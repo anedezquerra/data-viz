@@ -1,0 +1,15 @@
+-r requirements.txt
+
+# Testing
+pytest>=7.0
+pytest-cov>=3.0
+
+# Code Quality
+black>=22.0
+flake8>=4.0
+mypy>=0.950
+
+# Documentation
+sphinx>=4.5
+sphinx-rtd-theme>=1.0
+kaleido>=0.2.1

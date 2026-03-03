@@ -1,0 +1,148 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    // Terminal Shell Integration - PRIMARY SETTINGS
+    "terminal.integrated.shellIntegration.enabled": true,
+    "terminal.integrated.shellIntegration.decorationsEnabled": "decorations",
+    "terminal.integrated.shellIntegration.nonce": "${random}",
+
+    // PowerShell Configuration
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.automationShell.windows": "pwsh",
+    "terminal.integrated.profiles.windows": {
+      "PowerShell": {
+        "source": "PowerShell",
+        "icon": "terminal-powershell",
+        "args": ["-NoProfile", "-Command", "& $profile.CurrentUserCurrentHost"]
+      },
+      "Command Prompt": {
+        "path": "${env:WINDIR}\\cmd.exe",
+        "icon": "terminal-cmd"
+      }
+    },
+
+    // Environment and Inheritance
+    "terminal.integrated.inheritEnv": true,
+    "terminal.integrated.environmentChangeIndicator": "on",
+    "terminal.integrated.environmentChangesReInit": true,
+    "terminal.integrated.environmentVariableCollections": {},
+
+    // Terminal Execution Settings
+    "terminal.integrated.copyOnSelection": false,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.detectLocale": "auto",
+    "terminal.integrated.fastPtyDetection": true,
+    "terminal.integrated.shellArgs.windows": [],
+
+    // Python Integration
+    "python.defaultInterpreterPath": "${workspaceFolder}",
+    "python.terminal.executeInFileDir": true,
+    "python.terminal.focusAfterLaunch": true,
+    "python.analysis.extraPaths": [
+      "${workspaceFolder}/dataviz"
+    ],
+
+    // File and Editor Settings
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/*.pyc": true,
+      "**/.pytest_cache": true,
+      "**/.mypy_cache": true,
+      "**/*.egg-info": true,
+      "**/dist": true,
+      "**/build": true
+    },
+    "files.watcherExclude": {
+      "**/__pycache__": true,
+      "**/.git/objects/**": true,
+      "**/node_modules": true
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.rulers": [88],
+    "[python]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "ms-python.black-formatter",
+      "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+      }
+    },
+    "[markdown]": {
+      "editor.formatOnSave": false,
+      "editor.wordWrap": "on"
+    },
+
+    // Linting and Testing
+    "python.linting.enabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+      "tests"
+    ]
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-python.debugpy",
+      "ms-python.black-formatter",
+      "charliermarsh.ruff",
+      "ms-vscode.makefile-tools",
+      "GitHub.copilot"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Python: Current File",
+        "type": "python",
+        "request": "launch",
+        "program": "${file}",
+        "console": "integratedTerminal",
+        "justMyCode": true
+      },
+      {
+        "name": "Pytest: Current Directory",
+        "type": "python",
+        "request": "launch",
+        "module": "pytest",
+        "args": [
+          "tests/",
+          "-v",
+          "--tb=short"
+        ],
+        "console": "integratedTerminal",
+        "justMyCode": false,
+        "cwd": "${workspaceFolder}"
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "pytest",
+        "type": "shell",
+        "command": "python",
+        "args": [
+          "-m",
+          "pytest",
+          "tests/",
+          "-v"
+        ],
+        "group": {
+          "kind": "test",
+          "isDefault": true
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      }
+    ]
+  }
+}
