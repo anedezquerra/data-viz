@@ -57,7 +57,7 @@ def box_plot_static(
         TypeError: If required inputs are not compatible with the plotting backend.
         ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
     
-    Example:
+    Examples:
         ```python
         import dataviz as dv
         result = dv.box_plot_static(data)
@@ -148,7 +148,7 @@ def box_plot_interactive(
         TypeError: If required inputs are not compatible with the plotting backend.
         ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
     
-    Example:
+    Examples:
         ```python
         import dataviz as dv
         result = dv.box_plot_interactive(data)

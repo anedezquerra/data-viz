@@ -60,7 +60,7 @@ def histogram_static(
         TypeError: If required inputs are not compatible with the plotting backend.
         ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
     
-    Example:
+    Examples:
         ```python
         import dataviz as dv
         result = dv.histogram_static(data)
@@ -153,7 +153,7 @@ def histogram_interactive(
         TypeError: If required inputs are not compatible with the plotting backend.
         ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
     
-    Example:
+    Examples:
         ```python
         import dataviz as dv
         result = dv.histogram_interactive(data)
