@@ -31,7 +31,7 @@ def histogram(
         TypeError: If required inputs are not compatible with the plotting backend.
         ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
     
-    Example:
+    Examples:
         ```python
         import dataviz as dv
         result = dv.histogram(data)
@@ -71,7 +71,7 @@ def density_plot(
         TypeError: If required inputs are not compatible with the plotting backend.
         ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
     
-    Example:
+    Examples:
         ```python
         import dataviz as dv
         result = dv.density_plot(data)
@@ -111,7 +111,7 @@ def box_plot(
         TypeError: If required inputs are not compatible with the plotting backend.
         ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
     
-    Example:
+    Examples:
         ```python
         import dataviz as dv
         result = dv.box_plot(data)
@@ -151,7 +151,7 @@ def violin_plot(
         TypeError: If required inputs are not compatible with the plotting backend.
         ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
     
-    Example:
+    Examples:
         ```python
         import dataviz as dv
         result = dv.violin_plot(data)
