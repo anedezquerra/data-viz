@@ -77,7 +77,7 @@ def control_chart_static(
         TypeError: If required inputs are not compatible with the plotting backend.
         ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
     
-    Example:
+    Examples:
         ```python
         import dataviz as dv
         result = dv.control_chart_static(data)
@@ -226,7 +226,7 @@ def control_chart_interactive(
         TypeError: If required inputs are not compatible with the plotting backend.
         ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
     
-    Example:
+    Examples:
         ```python
         import dataviz as dv
         result = dv.control_chart_interactive(data)
