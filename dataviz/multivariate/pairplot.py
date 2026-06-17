@@ -1,6 +1,7 @@
 """Pairplot implementation - static and interactive versions."""
 
 from typing import Optional, Tuple
+from ..types import FigureSize, MatplotlibFigure, PlotlyFigure
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,7 +12,7 @@ import plotly.express as px
 def pairplot_static(
     df: pd.DataFrame,
     title: Optional[str] = None,
-    figsize: Tuple[int, int] = (12, 12),
+    figsize: FigureSize = (12, 12),
     diag_kind: str = 'hist',
     plot_kind: str = 'scatter',
     color: Optional[str] = None,
@@ -24,47 +25,43 @@ def pairplot_static(
     label_size: int = 11,
     marker_size: int = 50,
     **kwargs
-) -> plt.Figure:
-    """
-    Create a static pairwise relationships plot using matplotlib.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Input data
-    title : str, optional
-        Figure title
-    figsize : tuple, default (12, 12)
-        Figure size (width, height)
-    diag_kind : str, default 'hist'
-        Diagonal plot type: 'hist', 'kde'
-    plot_kind : str, default 'scatter'
-        Off-diagonal plot type: 'scatter', 'hist'
-    color : str, optional
-        Plot color
-    alpha : float, default 0.5
-        Transparency
-    bins : int, default 20
-        Number of bins for histograms
-    dpi : int, default 100
-        Figure DPI
-    style : str, default 'default'
-        Matplotlib style
-    font_size : int, default 10
-        Base font size
-    title_size : int, default 14
-        Title font size
-    label_size : int, default 11
-        Axis label font size
-    marker_size : int, default 50
-        Marker size for scatter plots
-    **kwargs
-        Additional arguments
-
-    Returns
-    -------
-    matplotlib.figure.Figure
-        The figure object
+) -> MatplotlibFigure:
+    """Create a static pairwise variable relationship plot.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        df (pd.DataFrame): Input dataframe containing the variables to visualize.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        figsize (FigureSize): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``(12, 12)``.
+        diag_kind (str): Configuration value for ``diag_kind``. Defaults to ``'hist'``.
+        plot_kind (str): Configuration value for ``plot_kind``. Defaults to ``'scatter'``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        alpha (float): Configuration value for ``alpha``. Defaults to ``0.5``.
+        bins (int): Number of bins used for histogram-like displays. Defaults to ``20``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        style (str): Matplotlib style context used while building the figure. Defaults to ``'default'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``10``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``14``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``11``.
+        marker_size (int): Configuration value for ``marker_size``. Defaults to ``50``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.figure.Figure: Configured matplotlib figure containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.pairplot_static(df)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Pairplot"
@@ -132,41 +129,40 @@ def pairplot_interactive(
     height: int = 1000,
     width: int = 1000,
     **kwargs
-) -> go.Figure:
-    """
-    Create an interactive pairplot using plotly.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Input data
-    title : str, optional
-        Figure title
-    color : str, optional
-        Plot color
-    marker_size : int, default 5
-        Marker size
-    diagonal_type : str, default 'histogram'
-        Diagonal plot type: 'histogram', 'axis'
-    hovermode : str, default 'closest'
-        Hover mode type
-    template : str, default 'plotly'
-        Plotly template
-    font_size : int, default 12
-        Font size
-    title_size : int, default 16
-        Title font size
-    height : int, default 1000
-        Figure height in pixels
-    width : int, default 1000
-        Figure width in pixels
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        The interactive figure
+) -> PlotlyFigure:
+    """Create an interactive pairwise variable relationship plot.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        df (pd.DataFrame): Input dataframe containing the variables to visualize.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        marker_size (int): Configuration value for ``marker_size``. Defaults to ``5``.
+        diagonal_type (str): Configuration value for ``diagonal_type``. Defaults to ``'histogram'``.
+        hovermode (str): Configuration value for ``hovermode``. Defaults to ``'closest'``.
+        template (str): Plotly template used to style the interactive figure. Defaults to ``'plotly'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``12``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``16``.
+        height (int): Plotly figure height in pixels. Defaults to ``1000``.
+        width (int): Plotly figure width in pixels. Defaults to ``1000``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        plotly.graph_objects.Figure: Configured Plotly figure containing the rendered interactive chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.pairplot_interactive(df)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Pairplot"

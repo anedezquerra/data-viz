@@ -1,6 +1,7 @@
 """Dendrogram implementation - static and interactive versions."""
 
 from typing import Optional
+from ..types import FigureSize, Labels, MatplotlibAxes, MatrixLike, PlotlyFigure
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
@@ -9,12 +10,12 @@ from ..utils import setup_plot, apply_theme
 
 
 def dendrogram_static(
-    linkage_matrix: np.ndarray,
-    labels: Optional[list] = None,
+    linkage_matrix: MatrixLike,
+    labels: Optional[Labels] = None,
     title: Optional[str] = None,
     xlabel: str = "Sample Index",
     ylabel: str = "Distance",
-    figsize: tuple = (12, 6),
+    figsize: FigureSize = (12, 6),
     color_threshold: Optional[float] = None,
     above_threshold_color: str = 'gray',
     orientation: str = 'top',
@@ -32,63 +33,51 @@ def dendrogram_static(
     line_color: str = 'black',
     line_width: float = 1.5,
     **kwargs
-) -> plt.Axes:
-    """
-    Create a static dendrogram using matplotlib.
-
-    Parameters
-    ----------
-    linkage_matrix : array
-        Linkage matrix from hierarchical clustering
-    labels : list, optional
-        Sample labels
-    title : str, optional
-        Chart title (auto-generated if None)
-    xlabel : str, default "Sample Index"
-        X-axis label
-    ylabel : str, default "Distance"
-        Y-axis label
-    figsize : tuple, default (12, 6)
-        Figure size
-    color_threshold : float, optional
-        Threshold for coloring clusters
-    above_threshold_color : str, default 'gray'
-        Color above threshold
-    orientation : str, default 'top'
-        Orientation ('top', 'bottom', 'left', 'right')
-    leaf_rotation : float, default 90.0
-        Leaf rotation angle
-    leaf_font_size : int, default 10
-        Leaf font size
-    font_size : int, default 10
-        Base font size
-    title_size : int, default 14
-        Title font size
-    label_size : int, default 11
-        Label font size
-    theme : str, default 'default'
-        Theme ('default', 'dark', 'minimal')
-    style : str, default 'default'
-        Matplotlib style
-    dpi : int, default 100
-        Figure DPI
-    grid : bool, default True
-        Show grid
-    grid_alpha : float, default 0.3
-        Grid transparency
-    show_leaf_counts : bool, default True
-        Show leaf counts
-    line_color : str, default 'black'
-        Dendrogram line color
-    line_width : float, default 1.5
-        Dendrogram line width
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a static dendrogram from hierarchical clustering linkage data.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        linkage_matrix (MatrixLike): Hierarchical clustering linkage matrix.
+        labels (Optional[Labels]): Class, feature, sample, or cluster labels shown on the chart. Defaults to ``None``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        xlabel (str): Optional x-axis label. Defaults to ``'Sample Index'``.
+        ylabel (str): Optional y-axis label. Defaults to ``'Distance'``.
+        figsize (FigureSize): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``(12, 6)``.
+        color_threshold (Optional[float]): Configuration value for ``color_threshold``. Defaults to ``None``.
+        above_threshold_color (str): Configuration value for ``above_threshold_color``. Defaults to ``'gray'``.
+        orientation (str): Configuration value for ``orientation``. Defaults to ``'top'``.
+        leaf_rotation (float): Configuration value for ``leaf_rotation``. Defaults to ``90.0``.
+        leaf_font_size (int): Configuration value for ``leaf_font_size``. Defaults to ``10``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``10``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``14``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``11``.
+        theme (str): Named styling theme applied after the base plot is created. Defaults to ``'default'``.
+        style (str): Matplotlib style context used while building the figure. Defaults to ``'default'``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        grid (bool): Configuration value for ``grid``. Defaults to ``True``.
+        grid_alpha (float): Configuration value for ``grid_alpha``. Defaults to ``0.3``.
+        show_leaf_counts (bool): Configuration value for ``show_leaf_counts``. Defaults to ``True``.
+        line_color (str): Configuration value for ``line_color``. Defaults to ``'black'``.
+        line_width (float): Configuration value for ``line_width``. Defaults to ``1.5``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.dendrogram_static(linkage_matrix)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Dendrogram"
@@ -134,8 +123,8 @@ def dendrogram_static(
 
 
 def dendrogram_interactive(
-    linkage_matrix: np.ndarray,
-    labels: Optional[list] = None,
+    linkage_matrix: MatrixLike,
+    labels: Optional[Labels] = None,
     title: Optional[str] = None,
     xlabel: str = "Samples",
     ylabel: str = "Distance",
@@ -151,51 +140,45 @@ def dendrogram_interactive(
     template: str = 'plotly',
     color_threshold: Optional[float] = None,
     **kwargs
-) -> go.Figure:
-    """
-    Create an interactive dendrogram using plotly.
-
-    Parameters
-    ----------
-    linkage_matrix : array
-        Linkage matrix from hierarchical clustering
-    labels : list, optional
-        Sample labels
-    title : str, optional
-        Chart title (auto-generated if None)
-    xlabel : str, default "Samples"
-        X-axis label
-    ylabel : str, default "Distance"
-        Y-axis label
-    height : int, default 600
-        Figure height
-    width : int, default 900
-        Figure width
-    line_color : str, default 'black'
-        Dendrogram line color
-    line_width : int, default 2
-        Dendrogram line width
-    font_size : int, default 12
-        Base font size
-    title_size : int, default 16
-        Title font size
-    label_size : int, default 12
-        Axis label font size
-    hovermode : str, default 'closest'
-        Hover mode
-    showlegend : bool, default False
-        Show legend
-    template : str, default 'plotly'
-        Plotly template
-    color_threshold : float, optional
-        Threshold for coloring
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        The interactive figure
+) -> PlotlyFigure:
+    """Create an interactive dendrogram from hierarchical clustering linkage data.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        linkage_matrix (MatrixLike): Hierarchical clustering linkage matrix.
+        labels (Optional[Labels]): Class, feature, sample, or cluster labels shown on the chart. Defaults to ``None``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        xlabel (str): Optional x-axis label. Defaults to ``'Samples'``.
+        ylabel (str): Optional y-axis label. Defaults to ``'Distance'``.
+        height (int): Plotly figure height in pixels. Defaults to ``600``.
+        width (int): Plotly figure width in pixels. Defaults to ``900``.
+        line_color (str): Configuration value for ``line_color``. Defaults to ``'black'``.
+        line_width (int): Configuration value for ``line_width``. Defaults to ``2``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``12``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``16``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``12``.
+        hovermode (str): Configuration value for ``hovermode``. Defaults to ``'closest'``.
+        showlegend (bool): Configuration value for ``showlegend``. Defaults to ``False``.
+        template (str): Plotly template used to style the interactive figure. Defaults to ``'plotly'``.
+        color_threshold (Optional[float]): Configuration value for ``color_threshold``. Defaults to ``None``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        plotly.graph_objects.Figure: Configured Plotly figure containing the rendered interactive chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.dendrogram_interactive(linkage_matrix)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Dendrogram"

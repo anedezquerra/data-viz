@@ -1,6 +1,7 @@
 """Scatter clusters implementation - static and interactive versions."""
 
 from typing import Optional
+from ..types import ArrayLike, FigureSize, Labels, MatplotlibAxes, PlotlyFigure
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
@@ -9,14 +10,14 @@ from ..utils import setup_plot, apply_theme
 
 
 def scatter_clusters_static(
-    x: np.ndarray,
-    y: np.ndarray,
-    labels: np.ndarray,
+    x: ArrayLike,
+    y: ArrayLike,
+    labels: ArrayLike,
     title: Optional[str] = None,
     xlabel: str = "Feature 1",
     ylabel: str = "Feature 2",
-    figsize: tuple = (10, 6),
-    cluster_colors: Optional[list] = None,
+    figsize: FigureSize = (10, 6),
+    cluster_colors: Optional[Labels] = None,
     marker: str = 'o',
     marker_sizes: Optional[dict] = None,
     alpha: float = 0.7,
@@ -37,71 +38,56 @@ def scatter_clusters_static(
     showlegend: bool = True,
     legend_loc: str = 'best',
     **kwargs
-) -> plt.Axes:
-    """
-    Create a static 2D cluster visualization using matplotlib.
-
-    Parameters
-    ----------
-    x : array
-        X-coordinates
-    y : array
-        Y-coordinates
-    labels : array
-        Cluster labels
-    title : str, optional
-        Chart title
-    xlabel : str, default "Feature 1"
-        X-axis label
-    ylabel : str, default "Feature 2"
-        Y-axis label
-    figsize : tuple, default (10, 6)
-        Figure size
-    cluster_colors : list, optional
-        Colors per cluster
-    marker : str, default 'o'
-        Marker style
-    alpha : float, default 0.7
-        Transparency
-    edgecolor : str, default 'black'
-        Edge color
-    linewidth : float, default 0.5
-        Edge width
-    show_centroids : bool, default False
-        Plot centroids
-    centroid_marker : str, default 'X'
-        Centroid marker
-    centroid_color : str, default 'red'
-        Centroid color
-    centroid_size : int, default 200
-        Centroid size
-    font_size : int, default 10
-        Font size
-    title_size : int, default 14
-        Title font size
-    label_size : int, default 11
-        Label font size
-    theme : str, default 'default'
-        Theme
-    style : str, default 'default'
-        Style
-    dpi : int, default 100
-        DPI
-    grid : bool, default True
-        Grid
-    grid_alpha : float, default 0.3
-        Grid alpha
-    showlegend : bool, default True
-        Show legend
-    legend_loc : str, default 'best'
-        Legend location
-    **kwargs
-        Additional arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a static cluster-labeled scatter plot.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        x (ArrayLike): Values plotted along the x-axis.
+        y (ArrayLike): Values plotted along the y-axis.
+        labels (ArrayLike): Class, feature, sample, or cluster labels shown on the chart.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        xlabel (str): Optional x-axis label. Defaults to ``'Feature 1'``.
+        ylabel (str): Optional y-axis label. Defaults to ``'Feature 2'``.
+        figsize (FigureSize): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``(10, 6)``.
+        cluster_colors (Optional[Labels]): Optional colors used to draw cluster groups. Defaults to ``None``.
+        marker (str): Configuration value for ``marker``. Defaults to ``'o'``.
+        marker_sizes (Optional[dict]): Configuration value for ``marker_sizes``. Defaults to ``None``.
+        alpha (float): Configuration value for ``alpha``. Defaults to ``0.7``.
+        edgecolor (str): Configuration value for ``edgecolor``. Defaults to ``'black'``.
+        linewidth (float): Configuration value for ``linewidth``. Defaults to ``0.5``.
+        show_centroids (bool): Configuration value for ``show_centroids``. Defaults to ``False``.
+        centroid_marker (str): Configuration value for ``centroid_marker``. Defaults to ``'X'``.
+        centroid_color (str): Configuration value for ``centroid_color``. Defaults to ``'red'``.
+        centroid_size (int): Configuration value for ``centroid_size``. Defaults to ``200``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``10``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``14``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``11``.
+        theme (str): Named styling theme applied after the base plot is created. Defaults to ``'default'``.
+        style (str): Matplotlib style context used while building the figure. Defaults to ``'default'``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        grid (bool): Configuration value for ``grid``. Defaults to ``True``.
+        grid_alpha (float): Configuration value for ``grid_alpha``. Defaults to ``0.3``.
+        showlegend (bool): Configuration value for ``showlegend``. Defaults to ``True``.
+        legend_loc (str): Configuration value for ``legend_loc``. Defaults to ``'best'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.scatter_clusters_static(x, y)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Cluster Visualization"
@@ -153,15 +139,15 @@ def scatter_clusters_static(
 
 
 def scatter_clusters_interactive(
-    x: np.ndarray,
-    y: np.ndarray,
-    labels: np.ndarray,
+    x: ArrayLike,
+    y: ArrayLike,
+    labels: ArrayLike,
     title: Optional[str] = None,
     xlabel: str = "Feature 1",
     ylabel: str = "Feature 2",
     height: int = 600,
     width: int = 900,
-    cluster_colors: Optional[list] = None,
+    cluster_colors: Optional[Labels] = None,
     marker_color: Optional[str] = None,
     marker_size: int = 8,
     marker_symbol: str = 'circle',
@@ -178,67 +164,53 @@ def scatter_clusters_interactive(
     template: str = 'plotly',
     dpi: int = 100,
     **kwargs
-) -> go.Figure:
-    """
-    Create an interactive 2D cluster visualization using plotly.
-
-    Parameters
-    ----------
-    x : array
-        X-coordinates
-    y : array
-        Y-coordinates
-    labels : array
-        Cluster labels
-    title : str, optional
-        Chart title
-    xlabel : str, default "Feature 1"
-        X-axis label
-    ylabel : str, default "Feature 2"
-        Y-axis label
-    height : int, default 600
-        Figure height
-    width : int, default 900
-        Figure width
-    cluster_colors : list, optional
-        Colors per cluster
-    marker_color : str, optional
-        Override color
-    marker_size : int, default 8
-        Marker size
-    marker_symbol : str, default 'circle'
-        Marker symbol
-    opacity : float, default 0.7
-        Opacity
-    line_width : int, default 1
-        Line width
-    show_centroids : bool, default False
-        Plot centroids
-    centroid_marker : str, default 'x'
-        Centroid marker
-    centroid_size : int, default 12
-        Centroid size
-    font_size : int, default 12
-        Font size
-    title_size : int, default 16
-        Title size
-    label_size : int, default 12
-        Label size
-    hovermode : str, default 'closest'
-        Hover mode
-    showlegend : bool, default True
-        Show legend
-    template : str, default 'plotly'
-        Template
-    dpi : int, default 100
-        DPI
-    **kwargs
-        Additional arguments
-
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        The interactive figure
+) -> PlotlyFigure:
+    """Create an interactive cluster-labeled scatter plot.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        x (ArrayLike): Values plotted along the x-axis.
+        y (ArrayLike): Values plotted along the y-axis.
+        labels (ArrayLike): Class, feature, sample, or cluster labels shown on the chart.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        xlabel (str): Optional x-axis label. Defaults to ``'Feature 1'``.
+        ylabel (str): Optional y-axis label. Defaults to ``'Feature 2'``.
+        height (int): Plotly figure height in pixels. Defaults to ``600``.
+        width (int): Plotly figure width in pixels. Defaults to ``900``.
+        cluster_colors (Optional[Labels]): Optional colors used to draw cluster groups. Defaults to ``None``.
+        marker_color (Optional[str]): Configuration value for ``marker_color``. Defaults to ``None``.
+        marker_size (int): Configuration value for ``marker_size``. Defaults to ``8``.
+        marker_symbol (str): Configuration value for ``marker_symbol``. Defaults to ``'circle'``.
+        opacity (float): Configuration value for ``opacity``. Defaults to ``0.7``.
+        line_width (int): Configuration value for ``line_width``. Defaults to ``1``.
+        show_centroids (bool): Configuration value for ``show_centroids``. Defaults to ``False``.
+        centroid_marker (str): Configuration value for ``centroid_marker``. Defaults to ``'x'``.
+        centroid_size (int): Configuration value for ``centroid_size``. Defaults to ``12``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``12``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``16``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``12``.
+        hovermode (str): Configuration value for ``hovermode``. Defaults to ``'closest'``.
+        showlegend (bool): Configuration value for ``showlegend``. Defaults to ``True``.
+        template (str): Plotly template used to style the interactive figure. Defaults to ``'plotly'``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        plotly.graph_objects.Figure: Configured Plotly figure containing the rendered interactive chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.scatter_clusters_interactive(x, y)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Cluster Visualization"

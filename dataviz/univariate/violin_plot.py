@@ -1,6 +1,7 @@
 """Violin plot implementation - static and interactive versions."""
 
 from typing import Optional, Tuple
+from ..types import FigureSize, FrameLike, MatplotlibAxes, PlotlyFigure
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -9,13 +10,13 @@ from ..utils import setup_plot, apply_theme
 
 
 def violin_plot_static(
-    data: pd.DataFrame,
+    data: FrameLike,
     x: Optional[str] = None,
     y: Optional[str] = None,
     title: Optional[str] = None,
     xlabel: Optional[str] = None,
     ylabel: Optional[str] = None,
-    figsize: Tuple[int, int] = (10, 6),
+    figsize: FigureSize = (10, 6),
     color: Optional[str] = None,
     palette: Optional[str] = None,
     inner: str = 'box',
@@ -31,61 +32,50 @@ def violin_plot_static(
     style: str = 'default',
     linewidth: float = 1.5,
     **kwargs
-) -> plt.Axes:
-    """
-    Create a static violin plot using seaborn.
-
-    Parameters
-    ----------
-    data : DataFrame
-        Data to visualize
-    x : str, optional
-        Column for x-axis
-    y : str, optional
-        Column for y-axis
-    title : str, optional
-        Chart title
-    xlabel : str, optional
-        X-axis label
-    ylabel : str, optional
-        Y-axis label
-    figsize : tuple, default (10, 6)
-        Figure size (width, height)
-    color : str, optional
-        Single color for all violins
-    palette : str, optional
-        Color palette
-    inner : str, default 'box'
-        Inner plot: 'box', 'quartile', 'point', 'stick', None
-    cut : float, default 0.0
-        Extend range of density estimate
-    alpha : float, default 0.7
-        Transparency
-    grid : bool, default True
-        Show grid
-    grid_alpha : float, default 0.3
-        Grid transparency
-    theme : str, default 'default'
-        Theme: 'default', 'dark', 'minimal'
-    font_size : int, default 10
-        Base font size
-    title_size : int, default 14
-        Title font size
-    label_size : int, default 11
-        Axis label font size
-    dpi : int, default 100
-        Figure DPI
-    style : str, default 'default'
-        Matplotlib style
-    linewidth : float, default 1.5
-        Line width
-    **kwargs
-        Additional seaborn violin_plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a static violin plot that shows the full distribution shape.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        data (FrameLike): Input observations, measurements, or values used to build the chart.
+        x (Optional[str]): Values plotted along the x-axis. Defaults to ``None``.
+        y (Optional[str]): Values plotted along the y-axis. Defaults to ``None``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        xlabel (Optional[str]): Optional x-axis label. Defaults to ``None``.
+        ylabel (Optional[str]): Optional y-axis label. Defaults to ``None``.
+        figsize (FigureSize): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``(10, 6)``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        palette (Optional[str]): Configuration value for ``palette``. Defaults to ``None``.
+        inner (str): Configuration value for ``inner``. Defaults to ``'box'``.
+        cut (float): Configuration value for ``cut``. Defaults to ``0.0``.
+        alpha (float): Configuration value for ``alpha``. Defaults to ``0.7``.
+        grid (bool): Configuration value for ``grid``. Defaults to ``True``.
+        grid_alpha (float): Configuration value for ``grid_alpha``. Defaults to ``0.3``.
+        theme (str): Named styling theme applied after the base plot is created. Defaults to ``'default'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``10``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``14``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``11``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        style (str): Matplotlib style context used while building the figure. Defaults to ``'default'``.
+        linewidth (float): Configuration value for ``linewidth``. Defaults to ``1.5``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.violin_plot_static(data, x, y)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Violin Plot"
@@ -133,7 +123,7 @@ def violin_plot_static(
 
 
 def violin_plot_interactive(
-    data: pd.DataFrame,
+    data: FrameLike,
     x: Optional[str] = None,
     y: Optional[str] = None,
     title: Optional[str] = None,
@@ -151,53 +141,46 @@ def violin_plot_interactive(
     meanline: bool = True,
     points: bool = False,
     **kwargs
-) -> go.Figure:
-    """
-    Create an interactive violin plot using plotly.
-
-    Parameters
-    ----------
-    data : DataFrame
-        Data to visualize
-    x : str, optional
-        Column for x-axis
-    y : str, optional
-        Column for y-axis
-    title : str, optional
-        Chart title
-    xlabel : str, optional
-        X-axis label
-    ylabel : str, optional
-        Y-axis label
-    color : str, optional
-        Violin color
-    marker_color : str, optional
-        Marker color (alternative)
-    showlegend : bool, default True
-        Show legend
-    hovermode : str, default 'closest'
-        Hover mode type
-    template : str, default 'plotly'
-        Plotly template
-    font_size : int, default 12
-        Font size
-    title_size : int, default 16
-        Title font size
-    height : int, default 600
-        Figure height in pixels
-    width : int, default 1000
-        Figure width in pixels
-    meanline : bool, default True
-        Show mean line
-    points : bool, default False
-        Show individual points
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        The interactive figure
+) -> PlotlyFigure:
+    """Create an interactive violin plot that shows the full distribution shape.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        data (FrameLike): Input observations, measurements, or values used to build the chart.
+        x (Optional[str]): Values plotted along the x-axis. Defaults to ``None``.
+        y (Optional[str]): Values plotted along the y-axis. Defaults to ``None``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        xlabel (Optional[str]): Optional x-axis label. Defaults to ``None``.
+        ylabel (Optional[str]): Optional y-axis label. Defaults to ``None``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        marker_color (Optional[str]): Configuration value for ``marker_color``. Defaults to ``None``.
+        showlegend (bool): Configuration value for ``showlegend``. Defaults to ``True``.
+        hovermode (str): Configuration value for ``hovermode``. Defaults to ``'closest'``.
+        template (str): Plotly template used to style the interactive figure. Defaults to ``'plotly'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``12``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``16``.
+        height (int): Plotly figure height in pixels. Defaults to ``600``.
+        width (int): Plotly figure width in pixels. Defaults to ``1000``.
+        meanline (bool): Configuration value for ``meanline``. Defaults to ``True``.
+        points (bool): Configuration value for ``points``. Defaults to ``False``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        plotly.graph_objects.Figure: Configured Plotly figure containing the rendered interactive chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.violin_plot_interactive(data, x, y)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Violin Plot"

@@ -1,6 +1,7 @@
 """Confusion matrix implementation - static and interactive versions."""
 
 from typing import Optional, Tuple
+from ..types import FigureSize, Labels, MatplotlibAxes, MatrixLike, PlotlyFigure
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
@@ -8,10 +9,10 @@ from ..utils import setup_plot, apply_theme
 
 
 def confusion_matrix_plot_static(
-    cm: np.ndarray,
-    labels: Optional[list] = None,
+    cm: MatrixLike,
+    labels: Optional[Labels] = None,
     title: Optional[str] = None,
-    figsize: Tuple[int, int] = (8, 6),
+    figsize: FigureSize = (8, 6),
     cmap: str = 'Blues',
     annot: bool = True,
     fmt: str = 'd',
@@ -25,51 +26,45 @@ def confusion_matrix_plot_static(
     dpi: int = 100,
     style: str = 'default',
     **kwargs
-) -> plt.Axes:
-    """
-    Create a static confusion matrix using matplotlib.
-
-    Parameters
-    ----------
-    cm : array
-        Confusion matrix
-    labels : list, optional
-        Class labels
-    title : str, optional
-        Chart title
-    figsize : tuple, default (8, 6)
-        Figure size (width, height)
-    cmap : str, default 'Blues'
-        Colormap name
-    annot : bool, default True
-        Show annotations
-    fmt : str, default 'd'
-        Annotation format
-    cbar : bool, default True
-        Show colorbar
-    linewidths : float, default 0.5
-        Cell border line width
-    linecolor : str, default 'gray'
-        Cell border color
-    theme : str, default 'default'
-        Theme: 'default', 'dark', 'minimal'
-    font_size : int, default 10
-        Base font size
-    title_size : int, default 14
-        Title font size
-    label_size : int, default 11
-        Axis label font size
-    dpi : int, default 100
-        Figure DPI
-    style : str, default 'default'
-        Matplotlib style
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a static visualization of a classification confusion matrix.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        cm (MatrixLike): Confusion matrix values arranged as actual classes by predicted classes.
+        labels (Optional[Labels]): Class, feature, sample, or cluster labels shown on the chart. Defaults to ``None``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        figsize (FigureSize): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``(8, 6)``.
+        cmap (str): Configuration value for ``cmap``. Defaults to ``'Blues'``.
+        annot (bool): Configuration value for ``annot``. Defaults to ``True``.
+        fmt (str): Configuration value for ``fmt``. Defaults to ``'d'``.
+        cbar (bool): Configuration value for ``cbar``. Defaults to ``True``.
+        linewidths (float): Configuration value for ``linewidths``. Defaults to ``0.5``.
+        linecolor (str): Configuration value for ``linecolor``. Defaults to ``'gray'``.
+        theme (str): Named styling theme applied after the base plot is created. Defaults to ``'default'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``10``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``14``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``11``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        style (str): Matplotlib style context used while building the figure. Defaults to ``'default'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.confusion_matrix_plot_static(cm)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Confusion Matrix"
@@ -122,8 +117,8 @@ def confusion_matrix_plot_static(
 
 
 def confusion_matrix_plot_interactive(
-    cm: np.ndarray,
-    labels: Optional[list] = None,
+    cm: MatrixLike,
+    labels: Optional[Labels] = None,
     title: Optional[str] = None,
     colorscale: str = 'Blues',
     showscale: bool = True,
@@ -135,43 +130,41 @@ def confusion_matrix_plot_interactive(
     height: int = 600,
     width: int = 700,
     **kwargs
-) -> go.Figure:
-    """
-    Create an interactive confusion matrix using plotly.
-
-    Parameters
-    ----------
-    cm : array
-        Confusion matrix
-    labels : list, optional
-        Class labels
-    title : str, optional
-        Chart title
-    colorscale : str, default 'Blues'
-        Plotly colorscale
-    showscale : bool, default True
-        Show color scale
-    annot : bool, default True
-        Show values in cells
-    hovermode : str, default 'closest'
-        Hover mode type
-    template : str, default 'plotly'
-        Plotly template
-    font_size : int, default 12
-        Font size
-    title_size : int, default 16
-        Title font size
-    height : int, default 600
-        Figure height in pixels
-    width : int, default 700
-        Figure width in pixels
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        The interactive figure
+) -> PlotlyFigure:
+    """Create an interactive visualization of a classification confusion matrix.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        cm (MatrixLike): Confusion matrix values arranged as actual classes by predicted classes.
+        labels (Optional[Labels]): Class, feature, sample, or cluster labels shown on the chart. Defaults to ``None``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        colorscale (str): Configuration value for ``colorscale``. Defaults to ``'Blues'``.
+        showscale (bool): Configuration value for ``showscale``. Defaults to ``True``.
+        annot (bool): Configuration value for ``annot``. Defaults to ``True``.
+        hovermode (str): Configuration value for ``hovermode``. Defaults to ``'closest'``.
+        template (str): Plotly template used to style the interactive figure. Defaults to ``'plotly'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``12``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``16``.
+        height (int): Plotly figure height in pixels. Defaults to ``600``.
+        width (int): Plotly figure width in pixels. Defaults to ``700``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        plotly.graph_objects.Figure: Configured Plotly figure containing the rendered interactive chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.confusion_matrix_plot_interactive(cm)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Confusion Matrix"

@@ -1,6 +1,7 @@
 """Clustering analysis visualization charts."""
 
 from typing import Optional
+from ..types import ArrayLike, Labels, MatplotlibAxes, MatrixLike
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,32 +9,38 @@ from ..utils import setup_plot, apply_theme
 
 
 def scatter_clusters(
-    x: np.ndarray,
-    y: np.ndarray,
-    labels: np.ndarray,
+    x: ArrayLike,
+    y: ArrayLike,
+    labels: ArrayLike,
     title: str = "Cluster Visualization",
     **kwargs
-) -> plt.Axes:
-    """
-    Visualize clusters in 2D scatter plot.
-
-    Parameters
-    ----------
-    x : array
-        X-coordinates
-    y : array
-        Y-coordinates
-    labels : array
-        Cluster labels
-    title : str, default "Cluster Visualization"
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a cluster-labeled scatter plot.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        x (ArrayLike): Values plotted along the x-axis.
+        y (ArrayLike): Values plotted along the y-axis.
+        labels (ArrayLike): Class, feature, sample, or cluster labels shown on the chart.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Cluster Visualization'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.scatter_clusters(x, y)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title, xlabel='Feature 1', ylabel='Feature 2')
     
@@ -52,29 +59,36 @@ def scatter_clusters(
 
 
 def elbow_plot(
-    n_clusters: np.ndarray,
-    inertias: np.ndarray,
+    n_clusters: ArrayLike,
+    inertias: ArrayLike,
     title: str = "Elbow Plot",
     **kwargs
-) -> plt.Axes:
-    """
-    Plot elbow curve for determining optimal number of clusters.
-
-    Parameters
-    ----------
-    n_clusters : array
-        Number of clusters
-    inertias : array
-        Inertia values for each cluster count
-    title : str, default "Elbow Plot"
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create an elbow plot for selecting a cluster count.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        n_clusters (ArrayLike): Configuration value for ``n_clusters``.
+        inertias (ArrayLike): Within-cluster sum-of-squares or inertia values by cluster count.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Elbow Plot'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.elbow_plot(inertias)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title, xlabel='Number of Clusters', ylabel='Inertia')
     
@@ -87,29 +101,36 @@ def elbow_plot(
 
 
 def dendrogram(
-    linkage_matrix: np.ndarray,
-    labels: Optional[list] = None,
+    linkage_matrix: MatrixLike,
+    labels: Optional[Labels] = None,
     title: str = "Dendrogram",
     **kwargs
-) -> plt.Axes:
-    """
-    Plot hierarchical clustering dendrogram.
-
-    Parameters
-    ----------
-    linkage_matrix : array
-        Linkage matrix from hierarchical clustering
-    labels : list, optional
-        Sample labels
-    title : str, default "Dendrogram"
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a dendrogram from hierarchical clustering linkage data.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        linkage_matrix (MatrixLike): Hierarchical clustering linkage matrix.
+        labels (Optional[Labels]): Class, feature, sample, or cluster labels shown on the chart. Defaults to ``None``.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Dendrogram'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.dendrogram(linkage_matrix)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     from scipy.cluster.hierarchy import dendrogram as scipy_dendrogram
     

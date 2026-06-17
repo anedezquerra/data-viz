@@ -1,124 +1,83 @@
-"""Bivariate relationships visualization charts."""
+"""Compatibility wrappers for bivariate relationship charts."""
 
-from typing import Optional
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from ..utils import setup_plot, apply_theme
+from typing import Any
+
+from ..types import MatplotlibAxes
+from .correlation import correlation_heatmap_static
+from .line import line_plot_static
+from .scatter import scatter_plot_static
 
 
-def scatter_plot(
-    x: pd.Series,
-    y: pd.Series,
-    title: Optional[str] = None,
-    **kwargs
-) -> plt.Axes:
+def scatter_plot(*args: Any, **kwargs: Any) -> MatplotlibAxes:
+    """Create a static scatter plot to compare two variables.
+
+    Args:
+        *args (Any): Positional arguments forwarded to ``scatter_plot_static``.
+        **kwargs (Any): Keyword arguments forwarded to ``scatter_plot_static``.
+
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the scatter plot.
+
+    Raises:
+        TypeError: If inputs cannot be resolved or plotted.
+        ValueError: If input lengths differ, inputs are empty, or options are invalid.
+
+    Example:
+        ```python
+        ax = scatter_plot(x, y)
+        ```
+
+    Notes:
+        This wrapper preserves the legacy ``dataviz.bivariate.charts`` API.
     """
-    Create a scatter plot showing relationship between two variables.
+    return scatter_plot_static(*args, **kwargs)
 
-    Parameters
-    ----------
-    x : Series or array-like
-        X-axis data
-    y : Series or array-like
-        Y-axis data
-    title : str, optional
-        Chart title
-    **kwargs
-        Additional scatter plot arguments
 
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+def line_plot(*args: Any, **kwargs: Any) -> MatplotlibAxes:
+    """Create a static line plot for ordered bivariate data.
+
+    Args:
+        *args (Any): Positional arguments forwarded to ``line_plot_static``.
+        **kwargs (Any): Keyword arguments forwarded to ``line_plot_static``.
+
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the line plot.
+
+    Raises:
+        TypeError: If inputs cannot be resolved or plotted.
+        ValueError: If input lengths differ, inputs are empty, or options are invalid.
+
+    Example:
+        ```python
+        ax = line_plot(x, y)
+        ```
+
+    Notes:
+        This wrapper preserves the legacy ``dataviz.bivariate.charts`` API.
     """
-    if title is None:
-        x_name = x.name if hasattr(x, 'name') else 'X'
-        y_name = y.name if hasattr(y, 'name') else 'Y'
-        title = f"Scatter Plot: {x_name} vs {y_name}"
-    
-    x_label = x.name if hasattr(x, 'name') else 'X'
-    y_label = y.name if hasattr(y, 'name') else 'Y'
-    
-    fig, ax = setup_plot(title=title, xlabel=x_label, ylabel=y_label)
-    ax.scatter(x, y, alpha=0.6, **kwargs)
-    apply_theme(ax)
-    
-    return ax
+    return line_plot_static(*args, **kwargs)
 
 
-def line_plot(
-    x: pd.Series,
-    y: pd.Series,
-    title: Optional[str] = None,
-    **kwargs
-) -> plt.Axes:
+def correlation_heatmap(*args: Any, **kwargs: Any) -> MatplotlibAxes:
+    """Create a static heatmap of pairwise correlations.
+
+    Args:
+        *args (Any): Positional arguments forwarded to ``correlation_heatmap_static``.
+        **kwargs (Any): Keyword arguments forwarded to ``correlation_heatmap_static``.
+
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the correlation heatmap.
+
+    Raises:
+        TypeError: If the input is not dataframe-like.
+        ValueError: If too few numeric columns exist or options are invalid.
+
+    Example:
+        ```python
+        ax = correlation_heatmap(df)
+        ```
+
+    Notes:
+        This wrapper preserves the legacy ``dataviz.bivariate.charts`` API.
     """
-    Create a line plot showing relationship between two variables over time/order.
-
-    Parameters
-    ----------
-    x : Series or array-like
-        X-axis data
-    y : Series or array-like
-        Y-axis data
-    title : str, optional
-        Chart title
-    **kwargs
-        Additional line plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
-    """
-    if title is None:
-        x_name = x.name if hasattr(x, 'name') else 'X'
-        y_name = y.name if hasattr(y, 'name') else 'Y'
-        title = f"Line Plot: {x_name} vs {y_name}"
-    
-    x_label = x.name if hasattr(x, 'name') else 'X'
-    y_label = y.name if hasattr(y, 'name') else 'Y'
-    
-    fig, ax = setup_plot(title=title, xlabel=x_label, ylabel=y_label)
-    ax.plot(x, y, **kwargs)
-    apply_theme(ax)
-    
-    return ax
-
-
-def correlation_heatmap(
-    df: pd.DataFrame,
-    title: str = "Correlation Heatmap",
-    **kwargs
-) -> plt.Axes:
-    """
-    Create a heatmap showing correlations between variables.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Input data
-    title : str, default "Correlation Heatmap"
-        Chart title
-    **kwargs
-        Additional heatmap arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
-    """
-    fig, ax = setup_plot(title=title)
-    
-    corr_matrix = df.corr()
-    im = ax.imshow(corr_matrix, cmap='coolwarm', aspect='auto', vmin=-1, vmax=1)
-    
-    ax.set_xticks(range(len(corr_matrix.columns)))
-    ax.set_yticks(range(len(corr_matrix.columns)))
-    ax.set_xticklabels(corr_matrix.columns, rotation=45, ha='right')
-    ax.set_yticklabels(corr_matrix.columns)
-    
-    plt.colorbar(im, ax=ax)
-    
-    return ax
+    return correlation_heatmap_static(*args, **kwargs)

@@ -1,6 +1,7 @@
 """Explainable AI (XAI) visualization charts."""
 
 from typing import Optional, List
+from ..types import ArrayLike, Labels, MatplotlibAxes, MatrixLike, SeriesLike
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,29 +9,36 @@ from ..utils import setup_plot, apply_theme
 
 
 def feature_importance(
-    importances: pd.Series,
+    importances: SeriesLike,
     title: str = "Feature Importance",
     top_n: Optional[int] = None,
     **kwargs
-) -> plt.Axes:
-    """
-    Visualize feature importance scores.
-
-    Parameters
-    ----------
-    importances : Series
-        Feature importance values with feature names as index
-    title : str, default "Feature Importance"
-        Chart title
-    top_n : int, optional
-        Show only top N features
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Visualize model feature-importance values.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        importances (SeriesLike): Feature-importance values indexed or paired with feature names.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Feature Importance'``.
+        top_n (Optional[int]): Maximum number of highest-ranked features to display. Defaults to ``None``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.feature_importance(importances)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if top_n is not None:
         importances = importances.nlargest(top_n)
@@ -47,29 +55,36 @@ def feature_importance(
 
 
 def shap_plot(
-    shap_values: np.ndarray,
-    feature_names: List[str],
+    shap_values: MatrixLike,
+    feature_names: Labels,
     title: str = "SHAP Feature Importance",
     **kwargs
-) -> plt.Axes:
-    """
-    Visualize SHAP feature importance (summary plot).
-
-    Parameters
-    ----------
-    shap_values : array
-        SHAP values array
-    feature_names : list
-        Names of features
-    title : str, default "SHAP Feature Importance"
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Visualize SHAP values for explainable model analysis.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        shap_values (MatrixLike): SHAP contribution values to summarize or plot.
+        feature_names (Labels): Names of the features represented by the values.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'SHAP Feature Importance'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.shap_plot(shap_values)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title, figsize=(10, 6))
     
@@ -86,32 +101,38 @@ def shap_plot(
 
 
 def partial_dependence(
-    feature_values: np.ndarray,
-    predictions: np.ndarray,
+    feature_values: ArrayLike,
+    predictions: ArrayLike,
     feature_name: str = "Feature",
     title: Optional[str] = None,
     **kwargs
-) -> plt.Axes:
-    """
-    Visualize partial dependence plot for a feature.
-
-    Parameters
-    ----------
-    feature_values : array
-        Values of the feature
-    predictions : array
-        Predicted values/probabilities
-    feature_name : str, default "Feature"
-        Name of the feature
-    title : str, optional
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Visualize a partial-dependence relationship for one feature.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        feature_values (ArrayLike): Feature grid or observed feature values for partial dependence.
+        predictions (ArrayLike): Predicted response values corresponding to the feature grid.
+        feature_name (str): Configuration value for ``feature_name``. Defaults to ``'Feature'``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.partial_dependence(feature_values, predictions)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = f"Partial Dependence - {feature_name}"

@@ -1,6 +1,7 @@
 """Box plot implementation - static and interactive versions."""
 
 from typing import Optional, Tuple
+from ..types import FigureSize, FrameLike, MatplotlibAxes, PlotlyFigure
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
@@ -8,10 +9,10 @@ from ..utils import setup_plot, apply_theme
 
 
 def box_plot_static(
-    data: pd.DataFrame,
+    data: FrameLike,
     title: Optional[str] = None,
     ylabel: Optional[str] = None,
-    figsize: Tuple[int, int] = (10, 6),
+    figsize: FigureSize = (10, 6),
     color: Optional[str] = None,
     patch_artist: bool = True,
     notch: bool = False,
@@ -25,51 +26,45 @@ def box_plot_static(
     style: str = 'default',
     widths: float = 0.6,
     **kwargs
-) -> plt.Axes:
-    """
-    Create a static box plot using matplotlib.
-
-    Parameters
-    ----------
-    data : DataFrame or array-like
-        Data to visualize
-    title : str, optional
-        Chart title
-    ylabel : str, optional
-        Y-axis label
-    figsize : tuple, default (10, 6)
-        Figure size (width, height)
-    color : str, optional
-        Box color
-    patch_artist : bool, default True
-        Use patch artist for boxes
-    notch : bool, default False
-        Show notches
-    grid : bool, default True
-        Show grid
-    grid_alpha : float, default 0.3
-        Grid transparency
-    theme : str, default 'default'
-        Theme: 'default', 'dark', 'minimal'
-    font_size : int, default 10
-        Base font size
-    title_size : int, default 14
-        Title font size
-    label_size : int, default 11
-        Axis label font size
-    dpi : int, default 100
-        Figure DPI
-    style : str, default 'default'
-        Matplotlib style
-    widths : float, default 0.6
-        Box width
-    **kwargs
-        Additional boxplot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a static box plot that summarizes quartiles, spread, and outliers.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        data (FrameLike): Input observations, measurements, or values used to build the chart.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        ylabel (Optional[str]): Optional y-axis label. Defaults to ``None``.
+        figsize (FigureSize): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``(10, 6)``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        patch_artist (bool): Configuration value for ``patch_artist``. Defaults to ``True``.
+        notch (bool): Configuration value for ``notch``. Defaults to ``False``.
+        grid (bool): Configuration value for ``grid``. Defaults to ``True``.
+        grid_alpha (float): Configuration value for ``grid_alpha``. Defaults to ``0.3``.
+        theme (str): Named styling theme applied after the base plot is created. Defaults to ``'default'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``10``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``14``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``11``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        style (str): Matplotlib style context used while building the figure. Defaults to ``'default'``.
+        widths (float): Configuration value for ``widths``. Defaults to ``0.6``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.box_plot_static(data)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Box Plot"
@@ -109,7 +104,7 @@ def box_plot_static(
 
 
 def box_plot_interactive(
-    data: pd.DataFrame,
+    data: FrameLike,
     title: Optional[str] = None,
     ylabel: Optional[str] = None,
     color: Optional[str] = None,
@@ -124,47 +119,43 @@ def box_plot_interactive(
     boxmean: bool = True,
     points: str = 'outliers',
     **kwargs
-) -> go.Figure:
-    """
-    Create an interactive box plot using plotly.
-
-    Parameters
-    ----------
-    data : DataFrame or Series
-        Data to visualize
-    title : str, optional
-        Chart title
-    ylabel : str, optional
-        Y-axis label
-    color : str, optional
-        Box color (color name or hex)
-    marker_color : str, optional
-        Marker color (alternative)
-    showlegend : bool, default True
-        Show legend
-    hovermode : str, default 'closest'
-        Hover mode type
-    template : str, default 'plotly'
-        Plotly template
-    font_size : int, default 12
-        Font size
-    title_size : int, default 16
-        Title font size
-    height : int, default 600
-        Figure height in pixels
-    width : int, default 1000
-        Figure width in pixels
-    boxmean : bool, default True
-        Show mean line
-    points : str, default 'outliers'
-        Show points: 'all', 'outliers', 'suspectedoutliers', False
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        The interactive figure
+) -> PlotlyFigure:
+    """Create an interactive box plot that summarizes quartiles, spread, and outliers.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        data (FrameLike): Input observations, measurements, or values used to build the chart.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        ylabel (Optional[str]): Optional y-axis label. Defaults to ``None``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        marker_color (Optional[str]): Configuration value for ``marker_color``. Defaults to ``None``.
+        showlegend (bool): Configuration value for ``showlegend``. Defaults to ``True``.
+        hovermode (str): Configuration value for ``hovermode``. Defaults to ``'closest'``.
+        template (str): Plotly template used to style the interactive figure. Defaults to ``'plotly'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``12``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``16``.
+        height (int): Plotly figure height in pixels. Defaults to ``600``.
+        width (int): Plotly figure width in pixels. Defaults to ``1000``.
+        boxmean (bool): Configuration value for ``boxmean``. Defaults to ``True``.
+        points (str): Configuration value for ``points``. Defaults to ``'outliers'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        plotly.graph_objects.Figure: Configured Plotly figure containing the rendered interactive chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.box_plot_interactive(data)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Box Plot"

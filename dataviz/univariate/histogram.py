@@ -1,6 +1,7 @@
 """Histogram chart implementation - static and interactive versions."""
 
 from typing import Optional, List, Tuple
+from ..types import FigureSize, MatplotlibAxes, PlotlyFigure, SeriesLike
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
@@ -9,12 +10,12 @@ from ..utils import setup_plot, apply_theme
 
 
 def histogram_static(
-    data: pd.Series,
+    data: SeriesLike,
     bins: int = 30,
     title: Optional[str] = None,
     xlabel: Optional[str] = None,
     ylabel: Optional[str] = None,
-    figsize: Tuple[int, int] = (10, 6),
+    figsize: FigureSize = (10, 6),
     color: Optional[str] = None,
     edgecolor: str = 'black',
     alpha: float = 0.7,
@@ -27,53 +28,46 @@ def histogram_static(
     dpi: int = 100,
     style: str = 'default',
     **kwargs
-) -> plt.Axes:
-    """
-    Create a static histogram using matplotlib/seaborn.
-
-    Parameters
-    ----------
-    data : Series or array-like
-        Data to visualize
-    bins : int, default 30
-        Number of bins
-    title : str, optional
-        Chart title
-    xlabel : str, optional
-        X-axis label
-    ylabel : str, optional
-        Y-axis label
-    figsize : tuple, default (10, 6)
-        Figure size (width, height)
-    color : str, optional
-        Bar color
-    edgecolor : str, default 'black'
-        Edge color of bars
-    alpha : float, default 0.7
-        Transparency (0-1)
-    grid : bool, default True
-        Show grid
-    grid_alpha : float, default 0.3
-        Grid transparency
-    theme : str, default 'default'
-        Theme: 'default', 'dark', 'minimal'
-    font_size : int, default 10
-        Base font size
-    title_size : int, default 14
-        Title font size
-    label_size : int, default 11
-        Axis label font size
-    dpi : int, default 100
-        Figure DPI
-    style : str, default 'default'
-        Matplotlib style
-    **kwargs
-        Additional histogram arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a static histogram that summarizes the frequency distribution of one variable.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        data (SeriesLike): Input observations, measurements, or values used to build the chart.
+        bins (int): Number of bins used for histogram-like displays. Defaults to ``30``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        xlabel (Optional[str]): Optional x-axis label. Defaults to ``None``.
+        ylabel (Optional[str]): Optional y-axis label. Defaults to ``None``.
+        figsize (FigureSize): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``(10, 6)``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        edgecolor (str): Configuration value for ``edgecolor``. Defaults to ``'black'``.
+        alpha (float): Configuration value for ``alpha``. Defaults to ``0.7``.
+        grid (bool): Configuration value for ``grid``. Defaults to ``True``.
+        grid_alpha (float): Configuration value for ``grid_alpha``. Defaults to ``0.3``.
+        theme (str): Named styling theme applied after the base plot is created. Defaults to ``'default'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``10``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``14``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``11``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        style (str): Matplotlib style context used while building the figure. Defaults to ``'default'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.histogram_static(data)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = f"Histogram - {data.name if hasattr(data, 'name') else 'Distribution'}"
@@ -111,7 +105,7 @@ def histogram_static(
 
 
 def histogram_interactive(
-    data: pd.Series,
+    data: SeriesLike,
     bins: int = 30,
     title: Optional[str] = None,
     xlabel: Optional[str] = None,
@@ -128,51 +122,45 @@ def histogram_interactive(
     width: int = 1000,
     bargap: float = 0.1,
     **kwargs
-) -> go.Figure:
-    """
-    Create an interactive histogram using plotly.
-
-    Parameters
-    ----------
-    data : Series or array-like
-        Data to visualize
-    bins : int, default 30
-        Number of bins
-    title : str, optional
-        Chart title
-    xlabel : str, optional
-        X-axis label
-    ylabel : str, optional
-        Y-axis label
-    color : str, optional
-        Bar color (color name or hex)
-    marker_color : str, optional
-        Marker color (alternative)
-    alpha : float, default 0.7
-        Transparency (0-1)
-    showlegend : bool, default True
-        Show legend
-    hovermode : str, default 'x unified'
-        Hover mode type
-    template : str, default 'plotly'
-        Plotly template
-    font_size : int, default 12
-        Font size
-    title_size : int, default 16
-        Title font size
-    height : int, default 600
-        Figure height in pixels
-    width : int, default 1000
-        Figure width in pixels
-    bargap : float, default 0.1
-        Gap between bars (0-1)
-    **kwargs
-        Additional plotly arguments
-
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        The interactive figure
+) -> PlotlyFigure:
+    """Create an interactive histogram that summarizes the frequency distribution of one variable.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        data (SeriesLike): Input observations, measurements, or values used to build the chart.
+        bins (int): Number of bins used for histogram-like displays. Defaults to ``30``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        xlabel (Optional[str]): Optional x-axis label. Defaults to ``None``.
+        ylabel (Optional[str]): Optional y-axis label. Defaults to ``None``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        marker_color (Optional[str]): Configuration value for ``marker_color``. Defaults to ``None``.
+        alpha (float): Configuration value for ``alpha``. Defaults to ``0.7``.
+        showlegend (bool): Configuration value for ``showlegend``. Defaults to ``True``.
+        hovermode (str): Configuration value for ``hovermode``. Defaults to ``'x unified'``.
+        template (str): Plotly template used to style the interactive figure. Defaults to ``'plotly'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``12``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``16``.
+        height (int): Plotly figure height in pixels. Defaults to ``600``.
+        width (int): Plotly figure width in pixels. Defaults to ``1000``.
+        bargap (float): Configuration value for ``bargap``. Defaults to ``0.1``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        plotly.graph_objects.Figure: Configured Plotly figure containing the rendered interactive chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.histogram_interactive(data)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = f"Histogram - {data.name if hasattr(data, 'name') else 'Distribution'}"

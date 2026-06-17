@@ -1,6 +1,7 @@
 """Regression analysis visualization charts."""
 
 from typing import Optional
+from ..types import ArrayLike, MatplotlibAxes
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,29 +9,36 @@ from ..utils import setup_plot, apply_theme
 
 
 def residual_plot(
-    y_true: np.ndarray,
-    y_pred: np.ndarray,
+    y_true: ArrayLike,
+    y_pred: ArrayLike,
     title: str = "Residual Plot",
     **kwargs
-) -> plt.Axes:
-    """
-    Create a residual plot for regression model diagnostics.
-
-    Parameters
-    ----------
-    y_true : array
-        Actual target values
-    y_pred : array
-        Predicted values
-    title : str, default "Residual Plot"
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a residual diagnostic plot for regression predictions.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        y_true (ArrayLike): Observed target values.
+        y_pred (ArrayLike): Predicted target values.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Residual Plot'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.residual_plot(y_true, y_pred)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     residuals = y_true - y_pred
     
@@ -44,29 +52,36 @@ def residual_plot(
 
 
 def prediction_plot(
-    y_true: np.ndarray,
-    y_pred: np.ndarray,
+    y_true: ArrayLike,
+    y_pred: ArrayLike,
     title: str = "Prediction Plot",
     **kwargs
-) -> plt.Axes:
-    """
-    Create a prediction vs actual plot for regression models.
-
-    Parameters
-    ----------
-    y_true : array
-        Actual target values
-    y_pred : array
-        Predicted values
-    title : str, default "Prediction Plot"
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Compare observed and predicted regression values.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        y_true (ArrayLike): Observed target values.
+        y_pred (ArrayLike): Predicted target values.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Prediction Plot'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.prediction_plot(y_true, y_pred)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title, xlabel='Actual Values', ylabel='Predicted Values')
     
@@ -84,32 +99,38 @@ def prediction_plot(
 
 
 def learning_curve(
-    train_sizes: np.ndarray,
-    train_scores: np.ndarray,
-    val_scores: np.ndarray,
+    train_sizes: ArrayLike,
+    train_scores: ArrayLike,
+    val_scores: ArrayLike,
     title: str = "Learning Curve",
     **kwargs
-) -> plt.Axes:
-    """
-    Visualize learning curve showing model performance vs training set size.
-
-    Parameters
-    ----------
-    train_sizes : array
-        Training set sizes
-    train_scores : array
-        Training scores
-    val_scores : array
-        Validation scores
-    title : str, default "Learning Curve"
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Plot model performance across training-set sizes.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        train_sizes (ArrayLike): Training-set sizes used to compute learning-curve scores.
+        train_scores (ArrayLike): Training scores corresponding to each training-set size.
+        val_scores (ArrayLike): Validation scores corresponding to each training-set size.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Learning Curve'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.learning_curve(train_sizes)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title, xlabel='Training Set Size', ylabel='Score')
     

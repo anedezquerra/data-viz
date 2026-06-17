@@ -1,6 +1,7 @@
 """Classification analysis visualization charts."""
 
 from typing import Optional
+from ..types import ArrayLike, Labels, MatplotlibAxes, MatrixLike
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,29 +9,36 @@ from ..utils import setup_plot, apply_theme
 
 
 def confusion_matrix_plot(
-    cm: np.ndarray,
-    labels: Optional[list] = None,
+    cm: MatrixLike,
+    labels: Optional[Labels] = None,
     title: str = "Confusion Matrix",
     **kwargs
-) -> plt.Axes:
-    """
-    Visualize a confusion matrix.
-
-    Parameters
-    ----------
-    cm : array
-        Confusion matrix
-    labels : list, optional
-        Class labels
-    title : str, default "Confusion Matrix"
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Visualize a classification confusion matrix.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        cm (MatrixLike): Confusion matrix values arranged as actual classes by predicted classes.
+        labels (Optional[Labels]): Class, feature, sample, or cluster labels shown on the chart. Defaults to ``None``.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Confusion Matrix'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.confusion_matrix_plot(cm)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title)
     
@@ -58,32 +66,38 @@ def confusion_matrix_plot(
 
 
 def roc_curve(
-    fpr: np.ndarray,
-    tpr: np.ndarray,
+    fpr: ArrayLike,
+    tpr: ArrayLike,
     auc: Optional[float] = None,
     title: str = "ROC Curve",
     **kwargs
-) -> plt.Axes:
-    """
-    Plot ROC (Receiver Operating Characteristic) curve.
-
-    Parameters
-    ----------
-    fpr : array
-        False positive rates
-    tpr : array
-        True positive rates
-    auc : float, optional
-        Area under curve value
-    title : str, default "ROC Curve"
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Plot a receiver operating characteristic curve.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        fpr (ArrayLike): False-positive-rate values for the ROC curve.
+        tpr (ArrayLike): True-positive-rate values for the ROC curve.
+        auc (Optional[float]): Area under the ROC curve to display in the legend. Defaults to ``None``.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'ROC Curve'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.roc_curve(fpr, tpr)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title, xlabel='False Positive Rate', ylabel='True Positive Rate')
     
@@ -103,32 +117,38 @@ def roc_curve(
 
 
 def precision_recall_curve(
-    precision: np.ndarray,
-    recall: np.ndarray,
+    precision: ArrayLike,
+    recall: ArrayLike,
     ap: Optional[float] = None,
     title: str = "Precision-Recall Curve",
     **kwargs
-) -> plt.Axes:
-    """
-    Plot Precision-Recall curve.
-
-    Parameters
-    ----------
-    precision : array
-        Precision values
-    recall : array
-        Recall values
-    ap : float, optional
-        Average precision value
-    title : str, default "Precision-Recall Curve"
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Plot a precision-recall curve for classification performance.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        precision (ArrayLike): Precision values for the precision-recall curve.
+        recall (ArrayLike): Recall values for the precision-recall curve.
+        ap (Optional[float]): Average precision value to display in the legend. Defaults to ``None``.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Precision-Recall Curve'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.precision_recall_curve(precision, recall)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title, xlabel='Recall', ylabel='Precision')
     

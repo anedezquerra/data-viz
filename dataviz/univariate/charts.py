@@ -1,6 +1,7 @@
 """Univariate distribution visualization charts."""
 
 from typing import Optional
+from ..types import FrameLike, MatplotlibAxes, SeriesLike
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,29 +9,36 @@ from ..utils import setup_plot, apply_theme
 
 
 def histogram(
-    data: pd.Series,
+    data: SeriesLike,
     bins: int = 30,
     title: Optional[str] = None,
     **kwargs
-) -> plt.Axes:
-    """
-    Create a histogram showing distribution of a single variable.
-
-    Parameters
-    ----------
-    data : Series or array-like
-        Data to visualize
-    bins : int, default 30
-        Number of bins
-    title : str, optional
-        Chart title
-    **kwargs
-        Additional histogram arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a histogram that summarizes the frequency distribution of one variable.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        data (SeriesLike): Input observations, measurements, or values used to build the chart.
+        bins (int): Number of bins used for histogram-like displays. Defaults to ``30``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.histogram(data)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = f"Histogram - {data.name if hasattr(data, 'name') else 'Distribution'}"
@@ -43,26 +51,34 @@ def histogram(
 
 
 def density_plot(
-    data: pd.Series,
+    data: SeriesLike,
     title: Optional[str] = None,
     **kwargs
-) -> plt.Axes:
-    """
-    Create a kernel density estimation (KDE) plot.
-
-    Parameters
-    ----------
-    data : Series or array-like
-        Data to visualize
-    title : str, optional
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a kernel density estimate chart for one variable.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        data (SeriesLike): Input observations, measurements, or values used to build the chart.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.density_plot(data)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = f"Density Plot - {data.name if hasattr(data, 'name') else 'Distribution'}"
@@ -75,26 +91,34 @@ def density_plot(
 
 
 def box_plot(
-    data: pd.DataFrame,
+    data: FrameLike,
     title: Optional[str] = None,
     **kwargs
-) -> plt.Axes:
-    """
-    Create a box plot showing distribution quartiles and outliers.
-
-    Parameters
-    ----------
-    data : DataFrame or array-like
-        Data to visualize
-    title : str, optional
-        Chart title
-    **kwargs
-        Additional boxplot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a box plot that summarizes quartiles, spread, and outliers.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        data (FrameLike): Input observations, measurements, or values used to build the chart.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.box_plot(data)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Box Plot"
@@ -107,26 +131,34 @@ def box_plot(
 
 
 def violin_plot(
-    data: pd.DataFrame,
+    data: FrameLike,
     title: Optional[str] = None,
     **kwargs
-) -> plt.Axes:
-    """
-    Create a violin plot showing full distribution shape.
-
-    Parameters
-    ----------
-    data : DataFrame or array-like
-        Data to visualize
-    title : str, optional
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a violin plot that shows the full distribution shape.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        data (FrameLike): Input observations, measurements, or values used to build the chart.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.violin_plot(data)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Violin Plot"

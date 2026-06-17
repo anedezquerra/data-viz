@@ -1,36 +1,42 @@
 """Helper functions and utilities for plotting."""
 
 from typing import Optional, Tuple
+from ..types import FigureSize, MatplotlibAxes, MatplotlibFigure
 import matplotlib.pyplot as plt
 import matplotlib.axes as mpl_axes
 
 
 def setup_plot(
-    figsize: Tuple[int, int] = (10, 6),
+    figsize: FigureSize = (10, 6),
     title: Optional[str] = None,
     xlabel: Optional[str] = None,
     ylabel: Optional[str] = None,
-) -> Tuple[plt.Figure, mpl_axes.Axes]:
-    """
-    Set up a basic plot with standard configuration.
-
-    Parameters
-    ----------
-    figsize : tuple, default (10, 6)
-        Figure size in inches (width, height)
-    title : str, optional
-        Plot title
-    xlabel : str, optional
-        X-axis label
-    ylabel : str, optional
-        Y-axis label
-
-    Returns
-    -------
-    fig : matplotlib.figure.Figure
-        The figure object
-    ax : matplotlib.axes.Axes
-        The axes object
+) -> Tuple[MatplotlibFigure, MatplotlibAxes]:
+    """Create and configure a matplotlib figure and axes pair.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        figsize (FigureSize): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``(10, 6)``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        xlabel (Optional[str]): Optional x-axis label. Defaults to ``None``.
+        ylabel (Optional[str]): Optional y-axis label. Defaults to ``None``.
+    
+    Returns:
+        tuple[matplotlib.figure.Figure, matplotlib.axes.Axes]: Created matplotlib figure and axes objects.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.setup_plot()
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = plt.subplots(figsize=figsize)
     
@@ -44,16 +50,30 @@ def setup_plot(
     return fig, ax
 
 
-def apply_theme(ax: mpl_axes.Axes, theme: str = "default") -> None:
-    """
-    Apply a theme to the plot.
-
-    Parameters
-    ----------
-    ax : matplotlib.axes.Axes
-        The axes object to apply theme to
-    theme : str, default 'default'
-        Theme name: 'default', 'dark', 'minimal'
+def apply_theme(ax: MatplotlibAxes, theme: str = "default") -> None:
+    """Apply a named visual theme to an existing matplotlib axes object.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        ax (MatplotlibAxes): Matplotlib axes object to update.
+        theme (str): Named styling theme applied after the base plot is created. Defaults to ``'default'``.
+    
+    Returns:
+        None: The supplied matplotlib axes is updated in place.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.apply_theme(ax)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if theme == "dark":
         ax.set_facecolor("#f0f0f0")

@@ -1,6 +1,7 @@
 """Exploratory Data Analysis (EDA) visualization charts."""
 
 from typing import Optional
+from ..types import MatplotlibAxes, MatplotlibFigure, SeriesLike
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,23 +12,31 @@ def missing_data_plot(
     df: pd.DataFrame,
     title: str = "Missing Data Analysis",
     **kwargs
-) -> plt.Axes:
-    """
-    Visualize missing data patterns in the dataset.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Input data
-    title : str, default "Missing Data Analysis"
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Visualize missing values by dataframe column.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        df (pd.DataFrame): Input dataframe containing the variables to visualize.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Missing Data Analysis'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.missing_data_plot(df)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title, figsize=(12, 6))
     
@@ -49,23 +58,31 @@ def distribution_summary(
     df: pd.DataFrame,
     title: str = "Distribution Summary",
     **kwargs
-) -> plt.Figure:
-    """
-    Create subplots showing distribution of all numeric columns.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Input data
-    title : str, default "Distribution Summary"
-        Figure title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.figure.Figure
-        The figure object
+) -> MatplotlibFigure:
+    """Create summary charts for dataframe column distributions.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        df (pd.DataFrame): Input dataframe containing the variables to visualize.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Distribution Summary'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.figure.Figure: Configured matplotlib figure containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.distribution_summary(df)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     numeric_cols = df.select_dtypes(include=[np.number]).columns
     n_cols = len(numeric_cols)
@@ -94,26 +111,34 @@ def distribution_summary(
 
 
 def class_distribution(
-    series: pd.Series,
+    series: SeriesLike,
     title: Optional[str] = None,
     **kwargs
-) -> plt.Axes:
-    """
-    Visualize the distribution of classes in a categorical variable.
-
-    Parameters
-    ----------
-    series : Series
-        Categorical data
-    title : str, optional
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Visualize class frequencies for a target variable.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        series (SeriesLike): Input series containing categorical or numeric values to summarize.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.class_distribution(series)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = f"Class Distribution - {series.name if hasattr(series, 'name') else 'Distribution'}"

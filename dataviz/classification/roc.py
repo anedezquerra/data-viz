@@ -1,6 +1,7 @@
 """ROC curve implementation - static and interactive versions."""
 
 from typing import Optional, Tuple
+from ..types import ArrayLike, FigureSize, MatplotlibAxes, PlotlyFigure
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
@@ -8,11 +9,11 @@ from ..utils import setup_plot, apply_theme
 
 
 def roc_curve_static(
-    fpr: np.ndarray,
-    tpr: np.ndarray,
+    fpr: ArrayLike,
+    tpr: ArrayLike,
     auc: Optional[float] = None,
     title: Optional[str] = None,
-    figsize: Tuple[int, int] = (10, 6),
+    figsize: FigureSize = (10, 6),
     color: Optional[str] = None,
     linewidth: float = 2.0,
     linestyle: str = '-',
@@ -28,57 +29,48 @@ def roc_curve_static(
     dpi: int = 100,
     style: str = 'default',
     **kwargs
-) -> plt.Axes:
-    """
-    Create a static ROC curve using matplotlib.
-
-    Parameters
-    ----------
-    fpr : array
-        False positive rates
-    tpr : array
-        True positive rates
-    auc : float, optional
-        Area under curve value
-    title : str, optional
-        Chart title
-    figsize : tuple, default (10, 6)
-        Figure size (width, height)
-    color : str, optional
-        ROC curve color
-    linewidth : float, default 2.0
-        ROC curve line width
-    linestyle : str, default '-'
-        ROC curve line style
-    reference_color : str, default 'black'
-        Reference line color
-    reference_linestyle : str, default '--'
-        Reference line style
-    reference_linewidth : float, default 1.5
-        Reference line width
-    grid : bool, default True
-        Show grid
-    grid_alpha : float, default 0.3
-        Grid transparency
-    theme : str, default 'default'
-        Theme: 'default', 'dark', 'minimal'
-    font_size : int, default 10
-        Base font size
-    title_size : int, default 14
-        Title font size
-    label_size : int, default 11
-        Axis label font size
-    dpi : int, default 100
-        Figure DPI
-    style : str, default 'default'
-        Matplotlib style
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a static receiver operating characteristic curve.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        fpr (ArrayLike): False-positive-rate values for the ROC curve.
+        tpr (ArrayLike): True-positive-rate values for the ROC curve.
+        auc (Optional[float]): Area under the ROC curve to display in the legend. Defaults to ``None``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        figsize (FigureSize): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``(10, 6)``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        linewidth (float): Configuration value for ``linewidth``. Defaults to ``2.0``.
+        linestyle (str): Configuration value for ``linestyle``. Defaults to ``'-'``.
+        reference_color (str): Configuration value for ``reference_color``. Defaults to ``'black'``.
+        reference_linestyle (str): Configuration value for ``reference_linestyle``. Defaults to ``'--'``.
+        reference_linewidth (float): Configuration value for ``reference_linewidth``. Defaults to ``1.5``.
+        grid (bool): Configuration value for ``grid``. Defaults to ``True``.
+        grid_alpha (float): Configuration value for ``grid_alpha``. Defaults to ``0.3``.
+        theme (str): Named styling theme applied after the base plot is created. Defaults to ``'default'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``10``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``14``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``11``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        style (str): Matplotlib style context used while building the figure. Defaults to ``'default'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.roc_curve_static(fpr, tpr)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "ROC Curve"
@@ -121,8 +113,8 @@ def roc_curve_static(
 
 
 def roc_curve_interactive(
-    fpr: np.ndarray,
-    tpr: np.ndarray,
+    fpr: ArrayLike,
+    tpr: ArrayLike,
     auc: Optional[float] = None,
     title: Optional[str] = None,
     color: Optional[str] = None,
@@ -139,53 +131,46 @@ def roc_curve_interactive(
     height: int = 600,
     width: int = 700,
     **kwargs
-) -> go.Figure:
-    """
-    Create an interactive ROC curve using plotly.
-
-    Parameters
-    ----------
-    fpr : array
-        False positive rates
-    tpr : array
-        True positive rates
-    auc : float, optional
-        Area under curve value
-    title : str, optional
-        Chart title
-    color : str, optional
-        ROC curve color
-    marker_color : str, optional
-        Alternative color parameter
-    linewidth : float, default 2.0
-        Line width
-    reference_color : str, default 'black'
-        Reference line color
-    reference_linestyle : str, default 'dash'
-        Reference line style
-    reference_linewidth : float, default 1.5
-        Reference line width
-    showlegend : bool, default True
-        Show legend
-    hovermode : str, default 'closest'
-        Hover mode type
-    template : str, default 'plotly'
-        Plotly template
-    font_size : int, default 12
-        Font size
-    title_size : int, default 16
-        Title font size
-    height : int, default 600
-        Figure height in pixels
-    width : int, default 700
-        Figure width in pixels
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        The interactive figure
+) -> PlotlyFigure:
+    """Create an interactive receiver operating characteristic curve.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        fpr (ArrayLike): False-positive-rate values for the ROC curve.
+        tpr (ArrayLike): True-positive-rate values for the ROC curve.
+        auc (Optional[float]): Area under the ROC curve to display in the legend. Defaults to ``None``.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        marker_color (Optional[str]): Configuration value for ``marker_color``. Defaults to ``None``.
+        linewidth (float): Configuration value for ``linewidth``. Defaults to ``2.0``.
+        reference_color (str): Configuration value for ``reference_color``. Defaults to ``'black'``.
+        reference_linestyle (str): Configuration value for ``reference_linestyle``. Defaults to ``'dash'``.
+        reference_linewidth (float): Configuration value for ``reference_linewidth``. Defaults to ``1.5``.
+        showlegend (bool): Configuration value for ``showlegend``. Defaults to ``True``.
+        hovermode (str): Configuration value for ``hovermode``. Defaults to ``'closest'``.
+        template (str): Plotly template used to style the interactive figure. Defaults to ``'plotly'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``12``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``16``.
+        height (int): Plotly figure height in pixels. Defaults to ``600``.
+        width (int): Plotly figure width in pixels. Defaults to ``700``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        plotly.graph_objects.Figure: Configured Plotly figure containing the rendered interactive chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.roc_curve_interactive(fpr, tpr)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "ROC Curve"

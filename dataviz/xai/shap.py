@@ -1,6 +1,7 @@
 """SHAP plot implementation - static and interactive versions."""
 
 from typing import Optional, List
+from ..types import FigureSize, Labels, MatplotlibAxes, MatrixLike, PlotlyFigure
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -9,13 +10,13 @@ from ..utils import setup_plot, apply_theme
 
 
 def shap_plot_static(
-    shap_values: np.ndarray,
-    feature_names: List[str],
+    shap_values: MatrixLike,
+    feature_names: Labels,
     title: Optional[str] = None,
     sort_order: str = 'descending',
     xlabel: str = "Mean |SHAP value|",
     ylabel: str = "Features",
-    figsize: tuple = (10, 8),
+    figsize: FigureSize = (10, 8),
     dpi: int = 100,
     color: str = 'steelblue',
     alpha: float = 0.8,
@@ -33,65 +34,52 @@ def shap_plot_static(
     grid: bool = True,
     grid_alpha: float = 0.3,
     **kwargs
-) -> plt.Axes:
-    """
-    Create a static SHAP feature importance plot using matplotlib.
-
-    Parameters
-    ----------
-    shap_values : array
-        SHAP values array
-    feature_names : list
-        Names of features
-    title : str, optional
-        Chart title (auto-generated if None)
-    sort_order : str, default 'descending'
-        Sort order ('ascending' or 'descending')
-    xlabel : str, default "Mean |SHAP value|"
-        X-axis label
-    ylabel : str, default "Features"
-        Y-axis label
-    figsize : tuple, default (10, 8)
-        Figure size (width, height)
-    dpi : int, default 100
-        Figure DPI
-    color : str, default 'steelblue'
-        Bar color
-    alpha : float, default 0.8
-        Bar transparency
-    edgecolor : str, default 'black'
-        Bar edge color
-    linewidth : float, default 1.0
-        Bar edge width
-    font_size : int, default 10
-        Base font size
-    title_size : int, default 14
-        Title font size
-    label_size : int, default 11
-        Axis label font size
-    show_values : bool, default True
-        Show values on bars
-    value_format : str, default '.3f'
-        Format string for values
-    color_positive : str, default 'steelblue'
-        Color for positive SHAP values
-    color_negative : str, default 'coral'
-        Color for negative SHAP values
-    theme : str, default 'default'
-        Plot theme
-    style : str, default 'default'
-        Matplotlib style
-    grid : bool, default True
-        Show grid
-    grid_alpha : float, default 0.3
-        Grid transparency
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a static SHAP-value visualization for explainable model analysis.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        shap_values (MatrixLike): SHAP contribution values to summarize or plot.
+        feature_names (Labels): Names of the features represented by the values.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        sort_order (str): Configuration value for ``sort_order``. Defaults to ``'descending'``.
+        xlabel (str): Optional x-axis label. Defaults to ``'Mean |SHAP value|'``.
+        ylabel (str): Optional y-axis label. Defaults to ``'Features'``.
+        figsize (FigureSize): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``(10, 8)``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        color (str): Configuration value for ``color``. Defaults to ``'steelblue'``.
+        alpha (float): Configuration value for ``alpha``. Defaults to ``0.8``.
+        edgecolor (str): Configuration value for ``edgecolor``. Defaults to ``'black'``.
+        linewidth (float): Configuration value for ``linewidth``. Defaults to ``1.0``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``10``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``14``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``11``.
+        show_values (bool): Configuration value for ``show_values``. Defaults to ``True``.
+        value_format (str): Configuration value for ``value_format``. Defaults to ``'.3f'``.
+        color_positive (str): Configuration value for ``color_positive``. Defaults to ``'steelblue'``.
+        color_negative (str): Configuration value for ``color_negative``. Defaults to ``'coral'``.
+        theme (str): Named styling theme applied after the base plot is created. Defaults to ``'default'``.
+        style (str): Matplotlib style context used while building the figure. Defaults to ``'default'``.
+        grid (bool): Configuration value for ``grid``. Defaults to ``True``.
+        grid_alpha (float): Configuration value for ``grid_alpha``. Defaults to ``0.3``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.shap_plot_static(shap_values)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "SHAP Feature Importance"
@@ -155,8 +143,8 @@ def shap_plot_static(
 
 
 def shap_plot_interactive(
-    shap_values: np.ndarray,
-    feature_names: List[str],
+    shap_values: MatrixLike,
+    feature_names: Labels,
     title: Optional[str] = None,
     sort_order: str = 'descending',
     xlabel: str = "Mean SHAP value",
@@ -175,57 +163,48 @@ def shap_plot_interactive(
     hovermode: str = 'closest',
     template: str = 'plotly',
     **kwargs
-) -> go.Figure:
-    """
-    Create an interactive SHAP feature importance plot using plotly.
-
-    Parameters
-    ----------
-    shap_values : array
-        SHAP values array
-    feature_names : list
-        Names of features
-    title : str, optional
-        Chart title (auto-generated if None)
-    sort_order : str, default 'descending'
-        Sort order ('ascending' or 'descending')
-    xlabel : str, default "Mean SHAP value"
-        X-axis label
-    ylabel : str, default "Features"
-        Y-axis label
-    height : int, default 600
-        Figure height
-    width : int, default 900
-        Figure width
-    color : str, default 'steelblue'
-        Default bar color
-    marker_color : str, optional
-        Override bar color
-    font_size : int, default 12
-        Base font size
-    title_size : int, default 16
-        Title font size
-    label_size : int, default 12
-        Axis label font size
-    show_values : bool, default True
-        Show values on bars
-    value_format : str, default '.3f'
-        Format string for values
-    color_positive : str, default 'steelblue'
-        Color for positive SHAP values
-    color_negative : str, default 'coral'
-        Color for negative SHAP values
-    hovermode : str, default 'closest'
-        Hover mode
-    template : str, default 'plotly'
-        Plotly template
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        The interactive figure
+) -> PlotlyFigure:
+    """Create an interactive SHAP-value visualization for explainable model analysis.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        shap_values (MatrixLike): SHAP contribution values to summarize or plot.
+        feature_names (Labels): Names of the features represented by the values.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        sort_order (str): Configuration value for ``sort_order``. Defaults to ``'descending'``.
+        xlabel (str): Optional x-axis label. Defaults to ``'Mean SHAP value'``.
+        ylabel (str): Optional y-axis label. Defaults to ``'Features'``.
+        height (int): Plotly figure height in pixels. Defaults to ``600``.
+        width (int): Plotly figure width in pixels. Defaults to ``900``.
+        color (str): Configuration value for ``color``. Defaults to ``'steelblue'``.
+        marker_color (Optional[str]): Configuration value for ``marker_color``. Defaults to ``None``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``12``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``16``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``12``.
+        show_values (bool): Configuration value for ``show_values``. Defaults to ``True``.
+        value_format (str): Configuration value for ``value_format``. Defaults to ``'.3f'``.
+        color_positive (str): Configuration value for ``color_positive``. Defaults to ``'steelblue'``.
+        color_negative (str): Configuration value for ``color_negative``. Defaults to ``'coral'``.
+        hovermode (str): Configuration value for ``hovermode``. Defaults to ``'closest'``.
+        template (str): Plotly template used to style the interactive figure. Defaults to ``'plotly'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        plotly.graph_objects.Figure: Configured Plotly figure containing the rendered interactive chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.shap_plot_interactive(shap_values)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "SHAP Feature Importance"

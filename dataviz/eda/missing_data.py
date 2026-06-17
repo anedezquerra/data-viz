@@ -1,6 +1,7 @@
 """Missing data plot implementation - static and interactive versions."""
 
 from typing import Optional, Tuple
+from ..types import FigureSize, MatplotlibAxes, PlotlyFigure
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
@@ -10,7 +11,7 @@ from ..utils import setup_plot, apply_theme
 def missing_data_plot_static(
     df: pd.DataFrame,
     title: Optional[str] = None,
-    figsize: Tuple[int, int] = (12, 6),
+    figsize: FigureSize = (12, 6),
     color: Optional[str] = None,
     edgecolor: str = 'black',
     linewidth: float = 1.0,
@@ -24,49 +25,44 @@ def missing_data_plot_static(
     dpi: int = 100,
     style: str = 'default',
     **kwargs
-) -> plt.Axes:
-    """
-    Create a static missing data visualization using matplotlib.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Input data
-    title : str, optional
-        Chart title
-    figsize : tuple, default (12, 6)
-        Figure size (width, height)
-    color : str, optional
-        Bar color
-    edgecolor : str, default 'black'
-        Bar edge color
-    linewidth : float, default 1.0
-        Edge line width
-    alpha : float, default 0.7
-        Transparency
-    grid : bool, default True
-        Show grid
-    grid_alpha : float, default 0.3
-        Grid transparency
-    theme : str, default 'default'
-        Theme: 'default', 'dark', 'minimal'
-    font_size : int, default 10
-        Base font size
-    title_size : int, default 14
-        Title font size
-    label_size : int, default 11
-        Axis label font size
-    dpi : int, default 100
-        Figure DPI
-    style : str, default 'default'
-        Matplotlib style
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a static missing-value summary by dataframe column.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        df (pd.DataFrame): Input dataframe containing the variables to visualize.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        figsize (FigureSize): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``(12, 6)``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        edgecolor (str): Configuration value for ``edgecolor``. Defaults to ``'black'``.
+        linewidth (float): Configuration value for ``linewidth``. Defaults to ``1.0``.
+        alpha (float): Configuration value for ``alpha``. Defaults to ``0.7``.
+        grid (bool): Configuration value for ``grid``. Defaults to ``True``.
+        grid_alpha (float): Configuration value for ``grid_alpha``. Defaults to ``0.3``.
+        theme (str): Named styling theme applied after the base plot is created. Defaults to ``'default'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``10``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``14``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``11``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        style (str): Matplotlib style context used while building the figure. Defaults to ``'default'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.missing_data_plot_static(df)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Missing Data Analysis"
@@ -125,41 +121,40 @@ def missing_data_plot_interactive(
     height: int = 600,
     width: int = 1000,
     **kwargs
-) -> go.Figure:
-    """
-    Create an interactive missing data visualization using plotly.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Input data
-    title : str, optional
-        Chart title
-    color : str, optional
-        Bar color
-    marker_color : str, optional
-        Alternative marker color parameter
-    showlegend : bool, default True
-        Show legend
-    hovermode : str, default 'closest'
-        Hover mode type
-    template : str, default 'plotly'
-        Plotly template
-    font_size : int, default 12
-        Font size
-    title_size : int, default 16
-        Title font size
-    height : int, default 600
-        Figure height in pixels
-    width : int, default 1000
-        Figure width in pixels
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        The interactive figure
+) -> PlotlyFigure:
+    """Create an interactive missing-value summary by dataframe column.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        df (pd.DataFrame): Input dataframe containing the variables to visualize.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        marker_color (Optional[str]): Configuration value for ``marker_color``. Defaults to ``None``.
+        showlegend (bool): Configuration value for ``showlegend``. Defaults to ``True``.
+        hovermode (str): Configuration value for ``hovermode``. Defaults to ``'closest'``.
+        template (str): Plotly template used to style the interactive figure. Defaults to ``'plotly'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``12``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``16``.
+        height (int): Plotly figure height in pixels. Defaults to ``600``.
+        width (int): Plotly figure width in pixels. Defaults to ``1000``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        plotly.graph_objects.Figure: Configured Plotly figure containing the rendered interactive chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.missing_data_plot_interactive(df)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Missing Data Analysis"

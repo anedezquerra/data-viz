@@ -1,6 +1,7 @@
 """Multivariate relationships visualization charts."""
 
 from typing import Optional
+from ..types import MatplotlibAxes, MatplotlibFigure
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,23 +12,31 @@ def pairplot(
     df: pd.DataFrame,
     title: str = "Pairplot",
     **kwargs
-) -> plt.Figure:
-    """
-    Create pairwise relationships plot for all numeric columns.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Input data
-    title : str, default "Pairplot"
-        Figure title
-    **kwargs
-        Additional arguments
-
-    Returns
-    -------
-    matplotlib.figure.Figure
-        The figure object
+) -> MatplotlibFigure:
+    """Create a pairwise variable relationship plot.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        df (pd.DataFrame): Input dataframe containing the variables to visualize.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Pairplot'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.figure.Figure: Configured matplotlib figure containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.pairplot(df)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     n_cols = len(df.select_dtypes(include=[np.number]).columns)
     fig, axes = plt.subplots(n_cols, n_cols, figsize=(12, 12))
@@ -41,25 +50,32 @@ def heatmap(
     title: str = "Heatmap",
     cmap: str = 'viridis',
     **kwargs
-) -> plt.Axes:
-    """
-    Create a heatmap visualization of data.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Input data
-    title : str, default "Heatmap"
-        Chart title
-    cmap : str, default 'viridis'
-        Colormap name
-    **kwargs
-        Additional heatmap arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a heatmap for matrix-like or dataframe values.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        df (pd.DataFrame): Input dataframe containing the variables to visualize.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Heatmap'``.
+        cmap (str): Configuration value for ``cmap``. Defaults to ``'viridis'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.heatmap(df)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title, figsize=(12, 8))
     
@@ -79,23 +95,31 @@ def parallel_coordinates(
     df: pd.DataFrame,
     title: str = "Parallel Coordinates",
     **kwargs
-) -> plt.Axes:
-    """
-    Create a parallel coordinates plot for exploring multivariate data.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Input data (numeric columns only)
-    title : str, default "Parallel Coordinates"
-        Chart title
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a parallel-coordinates plot for multivariate comparison.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        df (pd.DataFrame): Input dataframe containing the variables to visualize.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Parallel Coordinates'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.parallel_coordinates(df)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title, figsize=(12, 6))
     

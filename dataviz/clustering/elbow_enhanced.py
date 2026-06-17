@@ -1,6 +1,7 @@
 """Elbow plot implementation - static and interactive versions."""
 
 from typing import Optional
+from ..types import ArrayLike, FigureSize, MatplotlibAxes, PlotlyFigure
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
@@ -8,12 +9,12 @@ from ..utils import setup_plot, apply_theme
 
 
 def elbow_plot_static(
-    n_clusters: np.ndarray,
-    inertias: np.ndarray,
+    n_clusters: ArrayLike,
+    inertias: ArrayLike,
     title: Optional[str] = None,
     xlabel: str = "Number of Clusters",
     ylabel: str = "Inertia",
-    figsize: tuple = (10, 6),
+    figsize: FigureSize = (10, 6),
     color: str = 'blue',
     marker: str = 'o',
     marker_size: int = 50,
@@ -35,71 +36,55 @@ def elbow_plot_static(
     grid: bool = True,
     grid_alpha: float = 0.3,
     **kwargs
-) -> plt.Axes:
-    """
-    Create a static elbow plot using matplotlib.
-
-    Parameters
-    ----------
-    n_clusters : array
-        Number of clusters
-    inertias : array
-        Inertia values for each cluster count
-    title : str, optional
-        Chart title (auto-generated if None)
-    xlabel : str, default "Number of Clusters"
-        X-axis label
-    ylabel : str, default "Inertia"
-        Y-axis label
-    figsize : tuple, default (10, 6)
-        Figure size
-    color : str, default 'blue'
-        Line color
-    marker : str, default 'o'
-        Marker style
-    marker_size : int, default 50
-        Marker size
-    linestyle : str, default '-'
-        Line style
-    linewidth : float, default 2.0
-        Line width
-    marker_edgecolor : str, default 'black'
-        Marker edge color
-    marker_edgewidth : float, default 1.0
-        Marker edge width
-    alpha : float, default 0.7
-        Line transparency
-    elbow_idx : int, optional
-        Index of elbow point to highlight
-    elbow_marker : str, default 'X'
-        Elbow marker style
-    elbow_color : str, default 'red'
-        Elbow highlight color
-    elbow_size : int, default 200
-        Elbow marker size
-    font_size : int, default 10
-        Base font size
-    title_size : int, default 14
-        Title font size
-    label_size : int, default 11
-        Axis label font size
-    theme : str, default 'default'
-        Plot theme
-    style : str, default 'default'
-        Matplotlib style
-    dpi : int, default 100
-        Figure DPI
-    grid : bool, default True
-        Show grid
-    grid_alpha : float, default 0.3
-        Grid transparency
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a static elbow plot for selecting a cluster count.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        n_clusters (ArrayLike): Configuration value for ``n_clusters``.
+        inertias (ArrayLike): Within-cluster sum-of-squares or inertia values by cluster count.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        xlabel (str): Optional x-axis label. Defaults to ``'Number of Clusters'``.
+        ylabel (str): Optional y-axis label. Defaults to ``'Inertia'``.
+        figsize (FigureSize): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``(10, 6)``.
+        color (str): Configuration value for ``color``. Defaults to ``'blue'``.
+        marker (str): Configuration value for ``marker``. Defaults to ``'o'``.
+        marker_size (int): Configuration value for ``marker_size``. Defaults to ``50``.
+        linestyle (str): Configuration value for ``linestyle``. Defaults to ``'-'``.
+        linewidth (float): Configuration value for ``linewidth``. Defaults to ``2.0``.
+        marker_edgecolor (str): Configuration value for ``marker_edgecolor``. Defaults to ``'black'``.
+        marker_edgewidth (float): Configuration value for ``marker_edgewidth``. Defaults to ``1.0``.
+        alpha (float): Configuration value for ``alpha``. Defaults to ``0.7``.
+        elbow_idx (Optional[int]): Configuration value for ``elbow_idx``. Defaults to ``None``.
+        elbow_marker (str): Configuration value for ``elbow_marker``. Defaults to ``'X'``.
+        elbow_color (str): Configuration value for ``elbow_color``. Defaults to ``'red'``.
+        elbow_size (int): Configuration value for ``elbow_size``. Defaults to ``200``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``10``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``14``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``11``.
+        theme (str): Named styling theme applied after the base plot is created. Defaults to ``'default'``.
+        style (str): Matplotlib style context used while building the figure. Defaults to ``'default'``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        grid (bool): Configuration value for ``grid``. Defaults to ``True``.
+        grid_alpha (float): Configuration value for ``grid_alpha``. Defaults to ``0.3``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.elbow_plot_static(inertias)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Elbow Plot"
@@ -137,8 +122,8 @@ def elbow_plot_static(
 
 
 def elbow_plot_interactive(
-    n_clusters: np.ndarray,
-    inertias: np.ndarray,
+    n_clusters: ArrayLike,
+    inertias: ArrayLike,
     title: Optional[str] = None,
     xlabel: str = "Number of Clusters",
     ylabel: str = "Inertia",
@@ -160,63 +145,51 @@ def elbow_plot_interactive(
     showlegend: bool = False,
     template: str = 'plotly',
     **kwargs
-) -> go.Figure:
-    """
-    Create an interactive elbow plot using plotly.
-
-    Parameters
-    ----------
-    n_clusters : array
-        Number of clusters
-    inertias : array
-        Inertia values for each cluster count
-    title : str, optional
-        Chart title (auto-generated if None)
-    xlabel : str, default "Number of Clusters"
-        X-axis label
-    ylabel : str, default "Inertia"
-        Y-axis label
-    height : int, default 600
-        Figure height
-    width : int, default 900
-        Figure width
-    line_color : str, default 'blue'
-        Line color
-    line_width : int, default 2
-        Line width
-    marker_size : int, default 8
-        Marker size
-    marker_symbol : str, default 'circle'
-        Marker symbol
-    marker_color : str, optional
-        Marker color (defaults to line color)
-    opacity : float, default 0.7
-        Line/marker opacity
-    elbow_idx : int, optional
-        Index of elbow point to highlight
-    elbow_marker : str, default 'x-open-dot'
-        Elbow marker symbol
-    elbow_color : str, default 'red'
-        Elbow highlight color
-    font_size : int, default 12
-        Base font size
-    title_size : int, default 16
-        Title font size
-    label_size : int, default 12
-        Axis label font size
-    hovermode : str, default 'closest'
-        Hover mode
-    showlegend : bool, default False
-        Show legend
-    template : str, default 'plotly'
-        Plotly template
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        The interactive figure
+) -> PlotlyFigure:
+    """Create an interactive elbow plot for selecting a cluster count.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        n_clusters (ArrayLike): Configuration value for ``n_clusters``.
+        inertias (ArrayLike): Within-cluster sum-of-squares or inertia values by cluster count.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        xlabel (str): Optional x-axis label. Defaults to ``'Number of Clusters'``.
+        ylabel (str): Optional y-axis label. Defaults to ``'Inertia'``.
+        height (int): Plotly figure height in pixels. Defaults to ``600``.
+        width (int): Plotly figure width in pixels. Defaults to ``900``.
+        line_color (str): Configuration value for ``line_color``. Defaults to ``'blue'``.
+        line_width (int): Configuration value for ``line_width``. Defaults to ``2``.
+        marker_size (int): Configuration value for ``marker_size``. Defaults to ``8``.
+        marker_symbol (str): Configuration value for ``marker_symbol``. Defaults to ``'circle'``.
+        marker_color (Optional[str]): Configuration value for ``marker_color``. Defaults to ``None``.
+        opacity (float): Configuration value for ``opacity``. Defaults to ``0.7``.
+        elbow_idx (Optional[int]): Configuration value for ``elbow_idx``. Defaults to ``None``.
+        elbow_marker (str): Configuration value for ``elbow_marker``. Defaults to ``'x-open-dot'``.
+        elbow_color (str): Configuration value for ``elbow_color``. Defaults to ``'red'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``12``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``16``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``12``.
+        hovermode (str): Configuration value for ``hovermode``. Defaults to ``'closest'``.
+        showlegend (bool): Configuration value for ``showlegend``. Defaults to ``False``.
+        template (str): Plotly template used to style the interactive figure. Defaults to ``'plotly'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        plotly.graph_objects.Figure: Configured Plotly figure containing the rendered interactive chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.elbow_plot_interactive(inertias)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Elbow Plot"

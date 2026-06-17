@@ -1,6 +1,7 @@
 """Distribution summary implementation - static and interactive versions."""
 
 from typing import Optional, Tuple
+from ..types import FigureSize, MatplotlibFigure, PlotlyFigure
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -12,7 +13,7 @@ import plotly.express as px
 def distribution_summary_static(
     df: pd.DataFrame,
     title: Optional[str] = None,
-    figsize: Optional[Tuple[int, int]] = None,
+    figsize: Optional[FigureSize] = None,
     bins: int = 30,
     color: Optional[str] = None,
     alpha: float = 0.7,
@@ -26,49 +27,44 @@ def distribution_summary_static(
     dpi: int = 100,
     style: str = 'default',
     **kwargs
-) -> plt.Figure:
-    """
-    Create static subplots showing distribution of all numeric columns.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Input data
-    title : str, optional
-        Figure title
-    figsize : tuple, optional
-        Figure size (width, height)
-    bins : int, default 30
-        Number of histogram bins
-    color : str, optional
-        Bar color
-    alpha : float, default 0.7
-        Transparency
-    edgecolor : str, default 'black'
-        Edge color
-    grid : bool, default True
-        Show grid
-    grid_alpha : float, default 0.3
-        Grid transparency
-    theme : str, default 'default'
-        Theme: 'default', 'dark', 'minimal'
-    font_size : int, default 10
-        Base font size
-    title_size : int, default 14
-        Title font size
-    label_size : int, default 11
-        Axis label font size
-    dpi : int, default 100
-        Figure DPI
-    style : str, default 'default'
-        Matplotlib style
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    matplotlib.figure.Figure
-        The figure object
+) -> MatplotlibFigure:
+    """Create static summary charts for dataframe column distributions.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        df (pd.DataFrame): Input dataframe containing the variables to visualize.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        figsize (Optional[FigureSize]): Matplotlib figure size as ``(width, height)`` in inches. Defaults to ``None``.
+        bins (int): Number of bins used for histogram-like displays. Defaults to ``30``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        alpha (float): Configuration value for ``alpha``. Defaults to ``0.7``.
+        edgecolor (str): Configuration value for ``edgecolor``. Defaults to ``'black'``.
+        grid (bool): Configuration value for ``grid``. Defaults to ``True``.
+        grid_alpha (float): Configuration value for ``grid_alpha``. Defaults to ``0.3``.
+        theme (str): Named styling theme applied after the base plot is created. Defaults to ``'default'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``10``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``14``.
+        label_size (int): Configuration value for ``label_size``. Defaults to ``11``.
+        dpi (int): Configuration value for ``dpi``. Defaults to ``100``.
+        style (str): Matplotlib style context used while building the figure. Defaults to ``'default'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.figure.Figure: Configured matplotlib figure containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.distribution_summary_static(df)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Distribution Summary"
@@ -127,41 +123,40 @@ def distribution_summary_interactive(
     height: Optional[int] = None,
     width: int = 1200,
     **kwargs
-) -> go.Figure:
-    """
-    Create interactive subplots showing distribution of numeric columns.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Input data
-    title : str, optional
-        Figure title
-    bins : int, default 30
-        Number of histogram bins
-    color : str, optional
-        Bar color
-    marker_color : str, optional
-        Alternative marker color parameter
-    hovermode : str, default 'closest'
-        Hover mode type
-    template : str, default 'plotly'
-        Plotly template
-    font_size : int, default 12
-        Font size
-    title_size : int, default 16
-        Title font size
-    height : int, optional
-        Figure height in pixels
-    width : int, default 1200
-        Figure width in pixels
-    **kwargs
-        Additional plot arguments
-
-    Returns
-    -------
-    plotly.graph_objects.Figure
-        The interactive figure
+) -> PlotlyFigure:
+    """Create interactive summary charts for dataframe column distributions.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        df (pd.DataFrame): Input dataframe containing the variables to visualize.
+        title (Optional[str]): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``None``.
+        bins (int): Number of bins used for histogram-like displays. Defaults to ``30``.
+        color (Optional[str]): Configuration value for ``color``. Defaults to ``None``.
+        marker_color (Optional[str]): Configuration value for ``marker_color``. Defaults to ``None``.
+        hovermode (str): Configuration value for ``hovermode``. Defaults to ``'closest'``.
+        template (str): Plotly template used to style the interactive figure. Defaults to ``'plotly'``.
+        font_size (int): Configuration value for ``font_size``. Defaults to ``12``.
+        title_size (int): Configuration value for ``title_size``. Defaults to ``16``.
+        height (Optional[int]): Plotly figure height in pixels. Defaults to ``None``.
+        width (int): Plotly figure width in pixels. Defaults to ``1200``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        plotly.graph_objects.Figure: Configured Plotly figure containing the rendered interactive chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.distribution_summary_interactive(df)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     if title is None:
         title = "Distribution Summary"

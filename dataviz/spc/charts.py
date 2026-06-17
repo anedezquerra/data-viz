@@ -1,32 +1,41 @@
 """Statistical Process Control charts implementation."""
 
 from typing import Optional
+from ..types import ArrayLike, MatplotlibAxes
 import numpy as np
 import matplotlib.pyplot as plt
 from ..utils import setup_plot, apply_theme
 
 
 def control_chart(
-    data: np.ndarray,
+    data: ArrayLike,
     title: str = "Control Chart",
     **kwargs
-) -> plt.Axes:
-    """
-    Create a control chart for monitoring process stability.
-
-    Parameters
-    ----------
-    data : array-like
-        Process measurements
-    title : str, default "Control Chart"
-        Chart title
-    **kwargs
-        Additional plotting arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create a statistical process control chart.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        data (ArrayLike): Input observations, measurements, or values used to build the chart.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'Control Chart'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.control_chart(data)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title)
     
@@ -49,29 +58,36 @@ def control_chart(
 
 
 def x_range_chart(
-    data: np.ndarray,
+    data: ArrayLike,
     subgroup_size: int = 5,
     title: str = "X-Range Chart",
     **kwargs
-) -> plt.Axes:
-    """
-    Create an X-Range (individuals and moving range) chart.
-
-    Parameters
-    ----------
-    data : array-like
-        Process measurements
-    subgroup_size : int, default 5
-        Size of subgroups for moving range calculation
-    title : str, default "X-Range Chart"
-        Chart title
-    **kwargs
-        Additional plotting arguments
-
-    Returns
-    -------
-    matplotlib.axes.Axes
-        The plot axes
+) -> MatplotlibAxes:
+    """Create an X-range chart for individual values and range monitoring.
+    
+    Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+    
+    Args:
+        data (ArrayLike): Input observations, measurements, or values used to build the chart.
+        subgroup_size (int): Number of observations used in each subgroup calculation. Defaults to ``5``.
+        title (str): Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to ``'X-Range Chart'``.
+        **kwargs (Any): Additional keyword arguments forwarded to the underlying plotting function.
+    
+    Returns:
+        matplotlib.axes.Axes: Configured matplotlib axes containing the rendered static chart.
+    
+    Raises:
+        TypeError: If required inputs are not compatible with the plotting backend.
+        ValueError: If input lengths, matrix shapes, or option values are invalid for the requested chart.
+    
+    Example:
+        ```python
+        import dataviz as dv
+        result = dv.x_range_chart(data)
+        ```
+    
+    Notes:
+        Static functions return matplotlib objects; interactive functions return Plotly figures.
     """
     fig, ax = setup_plot(title=title)
     
