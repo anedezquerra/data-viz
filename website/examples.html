@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Examples - DataViz</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="examples">
+  <div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="brand-title">DataViz</span><span class="brand-subtitle">Examples</span></a><input class="search" data-search placeholder="Search navigation"><nav data-nav></nav></aside>
+  <main class="content"><div class="main">
+    <section class="hero"><p class="eyebrow">Examples</p><h1>Common workflows</h1><p class="lead">Representative snippets for the current modules. Replace sample arrays with pandas Series, NumPy arrays, or dataframe columns from your project.</p></section>
+    <h2>Univariate profile</h2><pre><code>import dataviz as dv
+
+profile = dv.auto_profile("revenue", data=df)
+fig = dv.auto_profile_chart_interactive("revenue", data=df)
+ci = dv.bootstrap_ci(df["revenue"], statistic="mean", seed=42)</code></pre>
+    <h2>Bivariate relationship</h2><pre><code>stats = dv.bivariate_summary(df["temperature"], df["yield"])
+ax = dv.regression_plot(df["temperature"], df["yield"])
+fig = dv.joint_scatter_hist_interactive(df["temperature"], df["yield"])</code></pre>
+    <h2>SPC dashboard</h2><pre><code>limits = dv.individuals_limits(process_values)
+violations = dv.detect_rule_violations(process_values, limits)
+fig = dv.spc_dashboard_interactive(process_values)</code></pre>
+    <h2>Model diagnostics</h2><pre><code>ax = dv.confusion_matrix_plot(cm, labels=["No", "Yes"])
+fig = dv.residual_plot_interactive(y_true, y_pred)
+importance = dv.xai.feature_importance_interactive(importances, feature_names=names)</code></pre>
+  </div></main></div>
+  <script src="assets/data.js"></script><script src="assets/functions.js"></script><script src="assets/site.js"></script>
+</body>
+</html>
