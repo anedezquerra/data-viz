@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Installation - DataViz</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="installation">
+  <div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="brand-title">DataViz</span><span class="brand-subtitle">Installation</span></a><input class="search" data-search placeholder="Search navigation"><nav data-nav></nav></aside>
+  <main class="content"><div class="main">
+    <section class="hero"><p class="eyebrow">Install</p><h1>Installation and development setup</h1><p class="lead">Install the package and runtime dependencies before using the plotting APIs.</p></section>
+    <h2>Runtime install</h2><pre><code>pip install dataviz</code></pre>
+    <h2>Local development</h2><pre><code>git clone https://github.com/anedezquerra/data-viz.git
+cd data-viz
+pip install -e ".[dev]"
+pip install -r requirements-dev.txt</code></pre>
+    <h2>Runtime dependencies</h2><p>The package uses matplotlib, seaborn, numpy, pandas, plotly, and scipy. Development also uses pytest, pytest-cov, black, flake8, mypy, sphinx, sphinx-rtd-theme, and kaleido.</p>
+  </div></main></div>
+  <script src="assets/data.js"></script><script src="assets/functions.js"></script><script src="assets/site.js"></script>
+</body>
+</html>

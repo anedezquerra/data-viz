@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Guide - DataViz</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="user-guide">
+  <div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="brand-title">DataViz</span><span class="brand-subtitle">User guide</span></a><input class="search" data-search placeholder="Search navigation"><nav data-nav></nav></aside>
+  <main class="content"><div class="main">
+    <section class="hero"><p class="eyebrow">User Guide</p><h1>Choosing the right module</h1><p class="lead">DataViz is organized around analysis intent. Start from the question you need to answer, then choose the module that matches the data shape and workflow.</p></section>
+    <h2>By Data Shape</h2>
+    <div class="grid">
+      <div class="card"><h3>One variable</h3><p>Use <a href="module-univariate.html">Univariate</a> for distributions, profiles, quality checks, outliers, weighted data, text, datetime, and bootstrap intervals.</p></div>
+      <div class="card"><h3>Two variables</h3><p>Use <a href="module-bivariate.html">Bivariate</a> for scatter, line, regression, category comparisons, agreement, lag, residual, and joint plots.</p></div>
+      <div class="card"><h3>Many variables</h3><p>Use <a href="module-multivariate.html">Multivariate</a> for heatmaps, pair plots, and parallel coordinates.</p></div>
+      <div class="card"><h3>Process data</h3><p>Use <a href="module-spc.html">SPC</a> for control charts, capability, rules, attributes, and process dashboards.</p></div>
+    </div>
+    <h2>By Modeling Workflow</h2>
+    <table class="api-table"><thead><tr><th>Workflow</th><th>Module</th><th>Typical functions</th></tr></thead><tbody>
+      <tr><td>Classification evaluation</td><td>Classification</td><td><code>confusion_matrix_plot</code> <code>roc_curve</code> <code>precision_recall_curve</code></td></tr>
+      <tr><td>Regression diagnostics</td><td>Regression</td><td><code>residual_plot</code> <code>prediction_plot</code> <code>learning_curve</code></td></tr>
+      <tr><td>Clustering inspection</td><td>Clustering</td><td><code>scatter_clusters</code> <code>dendrogram</code> <code>elbow_plot</code></td></tr>
+      <tr><td>Explainability</td><td>XAI</td><td><code>feature_importance</code> <code>shap_plot</code> <code>partial_dependence</code></td></tr>
+    </tbody></table>
+    <h2>Static vs Interactive</h2>
+    <p>Static functions return matplotlib axes or figures and are best for reports, notebooks, and publication workflows. Interactive functions return Plotly figures and are best for dashboards, exploratory review, and hover-driven inspection.</p>
+    <pre><code>ax = dv.histogram(values)
+fig = dv.histogram_interactive(values)</code></pre>
+  </div></main></div>
+  <script src="assets/data.js"></script><script src="assets/functions.js"></script><script src="assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DataViz Documentation</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="home">
+  <div class="layout">
+    <aside class="sidebar">
+      <a class="brand" href="index.html"><span class="brand-title">DataViz</span><span class="brand-subtitle">Static and interactive visualization toolkit</span></a>
+      <input class="search" data-search placeholder="Search navigation">
+      <nav data-nav></nav>
+    </aside>
+    <main class="content">
+      <div class="main">
+        <section class="hero">
+          <p class="eyebrow">Documentation</p>
+          <h1>DataViz</h1>
+          <p class="lead">A comprehensive Python visualization package organized by analysis category, with static matplotlib/seaborn charts, interactive Plotly charts, typed helper APIs, and module-specific analysis workflows.</p>
+          <p><img src="assets/dataviz-mark.svg" alt="Abstract DataViz module map" style="width:100%;max-width:720px;border-radius:8px;border:1px solid #dfe6f1;background:#fff;margin-top:18px;"></p>
+        </section>
+        <div class="stat-row">
+          <div class="stat"><strong>10</strong><span>implemented modules</span></div>
+          <div class="stat"><strong>300+</strong><span>public exports across charts and helpers</span></div>
+          <div class="stat"><strong>2</strong><span>rendering modes: static and interactive</span></div>
+          <div class="stat"><strong>8</strong><span>planned module pages reserved</span></div>
+        </div>
+        <h2>What You Can Build</h2>
+        <div class="grid">
+          <div class="card"><h3>Exploratory Analysis</h3><p>Use univariate, bivariate, multivariate, and EDA modules to understand columns, relationships, distributions, missingness, and outliers.</p></div>
+          <div class="card"><h3>Model Diagnostics</h3><p>Use regression, classification, clustering, and XAI pages to inspect model behavior, predictions, metrics, and explanations.</p></div>
+          <div class="card"><h3>Process Monitoring</h3><p>Use SPC charts, capability analysis, rule detection, and dashboards for manufacturing, operations, and quality workflows.</p></div>
+          <div class="card"><h3>Custom Extensions</h3><p>Use utility and helper functions to build project-specific visualizations that follow the package conventions.</p></div>
+        </div>
+        <h2>Quick Start</h2>
+        <pre><code>import dataviz as dv
+
+ax = dv.histogram(df["sales"], bins=30)
+fig = dv.scatter_plot_interactive(df["height"], df["weight"])
+profile = dv.auto_profile("sales", data=df)
+dashboard = dv.spc_dashboard_interactive(process_values)</code></pre>
+        <h2>Documentation Structure</h2>
+        <p>This static site mirrors a MkDocs-style documentation layout: a persistent navigation sidebar, user guide, API index, examples, module pages, and intentionally blank future pages.</p>
+        <div class="footer">Generated documentation scaffold for the local DataViz package.</div>
+      </div>
+    </main>
+  </div>
+  <script src="assets/data.js"></script><script src="assets/functions.js"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>
