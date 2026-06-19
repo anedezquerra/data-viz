@@ -1,35 +1,44 @@
-Data-Viz Documentation
-======================
+DataViz documentation
+=====================
 
-Welcome to the official documentation for Data-Viz!
+DataViz is a Python visualization toolkit with complementary static
+Matplotlib/Seaborn and interactive Plotly APIs. Its modules cover exploratory
+analysis, statistical process control, model diagnostics, clustering, and
+explainable AI.
+
+Use the guides to learn the public workflow, then move into the API reference
+for signatures, Google-style docstrings, return types, exceptions, examples,
+and source links.
+
+.. note::
+
+   This site is built from the repository's current ``main`` branch. The
+   version displayed in the header is read directly from ``pyproject.toml``.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Core Modules:
+   :caption: Getting started
 
-   dataviz.bivariate
-   dataviz.classification
-   dataviz.clustering
-   dataviz.eda
-   dataviz.multivariate
-   dataviz.regression
-   dataviz.spc
-   dataviz.univariate
+   getting_started
+   user_guide
+   examples
+
+.. toctree::
+   :maxdepth: 3
+   :caption: API reference
+
+   api/modules
 
 .. toctree::
    :maxdepth: 2
-   :caption: Infrastructure & Utilities:
+   :caption: Project
 
-   dataviz.utils
-   dataviz.xai
-   dataviz.core
-   dataviz.types
+   development
+   changelog
 
-Modules Reference
-=================
-
-Indices and tables
-==================
+Indices
+-------
 
 * :ref:`genindex`
 * :ref:`modindex`
+* :ref:`search`

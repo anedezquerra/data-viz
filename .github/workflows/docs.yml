@@ -1,38 +1,77 @@
-name: Deploy Docs
+name: Documentation
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+    paths:
+      - ".github/workflows/docs.yml"
+      - "dataviz/**"
+      - "docs/**"
+      - "pyproject.toml"
+      - "requirements*.txt"
+  pull_request:
+    paths:
+      - ".github/workflows/docs.yml"
+      - "dataviz/**"
+      - "docs/**"
+      - "pyproject.toml"
+      - "requirements*.txt"
+  workflow_dispatch:
 
-permissions:
-  contents: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      MPLBACKEND: Agg
+      MPLCONFIGDIR: ${{ runner.temp }}/matplotlib
+
     steps:
-      - name: Checkout code
+      - name: Check out repository
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.12"
+          cache: pip
 
-      - name: Install dependencies
+      - name: Install package and documentation dependencies
         run: |
-          pip install --upgrade pip
-          pip install sphinx sphinx_rtd_theme
-          # Install your local package so Sphinx can parse the docstrings
-          if [ -f setup.py ] || [ -f pyproject.toml ]; then pip install .; else pip install -e .; fi
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[docs]"
 
-      - name: Build Sphinx Docs
-        run: |
-          sphinx-build -b html docs/source/ docs/_build/html
+      - name: Build documentation with warnings as errors
+        run: >-
+          python -m sphinx
+          -W --keep-going
+          -b html
+          docs/source
+          docs/build/html
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload GitHub Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/_build/html
+          path: docs/build/html
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

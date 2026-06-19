@@ -1,0 +1,14 @@
+dataviz.eda package
+===================
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   dataviz.eda.charts
+   dataviz.eda.class_dist
+   dataviz.eda.distribution
+   dataviz.eda.missing_data

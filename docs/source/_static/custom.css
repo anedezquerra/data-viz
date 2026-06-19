@@ -1,0 +1,68 @@
+:root {
+  --dataviz-blue: #174f6f;
+  --dataviz-blue-dark: #103a52;
+  --dataviz-red: #c64b59;
+  --dataviz-ink: #172033;
+}
+
+.wy-side-nav-search,
+.wy-nav-top {
+  background: var(--dataviz-blue);
+}
+
+.wy-side-nav-search > a img.logo {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 0.35rem;
+  padding: 0;
+}
+
+.wy-menu-vertical a:active {
+  background: var(--dataviz-blue);
+}
+
+.wy-nav-content {
+  max-width: 1120px;
+}
+
+.rst-content code.literal,
+.rst-content tt.literal {
+  color: var(--dataviz-blue-dark);
+}
+
+.rst-content .admonition-title,
+.rst-content table.docutils thead,
+.rst-content table.field-list thead {
+  background: #e9f2f7;
+  color: var(--dataviz-ink);
+}
+
+.rst-content .note .admonition-title {
+  background: var(--dataviz-blue);
+  color: #fff;
+}
+
+.rst-content dl.py > dt {
+  border-top: 3px solid var(--dataviz-blue);
+  background: #f2f7fa;
+  color: var(--dataviz-ink);
+}
+
+.rst-content a,
+.wy-breadcrumbs a {
+  color: var(--dataviz-blue);
+}
+
+.rst-content a:visited {
+  color: #654a83;
+}
+
+.rst-content a:hover {
+  color: var(--dataviz-red);
+}
+
+@media screen and (max-width: 768px) {
+  .wy-nav-content {
+    padding: 1.5rem 1rem;
+  }
+}

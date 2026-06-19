@@ -23,19 +23,18 @@ pip install dataviz
 ### Static Charts (matplotlib - default)
 ```python
 import dataviz as dv
+import matplotlib.pyplot as plt
 import pandas as pd
 
 # Histogram
 ax = dv.histogram(df['column_name'], bins=30)
-ax.show()
 
 # Scatter plot
 ax = dv.scatter_plot(df['x'], df['y'])
-ax.show()
 
 # ROC curve
 ax = dv.roc_curve(fpr, tpr, auc_score)
-ax.show()
+plt.show()
 ```
 
 ### Interactive Charts (plotly)
@@ -99,32 +98,33 @@ fig = dv.xai.shap_plot_interactive(shap_values, feature_names)
 
 ## Project Structure
 
-```
+`	ext
 dataviz/
-├── spc/                    # Statistical Process Control charts
-├── univariate/             # Single variable visualization (histogram, density, box plots)
-├── bivariate/              # Two variable relationships (scatter, line, correlation)
-├── multivariate/           # Multiple variable analysis (pairplot, heatmap, parallel coords)
-├── eda/                    # Exploratory Data Analysis charts
-├── xai/                    # Explainable AI & feature importance visualizations
-├── regression/             # Regression model diagnostics
-├── classification/         # Classification metrics (confusion matrix, ROC, PR curves)
-├── clustering/             # Clustering analysis (scatter, dendrogram, elbow plot)
-└── utils/                  # Helper functions and utilities
-```
+|-- spc/                    # Statistical Process Control charts
+|-- univariate/             # Single-variable analysis and visualization
+|-- bivariate/              # Two-variable relationships and diagnostics
+|-- multivariate/           # Pair plots, heatmaps, and parallel coordinates
+|-- eda/                    # Exploratory data analysis
+|-- xai/                    # Explainable AI visualizations
+|-- regression/             # Regression diagnostics
+|-- classification/         # Classification evaluation
+|-- clustering/             # Cluster analysis and diagnostics
+-- utils/                  # Shared helpers and validation
+`
 
 ## Documentation
 
-For detailed documentation, visit [dataviz.readthedocs.io](https://dataviz.readthedocs.io)
+For detailed documentation, visit the
+[DataViz GitHub Pages site](https://anedezquerra.github.io/data-viz/).
 
 ## Development
 
 ### Setup
 
 ```bash
-git clone https://github.com/username/dataviz.git
-cd dataviz
-pip install -e ".[dev]"
+git clone https://github.com/anedezquerra/data-viz.git
+cd data-viz
+pip install -e ".[dev,docs]"
 ```
 
 ### Running Tests

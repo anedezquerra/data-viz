@@ -22,6 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
 
 dependencies = [
@@ -42,18 +43,18 @@ dev = [
     "mypy>=0.950",
 ]
 docs = [
-    "sphinx>=4.5",
-    "sphinx-rtd-theme>=1.0",
+    "sphinx>=8.0,<10.0",
+    "sphinx-rtd-theme>=3.0,<4.0",
 ]
 
 [project.urls]
-Homepage = "https://github.com/username/dataviz"
-Documentation = "https://dataviz.readthedocs.io"
-Repository = "https://github.com/username/dataviz.git"
-"Bug Tracker" = "https://github.com/username/dataviz/issues"
+Homepage = "https://github.com/anedezquerra/data-viz"
+Documentation = "https://anedezquerra.github.io/data-viz/"
+Repository = "https://github.com/anedezquerra/data-viz.git"
+"Bug Tracker" = "https://github.com/anedezquerra/data-viz/issues"
 
-[tool.setuptools]
-packages = ["dataviz"]
+[tool.setuptools.packages.find]
+include = ["dataviz*"]
 
 [tool.black]
 line-length = 88
@@ -64,7 +65,7 @@ testpaths = ["tests"]
 addopts = "--cov=dataviz --cov-report=html --cov-report=term-missing"
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.10"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = false
