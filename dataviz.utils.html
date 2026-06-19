@@ -1,0 +1,833 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dataviz.utils package &mdash; Data-Viz 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Data-Viz
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">dataviz.utils package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-dataviz.utils.helpers">dataviz.utils.helpers module</a><ul>
+<li><a class="reference internal" href="#dataviz.utils.helpers.apply_theme"><code class="docutils literal notranslate"><span class="pre">apply_theme()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.helpers.setup_plot"><code class="docutils literal notranslate"><span class="pre">setup_plot()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dataviz.utils.validation">dataviz.utils.validation module</a><ul>
+<li><a class="reference internal" href="#dataviz.utils.validation.add_plotly_reference_lines"><code class="docutils literal notranslate"><span class="pre">add_plotly_reference_lines()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.validation.add_reference_lines"><code class="docutils literal notranslate"><span class="pre">add_reference_lines()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.validation.numeric_dataframe"><code class="docutils literal notranslate"><span class="pre">numeric_dataframe()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.validation.resolve_series"><code class="docutils literal notranslate"><span class="pre">resolve_series()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.validation.resolve_xy_data"><code class="docutils literal notranslate"><span class="pre">resolve_xy_data()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.validation.validate_alpha"><code class="docutils literal notranslate"><span class="pre">validate_alpha()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.validation.validate_equal_length"><code class="docutils literal notranslate"><span class="pre">validate_equal_length()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.validation.validate_positive_int"><code class="docutils literal notranslate"><span class="pre">validate_positive_int()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dataviz.utils">Module contents</a><ul>
+<li><a class="reference internal" href="#dataviz.utils.add_plotly_reference_lines"><code class="docutils literal notranslate"><span class="pre">add_plotly_reference_lines()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.add_reference_lines"><code class="docutils literal notranslate"><span class="pre">add_reference_lines()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.apply_theme"><code class="docutils literal notranslate"><span class="pre">apply_theme()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.numeric_dataframe"><code class="docutils literal notranslate"><span class="pre">numeric_dataframe()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.resolve_series"><code class="docutils literal notranslate"><span class="pre">resolve_series()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.resolve_xy_data"><code class="docutils literal notranslate"><span class="pre">resolve_xy_data()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.setup_plot"><code class="docutils literal notranslate"><span class="pre">setup_plot()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.validate_alpha"><code class="docutils literal notranslate"><span class="pre">validate_alpha()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.validate_equal_length"><code class="docutils literal notranslate"><span class="pre">validate_equal_length()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.utils.validate_positive_int"><code class="docutils literal notranslate"><span class="pre">validate_positive_int()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Data-Viz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">dataviz.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dataviz.utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dataviz-utils-package">
+<h1>dataviz.utils package<a class="headerlink" href="#dataviz-utils-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-dataviz.utils.helpers">
+<span id="dataviz-utils-helpers-module"></span><h2>dataviz.utils.helpers module<a class="headerlink" href="#module-dataviz.utils.helpers" title="Link to this heading"></a></h2>
+<p>Helper functions and utilities for plotting.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.helpers.apply_theme">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.helpers.</span></span><span class="sig-name descname"><span class="pre">apply_theme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dataviz.utils.helpers.apply_theme" title="Link to this definition"></a></dt>
+<dd><p>Apply a named visual theme to an existing matplotlib axes object.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>MatplotlibAxes</em>) – Matplotlib axes object to update.</p></li>
+<li><p><strong>theme</strong> (<em>str</em>) – Named styling theme applied after the base plot is created. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The supplied matplotlib axes is updated in place.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.apply_theme(ax)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.helpers.setup_plot">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.helpers.</span></span><span class="sig-name descname"><span class="pre">setup_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(10,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Figure</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Axes</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dataviz.utils.helpers.setup_plot" title="Link to this definition"></a></dt>
+<dd><p>Create and configure a matplotlib figure and axes pair.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size as <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code> in inches. Defaults to <code class="docutils literal notranslate"><span class="pre">(10,</span> <span class="pre">6)</span></code>.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>xlabel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional x-axis label. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>ylabel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional y-axis label. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Created matplotlib figure and axes objects.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[matplotlib.figure.Figure, matplotlib.axes.Axes]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.setup_plot()</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+</section>
+<section id="module-dataviz.utils.validation">
+<span id="dataviz-utils-validation-module"></span><h2>dataviz.utils.validation module<a class="headerlink" href="#module-dataviz.utils.validation" title="Link to this heading"></a></h2>
+<p>Validation and data-preparation helpers for plotting functions.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.validation.add_plotly_reference_lines">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.validation.</span></span><span class="sig-name descname"><span class="pre">add_plotly_reference_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagonal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gray'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'dash'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dataviz.utils.validation.add_plotly_reference_lines" title="Link to this definition"></a></dt>
+<dd><p>Add optional reference lines to a Plotly figure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fig</strong> (<em>plotly.graph_objects.Figure</em>) – Figure to update.</p></li>
+<li><p><strong>hline</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Optional horizontal reference line.</p></li>
+<li><p><strong>vline</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Optional vertical reference line.</p></li>
+<li><p><strong>diagonal</strong> (<em>bool</em>) – Whether to draw a y=x diagonal reference.</p></li>
+<li><p><strong>x_values</strong> (<em>Optional</em><em>[</em><em>ArrayLike</em><em>]</em>) – X values used to compute diagonal limits.</p></li>
+<li><p><strong>y_values</strong> (<em>Optional</em><em>[</em><em>ArrayLike</em><em>]</em>) – Y values used to compute diagonal limits.</p></li>
+<li><p><strong>color</strong> (<em>str</em>) – Reference-line color.</p></li>
+<li><p><strong>dash</strong> (<em>str</em>) – Plotly line dash style.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The figure is modified in place.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If line positions are incompatible with Plotly.</p></li>
+<li><p><strong>ValueError</strong> – If diagonal limits are requested without x and y values.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">add_plotly_reference_lines(fig,</span> <span class="pre">hline=0)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Diagonal support is data-driven because Plotly layout limits may be unset.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.validation.add_reference_lines">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.validation.</span></span><span class="sig-name descname"><span class="pre">add_reference_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagonal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gray'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linestyle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'--'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dataviz.utils.validation.add_reference_lines" title="Link to this definition"></a></dt>
+<dd><p>Add optional reference lines to a matplotlib axes object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em>) – Axes to update.</p></li>
+<li><p><strong>hline</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Optional horizontal reference line.</p></li>
+<li><p><strong>vline</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Optional vertical reference line.</p></li>
+<li><p><strong>diagonal</strong> (<em>bool</em>) – Whether to draw a y=x diagonal reference.</p></li>
+<li><p><strong>color</strong> (<em>str</em>) – Reference-line color.</p></li>
+<li><p><strong>linestyle</strong> (<em>str</em>) – Reference-line style.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The axes is modified in place.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If line positions are incompatible with matplotlib.</p></li>
+<li><p><strong>ValueError</strong> – If axes limits cannot be determined for a diagonal line.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">add_reference_lines(ax,</span> <span class="pre">hline=0,</span> <span class="pre">diagonal=True)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>The diagonal line uses the current combined x/y limits.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.validation.numeric_dataframe">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.validation.</span></span><span class="sig-name descname"><span class="pre">numeric_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#dataviz.utils.validation.numeric_dataframe" title="Link to this definition"></a></dt>
+<dd><p>Select and validate numeric dataframe columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Input dataframe.</p></li>
+<li><p><strong>columns</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Optional subset of columns to use.</p></li>
+<li><p><strong>min_columns</strong> (<em>int</em>) – Minimum number of numeric columns required.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Numeric dataframe subset.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">df</span></code> is not a dataframe.</p></li>
+<li><p><strong>ValueError</strong> – If requested columns are missing or too few numeric columns remain.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">numeric</span> <span class="pre">=</span> <span class="pre">numeric_dataframe(df,</span> <span class="pre">columns=[&quot;a&quot;,</span> <span class="pre">&quot;b&quot;])</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Non-numeric columns are ignored after any explicit column selection.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.validation.resolve_series">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.validation.</span></span><span class="sig-name descname"><span class="pre">resolve_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fallback_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Value'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Series</span></span></span><a class="headerlink" href="#dataviz.utils.validation.resolve_series" title="Link to this definition"></a></dt>
+<dd><p>Resolve a series-like object or dataframe column name to a pandas Series.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>SeriesLike</em><em>]</em>) – Series-like values or a dataframe column name.</p></li>
+<li><p><strong>data</strong> (<em>Optional</em><em>[</em><em>pd.DataFrame</em><em>]</em>) – Dataframe used when <code class="docutils literal notranslate"><span class="pre">value</span></code> is a column name.</p></li>
+<li><p><strong>fallback_name</strong> (<em>str</em>) – Name assigned to unnamed array-like values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Resolved series.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.Series</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">value</span></code> is a column name and no dataframe is provided.</p></li>
+<li><p><strong>ValueError</strong> – If the requested dataframe column is missing.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">series</span> <span class="pre">=</span> <span class="pre">resolve_series(&quot;sales&quot;,</span> <span class="pre">data=df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>This helper enables both <code class="docutils literal notranslate"><span class="pre">plot(df[&quot;x&quot;],</span> <span class="pre">df[&quot;y&quot;])</span></code> and <code class="docutils literal notranslate"><span class="pre">plot(&quot;x&quot;,</span> <span class="pre">&quot;y&quot;,</span> <span class="pre">data=df)</span></code> APIs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.validation.resolve_xy_data">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.validation.</span></span><span class="sig-name descname"><span class="pre">resolve_xy_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">na_policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'drop'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'raise'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'keep'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'drop'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">require_numeric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Series</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Series</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dataviz.utils.validation.resolve_xy_data" title="Link to this definition"></a></dt>
+<dd><p>Resolve and validate paired bivariate inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>SeriesLike</em><em>]</em>) – X values or a dataframe column name.</p></li>
+<li><p><strong>y</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>SeriesLike</em><em>]</em>) – Y values or a dataframe column name.</p></li>
+<li><p><strong>data</strong> (<em>Optional</em><em>[</em><em>pd.DataFrame</em><em>]</em>) – Optional dataframe used for column-name lookup.</p></li>
+<li><p><strong>na_policy</strong> (<em>NaPolicy</em>) – Missing-value behavior: <code class="docutils literal notranslate"><span class="pre">&quot;drop&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;raise&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;keep&quot;</span></code>.</p></li>
+<li><p><strong>require_numeric</strong> (<em>bool</em>) – Whether to coerce both series to numeric values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Aligned x and y series.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[pandas.Series, pandas.Series]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If inputs cannot be resolved or coerced as requested.</p></li>
+<li><p><strong>ValueError</strong> – If lengths differ, data is empty, or missing values violate <code class="docutils literal notranslate"><span class="pre">na_policy</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">x_values,</span> <span class="pre">y_values</span> <span class="pre">=</span> <span class="pre">resolve_xy_data(&quot;height&quot;,</span> <span class="pre">&quot;weight&quot;,</span> <span class="pre">data=df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>The returned series preserve names for use in default axis labels.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.validation.validate_alpha">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.validation.</span></span><span class="sig-name descname"><span class="pre">validate_alpha</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'alpha'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dataviz.utils.validation.validate_alpha" title="Link to this definition"></a></dt>
+<dd><p>Validate an opacity value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<em>float</em>) – Opacity value to validate.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Parameter name used in the error message.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function returns only when validation succeeds.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">alpha</span></code> is not numeric.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">alpha</span></code> is outside the inclusive <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> range.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">validate_alpha(0.7)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Matplotlib and Plotly both expect opacity-like values in this range.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.validation.validate_equal_length">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.validation.</span></span><span class="sig-name descname"><span class="pre">validate_equal_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dataviz.utils.validation.validate_equal_length" title="Link to this definition"></a></dt>
+<dd><p>Validate that multiple sequences share the same length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*values</strong> (<em>Sequence</em><em>[</em><em>object</em><em>]</em>) – Sequences to compare.</p></li>
+<li><p><strong>names</strong> (<em>Optional</em><em>[</em><em>Sequence</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Optional names used in error messages.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function returns only when validation succeeds.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If a value does not expose <code class="docutils literal notranslate"><span class="pre">len</span></code>.</p></li>
+<li><p><strong>ValueError</strong> – If provided sequences have different lengths.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">validate_equal_length(x,</span> <span class="pre">y,</span> <span class="pre">names=(&quot;x&quot;,</span> <span class="pre">&quot;y&quot;))</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Empty inputs are handled separately by <code class="docutils literal notranslate"><span class="pre">resolve_xy_data</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.validation.validate_positive_int">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.validation.</span></span><span class="sig-name descname"><span class="pre">validate_positive_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dataviz.utils.validation.validate_positive_int" title="Link to this definition"></a></dt>
+<dd><p>Validate a positive integer parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int</em>) – Value to validate.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Parameter name used in the error message.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function returns only when validation succeeds.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If the value is not an integer.</p></li>
+<li><p><strong>ValueError</strong> – If the value is less than one.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">validate_positive_int(30,</span> <span class="pre">&quot;bins&quot;)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>This helper is intended for bins, marker sizes, and similar counts.</p>
+</dd></dl>
+
+</section>
+<section id="module-dataviz.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dataviz.utils" title="Link to this heading"></a></h2>
+<p>Utility functions for DataViz package.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.add_plotly_reference_lines">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.</span></span><span class="sig-name descname"><span class="pre">add_plotly_reference_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagonal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gray'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'dash'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dataviz.utils.add_plotly_reference_lines" title="Link to this definition"></a></dt>
+<dd><p>Add optional reference lines to a Plotly figure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fig</strong> (<em>plotly.graph_objects.Figure</em>) – Figure to update.</p></li>
+<li><p><strong>hline</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Optional horizontal reference line.</p></li>
+<li><p><strong>vline</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Optional vertical reference line.</p></li>
+<li><p><strong>diagonal</strong> (<em>bool</em>) – Whether to draw a y=x diagonal reference.</p></li>
+<li><p><strong>x_values</strong> (<em>Optional</em><em>[</em><em>ArrayLike</em><em>]</em>) – X values used to compute diagonal limits.</p></li>
+<li><p><strong>y_values</strong> (<em>Optional</em><em>[</em><em>ArrayLike</em><em>]</em>) – Y values used to compute diagonal limits.</p></li>
+<li><p><strong>color</strong> (<em>str</em>) – Reference-line color.</p></li>
+<li><p><strong>dash</strong> (<em>str</em>) – Plotly line dash style.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The figure is modified in place.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If line positions are incompatible with Plotly.</p></li>
+<li><p><strong>ValueError</strong> – If diagonal limits are requested without x and y values.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">add_plotly_reference_lines(fig,</span> <span class="pre">hline=0)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Diagonal support is data-driven because Plotly layout limits may be unset.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.add_reference_lines">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.</span></span><span class="sig-name descname"><span class="pre">add_reference_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagonal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gray'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linestyle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'--'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dataviz.utils.add_reference_lines" title="Link to this definition"></a></dt>
+<dd><p>Add optional reference lines to a matplotlib axes object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em>) – Axes to update.</p></li>
+<li><p><strong>hline</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Optional horizontal reference line.</p></li>
+<li><p><strong>vline</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Optional vertical reference line.</p></li>
+<li><p><strong>diagonal</strong> (<em>bool</em>) – Whether to draw a y=x diagonal reference.</p></li>
+<li><p><strong>color</strong> (<em>str</em>) – Reference-line color.</p></li>
+<li><p><strong>linestyle</strong> (<em>str</em>) – Reference-line style.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The axes is modified in place.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If line positions are incompatible with matplotlib.</p></li>
+<li><p><strong>ValueError</strong> – If axes limits cannot be determined for a diagonal line.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">add_reference_lines(ax,</span> <span class="pre">hline=0,</span> <span class="pre">diagonal=True)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>The diagonal line uses the current combined x/y limits.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.apply_theme">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.</span></span><span class="sig-name descname"><span class="pre">apply_theme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dataviz.utils.apply_theme" title="Link to this definition"></a></dt>
+<dd><p>Apply a named visual theme to an existing matplotlib axes object.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>MatplotlibAxes</em>) – Matplotlib axes object to update.</p></li>
+<li><p><strong>theme</strong> (<em>str</em>) – Named styling theme applied after the base plot is created. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The supplied matplotlib axes is updated in place.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.apply_theme(ax)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.numeric_dataframe">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.</span></span><span class="sig-name descname"><span class="pre">numeric_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#dataviz.utils.numeric_dataframe" title="Link to this definition"></a></dt>
+<dd><p>Select and validate numeric dataframe columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Input dataframe.</p></li>
+<li><p><strong>columns</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Optional subset of columns to use.</p></li>
+<li><p><strong>min_columns</strong> (<em>int</em>) – Minimum number of numeric columns required.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Numeric dataframe subset.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">df</span></code> is not a dataframe.</p></li>
+<li><p><strong>ValueError</strong> – If requested columns are missing or too few numeric columns remain.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">numeric</span> <span class="pre">=</span> <span class="pre">numeric_dataframe(df,</span> <span class="pre">columns=[&quot;a&quot;,</span> <span class="pre">&quot;b&quot;])</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Non-numeric columns are ignored after any explicit column selection.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.resolve_series">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.</span></span><span class="sig-name descname"><span class="pre">resolve_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fallback_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Value'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Series</span></span></span><a class="headerlink" href="#dataviz.utils.resolve_series" title="Link to this definition"></a></dt>
+<dd><p>Resolve a series-like object or dataframe column name to a pandas Series.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>SeriesLike</em><em>]</em>) – Series-like values or a dataframe column name.</p></li>
+<li><p><strong>data</strong> (<em>Optional</em><em>[</em><em>pd.DataFrame</em><em>]</em>) – Dataframe used when <code class="docutils literal notranslate"><span class="pre">value</span></code> is a column name.</p></li>
+<li><p><strong>fallback_name</strong> (<em>str</em>) – Name assigned to unnamed array-like values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Resolved series.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.Series</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">value</span></code> is a column name and no dataframe is provided.</p></li>
+<li><p><strong>ValueError</strong> – If the requested dataframe column is missing.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">series</span> <span class="pre">=</span> <span class="pre">resolve_series(&quot;sales&quot;,</span> <span class="pre">data=df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>This helper enables both <code class="docutils literal notranslate"><span class="pre">plot(df[&quot;x&quot;],</span> <span class="pre">df[&quot;y&quot;])</span></code> and <code class="docutils literal notranslate"><span class="pre">plot(&quot;x&quot;,</span> <span class="pre">&quot;y&quot;,</span> <span class="pre">data=df)</span></code> APIs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.resolve_xy_data">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.</span></span><span class="sig-name descname"><span class="pre">resolve_xy_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">na_policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'drop'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'raise'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'keep'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'drop'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">require_numeric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Series</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Series</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dataviz.utils.resolve_xy_data" title="Link to this definition"></a></dt>
+<dd><p>Resolve and validate paired bivariate inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>SeriesLike</em><em>]</em>) – X values or a dataframe column name.</p></li>
+<li><p><strong>y</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>SeriesLike</em><em>]</em>) – Y values or a dataframe column name.</p></li>
+<li><p><strong>data</strong> (<em>Optional</em><em>[</em><em>pd.DataFrame</em><em>]</em>) – Optional dataframe used for column-name lookup.</p></li>
+<li><p><strong>na_policy</strong> (<em>NaPolicy</em>) – Missing-value behavior: <code class="docutils literal notranslate"><span class="pre">&quot;drop&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;raise&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;keep&quot;</span></code>.</p></li>
+<li><p><strong>require_numeric</strong> (<em>bool</em>) – Whether to coerce both series to numeric values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Aligned x and y series.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[pandas.Series, pandas.Series]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If inputs cannot be resolved or coerced as requested.</p></li>
+<li><p><strong>ValueError</strong> – If lengths differ, data is empty, or missing values violate <code class="docutils literal notranslate"><span class="pre">na_policy</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">x_values,</span> <span class="pre">y_values</span> <span class="pre">=</span> <span class="pre">resolve_xy_data(&quot;height&quot;,</span> <span class="pre">&quot;weight&quot;,</span> <span class="pre">data=df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>The returned series preserve names for use in default axis labels.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.setup_plot">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.</span></span><span class="sig-name descname"><span class="pre">setup_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(10,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Figure</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Axes</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dataviz.utils.setup_plot" title="Link to this definition"></a></dt>
+<dd><p>Create and configure a matplotlib figure and axes pair.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size as <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code> in inches. Defaults to <code class="docutils literal notranslate"><span class="pre">(10,</span> <span class="pre">6)</span></code>.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>xlabel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional x-axis label. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>ylabel</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional y-axis label. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Created matplotlib figure and axes objects.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[matplotlib.figure.Figure, matplotlib.axes.Axes]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.setup_plot()</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.validate_alpha">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.</span></span><span class="sig-name descname"><span class="pre">validate_alpha</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'alpha'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dataviz.utils.validate_alpha" title="Link to this definition"></a></dt>
+<dd><p>Validate an opacity value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<em>float</em>) – Opacity value to validate.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Parameter name used in the error message.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function returns only when validation succeeds.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">alpha</span></code> is not numeric.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">alpha</span></code> is outside the inclusive <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> range.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">validate_alpha(0.7)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Matplotlib and Plotly both expect opacity-like values in this range.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.validate_equal_length">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.</span></span><span class="sig-name descname"><span class="pre">validate_equal_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dataviz.utils.validate_equal_length" title="Link to this definition"></a></dt>
+<dd><p>Validate that multiple sequences share the same length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*values</strong> (<em>Sequence</em><em>[</em><em>object</em><em>]</em>) – Sequences to compare.</p></li>
+<li><p><strong>names</strong> (<em>Optional</em><em>[</em><em>Sequence</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Optional names used in error messages.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function returns only when validation succeeds.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If a value does not expose <code class="docutils literal notranslate"><span class="pre">len</span></code>.</p></li>
+<li><p><strong>ValueError</strong> – If provided sequences have different lengths.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">validate_equal_length(x,</span> <span class="pre">y,</span> <span class="pre">names=(&quot;x&quot;,</span> <span class="pre">&quot;y&quot;))</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Empty inputs are handled separately by <code class="docutils literal notranslate"><span class="pre">resolve_xy_data</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.utils.validate_positive_int">
+<span class="sig-prename descclassname"><span class="pre">dataviz.utils.</span></span><span class="sig-name descname"><span class="pre">validate_positive_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dataviz.utils.validate_positive_int" title="Link to this definition"></a></dt>
+<dd><p>Validate a positive integer parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int</em>) – Value to validate.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Parameter name used in the error message.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function returns only when validation succeeds.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If the value is not an integer.</p></li>
+<li><p><strong>ValueError</strong> – If the value is less than one.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">validate_positive_int(30,</span> <span class="pre">&quot;bins&quot;)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>This helper is intended for bins, marker sizes, and similar counts.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Aned Esquerra Arguelles.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,956 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dataviz.multivariate package &mdash; Data-Viz 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Data-Viz
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">dataviz.multivariate package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-dataviz.multivariate.charts">dataviz.multivariate.charts module</a><ul>
+<li><a class="reference internal" href="#dataviz.multivariate.charts.heatmap"><code class="docutils literal notranslate"><span class="pre">heatmap()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.charts.pairplot"><code class="docutils literal notranslate"><span class="pre">pairplot()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.charts.parallel_coordinates"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dataviz.multivariate.heatmap">dataviz.multivariate.heatmap module</a><ul>
+<li><a class="reference internal" href="#dataviz.multivariate.heatmap.heatmap_interactive"><code class="docutils literal notranslate"><span class="pre">heatmap_interactive()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.heatmap.heatmap_static"><code class="docutils literal notranslate"><span class="pre">heatmap_static()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dataviz.multivariate.pairplot">dataviz.multivariate.pairplot module</a><ul>
+<li><a class="reference internal" href="#dataviz.multivariate.pairplot.pairplot_interactive"><code class="docutils literal notranslate"><span class="pre">pairplot_interactive()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.pairplot.pairplot_static"><code class="docutils literal notranslate"><span class="pre">pairplot_static()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dataviz.multivariate.parallel">dataviz.multivariate.parallel module</a><ul>
+<li><a class="reference internal" href="#dataviz.multivariate.parallel.parallel_coordinates_interactive"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates_interactive()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.parallel.parallel_coordinates_static"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates_static()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dataviz.multivariate">Module contents</a><ul>
+<li><a class="reference internal" href="#dataviz.multivariate.heatmap"><code class="docutils literal notranslate"><span class="pre">heatmap()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.heatmap_interactive"><code class="docutils literal notranslate"><span class="pre">heatmap_interactive()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.heatmap_static"><code class="docutils literal notranslate"><span class="pre">heatmap_static()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.pairplot"><code class="docutils literal notranslate"><span class="pre">pairplot()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.pairplot_interactive"><code class="docutils literal notranslate"><span class="pre">pairplot_interactive()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.pairplot_static"><code class="docutils literal notranslate"><span class="pre">pairplot_static()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.parallel_coordinates"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.parallel_coordinates_interactive"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates_interactive()</span></code></a></li>
+<li><a class="reference internal" href="#dataviz.multivariate.parallel_coordinates_static"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates_static()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Data-Viz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">dataviz.multivariate package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dataviz.multivariate.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dataviz-multivariate-package">
+<h1>dataviz.multivariate package<a class="headerlink" href="#dataviz-multivariate-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-dataviz.multivariate.charts">
+<span id="dataviz-multivariate-charts-module"></span><h2>dataviz.multivariate.charts module<a class="headerlink" href="#module-dataviz.multivariate.charts" title="Link to this heading"></a></h2>
+<p>Multivariate relationships visualization charts.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.charts.heatmap">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.charts.</span></span><span class="sig-name descname"><span class="pre">heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Heatmap'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'viridis'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="headerlink" href="#dataviz.multivariate.charts.heatmap" title="Link to this definition"></a></dt>
+<dd><p>Create a heatmap for matrix-like or dataframe values.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Heatmap'</span></code>.</p></li>
+<li><p><strong>cmap</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">cmap</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'viridis'</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.axes.Axes</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.heatmap(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.charts.pairplot">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.charts.</span></span><span class="sig-name descname"><span class="pre">pairplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Pairplot'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#dataviz.multivariate.charts.pairplot" title="Link to this definition"></a></dt>
+<dd><p>Create a pairwise variable relationship plot.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Pairplot'</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured matplotlib figure containing the rendered static chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.pairplot(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.charts.parallel_coordinates">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.charts.</span></span><span class="sig-name descname"><span class="pre">parallel_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Parallel</span> <span class="pre">Coordinates'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="headerlink" href="#dataviz.multivariate.charts.parallel_coordinates" title="Link to this definition"></a></dt>
+<dd><p>Create a parallel-coordinates plot for multivariate comparison.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Parallel</span> <span class="pre">Coordinates'</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.axes.Axes</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.parallel_coordinates(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+</section>
+<section id="module-dataviz.multivariate.heatmap">
+<span id="dataviz-multivariate-heatmap-module"></span><h2>dataviz.multivariate.heatmap module<a class="headerlink" href="#module-dataviz.multivariate.heatmap" title="Link to this heading"></a></h2>
+<p>Heatmap implementation - static and interactive versions.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.heatmap.heatmap_interactive">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.heatmap.</span></span><span class="sig-name descname"><span class="pre">heatmap_interactive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorscale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showscale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hovermode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'closest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'plotly'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">700</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">900</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#dataviz.multivariate.heatmap.heatmap_interactive" title="Link to this definition"></a></dt>
+<dd><p>Create an interactive heatmap for matrix-like or dataframe values.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>colorscale</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">colorscale</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'Viridis'</span></code>.</p></li>
+<li><p><strong>showscale</strong> (<em>bool</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">showscale</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>annot</strong> (<em>bool</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">annot</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>hovermode</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">hovermode</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'closest'</span></code>.</p></li>
+<li><p><strong>template</strong> (<em>str</em>) – Plotly template used to style the interactive figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'plotly'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">12</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">16</span></code>.</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – Plotly figure height in pixels. Defaults to <code class="docutils literal notranslate"><span class="pre">700</span></code>.</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – Plotly figure width in pixels. Defaults to <code class="docutils literal notranslate"><span class="pre">900</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured Plotly figure containing the rendered interactive chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.heatmap_interactive(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.heatmap.heatmap_static">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.heatmap.</span></span><span class="sig-name descname"><span class="pre">heatmap_static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(12,</span> <span class="pre">8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.2f'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linecolor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gray'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="headerlink" href="#dataviz.multivariate.heatmap.heatmap_static" title="Link to this definition"></a></dt>
+<dd><p>Create a static heatmap for matrix-like or dataframe values.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size as <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code> in inches. Defaults to <code class="docutils literal notranslate"><span class="pre">(12,</span> <span class="pre">8)</span></code>.</p></li>
+<li><p><strong>cmap</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">cmap</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'viridis'</span></code>.</p></li>
+<li><p><strong>annot</strong> (<em>bool</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">annot</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>fmt</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">fmt</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'.2f'</span></code>.</p></li>
+<li><p><strong>cbar</strong> (<em>bool</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">cbar</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>linewidths</strong> (<em>float</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">linewidths</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.</p></li>
+<li><p><strong>linecolor</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">linecolor</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'gray'</span></code>.</p></li>
+<li><p><strong>vmin</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">vmin</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>vmax</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">vmax</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>theme</strong> (<em>str</em>) – Named styling theme applied after the base plot is created. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">14</span></code>.</p></li>
+<li><p><strong>label_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">label_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">11</span></code>.</p></li>
+<li><p><strong>dpi</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">dpi</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+<li><p><strong>style</strong> (<em>str</em>) – Matplotlib style context used while building the figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.axes.Axes</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.heatmap_static(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+</section>
+<section id="module-dataviz.multivariate.pairplot">
+<span id="dataviz-multivariate-pairplot-module"></span><h2>dataviz.multivariate.pairplot module<a class="headerlink" href="#module-dataviz.multivariate.pairplot" title="Link to this heading"></a></h2>
+<p>Pairplot implementation - static and interactive versions.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.pairplot.pairplot_interactive">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.pairplot.</span></span><span class="sig-name descname"><span class="pre">pairplot_interactive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagonal_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'histogram'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hovermode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'closest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'plotly'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#dataviz.multivariate.pairplot.pairplot_interactive" title="Link to this definition"></a></dt>
+<dd><p>Create an interactive pairwise variable relationship plot.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">color</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>marker_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">marker_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+<li><p><strong>diagonal_type</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">diagonal_type</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'histogram'</span></code>.</p></li>
+<li><p><strong>hovermode</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">hovermode</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'closest'</span></code>.</p></li>
+<li><p><strong>template</strong> (<em>str</em>) – Plotly template used to style the interactive figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'plotly'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">12</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">16</span></code>.</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – Plotly figure height in pixels. Defaults to <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – Plotly figure width in pixels. Defaults to <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured Plotly figure containing the rendered interactive chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.pairplot_interactive(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.pairplot.pairplot_static">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.pairplot.</span></span><span class="sig-name descname"><span class="pre">pairplot_static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(12,</span> <span class="pre">12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diag_kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hist'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'scatter'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#dataviz.multivariate.pairplot.pairplot_static" title="Link to this definition"></a></dt>
+<dd><p>Create a static pairwise variable relationship plot.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size as <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code> in inches. Defaults to <code class="docutils literal notranslate"><span class="pre">(12,</span> <span class="pre">12)</span></code>.</p></li>
+<li><p><strong>diag_kind</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">diag_kind</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'hist'</span></code>.</p></li>
+<li><p><strong>plot_kind</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">plot_kind</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'scatter'</span></code>.</p></li>
+<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">color</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">alpha</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.</p></li>
+<li><p><strong>bins</strong> (<em>int</em>) – Number of bins used for histogram-like displays. Defaults to <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p></li>
+<li><p><strong>dpi</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">dpi</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+<li><p><strong>style</strong> (<em>str</em>) – Matplotlib style context used while building the figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">14</span></code>.</p></li>
+<li><p><strong>label_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">label_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">11</span></code>.</p></li>
+<li><p><strong>marker_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">marker_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">50</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured matplotlib figure containing the rendered static chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.pairplot_static(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+</section>
+<section id="module-dataviz.multivariate.parallel">
+<span id="dataviz-multivariate-parallel-module"></span><h2>dataviz.multivariate.parallel module<a class="headerlink" href="#module-dataviz.multivariate.parallel" title="Link to this heading"></a></h2>
+<p>Parallel coordinates implementation - static and interactive versions.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.parallel.parallel_coordinates_interactive">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.parallel.</span></span><span class="sig-name descname"><span class="pre">parallel_coordinates_interactive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorscale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showlegend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hovermode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'closest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'plotly'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">600</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#dataviz.multivariate.parallel.parallel_coordinates_interactive" title="Link to this definition"></a></dt>
+<dd><p>Create an interactive parallel-coordinates plot for multivariate comparison.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>color_col</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">color_col</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>colorscale</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">colorscale</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'Viridis'</span></code>.</p></li>
+<li><p><strong>showlegend</strong> (<em>bool</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">showlegend</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>hovermode</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">hovermode</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'closest'</span></code>.</p></li>
+<li><p><strong>template</strong> (<em>str</em>) – Plotly template used to style the interactive figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'plotly'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">12</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">16</span></code>.</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – Plotly figure height in pixels. Defaults to <code class="docutils literal notranslate"><span class="pre">600</span></code>.</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – Plotly figure width in pixels. Defaults to <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured Plotly figure containing the rendered interactive chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.parallel_coordinates_interactive(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.parallel.parallel_coordinates_static">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.parallel.</span></span><span class="sig-name descname"><span class="pre">parallel_coordinates_static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(12,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="headerlink" href="#dataviz.multivariate.parallel.parallel_coordinates_static" title="Link to this definition"></a></dt>
+<dd><p>Create a static parallel-coordinates plot for multivariate comparison.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size as <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code> in inches. Defaults to <code class="docutils literal notranslate"><span class="pre">(12,</span> <span class="pre">6)</span></code>.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">alpha</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">0.3</span></code>.</p></li>
+<li><p><strong>linewidth</strong> (<em>float</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">linewidth</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
+<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">color</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>style</strong> (<em>str</em>) – Matplotlib style context used while building the figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">14</span></code>.</p></li>
+<li><p><strong>label_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">label_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">11</span></code>.</p></li>
+<li><p><strong>dpi</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">dpi</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.axes.Axes</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.parallel_coordinates_static(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+</section>
+<section id="module-dataviz.multivariate">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dataviz.multivariate" title="Link to this heading"></a></h2>
+<p>Multivariate visualization charts - static and interactive versions.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.heatmap">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.</span></span><span class="sig-name descname"><span class="pre">heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(12,</span> <span class="pre">8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.2f'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linecolor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gray'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="headerlink" href="#dataviz.multivariate.heatmap" title="Link to this definition"></a></dt>
+<dd><p>Create a static heatmap for matrix-like or dataframe values.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size as <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code> in inches. Defaults to <code class="docutils literal notranslate"><span class="pre">(12,</span> <span class="pre">8)</span></code>.</p></li>
+<li><p><strong>cmap</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">cmap</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'viridis'</span></code>.</p></li>
+<li><p><strong>annot</strong> (<em>bool</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">annot</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>fmt</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">fmt</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'.2f'</span></code>.</p></li>
+<li><p><strong>cbar</strong> (<em>bool</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">cbar</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>linewidths</strong> (<em>float</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">linewidths</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.</p></li>
+<li><p><strong>linecolor</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">linecolor</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'gray'</span></code>.</p></li>
+<li><p><strong>vmin</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">vmin</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>vmax</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">vmax</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>theme</strong> (<em>str</em>) – Named styling theme applied after the base plot is created. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">14</span></code>.</p></li>
+<li><p><strong>label_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">label_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">11</span></code>.</p></li>
+<li><p><strong>dpi</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">dpi</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+<li><p><strong>style</strong> (<em>str</em>) – Matplotlib style context used while building the figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.axes.Axes</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.heatmap_static(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.heatmap_interactive">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.</span></span><span class="sig-name descname"><span class="pre">heatmap_interactive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorscale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showscale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hovermode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'closest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'plotly'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">700</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">900</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#dataviz.multivariate.heatmap_interactive" title="Link to this definition"></a></dt>
+<dd><p>Create an interactive heatmap for matrix-like or dataframe values.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>colorscale</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">colorscale</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'Viridis'</span></code>.</p></li>
+<li><p><strong>showscale</strong> (<em>bool</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">showscale</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>annot</strong> (<em>bool</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">annot</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>hovermode</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">hovermode</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'closest'</span></code>.</p></li>
+<li><p><strong>template</strong> (<em>str</em>) – Plotly template used to style the interactive figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'plotly'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">12</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">16</span></code>.</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – Plotly figure height in pixels. Defaults to <code class="docutils literal notranslate"><span class="pre">700</span></code>.</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – Plotly figure width in pixels. Defaults to <code class="docutils literal notranslate"><span class="pre">900</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured Plotly figure containing the rendered interactive chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.heatmap_interactive(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.heatmap_static">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.</span></span><span class="sig-name descname"><span class="pre">heatmap_static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(12,</span> <span class="pre">8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.2f'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linecolor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gray'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="headerlink" href="#dataviz.multivariate.heatmap_static" title="Link to this definition"></a></dt>
+<dd><p>Create a static heatmap for matrix-like or dataframe values.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size as <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code> in inches. Defaults to <code class="docutils literal notranslate"><span class="pre">(12,</span> <span class="pre">8)</span></code>.</p></li>
+<li><p><strong>cmap</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">cmap</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'viridis'</span></code>.</p></li>
+<li><p><strong>annot</strong> (<em>bool</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">annot</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>fmt</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">fmt</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'.2f'</span></code>.</p></li>
+<li><p><strong>cbar</strong> (<em>bool</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">cbar</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>linewidths</strong> (<em>float</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">linewidths</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.</p></li>
+<li><p><strong>linecolor</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">linecolor</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'gray'</span></code>.</p></li>
+<li><p><strong>vmin</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">vmin</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>vmax</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">vmax</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>theme</strong> (<em>str</em>) – Named styling theme applied after the base plot is created. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">14</span></code>.</p></li>
+<li><p><strong>label_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">label_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">11</span></code>.</p></li>
+<li><p><strong>dpi</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">dpi</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+<li><p><strong>style</strong> (<em>str</em>) – Matplotlib style context used while building the figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.axes.Axes</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.heatmap_static(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.pairplot">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.</span></span><span class="sig-name descname"><span class="pre">pairplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(12,</span> <span class="pre">12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diag_kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hist'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'scatter'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#dataviz.multivariate.pairplot" title="Link to this definition"></a></dt>
+<dd><p>Create a static pairwise variable relationship plot.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size as <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code> in inches. Defaults to <code class="docutils literal notranslate"><span class="pre">(12,</span> <span class="pre">12)</span></code>.</p></li>
+<li><p><strong>diag_kind</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">diag_kind</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'hist'</span></code>.</p></li>
+<li><p><strong>plot_kind</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">plot_kind</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'scatter'</span></code>.</p></li>
+<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">color</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">alpha</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.</p></li>
+<li><p><strong>bins</strong> (<em>int</em>) – Number of bins used for histogram-like displays. Defaults to <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p></li>
+<li><p><strong>dpi</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">dpi</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+<li><p><strong>style</strong> (<em>str</em>) – Matplotlib style context used while building the figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">14</span></code>.</p></li>
+<li><p><strong>label_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">label_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">11</span></code>.</p></li>
+<li><p><strong>marker_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">marker_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">50</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured matplotlib figure containing the rendered static chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.pairplot_static(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.pairplot_interactive">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.</span></span><span class="sig-name descname"><span class="pre">pairplot_interactive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagonal_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'histogram'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hovermode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'closest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'plotly'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#dataviz.multivariate.pairplot_interactive" title="Link to this definition"></a></dt>
+<dd><p>Create an interactive pairwise variable relationship plot.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">color</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>marker_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">marker_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+<li><p><strong>diagonal_type</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">diagonal_type</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'histogram'</span></code>.</p></li>
+<li><p><strong>hovermode</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">hovermode</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'closest'</span></code>.</p></li>
+<li><p><strong>template</strong> (<em>str</em>) – Plotly template used to style the interactive figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'plotly'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">12</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">16</span></code>.</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – Plotly figure height in pixels. Defaults to <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – Plotly figure width in pixels. Defaults to <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured Plotly figure containing the rendered interactive chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.pairplot_interactive(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.pairplot_static">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.</span></span><span class="sig-name descname"><span class="pre">pairplot_static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(12,</span> <span class="pre">12)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diag_kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hist'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'scatter'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#dataviz.multivariate.pairplot_static" title="Link to this definition"></a></dt>
+<dd><p>Create a static pairwise variable relationship plot.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size as <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code> in inches. Defaults to <code class="docutils literal notranslate"><span class="pre">(12,</span> <span class="pre">12)</span></code>.</p></li>
+<li><p><strong>diag_kind</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">diag_kind</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'hist'</span></code>.</p></li>
+<li><p><strong>plot_kind</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">plot_kind</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'scatter'</span></code>.</p></li>
+<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">color</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">alpha</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.</p></li>
+<li><p><strong>bins</strong> (<em>int</em>) – Number of bins used for histogram-like displays. Defaults to <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p></li>
+<li><p><strong>dpi</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">dpi</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+<li><p><strong>style</strong> (<em>str</em>) – Matplotlib style context used while building the figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">14</span></code>.</p></li>
+<li><p><strong>label_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">label_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">11</span></code>.</p></li>
+<li><p><strong>marker_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">marker_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">50</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured matplotlib figure containing the rendered static chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.pairplot_static(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.parallel_coordinates">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.</span></span><span class="sig-name descname"><span class="pre">parallel_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(12,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="headerlink" href="#dataviz.multivariate.parallel_coordinates" title="Link to this definition"></a></dt>
+<dd><p>Create a static parallel-coordinates plot for multivariate comparison.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size as <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code> in inches. Defaults to <code class="docutils literal notranslate"><span class="pre">(12,</span> <span class="pre">6)</span></code>.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">alpha</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">0.3</span></code>.</p></li>
+<li><p><strong>linewidth</strong> (<em>float</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">linewidth</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
+<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">color</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>style</strong> (<em>str</em>) – Matplotlib style context used while building the figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">14</span></code>.</p></li>
+<li><p><strong>label_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">label_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">11</span></code>.</p></li>
+<li><p><strong>dpi</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">dpi</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.axes.Axes</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.parallel_coordinates_static(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.parallel_coordinates_interactive">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.</span></span><span class="sig-name descname"><span class="pre">parallel_coordinates_interactive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorscale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showlegend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hovermode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'closest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'plotly'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">600</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#dataviz.multivariate.parallel_coordinates_interactive" title="Link to this definition"></a></dt>
+<dd><p>Create an interactive parallel-coordinates plot for multivariate comparison.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>color_col</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">color_col</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>colorscale</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">colorscale</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'Viridis'</span></code>.</p></li>
+<li><p><strong>showlegend</strong> (<em>bool</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">showlegend</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>hovermode</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">hovermode</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'closest'</span></code>.</p></li>
+<li><p><strong>template</strong> (<em>str</em>) – Plotly template used to style the interactive figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'plotly'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">12</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">16</span></code>.</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – Plotly figure height in pixels. Defaults to <code class="docutils literal notranslate"><span class="pre">600</span></code>.</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – Plotly figure width in pixels. Defaults to <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured Plotly figure containing the rendered interactive chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.parallel_coordinates_interactive(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dataviz.multivariate.parallel_coordinates_static">
+<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.</span></span><span class="sig-name descname"><span class="pre">parallel_coordinates_static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(12,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="headerlink" href="#dataviz.multivariate.parallel_coordinates_static" title="Link to this definition"></a></dt>
+<dd><p>Create a static parallel-coordinates plot for multivariate comparison.</p>
+<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size as <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code> in inches. Defaults to <code class="docutils literal notranslate"><span class="pre">(12,</span> <span class="pre">6)</span></code>.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">alpha</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">0.3</span></code>.</p></li>
+<li><p><strong>linewidth</strong> (<em>float</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">linewidth</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
+<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">color</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>style</strong> (<em>str</em>) – Matplotlib style context used while building the figure. Defaults to <code class="docutils literal notranslate"><span class="pre">'default'</span></code>.</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">font_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></li>
+<li><p><strong>title_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">title_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">14</span></code>.</p></li>
+<li><p><strong>label_size</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">label_size</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">11</span></code>.</p></li>
+<li><p><strong>dpi</strong> (<em>int</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">dpi</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.axes.Axes</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
+<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
+<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.parallel_coordinates_static(df)</span>
+<span class="pre">`</span></code></p>
+<p class="rubric">Notes</p>
+<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Aned Esquerra Arguelles.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
