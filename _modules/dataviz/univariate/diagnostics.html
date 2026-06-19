@@ -56,15 +56,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../dataviz.xai.html">dataviz.xai package</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.core">dataviz.core module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.core.plot"><code class="docutils literal notranslate"><span class="pre">plot()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.types">dataviz.types module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibAxes"><code class="docutils literal notranslate"><span class="pre">MatplotlibAxes</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibFigure"><code class="docutils literal notranslate"><span class="pre">MatplotlibFigure</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.PlotlyFigure"><code class="docutils literal notranslate"><span class="pre">PlotlyFigure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.core.html">dataviz.core module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.types.html">dataviz.types module</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz">Module contents</a><ul>
@@ -374,7 +368,7 @@
 
 
 <div class="viewcode-block" id="NormalityTestResult">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.NormalityTestResult">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.diagnostics.html#dataviz.NormalityTestResult">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">NormalityTestResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Normality test result for one variable.</span>
@@ -411,7 +405,7 @@
 
 
 <div class="viewcode-block" id="normality_test">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.normality_test">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.diagnostics.html#dataviz.normality_test">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">normality_test</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">method</span><span class="p">:</span> <span class="n">NormalityMethod</span> <span class="o">=</span> <span class="s2">&quot;shapiro&quot;</span><span class="p">,</span>
@@ -464,7 +458,7 @@
 
 
 <div class="viewcode-block" id="outlier_plot_static">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.outlier_plot_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.diagnostics.html#dataviz.outlier_plot_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">outlier_plot_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">method</span><span class="p">:</span> <span class="n">OutlierMethod</span> <span class="o">=</span> <span class="s2">&quot;iqr&quot;</span><span class="p">,</span>
@@ -530,7 +524,7 @@
 
 
 <div class="viewcode-block" id="outlier_plot_interactive">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.outlier_plot_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.diagnostics.html#dataviz.outlier_plot_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">outlier_plot_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">method</span><span class="p">:</span> <span class="n">OutlierMethod</span> <span class="o">=</span> <span class="s2">&quot;iqr&quot;</span><span class="p">,</span>
@@ -621,7 +615,7 @@
 
 
 <div class="viewcode-block" id="percentile_plot_static">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.percentile_plot_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.diagnostics.html#dataviz.percentile_plot_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">percentile_plot_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
@@ -673,7 +667,7 @@
 
 
 <div class="viewcode-block" id="percentile_plot_interactive">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.percentile_plot_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.diagnostics.html#dataviz.percentile_plot_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">percentile_plot_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
@@ -738,7 +732,7 @@
 
 
 <div class="viewcode-block" id="univariate_diagnostic_panel_static">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.univariate_diagnostic_panel_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.diagnostics.html#dataviz.univariate_diagnostic_panel_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">univariate_diagnostic_panel_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
@@ -796,7 +790,7 @@
 
 
 <div class="viewcode-block" id="univariate_diagnostic_panel_interactive">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.univariate_diagnostic_panel_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.diagnostics.html#dataviz.univariate_diagnostic_panel_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">univariate_diagnostic_panel_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>

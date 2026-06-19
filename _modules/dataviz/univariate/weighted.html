@@ -56,15 +56,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../dataviz.xai.html">dataviz.xai package</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.core">dataviz.core module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.core.plot"><code class="docutils literal notranslate"><span class="pre">plot()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.types">dataviz.types module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibAxes"><code class="docutils literal notranslate"><span class="pre">MatplotlibAxes</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibFigure"><code class="docutils literal notranslate"><span class="pre">MatplotlibFigure</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.PlotlyFigure"><code class="docutils literal notranslate"><span class="pre">PlotlyFigure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.core.html">dataviz.core module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.types.html">dataviz.types module</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz">Module contents</a><ul>
@@ -370,7 +364,7 @@
 
 
 <div class="viewcode-block" id="WeightedStats">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.WeightedStats">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.weighted.html#dataviz.WeightedStats">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">WeightedStats</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Weighted summary statistics for one numeric variable.</span>
@@ -413,7 +407,7 @@
 
 
 <div class="viewcode-block" id="resolve_weighted_series">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.resolve_weighted_series">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.weighted.html#dataviz.resolve_weighted_series">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">resolve_weighted_series</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve values and weights into aligned numeric Series.</span>
 
@@ -452,7 +446,7 @@
 
 
 <div class="viewcode-block" id="weighted_quantile">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_quantile">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.weighted.html#dataviz.weighted_quantile">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">weighted_quantile</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">quantile</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute a weighted quantile.</span>
 
@@ -490,7 +484,7 @@
 
 
 <div class="viewcode-block" id="weighted_summary">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_summary">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.weighted.html#dataviz.weighted_summary">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">weighted_summary</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WeightedStats</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute weighted summary statistics for one numeric variable.</span>
 
@@ -532,7 +526,7 @@
 
 
 <div class="viewcode-block" id="weighted_histogram_static">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_histogram_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.weighted.html#dataviz.weighted_histogram_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">weighted_histogram_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
@@ -583,7 +577,7 @@
 
 
 <div class="viewcode-block" id="weighted_histogram_interactive">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_histogram_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.weighted.html#dataviz.weighted_histogram_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">weighted_histogram_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
@@ -651,7 +645,7 @@
 
 
 <div class="viewcode-block" id="weighted_ecdf_values">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_ecdf_values">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.weighted.html#dataviz.weighted_ecdf_values">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">weighted_ecdf_values</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute weighted empirical cumulative distribution values.</span>
 
@@ -684,7 +678,7 @@
 
 
 <div class="viewcode-block" id="weighted_ecdf_plot_static">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_ecdf_plot_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.weighted.html#dataviz.weighted_ecdf_plot_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">weighted_ecdf_plot_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
@@ -728,7 +722,7 @@
 
 
 <div class="viewcode-block" id="weighted_ecdf_plot_interactive">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_ecdf_plot_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.weighted.html#dataviz.weighted_ecdf_plot_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">weighted_ecdf_plot_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>

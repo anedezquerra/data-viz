@@ -56,15 +56,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../dataviz.xai.html">dataviz.xai package</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.core">dataviz.core module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.core.plot"><code class="docutils literal notranslate"><span class="pre">plot()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.types">dataviz.types module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibAxes"><code class="docutils literal notranslate"><span class="pre">MatplotlibAxes</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibFigure"><code class="docutils literal notranslate"><span class="pre">MatplotlibFigure</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.PlotlyFigure"><code class="docutils literal notranslate"><span class="pre">PlotlyFigure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.core.html">dataviz.core module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.types.html">dataviz.types module</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz">Module contents</a><ul>
@@ -368,7 +362,7 @@
 
 
 <div class="viewcode-block" id="ControlLimits">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.ControlLimits">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.ControlLimits">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ControlLimits</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Control limits for an SPC chart.</span>
@@ -403,7 +397,7 @@
 
 
 <div class="viewcode-block" id="RuleViolation">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.RuleViolation">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.RuleViolation">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">RuleViolation</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Detected SPC rule violation.</span>
@@ -438,7 +432,7 @@
 
 
 <div class="viewcode-block" id="as_numeric_series">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.as_numeric_series">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.as_numeric_series">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Value&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert array-like process data to a numeric pandas Series.</span>
 
@@ -470,7 +464,7 @@
 
 
 <div class="viewcode-block" id="individuals_limits">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.individuals_limits">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.individuals_limits">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">individuals_limits</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">sigma_multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ControlLimits</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute individuals chart limits from process observations.</span>
 
@@ -503,7 +497,7 @@
 
 
 <div class="viewcode-block" id="moving_ranges">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.moving_ranges">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.moving_ranges">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">moving_ranges</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">span</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute moving ranges for process observations.</span>
 
@@ -535,7 +529,7 @@
 
 
 <div class="viewcode-block" id="subgroup_matrix">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.subgroup_matrix">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.subgroup_matrix">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">subgroup_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">,</span> <span class="n">subgroup_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert raw or grouped observations into a subgroup matrix.</span>
 
@@ -579,7 +573,7 @@
 
 
 <div class="viewcode-block" id="xbar_r_limits">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.xbar_r_limits">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.xbar_r_limits">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">xbar_r_limits</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">,</span>
     <span class="n">subgroup_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -641,7 +635,7 @@
 
 
 <div class="viewcode-block" id="xbar_s_limits">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.xbar_s_limits">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.xbar_s_limits">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">xbar_s_limits</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">,</span>
     <span class="n">subgroup_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -703,7 +697,7 @@
 
 
 <div class="viewcode-block" id="detect_rule_violations">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.detect_rule_violations">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.detect_rule_violations">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">detect_rule_violations</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
     <span class="n">limits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ControlLimits</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -796,7 +790,7 @@
 
 
 <div class="viewcode-block" id="violations_by_index">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.violations_by_index">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.violations_by_index">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">violations_by_index</span><span class="p">(</span><span class="n">violations</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">RuleViolation</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">RuleViolation</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Group rule violations by observation index.</span>
 

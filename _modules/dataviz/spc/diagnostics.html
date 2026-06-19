@@ -56,15 +56,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../dataviz.xai.html">dataviz.xai package</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.core">dataviz.core module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.core.plot"><code class="docutils literal notranslate"><span class="pre">plot()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.types">dataviz.types module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibAxes"><code class="docutils literal notranslate"><span class="pre">MatplotlibAxes</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibFigure"><code class="docutils literal notranslate"><span class="pre">MatplotlibFigure</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.PlotlyFigure"><code class="docutils literal notranslate"><span class="pre">PlotlyFigure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.core.html">dataviz.core module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.types.html">dataviz.types module</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz">Module contents</a><ul>
@@ -370,7 +364,7 @@
 
 
 <div class="viewcode-block" id="run_chart_static">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.run_chart_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.diagnostics.html#dataviz.run_chart_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">run_chart_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Run Chart&quot;</span><span class="p">,</span>
@@ -414,7 +408,7 @@
 
 
 <div class="viewcode-block" id="run_chart_interactive">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.run_chart_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.diagnostics.html#dataviz.run_chart_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">run_chart_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Run Chart&quot;</span><span class="p">,</span>
@@ -458,7 +452,7 @@
 
 
 <div class="viewcode-block" id="rule_violation_chart_static">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.rule_violation_chart_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.diagnostics.html#dataviz.rule_violation_chart_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">rule_violation_chart_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
     <span class="n">limits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ControlLimits</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -512,7 +506,7 @@
 
 
 <div class="viewcode-block" id="rule_violation_chart_interactive">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.rule_violation_chart_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.diagnostics.html#dataviz.rule_violation_chart_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">rule_violation_chart_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
     <span class="n">limits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ControlLimits</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -565,7 +559,7 @@
 
 
 <div class="viewcode-block" id="pareto_chart_static">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.pareto_chart_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.diagnostics.html#dataviz.pareto_chart_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">pareto_chart_static</span><span class="p">(</span>
     <span class="n">categories</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="n">counts</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
@@ -615,7 +609,7 @@
 
 
 <div class="viewcode-block" id="pareto_chart_interactive">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.pareto_chart_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.diagnostics.html#dataviz.pareto_chart_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">pareto_chart_interactive</span><span class="p">(</span>
     <span class="n">categories</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="n">counts</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
@@ -665,7 +659,7 @@
 
 
 <div class="viewcode-block" id="process_distribution_static">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.process_distribution_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.diagnostics.html#dataviz.process_distribution_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">process_distribution_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
     <span class="n">bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
@@ -714,7 +708,7 @@
 
 
 <div class="viewcode-block" id="process_distribution_interactive">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.process_distribution_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.diagnostics.html#dataviz.process_distribution_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">process_distribution_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
     <span class="n">bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
@@ -763,7 +757,7 @@
 
 
 <div class="viewcode-block" id="zone_chart_static">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.zone_chart_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.diagnostics.html#dataviz.zone_chart_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">zone_chart_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Zone Chart&quot;</span><span class="p">,</span>
@@ -809,7 +803,7 @@
 
 
 <div class="viewcode-block" id="zone_chart_interactive">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.zone_chart_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.diagnostics.html#dataviz.zone_chart_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">zone_chart_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Zone Chart&quot;</span><span class="p">,</span>

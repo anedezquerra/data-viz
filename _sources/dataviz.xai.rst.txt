@@ -4,37 +4,13 @@ dataviz.xai package
 Submodules
 ----------
 
-dataviz.xai.charts module
--------------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: dataviz.xai.charts
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-dataviz.xai.feature\_imp module
--------------------------------
-
-.. automodule:: dataviz.xai.feature_imp
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-dataviz.xai.partial\_dep module
--------------------------------
-
-.. automodule:: dataviz.xai.partial_dep
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-dataviz.xai.shap module
------------------------
-
-.. automodule:: dataviz.xai.shap
-   :members:
-   :show-inheritance:
-   :undoc-members:
+   dataviz.xai.charts
+   dataviz.xai.feature_imp
+   dataviz.xai.partial_dep
+   dataviz.xai.shap
 
 Module contents
 ---------------

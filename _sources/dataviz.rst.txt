@@ -21,21 +21,11 @@ Subpackages
 Submodules
 ----------
 
-dataviz.core module
--------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: dataviz.core
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-dataviz.types module
---------------------
-
-.. automodule:: dataviz.types
-   :members:
-   :show-inheritance:
-   :undoc-members:
+   dataviz.core
+   dataviz.types
 
 Module contents
 ---------------

@@ -56,15 +56,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../dataviz.xai.html">dataviz.xai package</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.core">dataviz.core module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.core.plot"><code class="docutils literal notranslate"><span class="pre">plot()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.types">dataviz.types module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibAxes"><code class="docutils literal notranslate"><span class="pre">MatplotlibAxes</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibFigure"><code class="docutils literal notranslate"><span class="pre">MatplotlibFigure</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.PlotlyFigure"><code class="docutils literal notranslate"><span class="pre">PlotlyFigure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.core.html">dataviz.core module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.types.html">dataviz.types module</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz">Module contents</a><ul>
@@ -369,7 +363,7 @@
 
 
 <div class="viewcode-block" id="HotellingT2Result">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.HotellingT2Result">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.multivariate.html#dataviz.HotellingT2Result">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">HotellingT2Result</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Hotelling T-squared monitoring result.</span>
@@ -432,7 +426,7 @@
 
 
 <div class="viewcode-block" id="hotelling_t2_summary">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.hotelling_t2_summary">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.multivariate.html#dataviz.hotelling_t2_summary">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">hotelling_t2_summary</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">,</span> <span class="n">limit_quantile</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HotellingT2Result</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Hotelling T-squared scores for multivariate process data.</span>
 
@@ -469,7 +463,7 @@
 
 
 <div class="viewcode-block" id="hotelling_t2_chart_static">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.hotelling_t2_chart_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.multivariate.html#dataviz.hotelling_t2_chart_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">hotelling_t2_chart_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">,</span>
     <span class="n">limit_quantile</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">,</span>
@@ -512,7 +506,7 @@
 
 
 <div class="viewcode-block" id="hotelling_t2_chart_interactive">
-<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.hotelling_t2_chart_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.multivariate.html#dataviz.hotelling_t2_chart_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">hotelling_t2_chart_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">,</span>
     <span class="n">limit_quantile</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">,</span>

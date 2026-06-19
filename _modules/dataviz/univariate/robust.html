@@ -56,15 +56,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../dataviz.xai.html">dataviz.xai package</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.core">dataviz.core module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.core.plot"><code class="docutils literal notranslate"><span class="pre">plot()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.types">dataviz.types module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibAxes"><code class="docutils literal notranslate"><span class="pre">MatplotlibAxes</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibFigure"><code class="docutils literal notranslate"><span class="pre">MatplotlibFigure</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.PlotlyFigure"><code class="docutils literal notranslate"><span class="pre">PlotlyFigure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.core.html">dataviz.core module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.types.html">dataviz.types module</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz">Module contents</a><ul>
@@ -370,7 +364,7 @@
 
 
 <div class="viewcode-block" id="RobustStats">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.RobustStats">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.robust.html#dataviz.RobustStats">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">RobustStats</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Robust summary statistics for one numeric variable.</span>
@@ -419,7 +413,7 @@
 
 
 <div class="viewcode-block" id="validate_proportion">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.validate_proportion">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.robust.html#dataviz.validate_proportion">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_proportion</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate a tail proportion.</span>
 
@@ -450,7 +444,7 @@
 
 
 <div class="viewcode-block" id="mad_zscores">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.mad_zscores">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.robust.html#dataviz.mad_zscores">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">mad_zscores</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.4826</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute robust z-scores using the median absolute deviation.</span>
 
@@ -485,7 +479,7 @@
 
 
 <div class="viewcode-block" id="mad_outliers">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.mad_outliers">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.robust.html#dataviz.mad_outliers">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">mad_outliers</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Flag observations with large robust MAD z-scores.</span>
 
@@ -515,7 +509,7 @@
 
 
 <div class="viewcode-block" id="trimmed_mean">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.trimmed_mean">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.robust.html#dataviz.trimmed_mean">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">trimmed_mean</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">proportion</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the trimmed mean after dropping both tails.</span>
 
@@ -545,7 +539,7 @@
 
 
 <div class="viewcode-block" id="winsorize_series">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.winsorize_series">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.robust.html#dataviz.winsorize_series">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">winsorize_series</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">limits</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Winsorize a numeric series by clipping both tails.</span>
 
@@ -577,7 +571,7 @@
 
 
 <div class="viewcode-block" id="robust_summary">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.robust_summary">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.robust.html#dataviz.robust_summary">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">robust_summary</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">trim_proportion</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
@@ -632,7 +626,7 @@
 
 
 <div class="viewcode-block" id="robust_location_plot_static">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.robust_location_plot_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.robust.html#dataviz.robust_location_plot_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">robust_location_plot_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -685,7 +679,7 @@
 
 
 <div class="viewcode-block" id="robust_location_plot_interactive">
-<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.robust_location_plot_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.robust.html#dataviz.robust_location_plot_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">robust_location_plot_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>

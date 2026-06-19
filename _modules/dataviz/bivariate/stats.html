@@ -56,15 +56,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../dataviz.xai.html">dataviz.xai package</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.core">dataviz.core module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.core.plot"><code class="docutils literal notranslate"><span class="pre">plot()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz.types">dataviz.types module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibAxes"><code class="docutils literal notranslate"><span class="pre">MatplotlibAxes</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.MatplotlibFigure"><code class="docutils literal notranslate"><span class="pre">MatplotlibFigure</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.html#dataviz.types.PlotlyFigure"><code class="docutils literal notranslate"><span class="pre">PlotlyFigure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.core.html">dataviz.core module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataviz.types.html">dataviz.types module</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../dataviz.html#module-dataviz">Module contents</a><ul>
@@ -370,7 +364,7 @@
 
 
 <div class="viewcode-block" id="BivariateStats">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.BivariateStats">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.BivariateStats">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BivariateStats</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Summary statistics for a pair of variables.</span>
@@ -550,7 +544,7 @@
 
 
 <div class="viewcode-block" id="bivariate_summary">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.bivariate_summary">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.bivariate_summary">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">bivariate_summary</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -610,7 +604,7 @@
 
 
 <div class="viewcode-block" id="outlier_scatter_static">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.outlier_scatter_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.outlier_scatter_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">outlier_scatter_static</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -666,7 +660,7 @@
 
 
 <div class="viewcode-block" id="outlier_scatter_interactive">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.outlier_scatter_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.outlier_scatter_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">outlier_scatter_interactive</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -719,7 +713,7 @@
 
 
 <div class="viewcode-block" id="residual_relationship_static">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.residual_relationship_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.residual_relationship_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">residual_relationship_static</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -769,7 +763,7 @@
 
 
 <div class="viewcode-block" id="residual_relationship_interactive">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.residual_relationship_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.residual_relationship_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">residual_relationship_interactive</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -820,7 +814,7 @@
 
 
 <div class="viewcode-block" id="quantile_bin_plot_static">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.quantile_bin_plot_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.quantile_bin_plot_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">quantile_bin_plot_static</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -879,7 +873,7 @@
 
 
 <div class="viewcode-block" id="quantile_bin_plot_interactive">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.quantile_bin_plot_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.quantile_bin_plot_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">quantile_bin_plot_interactive</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -935,7 +929,7 @@
 
 
 <div class="viewcode-block" id="bland_altman_static">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.bland_altman_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.bland_altman_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">bland_altman_static</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -988,7 +982,7 @@
 
 
 <div class="viewcode-block" id="bland_altman_interactive">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.bland_altman_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.bland_altman_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">bland_altman_interactive</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -1041,7 +1035,7 @@
 
 
 <div class="viewcode-block" id="rank_scatter_static">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.rank_scatter_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.rank_scatter_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">rank_scatter_static</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -1088,7 +1082,7 @@
 
 
 <div class="viewcode-block" id="rank_scatter_interactive">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.rank_scatter_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.rank_scatter_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">rank_scatter_interactive</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -1134,7 +1128,7 @@
 
 
 <div class="viewcode-block" id="lag_plot_static">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.lag_plot_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.lag_plot_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lag_plot_static</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -1186,7 +1180,7 @@
 
 
 <div class="viewcode-block" id="lag_plot_interactive">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.lag_plot_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.lag_plot_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lag_plot_interactive</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -1239,7 +1233,7 @@
 
 
 <div class="viewcode-block" id="conditional_box_static">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.conditional_box_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.conditional_box_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">conditional_box_static</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
@@ -1293,7 +1287,7 @@
 
 
 <div class="viewcode-block" id="conditional_box_interactive">
-<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.conditional_box_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.bivariate.stats.html#dataviz.conditional_box_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">conditional_box_interactive</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
     <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SeriesLike</span><span class="p">],</span>
