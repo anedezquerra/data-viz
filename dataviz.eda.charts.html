@@ -49,12 +49,7 @@
 <li class="toctree-l1"><a class="reference internal" href="dataviz.clustering.html">dataviz.clustering</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="dataviz.eda.html">dataviz.eda</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="dataviz.eda.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.eda.charts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.eda.charts.class_distribution"><code class="docutils literal notranslate"><span class="pre">class_distribution()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.eda.charts.distribution_summary"><code class="docutils literal notranslate"><span class="pre">distribution_summary()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.eda.charts.missing_data_plot"><code class="docutils literal notranslate"><span class="pre">missing_data_plot()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.eda.charts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.eda.class_dist.html">dataviz.eda.class_dist</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.eda.distribution.html">dataviz.eda.distribution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.eda.missing_data.html">dataviz.eda.missing_data</a></li>
@@ -101,114 +96,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dataviz.eda.charts">
-<span id="dataviz-eda-charts"></span><h1>dataviz.eda.charts<a class="headerlink" href="#module-dataviz.eda.charts" title="Link to this heading"></a></h1>
-<p>Exploratory Data Analysis (EDA) visualization charts.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.eda.charts.class_distribution">
-<span class="sig-prename descclassname"><span class="pre">dataviz.eda.charts.</span></span><span class="sig-name descname"><span class="pre">class_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/eda/charts.html#class_distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.eda.charts.class_distribution" title="Link to this definition"></a></dt>
-<dd><p>Visualize class frequencies for a target variable.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>series</strong> (<em>SeriesLike</em>) – Input series containing categorical or numeric values to summarize.</p></li>
-<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.class_distribution(series)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.eda.charts.distribution_summary">
-<span class="sig-prename descclassname"><span class="pre">dataviz.eda.charts.</span></span><span class="sig-name descname"><span class="pre">distribution_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Distribution</span> <span class="pre">Summary'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="_modules/dataviz/eda/charts.html#distribution_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.eda.charts.distribution_summary" title="Link to this definition"></a></dt>
-<dd><p>Create summary charts for dataframe column distributions.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Distribution</span> <span class="pre">Summary'</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib figure containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.figure.Figure</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.distribution_summary(df)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.eda.charts.missing_data_plot">
-<span class="sig-prename descclassname"><span class="pre">dataviz.eda.charts.</span></span><span class="sig-name descname"><span class="pre">missing_data_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Missing</span> <span class="pre">Data</span> <span class="pre">Analysis'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/eda/charts.html#missing_data_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.eda.charts.missing_data_plot" title="Link to this definition"></a></dt>
-<dd><p>Visualize missing values by dataframe column.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Missing</span> <span class="pre">Data</span> <span class="pre">Analysis'</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.missing_data_plot(df)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
+  <section id="dataviz-eda-charts">
+<h1>dataviz.eda.charts<a class="headerlink" href="#dataviz-eda-charts" title="Link to this heading"></a></h1>
 </section>
 
 

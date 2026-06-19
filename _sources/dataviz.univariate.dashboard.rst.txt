@@ -1,7 +1,10 @@
 dataviz.univariate.dashboard
-===================================
+============================
 
-.. automodule:: dataviz.univariate.dashboard
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   dashboard

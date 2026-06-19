@@ -1,7 +1,10 @@
 dataviz.bivariate.advanced
-=================================
+==========================
 
-.. automodule:: dataviz.bivariate.advanced
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.bivariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   advanced

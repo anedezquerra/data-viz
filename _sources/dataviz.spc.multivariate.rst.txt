@@ -1,7 +1,10 @@
 dataviz.spc.multivariate
-===============================
+========================
 
-.. automodule:: dataviz.spc.multivariate
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.spc
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   multivariate

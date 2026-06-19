@@ -54,11 +54,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="dataviz.spc.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.attribute.html">dataviz.spc.attribute</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.capability.html">dataviz.spc.capability</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.spc.charts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.spc.charts.control_chart"><code class="docutils literal notranslate"><span class="pre">control_chart()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.spc.charts.x_range_chart"><code class="docutils literal notranslate"><span class="pre">x_range_chart()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.spc.charts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.constants.html">dataviz.spc.constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.control.html">dataviz.spc.control</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.dashboard.html">dataviz.spc.dashboard</a></li>
@@ -107,73 +103,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dataviz.spc.charts">
-<span id="dataviz-spc-charts"></span><h1>dataviz.spc.charts<a class="headerlink" href="#module-dataviz.spc.charts" title="Link to this heading"></a></h1>
-<p>Compatibility wrappers for Statistical Process Control charts.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.spc.charts.control_chart">
-<span class="sig-prename descclassname"><span class="pre">dataviz.spc.charts.</span></span><span class="sig-name descname"><span class="pre">control_chart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/spc/charts.html#control_chart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.spc.charts.control_chart" title="Link to this definition"></a></dt>
-<dd><p>Create a static statistical process control chart.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>*args</strong> (<em>Any</em>) – Positional arguments forwarded to <code class="docutils literal notranslate"><span class="pre">control_chart_static</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Keyword arguments forwarded to <code class="docutils literal notranslate"><span class="pre">control_chart_static</span></code>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the control chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If inputs cannot be converted to numeric observations.</p></li>
-<li><p><strong>ValueError</strong> – If inputs are empty or options are invalid.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">ax</span> <span class="pre">=</span> <span class="pre">control_chart(data)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>This wrapper preserves the legacy <code class="docutils literal notranslate"><span class="pre">dataviz.spc.charts</span></code> API.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.spc.charts.x_range_chart">
-<span class="sig-prename descclassname"><span class="pre">dataviz.spc.charts.</span></span><span class="sig-name descname"><span class="pre">x_range_chart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/spc/charts.html#x_range_chart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.spc.charts.x_range_chart" title="Link to this definition"></a></dt>
-<dd><p>Create a static X-range chart for individual values and range monitoring.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>*args</strong> (<em>Any</em>) – Positional arguments forwarded to <code class="docutils literal notranslate"><span class="pre">x_range_chart_static</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Keyword arguments forwarded to <code class="docutils literal notranslate"><span class="pre">x_range_chart_static</span></code>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the X-range chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If inputs cannot be converted to numeric observations.</p></li>
-<li><p><strong>ValueError</strong> – If inputs are empty or options are invalid.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">ax</span> <span class="pre">=</span> <span class="pre">x_range_chart(data)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>This wrapper preserves the legacy <code class="docutils literal notranslate"><span class="pre">dataviz.spc.charts</span></code> API.</p>
-</dd></dl>
-
+  <section id="dataviz-spc-charts">
+<h1>dataviz.spc.charts<a class="headerlink" href="#dataviz-spc-charts" title="Link to this heading"></a></h1>
 </section>
 
 

@@ -50,12 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="dataviz.eda.html">dataviz.eda</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="dataviz.multivariate.html">dataviz.multivariate</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="dataviz.multivariate.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.multivariate.charts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.multivariate.charts.heatmap"><code class="docutils literal notranslate"><span class="pre">heatmap()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.multivariate.charts.pairplot"><code class="docutils literal notranslate"><span class="pre">pairplot()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.multivariate.charts.parallel_coordinates"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.multivariate.charts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.multivariate.heatmap.html">dataviz.multivariate.heatmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.multivariate.pairplot.html">dataviz.multivariate.pairplot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.multivariate.parallel.html">dataviz.multivariate.parallel</a></li>
@@ -101,115 +96,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dataviz.multivariate.charts">
-<span id="dataviz-multivariate-charts"></span><h1>dataviz.multivariate.charts<a class="headerlink" href="#module-dataviz.multivariate.charts" title="Link to this heading"></a></h1>
-<p>Multivariate relationships visualization charts.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.multivariate.charts.heatmap">
-<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.charts.</span></span><span class="sig-name descname"><span class="pre">heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Heatmap'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'viridis'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/multivariate/charts.html#heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.multivariate.charts.heatmap" title="Link to this definition"></a></dt>
-<dd><p>Create a heatmap for matrix-like or dataframe values.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Heatmap'</span></code>.</p></li>
-<li><p><strong>cmap</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">cmap</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'viridis'</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.heatmap(df)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.multivariate.charts.pairplot">
-<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.charts.</span></span><span class="sig-name descname"><span class="pre">pairplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Pairplot'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="_modules/dataviz/multivariate/charts.html#pairplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.multivariate.charts.pairplot" title="Link to this definition"></a></dt>
-<dd><p>Create a pairwise variable relationship plot.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Pairplot'</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib figure containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.figure.Figure</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.pairplot(df)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.multivariate.charts.parallel_coordinates">
-<span class="sig-prename descclassname"><span class="pre">dataviz.multivariate.charts.</span></span><span class="sig-name descname"><span class="pre">parallel_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Parallel</span> <span class="pre">Coordinates'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/multivariate/charts.html#parallel_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.multivariate.charts.parallel_coordinates" title="Link to this definition"></a></dt>
-<dd><p>Create a parallel-coordinates plot for multivariate comparison.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Input dataframe containing the variables to visualize.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Parallel</span> <span class="pre">Coordinates'</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.parallel_coordinates(df)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
+  <section id="dataviz-multivariate-charts">
+<h1>dataviz.multivariate.charts<a class="headerlink" href="#dataviz-multivariate-charts" title="Link to this heading"></a></h1>
 </section>
 
 

@@ -1,7 +1,10 @@
 dataviz.multivariate.pairplot
-====================================
+=============================
 
-.. automodule:: dataviz.multivariate.pairplot
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.multivariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   pairplot

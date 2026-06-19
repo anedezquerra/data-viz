@@ -1,7 +1,10 @@
-dataviz.classification.confusion\_matrix
-===============================================
+dataviz.classification.confusion_matrix
+=======================================
 
-.. automodule:: dataviz.classification.confusion_matrix
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.classification
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   confusion_matrix

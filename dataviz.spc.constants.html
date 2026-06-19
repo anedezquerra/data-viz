@@ -55,11 +55,7 @@
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.attribute.html">dataviz.spc.attribute</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.capability.html">dataviz.spc.capability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.charts.html">dataviz.spc.charts</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.spc.constants</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.spc.constants.SPCConstants"><code class="docutils literal notranslate"><span class="pre">SPCConstants</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.spc.constants.get_spc_constants"><code class="docutils literal notranslate"><span class="pre">get_spc_constants()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.spc.constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.control.html">dataviz.spc.control</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.dashboard.html">dataviz.spc.dashboard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.diagnostics.html">dataviz.spc.diagnostics</a></li>
@@ -107,117 +103,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dataviz.spc.constants">
-<span id="dataviz-spc-constants"></span><h1>dataviz.spc.constants<a class="headerlink" href="#module-dataviz.spc.constants" title="Link to this heading"></a></h1>
-<p>Traditional SPC constants for subgroup control charts.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="dataviz.spc.constants.SPCConstants">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dataviz.spc.constants.</span></span><span class="sig-name descname"><span class="pre">SPCConstants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dataviz/spc/constants.html#SPCConstants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.spc.constants.SPCConstants" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Traditional SPC constants for a subgroup size.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>n</strong> (<em>int</em>) – Subgroup size.</p></li>
-<li><p><strong>a2</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Xbar-R chart A2 constant.</p></li>
-<li><p><strong>d3</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – R chart D3 constant.</p></li>
-<li><p><strong>d4</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – R chart D4 constant.</p></li>
-<li><p><strong>a3</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Xbar-S chart A3 constant.</p></li>
-<li><p><strong>b3</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – S chart B3 constant.</p></li>
-<li><p><strong>b4</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – S chart B4 constant.</p></li>
-<li><p><strong>c4</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Bias correction constant for subgroup standard deviation.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Immutable constants for a supported subgroup size.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#dataviz.spc.constants.SPCConstants" title="dataviz.spc.constants.SPCConstants">SPCConstants</a></p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If constants cannot be represented numerically.</p></li>
-<li><p><strong>ValueError</strong> – If subgroup size is invalid.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">constants</span> <span class="pre">=</span> <span class="pre">get_spc_constants(5)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Constants are tabulated for common subgroup sizes from 2 through 25.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dataviz.spc.constants.SPCConstants.a2">
-<span class="sig-name descname"><span class="pre">a2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dataviz.spc.constants.SPCConstants.a2" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dataviz.spc.constants.SPCConstants.a3">
-<span class="sig-name descname"><span class="pre">a3</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dataviz.spc.constants.SPCConstants.a3" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dataviz.spc.constants.SPCConstants.b3">
-<span class="sig-name descname"><span class="pre">b3</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dataviz.spc.constants.SPCConstants.b3" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dataviz.spc.constants.SPCConstants.b4">
-<span class="sig-name descname"><span class="pre">b4</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dataviz.spc.constants.SPCConstants.b4" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dataviz.spc.constants.SPCConstants.c4">
-<span class="sig-name descname"><span class="pre">c4</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dataviz.spc.constants.SPCConstants.c4" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dataviz.spc.constants.SPCConstants.d3">
-<span class="sig-name descname"><span class="pre">d3</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dataviz.spc.constants.SPCConstants.d3" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dataviz.spc.constants.SPCConstants.d4">
-<span class="sig-name descname"><span class="pre">d4</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dataviz.spc.constants.SPCConstants.d4" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dataviz.spc.constants.SPCConstants.n">
-<span class="sig-name descname"><span class="pre">n</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#dataviz.spc.constants.SPCConstants.n" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.spc.constants.get_spc_constants">
-<span class="sig-prename descclassname"><span class="pre">dataviz.spc.constants.</span></span><span class="sig-name descname"><span class="pre">get_spc_constants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subgroup_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dataviz.spc.constants.SPCConstants" title="dataviz.spc.constants.SPCConstants"><span class="pre">SPCConstants</span></a></span></span><a class="reference internal" href="_modules/dataviz/spc/constants.html#get_spc_constants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.spc.constants.get_spc_constants" title="Link to this definition"></a></dt>
-<dd><p>Return traditional SPC constants for a subgroup size.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>subgroup_size</strong> (<em>int</em>) – Subgroup size to look up.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Constants for the requested subgroup size.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#dataviz.spc.constants.SPCConstants" title="dataviz.spc.constants.SPCConstants">SPCConstants</a></p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If subgroup size is not an integer.</p></li>
-<li><p><strong>ValueError</strong> – If subgroup size is unsupported.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">constants</span> <span class="pre">=</span> <span class="pre">get_spc_constants(5)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Supported subgroup sizes are 2 through 25.</p>
-</dd></dl>
-
+  <section id="dataviz-spc-constants">
+<h1>dataviz.spc.constants<a class="headerlink" href="#dataviz-spc-constants" title="Link to this heading"></a></h1>
 </section>
 
 

@@ -1,7 +1,10 @@
-dataviz.xai.feature\_imp
-===============================
+dataviz.xai.feature_imp
+=======================
 
-.. automodule:: dataviz.xai.feature_imp
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.xai
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   feature_imp

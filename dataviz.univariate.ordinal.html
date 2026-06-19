@@ -66,13 +66,7 @@
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.fitting.html">dataviz.univariate.fitting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.histogram.html">dataviz.univariate.histogram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.inference.html">dataviz.univariate.inference</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.univariate.ordinal</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.ordinal.likert_summary"><code class="docutils literal notranslate"><span class="pre">likert_summary()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.ordinal.ordered_category_counts"><code class="docutils literal notranslate"><span class="pre">ordered_category_counts()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.ordinal.ordinal_bar_interactive"><code class="docutils literal notranslate"><span class="pre">ordinal_bar_interactive()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.ordinal.ordinal_bar_static"><code class="docutils literal notranslate"><span class="pre">ordinal_bar_static()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.univariate.ordinal</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.profile.html">dataviz.univariate.profile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.quality.html">dataviz.univariate.quality</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.robust.html">dataviz.univariate.robust</a></li>
@@ -122,150 +116,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dataviz.univariate.ordinal">
-<span id="dataviz-univariate-ordinal"></span><h1>dataviz.univariate.ordinal<a class="headerlink" href="#module-dataviz.univariate.ordinal" title="Link to this heading"></a></h1>
-<p>Ordinal and Likert-style univariate summaries and charts.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.univariate.ordinal.likert_summary">
-<span class="sig-prename descclassname"><span class="pre">dataviz.univariate.ordinal.</span></span><span class="sig-name descname"><span class="pre">likert_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">('Strongly</span> <span class="pre">disagree',</span> <span class="pre">'Disagree',</span> <span class="pre">'Neutral',</span> <span class="pre">'Agree',</span> <span class="pre">'Strongly</span> <span class="pre">agree')</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/dataviz/univariate/ordinal.html#likert_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.univariate.ordinal.likert_summary" title="Link to this definition"></a></dt>
-<dd><p>Summarize one Likert-style variable.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>SeriesLike</em>) – Input Likert responses.</p></li>
-<li><p><strong>order</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>) – Ordered response labels.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Response, count, proportion, and cumulative proportion columns.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pandas.DataFrame</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If input data cannot be represented as a pandas Series.</p></li>
-<li><p><strong>ValueError</strong> – If the response order omits observed categories.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">table</span> <span class="pre">=</span> <span class="pre">likert_summary(responses)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>The default order follows a five-point agreement scale.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.univariate.ordinal.ordered_category_counts">
-<span class="sig-prename descclassname"><span class="pre">dataviz.univariate.ordinal.</span></span><span class="sig-name descname"><span class="pre">ordered_category_counts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropna</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Series</span></span></span><a class="reference internal" href="_modules/dataviz/univariate/ordinal.html#ordered_category_counts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.univariate.ordinal.ordered_category_counts" title="Link to this definition"></a></dt>
-<dd><p>Compute category counts in a meaningful order.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>SeriesLike</em>) – Input ordinal or categorical observations.</p></li>
-<li><p><strong>order</strong> (<em>Optional</em><em>[</em><em>Sequence</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Explicit category order.</p></li>
-<li><p><strong>normalize</strong> (<em>bool</em>) – Whether to return proportions instead of counts.</p></li>
-<li><p><strong>dropna</strong> (<em>bool</em>) – Whether to omit missing values.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Ordered category counts or proportions.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pandas.Series</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If input data cannot be represented as a pandas Series.</p></li>
-<li><p><strong>ValueError</strong> – If the requested order omits observed categories.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">counts</span> <span class="pre">=</span> <span class="pre">ordered_category_counts(responses,</span> <span class="pre">order=[&quot;Low&quot;,</span> <span class="pre">&quot;Medium&quot;,</span> <span class="pre">&quot;High&quot;])</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Without <code class="docutils literal notranslate"><span class="pre">order</span></code>, categories are sorted by their natural label order.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.univariate.ordinal.ordinal_bar_interactive">
-<span class="sig-prename descclassname"><span class="pre">dataviz.univariate.ordinal.</span></span><span class="sig-name descname"><span class="pre">ordinal_bar_interactive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'plotly'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">600</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="_modules/dataviz/univariate/ordinal.html#ordinal_bar_interactive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.univariate.ordinal.ordinal_bar_interactive" title="Link to this definition"></a></dt>
-<dd><p>Create an interactive ordered category bar chart.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>SeriesLike</em>) – Input ordinal or categorical observations.</p></li>
-<li><p><strong>order</strong> (<em>Optional</em><em>[</em><em>Sequence</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Explicit category order.</p></li>
-<li><p><strong>normalize</strong> (<em>bool</em>) – Whether to plot proportions instead of counts.</p></li>
-<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title.</p></li>
-<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Bar color.</p></li>
-<li><p><strong>template</strong> (<em>str</em>) – Plotly template name.</p></li>
-<li><p><strong>height</strong> (<em>int</em>) – Figure height in pixels.</p></li>
-<li><p><strong>width</strong> (<em>int</em>) – Figure width in pixels.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Interactive ordered bar chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If input data cannot be represented as a pandas Series.</p></li>
-<li><p><strong>ValueError</strong> – If the requested order omits observed categories.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">fig</span> <span class="pre">=</span> <span class="pre">ordinal_bar_interactive(ratings)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>The function keeps the caller-supplied order on the x-axis.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.univariate.ordinal.ordinal_bar_static">
-<span class="sig-prename descclassname"><span class="pre">dataviz.univariate.ordinal.</span></span><span class="sig-name descname"><span class="pre">ordinal_bar_static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(10,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/univariate/ordinal.html#ordinal_bar_static"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.univariate.ordinal.ordinal_bar_static" title="Link to this definition"></a></dt>
-<dd><p>Create a static ordered category bar chart.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>SeriesLike</em>) – Input ordinal or categorical observations.</p></li>
-<li><p><strong>order</strong> (<em>Optional</em><em>[</em><em>Sequence</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Explicit category order.</p></li>
-<li><p><strong>normalize</strong> (<em>bool</em>) – Whether to plot proportions instead of counts.</p></li>
-<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title.</p></li>
-<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size.</p></li>
-<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Bar color.</p></li>
-<li><p><strong>theme</strong> (<em>str</em>) – Styling theme name.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Axes containing the ordered bar chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If input data cannot be represented as a pandas Series.</p></li>
-<li><p><strong>ValueError</strong> – If the requested order omits observed categories.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">ax</span> <span class="pre">=</span> <span class="pre">ordinal_bar_static(ratings,</span> <span class="pre">order=[&quot;Low&quot;,</span> <span class="pre">&quot;Medium&quot;,</span> <span class="pre">&quot;High&quot;])</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Ordered bars avoid misleading frequency sorting for ordinal variables.</p>
-</dd></dl>
-
+  <section id="dataviz-univariate-ordinal">
+<h1>dataviz.univariate.ordinal<a class="headerlink" href="#dataviz-univariate-ordinal" title="Link to this heading"></a></h1>
 </section>
 
 

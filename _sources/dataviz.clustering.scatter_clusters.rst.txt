@@ -1,7 +1,10 @@
-dataviz.clustering.scatter\_clusters
-===========================================
+dataviz.clustering.scatter_clusters
+===================================
 
-.. automodule:: dataviz.clustering.scatter_clusters
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.clustering
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   scatter_clusters

@@ -1,7 +1,10 @@
-dataviz.univariate.violin\_plot
-======================================
+dataviz.univariate.violin_plot
+==============================
 
-.. automodule:: dataviz.univariate.violin_plot
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   violin_plot

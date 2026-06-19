@@ -57,11 +57,7 @@
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.charts.html">dataviz.spc.charts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.constants.html">dataviz.spc.constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.control.html">dataviz.spc.control</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.spc.dashboard</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.spc.dashboard.spc_dashboard_interactive"><code class="docutils literal notranslate"><span class="pre">spc_dashboard_interactive()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.spc.dashboard.spc_dashboard_static"><code class="docutils literal notranslate"><span class="pre">spc_dashboard_static()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.spc.dashboard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.diagnostics.html">dataviz.spc.diagnostics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.multivariate.html">dataviz.spc.multivariate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.spc.rules.html">dataviz.spc.rules</a></li>
@@ -107,82 +103,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dataviz.spc.dashboard">
-<span id="dataviz-spc-dashboard"></span><h1>dataviz.spc.dashboard<a class="headerlink" href="#module-dataviz.spc.dashboard" title="Link to this heading"></a></h1>
-<p>SPC dashboard views.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.spc.dashboard.spc_dashboard_interactive">
-<span class="sig-prename descclassname"><span class="pre">dataviz.spc.dashboard.</span></span><span class="sig-name descname"><span class="pre">spc_dashboard_interactive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SPC</span> <span class="pre">Dashboard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'plotly'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">800</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="_modules/dataviz/spc/dashboard.html#spc_dashboard_interactive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.spc.dashboard.spc_dashboard_interactive" title="Link to this definition"></a></dt>
-<dd><p>Create an interactive SPC dashboard with control, range, distribution, and rule panels.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>ArrayLike</em>) – Process observations.</p></li>
-<li><p><strong>span</strong> (<em>int</em>) – Moving range span.</p></li>
-<li><p><strong>bins</strong> (<em>int</em>) – Number of histogram bins.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Figure title.</p></li>
-<li><p><strong>template</strong> (<em>str</em>) – Plotly template.</p></li>
-<li><p><strong>height</strong> (<em>int</em>) – Figure height in pixels.</p></li>
-<li><p><strong>width</strong> (<em>int</em>) – Figure width in pixels.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Interactive dashboard figure.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If data cannot be converted to numeric observations.</p></li>
-<li><p><strong>ValueError</strong> – If span or bins are invalid.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">fig</span> <span class="pre">=</span> <span class="pre">dv.spc.spc_dashboard_interactive(values)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Rule summary counts use the default SPC rule detector.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.spc.dashboard.spc_dashboard_static">
-<span class="sig-prename descclassname"><span class="pre">dataviz.spc.dashboard.</span></span><span class="sig-name descname"><span class="pre">spc_dashboard_static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">span</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SPC</span> <span class="pre">Dashboard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(14,</span> <span class="pre">10)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="_modules/dataviz/spc/dashboard.html#spc_dashboard_static"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.spc.dashboard.spc_dashboard_static" title="Link to this definition"></a></dt>
-<dd><p>Create a static SPC dashboard with control, range, distribution, and rule panels.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>ArrayLike</em>) – Process observations.</p></li>
-<li><p><strong>span</strong> (<em>int</em>) – Moving range span.</p></li>
-<li><p><strong>bins</strong> (<em>int</em>) – Number of histogram bins.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Figure title.</p></li>
-<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Figure size in inches.</p></li>
-<li><p><strong>theme</strong> (<em>str</em>) – Named style theme.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dashboard figure.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.figure.Figure</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If data cannot be converted to numeric observations.</p></li>
-<li><p><strong>ValueError</strong> – If span or bins are invalid.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">fig</span> <span class="pre">=</span> <span class="pre">dv.spc.spc_dashboard_static(values)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>The dashboard is intended for quick process screening rather than formal reporting.</p>
-</dd></dl>
-
+  <section id="dataviz-spc-dashboard">
+<h1>dataviz.spc.dashboard<a class="headerlink" href="#dataviz-spc-dashboard" title="Link to this heading"></a></h1>
 </section>
 
 

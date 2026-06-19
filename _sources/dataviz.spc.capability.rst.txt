@@ -1,7 +1,10 @@
 dataviz.spc.capability
-=============================
+======================
 
-.. automodule:: dataviz.spc.capability
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.spc
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   capability

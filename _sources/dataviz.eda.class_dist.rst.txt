@@ -1,7 +1,10 @@
-dataviz.eda.class\_dist
-==============================
+dataviz.eda.class_dist
+======================
 
-.. automodule:: dataviz.eda.class_dist
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.eda
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   class_dist

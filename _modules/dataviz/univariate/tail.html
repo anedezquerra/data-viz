@@ -99,7 +99,7 @@
 
 
 <div class="viewcode-block" id="ConcentrationStats">
-<a class="viewcode-back" href="../../../dataviz.univariate.tail.html#dataviz.ConcentrationStats">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.ConcentrationStats">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ConcentrationStats</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Concentration statistics for non-negative values.</span>
@@ -134,7 +134,7 @@
 
 
 <div class="viewcode-block" id="survival_values">
-<a class="viewcode-back" href="../../../dataviz.univariate.tail.html#dataviz.survival_values">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.survival_values">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">survival_values</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute empirical survival curve values.</span>
 
@@ -163,7 +163,7 @@
 
 
 <div class="viewcode-block" id="exceedance_table">
-<a class="viewcode-back" href="../../../dataviz.univariate.tail.html#dataviz.exceedance_table">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.exceedance_table">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">exceedance_table</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">thresholds</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute exceedance counts and rates for thresholds.</span>
 
@@ -197,7 +197,7 @@
 
 
 <div class="viewcode-block" id="concentration_summary">
-<a class="viewcode-back" href="../../../dataviz.univariate.tail.html#dataviz.concentration_summary">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.concentration_summary">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">concentration_summary</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ConcentrationStats</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Gini and top-share concentration statistics.</span>
 
@@ -259,7 +259,7 @@
 
 
 <div class="viewcode-block" id="lorenz_curve_values">
-<a class="viewcode-back" href="../../../dataviz.univariate.tail.html#dataviz.lorenz_curve_values">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.lorenz_curve_values">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lorenz_curve_values</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Lorenz curve coordinates for non-negative values.</span>
 
@@ -295,7 +295,7 @@
 
 
 <div class="viewcode-block" id="survival_curve_static">
-<a class="viewcode-back" href="../../../dataviz.univariate.tail.html#dataviz.survival_curve_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.survival_curve_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">survival_curve_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -337,7 +337,7 @@
 
 
 <div class="viewcode-block" id="survival_curve_interactive">
-<a class="viewcode-back" href="../../../dataviz.univariate.tail.html#dataviz.survival_curve_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.survival_curve_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">survival_curve_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -379,7 +379,7 @@
 
 
 <div class="viewcode-block" id="lorenz_curve_static">
-<a class="viewcode-back" href="../../../dataviz.univariate.tail.html#dataviz.lorenz_curve_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.lorenz_curve_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lorenz_curve_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -425,7 +425,7 @@
 
 
 <div class="viewcode-block" id="lorenz_curve_interactive">
-<a class="viewcode-back" href="../../../dataviz.univariate.tail.html#dataviz.lorenz_curve_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.lorenz_curve_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lorenz_curve_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>

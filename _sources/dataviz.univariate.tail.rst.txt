@@ -1,7 +1,10 @@
 dataviz.univariate.tail
-==============================
+=======================
 
-.. automodule:: dataviz.univariate.tail
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   tail

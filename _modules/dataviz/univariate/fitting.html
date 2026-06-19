@@ -99,7 +99,7 @@
 
 
 <div class="viewcode-block" id="DistributionFit">
-<a class="viewcode-back" href="../../../dataviz.univariate.fitting.html#dataviz.DistributionFit">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.DistributionFit">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DistributionFit</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fitted SciPy distribution summary.</span>
@@ -166,7 +166,7 @@
 
 
 <div class="viewcode-block" id="fit_distribution">
-<a class="viewcode-back" href="../../../dataviz.univariate.fitting.html#dataviz.fit_distribution">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.fit_distribution">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fit_distribution</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">distribution</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;norm&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DistributionFit</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fit a SciPy continuous distribution to one numeric variable.</span>
 
@@ -209,7 +209,7 @@
 
 
 <div class="viewcode-block" id="compare_distributions">
-<a class="viewcode-back" href="../../../dataviz.univariate.fitting.html#dataviz.compare_distributions">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.compare_distributions">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compare_distributions</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">distributions</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;norm&quot;</span><span class="p">,</span> <span class="s2">&quot;lognorm&quot;</span><span class="p">,</span> <span class="s2">&quot;expon&quot;</span><span class="p">,</span> <span class="s2">&quot;gamma&quot;</span><span class="p">,</span> <span class="s2">&quot;weibull_min&quot;</span><span class="p">),</span>
@@ -253,7 +253,7 @@
 
 
 <div class="viewcode-block" id="fitted_pdf_values">
-<a class="viewcode-back" href="../../../dataviz.univariate.fitting.html#dataviz.fitted_pdf_values">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.fitted_pdf_values">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fitted_pdf_values</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">distribution</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;norm&quot;</span><span class="p">,</span> <span class="n">points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">DistributionFit</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute fitted probability density curve values.</span>
 
@@ -288,7 +288,7 @@
 
 
 <div class="viewcode-block" id="fitted_distribution_histogram_static">
-<a class="viewcode-back" href="../../../dataviz.univariate.fitting.html#dataviz.fitted_distribution_histogram_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.fitted_distribution_histogram_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fitted_distribution_histogram_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">distribution</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;norm&quot;</span><span class="p">,</span>
@@ -349,7 +349,7 @@
 
 
 <div class="viewcode-block" id="fitted_distribution_histogram_interactive">
-<a class="viewcode-back" href="../../../dataviz.univariate.fitting.html#dataviz.fitted_distribution_histogram_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.fitted_distribution_histogram_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fitted_distribution_histogram_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">distribution</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;norm&quot;</span><span class="p">,</span>

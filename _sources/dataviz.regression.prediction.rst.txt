@@ -1,7 +1,10 @@
 dataviz.regression.prediction
-====================================
+=============================
 
-.. automodule:: dataviz.regression.prediction
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.regression
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   prediction

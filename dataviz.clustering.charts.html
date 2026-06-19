@@ -48,12 +48,7 @@
 <li class="toctree-l1"><a class="reference internal" href="dataviz.classification.html">dataviz.classification</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="dataviz.clustering.html">dataviz.clustering</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="dataviz.clustering.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.clustering.charts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.clustering.charts.dendrogram"><code class="docutils literal notranslate"><span class="pre">dendrogram()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.clustering.charts.elbow_plot"><code class="docutils literal notranslate"><span class="pre">elbow_plot()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.clustering.charts.scatter_clusters"><code class="docutils literal notranslate"><span class="pre">scatter_clusters()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.clustering.charts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.clustering.dendrogram.html">dataviz.clustering.dendrogram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.clustering.elbow.html">dataviz.clustering.elbow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.clustering.elbow_enhanced.html">dataviz.clustering.elbow_enhanced</a></li>
@@ -102,118 +97,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dataviz.clustering.charts">
-<span id="dataviz-clustering-charts"></span><h1>dataviz.clustering.charts<a class="headerlink" href="#module-dataviz.clustering.charts" title="Link to this heading"></a></h1>
-<p>Clustering analysis visualization charts.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.clustering.charts.dendrogram">
-<span class="sig-prename descclassname"><span class="pre">dataviz.clustering.charts.</span></span><span class="sig-name descname"><span class="pre">dendrogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">linkage_matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Dendrogram'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/clustering/charts.html#dendrogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.clustering.charts.dendrogram" title="Link to this definition"></a></dt>
-<dd><p>Create a dendrogram from hierarchical clustering linkage data.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>linkage_matrix</strong> (<em>MatrixLike</em>) – Hierarchical clustering linkage matrix.</p></li>
-<li><p><strong>labels</strong> (<em>Optional</em><em>[</em><em>Labels</em><em>]</em>) – Class, feature, sample, or cluster labels shown on the chart. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Dendrogram'</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.dendrogram(linkage_matrix)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.clustering.charts.elbow_plot">
-<span class="sig-prename descclassname"><span class="pre">dataviz.clustering.charts.</span></span><span class="sig-name descname"><span class="pre">elbow_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inertias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Elbow</span> <span class="pre">Plot'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/clustering/charts.html#elbow_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.clustering.charts.elbow_plot" title="Link to this definition"></a></dt>
-<dd><p>Create an elbow plot for selecting a cluster count.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>n_clusters</strong> (<em>ArrayLike</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code>.</p></li>
-<li><p><strong>inertias</strong> (<em>ArrayLike</em>) – Within-cluster sum-of-squares or inertia values by cluster count.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Elbow</span> <span class="pre">Plot'</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.elbow_plot(inertias)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.clustering.charts.scatter_clusters">
-<span class="sig-prename descclassname"><span class="pre">dataviz.clustering.charts.</span></span><span class="sig-name descname"><span class="pre">scatter_clusters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Cluster</span> <span class="pre">Visualization'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/clustering/charts.html#scatter_clusters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.clustering.charts.scatter_clusters" title="Link to this definition"></a></dt>
-<dd><p>Create a cluster-labeled scatter plot.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>ArrayLike</em>) – Values plotted along the x-axis.</p></li>
-<li><p><strong>y</strong> (<em>ArrayLike</em>) – Values plotted along the y-axis.</p></li>
-<li><p><strong>labels</strong> (<em>ArrayLike</em>) – Class, feature, sample, or cluster labels shown on the chart.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Cluster</span> <span class="pre">Visualization'</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.scatter_clusters(x,</span> <span class="pre">y)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
+  <section id="dataviz-clustering-charts">
+<h1>dataviz.clustering.charts<a class="headerlink" href="#dataviz-clustering-charts" title="Link to this heading"></a></h1>
 </section>
 
 

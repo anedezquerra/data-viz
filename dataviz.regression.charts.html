@@ -51,12 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="dataviz.multivariate.html">dataviz.multivariate</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="dataviz.regression.html">dataviz.regression</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="dataviz.regression.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.regression.charts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.regression.charts.learning_curve"><code class="docutils literal notranslate"><span class="pre">learning_curve()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.regression.charts.prediction_plot"><code class="docutils literal notranslate"><span class="pre">prediction_plot()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.regression.charts.residual_plot"><code class="docutils literal notranslate"><span class="pre">residual_plot()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.regression.charts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.regression.learning.html">dataviz.regression.learning</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.regression.prediction.html">dataviz.regression.prediction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.regression.residual.html">dataviz.regression.residual</a></li>
@@ -101,118 +96,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dataviz.regression.charts">
-<span id="dataviz-regression-charts"></span><h1>dataviz.regression.charts<a class="headerlink" href="#module-dataviz.regression.charts" title="Link to this heading"></a></h1>
-<p>Regression analysis visualization charts.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.regression.charts.learning_curve">
-<span class="sig-prename descclassname"><span class="pre">dataviz.regression.charts.</span></span><span class="sig-name descname"><span class="pre">learning_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_sizes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_scores</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_scores</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Learning</span> <span class="pre">Curve'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/regression/charts.html#learning_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.regression.charts.learning_curve" title="Link to this definition"></a></dt>
-<dd><p>Plot model performance across training-set sizes.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>train_sizes</strong> (<em>ArrayLike</em>) – Training-set sizes used to compute learning-curve scores.</p></li>
-<li><p><strong>train_scores</strong> (<em>ArrayLike</em>) – Training scores corresponding to each training-set size.</p></li>
-<li><p><strong>val_scores</strong> (<em>ArrayLike</em>) – Validation scores corresponding to each training-set size.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Learning</span> <span class="pre">Curve'</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.learning_curve(train_sizes)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.regression.charts.prediction_plot">
-<span class="sig-prename descclassname"><span class="pre">dataviz.regression.charts.</span></span><span class="sig-name descname"><span class="pre">prediction_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Prediction</span> <span class="pre">Plot'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/regression/charts.html#prediction_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.regression.charts.prediction_plot" title="Link to this definition"></a></dt>
-<dd><p>Compare observed and predicted regression values.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>y_true</strong> (<em>ArrayLike</em>) – Observed target values.</p></li>
-<li><p><strong>y_pred</strong> (<em>ArrayLike</em>) – Predicted target values.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Prediction</span> <span class="pre">Plot'</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.prediction_plot(y_true,</span> <span class="pre">y_pred)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.regression.charts.residual_plot">
-<span class="sig-prename descclassname"><span class="pre">dataviz.regression.charts.</span></span><span class="sig-name descname"><span class="pre">residual_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Residual</span> <span class="pre">Plot'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/regression/charts.html#residual_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.regression.charts.residual_plot" title="Link to this definition"></a></dt>
-<dd><p>Create a residual diagnostic plot for regression predictions.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>y_true</strong> (<em>ArrayLike</em>) – Observed target values.</p></li>
-<li><p><strong>y_pred</strong> (<em>ArrayLike</em>) – Predicted target values.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Residual</span> <span class="pre">Plot'</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.residual_plot(y_true,</span> <span class="pre">y_pred)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
+  <section id="dataviz-regression-charts">
+<h1>dataviz.regression.charts<a class="headerlink" href="#dataviz-regression-charts" title="Link to this heading"></a></h1>
 </section>
 
 

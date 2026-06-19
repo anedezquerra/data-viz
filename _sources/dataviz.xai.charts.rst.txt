@@ -1,7 +1,10 @@
 dataviz.xai.charts
-=========================
+==================
 
-.. automodule:: dataviz.xai.charts
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.xai
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   charts

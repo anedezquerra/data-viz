@@ -1,7 +1,10 @@
 dataviz.univariate.weighted
-==================================
+===========================
 
-.. automodule:: dataviz.univariate.weighted
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   weighted

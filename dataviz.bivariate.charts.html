@@ -48,12 +48,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="dataviz.bivariate.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.advanced.html">dataviz.bivariate.advanced</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.categorical.html">dataviz.bivariate.categorical</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.bivariate.charts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.charts.correlation_heatmap"><code class="docutils literal notranslate"><span class="pre">correlation_heatmap()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.charts.line_plot"><code class="docutils literal notranslate"><span class="pre">line_plot()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.charts.scatter_plot"><code class="docutils literal notranslate"><span class="pre">scatter_plot()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.bivariate.charts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.correlation.html">dataviz.bivariate.correlation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.joint.html">dataviz.bivariate.joint</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.line.html">dataviz.bivariate.line</a></li>
@@ -106,105 +101,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dataviz.bivariate.charts">
-<span id="dataviz-bivariate-charts"></span><h1>dataviz.bivariate.charts<a class="headerlink" href="#module-dataviz.bivariate.charts" title="Link to this heading"></a></h1>
-<p>Compatibility wrappers for bivariate relationship charts.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.bivariate.charts.correlation_heatmap">
-<span class="sig-prename descclassname"><span class="pre">dataviz.bivariate.charts.</span></span><span class="sig-name descname"><span class="pre">correlation_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/bivariate/charts.html#correlation_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.bivariate.charts.correlation_heatmap" title="Link to this definition"></a></dt>
-<dd><p>Create a static heatmap of pairwise correlations.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>*args</strong> (<em>Any</em>) – Positional arguments forwarded to <code class="docutils literal notranslate"><span class="pre">correlation_heatmap_static</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Keyword arguments forwarded to <code class="docutils literal notranslate"><span class="pre">correlation_heatmap_static</span></code>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the correlation heatmap.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If the input is not dataframe-like.</p></li>
-<li><p><strong>ValueError</strong> – If too few numeric columns exist or options are invalid.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">ax</span> <span class="pre">=</span> <span class="pre">correlation_heatmap(df)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>This wrapper preserves the legacy <code class="docutils literal notranslate"><span class="pre">dataviz.bivariate.charts</span></code> API.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.bivariate.charts.line_plot">
-<span class="sig-prename descclassname"><span class="pre">dataviz.bivariate.charts.</span></span><span class="sig-name descname"><span class="pre">line_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/bivariate/charts.html#line_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.bivariate.charts.line_plot" title="Link to this definition"></a></dt>
-<dd><p>Create a static line plot for ordered bivariate data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>*args</strong> (<em>Any</em>) – Positional arguments forwarded to <code class="docutils literal notranslate"><span class="pre">line_plot_static</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Keyword arguments forwarded to <code class="docutils literal notranslate"><span class="pre">line_plot_static</span></code>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the line plot.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If inputs cannot be resolved or plotted.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths differ, inputs are empty, or options are invalid.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">ax</span> <span class="pre">=</span> <span class="pre">line_plot(x,</span> <span class="pre">y)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>This wrapper preserves the legacy <code class="docutils literal notranslate"><span class="pre">dataviz.bivariate.charts</span></code> API.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.bivariate.charts.scatter_plot">
-<span class="sig-prename descclassname"><span class="pre">dataviz.bivariate.charts.</span></span><span class="sig-name descname"><span class="pre">scatter_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/bivariate/charts.html#scatter_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.bivariate.charts.scatter_plot" title="Link to this definition"></a></dt>
-<dd><p>Create a static scatter plot to compare two variables.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>*args</strong> (<em>Any</em>) – Positional arguments forwarded to <code class="docutils literal notranslate"><span class="pre">scatter_plot_static</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Keyword arguments forwarded to <code class="docutils literal notranslate"><span class="pre">scatter_plot_static</span></code>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the scatter plot.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If inputs cannot be resolved or plotted.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths differ, inputs are empty, or options are invalid.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">ax</span> <span class="pre">=</span> <span class="pre">scatter_plot(x,</span> <span class="pre">y)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>This wrapper preserves the legacy <code class="docutils literal notranslate"><span class="pre">dataviz.bivariate.charts</span></code> API.</p>
-</dd></dl>
-
+  <section id="dataviz-bivariate-charts">
+<h1>dataviz.bivariate.charts<a class="headerlink" href="#dataviz-bivariate-charts" title="Link to this heading"></a></h1>
 </section>
 
 

@@ -1,7 +1,10 @@
 dataviz.bivariate.joint
-==============================
+=======================
 
-.. automodule:: dataviz.bivariate.joint
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.bivariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   joint

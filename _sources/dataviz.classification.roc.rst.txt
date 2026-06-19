@@ -1,7 +1,10 @@
 dataviz.classification.roc
-=================================
+==========================
 
-.. automodule:: dataviz.classification.roc
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.classification
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   roc

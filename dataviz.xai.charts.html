@@ -58,12 +58,7 @@
 <li class="toctree-l1"><a class="reference internal" href="dataviz.utils.html">dataviz.utils</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="dataviz.xai.html">dataviz.xai</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="dataviz.xai.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.xai.charts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.xai.charts.feature_importance"><code class="docutils literal notranslate"><span class="pre">feature_importance()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.xai.charts.partial_dependence"><code class="docutils literal notranslate"><span class="pre">partial_dependence()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.xai.charts.shap_plot"><code class="docutils literal notranslate"><span class="pre">shap_plot()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.xai.charts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.xai.feature_imp.html">dataviz.xai.feature_imp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.xai.partial_dep.html">dataviz.xai.partial_dep</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.xai.shap.html">dataviz.xai.shap</a></li>
@@ -101,118 +96,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dataviz.xai.charts">
-<span id="dataviz-xai-charts"></span><h1>dataviz.xai.charts<a class="headerlink" href="#module-dataviz.xai.charts" title="Link to this heading"></a></h1>
-<p>Explainable AI (XAI) visualization charts.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.xai.charts.feature_importance">
-<span class="sig-prename descclassname"><span class="pre">dataviz.xai.charts.</span></span><span class="sig-name descname"><span class="pre">feature_importance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">importances</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Feature</span> <span class="pre">Importance'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/xai/charts.html#feature_importance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.xai.charts.feature_importance" title="Link to this definition"></a></dt>
-<dd><p>Visualize model feature-importance values.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>importances</strong> (<em>SeriesLike</em>) – Feature-importance values indexed or paired with feature names.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'Feature</span> <span class="pre">Importance'</span></code>.</p></li>
-<li><p><strong>top_n</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Maximum number of highest-ranked features to display. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.feature_importance(importances)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.xai.charts.partial_dependence">
-<span class="sig-prename descclassname"><span class="pre">dataviz.xai.charts.</span></span><span class="sig-name descname"><span class="pre">partial_dependence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Feature'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/xai/charts.html#partial_dependence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.xai.charts.partial_dependence" title="Link to this definition"></a></dt>
-<dd><p>Visualize a partial-dependence relationship for one feature.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>feature_values</strong> (<em>ArrayLike</em>) – Feature grid or observed feature values for partial dependence.</p></li>
-<li><p><strong>predictions</strong> (<em>ArrayLike</em>) – Predicted response values corresponding to the feature grid.</p></li>
-<li><p><strong>feature_name</strong> (<em>str</em>) – Configuration value for <code class="docutils literal notranslate"><span class="pre">feature_name</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">'Feature'</span></code>.</p></li>
-<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.partial_dependence(feature_values,</span> <span class="pre">predictions)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.xai.charts.shap_plot">
-<span class="sig-prename descclassname"><span class="pre">dataviz.xai.charts.</span></span><span class="sig-name descname"><span class="pre">shap_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shap_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SHAP</span> <span class="pre">Feature</span> <span class="pre">Importance'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span></span></span><a class="reference internal" href="_modules/dataviz/xai/charts.html#shap_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.xai.charts.shap_plot" title="Link to this definition"></a></dt>
-<dd><p>Visualize SHAP values for explainable model analysis.</p>
-<p>Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>shap_values</strong> (<em>MatrixLike</em>) – SHAP contribution values to summarize or plot.</p></li>
-<li><p><strong>feature_names</strong> (<em>Labels</em>) – Names of the features represented by the values.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to <code class="docutils literal notranslate"><span class="pre">'SHAP</span> <span class="pre">Feature</span> <span class="pre">Importance'</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> (<em>Any</em>) – Additional keyword arguments forwarded to the underlying plotting function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Configured matplotlib axes containing the rendered static chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.axes.Axes</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If required inputs are not compatible with the plotting backend.</p></li>
-<li><p><strong>ValueError</strong> – If input lengths, matrix shapes, or option values are invalid for the requested chart.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">dataviz</span> <span class="pre">as</span> <span class="pre">dv</span>
-<span class="pre">result</span> <span class="pre">=</span> <span class="pre">dv.shap_plot(shap_values)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Static functions return matplotlib objects; interactive functions return Plotly figures.</p>
-</dd></dl>
-
+  <section id="dataviz-xai-charts">
+<h1>dataviz.xai.charts<a class="headerlink" href="#dataviz-xai-charts" title="Link to this heading"></a></h1>
 </section>
 
 

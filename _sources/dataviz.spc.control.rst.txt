@@ -1,7 +1,10 @@
 dataviz.spc.control
-==========================
+===================
 
-.. automodule:: dataviz.spc.control
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.spc
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   control

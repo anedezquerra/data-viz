@@ -97,7 +97,7 @@
 
 
 <div class="viewcode-block" id="UnivariateStats">
-<a class="viewcode-back" href="../../../dataviz.univariate.stats.html#dataviz.UnivariateStats">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.UnivariateStats">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">UnivariateStats</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Summary statistics for one variable.</span>
@@ -154,7 +154,7 @@
 
 
 <div class="viewcode-block" id="as_numeric_series">
-<a class="viewcode-back" href="../../../dataviz.univariate.stats.html#dataviz.as_numeric_series">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.as_numeric_series">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Value&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert series-like data to a clean numeric pandas Series.</span>
 
@@ -188,7 +188,7 @@
 
 
 <div class="viewcode-block" id="univariate_summary">
-<a class="viewcode-back" href="../../../dataviz.univariate.stats.html#dataviz.univariate_summary">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.univariate_summary">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">univariate_summary</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnivariateStats</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute robust descriptive statistics for one numeric variable.</span>
 
@@ -237,7 +237,7 @@
 
 
 <div class="viewcode-block" id="iqr_outliers">
-<a class="viewcode-back" href="../../../dataviz.univariate.stats.html#dataviz.iqr_outliers">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.iqr_outliers">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">iqr_outliers</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Flag observations outside Tukey IQR fences.</span>
 
@@ -273,7 +273,7 @@
 
 
 <div class="viewcode-block" id="zscore_outliers">
-<a class="viewcode-back" href="../../../dataviz.univariate.stats.html#dataviz.zscore_outliers">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.zscore_outliers">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">zscore_outliers</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Flag observations whose absolute z-score exceeds a threshold.</span>
 
@@ -308,7 +308,7 @@
 
 
 <div class="viewcode-block" id="recommended_bin_count">
-<a class="viewcode-back" href="../../../dataviz.univariate.stats.html#dataviz.recommended_bin_count">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.recommended_bin_count">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">recommended_bin_count</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">BinMethod</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Recommend a histogram bin count from common univariate rules.</span>
 
@@ -356,7 +356,7 @@
 
 
 <div class="viewcode-block" id="percentile_table">
-<a class="viewcode-back" href="../../../dataviz.univariate.stats.html#dataviz.percentile_table">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.percentile_table">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">percentile_table</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a percentile table for one numeric variable.</span>
 

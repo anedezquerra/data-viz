@@ -58,11 +58,7 @@
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.box_plot.html">dataviz.univariate.box_plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.categorical.html">dataviz.univariate.categorical</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.charts.html">dataviz.univariate.charts</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.univariate.dashboard</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.dashboard.univariate_analysis_dashboard_interactive"><code class="docutils literal notranslate"><span class="pre">univariate_analysis_dashboard_interactive()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.dashboard.univariate_analysis_dashboard_static"><code class="docutils literal notranslate"><span class="pre">univariate_analysis_dashboard_static()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.univariate.dashboard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.datetime.html">dataviz.univariate.datetime</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.density.html">dataviz.univariate.density</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.diagnostics.html">dataviz.univariate.diagnostics</a></li>
@@ -120,82 +116,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dataviz.univariate.dashboard">
-<span id="dataviz-univariate-dashboard"></span><h1>dataviz.univariate.dashboard<a class="headerlink" href="#module-dataviz.univariate.dashboard" title="Link to this heading"></a></h1>
-<p>Dashboard-style univariate analysis figures.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.univariate.dashboard.univariate_analysis_dashboard_interactive">
-<span class="sig-prename descclassname"><span class="pre">dataviz.univariate.dashboard.</span></span><span class="sig-name descname"><span class="pre">univariate_analysis_dashboard_interactive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'plotly'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">900</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1200</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="_modules/dataviz/univariate/dashboard.html#univariate_analysis_dashboard_interactive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.univariate.dashboard.univariate_analysis_dashboard_interactive" title="Link to this definition"></a></dt>
-<dd><p>Create an interactive multi-panel univariate analysis dashboard.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>SeriesLike</em>) – Input observations.</p></li>
-<li><p><strong>bins</strong> (<em>int</em>) – Number of histogram bins.</p></li>
-<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional figure title.</p></li>
-<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Primary plot color.</p></li>
-<li><p><strong>template</strong> (<em>str</em>) – Plotly template name.</p></li>
-<li><p><strong>height</strong> (<em>int</em>) – Figure height in pixels.</p></li>
-<li><p><strong>width</strong> (<em>int</em>) – Figure width in pixels.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Interactive univariate analysis dashboard.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If values cannot be converted to numeric data.</p></li>
-<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">bins</span></code> is invalid or no observations remain.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">fig</span> <span class="pre">=</span> <span class="pre">univariate_analysis_dashboard_interactive(data)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>The dashboard combines distribution shape, spread, normality, and robust-location diagnostics.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.univariate.dashboard.univariate_analysis_dashboard_static">
-<span class="sig-prename descclassname"><span class="pre">dataviz.univariate.dashboard.</span></span><span class="sig-name descname"><span class="pre">univariate_analysis_dashboard_static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(14,</span> <span class="pre">10)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="_modules/dataviz/univariate/dashboard.html#univariate_analysis_dashboard_static"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.univariate.dashboard.univariate_analysis_dashboard_static" title="Link to this definition"></a></dt>
-<dd><p>Create a static multi-panel univariate analysis dashboard.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>SeriesLike</em>) – Input observations.</p></li>
-<li><p><strong>bins</strong> (<em>int</em>) – Number of histogram bins.</p></li>
-<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional figure title.</p></li>
-<li><p><strong>figsize</strong> (<em>FigureSize</em>) – Matplotlib figure size.</p></li>
-<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Primary plot color.</p></li>
-<li><p><strong>theme</strong> (<em>str</em>) – Styling theme name.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Figure containing distribution, box, QQ, ECDF, percentile, and robust summaries.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>matplotlib.figure.Figure</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If values cannot be converted to numeric data.</p></li>
-<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">bins</span></code> is invalid or no observations remain.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">fig</span> <span class="pre">=</span> <span class="pre">univariate_analysis_dashboard_static(data)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>This dashboard is intended as a broad first-pass profile for one numeric variable.</p>
-</dd></dl>
-
+  <section id="dataviz-univariate-dashboard">
+<h1>dataviz.univariate.dashboard<a class="headerlink" href="#dataviz-univariate-dashboard" title="Link to this heading"></a></h1>
 </section>
 
 

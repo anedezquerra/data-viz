@@ -98,7 +98,7 @@
 
 
 <div class="viewcode-block" id="BooleanSummary">
-<a class="viewcode-back" href="../../../dataviz.univariate.text.html#dataviz.BooleanSummary">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.BooleanSummary">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BooleanSummary</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Boolean variable summary.</span>
@@ -133,7 +133,7 @@
 
 
 <div class="viewcode-block" id="BooleanRateInterval">
-<a class="viewcode-back" href="../../../dataviz.univariate.text.html#dataviz.BooleanRateInterval">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.BooleanRateInterval">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BooleanRateInterval</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Wilson confidence interval for a boolean true rate.</span>
@@ -168,7 +168,7 @@
 
 
 <div class="viewcode-block" id="boolean_summary">
-<a class="viewcode-back" href="../../../dataviz.univariate.text.html#dataviz.boolean_summary">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.boolean_summary">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">boolean_summary</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanSummary</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Summarize a boolean-like variable.</span>
 
@@ -200,7 +200,7 @@
 
 
 <div class="viewcode-block" id="boolean_wilson_interval">
-<a class="viewcode-back" href="../../../dataviz.univariate.text.html#dataviz.boolean_wilson_interval">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.boolean_wilson_interval">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">boolean_wilson_interval</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">confidence_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanRateInterval</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute a Wilson confidence interval for a boolean true rate.</span>
 
@@ -244,7 +244,7 @@
 
 
 <div class="viewcode-block" id="string_length_summary">
-<a class="viewcode-back" href="../../../dataviz.univariate.text.html#dataviz.string_length_summary">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.string_length_summary">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">string_length_summary</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute string lengths for text-like observations.</span>
 
@@ -274,7 +274,7 @@
 
 
 <div class="viewcode-block" id="token_count_summary">
-<a class="viewcode-back" href="../../../dataviz.univariate.text.html#dataviz.token_count_summary">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.token_count_summary">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">token_count_summary</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute whitespace token counts for text-like observations.</span>
 
@@ -304,7 +304,7 @@
 
 
 <div class="viewcode-block" id="top_terms">
-<a class="viewcode-back" href="../../../dataviz.univariate.text.html#dataviz.top_terms">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.top_terms">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">top_terms</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">top_n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">lowercase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Count the most common whitespace-delimited terms.</span>
 
@@ -342,7 +342,7 @@
 
 
 <div class="viewcode-block" id="boolean_bar_static">
-<a class="viewcode-back" href="../../../dataviz.univariate.text.html#dataviz.boolean_bar_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.boolean_bar_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">boolean_bar_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -382,7 +382,7 @@
 
 
 <div class="viewcode-block" id="boolean_bar_interactive">
-<a class="viewcode-back" href="../../../dataviz.univariate.text.html#dataviz.boolean_bar_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.boolean_bar_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">boolean_bar_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -422,7 +422,7 @@
 
 
 <div class="viewcode-block" id="top_terms_bar_static">
-<a class="viewcode-back" href="../../../dataviz.univariate.text.html#dataviz.top_terms_bar_static">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.top_terms_bar_static">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">top_terms_bar_static</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">top_n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
@@ -466,7 +466,7 @@
 
 
 <div class="viewcode-block" id="top_terms_bar_interactive">
-<a class="viewcode-back" href="../../../dataviz.univariate.text.html#dataviz.top_terms_bar_interactive">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.top_terms_bar_interactive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">top_terms_bar_interactive</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
     <span class="n">top_n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>

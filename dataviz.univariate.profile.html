@@ -67,12 +67,7 @@
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.histogram.html">dataviz.univariate.histogram</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.inference.html">dataviz.univariate.inference</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.ordinal.html">dataviz.univariate.ordinal</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.univariate.profile</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.profile.UnivariateProfile"><code class="docutils literal notranslate"><span class="pre">UnivariateProfile</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.profile.auto_profile"><code class="docutils literal notranslate"><span class="pre">auto_profile()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.profile.auto_profile_chart_interactive"><code class="docutils literal notranslate"><span class="pre">auto_profile_chart_interactive()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.univariate.profile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.quality.html">dataviz.univariate.quality</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.robust.html">dataviz.univariate.robust</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.stats.html">dataviz.univariate.stats</a></li>
@@ -121,131 +116,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-dataviz.univariate.profile">
-<span id="dataviz-univariate-profile"></span><h1>dataviz.univariate.profile<a class="headerlink" href="#module-dataviz.univariate.profile" title="Link to this heading"></a></h1>
-<p>Automatic univariate profiling and type-aware visual dispatch.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="dataviz.univariate.profile.UnivariateProfile">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dataviz.univariate.profile.</span></span><span class="sig-name descname"><span class="pre">UnivariateProfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quality</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dataviz.univariate.quality.html#dataviz.univariate.quality.DataQualitySummary" title="dataviz.univariate.quality.DataQualitySummary"><span class="pre">DataQualitySummary</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dataviz/univariate/profile.html#UnivariateProfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.univariate.profile.UnivariateProfile" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Automatic univariate profile.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – Variable name.</p></li>
-<li><p><strong>kind</strong> (<em>str</em>) – Inferred variable kind.</p></li>
-<li><p><strong>quality</strong> (<a class="reference internal" href="dataviz.html#dataviz.DataQualitySummary" title="dataviz.DataQualitySummary"><em>DataQualitySummary</em></a>) – Data quality summary.</p></li>
-<li><p><strong>summary</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>object</em><em>]</em>) – Type-specific summary payload.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Immutable automatic profile.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#dataviz.univariate.profile.UnivariateProfile" title="dataviz.univariate.profile.UnivariateProfile">UnivariateProfile</a></p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If fields cannot be represented by declared types.</p></li>
-<li><p><strong>ValueError</strong> – If profile values are inconsistent.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">profile</span> <span class="pre">=</span> <span class="pre">UnivariateProfile(&quot;sales&quot;,</span> <span class="pre">&quot;numeric&quot;,</span> <span class="pre">quality,</span> <span class="pre">{&quot;stats&quot;:</span> <span class="pre">stats})</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>The summary payload intentionally stays dictionary-based for mixed variable kinds.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dataviz.univariate.profile.UnivariateProfile.kind">
-<span class="sig-name descname"><span class="pre">kind</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#dataviz.univariate.profile.UnivariateProfile.kind" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dataviz.univariate.profile.UnivariateProfile.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#dataviz.univariate.profile.UnivariateProfile.name" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dataviz.univariate.profile.UnivariateProfile.quality">
-<span class="sig-name descname"><span class="pre">quality</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="dataviz.univariate.quality.html#dataviz.univariate.quality.DataQualitySummary" title="dataviz.univariate.quality.DataQualitySummary"><span class="pre">DataQualitySummary</span></a></em><a class="headerlink" href="#dataviz.univariate.profile.UnivariateProfile.quality" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="dataviz.univariate.profile.UnivariateProfile.summary">
-<span class="sig-name descname"><span class="pre">summary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dataviz.univariate.profile.UnivariateProfile.summary" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.univariate.profile.auto_profile">
-<span class="sig-prename descclassname"><span class="pre">dataviz.univariate.profile.</span></span><span class="sig-name descname"><span class="pre">auto_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Value'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dataviz.univariate.profile.UnivariateProfile" title="dataviz.univariate.profile.UnivariateProfile"><span class="pre">UnivariateProfile</span></a></span></span><a class="reference internal" href="_modules/dataviz/univariate/profile.html#auto_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.univariate.profile.auto_profile" title="Link to this definition"></a></dt>
-<dd><p>Create an automatic type-aware profile for one variable.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>value</strong> (<em>SeriesLike</em>) – Series-like values or a dataframe column name.</p></li>
-<li><p><strong>data</strong> (<em>Optional</em><em>[</em><em>pandas.DataFrame</em><em>]</em>) – Optional dataframe for column-name lookup.</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – Fallback name for unnamed arrays.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Quality metrics and type-specific summary information.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#dataviz.univariate.profile.UnivariateProfile" title="dataviz.univariate.profile.UnivariateProfile">UnivariateProfile</a></p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If input data cannot be resolved.</p></li>
-<li><p><strong>ValueError</strong> – If no observations remain.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">profile</span> <span class="pre">=</span> <span class="pre">auto_profile(&quot;sales&quot;,</span> <span class="pre">data=df)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Numeric variables include descriptive statistics; boolean variables include true-rate summary.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="dataviz.univariate.profile.auto_profile_chart_interactive">
-<span class="sig-prename descclassname"><span class="pre">dataviz.univariate.profile.</span></span><span class="sig-name descname"><span class="pre">auto_profile_chart_interactive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Value'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="_modules/dataviz/univariate/profile.html#auto_profile_chart_interactive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dataviz.univariate.profile.auto_profile_chart_interactive" title="Link to this definition"></a></dt>
-<dd><p>Create an interactive chart selected from inferred variable type.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>value</strong> (<em>SeriesLike</em>) – Series-like values or a dataframe column name.</p></li>
-<li><p><strong>data</strong> (<em>Optional</em><em>[</em><em>pandas.DataFrame</em><em>]</em>) – Optional dataframe for column-name lookup.</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – Fallback name for unnamed arrays.</p></li>
-<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional chart title.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Type-appropriate interactive profile chart.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If input data cannot be resolved.</p></li>
-<li><p><strong>ValueError</strong> – If no observations remain or a chart cannot be selected.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">fig</span> <span class="pre">=</span> <span class="pre">auto_profile_chart_interactive(&quot;sales&quot;,</span> <span class="pre">data=df)</span>
-<span class="pre">`</span></code></p>
-<p class="rubric">Notes</p>
-<p>Numeric values use the univariate dashboard; categorical values use a frequency bar.</p>
-</dd></dl>
-
+  <section id="dataviz-univariate-profile">
+<h1>dataviz.univariate.profile<a class="headerlink" href="#dataviz-univariate-profile" title="Link to this heading"></a></h1>
 </section>
 
 

@@ -1,7 +1,10 @@
-dataviz.eda.missing\_data
-================================
+dataviz.eda.missing_data
+========================
 
-.. automodule:: dataviz.eda.missing_data
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.eda
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   missing_data

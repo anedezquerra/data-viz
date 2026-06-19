@@ -97,7 +97,7 @@
 
 
 <div class="viewcode-block" id="ControlLimits">
-<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.ControlLimits">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.ControlLimits">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ControlLimits</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Control limits for an SPC chart.</span>
@@ -132,7 +132,7 @@
 
 
 <div class="viewcode-block" id="RuleViolation">
-<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.RuleViolation">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.RuleViolation">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">RuleViolation</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Detected SPC rule violation.</span>
@@ -166,8 +166,6 @@
 
 
 
-<div class="viewcode-block" id="as_numeric_series">
-<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.as_numeric_series">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Value&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert array-like process data to a numeric pandas Series.</span>
 
@@ -194,12 +192,11 @@
     <span class="n">series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">series</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;SPC data must contain at least one numeric observation.&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
-
+    <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="individuals_limits">
-<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.individuals_limits">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.individuals_limits">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">individuals_limits</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">sigma_multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ControlLimits</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute individuals chart limits from process observations.</span>
 
@@ -232,7 +229,7 @@
 
 
 <div class="viewcode-block" id="moving_ranges">
-<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.moving_ranges">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.moving_ranges">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">moving_ranges</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">span</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute moving ranges for process observations.</span>
 
@@ -263,8 +260,6 @@
 
 
 
-<div class="viewcode-block" id="subgroup_matrix">
-<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.subgroup_matrix">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">subgroup_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">,</span> <span class="n">subgroup_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert raw or grouped observations into a subgroup matrix.</span>
 
@@ -303,12 +298,9 @@
     <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">frame</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Subgroup data must contain numeric observations.&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">frame</span></div>
+    <span class="k">return</span> <span class="n">frame</span>
 
 
-
-<div class="viewcode-block" id="xbar_r_limits">
-<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.xbar_r_limits">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">xbar_r_limits</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">,</span>
     <span class="n">subgroup_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -365,12 +357,9 @@
     <span class="n">x_limits</span> <span class="o">=</span> <span class="n">individuals_limits</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">sigma_multiplier</span><span class="o">=</span><span class="n">sigma_multiplier</span><span class="p">)</span>
     <span class="n">r_sigma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ranges</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ranges</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span>
     <span class="n">r_limits</span> <span class="o">=</span> <span class="n">ControlLimits</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">r_center</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r_center</span> <span class="o">-</span> <span class="n">sigma_multiplier</span> <span class="o">*</span> <span class="n">r_sigma</span><span class="p">),</span> <span class="n">upper</span><span class="o">=</span><span class="n">r_center</span> <span class="o">+</span> <span class="n">sigma_multiplier</span> <span class="o">*</span> <span class="n">r_sigma</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">r_sigma</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">x_limits</span><span class="p">,</span> <span class="n">r_limits</span><span class="p">,</span> <span class="n">means</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">ranges</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">x_limits</span><span class="p">,</span> <span class="n">r_limits</span><span class="p">,</span> <span class="n">means</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">ranges</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
-
-<div class="viewcode-block" id="xbar_s_limits">
-<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.xbar_s_limits">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">xbar_s_limits</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">,</span>
     <span class="n">subgroup_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -427,12 +416,11 @@
     <span class="n">x_limits</span> <span class="o">=</span> <span class="n">individuals_limits</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">sigma_multiplier</span><span class="o">=</span><span class="n">sigma_multiplier</span><span class="p">)</span>
     <span class="n">s_sigma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stds</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span>
     <span class="n">s_limits</span> <span class="o">=</span> <span class="n">ControlLimits</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">s_center</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">s_center</span> <span class="o">-</span> <span class="n">sigma_multiplier</span> <span class="o">*</span> <span class="n">s_sigma</span><span class="p">),</span> <span class="n">upper</span><span class="o">=</span><span class="n">s_center</span> <span class="o">+</span> <span class="n">sigma_multiplier</span> <span class="o">*</span> <span class="n">s_sigma</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">s_sigma</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">x_limits</span><span class="p">,</span> <span class="n">s_limits</span><span class="p">,</span> <span class="n">means</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">stds</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
-
+    <span class="k">return</span> <span class="n">x_limits</span><span class="p">,</span> <span class="n">s_limits</span><span class="p">,</span> <span class="n">means</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">stds</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="detect_rule_violations">
-<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.detect_rule_violations">[docs]</a>
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.detect_rule_violations">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">detect_rule_violations</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
     <span class="n">limits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ControlLimits</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -524,8 +512,6 @@
 
 
 
-<div class="viewcode-block" id="violations_by_index">
-<a class="viewcode-back" href="../../../dataviz.spc.rules.html#dataviz.violations_by_index">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">violations_by_index</span><span class="p">(</span><span class="n">violations</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">RuleViolation</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">RuleViolation</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Group rule violations by observation index.</span>
 
@@ -550,8 +536,7 @@
     <span class="n">grouped</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">RuleViolation</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">violation</span> <span class="ow">in</span> <span class="n">violations</span><span class="p">:</span>
         <span class="n">grouped</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">violation</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">violation</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">grouped</span></div>
-
+    <span class="k">return</span> <span class="n">grouped</span>
 </pre></div>
 
            </div>
