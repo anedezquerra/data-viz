@@ -3,7 +3,7 @@ name: Deploy Docs
 on:
   push:
     branches:
-      - main # O el nombre de tu rama principal
+      - main
 
 permissions:
   contents: write
@@ -22,12 +22,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install .
+          pip install --upgrade pip
           pip install sphinx sphinx_rtd_theme
+          # Install your local package so Sphinx can parse the docstrings
+          if [ -f setup.py ] || [ -f pyproject.toml ]; then pip install .; else pip install -e .; fi
 
       - name: Build Sphinx Docs
         run: |
-          sphinx-build -b html docs/ docs/_build/html
+          sphinx-build -b html docs/source/ docs/_build/html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
