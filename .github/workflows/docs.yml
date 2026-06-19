@@ -29,7 +29,7 @@ jobs:
       contents: read
     env:
       MPLBACKEND: Agg
-      MPLCONFIGDIR: ${{ runner.temp }}/matplotlib
+      MPLCONFIGDIR: /tmp/matplotlib
 
     steps:
       - name: Check out repository
