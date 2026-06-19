@@ -4,7 +4,7 @@ Data-Viz Documentation
 Welcome to the official documentation for Data-Viz!
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
 
    modules
