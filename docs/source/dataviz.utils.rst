@@ -4,21 +4,11 @@ dataviz.utils package
 Submodules
 ----------
 
-dataviz.utils.helpers module
-----------------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: dataviz.utils.helpers
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-dataviz.utils.validation module
--------------------------------
-
-.. automodule:: dataviz.utils.validation
-   :members:
-   :show-inheritance:
-   :undoc-members:
+   dataviz.utils.helpers
+   dataviz.utils.validation
 
 Module contents
 ---------------

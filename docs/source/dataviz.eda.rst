@@ -4,37 +4,13 @@ dataviz.eda package
 Submodules
 ----------
 
-dataviz.eda.charts module
--------------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: dataviz.eda.charts
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-dataviz.eda.class\_dist module
-------------------------------
-
-.. automodule:: dataviz.eda.class_dist
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-dataviz.eda.distribution module
--------------------------------
-
-.. automodule:: dataviz.eda.distribution
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-dataviz.eda.missing\_data module
---------------------------------
-
-.. automodule:: dataviz.eda.missing_data
-   :members:
-   :show-inheritance:
-   :undoc-members:
+   dataviz.eda.charts
+   dataviz.eda.class_dist
+   dataviz.eda.distribution
+   dataviz.eda.missing_data
 
 Module contents
 ---------------

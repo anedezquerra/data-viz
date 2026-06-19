@@ -4,37 +4,13 @@ dataviz.classification package
 Submodules
 ----------
 
-dataviz.classification.charts module
-------------------------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: dataviz.classification.charts
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-dataviz.classification.confusion\_matrix module
------------------------------------------------
-
-.. automodule:: dataviz.classification.confusion_matrix
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-dataviz.classification.pr\_curve module
----------------------------------------
-
-.. automodule:: dataviz.classification.pr_curve
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-dataviz.classification.roc module
----------------------------------
-
-.. automodule:: dataviz.classification.roc
-   :members:
-   :show-inheritance:
-   :undoc-members:
+   dataviz.classification.charts
+   dataviz.classification.confusion_matrix
+   dataviz.classification.pr_curve
+   dataviz.classification.roc
 
 Module contents
 ---------------
