@@ -29,9 +29,19 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 
 # Add these theme options to enable deep, expandable sidebar navigation
+html_theme = 'sphinx_rtd_theme'
+
 html_theme_options = {
-    'collapse_navigation': False, # Allows expanding items instead of hiding them
-    'navigation_depth': 4,   
-    'titles_only': False, # Specifies how many nested levels to show in the sidebar
+    # Keeps the navigation expansion synced dynamically 
+    # with the current active page context.
+    'sticky_navigation': True,
+    
+    # Setting this to True ensures items that are not relevant 
+    # to the current active page automatically collapse.
+    'collapse_navigation': True,
+    
+    # Controls how deep the sidebar tree expands by default.
+    # Adjust this integer value to restrict or allow nesting depths.
+    'navigation_depth': 4,
 }
 
