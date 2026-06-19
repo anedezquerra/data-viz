@@ -169,7 +169,11 @@ def resolve_xy_data(
     x_series = resolve_series(x, data=data, fallback_name="X")
     y_series = resolve_series(y, data=data, fallback_name="Y")
     validate_equal_length(x_series, y_series, names=("x", "y"))
-    frame = pd.DataFrame({"x": x_series, "y": y_series})
+    if na_policy not in {"drop", "raise", "keep"}:
+        raise ValueError("na_policy must be 'drop', 'raise', or 'keep'.")
+    frame = pd.DataFrame(
+        {"x": x_series.to_numpy(), "y": y_series.to_numpy()}
+    )
     if frame.empty:
         raise ValueError("x and y must contain at least one observation.")
     if frame.isna().any().any():
