@@ -27,3 +27,10 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
+
+# Add these theme options to enable deep, expandable sidebar navigation
+html_theme_options = {
+    'collapse_navigation': False, # Allows expanding items instead of hiding them
+    'navigation_depth': 4,        # Specifies how many nested levels to show in the sidebar
+}
+
