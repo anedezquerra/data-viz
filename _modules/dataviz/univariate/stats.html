@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dataviz.univariate.stats &mdash; Data-Viz 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Data-Viz
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">dataviz</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Data-Viz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dataviz.univariate.stats</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dataviz.univariate.stats</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Statistical summaries and helper calculations for univariate data.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SeriesLike</span>
+
+<span class="n">BinMethod</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="s2">&quot;fd&quot;</span><span class="p">,</span> <span class="s2">&quot;sturges&quot;</span><span class="p">,</span> <span class="s2">&quot;rice&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="UnivariateStats">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.UnivariateStats">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">UnivariateStats</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Summary statistics for one variable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        count (int): Number of non-missing observations.</span>
+<span class="sd">        missing (int): Number of missing observations removed from the summary.</span>
+<span class="sd">        mean (float): Arithmetic mean.</span>
+<span class="sd">        median (float): Median value.</span>
+<span class="sd">        std (float): Sample standard deviation.</span>
+<span class="sd">        variance (float): Sample variance.</span>
+<span class="sd">        minimum (float): Minimum observed value.</span>
+<span class="sd">        q1 (float): First quartile.</span>
+<span class="sd">        q3 (float): Third quartile.</span>
+<span class="sd">        maximum (float): Maximum observed value.</span>
+<span class="sd">        iqr (float): Interquartile range.</span>
+<span class="sd">        skewness (float): Fisher-Pearson skewness estimate.</span>
+<span class="sd">        kurtosis (float): Fisher kurtosis estimate.</span>
+<span class="sd">        sem (float): Standard error of the mean.</span>
+<span class="sd">        mad (float): Median absolute deviation from the median.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        UnivariateStats: Immutable univariate summary record.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If provided values cannot be represented by the declared fields.</span>
+<span class="sd">        ValueError: If a statistic is incompatible with downstream numeric use.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        stats = UnivariateStats(10, 0, 5.0, 5.0, 1.0, 1.0, 3.0, 4.0, 6.0, 7.0, 2.0, 0.0, -1.2, 0.3, 1.0)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        The dataclass is returned by ``univariate_summary`` and can be converted with ``dataclasses.asdict``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">count</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">missing</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">mean</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">median</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">std</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">variance</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">minimum</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">q1</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">q3</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">maximum</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">iqr</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">skewness</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">kurtosis</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">sem</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">mad</span><span class="p">:</span> <span class="nb">float</span></div>
+
+
+
+<div class="viewcode-block" id="as_numeric_series">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.as_numeric_series">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Value&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert series-like data to a clean numeric pandas Series.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        name (str): Fallback series name for unnamed arrays.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.Series: Numeric observations with missing values removed.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be coerced to numeric values.</span>
+<span class="sd">        ValueError: If no numeric observations remain.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        values = as_numeric_series([1, 2, 3])</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This helper is intentionally shared by visual and non-visual univariate utilities.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">data</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">series</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">numeric</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">numeric</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;data must contain at least one numeric observation.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">numeric</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="univariate_summary">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.univariate_summary">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">univariate_summary</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnivariateStats</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute robust descriptive statistics for one numeric variable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        UnivariateStats: Count, center, spread, shape, and robust spread statistics.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If no non-missing numeric observations remain.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        summary = univariate_summary([1, 2, 3, 4])</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Sample standard deviation and variance use pandas defaults with ``ddof=1``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">original</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">q1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+    <span class="n">q3</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">))</span>
+    <span class="n">median</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+    <span class="n">mad</span> <span class="o">=</span> <span class="nb">float</span><span class="p">((</span><span class="n">values</span> <span class="o">-</span> <span class="n">median</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">UnivariateStats</span><span class="p">(</span>
+        <span class="n">count</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">count</span><span class="p">()),</span>
+        <span class="n">missing</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">original</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+        <span class="n">mean</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+        <span class="n">median</span><span class="o">=</span><span class="n">median</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">variance</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">minimum</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">min</span><span class="p">()),</span>
+        <span class="n">q1</span><span class="o">=</span><span class="n">q1</span><span class="p">,</span>
+        <span class="n">q3</span><span class="o">=</span><span class="n">q3</span><span class="p">,</span>
+        <span class="n">maximum</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+        <span class="n">iqr</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span><span class="p">),</span>
+        <span class="n">skewness</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">skew</span><span class="p">())</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">kurtosis</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">kurt</span><span class="p">())</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">sem</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">sem</span><span class="p">())</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">mad</span><span class="o">=</span><span class="n">mad</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="iqr_outliers">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.iqr_outliers">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">iqr_outliers</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Flag observations outside Tukey IQR fences.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        multiplier (float): IQR multiplier used to define lower and upper fences.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.Series: Boolean mask where ``True`` marks an outlier.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If ``multiplier`` is not positive or no observations remain.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        mask = iqr_outliers([1, 2, 3, 100])</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        The returned mask is aligned to the cleaned non-missing numeric series.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">multiplier</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;multiplier must be positive.&quot;</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">q1</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+    <span class="n">q3</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+    <span class="n">iqr</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span>
+    <span class="n">lower</span> <span class="o">=</span> <span class="n">q1</span> <span class="o">-</span> <span class="n">multiplier</span> <span class="o">*</span> <span class="n">iqr</span>
+    <span class="n">upper</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">+</span> <span class="n">multiplier</span> <span class="o">*</span> <span class="n">iqr</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">values</span> <span class="o">&lt;</span> <span class="n">lower</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">values</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="zscore_outliers">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.zscore_outliers">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">zscore_outliers</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Flag observations whose absolute z-score exceeds a threshold.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        threshold (float): Absolute z-score threshold used to mark outliers.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.Series: Boolean mask where ``True`` marks an outlier.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If ``threshold`` is not positive or no observations remain.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        mask = zscore_outliers([1, 2, 3, 100], threshold=2.5)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        A constant series returns an all-false mask because the standard deviation is zero.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">threshold</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;threshold must be positive.&quot;</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">std</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">std</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">zscores</span> <span class="o">=</span> <span class="p">(</span><span class="n">values</span> <span class="o">-</span> <span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">std</span>
+    <span class="k">return</span> <span class="n">zscores</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">threshold</span></div>
+
+
+
+<div class="viewcode-block" id="recommended_bin_count">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.recommended_bin_count">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">recommended_bin_count</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">BinMethod</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Recommend a histogram bin count from common univariate rules.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        method (BinMethod): Rule name: ``&quot;auto&quot;``, ``&quot;fd&quot;``, ``&quot;sturges&quot;``, ``&quot;rice&quot;``, or ``&quot;sqrt&quot;``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: Recommended positive number of bins.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If ``method`` is unknown or no observations remain.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        bins = recommended_bin_count(data, method=&quot;fd&quot;)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        ``&quot;auto&quot;`` chooses the larger of Freedman-Diaconis and Sturges recommendations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;sqrt&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;rice&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">))))</span>
+    <span class="n">sturges</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;sturges&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sturges</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="s2">&quot;fd&quot;</span><span class="p">}:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;method must be one of &#39;auto&#39;, &#39;fd&#39;, &#39;sturges&#39;, &#39;rice&#39;, or &#39;sqrt&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">q1</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+    <span class="n">q3</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+    <span class="n">iqr</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span>
+    <span class="k">if</span> <span class="n">iqr</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">fd</span> <span class="o">=</span> <span class="n">sturges</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">iqr</span> <span class="o">/</span> <span class="n">n</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">value_range</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">values</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+        <span class="n">fd</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">value_range</span> <span class="o">/</span> <span class="n">width</span><span class="p">)))</span> <span class="k">if</span> <span class="n">width</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">sturges</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">sturges</span><span class="p">)</span> <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;auto&quot;</span> <span class="k">else</span> <span class="n">fd</span></div>
+
+
+
+<div class="viewcode-block" id="percentile_table">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.percentile_table">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">percentile_table</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a percentile table for one numeric variable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        step (int): Percentile interval between rows.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.DataFrame: Percentile and value columns.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If ``step`` is not between 1 and 100 or no observations remain.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        table = percentile_table(data, step=5)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        The table always includes 0 and 100 percentiles.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">step</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">step</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;step must be between 1 and 100.&quot;</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">percentiles</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span> <span class="o">|</span> <span class="p">{</span><span class="mi">100</span><span class="p">})</span>
+    <span class="n">quantiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="o">/</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">percentiles</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;percentile&quot;</span><span class="p">:</span> <span class="n">percentiles</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">q</span><span class="p">))</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">quantiles</span><span class="p">],</span>
+        <span class="p">}</span>
+    <span class="p">)</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Aned Esquerra Arguelles.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

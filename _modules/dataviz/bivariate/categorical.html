@@ -1,0 +1,600 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dataviz.bivariate.categorical &mdash; Data-Viz 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Data-Viz
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">dataviz</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Data-Viz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dataviz.bivariate.categorical</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dataviz.bivariate.categorical</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Categorical bivariate comparison charts.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..types</span><span class="w"> </span><span class="kn">import</span> <span class="n">FigureSize</span><span class="p">,</span> <span class="n">MatplotlibAxes</span><span class="p">,</span> <span class="n">PlotlyFigure</span><span class="p">,</span> <span class="n">SeriesLike</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_theme</span><span class="p">,</span> <span class="n">setup_plot</span>
+
+<span class="n">Aggregator</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span> <span class="nb">float</span><span class="p">]]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_label</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">fallback</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a plotting label from a named object or fallback text.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        values (object): Object that may expose a ``name`` attribute.</span>
+<span class="sd">        fallback (str): Label used when no name is available.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Label for an axis, legend, or title.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If fallback cannot be represented as text.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        label = _label(series, &quot;Category&quot;)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This helper centralizes default label generation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="n">fallback</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_frame</span><span class="p">(</span><span class="n">category</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SeriesLike</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a temporary dataframe for category/value calculations.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        category (SeriesLike): Category labels.</span>
+<span class="sd">        values (Optional[SeriesLike]): Optional numeric values associated with each label.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.DataFrame: Dataframe with ``category`` and optional ``value`` columns.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If inputs cannot be converted into a dataframe.</span>
+<span class="sd">        ValueError: If category and value lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        frame = _frame(category, values)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        The public plotting functions use this helper before pandas grouping.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="n">category</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">values</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="grouped_bar_static">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.grouped_bar_static">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">grouped_bar_static</span><span class="p">(</span>
+    <span class="n">category</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">values</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">aggfunc</span><span class="p">:</span> <span class="n">Aggregator</span> <span class="o">=</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;steelblue&quot;</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="p">:</span> <span class="n">FigureSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MatplotlibAxes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a static aggregated bar chart for a numeric value by category.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        category (SeriesLike): Categorical group labels.</span>
+<span class="sd">        values (SeriesLike): Numeric values aggregated within each category.</span>
+<span class="sd">        aggfunc (Aggregator): Pandas aggregation function or name.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label.</span>
+<span class="sd">        color (str): Bar color.</span>
+<span class="sd">        figsize (FigureSize): Figure size in inches.</span>
+<span class="sd">        theme (str): Theme name applied to the axes.</span>
+<span class="sd">        style (str): Matplotlib style context.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``Axes.bar``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matplotlib.axes.Axes: Aggregated bar chart axes.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be aggregated.</span>
+<span class="sd">        ValueError: If category and values lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        ax = dv.bivariate.grouped_bar_static(groups, sales, aggfunc=&quot;sum&quot;)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Use box or violin plots when the distribution inside each group matters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;Category&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">aggfunc</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2"> by </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">_frame</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">aggfunc</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">setup_plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">summary</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span> <span class="n">summary</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+        <span class="n">apply_theme</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">theme</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<div class="viewcode-block" id="grouped_bar_interactive">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.grouped_bar_interactive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">grouped_bar_interactive</span><span class="p">(</span>
+    <span class="n">category</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">values</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">aggfunc</span><span class="p">:</span> <span class="n">Aggregator</span> <span class="o">=</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;steelblue&quot;</span><span class="p">,</span>
+    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;plotly&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlotlyFigure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an interactive aggregated bar chart for a numeric value by category.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        category (SeriesLike): Categorical group labels.</span>
+<span class="sd">        values (SeriesLike): Numeric values aggregated within each category.</span>
+<span class="sd">        aggfunc (Aggregator): Pandas aggregation function or name.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label.</span>
+<span class="sd">        color (str): Bar color.</span>
+<span class="sd">        template (str): Plotly layout template.</span>
+<span class="sd">        height (int): Figure height in pixels.</span>
+<span class="sd">        width (int): Figure width in pixels.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``go.Bar``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        plotly.graph_objects.Figure: Interactive aggregated bar chart.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be aggregated.</span>
+<span class="sd">        ValueError: If category and values lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        fig = dv.bivariate.grouped_bar_interactive(groups, sales, aggfunc=&quot;median&quot;)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Aggregation is performed with pandas before plotting.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;Category&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">aggfunc</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2"> by </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">_frame</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">aggfunc</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">summary</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">summary</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)])</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="box_by_category_static">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.box_by_category_static">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">box_by_category_static</span><span class="p">(</span>
+    <span class="n">category</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">values</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="p">:</span> <span class="n">FigureSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MatplotlibAxes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a static box plot of numeric values grouped by category.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        category (SeriesLike): Categorical group labels.</span>
+<span class="sd">        values (SeriesLike): Numeric values to summarize.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label.</span>
+<span class="sd">        figsize (FigureSize): Figure size in inches.</span>
+<span class="sd">        theme (str): Theme name applied to the axes.</span>
+<span class="sd">        style (str): Matplotlib style context.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``Axes.boxplot``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matplotlib.axes.Axes: Grouped box plot axes.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values are not numeric.</span>
+<span class="sd">        ValueError: If category and values lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        ax = dv.bivariate.box_by_category_static(groups, scores)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Categories are ordered by their natural pandas group order.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;Category&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2"> Distribution by </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">grouped</span> <span class="o">=</span> <span class="n">_frame</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">]</span>
+    <span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">setup_plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+        <span class="n">apply_theme</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">theme</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<div class="viewcode-block" id="box_by_category_interactive">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.box_by_category_interactive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">box_by_category_interactive</span><span class="p">(</span>
+    <span class="n">category</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">values</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;plotly&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlotlyFigure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an interactive box plot of numeric values grouped by category.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        category (SeriesLike): Categorical group labels.</span>
+<span class="sd">        values (SeriesLike): Numeric values to summarize.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label.</span>
+<span class="sd">        template (str): Plotly layout template.</span>
+<span class="sd">        height (int): Figure height in pixels.</span>
+<span class="sd">        width (int): Figure width in pixels.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``go.Box``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        plotly.graph_objects.Figure: Interactive grouped box plot.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values are not numeric.</span>
+<span class="sd">        ValueError: If category and values lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        fig = dv.bivariate.box_by_category_interactive(groups, scores)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Plotly handles per-category grouping from the x values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;Category&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2"> Distribution by </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">category</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">values</span><span class="p">,</span> <span class="n">boxpoints</span><span class="o">=</span><span class="s2">&quot;outliers&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)])</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="violin_by_category_static">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.violin_by_category_static">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">violin_by_category_static</span><span class="p">(</span>
+    <span class="n">category</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">values</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="p">:</span> <span class="n">FigureSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MatplotlibAxes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a static violin plot of numeric values grouped by category.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        category (SeriesLike): Categorical group labels.</span>
+<span class="sd">        values (SeriesLike): Numeric values to summarize.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label.</span>
+<span class="sd">        figsize (FigureSize): Figure size in inches.</span>
+<span class="sd">        theme (str): Theme name applied to the axes.</span>
+<span class="sd">        style (str): Matplotlib style context.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``Axes.violinplot``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matplotlib.axes.Axes: Grouped violin plot axes.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values are not numeric.</span>
+<span class="sd">        ValueError: If category and values lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        ax = dv.bivariate.violin_by_category_static(groups, scores)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Use this chart when each group has enough observations to show density.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;Category&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2"> Shape by </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">grouped</span> <span class="o">=</span> <span class="n">_frame</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">]</span>
+    <span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">setup_plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">showmeans</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+        <span class="n">apply_theme</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">theme</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<div class="viewcode-block" id="violin_by_category_interactive">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.violin_by_category_interactive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">violin_by_category_interactive</span><span class="p">(</span>
+    <span class="n">category</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">values</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;plotly&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlotlyFigure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an interactive violin plot of numeric values grouped by category.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        category (SeriesLike): Categorical group labels.</span>
+<span class="sd">        values (SeriesLike): Numeric values to summarize.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label.</span>
+<span class="sd">        template (str): Plotly layout template.</span>
+<span class="sd">        height (int): Figure height in pixels.</span>
+<span class="sd">        width (int): Figure width in pixels.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``go.Violin``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        plotly.graph_objects.Figure: Interactive grouped violin plot.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values are not numeric.</span>
+<span class="sd">        ValueError: If category and values lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        fig = dv.bivariate.violin_by_category_interactive(groups, scores)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Each category is rendered as a separate violin trace.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;Category&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2"> Shape by </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">_frame</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">frame</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">):</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Violin</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">box_visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">meanline_visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="crosstab_heatmap_static">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.crosstab_heatmap_static">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">crosstab_heatmap_static</span><span class="p">(</span>
+    <span class="n">row_category</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">column_category</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">normalize</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Crosstab Heatmap&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="p">:</span> <span class="n">FigureSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MatplotlibAxes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a static heatmap for two categorical variables.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        row_category (SeriesLike): Categories shown on the y-axis.</span>
+<span class="sd">        column_category (SeriesLike): Categories shown on the x-axis.</span>
+<span class="sd">        normalize (Optional[str]): Normalization mode accepted by ``pandas.crosstab``.</span>
+<span class="sd">        title (str): Chart title.</span>
+<span class="sd">        cmap (str): Matplotlib colormap.</span>
+<span class="sd">        figsize (FigureSize): Figure size in inches.</span>
+<span class="sd">        theme (str): Theme name applied to the axes.</span>
+<span class="sd">        style (str): Matplotlib style context.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``Axes.imshow``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matplotlib.axes.Axes: Crosstab heatmap axes.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If categories cannot be tabulated.</span>
+<span class="sd">        ValueError: If category lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        ax = dv.bivariate.crosstab_heatmap_static(region, segment)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Set ``normalize=&quot;index&quot;`` or ``normalize=&quot;columns&quot;`` for proportions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">row_category</span><span class="p">,</span> <span class="n">column_category</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="n">normalize</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">setup_plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">)))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">normalize</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]),</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+        <span class="n">apply_theme</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">theme</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<div class="viewcode-block" id="crosstab_heatmap_interactive">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.crosstab_heatmap_interactive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">crosstab_heatmap_interactive</span><span class="p">(</span>
+    <span class="n">row_category</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">column_category</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">normalize</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Crosstab Heatmap&quot;</span><span class="p">,</span>
+    <span class="n">colorscale</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;plotly&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlotlyFigure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an interactive heatmap for two categorical variables.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        row_category (SeriesLike): Categories shown on the y-axis.</span>
+<span class="sd">        column_category (SeriesLike): Categories shown on the x-axis.</span>
+<span class="sd">        normalize (Optional[str]): Normalization mode accepted by ``pandas.crosstab``.</span>
+<span class="sd">        title (str): Chart title.</span>
+<span class="sd">        colorscale (str): Plotly colorscale.</span>
+<span class="sd">        template (str): Plotly layout template.</span>
+<span class="sd">        height (int): Figure height in pixels.</span>
+<span class="sd">        width (int): Figure width in pixels.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``go.Heatmap``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        plotly.graph_objects.Figure: Interactive crosstab heatmap.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If categories cannot be tabulated.</span>
+<span class="sd">        ValueError: If category lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        fig = dv.bivariate.crosstab_heatmap_interactive(region, segment)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Hover labels expose the tabulated count or proportion.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">row_category</span><span class="p">,</span> <span class="n">column_category</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="n">normalize</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Heatmap</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="n">table</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">table</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span> <span class="n">colorscale</span><span class="o">=</span><span class="n">colorscale</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Aned Esquerra Arguelles.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,683 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dataviz.bivariate.advanced &mdash; Data-Viz 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Data-Viz
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">dataviz</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Data-Viz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dataviz.bivariate.advanced</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dataviz.bivariate.advanced</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Advanced bivariate relationship charts.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">FigureSize</span><span class="p">,</span> <span class="n">MatplotlibAxes</span><span class="p">,</span> <span class="n">PlotlyFigure</span><span class="p">,</span> <span class="n">SeriesLike</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_theme</span><span class="p">,</span> <span class="n">setup_plot</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_label</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">fallback</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a plotting label from a named object or fallback text.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        values (object): Object that may expose a ``name`` attribute.</span>
+<span class="sd">        fallback (str): Label used when no name is available.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Label for an axis, legend, or title.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If fallback cannot be represented as text.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        label = _label(series, &quot;X&quot;)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This helper keeps generated chart titles consistent across functions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="n">fallback</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_as_array</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert numeric array-like values to a NumPy array.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        values (ArrayLike): Numeric values to convert.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: Float array representation of the values.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be interpreted as an array.</span>
+<span class="sd">        ValueError: If values cannot be converted to floats.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        array = _as_array(values)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Conversion is intentionally strict because advanced bivariate charts need numeric data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_linear_fit</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">degree</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fit a polynomial line and return sorted x values with predictions.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (ArrayLike): Numeric x values.</span>
+<span class="sd">        y (ArrayLike): Numeric y values.</span>
+<span class="sd">        degree (int): Polynomial degree passed to ``numpy.polyfit``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple[numpy.ndarray, numpy.ndarray]: Sorted x values and fitted y values.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If x or y cannot be converted to floats.</span>
+<span class="sd">        ValueError: If the polynomial degree is invalid for the data length.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        x_fit, y_fit = _linear_fit(x, y)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Sorting x values keeps trend lines visually continuous.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_values</span> <span class="o">=</span> <span class="n">_as_array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y_values</span> <span class="o">=</span> <span class="n">_as_array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">x_values</span><span class="p">)</span>
+    <span class="n">x_sorted</span> <span class="o">=</span> <span class="n">x_values</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+    <span class="n">coefficients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_sorted</span><span class="p">,</span> <span class="n">y_values</span><span class="p">[</span><span class="n">order</span><span class="p">],</span> <span class="n">deg</span><span class="o">=</span><span class="n">degree</span><span class="p">)</span>
+    <span class="n">y_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">coefficients</span><span class="p">,</span> <span class="n">x_sorted</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x_sorted</span><span class="p">,</span> <span class="n">y_fit</span>
+
+
+<div class="viewcode-block" id="bubble_plot_static">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.bubble_plot_static">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">bubble_plot_static</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">size</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ArrayLike</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">size_scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">300.0</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="p">:</span> <span class="n">FigureSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MatplotlibAxes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a static bubble plot for two variables and a size dimension.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (SeriesLike): Values plotted along the x-axis.</span>
+<span class="sd">        y (SeriesLike): Values plotted along the y-axis.</span>
+<span class="sd">        size (ArrayLike): Numeric values mapped to marker area.</span>
+<span class="sd">        color (Optional[ArrayLike]): Optional numeric values mapped to marker color.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label. Defaults to the x series name or ``&quot;X&quot;``.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label. Defaults to the y series name or ``&quot;Y&quot;``.</span>
+<span class="sd">        size_scale (float): Multiplier used to scale marker area.</span>
+<span class="sd">        alpha (float): Marker opacity.</span>
+<span class="sd">        cmap (str): Matplotlib colormap for numeric colors.</span>
+<span class="sd">        figsize (FigureSize): Figure size in inches.</span>
+<span class="sd">        theme (str): Theme name applied to the axes.</span>
+<span class="sd">        style (str): Matplotlib style context.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``Axes.scatter``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matplotlib.axes.Axes: Bubble plot axes.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If inputs cannot be interpreted as numeric arrays.</span>
+<span class="sd">        ValueError: If x, y, and size lengths do not match.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        ax = dv.bivariate.bubble_plot_static(x, y, population)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Use ``bubble_plot_interactive`` for a Plotly figure with hover support.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;Bubble Plot: </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">sizes</span> <span class="o">=</span> <span class="n">_as_array</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sizes</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">sizes</span> <span class="o">=</span> <span class="p">(</span><span class="n">sizes</span> <span class="o">/</span> <span class="n">sizes</span><span class="o">.</span><span class="n">max</span><span class="p">())</span> <span class="o">*</span> <span class="n">size_scale</span>
+
+    <span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">setup_plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+        <span class="n">scatter</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">sizes</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">scatter</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+        <span class="n">apply_theme</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">theme</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<div class="viewcode-block" id="bubble_plot_interactive">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.bubble_plot_interactive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">bubble_plot_interactive</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">size</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ArrayLike</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">size_scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">40.0</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span>
+    <span class="n">colorscale</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Viridis&quot;</span><span class="p">,</span>
+    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;plotly&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlotlyFigure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an interactive bubble plot for two variables and a size dimension.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (SeriesLike): Values plotted along the x-axis.</span>
+<span class="sd">        y (SeriesLike): Values plotted along the y-axis.</span>
+<span class="sd">        size (ArrayLike): Numeric values mapped to marker size.</span>
+<span class="sd">        color (Optional[ArrayLike]): Optional numeric values mapped to marker color.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label. Defaults to the x series name or ``&quot;X&quot;``.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label. Defaults to the y series name or ``&quot;Y&quot;``.</span>
+<span class="sd">        size_scale (float): Maximum marker size.</span>
+<span class="sd">        opacity (float): Marker opacity.</span>
+<span class="sd">        colorscale (str): Plotly colorscale for numeric colors.</span>
+<span class="sd">        template (str): Plotly layout template.</span>
+<span class="sd">        height (int): Figure height in pixels.</span>
+<span class="sd">        width (int): Figure width in pixels.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``go.Scatter``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        plotly.graph_objects.Figure: Interactive bubble plot.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If inputs cannot be interpreted as numeric arrays.</span>
+<span class="sd">        ValueError: If x, y, and size lengths do not match.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        fig = dv.bivariate.bubble_plot_interactive(x, y, population)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Marker colors accept either a single color or one value per observation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;Bubble Plot: </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">raw_sizes</span> <span class="o">=</span> <span class="n">_as_array</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">marker_sizes</span> <span class="o">=</span> <span class="n">raw_sizes</span> <span class="k">if</span> <span class="n">raw_sizes</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">(</span><span class="n">raw_sizes</span> <span class="o">/</span> <span class="n">raw_sizes</span><span class="o">.</span><span class="n">max</span><span class="p">())</span> <span class="o">*</span> <span class="n">size_scale</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+                <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">marker_sizes</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">colorscale</span><span class="o">=</span><span class="n">colorscale</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="n">opacity</span><span class="p">,</span> <span class="n">showscale</span><span class="o">=</span><span class="n">color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">),</span>
+                <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="hexbin_plot_static">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.hexbin_plot_static">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">hexbin_plot_static</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">gridsize</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">mincnt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="p">:</span> <span class="n">FigureSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MatplotlibAxes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a static hexbin density plot for dense bivariate data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (SeriesLike): Values plotted along the x-axis.</span>
+<span class="sd">        y (SeriesLike): Values plotted along the y-axis.</span>
+<span class="sd">        gridsize (int): Number of hexagons in the x direction.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label.</span>
+<span class="sd">        cmap (str): Matplotlib colormap for hexagon counts.</span>
+<span class="sd">        mincnt (Optional[int]): Minimum observations required to draw a hexagon.</span>
+<span class="sd">        figsize (FigureSize): Figure size in inches.</span>
+<span class="sd">        theme (str): Theme name applied to the axes.</span>
+<span class="sd">        style (str): Matplotlib style context.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``Axes.hexbin``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matplotlib.axes.Axes: Hexbin plot axes.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If x or y is not numeric.</span>
+<span class="sd">        ValueError: If x and y lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        ax = dv.bivariate.hexbin_plot_static(x, y, gridsize=40)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Hexbin charts are useful when scatter points overlap heavily.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;Hexbin Density: </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">setup_plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+        <span class="n">mesh</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">gridsize</span><span class="o">=</span><span class="n">gridsize</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">mincnt</span><span class="o">=</span><span class="n">mincnt</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+        <span class="n">apply_theme</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">theme</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<div class="viewcode-block" id="hexbin_plot_interactive">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.hexbin_plot_interactive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">hexbin_plot_interactive</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">nbinsx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="n">nbinsy</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">colorscale</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Viridis&quot;</span><span class="p">,</span>
+    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;plotly&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlotlyFigure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an interactive bivariate histogram density plot.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (SeriesLike): Values plotted along the x-axis.</span>
+<span class="sd">        y (SeriesLike): Values plotted along the y-axis.</span>
+<span class="sd">        nbinsx (int): Number of bins along the x-axis.</span>
+<span class="sd">        nbinsy (int): Number of bins along the y-axis.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label.</span>
+<span class="sd">        colorscale (str): Plotly colorscale for bin counts.</span>
+<span class="sd">        template (str): Plotly layout template.</span>
+<span class="sd">        height (int): Figure height in pixels.</span>
+<span class="sd">        width (int): Figure width in pixels.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``go.Histogram2d``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        plotly.graph_objects.Figure: Interactive bivariate density figure.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If x or y is not numeric.</span>
+<span class="sd">        ValueError: If x and y lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        fig = dv.bivariate.hexbin_plot_interactive(x, y)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Plotly does not render true hexagons here; it uses rectangular 2D bins.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;2D Density: </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Histogram2d</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">nbinsx</span><span class="o">=</span><span class="n">nbinsx</span><span class="p">,</span> <span class="n">nbinsy</span><span class="o">=</span><span class="n">nbinsy</span><span class="p">,</span> <span class="n">colorscale</span><span class="o">=</span><span class="n">colorscale</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)])</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="regression_plot_static">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.regression_plot_static">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">regression_plot_static</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">degree</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">scatter_color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;steelblue&quot;</span><span class="p">,</span>
+    <span class="n">line_color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;crimson&quot;</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="p">:</span> <span class="n">FigureSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MatplotlibAxes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a static scatter plot with a polynomial regression trend line.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (SeriesLike): Values plotted along the x-axis.</span>
+<span class="sd">        y (SeriesLike): Values plotted along the y-axis.</span>
+<span class="sd">        degree (int): Polynomial degree passed to ``numpy.polyfit``.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label.</span>
+<span class="sd">        scatter_color (str): Scatter marker color.</span>
+<span class="sd">        line_color (str): Regression line color.</span>
+<span class="sd">        figsize (FigureSize): Figure size in inches.</span>
+<span class="sd">        theme (str): Theme name applied to the axes.</span>
+<span class="sd">        style (str): Matplotlib style context.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``Axes.scatter``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matplotlib.axes.Axes: Regression plot axes.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If x or y cannot be converted to numeric arrays.</span>
+<span class="sd">        ValueError: If there are too few observations for the requested polynomial degree.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        ax = dv.bivariate.regression_plot_static(x, y, degree=2)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function intentionally uses NumPy only; no statsmodels dependency is required.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;Regression Plot: </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">x_fit</span><span class="p">,</span> <span class="n">y_fit</span> <span class="o">=</span> <span class="n">_linear_fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">setup_plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">scatter_color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.65</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">y_fit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">line_color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Degree </span><span class="si">{</span><span class="n">degree</span><span class="si">}</span><span class="s2"> fit&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">apply_theme</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">theme</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<div class="viewcode-block" id="regression_plot_interactive">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.regression_plot_interactive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">regression_plot_interactive</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">degree</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">scatter_color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;steelblue&quot;</span><span class="p">,</span>
+    <span class="n">line_color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;crimson&quot;</span><span class="p">,</span>
+    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;plotly&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlotlyFigure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an interactive scatter plot with a polynomial regression trend line.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (SeriesLike): Values plotted along the x-axis.</span>
+<span class="sd">        y (SeriesLike): Values plotted along the y-axis.</span>
+<span class="sd">        degree (int): Polynomial degree passed to ``numpy.polyfit``.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label.</span>
+<span class="sd">        scatter_color (str): Scatter marker color.</span>
+<span class="sd">        line_color (str): Regression line color.</span>
+<span class="sd">        template (str): Plotly layout template.</span>
+<span class="sd">        height (int): Figure height in pixels.</span>
+<span class="sd">        width (int): Figure width in pixels.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to the scatter trace.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        plotly.graph_objects.Figure: Interactive regression plot.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If x or y cannot be converted to numeric arrays.</span>
+<span class="sd">        ValueError: If there are too few observations for the requested polynomial degree.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        fig = dv.bivariate.regression_plot_interactive(x, y)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        The fitted line is deterministic and uses all provided observations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;Regression Plot: </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">x_fit</span><span class="p">,</span> <span class="n">y_fit</span> <span class="o">=</span> <span class="n">_linear_fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Observed&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">scatter_color</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_fit</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_fit</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Degree </span><span class="si">{</span><span class="n">degree</span><span class="si">}</span><span class="s2"> fit&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">line_color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="density_contour_static">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.density_contour_static">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">density_contour_static</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="n">levels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">fill</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="p">:</span> <span class="n">FigureSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MatplotlibAxes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a static contour plot from a two-dimensional histogram.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (SeriesLike): Values plotted along the x-axis.</span>
+<span class="sd">        y (SeriesLike): Values plotted along the y-axis.</span>
+<span class="sd">        bins (int): Number of bins used to estimate density.</span>
+<span class="sd">        levels (int): Number of contour levels.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label.</span>
+<span class="sd">        cmap (str): Matplotlib colormap.</span>
+<span class="sd">        fill (bool): Whether to draw filled contours.</span>
+<span class="sd">        figsize (FigureSize): Figure size in inches.</span>
+<span class="sd">        theme (str): Theme name applied to the axes.</span>
+<span class="sd">        style (str): Matplotlib style context.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matplotlib.axes.Axes: Density contour axes.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If x or y is not numeric.</span>
+<span class="sd">        ValueError: If x and y lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        ax = dv.bivariate.density_contour_static(x, y, fill=True)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Density is estimated with ``numpy.histogram2d``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;Density Contour: </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">counts</span><span class="p">,</span> <span class="n">x_edges</span><span class="p">,</span> <span class="n">y_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram2d</span><span class="p">(</span><span class="n">_as_array</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">_as_array</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+    <span class="n">x_centers</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x_edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">y_centers</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">y_edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">setup_plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+        <span class="n">contour_fn</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span> <span class="k">if</span> <span class="n">fill</span> <span class="k">else</span> <span class="n">ax</span><span class="o">.</span><span class="n">contour</span>
+        <span class="n">contour</span> <span class="o">=</span> <span class="n">contour_fn</span><span class="p">(</span><span class="n">x_centers</span><span class="p">,</span> <span class="n">y_centers</span><span class="p">,</span> <span class="n">counts</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">contour</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+        <span class="n">apply_theme</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">theme</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<div class="viewcode-block" id="density_contour_interactive">
+<a class="viewcode-back" href="../../../dataviz.bivariate.html#dataviz.density_contour_interactive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">density_contour_interactive</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">colorscale</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Viridis&quot;</span><span class="p">,</span>
+    <span class="n">contours_coloring</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;fill&quot;</span><span class="p">,</span> <span class="s2">&quot;heatmap&quot;</span><span class="p">,</span> <span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;fill&quot;</span><span class="p">,</span>
+    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;plotly&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlotlyFigure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an interactive density contour plot.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (SeriesLike): Values plotted along the x-axis.</span>
+<span class="sd">        y (SeriesLike): Values plotted along the y-axis.</span>
+<span class="sd">        title (Optional[str]): Chart title. Defaults to a generated title.</span>
+<span class="sd">        xlabel (Optional[str]): X-axis label.</span>
+<span class="sd">        ylabel (Optional[str]): Y-axis label.</span>
+<span class="sd">        colorscale (str): Plotly colorscale.</span>
+<span class="sd">        contours_coloring (Literal[&quot;fill&quot;, &quot;heatmap&quot;, &quot;lines&quot;, &quot;none&quot;]): Contour coloring mode.</span>
+<span class="sd">        template (str): Plotly layout template.</span>
+<span class="sd">        height (int): Figure height in pixels.</span>
+<span class="sd">        width (int): Figure width in pixels.</span>
+<span class="sd">        **kwargs: Additional arguments forwarded to ``go.Histogram2dContour``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        plotly.graph_objects.Figure: Interactive density contour figure.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If x or y is not numeric.</span>
+<span class="sd">        ValueError: If x and y lengths differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        fig = dv.bivariate.density_contour_interactive(x, y)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Plotly estimates the two-dimensional density from the supplied points.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">xlabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">ylabel</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;Density Contour: </span><span class="si">{</span><span class="n">xlabel</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">ylabel</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Histogram2dContour</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">colorscale</span><span class="o">=</span><span class="n">colorscale</span><span class="p">,</span> <span class="n">contours_coloring</span><span class="o">=</span><span class="n">contours_coloring</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)])</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Aned Esquerra Arguelles.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

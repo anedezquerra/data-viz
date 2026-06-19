@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dataviz.univariate.quality &mdash; Data-Viz 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Data-Viz
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">dataviz</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Data-Viz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dataviz.univariate.quality</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dataviz.univariate.quality</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Univariate data quality summaries and visualizations.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..types</span><span class="w"> </span><span class="kn">import</span> <span class="n">FigureSize</span><span class="p">,</span> <span class="n">MatplotlibAxes</span><span class="p">,</span> <span class="n">PlotlyFigure</span><span class="p">,</span> <span class="n">SeriesLike</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_theme</span><span class="p">,</span> <span class="n">setup_plot</span>
+
+
+<div class="viewcode-block" id="DataQualitySummary">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.DataQualitySummary">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataQualitySummary</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Univariate data quality summary.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        count (int): Total number of observations.</span>
+<span class="sd">        missing (int): Number of missing observations.</span>
+<span class="sd">        missing_rate (float): Share of observations that are missing.</span>
+<span class="sd">        unique (int): Number of unique non-missing values.</span>
+<span class="sd">        duplicate_rate (float): Share of non-missing observations that repeat a previous value.</span>
+<span class="sd">        zero_rate (float): Share of numeric observations equal to zero.</span>
+<span class="sd">        negative_rate (float): Share of numeric observations below zero.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        DataQualitySummary: Immutable data quality profile.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be represented by the declared fields.</span>
+<span class="sd">        ValueError: If rates are incompatible with downstream numeric use.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        profile = DataQualitySummary(10, 1, 0.1, 4, 0.5, 0.2, 0.1)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Numeric-only rates are zero when no numeric observations are available.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">count</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">missing</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">missing_rate</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">unique</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">duplicate_rate</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">zero_rate</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">negative_rate</span><span class="p">:</span> <span class="nb">float</span></div>
+
+
+
+<div class="viewcode-block" id="data_quality_summary">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.data_quality_summary">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">data_quality_summary</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataQualitySummary</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute basic data quality metrics for one variable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        DataQualitySummary: Missingness, uniqueness, duplicate, zero, and negative rates.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If input data cannot be represented as a pandas Series.</span>
+<span class="sd">        ValueError: If the input has no observations.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        summary = data_quality_summary(series)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This summary is intentionally type-tolerant so it works for numeric and categorical variables.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;data must contain at least one observation.&quot;</span><span class="p">)</span>
+    <span class="n">non_missing</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">numeric</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">non_missing</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">numeric_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">numeric</span><span class="p">)</span>
+    <span class="n">duplicate_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">non_missing</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">DataQualitySummary</span><span class="p">(</span>
+        <span class="n">count</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">series</span><span class="p">)),</span>
+        <span class="n">missing</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+        <span class="n">missing_rate</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+        <span class="n">unique</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">non_missing</span><span class="o">.</span><span class="n">nunique</span><span class="p">()),</span>
+        <span class="n">duplicate_rate</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">duplicate_count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">non_missing</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">non_missing</span><span class="p">)</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">zero_rate</span><span class="o">=</span><span class="nb">float</span><span class="p">((</span><span class="n">numeric</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="k">if</span> <span class="n">numeric_count</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">negative_rate</span><span class="o">=</span><span class="nb">float</span><span class="p">((</span><span class="n">numeric</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="k">if</span> <span class="n">numeric_count</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="quality_bar_static">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.quality_bar_static">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">quality_bar_static</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="p">:</span> <span class="n">FigureSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MatplotlibAxes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a static bar chart of univariate quality rates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        title (Optional[str]): Optional chart title.</span>
+<span class="sd">        figsize (FigureSize): Matplotlib figure size.</span>
+<span class="sd">        color (Optional[str]: Bar color.</span>
+<span class="sd">        theme (str): Styling theme name.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matplotlib.axes.Axes: Axes containing quality-rate bars.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If input data cannot be represented as a pandas Series.</span>
+<span class="sd">        ValueError: If the input has no observations.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        ax = quality_bar_static(series)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Rates are shown on the inclusive ``[0, 1]`` scale.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">data_quality_summary</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Missing&quot;</span><span class="p">,</span> <span class="s2">&quot;Duplicate&quot;</span><span class="p">,</span> <span class="s2">&quot;Zero&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">]</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">summary</span><span class="o">.</span><span class="n">missing_rate</span><span class="p">,</span> <span class="n">summary</span><span class="o">.</span><span class="n">duplicate_rate</span><span class="p">,</span> <span class="n">summary</span><span class="o">.</span><span class="n">zero_rate</span><span class="p">,</span> <span class="n">summary</span><span class="o">.</span><span class="n">negative_rate</span><span class="p">]</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">setup_plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;Data Quality Rates&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Metric&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Rate&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">apply_theme</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">theme</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<div class="viewcode-block" id="quality_bar_interactive">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.quality_bar_interactive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">quality_bar_interactive</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;plotly&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlotlyFigure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an interactive bar chart of univariate quality rates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        title (Optional[str]): Optional chart title.</span>
+<span class="sd">        color (Optional[str]: Bar color.</span>
+<span class="sd">        template (str): Plotly template name.</span>
+<span class="sd">        height (int): Figure height in pixels.</span>
+<span class="sd">        width (int): Figure width in pixels.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        plotly.graph_objects.Figure: Interactive quality-rate chart.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If input data cannot be represented as a pandas Series.</span>
+<span class="sd">        ValueError: If the input has no observations.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        fig = quality_bar_interactive(series)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Quality rates provide a quick screen before selecting downstream visualizations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">data_quality_summary</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Missing&quot;</span><span class="p">,</span> <span class="s2">&quot;Duplicate&quot;</span><span class="p">,</span> <span class="s2">&quot;Zero&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative&quot;</span><span class="p">]</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">summary</span><span class="o">.</span><span class="n">missing_rate</span><span class="p">,</span> <span class="n">summary</span><span class="o">.</span><span class="n">duplicate_rate</span><span class="p">,</span> <span class="n">summary</span><span class="o">.</span><span class="n">zero_rate</span><span class="p">,</span> <span class="n">summary</span><span class="o">.</span><span class="n">negative_rate</span><span class="p">]</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">values</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="n">color</span><span class="p">))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;Data Quality Rates&quot;</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;Metric&quot;</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;Rate&quot;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="sentinel_value_counts">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.sentinel_value_counts">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sentinel_value_counts</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">sentinels</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Count configured sentinel values in one variable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        sentinels (SeriesLike): Values that should be treated as sentinel markers.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.Series: Counts indexed by sentinel value.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If input data cannot be represented as pandas Series.</span>
+<span class="sd">        ValueError: If no sentinel values are provided.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        counts = sentinel_value_counts(values, [-999, &quot;N/A&quot;])</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Sentinel values are counted before any type coercion.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sentinel_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">sentinels</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">sentinel_series</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;sentinels must contain at least one value.&quot;</span><span class="p">)</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="n">sentinel</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">series</span> <span class="o">==</span> <span class="n">sentinel</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="k">for</span> <span class="n">sentinel</span> <span class="ow">in</span> <span class="n">sentinel_series</span><span class="p">})</span></div>
+
+
+
+<div class="viewcode-block" id="sentinel_rate">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.sentinel_rate">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sentinel_rate</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">sentinels</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the rate of values matching configured sentinels.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        sentinels (SeriesLike): Values that should be treated as sentinel markers.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Share of observations matching any sentinel value.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If input data cannot be represented as pandas Series.</span>
+<span class="sd">        ValueError: If no observations or sentinels are provided.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        rate = sentinel_rate(values, [-999])</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This helper catches common data-quality placeholders that are not missing values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">series</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;data must contain at least one observation.&quot;</span><span class="p">)</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">sentinel_value_counts</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">sentinels</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">series</span><span class="p">))</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Aned Esquerra Arguelles.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

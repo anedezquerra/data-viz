@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dataviz.univariate.weighted &mdash; Data-Viz 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Data-Viz
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">dataviz</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Data-Viz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dataviz.univariate.weighted</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dataviz.univariate.weighted</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Weighted univariate statistics and visualizations.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..types</span><span class="w"> </span><span class="kn">import</span> <span class="n">FigureSize</span><span class="p">,</span> <span class="n">MatplotlibAxes</span><span class="p">,</span> <span class="n">PlotlyFigure</span><span class="p">,</span> <span class="n">SeriesLike</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_theme</span><span class="p">,</span> <span class="n">setup_plot</span><span class="p">,</span> <span class="n">validate_positive_int</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">as_numeric_series</span>
+
+
+<div class="viewcode-block" id="WeightedStats">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.WeightedStats">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WeightedStats</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Weighted summary statistics for one numeric variable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        count (int): Number of observations after missing-value removal.</span>
+<span class="sd">        weight_sum (float): Sum of non-negative weights.</span>
+<span class="sd">        mean (float): Weighted arithmetic mean.</span>
+<span class="sd">        variance (float): Weighted population variance.</span>
+<span class="sd">        std (float): Weighted population standard deviation.</span>
+<span class="sd">        q1 (float): Weighted first quartile.</span>
+<span class="sd">        median (float): Weighted median.</span>
+<span class="sd">        q3 (float): Weighted third quartile.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        WeightedStats: Immutable weighted summary record.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be represented by the declared fields.</span>
+<span class="sd">        ValueError: If summary values are incompatible with downstream numeric use.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        stats = WeightedStats(3, 6.0, 2.3, 0.5, 0.7, 1.0, 2.0, 3.0)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Weighted summaries are useful for survey data, grouped data, and importance-weighted samples.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">count</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">weight_sum</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">mean</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">variance</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">std</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">q1</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">median</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">q3</span><span class="p">:</span> <span class="nb">float</span></div>
+
+
+
+<div class="viewcode-block" id="resolve_weighted_series">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.resolve_weighted_series">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">resolve_weighted_series</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve values and weights into aligned numeric Series.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        weights (SeriesLike): Non-negative observation weights.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple[pandas.Series, pandas.Series]: Cleaned values and aligned weights.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values or weights cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If lengths differ, weights are negative, or total weight is not positive.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        values, weights = resolve_weighted_series([1, 2], [0.4, 0.6])</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Rows with missing values or missing weights are removed together.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">),</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">)</span>
+    <span class="n">weight_values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weight&quot;</span><span class="p">),</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">weight_values</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;data and weights must have the same length.&quot;</span><span class="p">)</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">values</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="n">weight_values</span><span class="p">})</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">frame</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;data and weights must contain at least one complete observation.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">frame</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;weights must be non-negative.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">frame</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;weights must sum to a positive value.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">frame</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">frame</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="weighted_quantile">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_quantile">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">weighted_quantile</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">quantile</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute a weighted quantile.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        weights (SeriesLike): Non-negative observation weights.</span>
+<span class="sd">        quantile (float): Desired quantile in the inclusive ``[0, 1]`` range.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Weighted quantile value.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values or weights cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If ``quantile`` is outside ``[0, 1]`` or weights are invalid.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        median = weighted_quantile(values, weights, 0.5)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        The implementation uses the first sorted value whose cumulative weight reaches the target.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">quantile</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">quantile</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;quantile must be between 0 and 1.&quot;</span><span class="p">)</span>
+    <span class="n">values</span><span class="p">,</span> <span class="n">weight_values</span> <span class="o">=</span> <span class="n">resolve_weighted_series</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
+    <span class="n">sorted_values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)[</span><span class="n">order</span><span class="p">]</span>
+    <span class="n">sorted_weights</span> <span class="o">=</span> <span class="n">weight_values</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)[</span><span class="n">order</span><span class="p">]</span>
+    <span class="n">cumulative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">sorted_weights</span><span class="p">)</span>
+    <span class="n">cutoff</span> <span class="o">=</span> <span class="n">quantile</span> <span class="o">*</span> <span class="n">cumulative</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">cumulative</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">sorted_values</span><span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sorted_values</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)])</span></div>
+
+
+
+<div class="viewcode-block" id="weighted_summary">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_summary">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">weighted_summary</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WeightedStats</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute weighted summary statistics for one numeric variable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        weights (SeriesLike): Non-negative observation weights.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        WeightedStats: Weighted center, spread, and quartile summary.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values or weights cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If weights are invalid or no observations remain.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        summary = weighted_summary(values, weights)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Variance is computed as a weighted population variance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">values</span><span class="p">,</span> <span class="n">weight_values</span> <span class="o">=</span> <span class="n">resolve_weighted_series</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="n">value_array</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">weight_array</span> <span class="o">=</span> <span class="n">weight_values</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">value_array</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weight_array</span><span class="p">))</span>
+    <span class="n">variance</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">((</span><span class="n">value_array</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weight_array</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">WeightedStats</span><span class="p">(</span>
+        <span class="n">count</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)),</span>
+        <span class="n">weight_sum</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">weight_array</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+        <span class="n">mean</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span>
+        <span class="n">variance</span><span class="o">=</span><span class="n">variance</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">)),</span>
+        <span class="n">q1</span><span class="o">=</span><span class="n">weighted_quantile</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">weight_values</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">),</span>
+        <span class="n">median</span><span class="o">=</span><span class="n">weighted_quantile</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">weight_values</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+        <span class="n">q3</span><span class="o">=</span><span class="n">weighted_quantile</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">weight_values</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="weighted_histogram_static">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_histogram_static">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">weighted_histogram_static</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="p">:</span> <span class="n">FigureSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MatplotlibAxes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a static weighted histogram.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        weights (SeriesLike): Non-negative observation weights.</span>
+<span class="sd">        bins (int): Number of histogram bins.</span>
+<span class="sd">        title (Optional[str]): Optional chart title.</span>
+<span class="sd">        xlabel (Optional[str]): Optional x-axis label.</span>
+<span class="sd">        figsize (FigureSize): Matplotlib figure size.</span>
+<span class="sd">        color (Optional[str]: Histogram color.</span>
+<span class="sd">        theme (str): Styling theme name.</span>
+<span class="sd">        **kwargs: Additional keyword arguments forwarded to ``Axes.hist``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matplotlib.axes.Axes: Axes containing the weighted histogram.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values or weights cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If weights or ``bins`` are invalid.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        ax = weighted_histogram_static(values, weights)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Weighted histograms are useful when rows represent unequal sample mass.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">validate_positive_int</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="s2">&quot;bins&quot;</span><span class="p">)</span>
+    <span class="n">values</span><span class="p">,</span> <span class="n">weight_values</span> <span class="o">=</span> <span class="n">resolve_weighted_series</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">setup_plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;Weighted Histogram&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span> <span class="ow">or</span> <span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Weighted Frequency&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weight_values</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">apply_theme</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">theme</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<div class="viewcode-block" id="weighted_histogram_interactive">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_histogram_interactive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">weighted_histogram_interactive</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;plotly&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlotlyFigure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an interactive weighted histogram.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        weights (SeriesLike): Non-negative observation weights.</span>
+<span class="sd">        bins (int): Number of histogram bins.</span>
+<span class="sd">        title (Optional[str]): Optional chart title.</span>
+<span class="sd">        xlabel (Optional[str]): Optional x-axis label.</span>
+<span class="sd">        color (Optional[str]: Histogram color.</span>
+<span class="sd">        template (str): Plotly template name.</span>
+<span class="sd">        height (int): Figure height in pixels.</span>
+<span class="sd">        width (int): Figure width in pixels.</span>
+<span class="sd">        **kwargs: Additional keyword arguments forwarded to ``go.Histogram``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        plotly.graph_objects.Figure: Interactive weighted histogram.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values or weights cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If weights or ``bins`` are invalid.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        fig = weighted_histogram_interactive(values, weights)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Plotly uses the ``histfunc=&quot;sum&quot;`` pattern over supplied weights.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">validate_positive_int</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="s2">&quot;bins&quot;</span><span class="p">)</span>
+    <span class="n">values</span><span class="p">,</span> <span class="n">weight_values</span> <span class="o">=</span> <span class="n">resolve_weighted_series</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
+        <span class="n">go</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">weight_values</span><span class="p">,</span>
+            <span class="n">histfunc</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span>
+            <span class="n">nbinsx</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span>
+            <span class="n">marker_color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+            <span class="n">opacity</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;Weighted Histogram&quot;</span><span class="p">,</span>
+        <span class="n">xaxis_title</span><span class="o">=</span><span class="n">xlabel</span> <span class="ow">or</span> <span class="s2">&quot;Value&quot;</span><span class="p">,</span>
+        <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;Weighted Frequency&quot;</span><span class="p">,</span>
+        <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="weighted_ecdf_values">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_ecdf_values">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">weighted_ecdf_values</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute weighted empirical cumulative distribution values.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        weights (SeriesLike): Non-negative observation weights.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple[numpy.ndarray, numpy.ndarray]: Sorted values and weighted cumulative probabilities.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values or weights cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If weights are invalid or no observations remain.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        x, y = weighted_ecdf_values(values, weights)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Weighted probabilities are normalized by the total weight.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">values</span><span class="p">,</span> <span class="n">weight_values</span> <span class="o">=</span> <span class="n">resolve_weighted_series</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
+    <span class="n">sorted_values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)[</span><span class="n">order</span><span class="p">]</span>
+    <span class="n">sorted_weights</span> <span class="o">=</span> <span class="n">weight_values</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)[</span><span class="n">order</span><span class="p">]</span>
+    <span class="n">cumulative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">sorted_weights</span><span class="p">)</span> <span class="o">/</span> <span class="n">sorted_weights</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">sorted_values</span><span class="p">,</span> <span class="n">cumulative</span></div>
+
+
+
+<div class="viewcode-block" id="weighted_ecdf_plot_static">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_ecdf_plot_static">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">weighted_ecdf_plot_static</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="p">:</span> <span class="n">FigureSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MatplotlibAxes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a static weighted empirical cumulative distribution plot.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        weights (SeriesLike): Non-negative observation weights.</span>
+<span class="sd">        title (Optional[str]): Optional chart title.</span>
+<span class="sd">        figsize (FigureSize): Matplotlib figure size.</span>
+<span class="sd">        color (Optional[str]): Line color.</span>
+<span class="sd">        theme (str): Styling theme name.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matplotlib.axes.Axes: Axes containing the weighted ECDF chart.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values or weights cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If weights are invalid or no observations remain.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        ax = weighted_ecdf_plot_static(values, weights)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Weighted ECDFs are useful for survey-weighted or importance-weighted samples.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_values</span><span class="p">,</span> <span class="n">probabilities</span> <span class="o">=</span> <span class="n">weighted_ecdf_values</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">setup_plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;Weighted ECDF&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Weighted Cumulative Probability&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">apply_theme</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">theme</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<div class="viewcode-block" id="weighted_ecdf_plot_interactive">
+<a class="viewcode-back" href="../../../dataviz.univariate.html#dataviz.weighted_ecdf_plot_interactive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">weighted_ecdf_plot_interactive</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">weights</span><span class="p">:</span> <span class="n">SeriesLike</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;plotly&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlotlyFigure</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an interactive weighted empirical cumulative distribution plot.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (SeriesLike): Input observations.</span>
+<span class="sd">        weights (SeriesLike): Non-negative observation weights.</span>
+<span class="sd">        title (Optional[str]): Optional chart title.</span>
+<span class="sd">        color (Optional[str]): Line color.</span>
+<span class="sd">        template (str): Plotly template name.</span>
+<span class="sd">        height (int): Figure height in pixels.</span>
+<span class="sd">        width (int): Figure width in pixels.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        plotly.graph_objects.Figure: Interactive weighted ECDF chart.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values or weights cannot be converted to numeric data.</span>
+<span class="sd">        ValueError: If weights are invalid or no observations remain.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        fig = weighted_ecdf_plot_interactive(values, weights)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        The line shape uses horizontal-vertical steps.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_values</span><span class="p">,</span> <span class="n">probabilities</span> <span class="o">=</span> <span class="n">weighted_ecdf_values</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_values</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;hv&quot;</span><span class="p">)))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;Weighted ECDF&quot;</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;Weighted Cumulative Probability&quot;</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Aned Esquerra Arguelles.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

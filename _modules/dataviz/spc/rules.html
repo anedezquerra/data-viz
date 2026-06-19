@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dataviz.spc.rules &mdash; Data-Viz 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Data-Viz
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">dataviz</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Data-Viz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dataviz.spc.rules</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dataviz.spc.rules</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;SPC rule evaluation and shared calculations.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">MatrixLike</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_positive_int</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_spc_constants</span>
+
+
+<div class="viewcode-block" id="ControlLimits">
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.ControlLimits">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ControlLimits</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Control limits for an SPC chart.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        center (float): Center-line value.</span>
+<span class="sd">        lower (float): Lower control limit.</span>
+<span class="sd">        upper (float): Upper control limit.</span>
+<span class="sd">        sigma (float): Estimated process standard deviation.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ControlLimits: Immutable control-limit summary.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be represented as floats.</span>
+<span class="sd">        ValueError: If limits are not finite.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        limits = ControlLimits(center=10.0, lower=7.0, upper=13.0, sigma=1.0)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        The class is shared by static and interactive SPC functions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">center</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span></div>
+
+
+
+<div class="viewcode-block" id="RuleViolation">
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.RuleViolation">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RuleViolation</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detected SPC rule violation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        index (int): Zero-based observation index.</span>
+<span class="sd">        value (float): Observation value at the violation.</span>
+<span class="sd">        rule (str): Rule identifier.</span>
+<span class="sd">        message (str): Human-readable rule explanation.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        RuleViolation: Immutable rule-violation record.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If values cannot be represented in the expected types.</span>
+<span class="sd">        ValueError: If index or value is invalid.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        violation = RuleViolation(4, 12.5, &quot;beyond_limits&quot;, &quot;Point outside limits&quot;)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Chart functions can highlight these records on top of process data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">index</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">value</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">rule</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span></div>
+
+
+
+<div class="viewcode-block" id="as_numeric_series">
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.as_numeric_series">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Value&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert array-like process data to a numeric pandas Series.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (ArrayLike): Process observations.</span>
+<span class="sd">        name (str): Series name.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.Series: Numeric process observations.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If data cannot be converted to numeric values.</span>
+<span class="sd">        ValueError: If data is empty after missing values are removed.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        values = as_numeric_series(data)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Missing values are dropped because SPC limits require observed values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">series</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;SPC data must contain at least one numeric observation.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="individuals_limits">
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.individuals_limits">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">individuals_limits</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">sigma_multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ControlLimits</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute individuals chart limits from process observations.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (ArrayLike): Process observations.</span>
+<span class="sd">        sigma_multiplier (float): Number of standard deviations for limits.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ControlLimits: Center, lower limit, upper limit, and sigma estimate.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If data cannot be converted to numeric values.</span>
+<span class="sd">        ValueError: If sigma multiplier is not positive.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        limits = individuals_limits(values)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Sigma uses the sample standard deviation with ``ddof=1`` when possible.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">sigma_multiplier</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;sigma_multiplier must be greater than zero.&quot;</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">ControlLimits</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">center</span> <span class="o">-</span> <span class="n">sigma_multiplier</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">center</span> <span class="o">+</span> <span class="n">sigma_multiplier</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="moving_ranges">
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.moving_ranges">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">moving_ranges</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">span</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute moving ranges for process observations.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (ArrayLike): Process observations.</span>
+<span class="sd">        span (int): Difference span used for moving ranges.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.Series: Absolute moving ranges.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If data cannot be converted to numeric values.</span>
+<span class="sd">        ValueError: If span is invalid for the data length.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        ranges = moving_ranges(values, span=2)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        The first ``span - 1`` positions cannot produce a moving range and are omitted.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">validate_positive_int</span><span class="p">(</span><span class="n">span</span><span class="p">,</span> <span class="s2">&quot;span&quot;</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">span</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;span must not exceed the number of observations.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">values</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="n">span</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="subgroup_matrix">
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.subgroup_matrix">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">subgroup_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">,</span> <span class="n">subgroup_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert raw or grouped observations into a subgroup matrix.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (MatrixLike): Matrix-like subgroup data or a flat sequence.</span>
+<span class="sd">        subgroup_size (Optional[int]): Subgroup size for flat sequences.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.DataFrame: Numeric subgroup matrix, one row per subgroup.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If data cannot be converted to a numeric dataframe.</span>
+<span class="sd">        ValueError: If subgroup size is invalid or no complete subgroup remains.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        groups = subgroup_matrix(values, subgroup_size=5)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Flat sequences are truncated to complete subgroups.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">subgroup_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;subgroup_size is required for flat data.&quot;</span><span class="p">)</span>
+            <span class="n">validate_positive_int</span><span class="p">(</span><span class="n">subgroup_size</span><span class="p">,</span> <span class="s2">&quot;subgroup_size&quot;</span><span class="p">)</span>
+            <span class="n">usable</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">//</span> <span class="n">subgroup_size</span><span class="p">)</span> <span class="o">*</span> <span class="n">subgroup_size</span>
+            <span class="k">if</span> <span class="n">usable</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No complete subgroups can be formed.&quot;</span><span class="p">)</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">array</span><span class="p">[:</span><span class="n">usable</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">subgroup_size</span><span class="p">)</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">frame</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Subgroup data must contain numeric observations.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">frame</span></div>
+
+
+
+<div class="viewcode-block" id="xbar_r_limits">
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.xbar_r_limits">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">xbar_r_limits</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">,</span>
+    <span class="n">subgroup_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">sigma_multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">use_constants</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">ControlLimits</span><span class="p">,</span> <span class="n">ControlLimits</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Xbar and R chart limits.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (MatrixLike): Matrix-like subgroup data or flat sequence.</span>
+<span class="sd">        subgroup_size (Optional[int]): Subgroup size for flat sequences.</span>
+<span class="sd">        sigma_multiplier (float): Number of range standard deviations for empirical fallback limits.</span>
+<span class="sd">        use_constants (bool): Whether to use traditional SPC constants when subgroup size is supported.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple[ControlLimits, ControlLimits, pandas.Series, pandas.Series]: Xbar limits, R limits, subgroup means, and subgroup ranges.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If data cannot be converted to numeric subgroups.</span>
+<span class="sd">        ValueError: If subgroup size or sigma multiplier is invalid.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        x_limits, r_limits, means, ranges = xbar_r_limits(data, subgroup_size=5)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Traditional constants are used by default for subgroup sizes 2 through 25.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="n">subgroup_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">subgroup_size</span><span class="o">=</span><span class="n">subgroup_size</span><span class="p">)</span>
+    <span class="n">means</span> <span class="o">=</span> <span class="n">groups</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ranges</span> <span class="o">=</span> <span class="n">groups</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">groups</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">r_center</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ranges</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">subgroup_n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">groups</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">use_constants</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">constants</span> <span class="o">=</span> <span class="n">get_spc_constants</span><span class="p">(</span><span class="n">subgroup_n</span><span class="p">)</span>
+            <span class="n">x_center</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">means</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+            <span class="n">x_limits</span> <span class="o">=</span> <span class="n">ControlLimits</span><span class="p">(</span>
+                <span class="n">center</span><span class="o">=</span><span class="n">x_center</span><span class="p">,</span>
+                <span class="n">lower</span><span class="o">=</span><span class="n">x_center</span> <span class="o">-</span> <span class="n">constants</span><span class="o">.</span><span class="n">a2</span> <span class="o">*</span> <span class="n">r_center</span><span class="p">,</span>
+                <span class="n">upper</span><span class="o">=</span><span class="n">x_center</span> <span class="o">+</span> <span class="n">constants</span><span class="o">.</span><span class="n">a2</span> <span class="o">*</span> <span class="n">r_center</span><span class="p">,</span>
+                <span class="n">sigma</span><span class="o">=</span><span class="n">r_center</span> <span class="o">/</span> <span class="n">subgroup_n</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">r_limits</span> <span class="o">=</span> <span class="n">ControlLimits</span><span class="p">(</span>
+                <span class="n">center</span><span class="o">=</span><span class="n">r_center</span><span class="p">,</span>
+                <span class="n">lower</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">d3</span> <span class="o">*</span> <span class="n">r_center</span><span class="p">),</span>
+                <span class="n">upper</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">d4</span> <span class="o">*</span> <span class="n">r_center</span><span class="p">,</span>
+                <span class="n">sigma</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">ranges</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ranges</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">x_limits</span><span class="p">,</span> <span class="n">r_limits</span><span class="p">,</span> <span class="n">means</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">ranges</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="n">x_limits</span> <span class="o">=</span> <span class="n">individuals_limits</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">sigma_multiplier</span><span class="o">=</span><span class="n">sigma_multiplier</span><span class="p">)</span>
+    <span class="n">r_sigma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ranges</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ranges</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span>
+    <span class="n">r_limits</span> <span class="o">=</span> <span class="n">ControlLimits</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">r_center</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r_center</span> <span class="o">-</span> <span class="n">sigma_multiplier</span> <span class="o">*</span> <span class="n">r_sigma</span><span class="p">),</span> <span class="n">upper</span><span class="o">=</span><span class="n">r_center</span> <span class="o">+</span> <span class="n">sigma_multiplier</span> <span class="o">*</span> <span class="n">r_sigma</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">r_sigma</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x_limits</span><span class="p">,</span> <span class="n">r_limits</span><span class="p">,</span> <span class="n">means</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">ranges</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="xbar_s_limits">
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.xbar_s_limits">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">xbar_s_limits</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">MatrixLike</span><span class="p">,</span>
+    <span class="n">subgroup_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">sigma_multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">use_constants</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">ControlLimits</span><span class="p">,</span> <span class="n">ControlLimits</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Xbar and S chart limits.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (MatrixLike): Matrix-like subgroup data or flat sequence.</span>
+<span class="sd">        subgroup_size (Optional[int]): Subgroup size for flat sequences.</span>
+<span class="sd">        sigma_multiplier (float): Number of standard deviations for empirical fallback limits.</span>
+<span class="sd">        use_constants (bool): Whether to use traditional SPC constants when subgroup size is supported.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple[ControlLimits, ControlLimits, pandas.Series, pandas.Series]: Xbar limits, S limits, subgroup means, and subgroup standard deviations.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If data cannot be converted to numeric subgroups.</span>
+<span class="sd">        ValueError: If subgroup size or sigma multiplier is invalid.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        x_limits, s_limits, means, stds = xbar_s_limits(data, subgroup_size=5)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        S limits use traditional B3/B4 constants by default for subgroup sizes 2 through 25.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="n">subgroup_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">subgroup_size</span><span class="o">=</span><span class="n">subgroup_size</span><span class="p">)</span>
+    <span class="n">means</span> <span class="o">=</span> <span class="n">groups</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">stds</span> <span class="o">=</span> <span class="n">groups</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">s_center</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stds</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">subgroup_n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">groups</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">use_constants</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">constants</span> <span class="o">=</span> <span class="n">get_spc_constants</span><span class="p">(</span><span class="n">subgroup_n</span><span class="p">)</span>
+            <span class="n">x_center</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">means</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+            <span class="n">x_limits</span> <span class="o">=</span> <span class="n">ControlLimits</span><span class="p">(</span>
+                <span class="n">center</span><span class="o">=</span><span class="n">x_center</span><span class="p">,</span>
+                <span class="n">lower</span><span class="o">=</span><span class="n">x_center</span> <span class="o">-</span> <span class="n">constants</span><span class="o">.</span><span class="n">a3</span> <span class="o">*</span> <span class="n">s_center</span><span class="p">,</span>
+                <span class="n">upper</span><span class="o">=</span><span class="n">x_center</span> <span class="o">+</span> <span class="n">constants</span><span class="o">.</span><span class="n">a3</span> <span class="o">*</span> <span class="n">s_center</span><span class="p">,</span>
+                <span class="n">sigma</span><span class="o">=</span><span class="n">s_center</span> <span class="o">/</span> <span class="n">subgroup_n</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">s_limits</span> <span class="o">=</span> <span class="n">ControlLimits</span><span class="p">(</span>
+                <span class="n">center</span><span class="o">=</span><span class="n">s_center</span><span class="p">,</span>
+                <span class="n">lower</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">b3</span> <span class="o">*</span> <span class="n">s_center</span><span class="p">),</span>
+                <span class="n">upper</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">b4</span> <span class="o">*</span> <span class="n">s_center</span><span class="p">,</span>
+                <span class="n">sigma</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">stds</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">x_limits</span><span class="p">,</span> <span class="n">s_limits</span><span class="p">,</span> <span class="n">means</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">stds</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="n">x_limits</span> <span class="o">=</span> <span class="n">individuals_limits</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">sigma_multiplier</span><span class="o">=</span><span class="n">sigma_multiplier</span><span class="p">)</span>
+    <span class="n">s_sigma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stds</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span>
+    <span class="n">s_limits</span> <span class="o">=</span> <span class="n">ControlLimits</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">s_center</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">s_center</span> <span class="o">-</span> <span class="n">sigma_multiplier</span> <span class="o">*</span> <span class="n">s_sigma</span><span class="p">),</span> <span class="n">upper</span><span class="o">=</span><span class="n">s_center</span> <span class="o">+</span> <span class="n">sigma_multiplier</span> <span class="o">*</span> <span class="n">s_sigma</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">s_sigma</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x_limits</span><span class="p">,</span> <span class="n">s_limits</span><span class="p">,</span> <span class="n">means</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">stds</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="detect_rule_violations">
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.detect_rule_violations">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">detect_rule_violations</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+    <span class="n">limits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ControlLimits</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">run_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="n">trend_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">RuleViolation</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect common SPC rule violations.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (ArrayLike): Process observations.</span>
+<span class="sd">        limits (Optional[ControlLimits]): Precomputed limits. Defaults to individuals limits.</span>
+<span class="sd">        rules (Optional[Sequence[str]]): Rule identifiers to evaluate. Defaults to all supported rules.</span>
+<span class="sd">        run_length (int): Consecutive points on one side of center needed for a run signal.</span>
+<span class="sd">        trend_length (int): Consecutive increasing or decreasing points needed for a trend signal.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[RuleViolation]: Detected rule violations.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If data cannot be converted to numeric values.</span>
+<span class="sd">        ValueError: If run or trend lengths are invalid.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        violations = detect_rule_violations(values)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Supported rules include beyond limits, center runs, trends, zone A/B patterns, and zone C clustering.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">validate_positive_int</span><span class="p">(</span><span class="n">run_length</span><span class="p">,</span> <span class="s2">&quot;run_length&quot;</span><span class="p">)</span>
+    <span class="n">validate_positive_int</span><span class="p">(</span><span class="n">trend_length</span><span class="p">,</span> <span class="s2">&quot;trend_length&quot;</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">as_numeric_series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">limits</span> <span class="o">=</span> <span class="n">limits</span> <span class="ow">or</span> <span class="n">individuals_limits</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">limits</span><span class="o">.</span><span class="n">sigma</span>
+    <span class="n">supported</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;beyond_limits&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;center_run&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;trend&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;two_of_three_zone_a&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;four_of_five_zone_b&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fifteen_zone_c&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">selected</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">rules</span> <span class="ow">or</span> <span class="n">supported</span><span class="p">)</span>
+    <span class="n">unknown</span> <span class="o">=</span> <span class="n">selected</span> <span class="o">-</span> <span class="n">supported</span>
+    <span class="k">if</span> <span class="n">unknown</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported SPC rule(s): </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">unknown</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="n">violations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">RuleViolation</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="s2">&quot;beyond_limits&quot;</span> <span class="ow">in</span> <span class="n">selected</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">limits</span><span class="o">.</span><span class="n">upper</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">limits</span><span class="o">.</span><span class="n">lower</span><span class="p">:</span>
+                <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RuleViolation</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="s2">&quot;beyond_limits&quot;</span><span class="p">,</span> <span class="s2">&quot;Point outside control limits&quot;</span><span class="p">))</span>
+    <span class="n">side</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">values</span> <span class="o">-</span> <span class="n">limits</span><span class="o">.</span><span class="n">center</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;center_run&quot;</span> <span class="ow">in</span> <span class="n">selected</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">run_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">side</span><span class="p">)):</span>
+            <span class="n">window</span> <span class="o">=</span> <span class="n">side</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span> <span class="o">-</span> <span class="n">run_length</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">window</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">or</span> <span class="p">(</span><span class="n">window</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RuleViolation</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span> <span class="s2">&quot;center_run&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">run_length</span><span class="si">}</span><span class="s2"> points on one side of center&quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s2">&quot;trend&quot;</span> <span class="ow">in</span> <span class="n">selected</span><span class="p">:</span>
+        <span class="n">diffs</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trend_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)):</span>
+            <span class="n">window</span> <span class="o">=</span> <span class="n">diffs</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span> <span class="o">-</span> <span class="n">trend_length</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">idx</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">window</span><span class="p">)</span> <span class="o">==</span> <span class="n">trend_length</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="p">((</span><span class="n">window</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">or</span> <span class="p">(</span><span class="n">window</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()):</span>
+                <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RuleViolation</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span> <span class="s2">&quot;trend&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">trend_length</span><span class="si">}</span><span class="s2"> point monotonic trend&quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">sigma</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="s2">&quot;two_of_three_zone_a&quot;</span> <span class="ow">in</span> <span class="n">selected</span><span class="p">:</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="n">values</span> <span class="o">-</span> <span class="n">limits</span><span class="o">.</span><span class="n">center</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)):</span>
+            <span class="n">window</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">:</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">high</span> <span class="o">=</span> <span class="p">(</span><span class="n">window</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="n">low</span> <span class="o">=</span> <span class="p">(</span><span class="n">window</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">high</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">low</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RuleViolation</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span> <span class="s2">&quot;two_of_three_zone_a&quot;</span><span class="p">,</span> <span class="s2">&quot;Two of three points beyond two sigma on one side&quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">sigma</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="s2">&quot;four_of_five_zone_b&quot;</span> <span class="ow">in</span> <span class="n">selected</span><span class="p">:</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="n">values</span> <span class="o">-</span> <span class="n">limits</span><span class="o">.</span><span class="n">center</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)):</span>
+            <span class="n">window</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span> <span class="o">-</span> <span class="mi">4</span> <span class="p">:</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">high</span> <span class="o">=</span> <span class="p">(</span><span class="n">window</span> <span class="o">&gt;</span> <span class="n">sigma</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="n">low</span> <span class="o">=</span> <span class="p">(</span><span class="n">window</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">sigma</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">high</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="ow">or</span> <span class="n">low</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RuleViolation</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span> <span class="s2">&quot;four_of_five_zone_b&quot;</span><span class="p">,</span> <span class="s2">&quot;Four of five points beyond one sigma on one side&quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">sigma</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="s2">&quot;fifteen_zone_c&quot;</span> <span class="ow">in</span> <span class="n">selected</span><span class="p">:</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="p">(</span><span class="n">values</span> <span class="o">-</span> <span class="n">limits</span><span class="o">.</span><span class="n">center</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)):</span>
+            <span class="n">window</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span> <span class="o">-</span> <span class="mi">14</span> <span class="p">:</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">window</span> <span class="o">&lt;</span> <span class="n">sigma</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RuleViolation</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span> <span class="s2">&quot;fifteen_zone_c&quot;</span><span class="p">,</span> <span class="s2">&quot;Fifteen points within one sigma of center&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">violations</span></div>
+
+
+
+<div class="viewcode-block" id="violations_by_index">
+<a class="viewcode-back" href="../../../dataviz.spc.html#dataviz.violations_by_index">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">violations_by_index</span><span class="p">(</span><span class="n">violations</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">RuleViolation</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">RuleViolation</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Group rule violations by observation index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        violations (Iterable[RuleViolation]): Rule violations to group.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict[int, List[RuleViolation]]: Violations keyed by observation index.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If violations are not iterable.</span>
+<span class="sd">        ValueError: If violation indexes are invalid.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        grouped = violations_by_index(violations)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        Grouping helps chart functions annotate points with multiple violations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">grouped</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">RuleViolation</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">violation</span> <span class="ow">in</span> <span class="n">violations</span><span class="p">:</span>
+        <span class="n">grouped</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">violation</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">violation</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grouped</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Aned Esquerra Arguelles.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
