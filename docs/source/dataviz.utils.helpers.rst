@@ -1,7 +1,10 @@
 dataviz.utils.helpers
-============================
+=====================
 
-.. automodule:: dataviz.utils.helpers
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.utils
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   helpers

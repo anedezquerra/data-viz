@@ -1,7 +1,10 @@
 dataviz.utils.validation
-===============================
+========================
 
-.. automodule:: dataviz.utils.validation
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.utils
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   validation

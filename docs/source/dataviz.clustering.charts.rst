@@ -1,7 +1,10 @@
 dataviz.clustering.charts
-================================
+=========================
 
-.. automodule:: dataviz.clustering.charts
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.clustering
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   charts

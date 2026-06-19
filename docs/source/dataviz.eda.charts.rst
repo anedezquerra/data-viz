@@ -1,7 +1,10 @@
 dataviz.eda.charts
-=========================
+==================
 
-.. automodule:: dataviz.eda.charts
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.eda
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   charts

@@ -1,7 +1,10 @@
-dataviz.xai.partial\_dep
-===============================
+dataviz.xai.partial_dep
+=======================
 
-.. automodule:: dataviz.xai.partial_dep
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.xai
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   partial_dep

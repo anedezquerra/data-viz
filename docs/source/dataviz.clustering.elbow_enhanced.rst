@@ -1,7 +1,10 @@
-dataviz.clustering.elbow\_enhanced
-=========================================
+dataviz.clustering.elbow_enhanced
+=================================
 
-.. automodule:: dataviz.clustering.elbow_enhanced
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.clustering
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   elbow_enhanced

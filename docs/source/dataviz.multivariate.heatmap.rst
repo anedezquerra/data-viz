@@ -1,7 +1,10 @@
 dataviz.multivariate.heatmap
-===================================
+============================
 
-.. automodule:: dataviz.multivariate.heatmap
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.multivariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   heatmap

@@ -1,7 +1,10 @@
-dataviz.univariate.box\_plot
-===================================
+dataviz.univariate.box_plot
+===========================
 
-.. automodule:: dataviz.univariate.box_plot
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   box_plot

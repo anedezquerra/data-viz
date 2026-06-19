@@ -1,7 +1,10 @@
 dataviz.univariate.ordinal
-=================================
+==========================
 
-.. automodule:: dataviz.univariate.ordinal
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   ordinal

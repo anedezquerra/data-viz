@@ -1,7 +1,10 @@
 dataviz.bivariate.scatter
-================================
+=========================
 
-.. automodule:: dataviz.bivariate.scatter
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.bivariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   scatter

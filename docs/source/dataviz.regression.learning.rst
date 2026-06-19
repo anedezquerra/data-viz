@@ -1,7 +1,10 @@
 dataviz.regression.learning
-==================================
+===========================
 
-.. automodule:: dataviz.regression.learning
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.regression
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   learning

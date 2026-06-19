@@ -1,7 +1,10 @@
 dataviz.univariate.profile
-=================================
+==========================
 
-.. automodule:: dataviz.univariate.profile
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   profile

@@ -1,7 +1,10 @@
 dataviz.multivariate.charts
-==================================
+===========================
 
-.. automodule:: dataviz.multivariate.charts
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.multivariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   charts

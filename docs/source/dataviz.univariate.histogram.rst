@@ -1,7 +1,10 @@
 dataviz.univariate.histogram
-===================================
+============================
 
-.. automodule:: dataviz.univariate.histogram
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   histogram

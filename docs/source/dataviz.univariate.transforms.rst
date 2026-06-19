@@ -1,7 +1,10 @@
 dataviz.univariate.transforms
-====================================
+=============================
 
-.. automodule:: dataviz.univariate.transforms
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   transforms

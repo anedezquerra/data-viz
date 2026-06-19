@@ -1,7 +1,10 @@
 dataviz.xai.shap
-=======================
+================
 
-.. automodule:: dataviz.xai.shap
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.xai
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   shap

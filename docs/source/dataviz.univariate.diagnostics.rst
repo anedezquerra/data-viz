@@ -1,7 +1,10 @@
 dataviz.univariate.diagnostics
-=====================================
+==============================
 
-.. automodule:: dataviz.univariate.diagnostics
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   diagnostics

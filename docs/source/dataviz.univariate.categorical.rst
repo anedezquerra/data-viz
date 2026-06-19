@@ -1,7 +1,10 @@
 dataviz.univariate.categorical
-=====================================
+==============================
 
-.. automodule:: dataviz.univariate.categorical
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   categorical

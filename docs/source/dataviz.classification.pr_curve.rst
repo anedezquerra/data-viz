@@ -1,7 +1,10 @@
-dataviz.classification.pr\_curve
-=======================================
+dataviz.classification.pr_curve
+===============================
 
-.. automodule:: dataviz.classification.pr_curve
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.classification
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   pr_curve

@@ -1,7 +1,10 @@
 dataviz.univariate.treatment
-===================================
+============================
 
-.. automodule:: dataviz.univariate.treatment
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   treatment

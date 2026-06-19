@@ -1,7 +1,10 @@
 dataviz.spc.dashboard
-============================
+=====================
 
-.. automodule:: dataviz.spc.dashboard
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.spc
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   dashboard

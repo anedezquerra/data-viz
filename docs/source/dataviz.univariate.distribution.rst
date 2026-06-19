@@ -1,7 +1,10 @@
 dataviz.univariate.distribution
-======================================
+===============================
 
-.. automodule:: dataviz.univariate.distribution
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   distribution

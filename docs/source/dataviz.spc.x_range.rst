@@ -1,7 +1,10 @@
-dataviz.spc.x\_range
-===========================
+dataviz.spc.x_range
+===================
 
-.. automodule:: dataviz.spc.x_range
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.spc
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   x_range

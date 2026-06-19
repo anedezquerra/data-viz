@@ -1,7 +1,10 @@
 dataviz.spc.charts
-=========================
+==================
 
-.. automodule:: dataviz.spc.charts
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.spc
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   charts

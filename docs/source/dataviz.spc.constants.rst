@@ -1,7 +1,10 @@
 dataviz.spc.constants
-============================
+=====================
 
-.. automodule:: dataviz.spc.constants
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.spc
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   constants

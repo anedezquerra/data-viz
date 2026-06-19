@@ -1,7 +1,10 @@
 dataviz.univariate.density
-=================================
+==========================
 
-.. automodule:: dataviz.univariate.density
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. currentmodule:: dataviz.univariate
+
+.. autosummary::
+   :toctree: generated
+   :nosignatures:
+
+   density
