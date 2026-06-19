@@ -1,4 +1,4 @@
-dataviz.bivariate package
+dataviz.bivariate
 =========================
 
 Submodules

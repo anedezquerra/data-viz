@@ -1,4 +1,4 @@
-dataviz.eda.charts module
+dataviz.eda.charts
 =========================
 
 .. automodule:: dataviz.eda.charts

@@ -1,4 +1,4 @@
-dataviz.bivariate.trends module
+dataviz.bivariate.trends
 ===============================
 
 .. automodule:: dataviz.bivariate.trends

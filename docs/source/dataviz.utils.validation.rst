@@ -1,4 +1,4 @@
-dataviz.utils.validation module
+dataviz.utils.validation
 ===============================
 
 .. automodule:: dataviz.utils.validation

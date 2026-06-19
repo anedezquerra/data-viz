@@ -1,4 +1,4 @@
-dataviz.classification.confusion\_matrix module
+dataviz.classification.confusion\_matrix
 ===============================================
 
 .. automodule:: dataviz.classification.confusion_matrix

@@ -1,4 +1,4 @@
-dataviz.regression.learning module
+dataviz.regression.learning
 ==================================
 
 .. automodule:: dataviz.regression.learning

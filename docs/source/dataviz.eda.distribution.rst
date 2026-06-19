@@ -1,4 +1,4 @@
-dataviz.eda.distribution module
+dataviz.eda.distribution
 ===============================
 
 .. automodule:: dataviz.eda.distribution

@@ -1,4 +1,4 @@
-dataviz.spc.capability module
+dataviz.spc.capability
 =============================
 
 .. automodule:: dataviz.spc.capability

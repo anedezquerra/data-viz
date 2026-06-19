@@ -1,4 +1,4 @@
-dataviz.clustering.dendrogram module
+dataviz.clustering.dendrogram
 ====================================
 
 .. automodule:: dataviz.clustering.dendrogram

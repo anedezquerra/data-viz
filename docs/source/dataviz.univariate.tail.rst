@@ -1,4 +1,4 @@
-dataviz.univariate.tail module
+dataviz.univariate.tail
 ==============================
 
 .. automodule:: dataviz.univariate.tail

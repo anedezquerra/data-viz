@@ -1,4 +1,4 @@
-dataviz.bivariate.scatter module
+dataviz.bivariate.scatter
 ================================
 
 .. automodule:: dataviz.bivariate.scatter

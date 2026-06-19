@@ -1,4 +1,4 @@
-dataviz.univariate.robust module
+dataviz.univariate.robust
 ================================
 
 .. automodule:: dataviz.univariate.robust

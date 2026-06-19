@@ -1,4 +1,4 @@
-dataviz.univariate.treatment module
+dataviz.univariate.treatment
 ===================================
 
 .. automodule:: dataviz.univariate.treatment

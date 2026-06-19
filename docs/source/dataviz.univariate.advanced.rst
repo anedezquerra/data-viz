@@ -1,4 +1,4 @@
-dataviz.univariate.advanced module
+dataviz.univariate.advanced
 ==================================
 
 .. automodule:: dataviz.univariate.advanced

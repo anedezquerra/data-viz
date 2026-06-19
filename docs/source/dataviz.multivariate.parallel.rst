@@ -1,4 +1,4 @@
-dataviz.multivariate.parallel module
+dataviz.multivariate.parallel
 ====================================
 
 .. automodule:: dataviz.multivariate.parallel

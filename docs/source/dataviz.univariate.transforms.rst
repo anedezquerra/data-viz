@@ -1,4 +1,4 @@
-dataviz.univariate.transforms module
+dataviz.univariate.transforms
 ====================================
 
 .. automodule:: dataviz.univariate.transforms

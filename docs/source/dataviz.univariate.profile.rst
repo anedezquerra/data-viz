@@ -1,4 +1,4 @@
-dataviz.univariate.profile module
+dataviz.univariate.profile
 =================================
 
 .. automodule:: dataviz.univariate.profile

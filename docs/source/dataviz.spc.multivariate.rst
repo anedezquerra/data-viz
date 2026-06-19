@@ -1,4 +1,4 @@
-dataviz.spc.multivariate module
+dataviz.spc.multivariate
 ===============================
 
 .. automodule:: dataviz.spc.multivariate

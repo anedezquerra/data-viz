@@ -1,4 +1,4 @@
-dataviz.univariate.stats module
+dataviz.univariate.stats
 ===============================
 
 .. automodule:: dataviz.univariate.stats

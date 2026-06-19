@@ -1,4 +1,4 @@
-dataviz.spc.variable module
+dataviz.spc.variable
 ===========================
 
 .. automodule:: dataviz.spc.variable

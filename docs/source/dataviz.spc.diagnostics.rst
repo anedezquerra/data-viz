@@ -1,4 +1,4 @@
-dataviz.spc.diagnostics module
+dataviz.spc.diagnostics
 ==============================
 
 .. automodule:: dataviz.spc.diagnostics

@@ -1,4 +1,4 @@
-dataviz.classification package
+dataviz.classification
 ==============================
 
 Submodules

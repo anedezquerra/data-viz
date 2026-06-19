@@ -1,4 +1,4 @@
-dataviz.spc.constants module
+dataviz.spc.constants
 ============================
 
 .. automodule:: dataviz.spc.constants

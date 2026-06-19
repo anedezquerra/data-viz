@@ -1,4 +1,4 @@
-dataviz.univariate.fitting module
+dataviz.univariate.fitting
 =================================
 
 .. automodule:: dataviz.univariate.fitting

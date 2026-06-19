@@ -1,4 +1,4 @@
-dataviz.spc.charts module
+dataviz.spc.charts
 =========================
 
 .. automodule:: dataviz.spc.charts

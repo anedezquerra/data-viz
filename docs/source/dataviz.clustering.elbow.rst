@@ -1,4 +1,4 @@
-dataviz.clustering.elbow module
+dataviz.clustering.elbow
 ===============================
 
 .. automodule:: dataviz.clustering.elbow

@@ -1,4 +1,4 @@
-dataviz.univariate.inference module
+dataviz.univariate.inference
 ===================================
 
 .. automodule:: dataviz.univariate.inference

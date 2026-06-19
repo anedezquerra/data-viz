@@ -1,4 +1,4 @@
-dataviz.bivariate.line module
+dataviz.bivariate.line
 =============================
 
 .. automodule:: dataviz.bivariate.line
