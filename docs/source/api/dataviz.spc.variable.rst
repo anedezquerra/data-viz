@@ -1,6 +1,10 @@
 dataviz.spc.variable module
 ===========================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>SPC toolkit</span><h2>Variable</h2><p>Monitor variable data with moving-range, Xbar, EWMA, and CUSUM charts.</p></div>
+
 .. automodule:: dataviz.spc.variable
 
 Public API

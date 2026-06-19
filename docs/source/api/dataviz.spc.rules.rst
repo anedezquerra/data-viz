@@ -1,6 +1,10 @@
 dataviz.spc.rules module
 ========================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>SPC toolkit</span><h2>Rules</h2><p>Calculate control limits and detect common process-behavior rule violations.</p></div>
+
 .. automodule:: dataviz.spc.rules
 
 Public API

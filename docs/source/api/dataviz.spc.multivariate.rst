@@ -1,6 +1,10 @@
 dataviz.spc.multivariate module
 ===============================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>SPC toolkit</span><h2>Multivariate</h2><p>Monitor correlated process variables with Hotelling T-squared statistics.</p></div>
+
 .. automodule:: dataviz.spc.multivariate
 
 Public API
