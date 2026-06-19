@@ -1,4 +1,4 @@
-dataviz.spc.x\_range module
+dataviz.spc.x\_range
 ===========================
 
 .. automodule:: dataviz.spc.x_range

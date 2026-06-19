@@ -1,4 +1,4 @@
-dataviz.bivariate.correlation module
+dataviz.bivariate.correlation
 ====================================
 
 .. automodule:: dataviz.bivariate.correlation

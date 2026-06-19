@@ -1,4 +1,4 @@
-dataviz.regression.prediction module
+dataviz.regression.prediction
 ====================================
 
 .. automodule:: dataviz.regression.prediction

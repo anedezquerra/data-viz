@@ -1,4 +1,4 @@
-dataviz.spc.rules module
+dataviz.spc.rules
 ========================
 
 .. automodule:: dataviz.spc.rules

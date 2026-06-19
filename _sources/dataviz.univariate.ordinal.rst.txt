@@ -1,4 +1,4 @@
-dataviz.univariate.ordinal module
+dataviz.univariate.ordinal
 =================================
 
 .. automodule:: dataviz.univariate.ordinal

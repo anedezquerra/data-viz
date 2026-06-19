@@ -1,4 +1,4 @@
-dataviz.univariate.datetime module
+dataviz.univariate.datetime
 ==================================
 
 .. automodule:: dataviz.univariate.datetime

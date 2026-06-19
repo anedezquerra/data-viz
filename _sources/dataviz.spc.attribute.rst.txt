@@ -1,4 +1,4 @@
-dataviz.spc.attribute module
+dataviz.spc.attribute
 ============================
 
 .. automodule:: dataviz.spc.attribute

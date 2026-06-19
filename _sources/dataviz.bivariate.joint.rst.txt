@@ -1,4 +1,4 @@
-dataviz.bivariate.joint module
+dataviz.bivariate.joint
 ==============================
 
 .. automodule:: dataviz.bivariate.joint

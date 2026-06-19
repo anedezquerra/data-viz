@@ -1,4 +1,4 @@
-dataviz.regression.charts module
+dataviz.regression.charts
 ================================
 
 .. automodule:: dataviz.regression.charts

@@ -1,4 +1,4 @@
-dataviz.bivariate.categorical module
+dataviz.bivariate.categorical
 ====================================
 
 .. automodule:: dataviz.bivariate.categorical

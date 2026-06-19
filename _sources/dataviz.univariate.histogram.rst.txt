@@ -1,4 +1,4 @@
-dataviz.univariate.histogram module
+dataviz.univariate.histogram
 ===================================
 
 .. automodule:: dataviz.univariate.histogram

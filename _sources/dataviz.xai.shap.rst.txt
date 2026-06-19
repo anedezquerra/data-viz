@@ -1,4 +1,4 @@
-dataviz.xai.shap module
+dataviz.xai.shap
 =======================
 
 .. automodule:: dataviz.xai.shap

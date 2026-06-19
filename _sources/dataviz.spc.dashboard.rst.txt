@@ -1,4 +1,4 @@
-dataviz.spc.dashboard module
+dataviz.spc.dashboard
 ============================
 
 .. automodule:: dataviz.spc.dashboard

@@ -1,4 +1,4 @@
-dataviz.eda package
+dataviz.eda
 ===================
 
 Submodules

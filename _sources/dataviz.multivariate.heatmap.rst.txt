@@ -1,4 +1,4 @@
-dataviz.multivariate.heatmap module
+dataviz.multivariate.heatmap
 ===================================
 
 .. automodule:: dataviz.multivariate.heatmap

@@ -1,4 +1,4 @@
-dataviz.multivariate.pairplot module
+dataviz.multivariate.pairplot
 ====================================
 
 .. automodule:: dataviz.multivariate.pairplot

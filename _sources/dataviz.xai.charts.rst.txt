@@ -1,4 +1,4 @@
-dataviz.xai.charts module
+dataviz.xai.charts
 =========================
 
 .. automodule:: dataviz.xai.charts

@@ -1,4 +1,4 @@
-dataviz.classification.roc module
+dataviz.classification.roc
 =================================
 
 .. automodule:: dataviz.classification.roc

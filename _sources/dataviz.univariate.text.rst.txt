@@ -1,4 +1,4 @@
-dataviz.univariate.text module
+dataviz.univariate.text
 ==============================
 
 .. automodule:: dataviz.univariate.text

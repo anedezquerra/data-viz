@@ -1,4 +1,4 @@
-dataviz.eda.class\_dist module
+dataviz.eda.class\_dist
 ==============================
 
 .. automodule:: dataviz.eda.class_dist

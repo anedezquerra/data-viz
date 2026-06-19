@@ -1,4 +1,4 @@
-dataviz.spc.control module
+dataviz.spc.control
 ==========================
 
 .. automodule:: dataviz.spc.control

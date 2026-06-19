@@ -1,4 +1,4 @@
-dataviz.univariate.diagnostics module
+dataviz.univariate.diagnostics
 =====================================
 
 .. automodule:: dataviz.univariate.diagnostics

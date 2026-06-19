@@ -1,4 +1,4 @@
-dataviz.univariate.distribution module
+dataviz.univariate.distribution
 ======================================
 
 .. automodule:: dataviz.univariate.distribution

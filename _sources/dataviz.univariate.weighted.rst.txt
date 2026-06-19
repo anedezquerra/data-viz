@@ -1,4 +1,4 @@
-dataviz.univariate.weighted module
+dataviz.univariate.weighted
 ==================================
 
 .. automodule:: dataviz.univariate.weighted

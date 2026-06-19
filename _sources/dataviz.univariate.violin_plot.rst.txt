@@ -1,4 +1,4 @@
-dataviz.univariate.violin\_plot module
+dataviz.univariate.violin\_plot
 ======================================
 
 .. automodule:: dataviz.univariate.violin_plot

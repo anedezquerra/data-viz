@@ -1,4 +1,4 @@
-dataviz.univariate.accessors module
+dataviz.univariate.accessors
 ===================================
 
 .. automodule:: dataviz.univariate.accessors

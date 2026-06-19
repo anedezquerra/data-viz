@@ -1,4 +1,4 @@
-dataviz.bivariate.stats module
+dataviz.bivariate.stats
 ==============================
 
 .. automodule:: dataviz.bivariate.stats

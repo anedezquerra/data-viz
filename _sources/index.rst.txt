@@ -7,7 +7,7 @@ Welcome to the official documentation for Data-Viz!
    :maxdepth: 4
    :caption: Contents:
 
-   modules
+  s
 
 Modules Reference
 =================

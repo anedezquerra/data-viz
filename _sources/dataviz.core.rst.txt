@@ -1,4 +1,4 @@
-dataviz.core module
+dataviz.core
 ===================
 
 .. automodule:: dataviz.core

@@ -1,4 +1,4 @@
-dataviz.univariate.dashboard module
+dataviz.univariate.dashboard
 ===================================
 
 .. automodule:: dataviz.univariate.dashboard

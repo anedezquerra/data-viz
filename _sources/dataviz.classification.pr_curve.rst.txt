@@ -1,4 +1,4 @@
-dataviz.classification.pr\_curve module
+dataviz.classification.pr\_curve
 =======================================
 
 .. automodule:: dataviz.classification.pr_curve

@@ -1,4 +1,4 @@
-dataviz.univariate.density module
+dataviz.univariate.density
 =================================
 
 .. automodule:: dataviz.univariate.density

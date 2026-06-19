@@ -1,4 +1,4 @@
-dataviz.bivariate.advanced module
+dataviz.bivariate.advanced
 =================================
 
 .. automodule:: dataviz.bivariate.advanced

@@ -1,4 +1,4 @@
-dataviz.utils.helpers module
+dataviz.utils.helpers
 ============================
 
 .. automodule:: dataviz.utils.helpers

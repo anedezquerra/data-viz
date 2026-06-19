@@ -1,4 +1,4 @@
-dataviz.univariate.box\_plot module
+dataviz.univariate.box\_plot
 ===================================
 
 .. automodule:: dataviz.univariate.box_plot

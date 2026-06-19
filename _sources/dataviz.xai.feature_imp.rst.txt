@@ -1,4 +1,4 @@
-dataviz.xai.feature\_imp module
+dataviz.xai.feature\_imp
 ===============================
 
 .. automodule:: dataviz.xai.feature_imp

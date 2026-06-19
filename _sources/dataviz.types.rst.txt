@@ -1,4 +1,4 @@
-dataviz.types module
+dataviz.types
 ====================
 
 .. automodule:: dataviz.types

@@ -1,4 +1,4 @@
-dataviz.clustering.charts module
+dataviz.clustering.charts
 ================================
 
 .. automodule:: dataviz.clustering.charts

@@ -1,4 +1,4 @@
-dataviz.classification.charts module
+dataviz.classification.charts
 ====================================
 
 .. automodule:: dataviz.classification.charts

@@ -1,4 +1,4 @@
-dataviz.eda.missing\_data module
+dataviz.eda.missing\_data
 ================================
 
 .. automodule:: dataviz.eda.missing_data

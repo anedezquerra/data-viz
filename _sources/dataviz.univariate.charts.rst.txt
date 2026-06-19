@@ -1,4 +1,4 @@
-dataviz.univariate.charts module
+dataviz.univariate.charts
 ================================
 
 .. automodule:: dataviz.univariate.charts

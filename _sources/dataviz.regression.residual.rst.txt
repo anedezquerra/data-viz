@@ -1,4 +1,4 @@
-dataviz.regression.residual module
+dataviz.regression.residual
 ==================================
 
 .. automodule:: dataviz.regression.residual

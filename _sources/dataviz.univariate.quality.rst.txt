@@ -1,4 +1,4 @@
-dataviz.univariate.quality module
+dataviz.univariate.quality
 =================================
 
 .. automodule:: dataviz.univariate.quality

@@ -1,4 +1,4 @@
-dataviz.univariate.categorical module
+dataviz.univariate.categorical
 =====================================
 
 .. automodule:: dataviz.univariate.categorical
