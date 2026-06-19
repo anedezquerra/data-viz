@@ -16,6 +16,7 @@ from ..utils import (
     resolve_xy_data,
     setup_plot,
     validate_alpha,
+    validate_equal_length,
     validate_positive_int,
 )
 from ..utils.validation import NaPolicy
@@ -50,6 +51,40 @@ def _fit_line(x: SeriesLike, y: SeriesLike, degree: int) -> Tuple[np.ndarray, np
     x_sorted = x_values[order]
     coeffs = np.polyfit(x_sorted, y_values[order], degree)
     return x_sorted, np.polyval(coeffs, x_sorted)
+
+
+def _scatter_row_positions(
+    x: Union[str, SeriesLike],
+    y: Union[str, SeriesLike],
+    data: Optional[pd.DataFrame],
+    na_policy: NaPolicy,
+) -> Tuple[np.ndarray, int]:
+    """Return source-row positions retained by paired missing-value handling."""
+    x_source = resolve_series(x, data=data, fallback_name="X")
+    y_source = resolve_series(y, data=data, fallback_name="Y")
+    validate_equal_length(x_source, y_source, names=("x", "y"))
+    frame = pd.DataFrame(
+        {"x": x_source.to_numpy(), "y": y_source.to_numpy()}
+    )
+    if na_policy == "drop":
+        retained = np.flatnonzero(~frame.isna().any(axis=1).to_numpy())
+    else:
+        retained = np.arange(len(frame))
+    return retained, len(frame)
+
+
+def _align_scatter_metadata(
+    value: Union[str, SeriesLike],
+    data: Optional[pd.DataFrame],
+    retained: np.ndarray,
+    expected_length: int,
+    name: str,
+) -> pd.Series:
+    """Apply the paired-data row selection to hue or point-label metadata."""
+    values = resolve_series(value, data=data, fallback_name=name.title())
+    validate_equal_length(range(expected_length), values, names=("x", name))
+    normalized = pd.Series(values.to_numpy(), name=values.name)
+    return normalized.iloc[retained].reset_index(drop=True)
 
 
 def scatter_plot_static(
@@ -144,6 +179,7 @@ def scatter_plot_static(
     validate_alpha(alpha)
     validate_positive_int(size, "size")
     x_values, y_values = resolve_xy_data(x, y, data=data, na_policy=na_policy)
+    retained, input_length = _scatter_row_positions(x, y, data, na_policy)
     xlabel = xlabel or x_values.name or "X"
     ylabel = ylabel or y_values.name or "Y"
     title = title or f"Scatter Plot: {xlabel} vs {ylabel}"
@@ -153,9 +189,14 @@ def scatter_plot_static(
 
     hue_values = None
     if hue is not None:
-        hue_values = resolve_series(hue, data=data, fallback_name="Hue")
-        if na_policy == "drop":
-            hue_values = hue_values.iloc[: len(x_values)]
+        hue_values = _align_scatter_metadata(
+            hue, data, retained, input_length, "hue"
+        )
+    point_labels = None
+    if annotate_points is not None:
+        point_labels = _align_scatter_metadata(
+            annotate_points, None, retained, input_length, "annotate_points"
+        )
 
     with plt.style.context(style):
         if ax is None:
@@ -200,8 +241,8 @@ def scatter_plot_static(
             ax.plot(x_fit, y_fit, color=fit_color, linewidth=2, label=f"Degree {fit_degree} fit")
             ax.legend(fontsize=font_size)
 
-        if annotate_points is not None:
-            for x_point, y_point, label in zip(x_values, y_values, annotate_points):
+        if point_labels is not None:
+            for x_point, y_point, label in zip(x_values, y_values, point_labels):
                 ax.annotate(str(label), (x_point, y_point), fontsize=font_size)
 
         add_reference_lines(ax, hline=hline, vline=vline, diagonal=diagonal)
@@ -296,6 +337,7 @@ def scatter_plot_interactive(
     """
     validate_positive_int(size, "size")
     x_values, y_values = resolve_xy_data(x, y, data=data, na_policy=na_policy)
+    retained, input_length = _scatter_row_positions(x, y, data, na_policy)
     xlabel = xlabel or x_values.name or "X"
     ylabel = ylabel or y_values.name or "Y"
     title = title or f"Scatter Plot: {xlabel} vs {ylabel}"
@@ -306,9 +348,17 @@ def scatter_plot_interactive(
         color = marker_color
 
     fig = go.Figure()
-    hue_values = resolve_series(hue, data=data, fallback_name="Hue") if hue is not None else None
+    hue_values = (
+        _align_scatter_metadata(hue, data, retained, input_length, "hue")
+        if hue is not None
+        else None
+    )
+    text_values = (
+        _align_scatter_metadata(text, None, retained, input_length, "text")
+        if text is not None
+        else None
+    )
     if hue_values is not None and not pd.api.types.is_numeric_dtype(hue_values):
-        hue_values = hue_values.iloc[: len(x_values)]
         for group_name in pd.unique(hue_values):
             mask = np.asarray(hue_values == group_name)
             fig.add_trace(
@@ -317,14 +367,23 @@ def scatter_plot_interactive(
                     y=y_values[mask],
                     mode=mode,
                     name=str(group_name),
-                    text=text,
+                    text=text_values[mask] if text_values is not None else None,
                     marker=dict(size=size),
                     **kwargs,
                 )
             )
     else:
         marker = dict(size=size, color=hue_values if hue_values is not None else color)
-        fig.add_trace(go.Scatter(x=x_values, y=y_values, mode=mode, text=text, marker=marker, **kwargs))
+        fig.add_trace(
+            go.Scatter(
+                x=x_values,
+                y=y_values,
+                mode=mode,
+                text=text_values,
+                marker=marker,
+                **kwargs,
+            )
+        )
 
     if fit_degree is not None:
         validate_positive_int(fit_degree, "fit_degree")
