@@ -18,7 +18,9 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dataviz.multivariate.charts" href="dataviz.multivariate.charts.html" />
+    <link rel="prev" title="dataviz.eda.missing_data" href="dataviz.eda.missing_data.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,26 +42,46 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">dataviz.multivariate</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-dataviz.multivariate">Module contents</a><ul>
-<li><a class="reference internal" href="#dataviz.multivariate.heatmap"><code class="docutils literal notranslate"><span class="pre">heatmap()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.multivariate.heatmap_interactive"><code class="docutils literal notranslate"><span class="pre">heatmap_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.multivariate.heatmap_static"><code class="docutils literal notranslate"><span class="pre">heatmap_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.multivariate.pairplot"><code class="docutils literal notranslate"><span class="pre">pairplot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.multivariate.pairplot_interactive"><code class="docutils literal notranslate"><span class="pre">pairplot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.multivariate.pairplot_static"><code class="docutils literal notranslate"><span class="pre">pairplot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.multivariate.parallel_coordinates"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.multivariate.parallel_coordinates_interactive"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.multivariate.parallel_coordinates_static"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates_static()</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Core Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dataviz.bivariate.html">dataviz.bivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.classification.html">dataviz.classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.clustering.html">dataviz.clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.eda.html">dataviz.eda</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">dataviz.multivariate</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.multivariate.charts.html">dataviz.multivariate.charts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.multivariate.heatmap.html">dataviz.multivariate.heatmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.multivariate.pairplot.html">dataviz.multivariate.pairplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.multivariate.parallel.html">dataviz.multivariate.parallel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dataviz.multivariate">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.multivariate.heatmap"><code class="docutils literal notranslate"><span class="pre">heatmap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.multivariate.heatmap_interactive"><code class="docutils literal notranslate"><span class="pre">heatmap_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.multivariate.heatmap_static"><code class="docutils literal notranslate"><span class="pre">heatmap_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.multivariate.pairplot"><code class="docutils literal notranslate"><span class="pre">pairplot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.multivariate.pairplot_interactive"><code class="docutils literal notranslate"><span class="pre">pairplot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.multivariate.pairplot_static"><code class="docutils literal notranslate"><span class="pre">pairplot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.multivariate.parallel_coordinates"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.multivariate.parallel_coordinates_interactive"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.multivariate.parallel_coordinates_static"><code class="docutils literal notranslate"><span class="pre">parallel_coordinates_static()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.regression.html">dataviz.regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.spc.html">dataviz.spc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.univariate.html">dataviz.univariate</a></li>
 </ul>
-</div>
+<p class="caption" role="heading"><span class="caption-text">Infrastructure &amp; Utilities:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.utils.html">dataviz.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.xai.html">dataviz.xai</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.core.html">dataviz.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.types.html">dataviz.types</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -537,7 +559,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dataviz.eda.missing_data.html" class="btn btn-neutral float-left" title="dataviz.eda.missing_data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dataviz.multivariate.charts.html" class="btn btn-neutral float-right" title="dataviz.multivariate.charts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

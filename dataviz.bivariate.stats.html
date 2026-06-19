@@ -18,7 +18,9 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dataviz.bivariate.trends" href="dataviz.bivariate.trends.html" />
+    <link rel="prev" title="dataviz.bivariate.scatter" href="dataviz.bivariate.scatter.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,44 +42,58 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">dataviz.bivariate.stats</a><ul>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats"><code class="docutils literal notranslate"><span class="pre">BivariateStats</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.covariance"><code class="docutils literal notranslate"><span class="pre">BivariateStats.covariance</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.intercept"><code class="docutils literal notranslate"><span class="pre">BivariateStats.intercept</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.missing_x"><code class="docutils literal notranslate"><span class="pre">BivariateStats.missing_x</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.missing_y"><code class="docutils literal notranslate"><span class="pre">BivariateStats.missing_y</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.n"><code class="docutils literal notranslate"><span class="pre">BivariateStats.n</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.pearson"><code class="docutils literal notranslate"><span class="pre">BivariateStats.pearson</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.r_squared"><code class="docutils literal notranslate"><span class="pre">BivariateStats.r_squared</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.slope"><code class="docutils literal notranslate"><span class="pre">BivariateStats.slope</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.spearman"><code class="docutils literal notranslate"><span class="pre">BivariateStats.spearman</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.x_mean"><code class="docutils literal notranslate"><span class="pre">BivariateStats.x_mean</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.x_std"><code class="docutils literal notranslate"><span class="pre">BivariateStats.x_std</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.y_mean"><code class="docutils literal notranslate"><span class="pre">BivariateStats.y_mean</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats.y_std"><code class="docutils literal notranslate"><span class="pre">BivariateStats.y_std</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Core Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="dataviz.bivariate.html">dataviz.bivariate</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="dataviz.bivariate.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.advanced.html">dataviz.bivariate.advanced</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.categorical.html">dataviz.bivariate.categorical</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.charts.html">dataviz.bivariate.charts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.correlation.html">dataviz.bivariate.correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.joint.html">dataviz.bivariate.joint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.line.html">dataviz.bivariate.line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.scatter.html">dataviz.bivariate.scatter</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.bivariate.stats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.BivariateStats"><code class="docutils literal notranslate"><span class="pre">BivariateStats</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.bivariate_summary"><code class="docutils literal notranslate"><span class="pre">bivariate_summary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.bland_altman_interactive"><code class="docutils literal notranslate"><span class="pre">bland_altman_interactive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.bland_altman_static"><code class="docutils literal notranslate"><span class="pre">bland_altman_static()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.conditional_box_interactive"><code class="docutils literal notranslate"><span class="pre">conditional_box_interactive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.conditional_box_static"><code class="docutils literal notranslate"><span class="pre">conditional_box_static()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.lag_plot_interactive"><code class="docutils literal notranslate"><span class="pre">lag_plot_interactive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.lag_plot_static"><code class="docutils literal notranslate"><span class="pre">lag_plot_static()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.outlier_scatter_interactive"><code class="docutils literal notranslate"><span class="pre">outlier_scatter_interactive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.outlier_scatter_static"><code class="docutils literal notranslate"><span class="pre">outlier_scatter_static()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.quantile_bin_plot_interactive"><code class="docutils literal notranslate"><span class="pre">quantile_bin_plot_interactive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.quantile_bin_plot_static"><code class="docutils literal notranslate"><span class="pre">quantile_bin_plot_static()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.rank_scatter_interactive"><code class="docutils literal notranslate"><span class="pre">rank_scatter_interactive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.rank_scatter_static"><code class="docutils literal notranslate"><span class="pre">rank_scatter_static()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.residual_relationship_interactive"><code class="docutils literal notranslate"><span class="pre">residual_relationship_interactive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.bivariate.stats.residual_relationship_static"><code class="docutils literal notranslate"><span class="pre">residual_relationship_static()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.bivariate_summary"><code class="docutils literal notranslate"><span class="pre">bivariate_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.bland_altman_interactive"><code class="docutils literal notranslate"><span class="pre">bland_altman_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.bland_altman_static"><code class="docutils literal notranslate"><span class="pre">bland_altman_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.conditional_box_interactive"><code class="docutils literal notranslate"><span class="pre">conditional_box_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.conditional_box_static"><code class="docutils literal notranslate"><span class="pre">conditional_box_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.lag_plot_interactive"><code class="docutils literal notranslate"><span class="pre">lag_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.lag_plot_static"><code class="docutils literal notranslate"><span class="pre">lag_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.outlier_scatter_interactive"><code class="docutils literal notranslate"><span class="pre">outlier_scatter_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.outlier_scatter_static"><code class="docutils literal notranslate"><span class="pre">outlier_scatter_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.quantile_bin_plot_interactive"><code class="docutils literal notranslate"><span class="pre">quantile_bin_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.quantile_bin_plot_static"><code class="docutils literal notranslate"><span class="pre">quantile_bin_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.rank_scatter_interactive"><code class="docutils literal notranslate"><span class="pre">rank_scatter_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.rank_scatter_static"><code class="docutils literal notranslate"><span class="pre">rank_scatter_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.residual_relationship_interactive"><code class="docutils literal notranslate"><span class="pre">residual_relationship_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.bivariate.stats.residual_relationship_static"><code class="docutils literal notranslate"><span class="pre">residual_relationship_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.bivariate.trends.html">dataviz.bivariate.trends</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="dataviz.bivariate.html#module-dataviz.bivariate">Module contents</a></li>
 </ul>
-</div>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.classification.html">dataviz.classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.clustering.html">dataviz.clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.eda.html">dataviz.eda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.multivariate.html">dataviz.multivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.regression.html">dataviz.regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.spc.html">dataviz.spc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.univariate.html">dataviz.univariate</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Infrastructure &amp; Utilities:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.utils.html">dataviz.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.xai.html">dataviz.xai</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.core.html">dataviz.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.types.html">dataviz.types</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -92,6 +108,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="dataviz.bivariate.html">dataviz.bivariate</a></li>
       <li class="breadcrumb-item active">dataviz.bivariate.stats</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/dataviz.bivariate.stats.rst.txt" rel="nofollow"> View page source</a>
@@ -794,7 +811,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dataviz.bivariate.scatter.html" class="btn btn-neutral float-left" title="dataviz.bivariate.scatter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dataviz.bivariate.trends.html" class="btn btn-neutral float-right" title="dataviz.bivariate.trends" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

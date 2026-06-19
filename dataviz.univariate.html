@@ -18,7 +18,9 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dataviz.univariate.accessors" href="dataviz.univariate.accessors.html" />
+    <link rel="prev" title="dataviz.spc.x_range" href="dataviz.spc.x_range.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,305 +42,345 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">dataviz.univariate</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-dataviz.univariate">Module contents</a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.BooleanRateInterval"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.BooleanRateInterval.confidence_level"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval.confidence_level</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.BooleanRateInterval.lower"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval.lower</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.BooleanRateInterval.true_rate"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval.true_rate</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.BooleanRateInterval.upper"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval.upper</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Core Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dataviz.bivariate.html">dataviz.bivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.classification.html">dataviz.classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.clustering.html">dataviz.clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.eda.html">dataviz.eda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.multivariate.html">dataviz.multivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.regression.html">dataviz.regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.spc.html">dataviz.spc</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">dataviz.univariate</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.accessors.html">dataviz.univariate.accessors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.advanced.html">dataviz.univariate.advanced</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.box_plot.html">dataviz.univariate.box_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.categorical.html">dataviz.univariate.categorical</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.charts.html">dataviz.univariate.charts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.dashboard.html">dataviz.univariate.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.datetime.html">dataviz.univariate.datetime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.density.html">dataviz.univariate.density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.diagnostics.html">dataviz.univariate.diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.distribution.html">dataviz.univariate.distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.fitting.html">dataviz.univariate.fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.histogram.html">dataviz.univariate.histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.inference.html">dataviz.univariate.inference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.ordinal.html">dataviz.univariate.ordinal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.profile.html">dataviz.univariate.profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.quality.html">dataviz.univariate.quality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.robust.html">dataviz.univariate.robust</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.stats.html">dataviz.univariate.stats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.tail.html">dataviz.univariate.tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.text.html">dataviz.univariate.text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.transforms.html">dataviz.univariate.transforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.treatment.html">dataviz.univariate.treatment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.violin_plot.html">dataviz.univariate.violin_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.weighted.html">dataviz.univariate.weighted</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.BooleanSummary"><code class="docutils literal notranslate"><span class="pre">BooleanSummary</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.BooleanSummary.count"><code class="docutils literal notranslate"><span class="pre">BooleanSummary.count</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.BooleanSummary.false_count"><code class="docutils literal notranslate"><span class="pre">BooleanSummary.false_count</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.BooleanSummary.true_count"><code class="docutils literal notranslate"><span class="pre">BooleanSummary.true_count</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.BooleanSummary.true_rate"><code class="docutils literal notranslate"><span class="pre">BooleanSummary.true_rate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dataviz.univariate">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.BooleanRateInterval"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BooleanRateInterval.confidence_level"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval.confidence_level</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BooleanRateInterval.lower"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval.lower</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BooleanRateInterval.true_rate"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval.true_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BooleanRateInterval.upper"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval.upper</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.BootstrapCI"><code class="docutils literal notranslate"><span class="pre">BootstrapCI</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.BootstrapCI.confidence_level"><code class="docutils literal notranslate"><span class="pre">BootstrapCI.confidence_level</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.BootstrapCI.estimate"><code class="docutils literal notranslate"><span class="pre">BootstrapCI.estimate</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.BootstrapCI.lower"><code class="docutils literal notranslate"><span class="pre">BootstrapCI.lower</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.BootstrapCI.n_resamples"><code class="docutils literal notranslate"><span class="pre">BootstrapCI.n_resamples</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.BootstrapCI.statistic"><code class="docutils literal notranslate"><span class="pre">BootstrapCI.statistic</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.BootstrapCI.upper"><code class="docutils literal notranslate"><span class="pre">BootstrapCI.upper</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.BooleanSummary"><code class="docutils literal notranslate"><span class="pre">BooleanSummary</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BooleanSummary.count"><code class="docutils literal notranslate"><span class="pre">BooleanSummary.count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BooleanSummary.false_count"><code class="docutils literal notranslate"><span class="pre">BooleanSummary.false_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BooleanSummary.true_count"><code class="docutils literal notranslate"><span class="pre">BooleanSummary.true_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BooleanSummary.true_rate"><code class="docutils literal notranslate"><span class="pre">BooleanSummary.true_rate</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.ConcentrationStats"><code class="docutils literal notranslate"><span class="pre">ConcentrationStats</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.ConcentrationStats.gini"><code class="docutils literal notranslate"><span class="pre">ConcentrationStats.gini</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ConcentrationStats.top_10_share"><code class="docutils literal notranslate"><span class="pre">ConcentrationStats.top_10_share</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ConcentrationStats.top_20_share"><code class="docutils literal notranslate"><span class="pre">ConcentrationStats.top_20_share</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ConcentrationStats.total"><code class="docutils literal notranslate"><span class="pre">ConcentrationStats.total</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.BootstrapCI"><code class="docutils literal notranslate"><span class="pre">BootstrapCI</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BootstrapCI.confidence_level"><code class="docutils literal notranslate"><span class="pre">BootstrapCI.confidence_level</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BootstrapCI.estimate"><code class="docutils literal notranslate"><span class="pre">BootstrapCI.estimate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BootstrapCI.lower"><code class="docutils literal notranslate"><span class="pre">BootstrapCI.lower</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BootstrapCI.n_resamples"><code class="docutils literal notranslate"><span class="pre">BootstrapCI.n_resamples</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BootstrapCI.statistic"><code class="docutils literal notranslate"><span class="pre">BootstrapCI.statistic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.BootstrapCI.upper"><code class="docutils literal notranslate"><span class="pre">BootstrapCI.upper</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.DataQualitySummary"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.count"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.count</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.duplicate_rate"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.duplicate_rate</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.missing"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.missing</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.missing_rate"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.missing_rate</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.negative_rate"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.negative_rate</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.unique"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.unique</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.zero_rate"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.zero_rate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.ConcentrationStats"><code class="docutils literal notranslate"><span class="pre">ConcentrationStats</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.ConcentrationStats.gini"><code class="docutils literal notranslate"><span class="pre">ConcentrationStats.gini</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.ConcentrationStats.top_10_share"><code class="docutils literal notranslate"><span class="pre">ConcentrationStats.top_10_share</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.ConcentrationStats.top_20_share"><code class="docutils literal notranslate"><span class="pre">ConcentrationStats.top_20_share</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.ConcentrationStats.total"><code class="docutils literal notranslate"><span class="pre">ConcentrationStats.total</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.DistributionFit"><code class="docutils literal notranslate"><span class="pre">DistributionFit</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.DistributionFit.aic"><code class="docutils literal notranslate"><span class="pre">DistributionFit.aic</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.DistributionFit.bic"><code class="docutils literal notranslate"><span class="pre">DistributionFit.bic</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.DistributionFit.distribution"><code class="docutils literal notranslate"><span class="pre">DistributionFit.distribution</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.DistributionFit.p_value"><code class="docutils literal notranslate"><span class="pre">DistributionFit.p_value</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.DistributionFit.parameters"><code class="docutils literal notranslate"><span class="pre">DistributionFit.parameters</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.DistributionFit.statistic"><code class="docutils literal notranslate"><span class="pre">DistributionFit.statistic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.DataQualitySummary"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.count"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.duplicate_rate"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.duplicate_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.missing"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.missing</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.missing_rate"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.missing_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.negative_rate"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.negative_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.unique"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.unique</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DataQualitySummary.zero_rate"><code class="docutils literal notranslate"><span class="pre">DataQualitySummary.zero_rate</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.NormalityTestResult"><code class="docutils literal notranslate"><span class="pre">NormalityTestResult</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.NormalityTestResult.alpha"><code class="docutils literal notranslate"><span class="pre">NormalityTestResult.alpha</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.NormalityTestResult.is_normal"><code class="docutils literal notranslate"><span class="pre">NormalityTestResult.is_normal</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.NormalityTestResult.method"><code class="docutils literal notranslate"><span class="pre">NormalityTestResult.method</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.NormalityTestResult.p_value"><code class="docutils literal notranslate"><span class="pre">NormalityTestResult.p_value</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.NormalityTestResult.statistic"><code class="docutils literal notranslate"><span class="pre">NormalityTestResult.statistic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.DistributionFit"><code class="docutils literal notranslate"><span class="pre">DistributionFit</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DistributionFit.aic"><code class="docutils literal notranslate"><span class="pre">DistributionFit.aic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DistributionFit.bic"><code class="docutils literal notranslate"><span class="pre">DistributionFit.bic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DistributionFit.distribution"><code class="docutils literal notranslate"><span class="pre">DistributionFit.distribution</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DistributionFit.p_value"><code class="docutils literal notranslate"><span class="pre">DistributionFit.p_value</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DistributionFit.parameters"><code class="docutils literal notranslate"><span class="pre">DistributionFit.parameters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.DistributionFit.statistic"><code class="docutils literal notranslate"><span class="pre">DistributionFit.statistic</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.OutlierTreatmentResult"><code class="docutils literal notranslate"><span class="pre">OutlierTreatmentResult</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.OutlierTreatmentResult.mask"><code class="docutils literal notranslate"><span class="pre">OutlierTreatmentResult.mask</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.OutlierTreatmentResult.method"><code class="docutils literal notranslate"><span class="pre">OutlierTreatmentResult.method</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.OutlierTreatmentResult.original"><code class="docutils literal notranslate"><span class="pre">OutlierTreatmentResult.original</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.OutlierTreatmentResult.rule"><code class="docutils literal notranslate"><span class="pre">OutlierTreatmentResult.rule</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.OutlierTreatmentResult.treated"><code class="docutils literal notranslate"><span class="pre">OutlierTreatmentResult.treated</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.NormalityTestResult"><code class="docutils literal notranslate"><span class="pre">NormalityTestResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.NormalityTestResult.alpha"><code class="docutils literal notranslate"><span class="pre">NormalityTestResult.alpha</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.NormalityTestResult.is_normal"><code class="docutils literal notranslate"><span class="pre">NormalityTestResult.is_normal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.NormalityTestResult.method"><code class="docutils literal notranslate"><span class="pre">NormalityTestResult.method</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.NormalityTestResult.p_value"><code class="docutils literal notranslate"><span class="pre">NormalityTestResult.p_value</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.NormalityTestResult.statistic"><code class="docutils literal notranslate"><span class="pre">NormalityTestResult.statistic</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.RobustStats"><code class="docutils literal notranslate"><span class="pre">RobustStats</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.RobustStats.count"><code class="docutils literal notranslate"><span class="pre">RobustStats.count</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.RobustStats.iqr"><code class="docutils literal notranslate"><span class="pre">RobustStats.iqr</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.RobustStats.lower_fence"><code class="docutils literal notranslate"><span class="pre">RobustStats.lower_fence</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.RobustStats.mad"><code class="docutils literal notranslate"><span class="pre">RobustStats.mad</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.RobustStats.median"><code class="docutils literal notranslate"><span class="pre">RobustStats.median</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.RobustStats.q1"><code class="docutils literal notranslate"><span class="pre">RobustStats.q1</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.RobustStats.q3"><code class="docutils literal notranslate"><span class="pre">RobustStats.q3</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.RobustStats.scaled_mad"><code class="docutils literal notranslate"><span class="pre">RobustStats.scaled_mad</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.RobustStats.trimmed_mean"><code class="docutils literal notranslate"><span class="pre">RobustStats.trimmed_mean</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.RobustStats.upper_fence"><code class="docutils literal notranslate"><span class="pre">RobustStats.upper_fence</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.RobustStats.winsorized_mean"><code class="docutils literal notranslate"><span class="pre">RobustStats.winsorized_mean</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.OutlierTreatmentResult"><code class="docutils literal notranslate"><span class="pre">OutlierTreatmentResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.OutlierTreatmentResult.mask"><code class="docutils literal notranslate"><span class="pre">OutlierTreatmentResult.mask</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.OutlierTreatmentResult.method"><code class="docutils literal notranslate"><span class="pre">OutlierTreatmentResult.method</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.OutlierTreatmentResult.original"><code class="docutils literal notranslate"><span class="pre">OutlierTreatmentResult.original</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.OutlierTreatmentResult.rule"><code class="docutils literal notranslate"><span class="pre">OutlierTreatmentResult.rule</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.OutlierTreatmentResult.treated"><code class="docutils literal notranslate"><span class="pre">OutlierTreatmentResult.treated</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.TransformResult"><code class="docutils literal notranslate"><span class="pre">TransformResult</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.TransformResult.method"><code class="docutils literal notranslate"><span class="pre">TransformResult.method</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.TransformResult.parameter"><code class="docutils literal notranslate"><span class="pre">TransformResult.parameter</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.TransformResult.values"><code class="docutils literal notranslate"><span class="pre">TransformResult.values</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.RobustStats"><code class="docutils literal notranslate"><span class="pre">RobustStats</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.RobustStats.count"><code class="docutils literal notranslate"><span class="pre">RobustStats.count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.RobustStats.iqr"><code class="docutils literal notranslate"><span class="pre">RobustStats.iqr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.RobustStats.lower_fence"><code class="docutils literal notranslate"><span class="pre">RobustStats.lower_fence</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.RobustStats.mad"><code class="docutils literal notranslate"><span class="pre">RobustStats.mad</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.RobustStats.median"><code class="docutils literal notranslate"><span class="pre">RobustStats.median</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.RobustStats.q1"><code class="docutils literal notranslate"><span class="pre">RobustStats.q1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.RobustStats.q3"><code class="docutils literal notranslate"><span class="pre">RobustStats.q3</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.RobustStats.scaled_mad"><code class="docutils literal notranslate"><span class="pre">RobustStats.scaled_mad</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.RobustStats.trimmed_mean"><code class="docutils literal notranslate"><span class="pre">RobustStats.trimmed_mean</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.RobustStats.upper_fence"><code class="docutils literal notranslate"><span class="pre">RobustStats.upper_fence</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.RobustStats.winsorized_mean"><code class="docutils literal notranslate"><span class="pre">RobustStats.winsorized_mean</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateInput"><code class="docutils literal notranslate"><span class="pre">UnivariateInput</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateInput.kind"><code class="docutils literal notranslate"><span class="pre">UnivariateInput.kind</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateInput.missing_count"><code class="docutils literal notranslate"><span class="pre">UnivariateInput.missing_count</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateInput.name"><code class="docutils literal notranslate"><span class="pre">UnivariateInput.name</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateInput.values"><code class="docutils literal notranslate"><span class="pre">UnivariateInput.values</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.TransformResult"><code class="docutils literal notranslate"><span class="pre">TransformResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.TransformResult.method"><code class="docutils literal notranslate"><span class="pre">TransformResult.method</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.TransformResult.parameter"><code class="docutils literal notranslate"><span class="pre">TransformResult.parameter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.TransformResult.values"><code class="docutils literal notranslate"><span class="pre">TransformResult.values</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateProfile"><code class="docutils literal notranslate"><span class="pre">UnivariateProfile</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateProfile.kind"><code class="docutils literal notranslate"><span class="pre">UnivariateProfile.kind</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateProfile.name"><code class="docutils literal notranslate"><span class="pre">UnivariateProfile.name</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateProfile.quality"><code class="docutils literal notranslate"><span class="pre">UnivariateProfile.quality</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateProfile.summary"><code class="docutils literal notranslate"><span class="pre">UnivariateProfile.summary</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.UnivariateInput"><code class="docutils literal notranslate"><span class="pre">UnivariateInput</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateInput.kind"><code class="docutils literal notranslate"><span class="pre">UnivariateInput.kind</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateInput.missing_count"><code class="docutils literal notranslate"><span class="pre">UnivariateInput.missing_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateInput.name"><code class="docutils literal notranslate"><span class="pre">UnivariateInput.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateInput.values"><code class="docutils literal notranslate"><span class="pre">UnivariateInput.values</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats"><code class="docutils literal notranslate"><span class="pre">UnivariateStats</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.count"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.count</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.iqr"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.iqr</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.kurtosis"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.kurtosis</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.mad"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.mad</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.maximum"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.maximum</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.mean"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.mean</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.median"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.median</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.minimum"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.minimum</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.missing"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.missing</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.q1"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.q1</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.q3"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.q3</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.sem"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.sem</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.skewness"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.skewness</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.std"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.std</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.UnivariateStats.variance"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.variance</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.UnivariateProfile"><code class="docutils literal notranslate"><span class="pre">UnivariateProfile</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateProfile.kind"><code class="docutils literal notranslate"><span class="pre">UnivariateProfile.kind</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateProfile.name"><code class="docutils literal notranslate"><span class="pre">UnivariateProfile.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateProfile.quality"><code class="docutils literal notranslate"><span class="pre">UnivariateProfile.quality</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateProfile.summary"><code class="docutils literal notranslate"><span class="pre">UnivariateProfile.summary</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.WeightedStats"><code class="docutils literal notranslate"><span class="pre">WeightedStats</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.WeightedStats.count"><code class="docutils literal notranslate"><span class="pre">WeightedStats.count</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.WeightedStats.mean"><code class="docutils literal notranslate"><span class="pre">WeightedStats.mean</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.WeightedStats.median"><code class="docutils literal notranslate"><span class="pre">WeightedStats.median</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.WeightedStats.q1"><code class="docutils literal notranslate"><span class="pre">WeightedStats.q1</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.WeightedStats.q3"><code class="docutils literal notranslate"><span class="pre">WeightedStats.q3</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.WeightedStats.std"><code class="docutils literal notranslate"><span class="pre">WeightedStats.std</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.WeightedStats.variance"><code class="docutils literal notranslate"><span class="pre">WeightedStats.variance</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.WeightedStats.weight_sum"><code class="docutils literal notranslate"><span class="pre">WeightedStats.weight_sum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.UnivariateStats"><code class="docutils literal notranslate"><span class="pre">UnivariateStats</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.count"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.iqr"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.iqr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.kurtosis"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.kurtosis</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.mad"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.mad</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.maximum"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.maximum</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.mean"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.mean</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.median"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.median</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.minimum"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.minimum</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.missing"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.missing</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.q1"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.q1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.q3"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.q3</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.sem"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.sem</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.skewness"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.skewness</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.std"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.std</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.UnivariateStats.variance"><code class="docutils literal notranslate"><span class="pre">UnivariateStats.variance</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.as_datetime_series"><code class="docutils literal notranslate"><span class="pre">as_datetime_series()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.as_numeric_series"><code class="docutils literal notranslate"><span class="pre">as_numeric_series()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.auto_profile"><code class="docutils literal notranslate"><span class="pre">auto_profile()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.auto_profile_chart"><code class="docutils literal notranslate"><span class="pre">auto_profile_chart()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.auto_profile_chart_interactive"><code class="docutils literal notranslate"><span class="pre">auto_profile_chart_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.boolean_bar"><code class="docutils literal notranslate"><span class="pre">boolean_bar()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.boolean_bar_interactive"><code class="docutils literal notranslate"><span class="pre">boolean_bar_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.boolean_bar_static"><code class="docutils literal notranslate"><span class="pre">boolean_bar_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.boolean_summary"><code class="docutils literal notranslate"><span class="pre">boolean_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.boolean_wilson_interval"><code class="docutils literal notranslate"><span class="pre">boolean_wilson_interval()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.bootstrap_ci"><code class="docutils literal notranslate"><span class="pre">bootstrap_ci()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.bootstrap_distribution"><code class="docutils literal notranslate"><span class="pre">bootstrap_distribution()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.bootstrap_distribution_plot"><code class="docutils literal notranslate"><span class="pre">bootstrap_distribution_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.bootstrap_distribution_plot_interactive"><code class="docutils literal notranslate"><span class="pre">bootstrap_distribution_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.bootstrap_distribution_plot_static"><code class="docutils literal notranslate"><span class="pre">bootstrap_distribution_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.box_plot"><code class="docutils literal notranslate"><span class="pre">box_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.box_plot_interactive"><code class="docutils literal notranslate"><span class="pre">box_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.box_plot_static"><code class="docutils literal notranslate"><span class="pre">box_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.cap_outliers"><code class="docutils literal notranslate"><span class="pre">cap_outliers()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.category_counts"><code class="docutils literal notranslate"><span class="pre">category_counts()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.compare_distributions"><code class="docutils literal notranslate"><span class="pre">compare_distributions()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.concentration_summary"><code class="docutils literal notranslate"><span class="pre">concentration_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.cumulative_histogram"><code class="docutils literal notranslate"><span class="pre">cumulative_histogram()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.cumulative_histogram_interactive"><code class="docutils literal notranslate"><span class="pre">cumulative_histogram_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.cumulative_histogram_static"><code class="docutils literal notranslate"><span class="pre">cumulative_histogram_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.data_quality_summary"><code class="docutils literal notranslate"><span class="pre">data_quality_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.density_interactive"><code class="docutils literal notranslate"><span class="pre">density_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.density_plot"><code class="docutils literal notranslate"><span class="pre">density_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.density_static"><code class="docutils literal notranslate"><span class="pre">density_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.dot_plot"><code class="docutils literal notranslate"><span class="pre">dot_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.dot_plot_interactive"><code class="docutils literal notranslate"><span class="pre">dot_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.dot_plot_static"><code class="docutils literal notranslate"><span class="pre">dot_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ecdf_plot"><code class="docutils literal notranslate"><span class="pre">ecdf_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ecdf_plot_interactive"><code class="docutils literal notranslate"><span class="pre">ecdf_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ecdf_plot_static"><code class="docutils literal notranslate"><span class="pre">ecdf_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ecdf_values"><code class="docutils literal notranslate"><span class="pre">ecdf_values()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.event_counts"><code class="docutils literal notranslate"><span class="pre">event_counts()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.event_frequency_plot"><code class="docutils literal notranslate"><span class="pre">event_frequency_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.event_frequency_plot_interactive"><code class="docutils literal notranslate"><span class="pre">event_frequency_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.event_frequency_plot_static"><code class="docutils literal notranslate"><span class="pre">event_frequency_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.exceedance_table"><code class="docutils literal notranslate"><span class="pre">exceedance_table()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fit_distribution"><code class="docutils literal notranslate"><span class="pre">fit_distribution()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitted_distribution_histogram"><code class="docutils literal notranslate"><span class="pre">fitted_distribution_histogram()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitted_distribution_histogram_interactive"><code class="docutils literal notranslate"><span class="pre">fitted_distribution_histogram_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitted_distribution_histogram_static"><code class="docutils literal notranslate"><span class="pre">fitted_distribution_histogram_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitted_pdf_values"><code class="docutils literal notranslate"><span class="pre">fitted_pdf_values()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.flag_outliers"><code class="docutils literal notranslate"><span class="pre">flag_outliers()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.frequency_bar"><code class="docutils literal notranslate"><span class="pre">frequency_bar()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.frequency_bar_interactive"><code class="docutils literal notranslate"><span class="pre">frequency_bar_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.frequency_bar_static"><code class="docutils literal notranslate"><span class="pre">frequency_bar_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.histogram"><code class="docutils literal notranslate"><span class="pre">histogram()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.histogram_interactive"><code class="docutils literal notranslate"><span class="pre">histogram_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.histogram_static"><code class="docutils literal notranslate"><span class="pre">histogram_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.infer_univariate_kind"><code class="docutils literal notranslate"><span class="pre">infer_univariate_kind()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.interarrival_plot"><code class="docutils literal notranslate"><span class="pre">interarrival_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.interarrival_plot_interactive"><code class="docutils literal notranslate"><span class="pre">interarrival_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.interarrival_plot_static"><code class="docutils literal notranslate"><span class="pre">interarrival_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.interarrival_times"><code class="docutils literal notranslate"><span class="pre">interarrival_times()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.iqr_outliers"><code class="docutils literal notranslate"><span class="pre">iqr_outliers()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.likert_summary"><code class="docutils literal notranslate"><span class="pre">likert_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.lollipop_chart"><code class="docutils literal notranslate"><span class="pre">lollipop_chart()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.lollipop_chart_interactive"><code class="docutils literal notranslate"><span class="pre">lollipop_chart_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.lollipop_chart_static"><code class="docutils literal notranslate"><span class="pre">lollipop_chart_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.lorenz_curve"><code class="docutils literal notranslate"><span class="pre">lorenz_curve()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.lorenz_curve_interactive"><code class="docutils literal notranslate"><span class="pre">lorenz_curve_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.lorenz_curve_static"><code class="docutils literal notranslate"><span class="pre">lorenz_curve_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.lorenz_curve_values"><code class="docutils literal notranslate"><span class="pre">lorenz_curve_values()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.mad_outliers"><code class="docutils literal notranslate"><span class="pre">mad_outliers()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.mad_zscores"><code class="docutils literal notranslate"><span class="pre">mad_zscores()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.normality_test"><code class="docutils literal notranslate"><span class="pre">normality_test()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.numeric_or_none"><code class="docutils literal notranslate"><span class="pre">numeric_or_none()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ordered_category_counts"><code class="docutils literal notranslate"><span class="pre">ordered_category_counts()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ordinal_bar"><code class="docutils literal notranslate"><span class="pre">ordinal_bar()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ordinal_bar_interactive"><code class="docutils literal notranslate"><span class="pre">ordinal_bar_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ordinal_bar_static"><code class="docutils literal notranslate"><span class="pre">ordinal_bar_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.outlier_mask"><code class="docutils literal notranslate"><span class="pre">outlier_mask()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.outlier_plot"><code class="docutils literal notranslate"><span class="pre">outlier_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.outlier_plot_interactive"><code class="docutils literal notranslate"><span class="pre">outlier_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.outlier_plot_static"><code class="docutils literal notranslate"><span class="pre">outlier_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.outlier_treatment_comparison"><code class="docutils literal notranslate"><span class="pre">outlier_treatment_comparison()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.outlier_treatment_comparison_interactive"><code class="docutils literal notranslate"><span class="pre">outlier_treatment_comparison_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.outlier_treatment_comparison_static"><code class="docutils literal notranslate"><span class="pre">outlier_treatment_comparison_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.pareto_chart_interactive"><code class="docutils literal notranslate"><span class="pre">pareto_chart_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.pareto_chart_static"><code class="docutils literal notranslate"><span class="pre">pareto_chart_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.percentile_plot"><code class="docutils literal notranslate"><span class="pre">percentile_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.percentile_plot_interactive"><code class="docutils literal notranslate"><span class="pre">percentile_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.percentile_plot_static"><code class="docutils literal notranslate"><span class="pre">percentile_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.percentile_table"><code class="docutils literal notranslate"><span class="pre">percentile_table()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.pp_plot"><code class="docutils literal notranslate"><span class="pre">pp_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.pp_plot_interactive"><code class="docutils literal notranslate"><span class="pre">pp_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.pp_plot_static"><code class="docutils literal notranslate"><span class="pre">pp_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.qq_plot"><code class="docutils literal notranslate"><span class="pre">qq_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.qq_plot_interactive"><code class="docutils literal notranslate"><span class="pre">qq_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.qq_plot_static"><code class="docutils literal notranslate"><span class="pre">qq_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.quality_bar"><code class="docutils literal notranslate"><span class="pre">quality_bar()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.quality_bar_interactive"><code class="docutils literal notranslate"><span class="pre">quality_bar_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.quality_bar_static"><code class="docutils literal notranslate"><span class="pre">quality_bar_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.raincloud_plot"><code class="docutils literal notranslate"><span class="pre">raincloud_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.raincloud_plot_interactive"><code class="docutils literal notranslate"><span class="pre">raincloud_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.raincloud_plot_static"><code class="docutils literal notranslate"><span class="pre">raincloud_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.recommended_bin_count"><code class="docutils literal notranslate"><span class="pre">recommended_bin_count()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.reference_band_histogram"><code class="docutils literal notranslate"><span class="pre">reference_band_histogram()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.reference_band_histogram_interactive"><code class="docutils literal notranslate"><span class="pre">reference_band_histogram_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.reference_band_histogram_static"><code class="docutils literal notranslate"><span class="pre">reference_band_histogram_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.remove_outliers"><code class="docutils literal notranslate"><span class="pre">remove_outliers()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.resolve_univariate_data"><code class="docutils literal notranslate"><span class="pre">resolve_univariate_data()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.resolve_weighted_series"><code class="docutils literal notranslate"><span class="pre">resolve_weighted_series()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ridgeline_plot"><code class="docutils literal notranslate"><span class="pre">ridgeline_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ridgeline_plot_interactive"><code class="docutils literal notranslate"><span class="pre">ridgeline_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.ridgeline_plot_static"><code class="docutils literal notranslate"><span class="pre">ridgeline_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.robust_location_plot"><code class="docutils literal notranslate"><span class="pre">robust_location_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.robust_location_plot_interactive"><code class="docutils literal notranslate"><span class="pre">robust_location_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.robust_location_plot_static"><code class="docutils literal notranslate"><span class="pre">robust_location_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.robust_summary"><code class="docutils literal notranslate"><span class="pre">robust_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.rug_plot"><code class="docutils literal notranslate"><span class="pre">rug_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.rug_plot_interactive"><code class="docutils literal notranslate"><span class="pre">rug_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.rug_plot_static"><code class="docutils literal notranslate"><span class="pre">rug_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.sentinel_rate"><code class="docutils literal notranslate"><span class="pre">sentinel_rate()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.sentinel_value_counts"><code class="docutils literal notranslate"><span class="pre">sentinel_value_counts()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.string_length_summary"><code class="docutils literal notranslate"><span class="pre">string_length_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.strip_plot"><code class="docutils literal notranslate"><span class="pre">strip_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.strip_plot_interactive"><code class="docutils literal notranslate"><span class="pre">strip_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.strip_plot_static"><code class="docutils literal notranslate"><span class="pre">strip_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.survival_curve"><code class="docutils literal notranslate"><span class="pre">survival_curve()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.survival_curve_interactive"><code class="docutils literal notranslate"><span class="pre">survival_curve_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.survival_curve_static"><code class="docutils literal notranslate"><span class="pre">survival_curve_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.survival_values"><code class="docutils literal notranslate"><span class="pre">survival_values()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.token_count_summary"><code class="docutils literal notranslate"><span class="pre">token_count_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.top_terms"><code class="docutils literal notranslate"><span class="pre">top_terms()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.top_terms_bar"><code class="docutils literal notranslate"><span class="pre">top_terms_bar()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.top_terms_bar_interactive"><code class="docutils literal notranslate"><span class="pre">top_terms_bar_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.top_terms_bar_static"><code class="docutils literal notranslate"><span class="pre">top_terms_bar_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.transform_series"><code class="docutils literal notranslate"><span class="pre">transform_series()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.transformation_comparison"><code class="docutils literal notranslate"><span class="pre">transformation_comparison()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.transformation_comparison_interactive"><code class="docutils literal notranslate"><span class="pre">transformation_comparison_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.transformation_comparison_static"><code class="docutils literal notranslate"><span class="pre">transformation_comparison_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.transformation_summary"><code class="docutils literal notranslate"><span class="pre">transformation_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.trimmed_mean"><code class="docutils literal notranslate"><span class="pre">trimmed_mean()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.univariate_analysis_dashboard"><code class="docutils literal notranslate"><span class="pre">univariate_analysis_dashboard()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.univariate_analysis_dashboard_interactive"><code class="docutils literal notranslate"><span class="pre">univariate_analysis_dashboard_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.univariate_analysis_dashboard_static"><code class="docutils literal notranslate"><span class="pre">univariate_analysis_dashboard_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.univariate_diagnostic_panel"><code class="docutils literal notranslate"><span class="pre">univariate_diagnostic_panel()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.univariate_diagnostic_panel_interactive"><code class="docutils literal notranslate"><span class="pre">univariate_diagnostic_panel_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.univariate_diagnostic_panel_static"><code class="docutils literal notranslate"><span class="pre">univariate_diagnostic_panel_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.univariate_pareto_chart"><code class="docutils literal notranslate"><span class="pre">univariate_pareto_chart()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.univariate_summary"><code class="docutils literal notranslate"><span class="pre">univariate_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.violin_plot"><code class="docutils literal notranslate"><span class="pre">violin_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.violin_plot_interactive"><code class="docutils literal notranslate"><span class="pre">violin_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.violin_plot_static"><code class="docutils literal notranslate"><span class="pre">violin_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.weighted_ecdf_plot"><code class="docutils literal notranslate"><span class="pre">weighted_ecdf_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.weighted_ecdf_plot_interactive"><code class="docutils literal notranslate"><span class="pre">weighted_ecdf_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.weighted_ecdf_plot_static"><code class="docutils literal notranslate"><span class="pre">weighted_ecdf_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.weighted_ecdf_values"><code class="docutils literal notranslate"><span class="pre">weighted_ecdf_values()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.weighted_histogram"><code class="docutils literal notranslate"><span class="pre">weighted_histogram()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.weighted_histogram_interactive"><code class="docutils literal notranslate"><span class="pre">weighted_histogram_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.weighted_histogram_static"><code class="docutils literal notranslate"><span class="pre">weighted_histogram_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.weighted_quantile"><code class="docutils literal notranslate"><span class="pre">weighted_quantile()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.weighted_summary"><code class="docutils literal notranslate"><span class="pre">weighted_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.winsorize_series"><code class="docutils literal notranslate"><span class="pre">winsorize_series()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.zscore_outliers"><code class="docutils literal notranslate"><span class="pre">zscore_outliers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.WeightedStats"><code class="docutils literal notranslate"><span class="pre">WeightedStats</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.WeightedStats.count"><code class="docutils literal notranslate"><span class="pre">WeightedStats.count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.WeightedStats.mean"><code class="docutils literal notranslate"><span class="pre">WeightedStats.mean</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.WeightedStats.median"><code class="docutils literal notranslate"><span class="pre">WeightedStats.median</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.WeightedStats.q1"><code class="docutils literal notranslate"><span class="pre">WeightedStats.q1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.WeightedStats.q3"><code class="docutils literal notranslate"><span class="pre">WeightedStats.q3</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.WeightedStats.std"><code class="docutils literal notranslate"><span class="pre">WeightedStats.std</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.WeightedStats.variance"><code class="docutils literal notranslate"><span class="pre">WeightedStats.variance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.WeightedStats.weight_sum"><code class="docutils literal notranslate"><span class="pre">WeightedStats.weight_sum</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.as_datetime_series"><code class="docutils literal notranslate"><span class="pre">as_datetime_series()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.as_numeric_series"><code class="docutils literal notranslate"><span class="pre">as_numeric_series()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.auto_profile"><code class="docutils literal notranslate"><span class="pre">auto_profile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.auto_profile_chart"><code class="docutils literal notranslate"><span class="pre">auto_profile_chart()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.auto_profile_chart_interactive"><code class="docutils literal notranslate"><span class="pre">auto_profile_chart_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.boolean_bar"><code class="docutils literal notranslate"><span class="pre">boolean_bar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.boolean_bar_interactive"><code class="docutils literal notranslate"><span class="pre">boolean_bar_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.boolean_bar_static"><code class="docutils literal notranslate"><span class="pre">boolean_bar_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.boolean_summary"><code class="docutils literal notranslate"><span class="pre">boolean_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.boolean_wilson_interval"><code class="docutils literal notranslate"><span class="pre">boolean_wilson_interval()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.bootstrap_ci"><code class="docutils literal notranslate"><span class="pre">bootstrap_ci()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.bootstrap_distribution"><code class="docutils literal notranslate"><span class="pre">bootstrap_distribution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.bootstrap_distribution_plot"><code class="docutils literal notranslate"><span class="pre">bootstrap_distribution_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.bootstrap_distribution_plot_interactive"><code class="docutils literal notranslate"><span class="pre">bootstrap_distribution_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.bootstrap_distribution_plot_static"><code class="docutils literal notranslate"><span class="pre">bootstrap_distribution_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.box_plot"><code class="docutils literal notranslate"><span class="pre">box_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.box_plot_interactive"><code class="docutils literal notranslate"><span class="pre">box_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.box_plot_static"><code class="docutils literal notranslate"><span class="pre">box_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.cap_outliers"><code class="docutils literal notranslate"><span class="pre">cap_outliers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.category_counts"><code class="docutils literal notranslate"><span class="pre">category_counts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.compare_distributions"><code class="docutils literal notranslate"><span class="pre">compare_distributions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.concentration_summary"><code class="docutils literal notranslate"><span class="pre">concentration_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.cumulative_histogram"><code class="docutils literal notranslate"><span class="pre">cumulative_histogram()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.cumulative_histogram_interactive"><code class="docutils literal notranslate"><span class="pre">cumulative_histogram_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.cumulative_histogram_static"><code class="docutils literal notranslate"><span class="pre">cumulative_histogram_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.data_quality_summary"><code class="docutils literal notranslate"><span class="pre">data_quality_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.density_interactive"><code class="docutils literal notranslate"><span class="pre">density_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.density_plot"><code class="docutils literal notranslate"><span class="pre">density_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.density_static"><code class="docutils literal notranslate"><span class="pre">density_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.dot_plot"><code class="docutils literal notranslate"><span class="pre">dot_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.dot_plot_interactive"><code class="docutils literal notranslate"><span class="pre">dot_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.dot_plot_static"><code class="docutils literal notranslate"><span class="pre">dot_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.ecdf_plot"><code class="docutils literal notranslate"><span class="pre">ecdf_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.ecdf_plot_interactive"><code class="docutils literal notranslate"><span class="pre">ecdf_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.ecdf_plot_static"><code class="docutils literal notranslate"><span class="pre">ecdf_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.ecdf_values"><code class="docutils literal notranslate"><span class="pre">ecdf_values()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.event_counts"><code class="docutils literal notranslate"><span class="pre">event_counts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.event_frequency_plot"><code class="docutils literal notranslate"><span class="pre">event_frequency_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.event_frequency_plot_interactive"><code class="docutils literal notranslate"><span class="pre">event_frequency_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.event_frequency_plot_static"><code class="docutils literal notranslate"><span class="pre">event_frequency_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.exceedance_table"><code class="docutils literal notranslate"><span class="pre">exceedance_table()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.fit_distribution"><code class="docutils literal notranslate"><span class="pre">fit_distribution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.fitted_distribution_histogram"><code class="docutils literal notranslate"><span class="pre">fitted_distribution_histogram()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.fitted_distribution_histogram_interactive"><code class="docutils literal notranslate"><span class="pre">fitted_distribution_histogram_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.fitted_distribution_histogram_static"><code class="docutils literal notranslate"><span class="pre">fitted_distribution_histogram_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.fitted_pdf_values"><code class="docutils literal notranslate"><span class="pre">fitted_pdf_values()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.flag_outliers"><code class="docutils literal notranslate"><span class="pre">flag_outliers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.frequency_bar"><code class="docutils literal notranslate"><span class="pre">frequency_bar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.frequency_bar_interactive"><code class="docutils literal notranslate"><span class="pre">frequency_bar_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.frequency_bar_static"><code class="docutils literal notranslate"><span class="pre">frequency_bar_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.histogram"><code class="docutils literal notranslate"><span class="pre">histogram()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.histogram_interactive"><code class="docutils literal notranslate"><span class="pre">histogram_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.histogram_static"><code class="docutils literal notranslate"><span class="pre">histogram_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.infer_univariate_kind"><code class="docutils literal notranslate"><span class="pre">infer_univariate_kind()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.interarrival_plot"><code class="docutils literal notranslate"><span class="pre">interarrival_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.interarrival_plot_interactive"><code class="docutils literal notranslate"><span class="pre">interarrival_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.interarrival_plot_static"><code class="docutils literal notranslate"><span class="pre">interarrival_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.interarrival_times"><code class="docutils literal notranslate"><span class="pre">interarrival_times()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.iqr_outliers"><code class="docutils literal notranslate"><span class="pre">iqr_outliers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.likert_summary"><code class="docutils literal notranslate"><span class="pre">likert_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.lollipop_chart"><code class="docutils literal notranslate"><span class="pre">lollipop_chart()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.lollipop_chart_interactive"><code class="docutils literal notranslate"><span class="pre">lollipop_chart_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.lollipop_chart_static"><code class="docutils literal notranslate"><span class="pre">lollipop_chart_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.lorenz_curve"><code class="docutils literal notranslate"><span class="pre">lorenz_curve()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.lorenz_curve_interactive"><code class="docutils literal notranslate"><span class="pre">lorenz_curve_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.lorenz_curve_static"><code class="docutils literal notranslate"><span class="pre">lorenz_curve_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.lorenz_curve_values"><code class="docutils literal notranslate"><span class="pre">lorenz_curve_values()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.mad_outliers"><code class="docutils literal notranslate"><span class="pre">mad_outliers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.mad_zscores"><code class="docutils literal notranslate"><span class="pre">mad_zscores()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.normality_test"><code class="docutils literal notranslate"><span class="pre">normality_test()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.numeric_or_none"><code class="docutils literal notranslate"><span class="pre">numeric_or_none()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.ordered_category_counts"><code class="docutils literal notranslate"><span class="pre">ordered_category_counts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.ordinal_bar"><code class="docutils literal notranslate"><span class="pre">ordinal_bar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.ordinal_bar_interactive"><code class="docutils literal notranslate"><span class="pre">ordinal_bar_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.ordinal_bar_static"><code class="docutils literal notranslate"><span class="pre">ordinal_bar_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.outlier_mask"><code class="docutils literal notranslate"><span class="pre">outlier_mask()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.outlier_plot"><code class="docutils literal notranslate"><span class="pre">outlier_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.outlier_plot_interactive"><code class="docutils literal notranslate"><span class="pre">outlier_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.outlier_plot_static"><code class="docutils literal notranslate"><span class="pre">outlier_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.outlier_treatment_comparison"><code class="docutils literal notranslate"><span class="pre">outlier_treatment_comparison()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.outlier_treatment_comparison_interactive"><code class="docutils literal notranslate"><span class="pre">outlier_treatment_comparison_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.outlier_treatment_comparison_static"><code class="docutils literal notranslate"><span class="pre">outlier_treatment_comparison_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.pareto_chart_interactive"><code class="docutils literal notranslate"><span class="pre">pareto_chart_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.pareto_chart_static"><code class="docutils literal notranslate"><span class="pre">pareto_chart_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.percentile_plot"><code class="docutils literal notranslate"><span class="pre">percentile_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.percentile_plot_interactive"><code class="docutils literal notranslate"><span class="pre">percentile_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.percentile_plot_static"><code class="docutils literal notranslate"><span class="pre">percentile_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.percentile_table"><code class="docutils literal notranslate"><span class="pre">percentile_table()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.pp_plot"><code class="docutils literal notranslate"><span class="pre">pp_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.pp_plot_interactive"><code class="docutils literal notranslate"><span class="pre">pp_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.pp_plot_static"><code class="docutils literal notranslate"><span class="pre">pp_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.qq_plot"><code class="docutils literal notranslate"><span class="pre">qq_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.qq_plot_interactive"><code class="docutils literal notranslate"><span class="pre">qq_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.qq_plot_static"><code class="docutils literal notranslate"><span class="pre">qq_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.quality_bar"><code class="docutils literal notranslate"><span class="pre">quality_bar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.quality_bar_interactive"><code class="docutils literal notranslate"><span class="pre">quality_bar_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.quality_bar_static"><code class="docutils literal notranslate"><span class="pre">quality_bar_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.raincloud_plot"><code class="docutils literal notranslate"><span class="pre">raincloud_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.raincloud_plot_interactive"><code class="docutils literal notranslate"><span class="pre">raincloud_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.raincloud_plot_static"><code class="docutils literal notranslate"><span class="pre">raincloud_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.recommended_bin_count"><code class="docutils literal notranslate"><span class="pre">recommended_bin_count()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.reference_band_histogram"><code class="docutils literal notranslate"><span class="pre">reference_band_histogram()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.reference_band_histogram_interactive"><code class="docutils literal notranslate"><span class="pre">reference_band_histogram_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.reference_band_histogram_static"><code class="docutils literal notranslate"><span class="pre">reference_band_histogram_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.remove_outliers"><code class="docutils literal notranslate"><span class="pre">remove_outliers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.resolve_univariate_data"><code class="docutils literal notranslate"><span class="pre">resolve_univariate_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.resolve_weighted_series"><code class="docutils literal notranslate"><span class="pre">resolve_weighted_series()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.ridgeline_plot"><code class="docutils literal notranslate"><span class="pre">ridgeline_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.ridgeline_plot_interactive"><code class="docutils literal notranslate"><span class="pre">ridgeline_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.ridgeline_plot_static"><code class="docutils literal notranslate"><span class="pre">ridgeline_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.robust_location_plot"><code class="docutils literal notranslate"><span class="pre">robust_location_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.robust_location_plot_interactive"><code class="docutils literal notranslate"><span class="pre">robust_location_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.robust_location_plot_static"><code class="docutils literal notranslate"><span class="pre">robust_location_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.robust_summary"><code class="docutils literal notranslate"><span class="pre">robust_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.rug_plot"><code class="docutils literal notranslate"><span class="pre">rug_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.rug_plot_interactive"><code class="docutils literal notranslate"><span class="pre">rug_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.rug_plot_static"><code class="docutils literal notranslate"><span class="pre">rug_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.sentinel_rate"><code class="docutils literal notranslate"><span class="pre">sentinel_rate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.sentinel_value_counts"><code class="docutils literal notranslate"><span class="pre">sentinel_value_counts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.string_length_summary"><code class="docutils literal notranslate"><span class="pre">string_length_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.strip_plot"><code class="docutils literal notranslate"><span class="pre">strip_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.strip_plot_interactive"><code class="docutils literal notranslate"><span class="pre">strip_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.strip_plot_static"><code class="docutils literal notranslate"><span class="pre">strip_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.survival_curve"><code class="docutils literal notranslate"><span class="pre">survival_curve()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.survival_curve_interactive"><code class="docutils literal notranslate"><span class="pre">survival_curve_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.survival_curve_static"><code class="docutils literal notranslate"><span class="pre">survival_curve_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.survival_values"><code class="docutils literal notranslate"><span class="pre">survival_values()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.token_count_summary"><code class="docutils literal notranslate"><span class="pre">token_count_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.top_terms"><code class="docutils literal notranslate"><span class="pre">top_terms()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.top_terms_bar"><code class="docutils literal notranslate"><span class="pre">top_terms_bar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.top_terms_bar_interactive"><code class="docutils literal notranslate"><span class="pre">top_terms_bar_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.top_terms_bar_static"><code class="docutils literal notranslate"><span class="pre">top_terms_bar_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.transform_series"><code class="docutils literal notranslate"><span class="pre">transform_series()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.transformation_comparison"><code class="docutils literal notranslate"><span class="pre">transformation_comparison()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.transformation_comparison_interactive"><code class="docutils literal notranslate"><span class="pre">transformation_comparison_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.transformation_comparison_static"><code class="docutils literal notranslate"><span class="pre">transformation_comparison_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.transformation_summary"><code class="docutils literal notranslate"><span class="pre">transformation_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.trimmed_mean"><code class="docutils literal notranslate"><span class="pre">trimmed_mean()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.univariate_analysis_dashboard"><code class="docutils literal notranslate"><span class="pre">univariate_analysis_dashboard()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.univariate_analysis_dashboard_interactive"><code class="docutils literal notranslate"><span class="pre">univariate_analysis_dashboard_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.univariate_analysis_dashboard_static"><code class="docutils literal notranslate"><span class="pre">univariate_analysis_dashboard_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.univariate_diagnostic_panel"><code class="docutils literal notranslate"><span class="pre">univariate_diagnostic_panel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.univariate_diagnostic_panel_interactive"><code class="docutils literal notranslate"><span class="pre">univariate_diagnostic_panel_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.univariate_diagnostic_panel_static"><code class="docutils literal notranslate"><span class="pre">univariate_diagnostic_panel_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.univariate_pareto_chart"><code class="docutils literal notranslate"><span class="pre">univariate_pareto_chart()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.univariate_summary"><code class="docutils literal notranslate"><span class="pre">univariate_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.violin_plot"><code class="docutils literal notranslate"><span class="pre">violin_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.violin_plot_interactive"><code class="docutils literal notranslate"><span class="pre">violin_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.violin_plot_static"><code class="docutils literal notranslate"><span class="pre">violin_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.weighted_ecdf_plot"><code class="docutils literal notranslate"><span class="pre">weighted_ecdf_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.weighted_ecdf_plot_interactive"><code class="docutils literal notranslate"><span class="pre">weighted_ecdf_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.weighted_ecdf_plot_static"><code class="docutils literal notranslate"><span class="pre">weighted_ecdf_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.weighted_ecdf_values"><code class="docutils literal notranslate"><span class="pre">weighted_ecdf_values()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.weighted_histogram"><code class="docutils literal notranslate"><span class="pre">weighted_histogram()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.weighted_histogram_interactive"><code class="docutils literal notranslate"><span class="pre">weighted_histogram_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.weighted_histogram_static"><code class="docutils literal notranslate"><span class="pre">weighted_histogram_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.weighted_quantile"><code class="docutils literal notranslate"><span class="pre">weighted_quantile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.weighted_summary"><code class="docutils literal notranslate"><span class="pre">weighted_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.winsorize_series"><code class="docutils literal notranslate"><span class="pre">winsorize_series()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.univariate.zscore_outliers"><code class="docutils literal notranslate"><span class="pre">zscore_outliers()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-</div>
+<p class="caption" role="heading"><span class="caption-text">Infrastructure &amp; Utilities:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.utils.html">dataviz.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.xai.html">dataviz.xai</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.core.html">dataviz.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.types.html">dataviz.types</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -7588,7 +7630,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dataviz.spc.x_range.html" class="btn btn-neutral float-left" title="dataviz.spc.x_range" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dataviz.univariate.accessors.html" class="btn btn-neutral float-right" title="dataviz.univariate.accessors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

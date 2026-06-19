@@ -18,7 +18,9 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dataviz.univariate.histogram" href="dataviz.univariate.histogram.html" />
+    <link rel="prev" title="dataviz.univariate.distribution" href="dataviz.univariate.distribution.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,27 +42,63 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">dataviz.univariate.fitting</a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.fitting.DistributionFit"><code class="docutils literal notranslate"><span class="pre">DistributionFit</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.fitting.DistributionFit.aic"><code class="docutils literal notranslate"><span class="pre">DistributionFit.aic</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitting.DistributionFit.bic"><code class="docutils literal notranslate"><span class="pre">DistributionFit.bic</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitting.DistributionFit.distribution"><code class="docutils literal notranslate"><span class="pre">DistributionFit.distribution</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitting.DistributionFit.p_value"><code class="docutils literal notranslate"><span class="pre">DistributionFit.p_value</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitting.DistributionFit.parameters"><code class="docutils literal notranslate"><span class="pre">DistributionFit.parameters</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitting.DistributionFit.statistic"><code class="docutils literal notranslate"><span class="pre">DistributionFit.statistic</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Core Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dataviz.bivariate.html">dataviz.bivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.classification.html">dataviz.classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.clustering.html">dataviz.clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.eda.html">dataviz.eda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.multivariate.html">dataviz.multivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.regression.html">dataviz.regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.spc.html">dataviz.spc</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="dataviz.univariate.html">dataviz.univariate</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="dataviz.univariate.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.accessors.html">dataviz.univariate.accessors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.advanced.html">dataviz.univariate.advanced</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.box_plot.html">dataviz.univariate.box_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.categorical.html">dataviz.univariate.categorical</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.charts.html">dataviz.univariate.charts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.dashboard.html">dataviz.univariate.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.datetime.html">dataviz.univariate.datetime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.density.html">dataviz.univariate.density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.diagnostics.html">dataviz.univariate.diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.distribution.html">dataviz.univariate.distribution</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.univariate.fitting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.fitting.DistributionFit"><code class="docutils literal notranslate"><span class="pre">DistributionFit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.fitting.compare_distributions"><code class="docutils literal notranslate"><span class="pre">compare_distributions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.fitting.fit_distribution"><code class="docutils literal notranslate"><span class="pre">fit_distribution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.fitting.fitted_distribution_histogram_interactive"><code class="docutils literal notranslate"><span class="pre">fitted_distribution_histogram_interactive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.fitting.fitted_distribution_histogram_static"><code class="docutils literal notranslate"><span class="pre">fitted_distribution_histogram_static()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.fitting.fitted_pdf_values"><code class="docutils literal notranslate"><span class="pre">fitted_pdf_values()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.fitting.compare_distributions"><code class="docutils literal notranslate"><span class="pre">compare_distributions()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitting.fit_distribution"><code class="docutils literal notranslate"><span class="pre">fit_distribution()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitting.fitted_distribution_histogram_interactive"><code class="docutils literal notranslate"><span class="pre">fitted_distribution_histogram_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitting.fitted_distribution_histogram_static"><code class="docutils literal notranslate"><span class="pre">fitted_distribution_histogram_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.fitting.fitted_pdf_values"><code class="docutils literal notranslate"><span class="pre">fitted_pdf_values()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.histogram.html">dataviz.univariate.histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.inference.html">dataviz.univariate.inference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.ordinal.html">dataviz.univariate.ordinal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.profile.html">dataviz.univariate.profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.quality.html">dataviz.univariate.quality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.robust.html">dataviz.univariate.robust</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.stats.html">dataviz.univariate.stats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.tail.html">dataviz.univariate.tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.text.html">dataviz.univariate.text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.transforms.html">dataviz.univariate.transforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.treatment.html">dataviz.univariate.treatment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.violin_plot.html">dataviz.univariate.violin_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.weighted.html">dataviz.univariate.weighted</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dataviz.univariate.html#module-dataviz.univariate">Module contents</a></li>
 </ul>
 </li>
 </ul>
-</div>
+<p class="caption" role="heading"><span class="caption-text">Infrastructure &amp; Utilities:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.utils.html">dataviz.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.xai.html">dataviz.xai</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.core.html">dataviz.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.types.html">dataviz.types</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -75,6 +113,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="dataviz.univariate.html">dataviz.univariate</a></li>
       <li class="breadcrumb-item active">dataviz.univariate.fitting</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/dataviz.univariate.fitting.rst.txt" rel="nofollow"> View page source</a>
@@ -338,7 +377,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dataviz.univariate.distribution.html" class="btn btn-neutral float-left" title="dataviz.univariate.distribution" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dataviz.univariate.histogram.html" class="btn btn-neutral float-right" title="dataviz.univariate.histogram" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

@@ -18,7 +18,9 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dataviz.univariate.transforms" href="dataviz.univariate.transforms.html" />
+    <link rel="prev" title="dataviz.univariate.tail" href="dataviz.univariate.tail.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,36 +42,68 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">dataviz.univariate.text</a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.text.BooleanRateInterval"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.text.BooleanRateInterval.confidence_level"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval.confidence_level</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.BooleanRateInterval.lower"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval.lower</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.BooleanRateInterval.true_rate"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval.true_rate</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.BooleanRateInterval.upper"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval.upper</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Core Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dataviz.bivariate.html">dataviz.bivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.classification.html">dataviz.classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.clustering.html">dataviz.clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.eda.html">dataviz.eda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.multivariate.html">dataviz.multivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.regression.html">dataviz.regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.spc.html">dataviz.spc</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="dataviz.univariate.html">dataviz.univariate</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="dataviz.univariate.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.accessors.html">dataviz.univariate.accessors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.advanced.html">dataviz.univariate.advanced</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.box_plot.html">dataviz.univariate.box_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.categorical.html">dataviz.univariate.categorical</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.charts.html">dataviz.univariate.charts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.dashboard.html">dataviz.univariate.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.datetime.html">dataviz.univariate.datetime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.density.html">dataviz.univariate.density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.diagnostics.html">dataviz.univariate.diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.distribution.html">dataviz.univariate.distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.fitting.html">dataviz.univariate.fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.histogram.html">dataviz.univariate.histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.inference.html">dataviz.univariate.inference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.ordinal.html">dataviz.univariate.ordinal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.profile.html">dataviz.univariate.profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.quality.html">dataviz.univariate.quality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.robust.html">dataviz.univariate.robust</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.stats.html">dataviz.univariate.stats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.tail.html">dataviz.univariate.tail</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dataviz.univariate.text</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.text.BooleanRateInterval"><code class="docutils literal notranslate"><span class="pre">BooleanRateInterval</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.text.BooleanSummary"><code class="docutils literal notranslate"><span class="pre">BooleanSummary</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.text.boolean_bar_interactive"><code class="docutils literal notranslate"><span class="pre">boolean_bar_interactive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.text.boolean_bar_static"><code class="docutils literal notranslate"><span class="pre">boolean_bar_static()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.text.boolean_summary"><code class="docutils literal notranslate"><span class="pre">boolean_summary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.text.boolean_wilson_interval"><code class="docutils literal notranslate"><span class="pre">boolean_wilson_interval()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.text.string_length_summary"><code class="docutils literal notranslate"><span class="pre">string_length_summary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.text.token_count_summary"><code class="docutils literal notranslate"><span class="pre">token_count_summary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.text.top_terms"><code class="docutils literal notranslate"><span class="pre">top_terms()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.text.top_terms_bar_interactive"><code class="docutils literal notranslate"><span class="pre">top_terms_bar_interactive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataviz.univariate.text.top_terms_bar_static"><code class="docutils literal notranslate"><span class="pre">top_terms_bar_static()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.text.BooleanSummary"><code class="docutils literal notranslate"><span class="pre">BooleanSummary</span></code></a><ul>
-<li><a class="reference internal" href="#dataviz.univariate.text.BooleanSummary.count"><code class="docutils literal notranslate"><span class="pre">BooleanSummary.count</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.BooleanSummary.false_count"><code class="docutils literal notranslate"><span class="pre">BooleanSummary.false_count</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.BooleanSummary.true_count"><code class="docutils literal notranslate"><span class="pre">BooleanSummary.true_count</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.BooleanSummary.true_rate"><code class="docutils literal notranslate"><span class="pre">BooleanSummary.true_rate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.transforms.html">dataviz.univariate.transforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.treatment.html">dataviz.univariate.treatment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.violin_plot.html">dataviz.univariate.violin_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.univariate.weighted.html">dataviz.univariate.weighted</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dataviz.univariate.text.boolean_bar_interactive"><code class="docutils literal notranslate"><span class="pre">boolean_bar_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.boolean_bar_static"><code class="docutils literal notranslate"><span class="pre">boolean_bar_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.boolean_summary"><code class="docutils literal notranslate"><span class="pre">boolean_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.boolean_wilson_interval"><code class="docutils literal notranslate"><span class="pre">boolean_wilson_interval()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.string_length_summary"><code class="docutils literal notranslate"><span class="pre">string_length_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.token_count_summary"><code class="docutils literal notranslate"><span class="pre">token_count_summary()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.top_terms"><code class="docutils literal notranslate"><span class="pre">top_terms()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.top_terms_bar_interactive"><code class="docutils literal notranslate"><span class="pre">top_terms_bar_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.univariate.text.top_terms_bar_static"><code class="docutils literal notranslate"><span class="pre">top_terms_bar_static()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataviz.univariate.html#module-dataviz.univariate">Module contents</a></li>
 </ul>
 </li>
 </ul>
-</div>
+<p class="caption" role="heading"><span class="caption-text">Infrastructure &amp; Utilities:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.utils.html">dataviz.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.xai.html">dataviz.xai</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.core.html">dataviz.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.types.html">dataviz.types</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -84,6 +118,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="dataviz.univariate.html">dataviz.univariate</a></li>
       <li class="breadcrumb-item active">dataviz.univariate.text</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/dataviz.univariate.text.rst.txt" rel="nofollow"> View page source</a>
@@ -508,7 +543,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dataviz.univariate.tail.html" class="btn btn-neutral float-left" title="dataviz.univariate.tail" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dataviz.univariate.transforms.html" class="btn btn-neutral float-right" title="dataviz.univariate.transforms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

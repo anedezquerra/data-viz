@@ -18,7 +18,9 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dataviz.clustering.charts" href="dataviz.clustering.charts.html" />
+    <link rel="prev" title="dataviz.classification.roc" href="dataviz.classification.roc.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,26 +42,47 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">dataviz.clustering</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-dataviz.clustering">Module contents</a><ul>
-<li><a class="reference internal" href="#dataviz.clustering.dendrogram"><code class="docutils literal notranslate"><span class="pre">dendrogram()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.clustering.dendrogram_interactive"><code class="docutils literal notranslate"><span class="pre">dendrogram_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.clustering.dendrogram_static"><code class="docutils literal notranslate"><span class="pre">dendrogram_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.clustering.elbow_plot"><code class="docutils literal notranslate"><span class="pre">elbow_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.clustering.elbow_plot_interactive"><code class="docutils literal notranslate"><span class="pre">elbow_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.clustering.elbow_plot_static"><code class="docutils literal notranslate"><span class="pre">elbow_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.clustering.scatter_clusters"><code class="docutils literal notranslate"><span class="pre">scatter_clusters()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.clustering.scatter_clusters_interactive"><code class="docutils literal notranslate"><span class="pre">scatter_clusters_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.clustering.scatter_clusters_static"><code class="docutils literal notranslate"><span class="pre">scatter_clusters_static()</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Core Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dataviz.bivariate.html">dataviz.bivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.classification.html">dataviz.classification</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">dataviz.clustering</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.clustering.charts.html">dataviz.clustering.charts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.clustering.dendrogram.html">dataviz.clustering.dendrogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.clustering.elbow.html">dataviz.clustering.elbow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.clustering.elbow_enhanced.html">dataviz.clustering.elbow_enhanced</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.clustering.scatter_clusters.html">dataviz.clustering.scatter_clusters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dataviz.clustering">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.clustering.dendrogram"><code class="docutils literal notranslate"><span class="pre">dendrogram()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.clustering.dendrogram_interactive"><code class="docutils literal notranslate"><span class="pre">dendrogram_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.clustering.dendrogram_static"><code class="docutils literal notranslate"><span class="pre">dendrogram_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.clustering.elbow_plot"><code class="docutils literal notranslate"><span class="pre">elbow_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.clustering.elbow_plot_interactive"><code class="docutils literal notranslate"><span class="pre">elbow_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.clustering.elbow_plot_static"><code class="docutils literal notranslate"><span class="pre">elbow_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.clustering.scatter_clusters"><code class="docutils literal notranslate"><span class="pre">scatter_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.clustering.scatter_clusters_interactive"><code class="docutils literal notranslate"><span class="pre">scatter_clusters_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.clustering.scatter_clusters_static"><code class="docutils literal notranslate"><span class="pre">scatter_clusters_static()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.eda.html">dataviz.eda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.multivariate.html">dataviz.multivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.regression.html">dataviz.regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.spc.html">dataviz.spc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.univariate.html">dataviz.univariate</a></li>
 </ul>
-</div>
+<p class="caption" role="heading"><span class="caption-text">Infrastructure &amp; Utilities:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.utils.html">dataviz.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.xai.html">dataviz.xai</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.core.html">dataviz.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.types.html">dataviz.types</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -640,7 +663,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dataviz.classification.roc.html" class="btn btn-neutral float-left" title="dataviz.classification.roc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dataviz.clustering.charts.html" class="btn btn-neutral float-right" title="dataviz.clustering.charts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

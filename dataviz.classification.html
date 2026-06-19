@@ -18,7 +18,9 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dataviz.classification.charts" href="dataviz.classification.charts.html" />
+    <link rel="prev" title="dataviz.bivariate.trends" href="dataviz.bivariate.trends.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,26 +42,46 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">dataviz.classification</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-dataviz.classification">Module contents</a><ul>
-<li><a class="reference internal" href="#dataviz.classification.confusion_matrix_plot"><code class="docutils literal notranslate"><span class="pre">confusion_matrix_plot()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.classification.confusion_matrix_plot_interactive"><code class="docutils literal notranslate"><span class="pre">confusion_matrix_plot_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.classification.confusion_matrix_plot_static"><code class="docutils literal notranslate"><span class="pre">confusion_matrix_plot_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.classification.precision_recall_curve"><code class="docutils literal notranslate"><span class="pre">precision_recall_curve()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.classification.precision_recall_curve_interactive"><code class="docutils literal notranslate"><span class="pre">precision_recall_curve_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.classification.precision_recall_curve_static"><code class="docutils literal notranslate"><span class="pre">precision_recall_curve_static()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.classification.roc_curve"><code class="docutils literal notranslate"><span class="pre">roc_curve()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.classification.roc_curve_interactive"><code class="docutils literal notranslate"><span class="pre">roc_curve_interactive()</span></code></a></li>
-<li><a class="reference internal" href="#dataviz.classification.roc_curve_static"><code class="docutils literal notranslate"><span class="pre">roc_curve_static()</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Core Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dataviz.bivariate.html">dataviz.bivariate</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">dataviz.classification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.classification.charts.html">dataviz.classification.charts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.classification.confusion_matrix.html">dataviz.classification.confusion_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.classification.pr_curve.html">dataviz.classification.pr_curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataviz.classification.roc.html">dataviz.classification.roc</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dataviz.classification">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.classification.confusion_matrix_plot"><code class="docutils literal notranslate"><span class="pre">confusion_matrix_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.classification.confusion_matrix_plot_interactive"><code class="docutils literal notranslate"><span class="pre">confusion_matrix_plot_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.classification.confusion_matrix_plot_static"><code class="docutils literal notranslate"><span class="pre">confusion_matrix_plot_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.classification.precision_recall_curve"><code class="docutils literal notranslate"><span class="pre">precision_recall_curve()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.classification.precision_recall_curve_interactive"><code class="docutils literal notranslate"><span class="pre">precision_recall_curve_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.classification.precision_recall_curve_static"><code class="docutils literal notranslate"><span class="pre">precision_recall_curve_static()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.classification.roc_curve"><code class="docutils literal notranslate"><span class="pre">roc_curve()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.classification.roc_curve_interactive"><code class="docutils literal notranslate"><span class="pre">roc_curve_interactive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataviz.classification.roc_curve_static"><code class="docutils literal notranslate"><span class="pre">roc_curve_static()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.clustering.html">dataviz.clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.eda.html">dataviz.eda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.multivariate.html">dataviz.multivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.regression.html">dataviz.regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.spc.html">dataviz.spc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.univariate.html">dataviz.univariate</a></li>
 </ul>
-</div>
+<p class="caption" role="heading"><span class="caption-text">Infrastructure &amp; Utilities:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.utils.html">dataviz.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.xai.html">dataviz.xai</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.core.html">dataviz.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataviz.types.html">dataviz.types</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -565,7 +587,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dataviz.bivariate.trends.html" class="btn btn-neutral float-left" title="dataviz.bivariate.trends" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dataviz.classification.charts.html" class="btn btn-neutral float-right" title="dataviz.classification.charts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
