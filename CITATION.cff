@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use DataViz in academic or applied work, please cite it as below."
+title: "DataViz: A comprehensive Python visualization package with static and interactive APIs"
+version: 0.1.0
+date-released: 2026-01-01
+authors:
+  - family-names: Esquerra-Arguelles
+    given-names: Aned
+    orcid: "https://orcid.org/0000-0003-1448-0407"
+repository-code: "https://github.com/anedezquerra/data-viz"
+url: "https://anedezquerra.github.io/data-viz/"
+license: MIT
+keywords:
+  - data visualization
+  - statistical process control
+  - exploratory data analysis
+  - matplotlib
+  - plotly
+  - python
+type: software
