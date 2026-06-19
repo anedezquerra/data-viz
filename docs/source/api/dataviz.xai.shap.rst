@@ -2,6 +2,12 @@ dataviz.xai.shap module
 =======================
 
 .. automodule:: dataviz.xai.shap
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+Public API
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   members/dataviz/xai/shap/shap_plot_static
+   members/dataviz/xai/shap/shap_plot_interactive

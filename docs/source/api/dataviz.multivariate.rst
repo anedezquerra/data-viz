@@ -1,12 +1,11 @@
 dataviz.multivariate package
 ============================
 
-
 Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    dataviz.multivariate.charts
    dataviz.multivariate.heatmap

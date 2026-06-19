@@ -1,12 +1,11 @@
 dataviz.regression package
 ==========================
 
-
 Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    dataviz.regression.charts
    dataviz.regression.learning

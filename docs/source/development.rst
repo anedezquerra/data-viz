@@ -34,7 +34,10 @@ The API pages are generated from the Python package layout:
 
 .. code-block:: console
 
-   sphinx-apidoc --force --separate --module-first --output-dir docs/source/api dataviz
+   python docs/generate_api.py
+
+The generator creates one page per public function or class beneath its
+submodule and keeps package/submodule pages as navigation indexes.
 
 GitHub Pages
 ------------

@@ -1,7 +1,13 @@
-dataviz.classification.confusion\_matrix module
-===============================================
+dataviz.classification.confusion_matrix module
+==============================================
 
 .. automodule:: dataviz.classification.confusion_matrix
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+Public API
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   members/dataviz/classification/confusion_matrix/confusion_matrix_plot_static
+   members/dataviz/classification/confusion_matrix/confusion_matrix_plot_interactive

@@ -1,7 +1,13 @@
-dataviz.classification.pr\_curve module
-=======================================
+dataviz.classification.pr_curve module
+======================================
 
 .. automodule:: dataviz.classification.pr_curve
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+Public API
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   members/dataviz/classification/pr_curve/precision_recall_curve_static
+   members/dataviz/classification/pr_curve/precision_recall_curve_interactive

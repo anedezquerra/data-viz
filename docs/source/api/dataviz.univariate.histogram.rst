@@ -2,6 +2,12 @@ dataviz.univariate.histogram module
 ===================================
 
 .. automodule:: dataviz.univariate.histogram
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+Public API
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   members/dataviz/univariate/histogram/histogram_static
+   members/dataviz/univariate/histogram/histogram_interactive

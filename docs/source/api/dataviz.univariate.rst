@@ -1,12 +1,11 @@
 dataviz.univariate package
 ==========================
 
-
 Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    dataviz.univariate.accessors
    dataviz.univariate.advanced

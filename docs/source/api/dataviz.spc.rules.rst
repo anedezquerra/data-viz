@@ -2,6 +2,20 @@ dataviz.spc.rules module
 ========================
 
 .. automodule:: dataviz.spc.rules
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+Public API
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   members/dataviz/spc/rules/ControlLimits
+   members/dataviz/spc/rules/RuleViolation
+   members/dataviz/spc/rules/as_numeric_series
+   members/dataviz/spc/rules/individuals_limits
+   members/dataviz/spc/rules/moving_ranges
+   members/dataviz/spc/rules/subgroup_matrix
+   members/dataviz/spc/rules/xbar_r_limits
+   members/dataviz/spc/rules/xbar_s_limits
+   members/dataviz/spc/rules/detect_rule_violations
+   members/dataviz/spc/rules/violations_by_index

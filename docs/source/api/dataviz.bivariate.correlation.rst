@@ -2,6 +2,12 @@ dataviz.bivariate.correlation module
 ====================================
 
 .. automodule:: dataviz.bivariate.correlation
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+Public API
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   members/dataviz/bivariate/correlation/correlation_heatmap_static
+   members/dataviz/bivariate/correlation/correlation_heatmap_interactive

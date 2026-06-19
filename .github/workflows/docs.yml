@@ -46,6 +46,11 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e ".[docs]"
 
+      - name: Verify generated API pages are current
+        run: |
+          python docs/generate_api.py
+          git diff --exit-code -- docs/source/api
+
       - name: Build documentation with warnings as errors
         run: >-
           python -m sphinx

@@ -1,12 +1,11 @@
 dataviz.clustering package
 ==========================
 
-
 Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    dataviz.clustering.charts
    dataviz.clustering.dendrogram

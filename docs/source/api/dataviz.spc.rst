@@ -1,12 +1,11 @@
 dataviz.spc package
 ===================
 
-
 Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    dataviz.spc.attribute
    dataviz.spc.capability

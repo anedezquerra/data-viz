@@ -1,12 +1,11 @@
 dataviz.bivariate package
 =========================
 
-
 Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    dataviz.bivariate.advanced
    dataviz.bivariate.categorical

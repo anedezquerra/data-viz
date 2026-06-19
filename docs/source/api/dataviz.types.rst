@@ -2,6 +2,5 @@ dataviz.types module
 ====================
 
 .. automodule:: dataviz.types
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+This module does not declare public functions or classes.

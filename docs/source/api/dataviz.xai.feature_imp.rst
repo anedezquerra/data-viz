@@ -1,7 +1,13 @@
-dataviz.xai.feature\_imp module
-===============================
+dataviz.xai.feature_imp module
+==============================
 
 .. automodule:: dataviz.xai.feature_imp
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+Public API
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   members/dataviz/xai/feature_imp/feature_importance_static
+   members/dataviz/xai/feature_imp/feature_importance_interactive

@@ -33,18 +33,14 @@ release = version
 
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",
     "sphinx.ext.githubpages",
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
 ]
 
-autosummary_generate = True
 autodoc_class_signature = "separated"
 autodoc_default_options = {
-    "members": True,
     "show-inheritance": True,
-    "special-members": "__call__",
 }
 autodoc_member_order = "bysource"
 autodoc_typehints = "description"

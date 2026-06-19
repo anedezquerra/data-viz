@@ -22,8 +22,11 @@ python -m sphinx -W --keep-going -b linkcheck docs/source docs/build/linkcheck
 ## API regeneration
 
 ```bash
-sphinx-apidoc --force --separate --module-first --output-dir docs/source/api dataviz
+python docs/generate_api.py
 ```
+
+The generator creates navigational package and submodule pages plus one page
+per public function or class under `docs/source/api/members`.
 
 ## GitHub Pages
 

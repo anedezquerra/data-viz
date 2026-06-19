@@ -2,6 +2,12 @@ dataviz.multivariate.heatmap module
 ===================================
 
 .. automodule:: dataviz.multivariate.heatmap
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+Public API
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   members/dataviz/multivariate/heatmap/heatmap_static
+   members/dataviz/multivariate/heatmap/heatmap_interactive

@@ -2,6 +2,12 @@ dataviz.clustering.elbow module
 ===============================
 
 .. automodule:: dataviz.clustering.elbow
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+Public API
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   members/dataviz/clustering/elbow/elbow_plot_static
+   members/dataviz/clustering/elbow/elbow_plot_interactive

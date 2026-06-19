@@ -1,12 +1,11 @@
 dataviz.eda package
 ===================
 
-
 Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    dataviz.eda.charts
    dataviz.eda.class_dist

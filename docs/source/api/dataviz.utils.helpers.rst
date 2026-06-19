@@ -2,6 +2,12 @@ dataviz.utils.helpers module
 ============================
 
 .. automodule:: dataviz.utils.helpers
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+Public API
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   members/dataviz/utils/helpers/setup_plot
+   members/dataviz/utils/helpers/apply_theme

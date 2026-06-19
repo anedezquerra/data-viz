@@ -1,7 +1,13 @@
-dataviz.clustering.elbow\_enhanced module
-=========================================
+dataviz.clustering.elbow_enhanced module
+========================================
 
 .. automodule:: dataviz.clustering.elbow_enhanced
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+Public API
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   members/dataviz/clustering/elbow_enhanced/elbow_plot_static
+   members/dataviz/clustering/elbow_enhanced/elbow_plot_interactive
