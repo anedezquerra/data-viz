@@ -320,6 +320,111 @@ from .spc import (
     spc_dashboard_interactive,
 )
 
+# Static versions also re-exported under their canonical *_static names so that
+# code following the documented `name_static` / `name_interactive` / `name`
+# convention works at the top-level namespace (see project README and
+# user_guide).
+from .univariate import (  # noqa: F401,E402
+    histogram_static,
+    density_static,
+    box_plot_static,
+    violin_plot_static,
+    frequency_bar_static,
+    ecdf_plot_static,
+    cumulative_histogram_static,
+    qq_plot_static,
+    pp_plot_static,
+    outlier_plot_static,
+    percentile_plot_static,
+    univariate_diagnostic_panel_static,
+    fitted_distribution_histogram_static,
+    robust_location_plot_static,
+    rug_plot_static,
+    strip_plot_static,
+    dot_plot_static,
+    lollipop_chart_static,
+    reference_band_histogram_static,
+    raincloud_plot_static,
+    ridgeline_plot_static,
+    transformation_comparison_static,
+    event_frequency_plot_static,
+    interarrival_plot_static,
+    univariate_analysis_dashboard_static,
+    weighted_histogram_static,
+    quality_bar_static,
+    survival_curve_static,
+    lorenz_curve_static,
+    bootstrap_distribution_plot_static,
+    boolean_bar_static,
+    top_terms_bar_static,
+    weighted_ecdf_plot_static,
+    ordinal_bar_static,
+    outlier_treatment_comparison_static,
+)
+from .bivariate import (  # noqa: F401,E402
+    scatter_plot_static,
+    line_plot_static,
+    correlation_heatmap_static,
+    bubble_plot_static,
+    hexbin_plot_static,
+    regression_plot_static,
+    density_contour_static,
+    grouped_bar_static,
+    box_by_category_static,
+    violin_by_category_static,
+    crosstab_heatmap_static,
+    binned_mean_plot_static,
+    errorbar_plot_static,
+    area_between_static,
+    step_plot_static,
+    joint_scatter_hist_static,
+    bivariate_histogram_static,
+    outlier_scatter_static,
+    residual_relationship_static,
+    quantile_bin_plot_static,
+    bland_altman_static,
+    rank_scatter_static,
+    lag_plot_static,
+    conditional_box_static,
+)
+from .eda import (  # noqa: F401,E402
+    missing_data_plot_static,
+    distribution_summary_static,
+    class_distribution_static,
+)
+from .regression import (  # noqa: F401,E402
+    residual_plot_static,
+    prediction_plot_static,
+    learning_curve_static,
+)
+from .classification import (  # noqa: F401,E402
+    confusion_matrix_plot_static,
+    roc_curve_static,
+    precision_recall_curve_static,
+)
+from .spc import (  # noqa: F401,E402
+    control_chart_static,
+    x_range_chart_static,
+    moving_range_chart_static,
+    xbar_r_chart_static,
+    xbar_s_chart_static,
+    ewma_chart_static,
+    cusum_chart_static,
+    p_chart_static,
+    np_chart_static,
+    c_chart_static,
+    u_chart_static,
+    capability_histogram_static,
+    run_chart_static,
+    rule_violation_chart_static,
+    process_distribution_static,
+    zone_chart_static,
+    hotelling_t2_chart_static,
+    spc_dashboard_static,
+)
+from .spc import pareto_chart_static as spc_pareto_chart_static  # noqa: F401,E402
+from .univariate import pareto_chart_static as univariate_pareto_chart_static  # noqa: F401,E402
+
 __all__ = [
     # Submodules
     "spc",
