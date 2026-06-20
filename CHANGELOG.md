@@ -1,5 +1,8 @@
 # Changelog
 
+- Unreleased: docs: add 52-example gallery across 26 pages spanning every sub-package, with copy-paste-ready code, sample charts, requirements and notes; add `docs/_tools/generate_examples.py` and `docs/_tools/generate_example_pages.py` for deterministic regeneration.
+- Unreleased: fix(univariate): drop unsupported `fill=` kwarg from `Series.plot.kde` call in `density_static`; render the shaded area with `Axes.fill_between` so the helper works on modern matplotlib.
+
 - Unreleased: chore(deps): tighten `.github/dependabot.yml` — lower PR cap to 3, switch to `increase-if-necessary` versioning, ignore breaking major bumps for `matplotlib`, `plotly`, `kaleido`, `setuptools`, and group all GitHub Actions updates into a single weekly PR.
 
 - Unreleased: fix(api): expose `*_static` chart names (e.g. `dv.histogram_static`, `dv.scatter_plot_static`, `dv.roc_curve_static`, `dv.control_chart_static`) at the top-level namespace so the documented naming convention is honored and `tests/test_core.py` passes.
