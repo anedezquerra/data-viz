@@ -1,0 +1,6 @@
+dataviz.classification.errors.misclassification_cluster_heatmap_interactive
+===========================================================================
+
+.. currentmodule:: dataviz.classification.errors
+
+.. autofunction:: misclassification_cluster_heatmap_interactive
