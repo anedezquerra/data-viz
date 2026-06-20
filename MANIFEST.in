@@ -1,0 +1,10 @@
+include LICENSE
+include README.md
+include CHANGELOG.md
+include CITATION.cff
+include pyproject.toml
+recursive-include dataviz py.typed *.pyi
+graft tests
+prune docs/build
+prune htmlcov
+global-exclude __pycache__ *.py[cod] *.so .DS_Store

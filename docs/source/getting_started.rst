@@ -78,27 +78,33 @@ Create and activate a virtual environment before installing:
 Installation
 ------------
 
-DataViz is currently distributed from source. Pick the option that matches
-your workflow.
+DataViz can be installed directly from GitHub or from a local checkout.
+Pick the option that matches your workflow.
 
 .. list-table::
    :header-rows: 1
-   :widths: 25 40 35
+   :widths: 25 50 25
 
    * - Use case
      - Command
      - Notes
-   * - Library user
+   * - Pinned release (recommended)
+     - ``pip install "dataviz @ git+https://github.com/anedezquerra/data-viz.git@v0.1.0"``
+     - Replace the tag with the desired version.
+   * - Latest ``main``
+     - ``pip install "git+https://github.com/anedezquerra/data-viz.git@main"``
+     - Unpinned; tracks development.
+   * - Library user (local checkout)
      - ``python -m pip install -e .``
      - Runtime dependencies only.
    * - Contributor
      - ``python -m pip install -e ".[dev]"``
-     - Adds ``pytest``, ``black``, ``flake8``, ``mypy``.
+     - Adds ``pytest``, ``black``, ``flake8``, ``mypy``, ``build``, ``twine``.
    * - Docs author
      - ``python -m pip install -e ".[docs]"``
      - Adds Sphinx and the theme used to build this site.
    * - All extras
-     - ``python -m pip install -e ".[dev,docs]"``
+     - ``python -m pip install -e ".[dev,docs,export]"``
      - Full development setup.
 
 Optional runtime extras
@@ -110,11 +116,12 @@ are worth calling out:
 * **scipy** (already a core dependency) powers hierarchical clustering and
   fitted-distribution overlays.
 * **kaleido** is required to export Plotly figures to static image formats via
-  :py:meth:`plotly.graph_objects.Figure.write_image`. Install on demand:
+  :py:meth:`plotly.graph_objects.Figure.write_image`. Install it as the
+  ``export`` extra:
 
   .. code-block:: console
 
-     $ python -m pip install kaleido
+     $ python -m pip install "dataviz[export] @ git+https://github.com/anedezquerra/data-viz.git@v0.1.0"
 
 Verify the installation
 -----------------------

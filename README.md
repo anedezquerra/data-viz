@@ -14,8 +14,36 @@ A comprehensive Python package for data visualization organized by chart categor
 
 ## Installation
 
+### From a GitHub release (recommended for pinned installs)
+
 ```bash
-pip install dataviz
+pip install "dataviz @ git+https://github.com/anedezquerra/data-viz.git@v0.1.0"
+```
+
+### From the latest `main` branch
+
+```bash
+pip install "git+https://github.com/anedezquerra/data-viz.git@main"
+```
+
+### From a local checkout (for development)
+
+```bash
+git clone https://github.com/anedezquerra/data-viz.git
+cd data-viz
+pip install -e ".[dev,docs]"
+```
+
+### Optional extras
+
+| Extra      | Adds                                                     |
+| ---------- | -------------------------------------------------------- |
+| `dev`      | `pytest`, `pytest-cov`, `black`, `flake8`, `mypy`, `build`, `twine` |
+| `docs`     | `sphinx`, `sphinx-rtd-theme`, `sphinx-copybutton`, `sphinx-design` |
+| `export`   | `kaleido` for Plotly static-image export                 |
+
+```bash
+pip install "dataviz[export] @ git+https://github.com/anedezquerra/data-viz.git@v0.1.0"
 ```
 
 ## Quick Start
