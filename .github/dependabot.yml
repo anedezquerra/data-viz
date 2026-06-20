@@ -4,7 +4,8 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
+    versioning-strategy: increase-if-necessary
     labels:
       - dependencies
     commit-message:
@@ -29,14 +30,36 @@ updates:
       python-docs:
         patterns:
           - "sphinx*"
+    ignore:
+      # Matplotlib >=3.11 removed `Series.plot.kde(fill=…)` used by univariate
+      # density helpers. Hold the major/minor line until callsites migrate.
+      - dependency-name: "matplotlib"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      # Plotly 6 renamed the `Box.points` property; pin until callsites use
+      # `boxpoints` consistently.
+      - dependency-name: "plotly"
+        update-types: ["version-update:semver-major"]
+      # Kaleido 1.x is a breaking rewrite; opt in manually after migration.
+      - dependency-name: "kaleido"
+        update-types: ["version-update:semver-major"]
+      # Setuptools floor lives in [build-system]; major bumps almost never
+      # require action and create noise on every release.
+      - dependency-name: "setuptools"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
     labels:
       - dependencies
       - github-actions
     commit-message:
       prefix: "chore(actions)"
+    groups:
+      github-actions:
+        patterns:
+          - "actions/*"
+          - "softprops/*"
+          - "pypa/*"

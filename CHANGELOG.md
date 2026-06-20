@@ -1,5 +1,7 @@
 # Changelog
 
+- Unreleased: chore(deps): tighten `.github/dependabot.yml` — lower PR cap to 3, switch to `increase-if-necessary` versioning, ignore breaking major bumps for `matplotlib`, `plotly`, `kaleido`, `setuptools`, and group all GitHub Actions updates into a single weekly PR.
+
 - Unreleased: fix(api): expose `*_static` chart names (e.g. `dv.histogram_static`, `dv.scatter_plot_static`, `dv.roc_curve_static`, `dv.control_chart_static`) at the top-level namespace so the documented naming convention is honored and `tests/test_core.py` passes.
 - Unreleased: chore(deps): tighten upper bounds — `matplotlib<3.11` (the 3.11 release removed `Series.plot.kde(fill=…)` used by univariate density helpers) and `plotly<6` (Plotly 6 renamed the `Box.points` property).
 - Unreleased: chore(ci): mark `black`, `flake8`, and `pytest` steps as advisory (`continue-on-error`) while baseline formatting and pre-existing test failures are addressed in follow-up PRs; the cross-platform `build` job remains a hard gate.
