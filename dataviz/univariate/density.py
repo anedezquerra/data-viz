@@ -80,7 +80,11 @@ def density_static(
         fig, ax = setup_plot(title=title, xlabel=xlabel, ylabel=ylabel, figsize=figsize)
         fig.set_dpi(dpi)
         
-        data.plot.kde(ax=ax, color=color, linewidth=linewidth, alpha=alpha, fill=fill, **kwargs)
+        data.plot.kde(ax=ax, color=color, linewidth=linewidth, alpha=alpha, **kwargs)
+        if fill and ax.lines:
+            line = ax.lines[-1]
+            xs, ys = line.get_xdata(), line.get_ydata()
+            ax.fill_between(xs, ys, color=line.get_color(), alpha=alpha * 0.3)
         
         # Customize fonts
         ax.title.set_fontsize(title_size)
