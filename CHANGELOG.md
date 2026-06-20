@@ -1,5 +1,9 @@
 # Changelog
 
+- Unreleased: feat(classification): add 36 additional chart families (72 functions) covering F-beta/MCC/Youden/balanced-accuracy/kappa/likelihood-ratio/predictive-value threshold curves, multiclass and bootstrap-CI calibration, Platt+isotonic overlay, Brier sharpness/resolution/uncertainty decomposition, score ECDF and Q-Q, per-class AUC/AP bars, top-K accuracy, confusion Sankey, multilabel confusion grid / co-occurrence / Hamming-subset bars, fairness per-segment metrics / disparity heatmap / ROC and calibration overlays, confidence-vs-correctness and loss-distribution diagnostics, model-comparison radar, Pareto bubble, critical-difference diagram, score drift and PSI, validation curve, CV score boxplot and training-history curves.
+
+- Unreleased: feat(classification): expand the classification sub-package with 25 new chart families (50 new functions, static + interactive each) covering multiclass / multi-model ROC and PR, calibration curves and Brier scores, probability histograms and KDEs, threshold metric sweeps, KS / DET / cost / decision-curve analysis, gain / lift / CAP charts, per-class report heatmaps and bars, class balance, prediction distribution, normalized and diff confusion matrices, error-analysis grid, per-class score distributions, and 2-D decision boundaries.
+
 - Unreleased: docs: add 52-example gallery across 26 pages spanning every sub-package, with copy-paste-ready code, sample charts, requirements and notes; add `docs/_tools/generate_examples.py` and `docs/_tools/generate_example_pages.py` for deterministic regeneration.
 - Unreleased: fix(univariate): drop unsupported `fill=` kwarg from `Series.plot.kde` call in `density_static`; render the shaded area with `Axes.fill_between` so the helper works on modern matplotlib.
 
