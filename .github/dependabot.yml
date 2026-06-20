@@ -1,0 +1,42 @@
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      python-runtime:
+        patterns:
+          - "matplotlib"
+          - "seaborn"
+          - "numpy"
+          - "pandas"
+          - "plotly"
+          - "scipy"
+      python-dev:
+        patterns:
+          - "pytest*"
+          - "black"
+          - "flake8"
+          - "mypy"
+          - "build"
+          - "twine"
+      python-docs:
+        patterns:
+          - "sphinx*"
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: "chore(actions)"
