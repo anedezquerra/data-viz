@@ -1,13 +1,13 @@
 -r requirements.txt
 
 # Testing
-pytest>=7.0
-pytest-cov>=3.0
+pytest>=8.4.2
+pytest-cov>=7.1.0
 
 # Code Quality
-black>=22.0
-flake8>=4.0
-mypy>=0.950
+black>=25.11.0
+flake8>=7.3.0
+mypy>=1.19.1
 
 # Documentation
 sphinx>=8.0,<10.0
