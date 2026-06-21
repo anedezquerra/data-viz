@@ -1,25 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
-  <title id="title">DataViz module map</title>
-  <desc id="desc">Abstract documentation graphic showing connected visualization modules.</desc>
-  <rect width="720" height="360" rx="24" fill="#eef4fb"/>
-  <g fill="none" stroke="#1b6ca8" stroke-width="3" opacity="0.65">
-    <path d="M110 250C180 170 250 190 320 120S485 80 610 150"/>
-    <path d="M120 100C220 135 250 250 380 240S530 220 620 270"/>
-    <path d="M150 280C250 300 295 70 420 105S545 160 640 90"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="dvm-title dvm-desc">
+  <title id="dvm-title">DataViz mark</title>
+  <desc id="dvm-desc">Rounded square mark with ascending bars, a smooth trend line and a connected interactive node.</desc>
+  <defs>
+    <linearGradient id="dv-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5f9fd"/>
+      <stop offset="1" stop-color="#e1ecf6"/>
+    </linearGradient>
+    <linearGradient id="dv-blue" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#155684"/>
+      <stop offset="1" stop-color="#1b6ca8"/>
+    </linearGradient>
+    <linearGradient id="dv-red" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#b03a4b"/>
+      <stop offset="1" stop-color="#d1495b"/>
+    </linearGradient>
+    <linearGradient id="dv-green" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#0e6e5b"/>
+      <stop offset="1" stop-color="#138a72"/>
+    </linearGradient>
+    <filter id="dv-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.4"/>
+      <feOffset dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.25"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect x="8" y="8" width="240" height="240" rx="48" fill="url(#dv-bg)" stroke="#cdd9e6" stroke-width="2"/>
+
+  <g filter="url(#dv-shadow)">
+    <rect x="56"  y="148" width="32" height="64"  rx="8" fill="url(#dv-green)"/>
+    <rect x="104" y="108" width="32" height="104" rx="8" fill="url(#dv-blue)"/>
+    <rect x="152" y="80"  width="32" height="132" rx="8" fill="url(#dv-red)"/>
   </g>
+
+  <path d="M56 156 C 96 132, 132 128, 168 96 S 208 60, 208 60"
+        fill="none" stroke="#172033" stroke-width="6" stroke-linecap="round" opacity="0.85"/>
+
   <g>
-    <circle cx="110" cy="250" r="28" fill="#1b6ca8"/>
-    <circle cx="320" cy="120" r="34" fill="#d1495b"/>
-    <circle cx="610" cy="150" r="30" fill="#138a72"/>
-    <circle cx="120" cy="100" r="26" fill="#138a72"/>
-    <circle cx="380" cy="240" r="36" fill="#1b6ca8"/>
-    <circle cx="620" cy="270" r="24" fill="#d1495b"/>
-    <circle cx="420" cy="105" r="22" fill="#1b6ca8"/>
-    <circle cx="640" cy="90" r="20" fill="#138a72"/>
+    <line x1="168" y1="96" x2="208" y2="60" stroke="#172033" stroke-width="3" opacity="0"/>
+    <circle cx="168" cy="96" r="10" fill="#ffffff" stroke="#172033" stroke-width="4"/>
+    <circle cx="208" cy="60" r="12" fill="#d1495b" stroke="#172033" stroke-width="4"/>
   </g>
-  <g fill="#172033" font-family="Segoe UI, Arial, sans-serif" font-weight="700">
-    <text x="62" y="322" font-size="24">static</text>
-    <text x="310" y="318" font-size="24">interactive</text>
-    <text x="560" y="322" font-size="24">analysis</text>
+
+  <g fill="#5b6a7d" opacity="0.45">
+    <rect x="48" y="216" width="160" height="2" rx="1"/>
+    <rect x="48" y="44"  width="2"   height="172" rx="1"/>
   </g>
 </svg>
