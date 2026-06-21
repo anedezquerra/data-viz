@@ -21,7 +21,7 @@ A multivariate analyst inspects five features simultaneously across 120 observat
 Requirements
 ~~~~~~~~~~~~
 
-* ``dataviz`` (this package)
+* ``dataviz``
 * ``numpy``, ``pandas`` and ``matplotlib`` (installed as ``dataviz`` dependencies)
 * No additional services or data files — the example uses a deterministic
   synthetic dataset generated from ``numpy.random.default_rng(0)``.
@@ -73,7 +73,7 @@ A data engineer audits a fresh extract by visualising the per-column and per-row
 Requirements
 ~~~~~~~~~~~~
 
-* ``dataviz`` (this package)
+* ``dataviz``
 * ``numpy``, ``pandas`` and ``matplotlib`` (installed as ``dataviz`` dependencies)
 * No additional services or data files — the example uses a deterministic
   synthetic dataset generated from ``numpy.random.default_rng(0)``.

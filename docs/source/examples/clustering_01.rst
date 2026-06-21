@@ -21,7 +21,7 @@ A clustering analyst visualises K-means assignments on a synthetic 3-cluster, 2-
 Requirements
 ~~~~~~~~~~~~
 
-* ``dataviz`` (this package)
+* ``dataviz``
 * ``numpy``, ``pandas`` and ``matplotlib`` (installed as ``dataviz`` dependencies)
 * No additional services or data files — the example uses a deterministic
   synthetic dataset generated from ``numpy.random.default_rng(0)``.
@@ -80,7 +80,7 @@ A practitioner sweeps K-means from k=1 to k=10 and uses the elbow of the inertia
 Requirements
 ~~~~~~~~~~~~
 
-* ``dataviz`` (this package)
+* ``dataviz``
 * ``numpy``, ``pandas`` and ``matplotlib`` (installed as ``dataviz`` dependencies)
 * No additional services or data files — the example uses a deterministic
   synthetic dataset generated from ``numpy.random.default_rng(0)``.

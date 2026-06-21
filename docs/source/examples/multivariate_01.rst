@@ -21,7 +21,7 @@ A geneticist visualises a 12 × 8 matrix of normalized expression values to spot
 Requirements
 ~~~~~~~~~~~~
 
-* ``dataviz`` (this package)
+* ``dataviz``
 * ``numpy``, ``pandas`` and ``matplotlib`` (installed as ``dataviz`` dependencies)
 * No additional services or data files — the example uses a deterministic
   synthetic dataset generated from ``numpy.random.default_rng(0)``.
@@ -73,7 +73,7 @@ An exploratory analyst inspects all pairwise relationships among four features i
 Requirements
 ~~~~~~~~~~~~
 
-* ``dataviz`` (this package)
+* ``dataviz``
 * ``numpy``, ``pandas`` and ``matplotlib`` (installed as ``dataviz`` dependencies)
 * No additional services or data files — the example uses a deterministic
   synthetic dataset generated from ``numpy.random.default_rng(0)``.

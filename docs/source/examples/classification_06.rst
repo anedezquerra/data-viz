@@ -21,7 +21,7 @@ A marketing team ranks customers by predicted purchase probability and asks: if 
 Requirements
 ~~~~~~~~~~~~
 
-* ``dataviz`` (this package)
+* ``dataviz``
 * ``numpy``, ``pandas`` and ``matplotlib`` (installed as ``dataviz`` dependencies)
 * No additional services or data files — the example uses a deterministic
   synthetic dataset generated from ``numpy.random.default_rng(0)``.
@@ -72,7 +72,7 @@ The same marketing team also wants the multiplicative gain over random targeting
 Requirements
 ~~~~~~~~~~~~
 
-* ``dataviz`` (this package)
+* ``dataviz``
 * ``numpy``, ``pandas`` and ``matplotlib`` (installed as ``dataviz`` dependencies)
 * No additional services or data files — the example uses a deterministic
   synthetic dataset generated from ``numpy.random.default_rng(0)``.

@@ -21,7 +21,7 @@ A modeller assesses the relationship between a numeric feature and a continuous 
 Requirements
 ~~~~~~~~~~~~
 
-* ``dataviz`` (this package)
+* ``dataviz``
 * ``numpy``, ``pandas`` and ``matplotlib`` (installed as ``dataviz`` dependencies)
 * No additional services or data files — the example uses a deterministic
   synthetic dataset generated from ``numpy.random.default_rng(0)``.
@@ -72,7 +72,7 @@ A business analyst tracks the daily evolution of an index over six months and ne
 Requirements
 ~~~~~~~~~~~~
 
-* ``dataviz`` (this package)
+* ``dataviz``
 * ``numpy``, ``pandas`` and ``matplotlib`` (installed as ``dataviz`` dependencies)
 * No additional services or data files — the example uses a deterministic
   synthetic dataset generated from ``numpy.random.default_rng(0)``.

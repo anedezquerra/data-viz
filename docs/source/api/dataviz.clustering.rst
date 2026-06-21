@@ -1,5 +1,5 @@
-dataviz.clustering package
-==========================
+dataviz.clustering
+==================
 
 Submodules
 ----------

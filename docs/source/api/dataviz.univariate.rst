@@ -1,5 +1,5 @@
-dataviz.univariate package
-==========================
+dataviz.univariate
+==================
 
 Submodules
 ----------

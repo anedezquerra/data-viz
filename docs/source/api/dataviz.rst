@@ -1,5 +1,5 @@
-dataviz package
-===============
+dataviz
+=======
 
 Subpackages
 -----------
