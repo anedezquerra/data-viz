@@ -1,5 +1,5 @@
-dataviz.regression package
-==========================
+dataviz.regression
+==================
 
 Submodules
 ----------

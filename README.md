@@ -1,6 +1,10 @@
 # DataViz
 
-A comprehensive Python package for data visualization organized by chart category and analysis type. **Each chart is available in both static (matplotlib/seaborn) and interactive (plotly) versions**.
+<p align="center">
+  <img src="docs/source/_static/dataviz-mark.svg" alt="DataViz logo" width="160"/>
+</p>
+
+A comprehensive Python toolkit for data visualization organized by chart category and analysis type. **Each chart is available in both static (matplotlib/seaborn) and interactive (plotly) versions**.
 
 ## Features
 

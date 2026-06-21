@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="96" viewBox="0 0 320 96" role="img" aria-labelledby="dvl-title dvl-desc">
+  <title id="dvl-title">DataViz</title>
+  <desc id="dvl-desc">DataViz wordmark with chart mark and tagline, optimised for dark sidebars.</desc>
+  <defs>
+    <linearGradient id="dvl-blue" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#3a9adf"/>
+      <stop offset="1" stop-color="#6fbef0"/>
+    </linearGradient>
+    <linearGradient id="dvl-red" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#e85d6f"/>
+      <stop offset="1" stop-color="#f47b8a"/>
+    </linearGradient>
+    <linearGradient id="dvl-green" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#3bb39a"/>
+      <stop offset="1" stop-color="#5fd0b9"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(8,10)">
+    <rect x="0" y="0" width="76" height="76" rx="16" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1.5"/>
+    <rect x="14" y="44" width="11" height="22" rx="3" fill="url(#dvl-green)"/>
+    <rect x="32" y="30" width="11" height="36" rx="3" fill="url(#dvl-blue)"/>
+    <rect x="50" y="18" width="11" height="48" rx="3" fill="url(#dvl-red)"/>
+    <path d="M14 46 C 28 36, 40 34, 52 20 S 64 12, 64 12"
+          fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" opacity="0.9"/>
+    <circle cx="52" cy="20" r="3.6" fill="#ffffff"/>
+    <circle cx="64" cy="12" r="4.2" fill="#f47b8a" stroke="#ffffff" stroke-width="1.4"/>
+  </g>
+
+  <g font-family="'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif">
+    <text x="104" y="52" font-size="34" font-weight="700" letter-spacing="-0.5">
+      <tspan fill="#6fbef0">Data</tspan><tspan fill="#ffffff">Viz</tspan>
+    </text>
+    <text x="106" y="74" font-size="10" font-weight="600" fill="#cdd9e6" letter-spacing="2.4">
+      STATIC · INTERACTIVE · EXPLAINABLE
+    </text>
+  </g>
+</svg>

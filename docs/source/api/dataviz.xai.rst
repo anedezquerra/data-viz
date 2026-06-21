@@ -1,5 +1,5 @@
-dataviz.xai package
-===================
+dataviz.xai
+===========
 
 Submodules
 ----------

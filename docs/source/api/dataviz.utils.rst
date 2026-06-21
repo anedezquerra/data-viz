@@ -1,5 +1,5 @@
-dataviz.utils package
-=====================
+dataviz.utils
+=============
 
 Submodules
 ----------

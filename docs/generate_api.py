@@ -329,7 +329,7 @@ def write_package_page(package_dir: Path) -> None:
     """Write a navigational package page without duplicating member docs."""
     dotted_name = module_name(package_dir / "__init__.py")
     subpackages, submodules = immediate_children(package_dir)
-    lines = [heading(f"{dotted_name} package")]
+    lines = [heading(dotted_name)]
     for title, children in (("Subpackages", subpackages), ("Submodules", submodules)):
         if not children:
             continue

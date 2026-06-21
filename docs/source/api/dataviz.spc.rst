@@ -1,5 +1,5 @@
-dataviz.spc package
-===================
+dataviz.spc
+===========
 
 Submodules
 ----------

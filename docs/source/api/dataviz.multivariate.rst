@@ -1,5 +1,5 @@
-dataviz.multivariate package
-============================
+dataviz.multivariate
+====================
 
 Submodules
 ----------
