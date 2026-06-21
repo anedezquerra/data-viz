@@ -390,6 +390,316 @@ def ex_pr_curve():
     save(ax, "classification_pr")
 
 
+# Helper: synthetic binary classifier scores
+def _binary_scores(n=400, seed=1):
+    r = np.random.default_rng(seed)
+    y_true = r.integers(0, 2, n)
+    y_prob = np.clip(0.35 + 0.4 * y_true + 0.18 * r.standard_normal(n), 0.01, 0.99)
+    return y_true, y_prob
+
+
+# Helper: synthetic multiclass probabilities
+def _multiclass_scores(n=300, k=4, seed=2):
+    r = np.random.default_rng(seed)
+    y_true = r.integers(0, k, n)
+    P = r.dirichlet(np.ones(k), n)
+    for i, t in enumerate(y_true):
+        P[i, t] += 1.4
+    P = P / P.sum(axis=1, keepdims=True)
+    return y_true, P
+
+
+def ex_multiclass_roc():
+    y_true, P = _multiclass_scores()
+    curves = {}
+    for c in range(P.shape[1]):
+        yt = (y_true == c).astype(int)
+        order = np.argsort(-P[:, c])
+        yt_o = yt[order]
+        tpr = np.cumsum(yt_o) / max(yt_o.sum(), 1)
+        fpr = np.cumsum(1 - yt_o) / max((1 - yt_o).sum(), 1)
+        curves[f"class {c}"] = (np.r_[0, fpr], np.r_[0, tpr])
+    ax = dv.classification.multiclass_roc_curve_static(
+        curves, title="One-vs-rest ROC curves")
+    save(ax, "classification_multiclass_roc")
+
+
+def ex_multiclass_pr():
+    y_true, P = _multiclass_scores()
+    curves = {}
+    for c in range(P.shape[1]):
+        yt = (y_true == c).astype(int)
+        order = np.argsort(-P[:, c])
+        yt_o = yt[order]
+        tp = np.cumsum(yt_o)
+        precision = tp / np.arange(1, len(yt_o) + 1)
+        recall = tp / max(yt_o.sum(), 1)
+        curves[f"class {c}"] = (recall, precision)
+    ax = dv.classification.multiclass_pr_curve_static(
+        curves, title="One-vs-rest precision-recall curves")
+    save(ax, "classification_multiclass_pr")
+
+
+def ex_calibration_curve():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.calibration_curve_static(
+        y_true, y_prob, n_bins=10, title="Reliability diagram")
+    save(ax, "classification_calibration")
+
+
+def ex_probability_histogram():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.probability_histogram_static(
+        y_true, y_prob, bins=30, title="Predicted probability by class")
+    save(ax, "classification_prob_hist")
+
+
+def ex_threshold_metric_curve():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.threshold_metric_curve_static(
+        y_true, y_prob, title="Precision / recall / F1 vs. threshold")
+    save(ax, "classification_threshold")
+
+
+def ex_ks_plot():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.ks_statistic_plot_static(
+        y_true, y_prob, title="Kolmogorov-Smirnov plot")
+    save(ax, "classification_ks")
+
+
+def ex_det_curve():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.det_curve_static(
+        y_true, y_prob, title="Detection error trade-off")
+    save(ax, "classification_det")
+
+
+def ex_net_benefit():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.net_benefit_curve_static(
+        y_true, y_prob, title="Decision-curve analysis (net benefit)")
+    save(ax, "classification_net_benefit")
+
+
+def ex_gain_chart():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.gain_chart_static(
+        y_true, y_prob, title="Cumulative gain chart")
+    save(ax, "classification_gain")
+
+
+def ex_lift_chart():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.lift_chart_static(
+        y_true, y_prob, n_bins=10, title="Decile lift chart")
+    save(ax, "classification_lift")
+
+
+def ex_class_balance():
+    y_true = rng.choice([0, 1, 2, 3], size=400, p=[0.5, 0.25, 0.15, 0.1])
+    y_pred = y_true.copy()
+    flip = rng.random(400) < 0.18
+    y_pred[flip] = rng.choice([0, 1, 2, 3], size=flip.sum())
+    ax = dv.classification.class_balance_bar_static(
+        y_true, y_pred, labels=["A", "B", "C", "D"],
+        title="Class balance: true vs. predicted")
+    save(ax, "classification_class_balance")
+
+
+def ex_per_class_metrics():
+    y_true = rng.choice([0, 1, 2], size=300, p=[0.5, 0.3, 0.2])
+    y_pred = y_true.copy()
+    flip = rng.random(300) < 0.20
+    y_pred[flip] = rng.choice([0, 1, 2], size=flip.sum())
+    ax = dv.classification.per_class_metrics_bar_static(
+        y_true, y_pred, labels=["A", "B", "C"],
+        title="Per-class precision / recall / F1")
+    save(ax, "classification_per_class_metrics")
+
+
+def ex_normalized_confusion():
+    y_true = rng.choice([0, 1, 2], size=240, p=[0.4, 0.35, 0.25])
+    y_pred = y_true.copy()
+    flip = rng.random(240) < 0.22
+    y_pred[flip] = rng.choice([0, 1, 2], size=flip.sum())
+    cm = np.zeros((3, 3), dtype=int)
+    for t, p in zip(y_true, y_pred):
+        cm[t, p] += 1
+    ax = dv.classification.normalized_confusion_matrix_static(
+        cm, labels=["A", "B", "C"], normalize="true",
+        title="Row-normalized confusion matrix")
+    save(ax, "classification_normalized_cm")
+
+
+def ex_error_grid():
+    y_true = rng.choice([0, 1, 2], size=240, p=[0.4, 0.35, 0.25])
+    y_pred = y_true.copy()
+    flip = rng.random(240) < 0.25
+    y_pred[flip] = rng.choice([0, 1, 2], size=flip.sum())
+    cm = np.zeros((3, 3), dtype=int)
+    for t, p in zip(y_true, y_pred):
+        cm[t, p] += 1
+    ax = dv.classification.error_analysis_grid_static(
+        cm, labels=["A", "B", "C"], title="Error analysis grid")
+    save(ax, "classification_error_grid")
+
+
+def ex_score_dist():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.score_distribution_by_class_static(
+        y_true, y_prob, title="Score distribution by class")
+    save(ax, "classification_score_dist")
+
+
+def ex_decision_boundary():
+    centers = np.array([[-2, -2], [2, 2], [-2, 2]])
+    labels = np.repeat([0, 1, 2], 60)
+    pts = np.vstack([rng.normal(c, 0.7, (60, 2)) for c in centers])
+
+    def predict(P):
+        d = np.stack([np.linalg.norm(P - c, axis=1) for c in centers], axis=1)
+        return d.argmin(axis=1)
+
+    ax = dv.classification.decision_boundary_plot_static(
+        pts[:, 0], pts[:, 1], labels, predict_fn=predict,
+        title="Nearest-centroid decision boundary")
+    save(ax, "classification_decision_boundary")
+
+
+def ex_f_beta_curve():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.f_beta_curve_static(
+        y_true, y_prob, betas=(0.5, 1.0, 2.0),
+        title="F-beta vs. threshold")
+    save(ax, "classification_f_beta")
+
+
+def ex_mcc_curve():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.mcc_curve_static(
+        y_true, y_prob, title="Matthews correlation vs. threshold")
+    save(ax, "classification_mcc")
+
+
+def ex_per_class_auc():
+    aucs = {f"class {c}": float(rng.uniform(0.75, 0.95)) for c in range(5)}
+    ax = dv.classification.per_class_auc_bar_static(
+        aucs, title="Per-class one-vs-rest AUC")
+    save(ax, "classification_per_class_auc")
+
+
+def ex_top_k_accuracy():
+    y_true, P = _multiclass_scores(n=400, k=6)
+    ax = dv.classification.top_k_accuracy_curve_static(
+        y_true, P, max_k=6, title="Top-K accuracy")
+    save(ax, "classification_top_k")
+
+
+def ex_multilabel_grid():
+    n, L = 240, 6
+    Y_true = (rng.random((n, L)) > 0.65).astype(int)
+    Y_pred = Y_true.copy()
+    flip = rng.random((n, L)) < 0.18
+    Y_pred[flip] = 1 - Y_pred[flip]
+    labels = [f"L{i}" for i in range(L)]
+    axes = dv.classification.multilabel_confusion_grid_static(
+        Y_true, Y_pred, labels=labels,
+        title="Per-label confusion (multilabel)")
+    fig = np.asarray(axes).ravel()[0].figure
+    save(fig, "classification_multilabel_grid")
+
+
+def ex_label_cooccurrence():
+    n, L = 300, 6
+    Y = (rng.random((n, L)) > 0.6).astype(int)
+    labels = [f"L{i}" for i in range(L)]
+    ax = dv.classification.label_cooccurrence_heatmap_static(
+        Y, labels=labels, title="Label co-occurrence (Jaccard)")
+    save(ax, "classification_label_cooccurrence")
+
+
+def ex_segment_metric():
+    n = 400
+    y_true = rng.integers(0, 2, n)
+    y_pred = y_true.copy()
+    groups = rng.choice(["A", "B", "C"], n)
+    rate = {"A": 0.10, "B": 0.20, "C": 0.30}
+    flip = rng.random(n) < np.array([rate[g] for g in groups])
+    y_pred[flip] = 1 - y_pred[flip]
+    ax = dv.classification.per_segment_metric_bar_static(
+        y_true, y_pred, groups, title="Accuracy / precision / recall per segment")
+    save(ax, "classification_segment_metric")
+
+
+def ex_fairness_disparity():
+    n = 500
+    y_true = rng.integers(0, 2, n)
+    y_pred = y_true.copy()
+    groups = rng.choice(["A", "B", "C", "D"], n)
+    rate = {"A": 0.05, "B": 0.15, "C": 0.10, "D": 0.30}
+    flip = rng.random(n) < np.array([rate[g] for g in groups])
+    y_pred[flip] = 1 - y_pred[flip]
+    ax = dv.classification.fairness_disparity_heatmap_static(
+        y_true, y_pred, groups, title="Fairness disparity (Δ from population)")
+    save(ax, "classification_fairness_disparity")
+
+
+def ex_discrimination_dashboard():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.discrimination_threshold_dashboard_static(
+        y_true, y_prob, title="Discrimination threshold dashboard")
+    save(ax, "classification_discrimination")
+
+
+def ex_loss_distribution():
+    y_true, y_prob = _binary_scores()
+    ax = dv.classification.loss_distribution_plot_static(
+        y_true, y_prob, title="Per-sample log loss")
+    save(ax, "classification_loss_distribution")
+
+
+def ex_metrics_radar():
+    metrics = {
+        "Logistic":     {"precision": 0.74, "recall": 0.83, "f1": 0.78, "auc": 0.85},
+        "Random Forest":{"precision": 0.82, "recall": 0.78, "f1": 0.80, "auc": 0.88},
+        "Gradient Boost":{"precision":0.85, "recall": 0.80, "f1": 0.82, "auc": 0.91},
+    }
+    ax = dv.classification.metrics_radar_chart_static(
+        metrics, title="Model comparison (radar)")
+    save(ax, "classification_metrics_radar")
+
+
+def ex_psi_bar():
+    ref = rng.normal(0.4, 0.15, 800).clip(0, 1)
+    cur = rng.normal(0.55, 0.2, 600).clip(0, 1)
+    ax = dv.classification.psi_bar_static(
+        ref, cur, n_bins=10, title="Population stability index by bin")
+    save(ax, "classification_psi")
+
+
+def ex_validation_curve():
+    params = np.linspace(1, 10, 9)
+    train = (0.95 - 0.02 * params)[:, None] + 0.02 * rng.standard_normal((9, 5))
+    val = (0.85 - 0.01 * params)[:, None] + 0.03 * rng.standard_normal((9, 5))
+    ax = dv.classification.validation_curve_static(
+        params, train, val, param_name="C", title="Validation curve over C")
+    save(ax, "classification_validation_curve")
+
+
+def ex_training_history():
+    epochs = 25
+    history = {
+        "loss":     list(np.linspace(1.0, 0.20, epochs) + 0.04 * rng.standard_normal(epochs)),
+        "val_loss": list(np.linspace(1.1, 0.35, epochs) + 0.05 * rng.standard_normal(epochs)),
+        "accuracy":     list(np.linspace(0.55, 0.94, epochs)),
+        "val_accuracy": list(np.linspace(0.55, 0.87, epochs)),
+    }
+    ax = dv.classification.training_history_curve_static(
+        history, title="Training history (loss and accuracy)")
+    save(ax, "classification_training_history")
+
+
 # --- Clustering -------------------------------------------------------------
 def ex_scatter_clusters():
     n = 300
@@ -501,6 +811,36 @@ EXAMPLES = [
     ("classification_confusion", ex_confusion_matrix),
     ("classification_roc", ex_roc),
     ("classification_pr", ex_pr_curve),
+    ("classification_multiclass_roc", ex_multiclass_roc),
+    ("classification_multiclass_pr", ex_multiclass_pr),
+    ("classification_calibration", ex_calibration_curve),
+    ("classification_prob_hist", ex_probability_histogram),
+    ("classification_threshold", ex_threshold_metric_curve),
+    ("classification_ks", ex_ks_plot),
+    ("classification_det", ex_det_curve),
+    ("classification_net_benefit", ex_net_benefit),
+    ("classification_gain", ex_gain_chart),
+    ("classification_lift", ex_lift_chart),
+    ("classification_class_balance", ex_class_balance),
+    ("classification_per_class_metrics", ex_per_class_metrics),
+    ("classification_normalized_cm", ex_normalized_confusion),
+    ("classification_error_grid", ex_error_grid),
+    ("classification_score_dist", ex_score_dist),
+    ("classification_decision_boundary", ex_decision_boundary),
+    ("classification_f_beta", ex_f_beta_curve),
+    ("classification_mcc", ex_mcc_curve),
+    ("classification_per_class_auc", ex_per_class_auc),
+    ("classification_top_k", ex_top_k_accuracy),
+    ("classification_multilabel_grid", ex_multilabel_grid),
+    ("classification_label_cooccurrence", ex_label_cooccurrence),
+    ("classification_segment_metric", ex_segment_metric),
+    ("classification_fairness_disparity", ex_fairness_disparity),
+    ("classification_discrimination", ex_discrimination_dashboard),
+    ("classification_loss_distribution", ex_loss_distribution),
+    ("classification_metrics_radar", ex_metrics_radar),
+    ("classification_psi", ex_psi_bar),
+    ("classification_validation_curve", ex_validation_curve),
+    ("classification_training_history", ex_training_history),
 
     ("clustering_scatter", ex_scatter_clusters),
     ("clustering_elbow", ex_elbow),

@@ -1,5 +1,5 @@
-Classification diagnostics: ROC and precision-recall
-====================================================
+Classification I: ROC and precision-recall
+==========================================
 
 Threshold-free quality views for binary and one-vs-rest classifiers.
 
