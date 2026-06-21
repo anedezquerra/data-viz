@@ -1,7 +1,7 @@
 Examples gallery
 ================
 
-A curated, copy-paste-ready gallery of **52 worked examples** covering every
+A curated, copy-paste-ready gallery of **80 worked examples** covering every
 sub-package of ``dataviz``. Each example page contains, for two charts:
 
 * a plain-English **description** of the chart and what it is good for;
@@ -104,13 +104,29 @@ models.
 Classification diagnostics
 --------------------------
 
-Confusion matrices, ROC and precision-recall curves for classification
-models.
+Confusion matrices, ROC and precision-recall curves, calibration, threshold
+selection, gain / lift, multiclass and multilabel quality, fairness segments,
+error analysis, model comparison, drift monitoring and training diagnostics.
 
 .. toctree::
    :maxdepth: 1
 
    examples/classification_01
+   examples/classification_02
+   examples/classification_03
+   examples/classification_04
+   examples/classification_05
+   examples/classification_06
+   examples/classification_07
+   examples/classification_08
+   examples/classification_09
+   examples/classification_10
+   examples/classification_11
+   examples/classification_12
+   examples/classification_13
+   examples/classification_14
+   examples/classification_15
+   examples/classification_16
 
 Clustering
 ----------
