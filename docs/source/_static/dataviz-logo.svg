@@ -1,37 +1,69 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="96" viewBox="0 0 320 96" role="img" aria-labelledby="dvl-title dvl-desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="440" viewBox="0 0 480 440" role="img" aria-labelledby="dvl-title dvl-desc">
   <title id="dvl-title">DataViz</title>
-  <desc id="dvl-desc">DataViz wordmark with chart mark and tagline, optimised for dark sidebars.</desc>
+  <desc id="dvl-desc">DataViz brand logo: rounded panel with gradient bar chart, smooth trend curve and an interactive node, set above the DataViz wordmark and tagline.</desc>
+
   <defs>
+    <linearGradient id="dvl-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.04"/>
+    </linearGradient>
     <linearGradient id="dvl-blue" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#3a9adf"/>
-      <stop offset="1" stop-color="#6fbef0"/>
+      <stop offset="0" stop-color="#2f86c9"/>
+      <stop offset="1" stop-color="#7cc8f5"/>
     </linearGradient>
     <linearGradient id="dvl-red" x1="0" y1="1" x2="0" y2="0">
       <stop offset="0" stop-color="#e85d6f"/>
-      <stop offset="1" stop-color="#f47b8a"/>
+      <stop offset="1" stop-color="#fa97a4"/>
     </linearGradient>
     <linearGradient id="dvl-green" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#3bb39a"/>
-      <stop offset="1" stop-color="#5fd0b9"/>
+      <stop offset="0" stop-color="#33b89a"/>
+      <stop offset="1" stop-color="#6ddcc1"/>
     </linearGradient>
+    <linearGradient id="dvl-amber" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#e8a23b"/>
+      <stop offset="1" stop-color="#f7c870"/>
+    </linearGradient>
+    <filter id="dvl-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+      <feOffset dy="4"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
   </defs>
 
-  <g transform="translate(8,10)">
-    <rect x="0" y="0" width="76" height="76" rx="16" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1.5"/>
-    <rect x="14" y="44" width="11" height="22" rx="3" fill="url(#dvl-green)"/>
-    <rect x="32" y="30" width="11" height="36" rx="3" fill="url(#dvl-blue)"/>
-    <rect x="50" y="18" width="11" height="48" rx="3" fill="url(#dvl-red)"/>
-    <path d="M14 46 C 28 36, 40 34, 52 20 S 64 12, 64 12"
-          fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" opacity="0.9"/>
-    <circle cx="52" cy="20" r="3.6" fill="#ffffff"/>
-    <circle cx="64" cy="12" r="4.2" fill="#f47b8a" stroke="#ffffff" stroke-width="1.4"/>
+  <rect x="40" y="20" width="400" height="260" rx="34"
+        fill="url(#dvl-panel)" stroke="#ffffff" stroke-opacity="0.32" stroke-width="2.5"/>
+
+  <g stroke="#ffffff" stroke-opacity="0.10" stroke-width="1.5">
+    <line x1="76"  y1="232" x2="404" y2="232"/>
+    <line x1="76"  y1="178" x2="404" y2="178"/>
+    <line x1="76"  y1="124" x2="404" y2="124"/>
+    <line x1="76"  y1="70"  x2="404" y2="70"/>
   </g>
 
-  <g font-family="'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif">
-    <text x="104" y="52" font-size="34" font-weight="700" letter-spacing="-0.5">
-      <tspan fill="#6fbef0">Data</tspan><tspan fill="#ffffff">Viz</tspan>
+  <g filter="url(#dvl-shadow)">
+    <rect x="92"  y="178" width="48" height="74"  rx="10" fill="url(#dvl-green)"/>
+    <rect x="160" y="138" width="48" height="114" rx="10" fill="url(#dvl-blue)"/>
+    <rect x="228" y="100" width="48" height="152" rx="10" fill="url(#dvl-amber)"/>
+    <rect x="296" y="68"  width="48" height="184" rx="10" fill="url(#dvl-red)"/>
+  </g>
+
+  <path d="M92 198 C 150 168, 200 168, 240 124 S 320 70, 340 60"
+        fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"
+        opacity="0.95"/>
+
+  <g>
+    <circle cx="240" cy="124" r="9"  fill="#ffffff"/>
+    <circle cx="340" cy="60"  r="13" fill="#fa97a4" stroke="#ffffff" stroke-width="4"/>
+  </g>
+
+  <g font-family="'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif"
+     text-anchor="middle">
+    <text x="240" y="360" font-size="78" font-weight="800" letter-spacing="-1.5">
+      <tspan fill="#7cc8f5">Data</tspan><tspan fill="#ffffff">Viz</tspan>
     </text>
-    <text x="106" y="74" font-size="10" font-weight="600" fill="#cdd9e6" letter-spacing="2.4">
+    <text x="240" y="404" font-size="18" font-weight="700"
+          fill="#cdd9e6" letter-spacing="4">
       STATIC · INTERACTIVE · EXPLAINABLE
     </text>
   </g>
