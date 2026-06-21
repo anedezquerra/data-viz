@@ -51,6 +51,9 @@ jobs:
           python docs/generate_api.py
           git diff --exit-code -- docs/source/api
 
+      - name: Lint generated docs for redundant 'package' wording
+        run: python docs/_tools/check_package_wording.py
+
       - name: Build documentation with warnings as errors
         run: >-
           python -m sphinx
