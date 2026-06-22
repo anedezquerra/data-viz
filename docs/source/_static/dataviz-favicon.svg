@@ -1,20 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 256 256" role="img" aria-label="DataViz">
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 520 280" role="img" aria-label="data viz favicon">
   <defs>
-    <linearGradient id="fv-blue" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#155684"/><stop offset="1" stop-color="#1b6ca8"/>
-    </linearGradient>
-    <linearGradient id="fv-red" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#b03a4b"/><stop offset="1" stop-color="#d1495b"/>
-    </linearGradient>
-    <linearGradient id="fv-green" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#0e6e5b"/><stop offset="1" stop-color="#138a72"/>
-    </linearGradient>
+    <clipPath id="dvf-eye-clip">
+      <path d="M60 140 C 150 20, 370 20, 460 140 C 370 260, 150 260, 60 140 Z"/>
+    </clipPath>
   </defs>
-  <rect x="0" y="0" width="256" height="256" rx="56" fill="#ffffff"/>
-  <rect x="48"  y="148" width="40" height="64"  rx="10" fill="url(#fv-green)"/>
-  <rect x="108" y="108" width="40" height="104" rx="10" fill="url(#fv-blue)"/>
-  <rect x="168" y="80"  width="40" height="132" rx="10" fill="url(#fv-red)"/>
-  <path d="M48 156 C 100 124, 144 116, 188 76"
-        fill="none" stroke="#172033" stroke-width="10" stroke-linecap="round"/>
-  <circle cx="188" cy="76" r="14" fill="#d1495b" stroke="#172033" stroke-width="5"/>
+  <path d="M40 140 C 140 0, 380 0, 480 140 C 380 280, 140 280, 40 140 Z" fill="#1b3a5b"/>
+  <path d="M60 140 C 150 20, 370 20, 460 140 C 370 260, 150 260, 60 140 Z" fill="#ffffff"/>
+  <g clip-path="url(#dvf-eye-clip)">
+    <g fill="#1b3a5b">
+      <rect x="178" y="148" width="28" height="60" rx="3"/>
+      <rect x="214" y="128" width="28" height="80" rx="3"/>
+      <rect x="250" y="158" width="28" height="50" rx="3"/>
+      <rect x="286" y="110" width="28" height="98" rx="3"/>
+      <rect x="322" y="86"  width="28" height="122" rx="3"/>
+    </g>
+    <polyline points="186,190 224,164 262,176 300,140 338,110"
+              fill="none" stroke="#2eb886" stroke-width="14"
+              stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <path d="M60 140 C 150 20, 370 20, 460 140 C 370 260, 150 260, 60 140 Z"
+        fill="none" stroke="#1b3a5b" stroke-width="12"/>
 </svg>
