@@ -37,7 +37,21 @@ The API pages are generated from the Python package layout:
    python docs/generate_api.py
 
 The generator creates one page per public function or class beneath its
-submodule and keeps package/submodule pages as navigation indexes.
+submodule and keeps subpackage / submodule pages as navigation indexes.
+
+Lint generated docs
+-------------------
+
+After regenerating pages, run the wording check that protects against
+boilerplate creeping back into auto-generated pages (e.g. ``(this package)``
+in example requirements blocks or ``<dotted.name> package`` H1 headings):
+
+.. code-block:: console
+
+   python docs/_tools/check_package_wording.py
+
+The same check runs in the ``Documentation`` workflow and will fail CI if
+new generator templates reintroduce the redundant wording.
 
 GitHub Pages
 ------------

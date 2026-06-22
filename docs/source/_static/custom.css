@@ -10,11 +10,20 @@
   background: var(--dataviz-blue);
 }
 
+.wy-side-nav-search {
+  padding: 1rem 0.6rem 0.8rem;
+}
+
 .wy-side-nav-search > a img.logo {
-  width: 88px;
-  height: 88px;
-  margin: 0 auto 0.35rem;
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  margin: 0 auto 0.4rem;
   padding: 0;
+}
+
+.wy-side-nav-search > div.version {
+  color: #cdd9e6;
 }
 
 .wy-menu-vertical a:active {

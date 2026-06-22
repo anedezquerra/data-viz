@@ -1,38 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="96" viewBox="0 0 320 96" role="img" aria-labelledby="dvl-title dvl-desc">
-  <title id="dvl-title">DataViz</title>
-  <desc id="dvl-desc">DataViz wordmark with chart mark and tagline, optimised for dark sidebars.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="520" viewBox="0 0 520 520" role="img" aria-labelledby="dvl-title dvl-desc">
+  <title id="dvl-title">data viz</title>
+  <desc id="dvl-desc">data viz logo: an eye-shaped mark enclosing a bar chart with a rising arrow and a sunburst, above the wordmark "data viz" and the tagline "Visualizing the Truth, Python Powered".</desc>
+
   <defs>
-    <linearGradient id="dvl-blue" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#3a9adf"/>
-      <stop offset="1" stop-color="#6fbef0"/>
-    </linearGradient>
-    <linearGradient id="dvl-red" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#e85d6f"/>
-      <stop offset="1" stop-color="#f47b8a"/>
-    </linearGradient>
-    <linearGradient id="dvl-green" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#3bb39a"/>
-      <stop offset="1" stop-color="#5fd0b9"/>
-    </linearGradient>
+    <clipPath id="dvl-eye-clip">
+      <path d="M60 200 C 150 80, 370 80, 460 200 C 370 320, 150 320, 60 200 Z"/>
+    </clipPath>
   </defs>
 
-  <g transform="translate(8,10)">
-    <rect x="0" y="0" width="76" height="76" rx="16" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1.5"/>
-    <rect x="14" y="44" width="11" height="22" rx="3" fill="url(#dvl-green)"/>
-    <rect x="32" y="30" width="11" height="36" rx="3" fill="url(#dvl-blue)"/>
-    <rect x="50" y="18" width="11" height="48" rx="3" fill="url(#dvl-red)"/>
-    <path d="M14 46 C 28 36, 40 34, 52 20 S 64 12, 64 12"
-          fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" opacity="0.9"/>
-    <circle cx="52" cy="20" r="3.6" fill="#ffffff"/>
-    <circle cx="64" cy="12" r="4.2" fill="#f47b8a" stroke="#ffffff" stroke-width="1.4"/>
+  <rect x="8" y="8" width="504" height="504" rx="40" fill="#ffffff"/>
+
+  <g fill="#ffffff">
+    <path d="M40 200 C 140 60, 380 60, 480 200 C 380 340, 140 340, 40 200 Z"
+          fill="#1b3a5b"/>
+    <path d="M60 200 C 150 80, 370 80, 460 200 C 370 320, 150 320, 60 200 Z"
+          fill="#ffffff"/>
+
+    <g clip-path="url(#dvl-eye-clip)">
+      <g stroke="#1b3a5b" stroke-width="9" stroke-linecap="round" fill="none">
+        <line x1="260" y1="232" x2="260" y2="118"/>
+        <line x1="260" y1="232" x2="178" y2="150"/>
+        <line x1="260" y1="232" x2="210" y2="124"/>
+        <line x1="260" y1="232" x2="310" y2="124"/>
+        <line x1="260" y1="232" x2="342" y2="150"/>
+      </g>
+
+      <g fill="#1b3a5b">
+        <rect x="178" y="208" width="28" height="60" rx="3"/>
+        <rect x="214" y="188" width="28" height="80" rx="3"/>
+        <rect x="250" y="218" width="28" height="50" rx="3"/>
+        <rect x="286" y="170" width="28" height="98" rx="3"/>
+        <rect x="322" y="146" width="28" height="122" rx="3"/>
+      </g>
+
+      <g fill="none" stroke="#2eb886" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="186,250 224,224 262,236 300,200 338,170"/>
+      </g>
+      <polygon points="338,170 318,164 330,150 348,156" fill="#2eb886"/>
+      <polygon points="346,158 360,150 360,178" fill="#2eb886"/>
+    </g>
+
+    <path d="M60 200 C 150 80, 370 80, 460 200 C 370 320, 150 320, 60 200 Z"
+          fill="none" stroke="#1b3a5b" stroke-width="10"/>
   </g>
 
-  <g font-family="'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif">
-    <text x="104" y="52" font-size="34" font-weight="700" letter-spacing="-0.5">
-      <tspan fill="#6fbef0">Data</tspan><tspan fill="#ffffff">Viz</tspan>
+  <g font-family="'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif"
+     text-anchor="middle">
+    <text x="260" y="420" font-size="92" font-weight="800" fill="#1b3a5b" letter-spacing="-1">
+      data viz
     </text>
-    <text x="106" y="74" font-size="10" font-weight="600" fill="#cdd9e6" letter-spacing="2.4">
-      STATIC · INTERACTIVE · EXPLAINABLE
+    <text x="260" y="470" font-size="22" font-weight="600" fill="#1b3a5b" letter-spacing="0.5">
+      Visualizing the Truth, Python Powered
     </text>
   </g>
 </svg>
