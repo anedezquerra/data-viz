@@ -342,4 +342,209 @@ __all__ = [
     "autocorrelation",
     "partial_autocorrelation",
     "runs_test_signs",
+    "variance_inflation_factors",
+    "breusch_pagan_statistic",
+    "white_test_statistic",
+    "ljung_box_statistic",
+    "jarque_bera_statistic",
+    "durbin_watson_statistic",
+    "box_cox_loglikelihood",
+    "yeo_johnson_loglikelihood",
+    "conformal_quantile",
+    "jackknife_plus_intervals",
 ]
+
+
+# ---------------------------------------------------------------------------
+# Diagnostic statistics used by goodness-of-fit / multicollinearity charts.
+# ---------------------------------------------------------------------------
+
+def variance_inflation_factors(X: MatrixLike, include_intercept: bool = True) -> np.ndarray:
+    """Return one VIF per column of ``X`` using OLS regressions of each on the rest."""
+    Xm = _as_matrix(X)
+    n, p = Xm.shape
+    vif = np.zeros(p)
+    for j in range(p):
+        others = np.delete(Xm, j, axis=1)
+        Z = np.column_stack([np.ones(n), others]) if include_intercept else others
+        beta = np.linalg.pinv(Z.T @ Z) @ Z.T @ Xm[:, j]
+        pred = Z @ beta
+        ss_res = float(np.sum((Xm[:, j] - pred) ** 2))
+        ss_tot = float(np.sum((Xm[:, j] - Xm[:, j].mean()) ** 2))
+        r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else 0.0
+        vif[j] = 1.0 / max(1.0 - r2, 1e-12)
+    return vif
+
+
+def breusch_pagan_statistic(X: MatrixLike, residuals: ArrayLike) -> Tuple[float, float]:
+    """Return (LM statistic, p-value-like) for Breusch–Pagan heteroscedasticity test.
+
+    The "p-value-like" output is ``1 - F_chi2(LM, df=p)`` evaluated with a
+    Wilson–Hilferty cube-root approximation. Sufficient for diagnostic charts.
+    """
+    Xm = _as_matrix(X)
+    r = _as_array(residuals)
+    n = r.size
+    sigma2 = float(np.mean(r ** 2))
+    if sigma2 <= 0:
+        return 0.0, 1.0
+    g = r ** 2 / sigma2
+    Z = np.column_stack([np.ones(n), Xm])
+    beta = np.linalg.pinv(Z.T @ Z) @ Z.T @ g
+    fitted = Z @ beta
+    ss_reg = float(np.sum((fitted - g.mean()) ** 2))
+    lm = 0.5 * ss_reg
+    p = Z.shape[1] - 1
+    return float(lm), _chi2_sf(lm, p)
+
+
+def white_test_statistic(X: MatrixLike, residuals: ArrayLike) -> Tuple[float, float]:
+    """White heteroscedasticity test using ``X``, ``X**2`` and cross-products."""
+    Xm = _as_matrix(X)
+    r = _as_array(residuals)
+    n, p = Xm.shape
+    feats = [np.ones(n), Xm, Xm ** 2]
+    for i in range(p):
+        for j in range(i + 1, p):
+            feats.append((Xm[:, i] * Xm[:, j]).reshape(-1, 1))
+    Z = np.column_stack(feats)
+    g = r ** 2
+    beta = np.linalg.pinv(Z.T @ Z) @ Z.T @ g
+    fitted = Z @ beta
+    ss_res = float(np.sum((g - fitted) ** 2))
+    ss_tot = float(np.sum((g - g.mean()) ** 2))
+    r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else 0.0
+    lm = n * r2
+    df = Z.shape[1] - 1
+    return float(lm), _chi2_sf(lm, df)
+
+
+def ljung_box_statistic(residuals: ArrayLike, lags: int = 10) -> Tuple[float, float]:
+    """Ljung–Box Q-statistic up to ``lags`` and its approximate p-value."""
+    r = _as_array(residuals)
+    n = r.size
+    acf = autocorrelation(r, max_lag=lags)
+    q = n * (n + 2) * np.sum(acf[1:] ** 2 / (n - np.arange(1, lags + 1)))
+    return float(q), _chi2_sf(float(q), lags)
+
+
+def jarque_bera_statistic(residuals: ArrayLike) -> Tuple[float, float]:
+    """Jarque–Bera normality test statistic and approximate p-value."""
+    r = _as_array(residuals)
+    n = r.size
+    if n < 2:
+        return 0.0, 1.0
+    m = r - r.mean()
+    s2 = float(np.mean(m ** 2))
+    if s2 <= 0:
+        return 0.0, 1.0
+    skew = float(np.mean(m ** 3) / s2 ** 1.5)
+    kurt = float(np.mean(m ** 4) / s2 ** 2) - 3.0
+    jb = n / 6.0 * (skew ** 2 + (kurt ** 2) / 4.0)
+    return float(jb), _chi2_sf(float(jb), 2)
+
+
+def durbin_watson_statistic(residuals: ArrayLike) -> float:
+    """Durbin–Watson statistic for first-order residual autocorrelation."""
+    r = _as_array(residuals)
+    if r.size < 2:
+        return 2.0
+    diff = np.diff(r)
+    return float(np.sum(diff ** 2) / max(np.sum(r ** 2), 1e-12))
+
+
+def box_cox_loglikelihood(y: ArrayLike, lambdas: ArrayLike) -> np.ndarray:
+    """Profile log-likelihood for the Box–Cox transform across ``lambdas``.
+
+    ``y`` must be strictly positive. Returns an array shaped like ``lambdas``.
+    """
+    y_arr = _as_array(y)
+    if np.any(y_arr <= 0):
+        raise ValueError("Box-Cox requires strictly positive y.")
+    lambdas_arr = _as_array(lambdas)
+    n = y_arr.size
+    log_y = np.log(y_arr)
+    out = np.zeros_like(lambdas_arr, dtype=float)
+    for i, lam in enumerate(lambdas_arr):
+        if abs(lam) < 1e-8:
+            y_t = log_y
+        else:
+            y_t = (y_arr ** lam - 1.0) / lam
+        var = float(np.var(y_t, ddof=0))
+        out[i] = -n / 2.0 * np.log(max(var, 1e-12)) + (lam - 1.0) * np.sum(log_y)
+    return out
+
+
+def yeo_johnson_loglikelihood(y: ArrayLike, lambdas: ArrayLike) -> np.ndarray:
+    """Profile log-likelihood for the Yeo–Johnson transform across ``lambdas``."""
+    y_arr = _as_array(y)
+    lambdas_arr = _as_array(lambdas)
+    n = y_arr.size
+    out = np.zeros_like(lambdas_arr, dtype=float)
+    pos = y_arr >= 0
+    neg = ~pos
+    for i, lam in enumerate(lambdas_arr):
+        y_t = np.zeros_like(y_arr)
+        if abs(lam) < 1e-8:
+            y_t[pos] = np.log1p(y_arr[pos])
+        else:
+            y_t[pos] = ((y_arr[pos] + 1.0) ** lam - 1.0) / lam
+        if abs(lam - 2.0) < 1e-8:
+            y_t[neg] = -np.log1p(-y_arr[neg])
+        else:
+            y_t[neg] = -(((-y_arr[neg] + 1.0) ** (2.0 - lam)) - 1.0) / (2.0 - lam)
+        var = float(np.var(y_t, ddof=0))
+        sign = np.where(pos, 1.0, -1.0)
+        log_term = np.sum(sign * np.log1p(np.abs(y_arr)))
+        out[i] = -n / 2.0 * np.log(max(var, 1e-12)) + (lam - 1.0) * log_term
+    return out
+
+
+def conformal_quantile(residuals_calibration: ArrayLike, alpha: float = 0.1) -> float:
+    """Split-conformal quantile of absolute residuals at level ``1-alpha``."""
+    r = np.abs(_as_array(residuals_calibration))
+    n = r.size
+    k = int(np.ceil((n + 1) * (1.0 - alpha)))
+    k = max(1, min(n, k))
+    return float(np.partition(r, k - 1)[k - 1])
+
+
+def jackknife_plus_intervals(
+    leave_one_out_predictions: MatrixLike,
+    y_calibration: ArrayLike,
+    new_predictions: ArrayLike,
+    alpha: float = 0.1,
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Jackknife+ prediction intervals (Barber et al. 2021).
+
+    ``leave_one_out_predictions`` has shape ``(n_calibration, n_test)``; each
+    row ``i`` holds predictions for the test set from the model trained
+    without calibration point ``i``. ``y_calibration`` are the calibration
+    targets and ``new_predictions`` are the standard predictions on the test set.
+    """
+    L = _as_matrix(leave_one_out_predictions)
+    y_c = _as_array(y_calibration)
+    y_n = _as_array(new_predictions)
+    if L.shape[0] != y_c.size:
+        raise ValueError("rows of leave_one_out_predictions must equal y_calibration length.")
+    if L.shape[1] != y_n.size:
+        raise ValueError("cols of leave_one_out_predictions must equal new_predictions length.")
+    abs_res = np.abs(y_c[:, None] - L)
+    lo = np.quantile(L - abs_res, alpha, axis=0)
+    hi = np.quantile(L + abs_res, 1.0 - alpha, axis=0)
+    return lo, hi
+
+
+# ---------------------------------------------------------------------------
+# Approximate chi-squared survival function (no scipy dependency).
+# ---------------------------------------------------------------------------
+
+def _chi2_sf(x: float, df: int) -> float:
+    """1 - F_chi2(x; df) via Wilson–Hilferty approximation."""
+    if x <= 0 or df <= 0:
+        return 1.0
+    h = 2.0 / (9.0 * df)
+    z = ((x / df) ** (1.0 / 3.0) - (1.0 - h)) / np.sqrt(h)
+    # Standard normal survival via erf complement.
+    from math import erf, sqrt
+    return float(0.5 * (1.0 - erf(z / sqrt(2.0))))
