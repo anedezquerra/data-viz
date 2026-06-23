@@ -1,5 +1,6 @@
 # Changelog
 
+- Unreleased: feat(website): nav drills into submodules and individual functions as deepest level
 - Unreleased: feat(xai): add 33 chart families (66 funcs) — gain importance, stability, importance correlation, feature clustermap, SHAP beeswarm/instance heatmap/stacked force/main-vs-interaction/monotonicity/temporal drift, anchor/k-NN/prototype-criticism/contrastive local explanations, PDP+ICE overlay, 2-D ALE, H-statistic, interaction network, counterfactual paths/diverse CFs/what-if, disparate impact, subgroup SHAP divergence, intersectional importance, predictive uncertainty band, uncertainty attribution, epistemic-vs-aleatoric, TCAV concept activation, saliency overlay, attention heatmap, embedding projection, importance comparison heatmap, SHAP model-agreement scatter, Rashomon importance band.
 
 - Unreleased: feat(xai): add 22 chart families (44 funcs) for importance (permutation, grouped, boxplot, drop-column, method-scatter), SHAP (summary dot, global bar, violin, dependence, interaction heatmap, waterfall), local explanations (force, decision, LIME), 2-D PDP, ICE, centered-ICE, ALE, surrogate tree, counterfactual deltas, per-segment importance heatmap and SHAP cluster heatmap.

@@ -109,6 +109,69 @@ a:hover {
   text-decoration: none;
 }
 
+.nav-tree details {
+  margin: 2px 0;
+}
+
+.nav-tree summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 5px;
+  font-size: 0.94rem;
+  color: #2a3345;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-tree summary::-webkit-details-marker { display: none; }
+
+.nav-tree summary::before {
+  content: "▸";
+  font-size: 0.7rem;
+  color: var(--muted);
+  width: 10px;
+  display: inline-block;
+  transition: transform 0.15s;
+}
+
+.nav-tree details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.nav-tree summary:hover,
+.nav-tree summary.active {
+  background: #eef4fb;
+}
+
+.nav-module-summary {
+  font-weight: 600;
+}
+
+.nav-module-link {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+}
+
+.nav-module-link:hover { text-decoration: none; }
+
+.nav-sublist {
+  padding-left: 14px;
+  border-left: 1px solid var(--line);
+  margin-left: 6px;
+}
+
+.nav-sublist .leaf {
+  font-size: 0.88rem;
+  color: #3a4458;
+  padding: 4px 8px;
+}
+
 .badge {
   display: inline-flex;
   align-items: center;
