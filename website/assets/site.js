@@ -31,20 +31,64 @@ function functionCodeLink(moduleSlug, name) {
   return `<a class="code-link" href="${siteLink(href)}"><code>${name}</code></a>`;
 }
 
+function submoduleTree(moduleSlug) {
+  const docs = window.DATAVIZ_FUNCTION_DOCS?.[moduleSlug] || {};
+  const groups = {};
+  Object.values(docs).forEach((doc) => {
+    const sub = doc.submodule || "_";
+    (groups[sub] ||= []).push(doc);
+  });
+  Object.values(groups).forEach((list) => list.sort((a, b) => a.name.localeCompare(b.name)));
+  return Object.keys(groups).sort().map((sub) => ({ name: sub, docs: groups[sub] }));
+}
+
 function renderNav() {
   const completed = Object.values(window.DATAVIZ_MODULES).filter((item) => item.status === "complete");
   const planned = Object.values(window.DATAVIZ_MODULES).filter((item) => item.status !== "complete");
   const current = document.body.dataset.page || "";
   const currentModule = document.body.dataset.functionModule || "";
+  const currentFunction = document.body.dataset.functionName || "";
   const nav = document.querySelector("[data-nav]");
   if (!nav) return;
-  const item = (entry) => html`
-    <li>
-      <a class="${current === entry.slug || currentModule === entry.slug ? "active" : ""}" href="${siteLink(entry.href)}">
-        <span>${entry.title}</span>
-        <span class="badge ${entry.status === "complete" ? "" : "todo"}">${entry.status === "complete" ? "Ready" : "Blank"}</span>
-      </a>
+
+  const functionNode = (moduleSlug, doc) => {
+    const active = currentModule === moduleSlug && currentFunction === doc.name;
+    return html`<li><a class="leaf ${active ? "active" : ""}" href="${siteLink(doc.href)}">${doc.name}</a></li>`;
+  };
+
+  const submoduleNode = (moduleSlug, sub, activeSub) => html`
+    <li class="nav-sub">
+      <details ${activeSub === sub.name ? "open" : ""}>
+        <summary>${sub.name}</summary>
+        <ul class="nav-list nav-sublist">${sub.docs.map((doc) => functionNode(moduleSlug, doc)).join("")}</ul>
+      </details>
     </li>`;
+
+  const moduleNode = (entry) => {
+    const isActive = current === entry.slug || currentModule === entry.slug;
+    const subs = entry.status === "complete" ? submoduleTree(entry.slug) : [];
+    const activeSub = currentModule === entry.slug
+      ? (window.DATAVIZ_FUNCTION_DOCS?.[entry.slug]?.[currentFunction]?.submodule || "")
+      : "";
+    const header = html`
+      <summary class="nav-module-summary ${isActive ? "active" : ""}">
+        <a class="nav-module-link" href="${siteLink(entry.href)}">
+          <span>${entry.title}</span>
+          <span class="badge ${entry.status === "complete" ? "" : "todo"}">${entry.status === "complete" ? "Ready" : "Blank"}</span>
+        </a>
+      </summary>`;
+    if (!subs.length) {
+      return html`<li class="nav-module"><details ${isActive ? "open" : ""}>${header}</details></li>`;
+    }
+    return html`
+      <li class="nav-module">
+        <details ${isActive ? "open" : ""}>
+          ${header}
+          <ul class="nav-list nav-sublist">${subs.map((sub) => submoduleNode(entry.slug, sub, activeSub)).join("")}</ul>
+        </details>
+      </li>`;
+  };
+
   nav.innerHTML = html`
     <div class="nav-section">Documentation</div>
     <ul class="nav-list">
@@ -56,9 +100,9 @@ function renderNav() {
       <li><a class="${current === "changelog" ? "active" : ""}" href="${siteLink("changelog.html")}">Changelog</a></li>
     </ul>
     <div class="nav-section">Completed Modules</div>
-    <ul class="nav-list">${completed.map(item).join("")}</ul>
+    <ul class="nav-list nav-tree">${completed.map(moduleNode).join("")}</ul>
     <div class="nav-section">Planned Modules</div>
-    <ul class="nav-list">${planned.map(item).join("")}</ul>`;
+    <ul class="nav-list nav-tree">${planned.map(moduleNode).join("")}</ul>`;
 }
 
 function renderModulePage() {
@@ -177,9 +221,29 @@ function initSearch() {
   const input = document.querySelector("[data-search]");
   if (!input) return;
   input.addEventListener("input", () => {
-    const q = input.value.toLowerCase();
-    document.querySelectorAll(".nav-list li").forEach((li) => {
-      li.style.display = li.textContent.toLowerCase().includes(q) ? "" : "none";
+    const q = input.value.toLowerCase().trim();
+    const nav = document.querySelector("[data-nav]");
+    if (!nav) return;
+    if (!q) {
+      nav.querySelectorAll("li").forEach((li) => (li.style.display = ""));
+      nav.querySelectorAll("details").forEach((d) => d.removeAttribute("data-search-open"));
+      return;
+    }
+    nav.querySelectorAll("li").forEach((li) => (li.style.display = "none"));
+    nav.querySelectorAll(".nav-list a, .nav-list summary").forEach((el) => {
+      if (!el.textContent.toLowerCase().includes(q)) return;
+      let node = el.closest("li");
+      while (node) {
+        node.style.display = "";
+        const det = node.parentElement?.closest("details");
+        if (det) {
+          det.open = true;
+          det.setAttribute("data-search-open", "1");
+          node = det.closest("li");
+        } else {
+          node = null;
+        }
+      }
     });
   });
 }
