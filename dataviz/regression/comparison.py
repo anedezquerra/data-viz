@@ -104,7 +104,7 @@ def residual_density_overlay_multi_interactive(residuals_per_model, model_labels
 def error_ecdf_overlay_static(errors_per_model, model_labels, title=None,
                               figsize=(10, 6), cmap="viridis", style="default",
                               theme="default", dpi=100, **kwargs) -> MatplotlibAxes:
-    """Overlay empirical CDFs of |error| per model."""
+    """Overlay empirical CDFs of \\|error\\| per model."""
     cmap_obj = plt.get_cmap(cmap)
     with plt.style.context(style):
         fig, ax = setup_plot(title=title or "Error ECDF (overlay)",

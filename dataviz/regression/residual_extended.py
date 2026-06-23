@@ -429,7 +429,7 @@ def scale_location_plot_static(
     style: str = "default",
     **kwargs,
 ) -> MatplotlibAxes:
-    """Sqrt(|standardized residual|) vs predicted — homoscedasticity check."""
+    """Sqrt(\\|standardized residual\\|) vs predicted — homoscedasticity check."""
     res = _residuals(y_true, y_pred)
     sigma = float(np.std(res, ddof=1)) if res.size > 1 else 1.0
     sqrt_abs = np.sqrt(np.abs(res / max(sigma, 1e-12)))
