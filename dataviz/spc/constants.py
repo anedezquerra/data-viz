@@ -72,6 +72,47 @@ SPC_CONSTANTS: Dict[int, SPCConstants] = {
 }
 
 
+D2_CONSTANTS: Dict[int, float] = {
+    2: 1.128,
+    3: 1.693,
+    4: 2.059,
+    5: 2.326,
+    6: 2.534,
+    7: 2.704,
+    8: 2.847,
+    9: 2.970,
+    10: 3.078,
+}
+
+
+def get_d2(span: int) -> float:
+    """Return the ``d2`` bias-correction constant for a moving-range span.
+
+    Args:
+        span (int): Moving-range span (number of consecutive observations).
+
+    Returns:
+        float: The ``d2`` constant used to estimate sigma from the mean range.
+
+    Raises:
+        TypeError: If span is not an integer.
+        ValueError: If span is outside the supported range 2 through 10.
+
+    Examples:
+        ```python
+        d2 = get_d2(2)
+        ```
+
+    Notes:
+        ``d2`` converts a mean range to a standard-deviation estimate as ``Rbar / d2``.
+    """
+    if not isinstance(span, int):
+        raise TypeError("span must be an integer.")
+    if span not in D2_CONSTANTS:
+        raise ValueError("d2 constants are available for spans 2 through 10.")
+    return D2_CONSTANTS[span]
+
+
 def get_spc_constants(subgroup_size: int) -> SPCConstants:
     """Return traditional SPC constants for a subgroup size.
 
@@ -96,5 +137,7 @@ def get_spc_constants(subgroup_size: int) -> SPCConstants:
     if not isinstance(subgroup_size, int):
         raise TypeError("subgroup_size must be an integer.")
     if subgroup_size not in SPC_CONSTANTS:
-        raise ValueError("Traditional SPC constants are available for subgroup sizes 2 through 25.")
+        raise ValueError(
+            "Traditional SPC constants are available for subgroup sizes 2 through 25."
+        )
     return SPC_CONSTANTS[subgroup_size]

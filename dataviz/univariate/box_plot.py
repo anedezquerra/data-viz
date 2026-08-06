@@ -173,7 +173,7 @@ def box_plot_interactive(
                 name=str(col),
                 marker_color=color,
                 boxmean=boxmean,
-                points=points,
+                boxpoints=points,
                 **kwargs
             ))
     else:
@@ -181,7 +181,7 @@ def box_plot_interactive(
             y=data,
             marker_color=color,
             boxmean=boxmean,
-            points=points,
+            boxpoints=points,
             **kwargs
         ))
     

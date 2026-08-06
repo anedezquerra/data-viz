@@ -9,12 +9,19 @@ from .variable import (
     xbar_s_chart_static,
     ewma_chart_static,
     cusum_chart_static,
+    imr_chart_static,
+    median_chart_static,
+    levey_jennings_chart_static,
 )
 from .attribute import (
     p_chart_static,
     np_chart_static,
     c_chart_static,
     u_chart_static,
+    g_chart_static,
+    t_chart_static,
+    laney_p_chart_static,
+    laney_u_chart_static,
 )
 from .capability import (
     CapabilityStats,
@@ -52,12 +59,19 @@ from .variable import (
     xbar_s_chart_interactive,
     ewma_chart_interactive,
     cusum_chart_interactive,
+    imr_chart_interactive,
+    median_chart_interactive,
+    levey_jennings_chart_interactive,
 )
 from .attribute import (
     p_chart_interactive,
     np_chart_interactive,
     c_chart_interactive,
     u_chart_interactive,
+    g_chart_interactive,
+    t_chart_interactive,
+    laney_p_chart_interactive,
+    laney_u_chart_interactive,
 )
 from .capability import capability_histogram_interactive
 from .diagnostics import (
@@ -78,10 +92,17 @@ xbar_r_chart = xbar_r_chart_static
 xbar_s_chart = xbar_s_chart_static
 ewma_chart = ewma_chart_static
 cusum_chart = cusum_chart_static
+imr_chart = imr_chart_static
+median_chart = median_chart_static
+levey_jennings_chart = levey_jennings_chart_static
 p_chart = p_chart_static
 np_chart = np_chart_static
 c_chart = c_chart_static
 u_chart = u_chart_static
+g_chart = g_chart_static
+t_chart = t_chart_static
+laney_p_chart = laney_p_chart_static
+laney_u_chart = laney_u_chart_static
 capability_histogram = capability_histogram_static
 run_chart = run_chart_static
 rule_violation_chart = rule_violation_chart_static
@@ -100,10 +121,17 @@ __all__ = [
     "xbar_s_chart_static",
     "ewma_chart_static",
     "cusum_chart_static",
+    "imr_chart_static",
+    "median_chart_static",
+    "levey_jennings_chart_static",
     "p_chart_static",
     "np_chart_static",
     "c_chart_static",
     "u_chart_static",
+    "g_chart_static",
+    "t_chart_static",
+    "laney_p_chart_static",
+    "laney_u_chart_static",
     "capability_histogram_static",
     "run_chart_static",
     "rule_violation_chart_static",
@@ -120,10 +148,17 @@ __all__ = [
     "xbar_s_chart_interactive",
     "ewma_chart_interactive",
     "cusum_chart_interactive",
+    "imr_chart_interactive",
+    "median_chart_interactive",
+    "levey_jennings_chart_interactive",
     "p_chart_interactive",
     "np_chart_interactive",
     "c_chart_interactive",
     "u_chart_interactive",
+    "g_chart_interactive",
+    "t_chart_interactive",
+    "laney_p_chart_interactive",
+    "laney_u_chart_interactive",
     "capability_histogram_interactive",
     "run_chart_interactive",
     "rule_violation_chart_interactive",
@@ -153,10 +188,17 @@ __all__ = [
     "xbar_s_chart",
     "ewma_chart",
     "cusum_chart",
+    "imr_chart",
+    "median_chart",
+    "levey_jennings_chart",
     "p_chart",
     "np_chart",
     "c_chart",
     "u_chart",
+    "g_chart",
+    "t_chart",
+    "laney_p_chart",
+    "laney_u_chart",
     "capability_histogram",
     "run_chart",
     "rule_violation_chart",

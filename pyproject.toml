@@ -47,10 +47,8 @@ dependencies = [
     "matplotlib>=3.9.4,<3.11",
     "seaborn>=0.13.2,<1",
     "numpy>=2.0.2,<3",
-    "pandas>=2.3.3,<3",
-    # Plotly 6 renamed the box-trace `points` property; pin until callsites
-    # are updated to use `boxpoints` consistently.
-    "plotly>=5.0,<6",
+    "pandas>=2.3.3,<4",
+    "plotly>=5.0,<7",
     "scipy>=1.13.1,<2",
 ]
 

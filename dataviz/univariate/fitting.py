@@ -102,7 +102,7 @@ def fit_distribution(data: SeriesLike, distribution: str = "norm") -> Distributi
     values = as_numeric_series(data).to_numpy(dtype=float)
     dist = _distribution(distribution)
     params = tuple(float(value) for value in dist.fit(values))
-    statistic, p_value = stats.kstest(values, distribution, args=params)
+    statistic, p_value = stats.kstest(values, dist(*params).cdf)
     pdf_values = np.maximum(dist.pdf(values, *params), np.finfo(float).tiny)
     log_likelihood = float(np.sum(np.log(pdf_values)))
     k = len(params)
