@@ -1,0 +1,344 @@
+{
+  "control_chart": [
+    {
+      "src": "assets/examples/spc/control_chart_1.png",
+      "caption": "Stable process \u2014 points vary randomly inside the control limits."
+    },
+    {
+      "src": "assets/examples/spc/control_chart_2.png",
+      "caption": "Mean shift \u2014 the average jumps midway through the run."
+    },
+    {
+      "src": "assets/examples/spc/control_chart_3.png",
+      "caption": "Gradual drift \u2014 a slow upward trend walks toward the upper limit."
+    },
+    {
+      "src": "assets/examples/spc/control_chart_4.png",
+      "caption": "Special-cause spikes \u2014 isolated points break the control limits."
+    }
+  ],
+  "x_range_chart": [
+    {
+      "src": "assets/examples/spc/x_range_chart_1.png",
+      "caption": "Stable process \u2014 30 subgroups of five stay in control."
+    },
+    {
+      "src": "assets/examples/spc/x_range_chart_2.png",
+      "caption": "Mean shift \u2014 the process centre moves up after subgroup 15."
+    },
+    {
+      "src": "assets/examples/spc/x_range_chart_3.png",
+      "caption": "Drift \u2014 a steady trend pushes subgroup means upward."
+    },
+    {
+      "src": "assets/examples/spc/x_range_chart_4.png",
+      "caption": "High variation \u2014 a wider spread stresses the range portion."
+    }
+  ],
+  "moving_range_chart": [
+    {
+      "src": "assets/examples/spc/moving_range_chart_1.png",
+      "caption": "Stable process \u2014 points vary randomly inside the control limits."
+    },
+    {
+      "src": "assets/examples/spc/moving_range_chart_2.png",
+      "caption": "Mean shift \u2014 the average jumps midway through the run."
+    },
+    {
+      "src": "assets/examples/spc/moving_range_chart_3.png",
+      "caption": "Gradual drift \u2014 a slow upward trend walks toward the upper limit."
+    },
+    {
+      "src": "assets/examples/spc/moving_range_chart_4.png",
+      "caption": "Special-cause spikes \u2014 isolated points break the control limits."
+    }
+  ],
+  "xbar_r_chart": [
+    {
+      "src": "assets/examples/spc/xbar_r_chart_1.png",
+      "caption": "Stable subgroups \u2014 subgroup means and ranges stay in control."
+    },
+    {
+      "src": "assets/examples/spc/xbar_r_chart_2.png",
+      "caption": "Mean shift \u2014 subgroup averages climb after the 15th sample."
+    },
+    {
+      "src": "assets/examples/spc/xbar_r_chart_3.png",
+      "caption": "Widening spread \u2014 larger within-subgroup variation inflates the range chart."
+    },
+    {
+      "src": "assets/examples/spc/xbar_r_chart_4.png",
+      "caption": "Out-of-control subgroup \u2014 one subgroup mean exceeds the limit."
+    }
+  ],
+  "xbar_s_chart": [
+    {
+      "src": "assets/examples/spc/xbar_s_chart_1.png",
+      "caption": "Stable subgroups \u2014 mean and standard-deviation charts are in control."
+    },
+    {
+      "src": "assets/examples/spc/xbar_s_chart_2.png",
+      "caption": "Mean shift \u2014 subgroup averages step up partway through."
+    },
+    {
+      "src": "assets/examples/spc/xbar_s_chart_3.png",
+      "caption": "Increased variation \u2014 subgroup spread grows and the S chart reacts."
+    },
+    {
+      "src": "assets/examples/spc/xbar_s_chart_4.png",
+      "caption": "Special cause \u2014 a single subgroup drives an out-of-control signal."
+    }
+  ],
+  "ewma_chart": [
+    {
+      "src": "assets/examples/spc/ewma_chart_1.png",
+      "caption": "Stable process \u2014 points vary randomly inside the control limits."
+    },
+    {
+      "src": "assets/examples/spc/ewma_chart_2.png",
+      "caption": "Mean shift \u2014 the average jumps midway through the run."
+    },
+    {
+      "src": "assets/examples/spc/ewma_chart_3.png",
+      "caption": "Gradual drift \u2014 a slow upward trend walks toward the upper limit."
+    },
+    {
+      "src": "assets/examples/spc/ewma_chart_4.png",
+      "caption": "Special-cause spikes \u2014 isolated points break the control limits."
+    }
+  ],
+  "cusum_chart": [
+    {
+      "src": "assets/examples/spc/cusum_chart_1.png",
+      "caption": "Stable process \u2014 points vary randomly inside the control limits."
+    },
+    {
+      "src": "assets/examples/spc/cusum_chart_2.png",
+      "caption": "Mean shift \u2014 the average jumps midway through the run."
+    },
+    {
+      "src": "assets/examples/spc/cusum_chart_3.png",
+      "caption": "Gradual drift \u2014 a slow upward trend walks toward the upper limit."
+    },
+    {
+      "src": "assets/examples/spc/cusum_chart_4.png",
+      "caption": "Special-cause spikes \u2014 isolated points break the control limits."
+    }
+  ],
+  "p_chart": [
+    {
+      "src": "assets/examples/spc/p_chart_1.png",
+      "caption": "Stable proportion defective \u2014 points scatter around p-bar."
+    },
+    {
+      "src": "assets/examples/spc/p_chart_2.png",
+      "caption": "Process deterioration \u2014 the defect rate rises in the second half."
+    },
+    {
+      "src": "assets/examples/spc/p_chart_3.png",
+      "caption": "Varying sample sizes \u2014 control limits widen for smaller samples."
+    },
+    {
+      "src": "assets/examples/spc/p_chart_4.png",
+      "caption": "Out-of-control points \u2014 two samples exceed the upper limit."
+    }
+  ],
+  "np_chart": [
+    {
+      "src": "assets/examples/spc/np_chart_1.png",
+      "caption": "Stable defective count \u2014 constant sample size of 100."
+    },
+    {
+      "src": "assets/examples/spc/np_chart_2.png",
+      "caption": "Upward shift \u2014 nonconforming units increase midway."
+    },
+    {
+      "src": "assets/examples/spc/np_chart_3.png",
+      "caption": "Slow drift \u2014 the defective count trends upward over time."
+    },
+    {
+      "src": "assets/examples/spc/np_chart_4.png",
+      "caption": "Special cause \u2014 isolated high counts break the limit."
+    }
+  ],
+  "c_chart": [
+    {
+      "src": "assets/examples/spc/c_chart_1.png",
+      "caption": "Stable defect count \u2014 a constant inspection area."
+    },
+    {
+      "src": "assets/examples/spc/c_chart_2.png",
+      "caption": "Increased defects \u2014 the average count rises partway through."
+    },
+    {
+      "src": "assets/examples/spc/c_chart_3.png",
+      "caption": "Drifting count \u2014 defects trend upward over time."
+    },
+    {
+      "src": "assets/examples/spc/c_chart_4.png",
+      "caption": "Special cause \u2014 two inspections show excessive defects."
+    }
+  ],
+  "u_chart": [
+    {
+      "src": "assets/examples/spc/u_chart_1.png",
+      "caption": "Stable defects per unit \u2014 inspection sizes vary sample to sample."
+    },
+    {
+      "src": "assets/examples/spc/u_chart_2.png",
+      "caption": "Rate increase \u2014 defects per unit climb in the second half."
+    },
+    {
+      "src": "assets/examples/spc/u_chart_3.png",
+      "caption": "Equal inspection sizes \u2014 straight control limits."
+    },
+    {
+      "src": "assets/examples/spc/u_chart_4.png",
+      "caption": "Special cause \u2014 two samples exceed the upper limit."
+    }
+  ],
+  "capability_histogram": [
+    {
+      "src": "assets/examples/spc/capability_histogram_1.png",
+      "caption": "Capable and centred \u2014 the spread fits comfortably in spec."
+    },
+    {
+      "src": "assets/examples/spc/capability_histogram_2.png",
+      "caption": "Off-centre \u2014 the mean drifts toward the upper spec limit."
+    },
+    {
+      "src": "assets/examples/spc/capability_histogram_3.png",
+      "caption": "Too much spread \u2014 the distribution overflows both limits."
+    },
+    {
+      "src": "assets/examples/spc/capability_histogram_4.png",
+      "caption": "Skewed process \u2014 a non-normal tail crosses the lower limit."
+    }
+  ],
+  "run_chart": [
+    {
+      "src": "assets/examples/spc/run_chart_1.png",
+      "caption": "Stable process \u2014 points vary randomly inside the control limits."
+    },
+    {
+      "src": "assets/examples/spc/run_chart_2.png",
+      "caption": "Mean shift \u2014 the average jumps midway through the run."
+    },
+    {
+      "src": "assets/examples/spc/run_chart_3.png",
+      "caption": "Gradual drift \u2014 a slow upward trend walks toward the upper limit."
+    },
+    {
+      "src": "assets/examples/spc/run_chart_4.png",
+      "caption": "Special-cause spikes \u2014 isolated points break the control limits."
+    }
+  ],
+  "rule_violation_chart": [
+    {
+      "src": "assets/examples/spc/rule_violation_chart_1.png",
+      "caption": "Stable process \u2014 points vary randomly inside the control limits."
+    },
+    {
+      "src": "assets/examples/spc/rule_violation_chart_2.png",
+      "caption": "Mean shift \u2014 the average jumps midway through the run."
+    },
+    {
+      "src": "assets/examples/spc/rule_violation_chart_3.png",
+      "caption": "Gradual drift \u2014 a slow upward trend walks toward the upper limit."
+    },
+    {
+      "src": "assets/examples/spc/rule_violation_chart_4.png",
+      "caption": "Special-cause spikes \u2014 isolated points break the control limits."
+    }
+  ],
+  "pareto_chart": [
+    {
+      "src": "assets/examples/spc/pareto_chart_1.png",
+      "caption": "Classic 80/20 \u2014 a few categories dominate the defects."
+    },
+    {
+      "src": "assets/examples/spc/pareto_chart_2.png",
+      "caption": "Single dominant cause \u2014 one category drives most defects."
+    },
+    {
+      "src": "assets/examples/spc/pareto_chart_3.png",
+      "caption": "Even spread \u2014 no single vital few stands out."
+    },
+    {
+      "src": "assets/examples/spc/pareto_chart_4.png",
+      "caption": "Long tail \u2014 many small contributors after the leaders."
+    }
+  ],
+  "process_distribution": [
+    {
+      "src": "assets/examples/spc/process_distribution_1.png",
+      "caption": "Normal process \u2014 a symmetric, bell-shaped distribution."
+    },
+    {
+      "src": "assets/examples/spc/process_distribution_2.png",
+      "caption": "Right-skewed \u2014 a long upper tail from occasional large values."
+    },
+    {
+      "src": "assets/examples/spc/process_distribution_3.png",
+      "caption": "Bimodal \u2014 two overlapping modes suggest mixed streams."
+    },
+    {
+      "src": "assets/examples/spc/process_distribution_4.png",
+      "caption": "Heavy-tailed \u2014 extra dispersion from rare extreme values."
+    }
+  ],
+  "zone_chart": [
+    {
+      "src": "assets/examples/spc/zone_chart_1.png",
+      "caption": "Stable process \u2014 points vary randomly inside the control limits."
+    },
+    {
+      "src": "assets/examples/spc/zone_chart_2.png",
+      "caption": "Mean shift \u2014 the average jumps midway through the run."
+    },
+    {
+      "src": "assets/examples/spc/zone_chart_3.png",
+      "caption": "Gradual drift \u2014 a slow upward trend walks toward the upper limit."
+    },
+    {
+      "src": "assets/examples/spc/zone_chart_4.png",
+      "caption": "Special-cause spikes \u2014 isolated points break the control limits."
+    }
+  ],
+  "hotelling_t2_chart": [
+    {
+      "src": "assets/examples/spc/hotelling_t2_chart_1.png",
+      "caption": "In control \u2014 two correlated variables stay within the T\u00b2 limit."
+    },
+    {
+      "src": "assets/examples/spc/hotelling_t2_chart_2.png",
+      "caption": "Joint shift \u2014 both variables move together after sample 20."
+    },
+    {
+      "src": "assets/examples/spc/hotelling_t2_chart_3.png",
+      "caption": "Counter-move \u2014 a single variable breaks the usual correlation."
+    },
+    {
+      "src": "assets/examples/spc/hotelling_t2_chart_4.png",
+      "caption": "Multivariate outlier \u2014 one point is far in the T\u00b2 metric."
+    }
+  ],
+  "spc_dashboard": [
+    {
+      "src": "assets/examples/spc/spc_dashboard_1.png",
+      "caption": "Stable process \u2014 points vary randomly inside the control limits."
+    },
+    {
+      "src": "assets/examples/spc/spc_dashboard_2.png",
+      "caption": "Mean shift \u2014 the average jumps midway through the run."
+    },
+    {
+      "src": "assets/examples/spc/spc_dashboard_3.png",
+      "caption": "Gradual drift \u2014 a slow upward trend walks toward the upper limit."
+    },
+    {
+      "src": "assets/examples/spc/spc_dashboard_4.png",
+      "caption": "Special-cause spikes \u2014 isolated points break the control limits."
+    }
+  ]
+}
