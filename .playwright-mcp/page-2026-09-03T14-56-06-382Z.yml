@@ -1,0 +1,296 @@
+- generic [ref=e2]:
+  - navigation [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link " DataViz Logo" [ref=e6] [cursor=pointer]:
+          - /url: ../../../../../index.html
+          - text:  DataViz
+          - img "Logo" [ref=e7]
+        - search [ref=e8]:
+          - textbox "Search docs" [ref=e10]
+      - navigation "Navigation menu" [ref=e11]:
+        - heading "Getting started" [ref=e12]
+        - list [ref=e13]:
+          - listitem [ref=e14]:
+            - link " Getting started" [ref=e15] [cursor=pointer]:
+              - /url: ../../../../../getting_started.html
+              - button "" [ref=e16]
+              - text: Getting started
+            - text:  
+          - listitem [ref=e17]:
+            - link " User guide" [ref=e18] [cursor=pointer]:
+              - /url: ../../../../../user_guide.html
+              - button "" [ref=e19]
+              - text: User guide
+            - text:   
+          - listitem [ref=e20]:
+            - link " Examples gallery" [ref=e21] [cursor=pointer]:
+              - /url: ../../../../../examples.html
+              - button "" [ref=e22]
+              - text: Examples gallery
+            - text:                                                  
+        - heading "API reference" [ref=e23]
+        - list [ref=e24]:
+          - listitem [ref=e25]:
+            - link " API reference" [ref=e26] [cursor=pointer]:
+              - /url: ../../../../modules.html
+              - button "" [ref=e27]
+              - text: API reference
+            - list [ref=e28]:
+              - listitem [ref=e29]:
+                - link " dataviz" [ref=e30] [cursor=pointer]:
+                  - /url: ../../../../dataviz.html
+                  - button "" [ref=e31]
+                  - text: dataviz
+                - list [ref=e32]:
+                  - listitem [ref=e33]:
+                    - link " Subpackages" [ref=e34] [cursor=pointer]:
+                      - /url: ../../../../dataviz.html#subpackages
+                      - button "" [ref=e35]
+                      - text: Subpackages
+                    - list [ref=e36]:
+                      - listitem [ref=e37]:
+                        - link "dataviz.bivariate" [ref=e38] [cursor=pointer]:
+                          - /url: ../../../../dataviz.bivariate.html
+                      - listitem [ref=e39]:
+                        - link "dataviz.classification" [ref=e40] [cursor=pointer]:
+                          - /url: ../../../../dataviz.classification.html
+                      - listitem [ref=e41]:
+                        - link "dataviz.clustering" [ref=e42] [cursor=pointer]:
+                          - /url: ../../../../dataviz.clustering.html
+                      - listitem [ref=e43]:
+                        - link "dataviz.eda" [ref=e44] [cursor=pointer]:
+                          - /url: ../../../../dataviz.eda.html
+                      - listitem [ref=e45]:
+                        - link "dataviz.multivariate" [ref=e46] [cursor=pointer]:
+                          - /url: ../../../../dataviz.multivariate.html
+                      - listitem [ref=e47]:
+                        - link "dataviz.regression" [ref=e48] [cursor=pointer]:
+                          - /url: ../../../../dataviz.regression.html
+                      - listitem [ref=e49]:
+                        - link "dataviz.spc" [ref=e50] [cursor=pointer]:
+                          - /url: ../../../../dataviz.spc.html
+                      - listitem [ref=e51]:
+                        - link "dataviz.univariate" [ref=e52] [cursor=pointer]:
+                          - /url: ../../../../dataviz.univariate.html
+                      - listitem [ref=e53]:
+                        - link "dataviz.utils" [ref=e54] [cursor=pointer]:
+                          - /url: ../../../../dataviz.utils.html
+                      - listitem [ref=e55]:
+                        - link "dataviz.xai" [ref=e56] [cursor=pointer]:
+                          - /url: ../../../../dataviz.xai.html
+                  - listitem [ref=e57]:
+                    - link " Submodules" [ref=e58] [cursor=pointer]:
+                      - /url: ../../../../dataviz.html#submodules
+                      - button "" [ref=e59]
+                      - text: Submodules
+        - heading "Project" [ref=e60]
+        - list [ref=e61]:
+          - listitem [ref=e62]:
+            - link " Documentation development" [ref=e63] [cursor=pointer]:
+              - /url: ../../../../../development.html
+              - button "" [ref=e64]
+              - text: Documentation development
+          - listitem [ref=e65]:
+            - link " Changelog" [ref=e66] [cursor=pointer]:
+              - /url: ../../../../../changelog.html
+              - button "" [ref=e67]
+              - text: Changelog
+  - generic [ref=e68]:
+    - text: 
+    - generic [ref=e70]:
+      - navigation "Page navigation" [ref=e71]:
+        - list [ref=e72]:
+          - listitem [ref=e73]:
+            - link "Home" [ref=e74] [cursor=pointer]:
+              - /url: ../../../../../index.html
+              - text: 
+          - listitem [ref=e75]:
+            - text: /
+            - link "API reference" [ref=e76] [cursor=pointer]:
+              - /url: ../../../../modules.html
+          - listitem [ref=e77]:
+            - text: /
+            - link "dataviz" [ref=e78] [cursor=pointer]:
+              - /url: ../../../../dataviz.html
+          - listitem [ref=e79]:
+            - text: /
+            - link "dataviz.spc" [ref=e80] [cursor=pointer]:
+              - /url: ../../../../dataviz.spc.html
+          - listitem [ref=e81]:
+            - text: /
+            - link "dataviz.spc.attribute module" [ref=e82] [cursor=pointer]:
+              - /url: ../../../../dataviz.spc.attribute.html
+          - listitem [ref=e83]: /dataviz.spc.attribute.p_chart_static
+          - listitem [ref=e84]:
+            - link " Edit on GitHub" [ref=e85] [cursor=pointer]:
+              - /url: https://github.com/anedezquerra/data-viz/blob/main/docs/source/api/members/dataviz/spc/attribute/p_chart_static.rst
+        - navigation "Sequential page navigation" [ref=e86]:
+          - link "Previous" [ref=e87] [cursor=pointer]:
+            - /url: ../../../../dataviz.spc.attribute.html
+            - generic [ref=e88]: 
+            - text: Previous
+          - link "Next" [ref=e89] [cursor=pointer]:
+            - /url: p_chart_interactive.html
+            - text: Next
+            - generic [ref=e90]: 
+        - separator [ref=e91]
+      - main [ref=e92]:
+        - generic [ref=e94]:
+          - heading "dataviz.spc.attribute.p_chart_static " [level=1] [ref=e95]:
+            - text: dataviz.spc.attribute.p_chart_static
+            - link "" [ref=e96] [cursor=pointer]:
+              - /url: "#dataviz-spc-attribute-p-chart-static"
+          - generic [ref=e97]:
+            - generic [ref=e98]: Function
+            - paragraph [ref=e99]: dataviz.spc.attribute
+          - generic [ref=e100]:
+            - term [ref=e101]:
+              - generic [ref=e102]: dataviz.spc.attribute.
+              - generic [ref=e103]: p_chart_static
+              - text: (
+              - emphasis [ref=e104]:
+                - generic [ref=e105]: defects
+              - text: ","
+              - emphasis [ref=e106]:
+                - generic [ref=e107]: sample_sizes
+              - text: ","
+              - emphasis [ref=e108]:
+                - generic [ref=e109]: title
+                - generic [ref=e110]: =
+                - generic [ref=e111]: "'p Chart'"
+              - text: ","
+              - emphasis [ref=e112]:
+                - generic [ref=e113]: figsize
+                - generic [ref=e114]: =
+                - generic [ref=e115]: (12, 6)
+              - text: ","
+              - emphasis [ref=e116]:
+                - generic [ref=e117]: theme
+                - generic [ref=e118]: =
+                - generic [ref=e119]: "'default'"
+              - text: )
+              - link "[source]" [ref=e120] [cursor=pointer]:
+                - /url: ../../../../../_modules/dataviz/spc/attribute.html#p_chart_static
+                - generic [ref=e121]: "[source]"
+              - link "" [ref=e122] [cursor=pointer]:
+                - /url: "#dataviz.spc.attribute.p_chart_static"
+            - definition [ref=e123]:
+              - paragraph [ref=e124]: Create a static p chart for defect proportions.
+              - generic [ref=e125]:
+                - term [ref=e126]:
+                  - text: Parameters
+                  - generic [ref=e127]: ":"
+                - definition [ref=e128]:
+                  - list [ref=e129]:
+                    - listitem [ref=e130]:
+                      - paragraph [ref=e131]:
+                        - strong [ref=e132]: defects
+                        - text: (
+                        - emphasis [ref=e133]: ArrayLike
+                        - text: ) – Defective counts per sample.
+                    - listitem [ref=e134]:
+                      - paragraph [ref=e135]:
+                        - strong [ref=e136]: sample_sizes
+                        - text: (
+                        - emphasis [ref=e137]: ArrayLike
+                        - text: ) – Sample sizes for each count.
+                    - listitem [ref=e138]:
+                      - paragraph [ref=e139]:
+                        - strong [ref=e140]: title
+                        - text: (
+                        - emphasis [ref=e141]: str
+                        - text: ) – Chart title.
+                    - listitem [ref=e142]:
+                      - paragraph [ref=e143]:
+                        - strong [ref=e144]: figsize
+                        - text: (
+                        - emphasis [ref=e145]: FigureSize
+                        - text: ) – Figure size in inches.
+                    - listitem [ref=e146]:
+                      - paragraph [ref=e147]:
+                        - strong [ref=e148]: theme
+                        - text: (
+                        - emphasis [ref=e149]: str
+                        - text: ) – Named style theme.
+                - term [ref=e150]:
+                  - text: Returns
+                  - generic [ref=e151]: ":"
+                - definition [ref=e152]:
+                  - paragraph [ref=e153]: p chart axes.
+                - term [ref=e154]:
+                  - text: Return type
+                  - generic [ref=e155]: ":"
+                - definition [ref=e156]:
+                  - paragraph [ref=e157]: matplotlib.axes.Axes
+                - term [ref=e158]:
+                  - text: Raises
+                  - generic [ref=e159]: ":"
+                - definition [ref=e160]:
+                  - list [ref=e161]:
+                    - listitem [ref=e162]:
+                      - paragraph [ref=e163]:
+                        - strong [ref=e164]: TypeError
+                        - text: – If inputs cannot be converted to numeric values.
+                    - listitem [ref=e165]:
+                      - paragraph [ref=e166]:
+                        - strong [ref=e167]: ValueError
+                        - text: – If counts and sample sizes are incompatible.
+              - generic [ref=e168]:
+                - paragraph [ref=e169]:  Examples
+                - paragraph [ref=e170]:
+                  - code [ref=e171]: "`python ax = dv.spc.p_chart_static(defects, sample_sizes) `"
+              - generic [ref=e172]:
+                - paragraph [ref=e173]:  Notes
+                - paragraph [ref=e174]: Limits are based on average sample size when subgroup sizes vary.
+          - generic [ref=e175]:
+            - heading "Complete example " [level=2] [ref=e176]:
+              - text: Complete example
+              - link "" [ref=e177] [cursor=pointer]:
+                - /url: "#complete-example"
+            - paragraph [ref=e178]: The following example is self-contained and can be copied into a Python session or script.
+            - generic [ref=e180]:
+              - generic [ref=e181]: import numpy as np import matplotlib.pyplot as plt from dataviz.spc.attribute import p_chart_static defects = np.array([3, 5, 4, 6, 2, 7, 4, 5, 3, 6]) sample_sizes = np.array([100, 105, 98, 110, 102, 108, 100, 104, 99, 106]) ax = p_chart_static(defects, sample_sizes, title="Supplier defect proportion") plt.show()
+              - button "Copy to clipboard" [ref=e182] [cursor=pointer]:
+                - img "Copy to clipboard" [ref=e183]
+          - generic [ref=e187]:
+            - heading "Output gallery " [level=2] [ref=e188]:
+              - text: Output gallery
+              - link "" [ref=e189] [cursor=pointer]:
+                - /url: "#output-gallery"
+            - generic [ref=e190]:
+              - figure "Future example image 1" [ref=e191]:
+                - generic [ref=e192]: "01"
+                - generic [ref=e193]: Future example image 1
+              - figure "Future example image 2" [ref=e194]:
+                - generic [ref=e195]: "02"
+                - generic [ref=e196]: Future example image 2
+              - figure "Future example image 3" [ref=e197]:
+                - generic [ref=e198]: "03"
+                - generic [ref=e199]: Future example image 3
+              - figure "Future example image 4" [ref=e200]:
+                - generic [ref=e201]: "04"
+                - generic [ref=e202]: Future example image 4
+      - generic [ref=e203]:
+        - navigation "Footer" [ref=e204]:
+          - link "Previous" [ref=e205] [cursor=pointer]:
+            - /url: ../../../../dataviz.spc.attribute.html
+            - generic [ref=e206]: 
+            - text: Previous
+          - link "Next" [ref=e207] [cursor=pointer]:
+            - /url: p_chart_interactive.html
+            - text: Next
+            - generic [ref=e208]: 
+        - separator [ref=e209]
+        - contentinfo [ref=e210]:
+          - paragraph [ref=e211]: © Copyright 2026, Aned Esquerra-Arguelles.
+        - text: Built with
+        - link "Sphinx" [ref=e212] [cursor=pointer]:
+          - /url: https://www.sphinx-doc.org/
+        - text: using a
+        - link "theme" [ref=e213] [cursor=pointer]:
+          - /url: https://github.com/readthedocs/sphinx_rtd_theme
+        - text: provided by
+        - link "Read the Docs" [ref=e214] [cursor=pointer]:
+          - /url: https://readthedocs.org
+        - text: .

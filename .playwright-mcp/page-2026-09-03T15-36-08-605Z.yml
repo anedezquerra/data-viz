@@ -1,0 +1,505 @@
+- generic [ref=e2]:
+  - navigation [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link " DataViz Logo" [ref=e6] [cursor=pointer]:
+          - /url: ../../../../../index.html
+          - text:  DataViz
+          - img "Logo" [ref=e7]
+        - search [ref=e8]:
+          - textbox "Search docs" [ref=e10]
+      - navigation "Navigation menu" [ref=e11]:
+        - heading "Getting started" [ref=e12]
+        - list [ref=e13]:
+          - listitem [ref=e14]:
+            - link " Getting started" [ref=e15] [cursor=pointer]:
+              - /url: ../../../../../getting_started.html
+              - button "" [ref=e16]
+              - text: Getting started
+            - text:  
+          - listitem [ref=e17]:
+            - link " User guide" [ref=e18] [cursor=pointer]:
+              - /url: ../../../../../user_guide.html
+              - button "" [ref=e19]
+              - text: User guide
+            - text:   
+          - listitem [ref=e20]:
+            - link " Examples gallery" [ref=e21] [cursor=pointer]:
+              - /url: ../../../../../examples.html
+              - button "" [ref=e22]
+              - text: Examples gallery
+            - text:                                                  
+        - heading "API reference" [ref=e23]
+        - list [ref=e24]:
+          - listitem [ref=e25]:
+            - link " API reference" [ref=e26] [cursor=pointer]:
+              - /url: ../../../../modules.html
+              - button "" [ref=e27]
+              - text: API reference
+            - list [ref=e28]:
+              - listitem [ref=e29]:
+                - link " dataviz" [ref=e30] [cursor=pointer]:
+                  - /url: ../../../../dataviz.html
+                  - button "" [ref=e31]
+                  - text: dataviz
+                - list [ref=e32]:
+                  - listitem [ref=e33]:
+                    - link " Subpackages" [ref=e34] [cursor=pointer]:
+                      - /url: ../../../../dataviz.html#subpackages
+                      - button "" [ref=e35]
+                      - text: Subpackages
+                    - list [ref=e36]:
+                      - listitem [ref=e37]:
+                        - link "dataviz.bivariate" [ref=e38] [cursor=pointer]:
+                          - /url: ../../../../dataviz.bivariate.html
+                      - listitem [ref=e39]:
+                        - link "dataviz.classification" [ref=e40] [cursor=pointer]:
+                          - /url: ../../../../dataviz.classification.html
+                      - listitem [ref=e41]:
+                        - link "dataviz.clustering" [ref=e42] [cursor=pointer]:
+                          - /url: ../../../../dataviz.clustering.html
+                      - listitem [ref=e43]:
+                        - link "dataviz.eda" [ref=e44] [cursor=pointer]:
+                          - /url: ../../../../dataviz.eda.html
+                      - listitem [ref=e45]:
+                        - link "dataviz.multivariate" [ref=e46] [cursor=pointer]:
+                          - /url: ../../../../dataviz.multivariate.html
+                      - listitem [ref=e47]:
+                        - link "dataviz.regression" [ref=e48] [cursor=pointer]:
+                          - /url: ../../../../dataviz.regression.html
+                      - listitem [ref=e49]:
+                        - link "dataviz.spc" [ref=e50] [cursor=pointer]:
+                          - /url: ../../../../dataviz.spc.html
+                      - listitem [ref=e51]:
+                        - link "dataviz.univariate" [ref=e52] [cursor=pointer]:
+                          - /url: ../../../../dataviz.univariate.html
+                      - listitem [ref=e53]:
+                        - link "dataviz.utils" [ref=e54] [cursor=pointer]:
+                          - /url: ../../../../dataviz.utils.html
+                      - listitem [ref=e55]:
+                        - link "dataviz.xai" [ref=e56] [cursor=pointer]:
+                          - /url: ../../../../dataviz.xai.html
+                  - listitem [ref=e57]:
+                    - link " Submodules" [ref=e58] [cursor=pointer]:
+                      - /url: ../../../../dataviz.html#submodules
+                      - button "" [ref=e59]
+                      - text: Submodules
+        - heading "Project" [ref=e60]
+        - list [ref=e61]:
+          - listitem [ref=e62]:
+            - link " Documentation development" [ref=e63] [cursor=pointer]:
+              - /url: ../../../../../development.html
+              - button "" [ref=e64]
+              - text: Documentation development
+          - listitem [ref=e65]:
+            - link " Changelog" [ref=e66] [cursor=pointer]:
+              - /url: ../../../../../changelog.html
+              - button "" [ref=e67]
+              - text: Changelog
+  - generic [ref=e68]:
+    - text: 
+    - generic [ref=e70]:
+      - navigation "Page navigation" [ref=e71]:
+        - list [ref=e72]:
+          - listitem [ref=e73]:
+            - link "Home" [ref=e74] [cursor=pointer]:
+              - /url: ../../../../../index.html
+              - text: 
+          - listitem [ref=e75]:
+            - text: /
+            - link "API reference" [ref=e76] [cursor=pointer]:
+              - /url: ../../../../modules.html
+          - listitem [ref=e77]:
+            - text: /
+            - link "dataviz" [ref=e78] [cursor=pointer]:
+              - /url: ../../../../dataviz.html
+          - listitem [ref=e79]:
+            - text: /
+            - link "dataviz.univariate" [ref=e80] [cursor=pointer]:
+              - /url: ../../../../dataviz.univariate.html
+          - listitem [ref=e81]:
+            - text: /
+            - link "dataviz.univariate.histogram module" [ref=e82] [cursor=pointer]:
+              - /url: ../../../../dataviz.univariate.histogram.html
+          - listitem [ref=e83]: /dataviz.univariate.histogram.histogram_static
+          - listitem [ref=e84]:
+            - link " Edit on GitHub" [ref=e85] [cursor=pointer]:
+              - /url: https://github.com/anedezquerra/data-viz/blob/main/docs/source/api/members/dataviz/univariate/histogram/histogram_static.rst
+        - navigation "Sequential page navigation" [ref=e86]:
+          - link "Previous" [ref=e87] [cursor=pointer]:
+            - /url: ../../../../dataviz.univariate.histogram.html
+            - generic [ref=e88]: 
+            - text: Previous
+          - link "Next" [ref=e89] [cursor=pointer]:
+            - /url: histogram_interactive.html
+            - text: Next
+            - generic [ref=e90]: 
+        - separator [ref=e91]
+      - main [ref=e92]:
+        - generic [ref=e94]:
+          - heading "dataviz.univariate.histogram.histogram_static " [level=1] [ref=e95]:
+            - text: dataviz.univariate.histogram.histogram_static
+            - link "" [ref=e96] [cursor=pointer]:
+              - /url: "#dataviz-univariate-histogram-histogram-static"
+          - generic [ref=e97]:
+            - generic [ref=e98]: Function
+            - paragraph [ref=e99]: dataviz.univariate.histogram
+          - generic [ref=e100]:
+            - term [ref=e101]:
+              - generic [ref=e102]: dataviz.univariate.histogram.
+              - generic [ref=e103]: histogram_static
+              - text: (
+              - emphasis [ref=e104]:
+                - generic [ref=e105]: data
+              - text: ","
+              - emphasis [ref=e106]:
+                - generic [ref=e107]: bins
+                - generic [ref=e108]: =
+                - generic [ref=e109]: "30"
+              - text: ","
+              - emphasis [ref=e110]:
+                - generic [ref=e111]: title
+                - generic [ref=e112]: =
+                - generic [ref=e113]: None
+              - text: ","
+              - emphasis [ref=e114]:
+                - generic [ref=e115]: xlabel
+                - generic [ref=e116]: =
+                - generic [ref=e117]: None
+              - text: ","
+              - emphasis [ref=e118]:
+                - generic [ref=e119]: ylabel
+                - generic [ref=e120]: =
+                - generic [ref=e121]: None
+              - text: ","
+              - emphasis [ref=e122]:
+                - generic [ref=e123]: figsize
+                - generic [ref=e124]: =
+                - generic [ref=e125]: (10, 6)
+              - text: ","
+              - emphasis [ref=e126]:
+                - generic [ref=e127]: color
+                - generic [ref=e128]: =
+                - generic [ref=e129]: None
+              - text: ","
+              - emphasis [ref=e130]:
+                - generic [ref=e131]: edgecolor
+                - generic [ref=e132]: =
+                - generic [ref=e133]: "'black'"
+              - text: ","
+              - emphasis [ref=e134]:
+                - generic [ref=e135]: alpha
+                - generic [ref=e136]: =
+                - generic [ref=e137]: "0.7"
+              - text: ","
+              - emphasis [ref=e138]:
+                - generic [ref=e139]: grid
+                - generic [ref=e140]: =
+                - generic [ref=e141]: "True"
+              - text: ","
+              - emphasis [ref=e142]:
+                - generic [ref=e143]: grid_alpha
+                - generic [ref=e144]: =
+                - generic [ref=e145]: "0.3"
+              - text: ","
+              - emphasis [ref=e146]:
+                - generic [ref=e147]: theme
+                - generic [ref=e148]: =
+                - generic [ref=e149]: "'default'"
+              - text: ","
+              - emphasis [ref=e150]:
+                - generic [ref=e151]: font_size
+                - generic [ref=e152]: =
+                - generic [ref=e153]: "10"
+              - text: ","
+              - emphasis [ref=e154]:
+                - generic [ref=e155]: title_size
+                - generic [ref=e156]: =
+                - generic [ref=e157]: "14"
+              - text: ","
+              - emphasis [ref=e158]:
+                - generic [ref=e159]: label_size
+                - generic [ref=e160]: =
+                - generic [ref=e161]: "11"
+              - text: ","
+              - emphasis [ref=e162]:
+                - generic [ref=e163]: dpi
+                - generic [ref=e164]: =
+                - generic [ref=e165]: "100"
+              - text: ","
+              - emphasis [ref=e166]:
+                - generic [ref=e167]: style
+                - generic [ref=e168]: =
+                - generic [ref=e169]: "'default'"
+              - text: ","
+              - emphasis [ref=e170]:
+                - generic [ref=e171]: "**"
+                - generic [ref=e172]: kwargs
+              - text: )
+              - link "[source]" [ref=e173] [cursor=pointer]:
+                - /url: ../../../../../_modules/dataviz/univariate/histogram.html#histogram_static
+                - generic [ref=e174]: "[source]"
+              - link "" [ref=e175] [cursor=pointer]:
+                - /url: "#dataviz.univariate.histogram.histogram_static"
+            - definition [ref=e176]:
+              - paragraph [ref=e177]: Create a static histogram that summarizes the frequency distribution of one variable.
+              - paragraph [ref=e178]: Builds the visualization with package defaults while allowing backend-specific customization through keyword arguments where supported.
+              - generic [ref=e179]:
+                - term [ref=e180]:
+                  - text: Parameters
+                  - generic [ref=e181]: ":"
+                - definition [ref=e182]:
+                  - list [ref=e183]:
+                    - listitem [ref=e184]:
+                      - paragraph [ref=e185]:
+                        - strong [ref=e186]: data
+                        - text: (
+                        - emphasis [ref=e187]: SeriesLike
+                        - text: ) – Input observations, measurements, or values used to build the chart.
+                    - listitem [ref=e188]:
+                      - paragraph [ref=e189]:
+                        - strong [ref=e190]: bins
+                        - text: (
+                        - emphasis [ref=e191]: int
+                        - text: ) – Number of bins used for histogram-like displays. Defaults to
+                        - code [ref=e192]: "30"
+                        - text: .
+                    - listitem [ref=e193]:
+                      - paragraph [ref=e194]:
+                        - strong [ref=e195]: title
+                        - text: (
+                        - emphasis [ref=e196]: Optional
+                        - emphasis [ref=e197]: "["
+                        - emphasis [ref=e198]: str
+                        - emphasis [ref=e199]: "]"
+                        - text: ) – Optional chart title. When omitted, a descriptive title is generated where possible. Defaults to
+                        - code [ref=e200]: None
+                        - text: .
+                    - listitem [ref=e201]:
+                      - paragraph [ref=e202]:
+                        - strong [ref=e203]: xlabel
+                        - text: (
+                        - emphasis [ref=e204]: Optional
+                        - emphasis [ref=e205]: "["
+                        - emphasis [ref=e206]: str
+                        - emphasis [ref=e207]: "]"
+                        - text: ) – Optional x-axis label. Defaults to
+                        - code [ref=e208]: None
+                        - text: .
+                    - listitem [ref=e209]:
+                      - paragraph [ref=e210]:
+                        - strong [ref=e211]: ylabel
+                        - text: (
+                        - emphasis [ref=e212]: Optional
+                        - emphasis [ref=e213]: "["
+                        - emphasis [ref=e214]: str
+                        - emphasis [ref=e215]: "]"
+                        - text: ) – Optional y-axis label. Defaults to
+                        - code [ref=e216]: None
+                        - text: .
+                    - listitem [ref=e217]:
+                      - paragraph [ref=e218]:
+                        - strong [ref=e219]: figsize
+                        - text: (
+                        - emphasis [ref=e220]: FigureSize
+                        - text: ) – Matplotlib figure size as
+                        - code [ref=e221]: (width, height)
+                        - text: in inches. Defaults to
+                        - code [ref=e222]: (10, 6)
+                        - text: .
+                    - listitem [ref=e223]:
+                      - paragraph [ref=e224]:
+                        - strong [ref=e225]: color
+                        - text: (
+                        - emphasis [ref=e226]: Optional
+                        - emphasis [ref=e227]: "["
+                        - emphasis [ref=e228]: str
+                        - emphasis [ref=e229]: "]"
+                        - text: ) – Configuration value for
+                        - code [ref=e230]: color
+                        - text: . Defaults to
+                        - code [ref=e231]: None
+                        - text: .
+                    - listitem [ref=e232]:
+                      - paragraph [ref=e233]:
+                        - strong [ref=e234]: edgecolor
+                        - text: (
+                        - emphasis [ref=e235]: str
+                        - text: ) – Configuration value for
+                        - code [ref=e236]: edgecolor
+                        - text: . Defaults to
+                        - code [ref=e237]: "'black'"
+                        - text: .
+                    - listitem [ref=e238]:
+                      - paragraph [ref=e239]:
+                        - strong [ref=e240]: alpha
+                        - text: (
+                        - emphasis [ref=e241]: float
+                        - text: ) – Configuration value for
+                        - code [ref=e242]: alpha
+                        - text: . Defaults to
+                        - code [ref=e243]: "0.7"
+                        - text: .
+                    - listitem [ref=e244]:
+                      - paragraph [ref=e245]:
+                        - strong [ref=e246]: grid
+                        - text: (
+                        - emphasis [ref=e247]: bool
+                        - text: ) – Configuration value for
+                        - code [ref=e248]: grid
+                        - text: . Defaults to
+                        - code [ref=e249]: "True"
+                        - text: .
+                    - listitem [ref=e250]:
+                      - paragraph [ref=e251]:
+                        - strong [ref=e252]: grid_alpha
+                        - text: (
+                        - emphasis [ref=e253]: float
+                        - text: ) – Configuration value for
+                        - code [ref=e254]: grid_alpha
+                        - text: . Defaults to
+                        - code [ref=e255]: "0.3"
+                        - text: .
+                    - listitem [ref=e256]:
+                      - paragraph [ref=e257]:
+                        - strong [ref=e258]: theme
+                        - text: (
+                        - emphasis [ref=e259]: str
+                        - text: ) – Named styling theme applied after the base plot is created. Defaults to
+                        - code [ref=e260]: "'default'"
+                        - text: .
+                    - listitem [ref=e261]:
+                      - paragraph [ref=e262]:
+                        - strong [ref=e263]: font_size
+                        - text: (
+                        - emphasis [ref=e264]: int
+                        - text: ) – Configuration value for
+                        - code [ref=e265]: font_size
+                        - text: . Defaults to
+                        - code [ref=e266]: "10"
+                        - text: .
+                    - listitem [ref=e267]:
+                      - paragraph [ref=e268]:
+                        - strong [ref=e269]: title_size
+                        - text: (
+                        - emphasis [ref=e270]: int
+                        - text: ) – Configuration value for
+                        - code [ref=e271]: title_size
+                        - text: . Defaults to
+                        - code [ref=e272]: "14"
+                        - text: .
+                    - listitem [ref=e273]:
+                      - paragraph [ref=e274]:
+                        - strong [ref=e275]: label_size
+                        - text: (
+                        - emphasis [ref=e276]: int
+                        - text: ) – Configuration value for
+                        - code [ref=e277]: label_size
+                        - text: . Defaults to
+                        - code [ref=e278]: "11"
+                        - text: .
+                    - listitem [ref=e279]:
+                      - paragraph [ref=e280]:
+                        - strong [ref=e281]: dpi
+                        - text: (
+                        - emphasis [ref=e282]: int
+                        - text: ) – Configuration value for
+                        - code [ref=e283]: dpi
+                        - text: . Defaults to
+                        - code [ref=e284]: "100"
+                        - text: .
+                    - listitem [ref=e285]:
+                      - paragraph [ref=e286]:
+                        - strong [ref=e287]: style
+                        - text: (
+                        - emphasis [ref=e288]: str
+                        - text: ) – Matplotlib style context used while building the figure. Defaults to
+                        - code [ref=e289]: "'default'"
+                        - text: .
+                    - listitem [ref=e290]:
+                      - paragraph [ref=e291]:
+                        - strong [ref=e292]: "**kwargs"
+                        - text: (
+                        - emphasis [ref=e293]: Any
+                        - text: ) – Additional keyword arguments forwarded to the underlying plotting function.
+                - term [ref=e294]:
+                  - text: Returns
+                  - generic [ref=e295]: ":"
+                - definition [ref=e296]:
+                  - paragraph [ref=e297]: Configured matplotlib axes containing the rendered static chart.
+                - term [ref=e298]:
+                  - text: Return type
+                  - generic [ref=e299]: ":"
+                - definition [ref=e300]:
+                  - paragraph [ref=e301]: matplotlib.axes.Axes
+                - term [ref=e302]:
+                  - text: Raises
+                  - generic [ref=e303]: ":"
+                - definition [ref=e304]:
+                  - list [ref=e305]:
+                    - listitem [ref=e306]:
+                      - paragraph [ref=e307]:
+                        - strong [ref=e308]: TypeError
+                        - text: – If required inputs are not compatible with the plotting backend.
+                    - listitem [ref=e309]:
+                      - paragraph [ref=e310]:
+                        - strong [ref=e311]: ValueError
+                        - text: – If input lengths, matrix shapes, or option values are invalid for the requested chart.
+              - generic [ref=e312]:
+                - paragraph [ref=e313]:  Examples
+                - paragraph [ref=e314]:
+                  - code [ref=e315]: "`python import dataviz as dv result = dv.histogram_static(data) `"
+              - generic [ref=e316]:
+                - paragraph [ref=e317]:  Notes
+                - paragraph [ref=e318]: Static functions return matplotlib objects; interactive functions return Plotly figures.
+          - generic [ref=e319]:
+            - heading "Complete example " [level=2] [ref=e320]:
+              - text: Complete example
+              - link "" [ref=e321] [cursor=pointer]:
+                - /url: "#complete-example"
+            - paragraph [ref=e322]: The following example is self-contained and can be copied into a Python session or script.
+            - generic [ref=e324]:
+              - generic [ref=e325]: import pandas as pd import matplotlib.pyplot as plt from dataviz.univariate.histogram import histogram_static values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value") ax = histogram_static(values) plt.show()
+              - button "Copy to clipboard" [ref=e326] [cursor=pointer]:
+                - img "Copy to clipboard" [ref=e327]
+          - generic [ref=e331]:
+            - heading "Output gallery " [level=2] [ref=e332]:
+              - text: Output gallery
+              - link "" [ref=e333] [cursor=pointer]:
+                - /url: "#output-gallery"
+            - generic [ref=e334]:
+              - figure "Future example image 1" [ref=e335]:
+                - generic [ref=e336]: "01"
+                - generic [ref=e337]: Future example image 1
+              - figure "Future example image 2" [ref=e338]:
+                - generic [ref=e339]: "02"
+                - generic [ref=e340]: Future example image 2
+              - figure "Future example image 3" [ref=e341]:
+                - generic [ref=e342]: "03"
+                - generic [ref=e343]: Future example image 3
+              - figure "Future example image 4" [ref=e344]:
+                - generic [ref=e345]: "04"
+                - generic [ref=e346]: Future example image 4
+      - generic [ref=e347]:
+        - navigation "Footer" [ref=e348]:
+          - link "Previous" [ref=e349] [cursor=pointer]:
+            - /url: ../../../../dataviz.univariate.histogram.html
+            - generic [ref=e350]: 
+            - text: Previous
+          - link "Next" [ref=e351] [cursor=pointer]:
+            - /url: histogram_interactive.html
+            - text: Next
+            - generic [ref=e352]: 
+        - separator [ref=e353]
+        - contentinfo [ref=e354]:
+          - paragraph [ref=e355]: © Copyright 2026, Aned Esquerra-Arguelles.
+        - text: Built with
+        - link "Sphinx" [ref=e356] [cursor=pointer]:
+          - /url: https://www.sphinx-doc.org/
+        - text: using a
+        - link "theme" [ref=e357] [cursor=pointer]:
+          - /url: https://github.com/readthedocs/sphinx_rtd_theme
+        - text: provided by
+        - link "Read the Docs" [ref=e358] [cursor=pointer]:
+          - /url: https://readthedocs.org
+        - text: .
