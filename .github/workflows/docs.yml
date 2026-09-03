@@ -26,7 +26,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     env:
       MPLBACKEND: Agg
       MPLCONFIGDIR: /tmp/matplotlib
@@ -34,6 +34,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref }}
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -46,10 +48,32 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e ".[docs]"
 
-      - name: Verify generated API pages are current
+      - name: Generate API member pages
+        run: python docs/generate_api.py
+
+      - name: Verify every Complete example is runnable
+        run: python docs/generate_api.py --verify
+
+      - name: Commit regenerated API pages
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         run: |
-          python docs/generate_api.py
-          git diff --exit-code -- docs/source/api
+          if git diff --quiet -- docs/source/api; then
+            echo "API pages already up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/source/api
+          git commit -m "docs(api): regenerate member pages"
+          git push
+
+      - name: Check generated API pages are current (forked pull requests)
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          git diff --exit-code -- docs/source/api || {
+            echo "::error::API pages are stale. Run 'python docs/generate_api.py' and commit the result."
+            exit 1
+          }
 
       - name: Lint generated docs for redundant 'package' wording
         run: python docs/_tools/check_package_wording.py

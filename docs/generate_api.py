@@ -1,4 +1,8 @@
-"""Generate Sphinx API indexes and one page per public function or class."""
+"""Generate Sphinx API indexes and one page per public function or class.
+
+Each member page embeds a self-contained "Complete example". Run
+``python docs/generate_api.py --verify`` to execute them all headlessly.
+"""
 
 from __future__ import annotations
 
@@ -6,6 +10,7 @@ import ast
 import importlib
 import inspect
 import shutil
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -726,5 +731,61 @@ def generate() -> None:
     )
 
 
-if __name__ == "__main__":
+def verify_examples(only_pkg: str | None = None) -> int:
+    """Execute every generated Complete example; return the failure count."""
+    import traceback
+
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import plotly.graph_objects as go
+
+    go.Figure.show = lambda self, *args, **kwargs: None  # headless
+
+    failures: list[tuple[str, str]] = []
+    total = 0
+    for path in sorted(PACKAGE_ROOT.rglob("*.py")):
+        if path.name == "__init__.py":
+            continue
+        dotted = module_name(path)
+        if only_pkg and not dotted.startswith(f"dataviz.{only_pkg}."):
+            continue
+        for member in public_members(path):
+            total += 1
+            code = example_for(dotted, member)
+            tag = f"{dotted}.{member.name}"
+            try:
+                exec(compile(code, tag, "exec"), {})  # noqa: S102
+            except Exception:
+                failures.append((tag, traceback.format_exc(limit=2)))
+            finally:
+                plt.close("all")
+
+    print(f"executed: {total}, failed: {len(failures)}")
+    for tag, tb in failures:
+        last = tb.strip().splitlines()[-1]
+        print(f"FAIL {tag}: {last}")
+    return len(failures)
+
+
+def main() -> int:
+    """Generate API pages, or execute their Complete examples with --verify."""
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--verify",
+        action="store_true",
+        help="execute every generated Complete example instead of writing pages",
+    )
+    parser.add_argument("--pkg", help="verify only one subpackage, e.g. spc")
+    args = parser.parse_args()
+    if args.verify:
+        return 1 if verify_examples(args.pkg) else 0
     generate()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

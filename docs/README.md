@@ -22,11 +22,21 @@ python -m sphinx -W --keep-going -b linkcheck docs/source docs/build/linkcheck
 ## API regeneration
 
 ```bash
-python docs/generate_api.py
+python docs/generate_api.py            # regenerate the pages
+python docs/generate_api.py --verify   # execute every "Complete example"
 ```
 
 The generator creates navigational package and submodule pages plus one page
-per public function or class under `docs/source/api/members`.
+per public function or class under `docs/source/api/members`. Every member
+page embeds a self-contained "Complete example" that `--verify` executes
+headlessly. `docs/_tools/verify_api_examples.py` is a backward-compatible
+alias for `--verify`.
+
+In CI, `.github/workflows/docs.yml` regenerates the pages, verifies that
+every example runs, and commits any drift back to the branch, so new or
+updated integrations automatically ship with runnable examples. Forked pull
+requests cannot receive commits, so they get a staleness check instead —
+run `python docs/generate_api.py` locally and commit the result.
 
 ## GitHub Pages
 
