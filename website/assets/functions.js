@@ -14143,11 +14143,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.control_chart_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Diameter (mm)\")\n\nax = dv.spc.control_chart_static(values, title=\"Individuals control chart\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "control_chart_interactive",
         "control_chart"
+      ],
+      "useCase": "Use the individuals (I) control chart when you measure one value per time period — a machined diameter, a batch yield, a daily cycle time — and want to know whether the process is stable or whether a point signals a special cause. Control limits are computed from the data at ±3σ (estimated from the average moving range), so points outside the limits or non-random patterns flag investigation-worthy events rather than normal variation.",
+      "images": [
+        {
+          "src": "assets/examples/spc/control_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/control_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/control_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/control_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "x_range_chart_static": {
@@ -14316,11 +14335,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.x_range_chart_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(20)\n# 30 subgroups of five measurements flattened into one series\nvalues = pd.Series(rng.normal(10.0, 0.5, size=150), name=\"Value\")\n\nax = dv.spc.x_range_chart_static(values, subgroup_size=5)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "x_range_chart_interactive",
         "x_range_chart"
+      ],
+      "useCase": "Use the X̄/R chart when measurements arrive in rational subgroups (for example five parts sampled each hour). It tracks the subgroup mean to detect shifts in the process centre and the subgroup range to detect changes in within-subgroup spread, giving an early, sensitive view of process stability for continuous data.",
+      "images": [
+        {
+          "src": "assets/examples/spc/x_range_chart_1.png",
+          "caption": "Stable process — 30 subgroups of five stay in control."
+        },
+        {
+          "src": "assets/examples/spc/x_range_chart_2.png",
+          "caption": "Mean shift — the process centre moves up after subgroup 15."
+        },
+        {
+          "src": "assets/examples/spc/x_range_chart_3.png",
+          "caption": "Drift — a steady trend pushes subgroup means upward."
+        },
+        {
+          "src": "assets/examples/spc/x_range_chart_4.png",
+          "caption": "High variation — a wider spread stresses the range portion."
+        }
       ]
     },
     "moving_range_chart_static": {
@@ -14381,11 +14419,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.moving_range_chart_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nax = dv.spc.moving_range_chart_static(values, span=2)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "moving_range_chart_interactive",
         "moving_range_chart"
+      ],
+      "useCase": "Use the moving range (MR) chart alongside an individuals chart to monitor short-term, point-to-point variation when only one measurement is available per period. Each plotted value is the absolute difference between consecutive observations; an out-of-control moving range warns that the process spread — not just its centre — has changed.",
+      "images": [
+        {
+          "src": "assets/examples/spc/moving_range_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/moving_range_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/moving_range_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/moving_range_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "xbar_r_chart_static": {
@@ -14440,11 +14497,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns Tuple[MatplotlibAxes, MatplotlibAxes], usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.xbar_r_chart_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(10)\n# 25 subgroups of five measurements arranged as rows\ndata = rng.normal(10.0, 0.5, size=(25, 5))\n\nax_mean, ax_range = dv.spc.xbar_r_chart_static(data)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "xbar_r_chart_interactive",
         "xbar_r_chart"
+      ],
+      "useCase": "Use the X̄-R chart pair for small rational subgroups (roughly two to nine units each). The X̄ chart monitors the process average while the R chart monitors within-subgroup range; reading them together separates shifts in centring from changes in variation. The R chart should be assessed first because the X̄ limits depend on a stable range.",
+      "images": [
+        {
+          "src": "assets/examples/spc/xbar_r_chart_1.png",
+          "caption": "Stable subgroups — subgroup means and ranges stay in control."
+        },
+        {
+          "src": "assets/examples/spc/xbar_r_chart_2.png",
+          "caption": "Mean shift — subgroup averages climb after the 15th sample."
+        },
+        {
+          "src": "assets/examples/spc/xbar_r_chart_3.png",
+          "caption": "Widening spread — larger within-subgroup variation inflates the range chart."
+        },
+        {
+          "src": "assets/examples/spc/xbar_r_chart_4.png",
+          "caption": "Out-of-control subgroup — one subgroup mean exceeds the limit."
+        }
       ]
     },
     "xbar_s_chart_static": {
@@ -14499,11 +14575,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns Tuple[MatplotlibAxes, MatplotlibAxes], usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.xbar_s_chart_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(14)\n# 25 subgroups of eight measurements arranged as rows\ndata = rng.normal(10.0, 0.5, size=(25, 8))\n\nax_mean, ax_std = dv.spc.xbar_s_chart_static(data)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "xbar_s_chart_interactive",
         "xbar_s_chart"
+      ],
+      "useCase": "Use the X̄-S chart pair instead of X̄-R when subgroups are larger (about ten units or more), where the sample standard deviation estimates within-subgroup variation more efficiently than the range. The X̄ chart tracks the mean and the S chart tracks the standard deviation, so together they reveal both centring shifts and dispersion changes.",
+      "images": [
+        {
+          "src": "assets/examples/spc/xbar_s_chart_1.png",
+          "caption": "Stable subgroups — mean and standard-deviation charts are in control."
+        },
+        {
+          "src": "assets/examples/spc/xbar_s_chart_2.png",
+          "caption": "Mean shift — subgroup averages step up partway through."
+        },
+        {
+          "src": "assets/examples/spc/xbar_s_chart_3.png",
+          "caption": "Increased variation — subgroup spread grows and the S chart reacts."
+        },
+        {
+          "src": "assets/examples/spc/xbar_s_chart_4.png",
+          "caption": "Special cause — a single subgroup drives an out-of-control signal."
+        }
       ]
     },
     "ewma_chart_static": {
@@ -14558,11 +14653,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.ewma_chart_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(2)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nax = dv.spc.ewma_chart_static(values, lambda_=0.2)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "ewma_chart_interactive",
         "ewma_chart"
+      ],
+      "useCase": "Use the exponentially weighted moving average (EWMA) chart to detect small, sustained shifts in the process mean that an individuals chart would miss. Each point is a weighted average of the current and all prior observations (controlled by λ), which smooths noise and makes gradual drifts easier to catch. Smaller λ values give more memory and greater sensitivity to tiny shifts.",
+      "images": [
+        {
+          "src": "assets/examples/spc/ewma_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/ewma_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/ewma_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/ewma_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "cusum_chart_static": {
@@ -14629,11 +14743,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.cusum_chart_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(3)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nax = dv.spc.cusum_chart_static(values, target=10.0, k=0.5, h=5.0)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "cusum_chart_interactive",
         "cusum_chart"
+      ],
+      "useCase": "Use the cumulative sum (CUSUM) chart to detect small, persistent deviations from a target value as quickly as possible. It accumulates the signed differences from target, so even a modest sustained shift produces a steep, unmistakable slope. Provide the target and tune the slack (k) and decision interval (h) to trade off sensitivity against false alarms.",
+      "images": [
+        {
+          "src": "assets/examples/spc/cusum_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/cusum_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/cusum_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/cusum_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "p_chart_static": {
@@ -14682,11 +14815,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.p_chart_static(defects)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(33)\nsample_sizes = pd.Series(rng.integers(80, 140, size=20))\ndefectives = pd.Series(\n    [rng.binomial(int(n), 0.05) for n in sample_sizes]\n)\n\nax = dv.spc.p_chart_static(defectives, sample_sizes)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "p_chart_interactive",
         "p_chart"
+      ],
+      "useCase": "Use the p chart to monitor the proportion of nonconforming units when sample sizes vary from period to period (for example the fraction of defective items in daily production lots of differing size). Control limits adjust for each sample size, widening for small samples and tightening for large ones, so shifts in the underlying defect rate stand out.",
+      "images": [
+        {
+          "src": "assets/examples/spc/p_chart_1.png",
+          "caption": "Stable proportion defective — points scatter around p-bar."
+        },
+        {
+          "src": "assets/examples/spc/p_chart_2.png",
+          "caption": "Process deterioration — the defect rate rises in the second half."
+        },
+        {
+          "src": "assets/examples/spc/p_chart_3.png",
+          "caption": "Varying sample sizes — control limits widen for smaller samples."
+        },
+        {
+          "src": "assets/examples/spc/p_chart_4.png",
+          "caption": "Out-of-control points — two samples exceed the upper limit."
+        }
       ]
     },
     "np_chart_static": {
@@ -14735,11 +14887,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.np_chart_static(defects)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(40)\nsample_size = 100\ndefectives = pd.Series(rng.binomial(sample_size, 0.04, size=20))\n\nax = dv.spc.np_chart_static(defectives, sample_size)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "np_chart_interactive",
         "np_chart"
+      ],
+      "useCase": "Use the np chart to monitor the count of nonconforming units when the sample size is constant. It plots the raw number of defectives per sample against limits derived from the binomial distribution, making it the most direct display when every inspection lot is the same size.",
+      "images": [
+        {
+          "src": "assets/examples/spc/np_chart_1.png",
+          "caption": "Stable defective count — constant sample size of 100."
+        },
+        {
+          "src": "assets/examples/spc/np_chart_2.png",
+          "caption": "Upward shift — nonconforming units increase midway."
+        },
+        {
+          "src": "assets/examples/spc/np_chart_3.png",
+          "caption": "Slow drift — the defective count trends upward over time."
+        },
+        {
+          "src": "assets/examples/spc/np_chart_4.png",
+          "caption": "Special cause — isolated high counts break the limit."
+        }
       ]
     },
     "c_chart_static": {
@@ -14752,7 +14923,7 @@ window.DATAVIZ_FUNCTION_DOCS = {
       "kind": "function",
       "href": "modules/spc/attribute/c_chart_static.html",
       "source": "dataviz/spc/attribute.py",
-      "signature": "def c_chart_static(defects: ArrayLike, title: str = \"c Chart\", figsize: FigureSize = (12, 6), theme: str = \"default\") -> MatplotlibAxes",
+      "signature": "def c_chart_static( defects: ArrayLike, title: str = \"c Chart\", figsize: FigureSize = (12, 6), theme: str = \"default\") -> MatplotlibAxes",
       "summary": "C Chart Static creates a static matplotlib/seaborn-style visualization in the SPC module. Use it when you need a publication-ready axis, notebook output, or a chart that can be composed with other matplotlib objects.",
       "parameters": [
         {
@@ -14782,11 +14953,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.c_chart_static(defects)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(50)\ndefects = pd.Series(rng.poisson(4.0, size=25))\n\nax = dv.spc.c_chart_static(defects)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "c_chart_interactive",
         "c_chart"
+      ],
+      "useCase": "Use the c chart to monitor the count of defects per inspection unit when the inspection area or opportunity size is constant (for example the number of surface flaws per fixed-size panel). Limits are based on the Poisson distribution, so an unusually high or low defect count signals a change in the process.",
+      "images": [
+        {
+          "src": "assets/examples/spc/c_chart_1.png",
+          "caption": "Stable defect count — a constant inspection area."
+        },
+        {
+          "src": "assets/examples/spc/c_chart_2.png",
+          "caption": "Increased defects — the average count rises partway through."
+        },
+        {
+          "src": "assets/examples/spc/c_chart_3.png",
+          "caption": "Drifting count — defects trend upward over time."
+        },
+        {
+          "src": "assets/examples/spc/c_chart_4.png",
+          "caption": "Special cause — two inspections show excessive defects."
+        }
       ]
     },
     "u_chart_static": {
@@ -14799,7 +14989,7 @@ window.DATAVIZ_FUNCTION_DOCS = {
       "kind": "function",
       "href": "modules/spc/attribute/u_chart_static.html",
       "source": "dataviz/spc/attribute.py",
-      "signature": "def u_chart_static(defects: ArrayLike, units: ArrayLike, title: str = \"u Chart\", figsize: FigureSize = (12, 6), theme: str = \"default\") -> MatplotlibAxes",
+      "signature": "def u_chart_static( defects: ArrayLike, units: ArrayLike, title: str = \"u Chart\", figsize: FigureSize = (12, 6), theme: str = \"default\") -> MatplotlibAxes",
       "summary": "U Chart Static creates a static matplotlib/seaborn-style visualization in the SPC module. Use it when you need a publication-ready axis, notebook output, or a chart that can be composed with other matplotlib objects.",
       "parameters": [
         {
@@ -14835,11 +15025,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.u_chart_static(defects, units)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(60)\nunits = pd.Series(rng.integers(40, 60, size=20))\ndefects = pd.Series([rng.poisson(0.1 * u) for u in units])\n\nax = dv.spc.u_chart_static(defects, units)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "u_chart_interactive",
         "u_chart"
+      ],
+      "useCase": "Use the u chart to monitor defects per unit when the inspection size varies between samples (for example defects per square metre of fabric across rolls of different length). It normalises the defect count by the number of units inspected and adjusts the control limits for each sample size, so the defect rate is comparable across unequal samples.",
+      "images": [
+        {
+          "src": "assets/examples/spc/u_chart_1.png",
+          "caption": "Stable defects per unit — inspection sizes vary sample to sample."
+        },
+        {
+          "src": "assets/examples/spc/u_chart_2.png",
+          "caption": "Rate increase — defects per unit climb in the second half."
+        },
+        {
+          "src": "assets/examples/spc/u_chart_3.png",
+          "caption": "Equal inspection sizes — straight control limits."
+        },
+        {
+          "src": "assets/examples/spc/u_chart_4.png",
+          "caption": "Special cause — two samples exceed the upper limit."
+        }
       ]
     },
     "capability_histogram_static": {
@@ -14900,11 +15109,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.capability_histogram_static(values, lsl=9.5, usl=10.5)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(100)\nvalues = pd.Series(rng.normal(10.0, 0.4, size=300), name=\"Value\")\n\nax = dv.spc.capability_histogram_static(values, lsl=8.5, usl=11.5)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "capability_histogram_interactive",
         "capability_histogram"
+      ],
+      "useCase": "Use the process capability histogram to compare the natural spread of a process against its specification limits. Overlaying the distribution with the lower and upper specification limits shows visually whether the process is centred and capable, and the accompanying capability indices (Cp, Cpk) quantify how much margin exists before parts fall out of spec.",
+      "images": [
+        {
+          "src": "assets/examples/spc/capability_histogram_1.png",
+          "caption": "Capable and centred — the spread fits comfortably in spec."
+        },
+        {
+          "src": "assets/examples/spc/capability_histogram_2.png",
+          "caption": "Off-centre — the mean drifts toward the upper spec limit."
+        },
+        {
+          "src": "assets/examples/spc/capability_histogram_3.png",
+          "caption": "Too much spread — the distribution overflows both limits."
+        },
+        {
+          "src": "assets/examples/spc/capability_histogram_4.png",
+          "caption": "Skewed process — a non-normal tail crosses the lower limit."
+        }
       ]
     },
     "run_chart_static": {
@@ -14953,11 +15181,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.run_chart_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nax = dv.spc.run_chart_static(values, show_median=True)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "run_chart_interactive",
         "run_chart"
+      ],
+      "useCase": "Use the run chart as a simple first look at how a measurement behaves over time before committing to full control limits. Plotting the series against its median makes trends, cycles, and shifts easy to spot with run-based tests, and it needs no assumptions about the distribution — ideal for early exploration or non-technical audiences.",
+      "images": [
+        {
+          "src": "assets/examples/spc/run_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/run_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/run_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/run_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "rule_violation_chart_static": {
@@ -15006,11 +15253,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.rule_violation_chart_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(1)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\nvalues[20:] += 1.2  # introduce a shift to trigger rules\n\nax = dv.spc.rule_violation_chart_static(values)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "rule_violation_chart_interactive",
         "rule_violation_chart"
+      ],
+      "useCase": "Use the rule violation chart to run the Western Electric / Nelson pattern rules automatically and highlight the exact points that break them. Beyond the basic “outside ±3σ” test, it flags runs, trends, and zone patterns that indicate a process is no longer in statistical control, so reviewers can focus on the specific signals that need action.",
+      "images": [
+        {
+          "src": "assets/examples/spc/rule_violation_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/rule_violation_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/rule_violation_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/rule_violation_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "pareto_chart_static": {
@@ -15059,11 +15325,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nax = dv.spc.pareto_chart_static(categories)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\ncategories = [\"Scratch\", \"Dent\", \"Misalign\", \"Color\", \"Crack\", \"Other\"]\ncounts = [140, 90, 40, 20, 8, 4]\n\nax = dv.spc.pareto_chart_static(categories, counts)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "pareto_chart_interactive",
         "pareto_chart"
+      ],
+      "useCase": "Use the Pareto chart to prioritise improvement effort by separating the “vital few” causes from the “trivial many”. Sorting defect categories by frequency and overlaying the cumulative percentage line makes it immediately clear which handful of problems accounts for most of the impact, guiding where to focus root-cause work.",
+      "images": [
+        {
+          "src": "assets/examples/spc/pareto_chart_1.png",
+          "caption": "Classic 80/20 — a few categories dominate the defects."
+        },
+        {
+          "src": "assets/examples/spc/pareto_chart_2.png",
+          "caption": "Single dominant cause — one category drives most defects."
+        },
+        {
+          "src": "assets/examples/spc/pareto_chart_3.png",
+          "caption": "Even spread — no single vital few stands out."
+        },
+        {
+          "src": "assets/examples/spc/pareto_chart_4.png",
+          "caption": "Long tail — many small contributors after the leaders."
+        }
       ]
     },
     "process_distribution_static": {
@@ -15112,11 +15397,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.process_distribution_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(110)\nvalues = pd.Series(rng.normal(10.0, 0.6, size=400), name=\"Value\")\n\nax = dv.spc.process_distribution_static(values, bins=30)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "process_distribution_interactive",
         "process_distribution"
+      ],
+      "useCase": "Use the process distribution plot to inspect the shape of a measurement before applying control charts or capability analysis. Revealing skewness, bimodality, or heavy tails helps you check the normality assumption, spot mixed process streams, and choose the right analysis rather than trusting summary statistics alone.",
+      "images": [
+        {
+          "src": "assets/examples/spc/process_distribution_1.png",
+          "caption": "Normal process — a symmetric, bell-shaped distribution."
+        },
+        {
+          "src": "assets/examples/spc/process_distribution_2.png",
+          "caption": "Right-skewed — a long upper tail from occasional large values."
+        },
+        {
+          "src": "assets/examples/spc/process_distribution_3.png",
+          "caption": "Bimodal — two overlapping modes suggest mixed streams."
+        },
+        {
+          "src": "assets/examples/spc/process_distribution_4.png",
+          "caption": "Heavy-tailed — extra dispersion from rare extreme values."
+        }
       ]
     },
     "zone_chart_static": {
@@ -15159,11 +15463,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.zone_chart_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nax = dv.spc.zone_chart_static(values)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "zone_chart_interactive",
         "zone_chart"
+      ],
+      "useCase": "Use the zone chart to make the Western Electric zone tests visible by dividing the region around the centre line into A, B, and C bands (one, two, and three sigma). Colour-coded zones make patterns such as “two of three points in zone A” easy to read directly off the chart, which is helpful for training operators to recognise out-of-control signals.",
+      "images": [
+        {
+          "src": "assets/examples/spc/zone_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/zone_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/zone_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/zone_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "hotelling_t2_chart_static": {
@@ -15212,11 +15535,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.hotelling_t2_chart_static(matrix)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(120)\nx1 = rng.normal(10.0, 0.5, size=40)\nx2 = 0.6 * (x1 - 10.0) + rng.normal(20.0, 0.5, size=40)\ndata = pd.DataFrame({\"x1\": x1, \"x2\": x2})\n\nax = dv.spc.hotelling_t2_chart_static(data, limit_quantile=0.99)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "hotelling_t2_chart_interactive",
         "hotelling_t2_chart"
+      ],
+      "useCase": "Use the Hotelling T² chart to monitor several correlated variables at once instead of running separate charts that ignore their relationships. The T² statistic collapses the multivariate deviation into a single distance, so it flags points that are unusual jointly — including cases where each variable looks acceptable on its own but their combination does not.",
+      "images": [
+        {
+          "src": "assets/examples/spc/hotelling_t2_chart_1.png",
+          "caption": "In control — two correlated variables stay within the T² limit."
+        },
+        {
+          "src": "assets/examples/spc/hotelling_t2_chart_2.png",
+          "caption": "Joint shift — both variables move together after sample 20."
+        },
+        {
+          "src": "assets/examples/spc/hotelling_t2_chart_3.png",
+          "caption": "Counter-move — a single variable breaks the usual correlation."
+        },
+        {
+          "src": "assets/examples/spc/hotelling_t2_chart_4.png",
+          "caption": "Multivariate outlier — one point is far in the T² metric."
+        }
       ]
     },
     "spc_dashboard_static": {
@@ -15271,11 +15613,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibFigure, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nax = dv.spc.spc_dashboard_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nfig = dv.spc.spc_dashboard_static(values)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "spc_dashboard_interactive",
         "spc_dashboard"
+      ],
+      "useCase": "Use the SPC dashboard to review a process at a glance by combining the individuals chart, moving range chart, and distribution views in a single figure. It is well suited to reports and status reviews where one composite picture of stability, spread, and shape is more useful than a set of separate charts.",
+      "images": [
+        {
+          "src": "assets/examples/spc/spc_dashboard_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/spc_dashboard_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/spc_dashboard_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/spc_dashboard_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "control_chart_interactive": {
@@ -15426,11 +15787,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.control_chart_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Diameter (mm)\")\n\nfig = dv.spc.control_chart_interactive(values, title=\"Individuals control chart\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "control_chart_static",
         "control_chart"
+      ],
+      "useCase": "Use the individuals (I) control chart when you measure one value per time period — a machined diameter, a batch yield, a daily cycle time — and want to know whether the process is stable or whether a point signals a special cause. Control limits are computed from the data at ±3σ (estimated from the average moving range), so points outside the limits or non-random patterns flag investigation-worthy events rather than normal variation.",
+      "images": [
+        {
+          "src": "assets/examples/spc/control_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/control_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/control_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/control_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "x_range_chart_interactive": {
@@ -15569,11 +15949,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.x_range_chart_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(20)\n# 30 subgroups of five measurements flattened into one series\nvalues = pd.Series(rng.normal(10.0, 0.5, size=150), name=\"Value\")\n\nfig = dv.spc.x_range_chart_interactive(values, subgroup_size=5)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "x_range_chart_static",
         "x_range_chart"
+      ],
+      "useCase": "Use the X̄/R chart when measurements arrive in rational subgroups (for example five parts sampled each hour). It tracks the subgroup mean to detect shifts in the process centre and the subgroup range to detect changes in within-subgroup spread, giving an early, sensitive view of process stability for continuous data.",
+      "images": [
+        {
+          "src": "assets/examples/spc/x_range_chart_1.png",
+          "caption": "Stable process — 30 subgroups of five stay in control."
+        },
+        {
+          "src": "assets/examples/spc/x_range_chart_2.png",
+          "caption": "Mean shift — the process centre moves up after subgroup 15."
+        },
+        {
+          "src": "assets/examples/spc/x_range_chart_3.png",
+          "caption": "Drift — a steady trend pushes subgroup means upward."
+        },
+        {
+          "src": "assets/examples/spc/x_range_chart_4.png",
+          "caption": "High variation — a wider spread stresses the range portion."
+        }
       ]
     },
     "moving_range_chart_interactive": {
@@ -15634,11 +16033,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.moving_range_chart_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nfig = dv.spc.moving_range_chart_interactive(values, span=2)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "moving_range_chart_static",
         "moving_range_chart"
+      ],
+      "useCase": "Use the moving range (MR) chart alongside an individuals chart to monitor short-term, point-to-point variation when only one measurement is available per period. Each plotted value is the absolute difference between consecutive observations; an out-of-control moving range warns that the process spread — not just its centre — has changed.",
+      "images": [
+        {
+          "src": "assets/examples/spc/moving_range_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/moving_range_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/moving_range_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/moving_range_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "xbar_r_chart_interactive": {
@@ -15693,11 +16111,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.xbar_r_chart_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(10)\n# 25 subgroups of five measurements arranged as rows\ndata = rng.normal(10.0, 0.5, size=(25, 5))\n\nfig = dv.spc.xbar_r_chart_interactive(data)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "xbar_r_chart_static",
         "xbar_r_chart"
+      ],
+      "useCase": "Use the X̄-R chart pair for small rational subgroups (roughly two to nine units each). The X̄ chart monitors the process average while the R chart monitors within-subgroup range; reading them together separates shifts in centring from changes in variation. The R chart should be assessed first because the X̄ limits depend on a stable range.",
+      "images": [
+        {
+          "src": "assets/examples/spc/xbar_r_chart_1.png",
+          "caption": "Stable subgroups — subgroup means and ranges stay in control."
+        },
+        {
+          "src": "assets/examples/spc/xbar_r_chart_2.png",
+          "caption": "Mean shift — subgroup averages climb after the 15th sample."
+        },
+        {
+          "src": "assets/examples/spc/xbar_r_chart_3.png",
+          "caption": "Widening spread — larger within-subgroup variation inflates the range chart."
+        },
+        {
+          "src": "assets/examples/spc/xbar_r_chart_4.png",
+          "caption": "Out-of-control subgroup — one subgroup mean exceeds the limit."
+        }
       ]
     },
     "xbar_s_chart_interactive": {
@@ -15752,11 +16189,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.xbar_s_chart_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(14)\n# 25 subgroups of eight measurements arranged as rows\ndata = rng.normal(10.0, 0.5, size=(25, 8))\n\nfig = dv.spc.xbar_s_chart_interactive(data)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "xbar_s_chart_static",
         "xbar_s_chart"
+      ],
+      "useCase": "Use the X̄-S chart pair instead of X̄-R when subgroups are larger (about ten units or more), where the sample standard deviation estimates within-subgroup variation more efficiently than the range. The X̄ chart tracks the mean and the S chart tracks the standard deviation, so together they reveal both centring shifts and dispersion changes.",
+      "images": [
+        {
+          "src": "assets/examples/spc/xbar_s_chart_1.png",
+          "caption": "Stable subgroups — mean and standard-deviation charts are in control."
+        },
+        {
+          "src": "assets/examples/spc/xbar_s_chart_2.png",
+          "caption": "Mean shift — subgroup averages step up partway through."
+        },
+        {
+          "src": "assets/examples/spc/xbar_s_chart_3.png",
+          "caption": "Increased variation — subgroup spread grows and the S chart reacts."
+        },
+        {
+          "src": "assets/examples/spc/xbar_s_chart_4.png",
+          "caption": "Special cause — a single subgroup drives an out-of-control signal."
+        }
       ]
     },
     "ewma_chart_interactive": {
@@ -15811,11 +16267,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.ewma_chart_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(2)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nfig = dv.spc.ewma_chart_interactive(values, lambda_=0.2)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "ewma_chart_static",
         "ewma_chart"
+      ],
+      "useCase": "Use the exponentially weighted moving average (EWMA) chart to detect small, sustained shifts in the process mean that an individuals chart would miss. Each point is a weighted average of the current and all prior observations (controlled by λ), which smooths noise and makes gradual drifts easier to catch. Smaller λ values give more memory and greater sensitivity to tiny shifts.",
+      "images": [
+        {
+          "src": "assets/examples/spc/ewma_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/ewma_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/ewma_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/ewma_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "cusum_chart_interactive": {
@@ -15882,11 +16357,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.cusum_chart_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(3)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nfig = dv.spc.cusum_chart_interactive(values, target=10.0, k=0.5, h=5.0)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "cusum_chart_static",
         "cusum_chart"
+      ],
+      "useCase": "Use the cumulative sum (CUSUM) chart to detect small, persistent deviations from a target value as quickly as possible. It accumulates the signed differences from target, so even a modest sustained shift produces a steep, unmistakable slope. Provide the target and tune the slack (k) and decision interval (h) to trade off sensitivity against false alarms.",
+      "images": [
+        {
+          "src": "assets/examples/spc/cusum_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/cusum_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/cusum_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/cusum_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "p_chart_interactive": {
@@ -15941,11 +16435,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.p_chart_interactive(defects)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(33)\nsample_sizes = pd.Series(rng.integers(80, 140, size=20))\ndefectives = pd.Series(\n    [rng.binomial(int(n), 0.05) for n in sample_sizes]\n)\n\nfig = dv.spc.p_chart_interactive(defectives, sample_sizes)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "p_chart_static",
         "p_chart"
+      ],
+      "useCase": "Use the p chart to monitor the proportion of nonconforming units when sample sizes vary from period to period (for example the fraction of defective items in daily production lots of differing size). Control limits adjust for each sample size, widening for small samples and tightening for large ones, so shifts in the underlying defect rate stand out.",
+      "images": [
+        {
+          "src": "assets/examples/spc/p_chart_1.png",
+          "caption": "Stable proportion defective — points scatter around p-bar."
+        },
+        {
+          "src": "assets/examples/spc/p_chart_2.png",
+          "caption": "Process deterioration — the defect rate rises in the second half."
+        },
+        {
+          "src": "assets/examples/spc/p_chart_3.png",
+          "caption": "Varying sample sizes — control limits widen for smaller samples."
+        },
+        {
+          "src": "assets/examples/spc/p_chart_4.png",
+          "caption": "Out-of-control points — two samples exceed the upper limit."
+        }
       ]
     },
     "np_chart_interactive": {
@@ -16000,11 +16513,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.np_chart_interactive(defects)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(40)\nsample_size = 100\ndefectives = pd.Series(rng.binomial(sample_size, 0.04, size=20))\n\nfig = dv.spc.np_chart_interactive(defectives, sample_size)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "np_chart_static",
         "np_chart"
+      ],
+      "useCase": "Use the np chart to monitor the count of nonconforming units when the sample size is constant. It plots the raw number of defectives per sample against limits derived from the binomial distribution, making it the most direct display when every inspection lot is the same size.",
+      "images": [
+        {
+          "src": "assets/examples/spc/np_chart_1.png",
+          "caption": "Stable defective count — constant sample size of 100."
+        },
+        {
+          "src": "assets/examples/spc/np_chart_2.png",
+          "caption": "Upward shift — nonconforming units increase midway."
+        },
+        {
+          "src": "assets/examples/spc/np_chart_3.png",
+          "caption": "Slow drift — the defective count trends upward over time."
+        },
+        {
+          "src": "assets/examples/spc/np_chart_4.png",
+          "caption": "Special cause — isolated high counts break the limit."
+        }
       ]
     },
     "c_chart_interactive": {
@@ -16017,7 +16549,7 @@ window.DATAVIZ_FUNCTION_DOCS = {
       "kind": "function",
       "href": "modules/spc/attribute/c_chart_interactive.html",
       "source": "dataviz/spc/attribute.py",
-      "signature": "def c_chart_interactive(defects: ArrayLike, title: str = \"c Chart\", template: str = \"plotly\", height: int = 500, width: int = 1000) -> PlotlyFigure",
+      "signature": "def c_chart_interactive( defects: ArrayLike, title: str = \"c Chart\", template: str = \"plotly\", height: int = 500, width: int = 1000) -> PlotlyFigure",
       "summary": "C Chart Interactive creates a Plotly-based interactive visualization in the SPC module. Use it when hover labels, zooming, legends, or browser-delivered exploration will make the result easier to inspect.",
       "parameters": [
         {
@@ -16053,11 +16585,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.c_chart_interactive(defects)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(50)\ndefects = pd.Series(rng.poisson(4.0, size=25))\n\nfig = dv.spc.c_chart_interactive(defects)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "c_chart_static",
         "c_chart"
+      ],
+      "useCase": "Use the c chart to monitor the count of defects per inspection unit when the inspection area or opportunity size is constant (for example the number of surface flaws per fixed-size panel). Limits are based on the Poisson distribution, so an unusually high or low defect count signals a change in the process.",
+      "images": [
+        {
+          "src": "assets/examples/spc/c_chart_1.png",
+          "caption": "Stable defect count — a constant inspection area."
+        },
+        {
+          "src": "assets/examples/spc/c_chart_2.png",
+          "caption": "Increased defects — the average count rises partway through."
+        },
+        {
+          "src": "assets/examples/spc/c_chart_3.png",
+          "caption": "Drifting count — defects trend upward over time."
+        },
+        {
+          "src": "assets/examples/spc/c_chart_4.png",
+          "caption": "Special cause — two inspections show excessive defects."
+        }
       ]
     },
     "u_chart_interactive": {
@@ -16070,7 +16621,7 @@ window.DATAVIZ_FUNCTION_DOCS = {
       "kind": "function",
       "href": "modules/spc/attribute/u_chart_interactive.html",
       "source": "dataviz/spc/attribute.py",
-      "signature": "def u_chart_interactive(defects: ArrayLike, units: ArrayLike, title: str = \"u Chart\", template: str = \"plotly\", height: int = 500, width: int = 1000) -> PlotlyFigure",
+      "signature": "def u_chart_interactive( defects: ArrayLike, units: ArrayLike, title: str = \"u Chart\", template: str = \"plotly\", height: int = 500, width: int = 1000) -> PlotlyFigure",
       "summary": "U Chart Interactive creates a Plotly-based interactive visualization in the SPC module. Use it when hover labels, zooming, legends, or browser-delivered exploration will make the result easier to inspect.",
       "parameters": [
         {
@@ -16112,11 +16663,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.u_chart_interactive(defects, units)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(60)\nunits = pd.Series(rng.integers(40, 60, size=20))\ndefects = pd.Series([rng.poisson(0.1 * u) for u in units])\n\nfig = dv.spc.u_chart_interactive(defects, units)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "u_chart_static",
         "u_chart"
+      ],
+      "useCase": "Use the u chart to monitor defects per unit when the inspection size varies between samples (for example defects per square metre of fabric across rolls of different length). It normalises the defect count by the number of units inspected and adjusts the control limits for each sample size, so the defect rate is comparable across unequal samples.",
+      "images": [
+        {
+          "src": "assets/examples/spc/u_chart_1.png",
+          "caption": "Stable defects per unit — inspection sizes vary sample to sample."
+        },
+        {
+          "src": "assets/examples/spc/u_chart_2.png",
+          "caption": "Rate increase — defects per unit climb in the second half."
+        },
+        {
+          "src": "assets/examples/spc/u_chart_3.png",
+          "caption": "Equal inspection sizes — straight control limits."
+        },
+        {
+          "src": "assets/examples/spc/u_chart_4.png",
+          "caption": "Special cause — two samples exceed the upper limit."
+        }
       ]
     },
     "capability_histogram_interactive": {
@@ -16183,11 +16753,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.capability_histogram_interactive(values, lsl=9.5, usl=10.5)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(100)\nvalues = pd.Series(rng.normal(10.0, 0.4, size=300), name=\"Value\")\n\nfig = dv.spc.capability_histogram_interactive(values, lsl=8.5, usl=11.5)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "capability_histogram_static",
         "capability_histogram"
+      ],
+      "useCase": "Use the process capability histogram to compare the natural spread of a process against its specification limits. Overlaying the distribution with the lower and upper specification limits shows visually whether the process is centred and capable, and the accompanying capability indices (Cp, Cpk) quantify how much margin exists before parts fall out of spec.",
+      "images": [
+        {
+          "src": "assets/examples/spc/capability_histogram_1.png",
+          "caption": "Capable and centred — the spread fits comfortably in spec."
+        },
+        {
+          "src": "assets/examples/spc/capability_histogram_2.png",
+          "caption": "Off-centre — the mean drifts toward the upper spec limit."
+        },
+        {
+          "src": "assets/examples/spc/capability_histogram_3.png",
+          "caption": "Too much spread — the distribution overflows both limits."
+        },
+        {
+          "src": "assets/examples/spc/capability_histogram_4.png",
+          "caption": "Skewed process — a non-normal tail crosses the lower limit."
+        }
       ]
     },
     "run_chart_interactive": {
@@ -16242,11 +16831,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.run_chart_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nfig = dv.spc.run_chart_interactive(values, show_median=True)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "run_chart_static",
         "run_chart"
+      ],
+      "useCase": "Use the run chart as a simple first look at how a measurement behaves over time before committing to full control limits. Plotting the series against its median makes trends, cycles, and shifts easy to spot with run-based tests, and it needs no assumptions about the distribution — ideal for early exploration or non-technical audiences.",
+      "images": [
+        {
+          "src": "assets/examples/spc/run_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/run_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/run_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/run_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "rule_violation_chart_interactive": {
@@ -16301,11 +16909,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.rule_violation_chart_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(1)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\nvalues[20:] += 1.2  # introduce a shift to trigger rules\n\nfig = dv.spc.rule_violation_chart_interactive(values)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "rule_violation_chart_static",
         "rule_violation_chart"
+      ],
+      "useCase": "Use the rule violation chart to run the Western Electric / Nelson pattern rules automatically and highlight the exact points that break them. Beyond the basic “outside ±3σ” test, it flags runs, trends, and zone patterns that indicate a process is no longer in statistical control, so reviewers can focus on the specific signals that need action.",
+      "images": [
+        {
+          "src": "assets/examples/spc/rule_violation_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/rule_violation_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/rule_violation_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/rule_violation_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "pareto_chart_interactive": {
@@ -16360,11 +16987,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nfig = dv.spc.pareto_chart_interactive(categories)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\ncategories = [\"Scratch\", \"Dent\", \"Misalign\", \"Color\", \"Crack\", \"Other\"]\ncounts = [140, 90, 40, 20, 8, 4]\n\nfig = dv.spc.pareto_chart_interactive(categories, counts)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "pareto_chart_static",
         "pareto_chart"
+      ],
+      "useCase": "Use the Pareto chart to prioritise improvement effort by separating the “vital few” causes from the “trivial many”. Sorting defect categories by frequency and overlaying the cumulative percentage line makes it immediately clear which handful of problems accounts for most of the impact, guiding where to focus root-cause work.",
+      "images": [
+        {
+          "src": "assets/examples/spc/pareto_chart_1.png",
+          "caption": "Classic 80/20 — a few categories dominate the defects."
+        },
+        {
+          "src": "assets/examples/spc/pareto_chart_2.png",
+          "caption": "Single dominant cause — one category drives most defects."
+        },
+        {
+          "src": "assets/examples/spc/pareto_chart_3.png",
+          "caption": "Even spread — no single vital few stands out."
+        },
+        {
+          "src": "assets/examples/spc/pareto_chart_4.png",
+          "caption": "Long tail — many small contributors after the leaders."
+        }
       ]
     },
     "process_distribution_interactive": {
@@ -16419,11 +17065,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.process_distribution_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(110)\nvalues = pd.Series(rng.normal(10.0, 0.6, size=400), name=\"Value\")\n\nfig = dv.spc.process_distribution_interactive(values, bins=30)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "process_distribution_static",
         "process_distribution"
+      ],
+      "useCase": "Use the process distribution plot to inspect the shape of a measurement before applying control charts or capability analysis. Revealing skewness, bimodality, or heavy tails helps you check the normality assumption, spot mixed process streams, and choose the right analysis rather than trusting summary statistics alone.",
+      "images": [
+        {
+          "src": "assets/examples/spc/process_distribution_1.png",
+          "caption": "Normal process — a symmetric, bell-shaped distribution."
+        },
+        {
+          "src": "assets/examples/spc/process_distribution_2.png",
+          "caption": "Right-skewed — a long upper tail from occasional large values."
+        },
+        {
+          "src": "assets/examples/spc/process_distribution_3.png",
+          "caption": "Bimodal — two overlapping modes suggest mixed streams."
+        },
+        {
+          "src": "assets/examples/spc/process_distribution_4.png",
+          "caption": "Heavy-tailed — extra dispersion from rare extreme values."
+        }
       ]
     },
     "zone_chart_interactive": {
@@ -16472,11 +17137,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.zone_chart_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nfig = dv.spc.zone_chart_interactive(values)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "zone_chart_static",
         "zone_chart"
+      ],
+      "useCase": "Use the zone chart to make the Western Electric zone tests visible by dividing the region around the centre line into A, B, and C bands (one, two, and three sigma). Colour-coded zones make patterns such as “two of three points in zone A” easy to read directly off the chart, which is helpful for training operators to recognise out-of-control signals.",
+      "images": [
+        {
+          "src": "assets/examples/spc/zone_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/zone_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/zone_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/zone_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "hotelling_t2_chart_interactive": {
@@ -16531,11 +17215,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.hotelling_t2_chart_interactive(matrix)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(120)\nx1 = rng.normal(10.0, 0.5, size=40)\nx2 = 0.6 * (x1 - 10.0) + rng.normal(20.0, 0.5, size=40)\ndata = pd.DataFrame({\"x1\": x1, \"x2\": x2})\n\nfig = dv.spc.hotelling_t2_chart_interactive(data, limit_quantile=0.99)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "hotelling_t2_chart_static",
         "hotelling_t2_chart"
+      ],
+      "useCase": "Use the Hotelling T² chart to monitor several correlated variables at once instead of running separate charts that ignore their relationships. The T² statistic collapses the multivariate deviation into a single distance, so it flags points that are unusual jointly — including cases where each variable looks acceptable on its own but their combination does not.",
+      "images": [
+        {
+          "src": "assets/examples/spc/hotelling_t2_chart_1.png",
+          "caption": "In control — two correlated variables stay within the T² limit."
+        },
+        {
+          "src": "assets/examples/spc/hotelling_t2_chart_2.png",
+          "caption": "Joint shift — both variables move together after sample 20."
+        },
+        {
+          "src": "assets/examples/spc/hotelling_t2_chart_3.png",
+          "caption": "Counter-move — a single variable breaks the usual correlation."
+        },
+        {
+          "src": "assets/examples/spc/hotelling_t2_chart_4.png",
+          "caption": "Multivariate outlier — one point is far in the T² metric."
+        }
       ]
     },
     "spc_dashboard_interactive": {
@@ -16596,11 +17299,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nfig = dv.spc.spc_dashboard_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nfig = dv.spc.spc_dashboard_interactive(values)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "spc_dashboard_static",
         "spc_dashboard"
+      ],
+      "useCase": "Use the SPC dashboard to review a process at a glance by combining the individuals chart, moving range chart, and distribution views in a single figure. It is well suited to reports and status reviews where one composite picture of stability, spread, and shape is more useful than a set of separate charts.",
+      "images": [
+        {
+          "src": "assets/examples/spc/spc_dashboard_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/spc_dashboard_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/spc_dashboard_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/spc_dashboard_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "ControlLimits": {
@@ -16962,11 +17684,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.control_chart(values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Diameter (mm)\")\n\nax = dv.spc.control_chart_static(values, title=\"Individuals control chart\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "control_chart_static",
         "control_chart_interactive"
+      ],
+      "useCase": "Use the individuals (I) control chart when you measure one value per time period — a machined diameter, a batch yield, a daily cycle time — and want to know whether the process is stable or whether a point signals a special cause. Control limits are computed from the data at ±3σ (estimated from the average moving range), so points outside the limits or non-random patterns flag investigation-worthy events rather than normal variation.",
+      "images": [
+        {
+          "src": "assets/examples/spc/control_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/control_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/control_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/control_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "x_range_chart": {
@@ -16997,11 +17738,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.x_range_chart(values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(20)\n# 30 subgroups of five measurements flattened into one series\nvalues = pd.Series(rng.normal(10.0, 0.5, size=150), name=\"Value\")\n\nax = dv.spc.x_range_chart_static(values, subgroup_size=5)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "x_range_chart_static",
         "x_range_chart_interactive"
+      ],
+      "useCase": "Use the X̄/R chart when measurements arrive in rational subgroups (for example five parts sampled each hour). It tracks the subgroup mean to detect shifts in the process centre and the subgroup range to detect changes in within-subgroup spread, giving an early, sensitive view of process stability for continuous data.",
+      "images": [
+        {
+          "src": "assets/examples/spc/x_range_chart_1.png",
+          "caption": "Stable process — 30 subgroups of five stay in control."
+        },
+        {
+          "src": "assets/examples/spc/x_range_chart_2.png",
+          "caption": "Mean shift — the process centre moves up after subgroup 15."
+        },
+        {
+          "src": "assets/examples/spc/x_range_chart_3.png",
+          "caption": "Drift — a steady trend pushes subgroup means upward."
+        },
+        {
+          "src": "assets/examples/spc/x_range_chart_4.png",
+          "caption": "High variation — a wider spread stresses the range portion."
+        }
       ]
     },
     "moving_range_chart": {
@@ -17062,11 +17822,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.moving_range_chart(values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nax = dv.spc.moving_range_chart_static(values, span=2)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "moving_range_chart_static",
         "moving_range_chart_interactive"
+      ],
+      "useCase": "Use the moving range (MR) chart alongside an individuals chart to monitor short-term, point-to-point variation when only one measurement is available per period. Each plotted value is the absolute difference between consecutive observations; an out-of-control moving range warns that the process spread — not just its centre — has changed.",
+      "images": [
+        {
+          "src": "assets/examples/spc/moving_range_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/moving_range_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/moving_range_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/moving_range_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "xbar_r_chart": {
@@ -17121,11 +17900,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns Tuple[MatplotlibAxes, MatplotlibAxes]; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.xbar_r_chart(values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(10)\n# 25 subgroups of five measurements arranged as rows\ndata = rng.normal(10.0, 0.5, size=(25, 5))\n\nax_mean, ax_range = dv.spc.xbar_r_chart_static(data)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "xbar_r_chart_static",
         "xbar_r_chart_interactive"
+      ],
+      "useCase": "Use the X̄-R chart pair for small rational subgroups (roughly two to nine units each). The X̄ chart monitors the process average while the R chart monitors within-subgroup range; reading them together separates shifts in centring from changes in variation. The R chart should be assessed first because the X̄ limits depend on a stable range.",
+      "images": [
+        {
+          "src": "assets/examples/spc/xbar_r_chart_1.png",
+          "caption": "Stable subgroups — subgroup means and ranges stay in control."
+        },
+        {
+          "src": "assets/examples/spc/xbar_r_chart_2.png",
+          "caption": "Mean shift — subgroup averages climb after the 15th sample."
+        },
+        {
+          "src": "assets/examples/spc/xbar_r_chart_3.png",
+          "caption": "Widening spread — larger within-subgroup variation inflates the range chart."
+        },
+        {
+          "src": "assets/examples/spc/xbar_r_chart_4.png",
+          "caption": "Out-of-control subgroup — one subgroup mean exceeds the limit."
+        }
       ]
     },
     "xbar_s_chart": {
@@ -17180,11 +17978,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns Tuple[MatplotlibAxes, MatplotlibAxes]; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.xbar_s_chart(values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(14)\n# 25 subgroups of eight measurements arranged as rows\ndata = rng.normal(10.0, 0.5, size=(25, 8))\n\nax_mean, ax_std = dv.spc.xbar_s_chart_static(data)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "xbar_s_chart_static",
         "xbar_s_chart_interactive"
+      ],
+      "useCase": "Use the X̄-S chart pair instead of X̄-R when subgroups are larger (about ten units or more), where the sample standard deviation estimates within-subgroup variation more efficiently than the range. The X̄ chart tracks the mean and the S chart tracks the standard deviation, so together they reveal both centring shifts and dispersion changes.",
+      "images": [
+        {
+          "src": "assets/examples/spc/xbar_s_chart_1.png",
+          "caption": "Stable subgroups — mean and standard-deviation charts are in control."
+        },
+        {
+          "src": "assets/examples/spc/xbar_s_chart_2.png",
+          "caption": "Mean shift — subgroup averages step up partway through."
+        },
+        {
+          "src": "assets/examples/spc/xbar_s_chart_3.png",
+          "caption": "Increased variation — subgroup spread grows and the S chart reacts."
+        },
+        {
+          "src": "assets/examples/spc/xbar_s_chart_4.png",
+          "caption": "Special cause — a single subgroup drives an out-of-control signal."
+        }
       ]
     },
     "ewma_chart": {
@@ -17239,11 +18056,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.ewma_chart(values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(2)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nax = dv.spc.ewma_chart_static(values, lambda_=0.2)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "ewma_chart_static",
         "ewma_chart_interactive"
+      ],
+      "useCase": "Use the exponentially weighted moving average (EWMA) chart to detect small, sustained shifts in the process mean that an individuals chart would miss. Each point is a weighted average of the current and all prior observations (controlled by λ), which smooths noise and makes gradual drifts easier to catch. Smaller λ values give more memory and greater sensitivity to tiny shifts.",
+      "images": [
+        {
+          "src": "assets/examples/spc/ewma_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/ewma_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/ewma_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/ewma_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "cusum_chart": {
@@ -17310,11 +18146,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.cusum_chart(values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(3)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nax = dv.spc.cusum_chart_static(values, target=10.0, k=0.5, h=5.0)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "cusum_chart_static",
         "cusum_chart_interactive"
+      ],
+      "useCase": "Use the cumulative sum (CUSUM) chart to detect small, persistent deviations from a target value as quickly as possible. It accumulates the signed differences from target, so even a modest sustained shift produces a steep, unmistakable slope. Provide the target and tune the slack (k) and decision interval (h) to trade off sensitivity against false alarms.",
+      "images": [
+        {
+          "src": "assets/examples/spc/cusum_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/cusum_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/cusum_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/cusum_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "p_chart": {
@@ -17363,11 +18218,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.p_chart(defects)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(33)\nsample_sizes = pd.Series(rng.integers(80, 140, size=20))\ndefectives = pd.Series(\n    [rng.binomial(int(n), 0.05) for n in sample_sizes]\n)\n\nax = dv.spc.p_chart_static(defectives, sample_sizes)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "p_chart_static",
         "p_chart_interactive"
+      ],
+      "useCase": "Use the p chart to monitor the proportion of nonconforming units when sample sizes vary from period to period (for example the fraction of defective items in daily production lots of differing size). Control limits adjust for each sample size, widening for small samples and tightening for large ones, so shifts in the underlying defect rate stand out.",
+      "images": [
+        {
+          "src": "assets/examples/spc/p_chart_1.png",
+          "caption": "Stable proportion defective — points scatter around p-bar."
+        },
+        {
+          "src": "assets/examples/spc/p_chart_2.png",
+          "caption": "Process deterioration — the defect rate rises in the second half."
+        },
+        {
+          "src": "assets/examples/spc/p_chart_3.png",
+          "caption": "Varying sample sizes — control limits widen for smaller samples."
+        },
+        {
+          "src": "assets/examples/spc/p_chart_4.png",
+          "caption": "Out-of-control points — two samples exceed the upper limit."
+        }
       ]
     },
     "np_chart": {
@@ -17416,11 +18290,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.np_chart(defects)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(40)\nsample_size = 100\ndefectives = pd.Series(rng.binomial(sample_size, 0.04, size=20))\n\nax = dv.spc.np_chart_static(defectives, sample_size)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "np_chart_static",
         "np_chart_interactive"
+      ],
+      "useCase": "Use the np chart to monitor the count of nonconforming units when the sample size is constant. It plots the raw number of defectives per sample against limits derived from the binomial distribution, making it the most direct display when every inspection lot is the same size.",
+      "images": [
+        {
+          "src": "assets/examples/spc/np_chart_1.png",
+          "caption": "Stable defective count — constant sample size of 100."
+        },
+        {
+          "src": "assets/examples/spc/np_chart_2.png",
+          "caption": "Upward shift — nonconforming units increase midway."
+        },
+        {
+          "src": "assets/examples/spc/np_chart_3.png",
+          "caption": "Slow drift — the defective count trends upward over time."
+        },
+        {
+          "src": "assets/examples/spc/np_chart_4.png",
+          "caption": "Special cause — isolated high counts break the limit."
+        }
       ]
     },
     "c_chart": {
@@ -17433,7 +18326,7 @@ window.DATAVIZ_FUNCTION_DOCS = {
       "kind": "function",
       "href": "modules/spc/attribute/c_chart.html",
       "source": "dataviz/spc/attribute.py",
-      "signature": "def c_chart(defects: ArrayLike, title: str = \"c Chart\", figsize: FigureSize = (12, 6), theme: str = \"default\") -> MatplotlibAxes",
+      "signature": "def c_chart( defects: ArrayLike, title: str = \"c Chart\", figsize: FigureSize = (12, 6), theme: str = \"default\") -> MatplotlibAxes",
       "summary": "C Chart is a SPC helper that prepares, summarizes, validates, or transforms data before visualization. Use it to keep calculations explicit and testable before drawing charts.",
       "parameters": [
         {
@@ -17463,11 +18356,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.c_chart(defects)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(50)\ndefects = pd.Series(rng.poisson(4.0, size=25))\n\nax = dv.spc.c_chart_static(defects)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "c_chart_static",
         "c_chart_interactive"
+      ],
+      "useCase": "Use the c chart to monitor the count of defects per inspection unit when the inspection area or opportunity size is constant (for example the number of surface flaws per fixed-size panel). Limits are based on the Poisson distribution, so an unusually high or low defect count signals a change in the process.",
+      "images": [
+        {
+          "src": "assets/examples/spc/c_chart_1.png",
+          "caption": "Stable defect count — a constant inspection area."
+        },
+        {
+          "src": "assets/examples/spc/c_chart_2.png",
+          "caption": "Increased defects — the average count rises partway through."
+        },
+        {
+          "src": "assets/examples/spc/c_chart_3.png",
+          "caption": "Drifting count — defects trend upward over time."
+        },
+        {
+          "src": "assets/examples/spc/c_chart_4.png",
+          "caption": "Special cause — two inspections show excessive defects."
+        }
       ]
     },
     "u_chart": {
@@ -17480,7 +18392,7 @@ window.DATAVIZ_FUNCTION_DOCS = {
       "kind": "function",
       "href": "modules/spc/attribute/u_chart.html",
       "source": "dataviz/spc/attribute.py",
-      "signature": "def u_chart(defects: ArrayLike, units: ArrayLike, title: str = \"u Chart\", figsize: FigureSize = (12, 6), theme: str = \"default\") -> MatplotlibAxes",
+      "signature": "def u_chart( defects: ArrayLike, units: ArrayLike, title: str = \"u Chart\", figsize: FigureSize = (12, 6), theme: str = \"default\") -> MatplotlibAxes",
       "summary": "U Chart is a SPC helper that prepares, summarizes, validates, or transforms data before visualization. Use it to keep calculations explicit and testable before drawing charts.",
       "parameters": [
         {
@@ -17516,11 +18428,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.u_chart(defects, units)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(60)\nunits = pd.Series(rng.integers(40, 60, size=20))\ndefects = pd.Series([rng.poisson(0.1 * u) for u in units])\n\nax = dv.spc.u_chart_static(defects, units)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "u_chart_static",
         "u_chart_interactive"
+      ],
+      "useCase": "Use the u chart to monitor defects per unit when the inspection size varies between samples (for example defects per square metre of fabric across rolls of different length). It normalises the defect count by the number of units inspected and adjusts the control limits for each sample size, so the defect rate is comparable across unequal samples.",
+      "images": [
+        {
+          "src": "assets/examples/spc/u_chart_1.png",
+          "caption": "Stable defects per unit — inspection sizes vary sample to sample."
+        },
+        {
+          "src": "assets/examples/spc/u_chart_2.png",
+          "caption": "Rate increase — defects per unit climb in the second half."
+        },
+        {
+          "src": "assets/examples/spc/u_chart_3.png",
+          "caption": "Equal inspection sizes — straight control limits."
+        },
+        {
+          "src": "assets/examples/spc/u_chart_4.png",
+          "caption": "Special cause — two samples exceed the upper limit."
+        }
       ]
     },
     "capability_histogram": {
@@ -17581,11 +18512,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.capability_histogram(values, lsl=9.5, usl=10.5)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(100)\nvalues = pd.Series(rng.normal(10.0, 0.4, size=300), name=\"Value\")\n\nax = dv.spc.capability_histogram_static(values, lsl=8.5, usl=11.5)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "capability_histogram_static",
         "capability_histogram_interactive"
+      ],
+      "useCase": "Use the process capability histogram to compare the natural spread of a process against its specification limits. Overlaying the distribution with the lower and upper specification limits shows visually whether the process is centred and capable, and the accompanying capability indices (Cp, Cpk) quantify how much margin exists before parts fall out of spec.",
+      "images": [
+        {
+          "src": "assets/examples/spc/capability_histogram_1.png",
+          "caption": "Capable and centred — the spread fits comfortably in spec."
+        },
+        {
+          "src": "assets/examples/spc/capability_histogram_2.png",
+          "caption": "Off-centre — the mean drifts toward the upper spec limit."
+        },
+        {
+          "src": "assets/examples/spc/capability_histogram_3.png",
+          "caption": "Too much spread — the distribution overflows both limits."
+        },
+        {
+          "src": "assets/examples/spc/capability_histogram_4.png",
+          "caption": "Skewed process — a non-normal tail crosses the lower limit."
+        }
       ]
     },
     "run_chart": {
@@ -17634,11 +18584,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.run_chart(values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nax = dv.spc.run_chart_static(values, show_median=True)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "run_chart_static",
         "run_chart_interactive"
+      ],
+      "useCase": "Use the run chart as a simple first look at how a measurement behaves over time before committing to full control limits. Plotting the series against its median makes trends, cycles, and shifts easy to spot with run-based tests, and it needs no assumptions about the distribution — ideal for early exploration or non-technical audiences.",
+      "images": [
+        {
+          "src": "assets/examples/spc/run_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/run_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/run_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/run_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "rule_violation_chart": {
@@ -17687,11 +18656,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.rule_violation_chart(values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(1)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\nvalues[20:] += 1.2  # introduce a shift to trigger rules\n\nax = dv.spc.rule_violation_chart_static(values)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "rule_violation_chart_static",
         "rule_violation_chart_interactive"
+      ],
+      "useCase": "Use the rule violation chart to run the Western Electric / Nelson pattern rules automatically and highlight the exact points that break them. Beyond the basic “outside ±3σ” test, it flags runs, trends, and zone patterns that indicate a process is no longer in statistical control, so reviewers can focus on the specific signals that need action.",
+      "images": [
+        {
+          "src": "assets/examples/spc/rule_violation_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/rule_violation_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/rule_violation_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/rule_violation_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "pareto_chart": {
@@ -17740,11 +18728,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nresult = dv.spc.pareto_chart(categories)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\ncategories = [\"Scratch\", \"Dent\", \"Misalign\", \"Color\", \"Crack\", \"Other\"]\ncounts = [140, 90, 40, 20, 8, 4]\n\nax = dv.spc.pareto_chart_static(categories, counts)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "pareto_chart_static",
         "pareto_chart_interactive"
+      ],
+      "useCase": "Use the Pareto chart to prioritise improvement effort by separating the “vital few” causes from the “trivial many”. Sorting defect categories by frequency and overlaying the cumulative percentage line makes it immediately clear which handful of problems accounts for most of the impact, guiding where to focus root-cause work.",
+      "images": [
+        {
+          "src": "assets/examples/spc/pareto_chart_1.png",
+          "caption": "Classic 80/20 — a few categories dominate the defects."
+        },
+        {
+          "src": "assets/examples/spc/pareto_chart_2.png",
+          "caption": "Single dominant cause — one category drives most defects."
+        },
+        {
+          "src": "assets/examples/spc/pareto_chart_3.png",
+          "caption": "Even spread — no single vital few stands out."
+        },
+        {
+          "src": "assets/examples/spc/pareto_chart_4.png",
+          "caption": "Long tail — many small contributors after the leaders."
+        }
       ]
     },
     "process_distribution": {
@@ -17793,11 +18800,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.process_distribution(values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(110)\nvalues = pd.Series(rng.normal(10.0, 0.6, size=400), name=\"Value\")\n\nax = dv.spc.process_distribution_static(values, bins=30)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "process_distribution_static",
         "process_distribution_interactive"
+      ],
+      "useCase": "Use the process distribution plot to inspect the shape of a measurement before applying control charts or capability analysis. Revealing skewness, bimodality, or heavy tails helps you check the normality assumption, spot mixed process streams, and choose the right analysis rather than trusting summary statistics alone.",
+      "images": [
+        {
+          "src": "assets/examples/spc/process_distribution_1.png",
+          "caption": "Normal process — a symmetric, bell-shaped distribution."
+        },
+        {
+          "src": "assets/examples/spc/process_distribution_2.png",
+          "caption": "Right-skewed — a long upper tail from occasional large values."
+        },
+        {
+          "src": "assets/examples/spc/process_distribution_3.png",
+          "caption": "Bimodal — two overlapping modes suggest mixed streams."
+        },
+        {
+          "src": "assets/examples/spc/process_distribution_4.png",
+          "caption": "Heavy-tailed — extra dispersion from rare extreme values."
+        }
       ]
     },
     "zone_chart": {
@@ -17840,11 +18866,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.zone_chart(values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nax = dv.spc.zone_chart_static(values)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "zone_chart_static",
         "zone_chart_interactive"
+      ],
+      "useCase": "Use the zone chart to make the Western Electric zone tests visible by dividing the region around the centre line into A, B, and C bands (one, two, and three sigma). Colour-coded zones make patterns such as “two of three points in zone A” easy to read directly off the chart, which is helpful for training operators to recognise out-of-control signals.",
+      "images": [
+        {
+          "src": "assets/examples/spc/zone_chart_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/zone_chart_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/zone_chart_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/zone_chart_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     },
     "hotelling_t2_chart": {
@@ -17893,11 +18938,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.hotelling_t2_chart(matrix)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(120)\nx1 = rng.normal(10.0, 0.5, size=40)\nx2 = 0.6 * (x1 - 10.0) + rng.normal(20.0, 0.5, size=40)\ndata = pd.DataFrame({\"x1\": x1, \"x2\": x2})\n\nax = dv.spc.hotelling_t2_chart_static(data, limit_quantile=0.99)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "hotelling_t2_chart_static",
         "hotelling_t2_chart_interactive"
+      ],
+      "useCase": "Use the Hotelling T² chart to monitor several correlated variables at once instead of running separate charts that ignore their relationships. The T² statistic collapses the multivariate deviation into a single distance, so it flags points that are unusual jointly — including cases where each variable looks acceptable on its own but their combination does not.",
+      "images": [
+        {
+          "src": "assets/examples/spc/hotelling_t2_chart_1.png",
+          "caption": "In control — two correlated variables stay within the T² limit."
+        },
+        {
+          "src": "assets/examples/spc/hotelling_t2_chart_2.png",
+          "caption": "Joint shift — both variables move together after sample 20."
+        },
+        {
+          "src": "assets/examples/spc/hotelling_t2_chart_3.png",
+          "caption": "Counter-move — a single variable breaks the usual correlation."
+        },
+        {
+          "src": "assets/examples/spc/hotelling_t2_chart_4.png",
+          "caption": "Multivariate outlier — one point is far in the T² metric."
+        }
       ]
     },
     "spc_dashboard": {
@@ -17952,11 +19016,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibFigure; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nvalues = pd.Series([10.1, 9.9, 10.2, 10.4, 10.0, 9.8], name=\"Diameter\")\ndefects = pd.Series([2, 1, 3, 0, 2, 1])\ndefectives = pd.Series([3, 2, 5, 1, 4, 2])\nn = pd.Series([100, 100, 100, 100, 100, 100])\nunits = pd.Series([50, 48, 52, 51, 50, 49])\nmatrix = pd.DataFrame({\"x1\": [1.0, 1.1, 0.9, 1.2], \"x2\": [2.0, 2.1, 1.8, 2.2]})\n\nresult = dv.spc.spc_dashboard(values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=40), name=\"Value\")\n\nfig = dv.spc.spc_dashboard_static(values)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "spc_dashboard_static",
         "spc_dashboard_interactive"
+      ],
+      "useCase": "Use the SPC dashboard to review a process at a glance by combining the individuals chart, moving range chart, and distribution views in a single figure. It is well suited to reports and status reviews where one composite picture of stability, spread, and shape is more useful than a set of separate charts.",
+      "images": [
+        {
+          "src": "assets/examples/spc/spc_dashboard_1.png",
+          "caption": "Stable process — points vary randomly inside the control limits."
+        },
+        {
+          "src": "assets/examples/spc/spc_dashboard_2.png",
+          "caption": "Mean shift — the average jumps midway through the run."
+        },
+        {
+          "src": "assets/examples/spc/spc_dashboard_3.png",
+          "caption": "Gradual drift — a slow upward trend walks toward the upper limit."
+        },
+        {
+          "src": "assets/examples/spc/spc_dashboard_4.png",
+          "caption": "Special-cause spikes — isolated points break the control limits."
+        }
       ]
     }
   },

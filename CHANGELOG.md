@@ -1,5 +1,6 @@
 # Changelog
 
+- Unreleased: docs(website): standardize SPC function pages with a real use-case description, a complete copy-paste code sample, and a four-image example gallery per chart family; add `website/_generate_spc_images.py` and `website/_spc_docs.mjs` for regeneration.
 - Unreleased: feat(spc): add 10 chart families (20 funcs) — I-MR combined, median (X-tilde), Levey-Jennings, g-chart, t-chart, and Laney p'/u' charts; add `get_d2` and `D2_CONSTANTS` helpers.
 - Unreleased: chore(deps): lift upper bounds to `plotly<7` and `pandas<4` after auditing all sub-packages for Plotly 6 / pandas 3 compatibility.
 - Unreleased: fix(univariate): compute `fit_distribution` K-S test via frozen-distribution CDF for SciPy 1.14+ compatibility.

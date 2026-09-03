@@ -179,6 +179,18 @@ function renderFunctionPage() {
     return;
   }
   const related = (doc.related || []).map((relatedName) => functionCodeLink(moduleSlug, relatedName)).join(" ");
+  const useCase = doc.useCase
+    ? `<h2>Use Case</h2><p>${doc.useCase}</p>`
+    : "";
+  const gallery = (doc.images || []).length
+    ? `<h2>Example Gallery</h2>
+    <div class="doc-gallery">${doc.images
+        .map(
+          (img) =>
+            `<figure class="doc-gallery-item"><img loading="lazy" src="${siteLink(img.src)}" alt="${img.caption}"><figcaption>${img.caption}</figcaption></figure>`,
+        )
+        .join("")}</div>`
+    : "";
   target.innerHTML = html`
     <nav class="breadcrumbs">
       <a href="${siteLink("index.html")}">Docs</a>
@@ -200,6 +212,7 @@ function renderFunctionPage() {
     </section>
     <h2>Signature</h2>
     <pre class="signature"><code>${doc.signature}</code></pre>
+    ${useCase}
     <h2>Parameters</h2>
     ${doc.parameters.length ? `<table class="api-table param-table"><thead><tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody>${doc.parameters.map((param) => `<tr><td><code>${param.name}</code></td><td><code>${param.type}</code></td><td>${param.required ? "Yes" : "No"}</td><td>${param.description}</td></tr>`).join("")}</tbody></table>` : `<p>This entry does not expose public call parameters.</p>`}
     <h2>Returns</h2>
@@ -208,6 +221,7 @@ function renderFunctionPage() {
     <p>${doc.errors}</p>
     <h2>Usage Example</h2>
     <pre><code>${doc.example}</code></pre>
+    ${gallery}
     <h2>Additional Explanation</h2>
     <p>${doc.explanation}</p>
     <div class="callout">

@@ -1,9 +1,41 @@
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
+import { fileURLToPath } from "node:url";
+import { SPC_OVERRIDES } from "./_spc_docs.mjs";
 
-const root = "C:/Projects/repos/data-viz";
-const website = path.join(root, "website");
+const website = path.dirname(fileURLToPath(import.meta.url));
+const root = path.dirname(website);
+
+const spcManifestPath = path.join(website, "assets", "examples", "spc", "manifest.json");
+const spcImages = fs.existsSync(spcManifestPath)
+  ? JSON.parse(fs.readFileSync(spcManifestPath, "utf8"))
+  : {};
+
+function spcBaseFamily(name) {
+  return name.replace(/_(static|interactive)$/, "");
+}
+
+function spcExample(name, mode, override) {
+  const imports = [
+    "import numpy as np",
+    "import pandas as pd",
+    ...(mode === "interactive" ? [] : ["import matplotlib.pyplot as plt"]),
+    "import dataviz as dv",
+  ].join("\n");
+  const call = mode === "interactive" ? override.interactiveCall : override.staticCall;
+  return `${imports}\n\n${override.setup}\n\n${call}`;
+}
+
+function applySpcOverride(doc) {
+  const override = SPC_OVERRIDES[spcBaseFamily(doc.name)];
+  if (!override) return doc;
+  doc.useCase = override.useCase;
+  doc.example = spcExample(doc.name, doc.mode, override);
+  const images = spcImages[spcBaseFamily(doc.name)];
+  if (images) doc.images = images;
+  return doc;
+}
 const ctx = { window: {} };
 vm.createContext(ctx);
 vm.runInContext(fs.readFileSync(path.join(website, "assets", "data.js"), "utf8"), ctx);
@@ -514,6 +546,8 @@ for (const [slug, entry] of Object.entries(modules)) {
       explanation: explanationFor(name, mode, entry),
       related,
     };
+
+    if (slug === "spc") applySpcOverride(functionDocs[slug][name]);
 
     const outDir = path.join(website, "modules", slug, submodule);
     fs.mkdirSync(outDir, { recursive: true });

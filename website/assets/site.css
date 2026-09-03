@@ -326,6 +326,35 @@ pre code {
   color: var(--brand-dark);
 }
 
+.doc-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin: 8px 0 24px;
+}
+
+.doc-gallery-item {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 12px;
+}
+
+.doc-gallery-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+}
+
+.doc-gallery-item figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
 .breadcrumbs {
   display: flex;
   flex-wrap: wrap;
