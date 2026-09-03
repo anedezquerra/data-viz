@@ -1,6 +1,10 @@
 dataviz.clustering.dendrogram module
 ====================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Clustering toolkit</span><h2>Dendrogram</h2><p>Inspect cluster structure and choose cluster counts.</p></div>
+
 .. automodule:: dataviz.clustering.dendrogram
 
 Public API

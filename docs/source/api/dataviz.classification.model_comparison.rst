@@ -1,6 +1,10 @@
 dataviz.classification.model_comparison module
 ==============================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Classification toolkit</span><h2>Model Comparison</h2><p>Evaluate and compare classification models.</p></div>
+
 .. automodule:: dataviz.classification.model_comparison
 
 Public API

@@ -1,6 +1,10 @@
 dataviz.classification.charts module
 ====================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Classification toolkit</span><h2>Charts</h2><p>Evaluate and compare classification models.</p></div>
+
 .. automodule:: dataviz.classification.charts
 
 Public API

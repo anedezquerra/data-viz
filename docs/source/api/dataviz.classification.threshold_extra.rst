@@ -1,6 +1,10 @@
 dataviz.classification.threshold_extra module
 =============================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Classification toolkit</span><h2>Threshold Extra</h2><p>Evaluate and compare classification models.</p></div>
+
 .. automodule:: dataviz.classification.threshold_extra
 
 Public API

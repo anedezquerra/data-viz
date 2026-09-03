@@ -1,6 +1,10 @@
 dataviz.classification.multiclass module
 ========================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Classification toolkit</span><h2>Multiclass</h2><p>Evaluate and compare classification models.</p></div>
+
 .. automodule:: dataviz.classification.multiclass
 
 Public API

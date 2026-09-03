@@ -1,6 +1,10 @@
 dataviz.utils.validation module
 ===============================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Utilities</span><h2>Validation</h2><p>Shared validation, theming, and plotting helpers.</p></div>
+
 .. automodule:: dataviz.utils.validation
 
 Public API

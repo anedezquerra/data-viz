@@ -1,6 +1,10 @@
 dataviz.regression.residual_extended module
 ===========================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Regression toolkit</span><h2>Residual Extended</h2><p>Diagnose and compare regression models.</p></div>
+
 .. automodule:: dataviz.regression.residual_extended
 
 Public API

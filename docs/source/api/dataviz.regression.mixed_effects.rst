@@ -1,6 +1,10 @@
 dataviz.regression.mixed_effects module
 =======================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Regression toolkit</span><h2>Mixed Effects</h2><p>Diagnose and compare regression models.</p></div>
+
 .. automodule:: dataviz.regression.mixed_effects
 
 Public API

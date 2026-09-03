@@ -1,6 +1,10 @@
 dataviz.regression.autocorrelation module
 =========================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Regression toolkit</span><h2>Autocorrelation</h2><p>Diagnose and compare regression models.</p></div>
+
 .. automodule:: dataviz.regression.autocorrelation
 
 Public API

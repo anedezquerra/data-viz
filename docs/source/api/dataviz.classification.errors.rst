@@ -1,6 +1,10 @@
 dataviz.classification.errors module
 ====================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Classification toolkit</span><h2>Errors</h2><p>Evaluate and compare classification models.</p></div>
+
 .. automodule:: dataviz.classification.errors
 
 Public API

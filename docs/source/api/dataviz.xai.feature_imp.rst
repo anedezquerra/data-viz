@@ -1,6 +1,10 @@
 dataviz.xai.feature_imp module
 ==============================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>XAI toolkit</span><h2>Feature Imp</h2><p>Explain model predictions and feature effects.</p></div>
+
 .. automodule:: dataviz.xai.feature_imp
 
 Public API

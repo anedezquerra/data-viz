@@ -1,6 +1,10 @@
 dataviz.classification.confusion_extended module
 ================================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Classification toolkit</span><h2>Confusion Extended</h2><p>Evaluate and compare classification models.</p></div>
+
 .. automodule:: dataviz.classification.confusion_extended
 
 Public API

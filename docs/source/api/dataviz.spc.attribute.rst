@@ -21,3 +21,11 @@ Public API
    members/dataviz/spc/attribute/c_chart_interactive
    members/dataviz/spc/attribute/u_chart_static
    members/dataviz/spc/attribute/u_chart_interactive
+   members/dataviz/spc/attribute/g_chart_static
+   members/dataviz/spc/attribute/g_chart_interactive
+   members/dataviz/spc/attribute/t_chart_static
+   members/dataviz/spc/attribute/t_chart_interactive
+   members/dataviz/spc/attribute/laney_p_chart_static
+   members/dataviz/spc/attribute/laney_p_chart_interactive
+   members/dataviz/spc/attribute/laney_u_chart_static
+   members/dataviz/spc/attribute/laney_u_chart_interactive

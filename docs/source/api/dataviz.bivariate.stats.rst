@@ -1,6 +1,10 @@
 dataviz.bivariate.stats module
 ==============================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Bivariate toolkit</span><h2>Stats</h2><p>Explore relationships between two variables.</p></div>
+
 .. automodule:: dataviz.bivariate.stats
 
 Public API

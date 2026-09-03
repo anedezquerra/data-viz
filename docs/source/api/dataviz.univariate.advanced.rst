@@ -1,6 +1,10 @@
 dataviz.univariate.advanced module
 ==================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Univariate toolkit</span><h2>Advanced</h2><p>Profile, test, and visualize a single variable.</p></div>
+
 .. automodule:: dataviz.univariate.advanced
 
 Public API

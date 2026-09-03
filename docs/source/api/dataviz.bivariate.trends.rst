@@ -1,6 +1,10 @@
 dataviz.bivariate.trends module
 ===============================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Bivariate toolkit</span><h2>Trends</h2><p>Explore relationships between two variables.</p></div>
+
 .. automodule:: dataviz.bivariate.trends
 
 Public API

@@ -1,6 +1,10 @@
 dataviz.regression.uncertainty module
 =====================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Regression toolkit</span><h2>Uncertainty</h2><p>Diagnose and compare regression models.</p></div>
+
 .. automodule:: dataviz.regression.uncertainty
 
 Public API

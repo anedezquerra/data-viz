@@ -1,6 +1,10 @@
 dataviz.classification.decision_boundary module
 ===============================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Classification toolkit</span><h2>Decision Boundary</h2><p>Evaluate and compare classification models.</p></div>
+
 .. automodule:: dataviz.classification.decision_boundary
 
 Public API

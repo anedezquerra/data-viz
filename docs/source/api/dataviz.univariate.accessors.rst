@@ -1,6 +1,10 @@
 dataviz.univariate.accessors module
 ===================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Univariate toolkit</span><h2>Accessors</h2><p>Profile, test, and visualize a single variable.</p></div>
+
 .. automodule:: dataviz.univariate.accessors
 
 Public API

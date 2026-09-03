@@ -1,6 +1,10 @@
 dataviz.xai.local_explanations module
 =====================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>XAI toolkit</span><h2>Local Explanations</h2><p>Explain model predictions and feature effects.</p></div>
+
 .. automodule:: dataviz.xai.local_explanations
 
 Public API

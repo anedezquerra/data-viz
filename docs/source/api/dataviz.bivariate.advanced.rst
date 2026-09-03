@@ -1,6 +1,10 @@
 dataviz.bivariate.advanced module
 =================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Bivariate toolkit</span><h2>Advanced</h2><p>Explore relationships between two variables.</p></div>
+
 .. automodule:: dataviz.bivariate.advanced
 
 Public API
