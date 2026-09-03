@@ -1,0 +1,56 @@
+{
+  "feature_importance": [
+    {
+      "src": "assets/examples/xai/feature_importance_1.png",
+      "caption": "Dominant driver \u2014 one feature carries most of the signal."
+    },
+    {
+      "src": "assets/examples/xai/feature_importance_2.png",
+      "caption": "Even spread \u2014 contributions are shared across features."
+    },
+    {
+      "src": "assets/examples/xai/feature_importance_3.png",
+      "caption": "Long tail \u2014 two leaders ahead of many weak contributors."
+    },
+    {
+      "src": "assets/examples/xai/feature_importance_4.png",
+      "caption": "Weak model \u2014 all importances hover near zero."
+    }
+  ],
+  "shap_plot": [
+    {
+      "src": "assets/examples/xai/shap_plot_1.png",
+      "caption": "Single driver \u2014 one feature dominates the average impact."
+    },
+    {
+      "src": "assets/examples/xai/shap_plot_2.png",
+      "caption": "Opposing effects \u2014 two features push predictions in opposite directions."
+    },
+    {
+      "src": "assets/examples/xai/shap_plot_3.png",
+      "caption": "Uniform impact \u2014 all features contribute small, similar effects."
+    },
+    {
+      "src": "assets/examples/xai/shap_plot_4.png",
+      "caption": "Graded impacts \u2014 contributions taper smoothly across features."
+    }
+  ],
+  "partial_dependence": [
+    {
+      "src": "assets/examples/xai/partial_dependence_1.png",
+      "caption": "Linear effect \u2014 the prediction rises steadily with the feature."
+    },
+    {
+      "src": "assets/examples/xai/partial_dependence_2.png",
+      "caption": "Saturating effect \u2014 gains flatten out at higher values."
+    },
+    {
+      "src": "assets/examples/xai/partial_dependence_3.png",
+      "caption": "Non-monotonic effect \u2014 the response peaks in the mid-range."
+    },
+    {
+      "src": "assets/examples/xai/partial_dependence_4.png",
+      "caption": "No effect \u2014 the feature barely changes the prediction."
+    }
+  ]
+}

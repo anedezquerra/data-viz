@@ -1,0 +1,56 @@
+{
+  "scatter_clusters": [
+    {
+      "src": "assets/examples/clustering/scatter_clusters_1.png",
+      "caption": "Well separated \u2014 three compact clusters with clear gaps."
+    },
+    {
+      "src": "assets/examples/clustering/scatter_clusters_2.png",
+      "caption": "Overlapping clusters \u2014 boundaries blur between groups."
+    },
+    {
+      "src": "assets/examples/clustering/scatter_clusters_3.png",
+      "caption": "Non-spherical structure \u2014 ring shapes defeat distance-based splits."
+    },
+    {
+      "src": "assets/examples/clustering/scatter_clusters_4.png",
+      "caption": "With centroids \u2014 markers locate each cluster centre."
+    }
+  ],
+  "dendrogram": [
+    {
+      "src": "assets/examples/clustering/dendrogram_1.png",
+      "caption": "Clear structure \u2014 long final gaps mark three natural clusters."
+    },
+    {
+      "src": "assets/examples/clustering/dendrogram_2.png",
+      "caption": "Chained merges \u2014 no gap suggests a clean place to cut."
+    },
+    {
+      "src": "assets/examples/clustering/dendrogram_3.png",
+      "caption": "Two dominant groups \u2014 one large merge splits the tree in half."
+    },
+    {
+      "src": "assets/examples/clustering/dendrogram_4.png",
+      "caption": "Cut by threshold \u2014 colouring marks clusters below the line."
+    }
+  ],
+  "elbow_plot": [
+    {
+      "src": "assets/examples/clustering/elbow_plot_1.png",
+      "caption": "Clear elbow \u2014 the curve bends sharply at three clusters."
+    },
+    {
+      "src": "assets/examples/clustering/elbow_plot_2.png",
+      "caption": "No elbow \u2014 a smooth decline offers no obvious choice."
+    },
+    {
+      "src": "assets/examples/clustering/elbow_plot_3.png",
+      "caption": "Elbow at four \u2014 the bend arrives one cluster later."
+    },
+    {
+      "src": "assets/examples/clustering/elbow_plot_4.png",
+      "caption": "Steep drop, quick plateau \u2014 two clusters capture most structure."
+    }
+  ]
+}

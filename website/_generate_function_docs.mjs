@@ -1,22 +1,44 @@
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
-import { fileURLToPath } from "node:url";
-import { SPC_OVERRIDES } from "./_spc_docs.mjs";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const website = path.dirname(fileURLToPath(import.meta.url));
 const root = path.dirname(website);
 
-const spcManifestPath = path.join(website, "assets", "examples", "spc", "manifest.json");
-const spcImages = fs.existsSync(spcManifestPath)
-  ? JSON.parse(fs.readFileSync(spcManifestPath, "utf8"))
-  : {};
+// Curated per-module overrides live in website/_<slug>_docs.mjs and export
+// <SLUG>_OVERRIDES keyed by chart-family base name (no _static/_interactive
+// suffix). Image galleries come from assets/examples/<slug>/manifest.json.
+const OVERRIDE_SLUGS = [
+  "spc",
+  "univariate",
+  "bivariate",
+  "multivariate",
+  "eda",
+  "classification",
+  "regression",
+  "clustering",
+  "xai",
+];
+const OVERRIDE_REGISTRY = {};
+const IMAGE_MANIFESTS = {};
+for (const slug of OVERRIDE_SLUGS) {
+  const overridePath = path.join(website, `_${slug}_docs.mjs`);
+  if (fs.existsSync(overridePath)) {
+    const mod = await import(pathToFileURL(overridePath).href);
+    OVERRIDE_REGISTRY[slug] = mod[`${slug.toUpperCase()}_OVERRIDES`] || {};
+  }
+  const manifestPath = path.join(website, "assets", "examples", slug, "manifest.json");
+  IMAGE_MANIFESTS[slug] = fs.existsSync(manifestPath)
+    ? JSON.parse(fs.readFileSync(manifestPath, "utf8"))
+    : {};
+}
 
-function spcBaseFamily(name) {
+function baseFamily(name) {
   return name.replace(/_(static|interactive)$/, "");
 }
 
-function spcExample(name, mode, override) {
+function curatedExample(mode, override) {
   const imports = [
     "import numpy as np",
     "import pandas as pd",
@@ -27,12 +49,12 @@ function spcExample(name, mode, override) {
   return `${imports}\n\n${override.setup}\n\n${call}`;
 }
 
-function applySpcOverride(doc) {
-  const override = SPC_OVERRIDES[spcBaseFamily(doc.name)];
+function applyOverride(doc) {
+  const override = OVERRIDE_REGISTRY[doc.module]?.[baseFamily(doc.name)];
   if (!override) return doc;
   doc.useCase = override.useCase;
-  doc.example = spcExample(doc.name, doc.mode, override);
-  const images = spcImages[spcBaseFamily(doc.name)];
+  doc.example = curatedExample(doc.mode, override);
+  const images = IMAGE_MANIFESTS[doc.module]?.[baseFamily(doc.name)];
   if (images) doc.images = images;
   return doc;
 }
@@ -547,7 +569,7 @@ for (const [slug, entry] of Object.entries(modules)) {
       related,
     };
 
-    if (slug === "spc") applySpcOverride(functionDocs[slug][name]);
+    applyOverride(functionDocs[slug][name]);
 
     const outDir = path.join(website, "modules", slug, submodule);
     fs.mkdirSync(outDir, { recursive: true });

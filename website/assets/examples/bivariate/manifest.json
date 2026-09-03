@@ -1,0 +1,434 @@
+{
+  "scatter_plot": [
+    {
+      "src": "assets/examples/bivariate/scatter_plot_1.png",
+      "caption": "Strong linear trend \u2014 y rises steadily with x."
+    },
+    {
+      "src": "assets/examples/bivariate/scatter_plot_2.png",
+      "caption": "Curved relationship \u2014 a parabola the eye catches at once."
+    },
+    {
+      "src": "assets/examples/bivariate/scatter_plot_3.png",
+      "caption": "No correlation \u2014 the cloud is round and directionless."
+    },
+    {
+      "src": "assets/examples/bivariate/scatter_plot_4.png",
+      "caption": "Outlier-driven \u2014 three stray points dominate the picture."
+    }
+  ],
+  "line_plot": [
+    {
+      "src": "assets/examples/bivariate/line_plot_1.png",
+      "caption": "Upward trend \u2014 throughput climbs steadily over the period."
+    },
+    {
+      "src": "assets/examples/bivariate/line_plot_2.png",
+      "caption": "Seasonal cycle \u2014 a repeating wave rides on the noise."
+    },
+    {
+      "src": "assets/examples/bivariate/line_plot_3.png",
+      "caption": "Flat series \u2014 no trend, only point-to-point variation."
+    },
+    {
+      "src": "assets/examples/bivariate/line_plot_4.png",
+      "caption": "Step change \u2014 the level drops abruptly midway through."
+    }
+  ],
+  "correlation_heatmap": [
+    {
+      "src": "assets/examples/bivariate/correlation_heatmap_1.png",
+      "caption": "Strong blocks \u2014 high positive and negative correlations stand out."
+    },
+    {
+      "src": "assets/examples/bivariate/correlation_heatmap_2.png",
+      "caption": "Weak correlations \u2014 no meaningful structure between variables."
+    },
+    {
+      "src": "assets/examples/bivariate/correlation_heatmap_3.png",
+      "caption": "Mixed signs \u2014 positive and negative associations side by side."
+    },
+    {
+      "src": "assets/examples/bivariate/correlation_heatmap_4.png",
+      "caption": "One dominant pair \u2014 a single strong link among independents."
+    }
+  ],
+  "bubble_plot": [
+    {
+      "src": "assets/examples/bivariate/bubble_plot_1.png",
+      "caption": "Size tracks x \u2014 larger bubbles cluster to the right."
+    },
+    {
+      "src": "assets/examples/bivariate/bubble_plot_2.png",
+      "caption": "Unrelated size \u2014 bubble area carries no signal."
+    },
+    {
+      "src": "assets/examples/bivariate/bubble_plot_3.png",
+      "caption": "Colour gradient \u2014 a fourth variable encoded as colour."
+    },
+    {
+      "src": "assets/examples/bivariate/bubble_plot_4.png",
+      "caption": "Few large players \u2014 a handful of bubbles dominate the field."
+    }
+  ],
+  "hexbin_plot": [
+    {
+      "src": "assets/examples/bivariate/hexbin_plot_1.png",
+      "caption": "Correlated mass \u2014 density stretches along the diagonal."
+    },
+    {
+      "src": "assets/examples/bivariate/hexbin_plot_2.png",
+      "caption": "Two clusters \u2014 the bins reveal two distinct groups."
+    },
+    {
+      "src": "assets/examples/bivariate/hexbin_plot_3.png",
+      "caption": "Uniform spread \u2014 no concentration anywhere in the plane."
+    },
+    {
+      "src": "assets/examples/bivariate/hexbin_plot_4.png",
+      "caption": "Skewed density \u2014 mass piles up near the origin."
+    }
+  ],
+  "regression_plot": [
+    {
+      "src": "assets/examples/bivariate/regression_plot_1.png",
+      "caption": "Linear fit \u2014 the degree-1 line tracks the data well."
+    },
+    {
+      "src": "assets/examples/bivariate/regression_plot_2.png",
+      "caption": "Curved trend \u2014 degree 2 follows the acceleration."
+    },
+    {
+      "src": "assets/examples/bivariate/regression_plot_3.png",
+      "caption": "Weak slope \u2014 the fit is nearly flat against the noise."
+    },
+    {
+      "src": "assets/examples/bivariate/regression_plot_4.png",
+      "caption": "Outliers pull \u2014 a few points bend the fitted line."
+    }
+  ],
+  "density_contour": [
+    {
+      "src": "assets/examples/bivariate/density_contour_1.png",
+      "caption": "Correlated mass \u2014 density stretches along the diagonal."
+    },
+    {
+      "src": "assets/examples/bivariate/density_contour_2.png",
+      "caption": "Two clusters \u2014 the bins reveal two distinct groups."
+    },
+    {
+      "src": "assets/examples/bivariate/density_contour_3.png",
+      "caption": "Uniform spread \u2014 no concentration anywhere in the plane."
+    },
+    {
+      "src": "assets/examples/bivariate/density_contour_4.png",
+      "caption": "Skewed density \u2014 mass piles up near the origin."
+    }
+  ],
+  "grouped_bar": [
+    {
+      "src": "assets/examples/bivariate/grouped_bar_1.png",
+      "caption": "Shifted levels \u2014 group means differ clearly."
+    },
+    {
+      "src": "assets/examples/bivariate/grouped_bar_2.png",
+      "caption": "No group effect \u2014 all categories average the same."
+    },
+    {
+      "src": "assets/examples/bivariate/grouped_bar_3.png",
+      "caption": "One dominant group \u2014 totals driven by category A."
+    },
+    {
+      "src": "assets/examples/bivariate/grouped_bar_4.png",
+      "caption": "Mixed signs \u2014 some groups average below zero."
+    }
+  ],
+  "box_by_category": [
+    {
+      "src": "assets/examples/bivariate/box_by_category_1.png",
+      "caption": "Shifted levels \u2014 group means differ clearly."
+    },
+    {
+      "src": "assets/examples/bivariate/box_by_category_2.png",
+      "caption": "No group effect \u2014 all categories average the same."
+    },
+    {
+      "src": "assets/examples/bivariate/box_by_category_3.png",
+      "caption": "One dominant group \u2014 totals driven by category A."
+    },
+    {
+      "src": "assets/examples/bivariate/box_by_category_4.png",
+      "caption": "Mixed signs \u2014 some groups average below zero."
+    }
+  ],
+  "violin_by_category": [
+    {
+      "src": "assets/examples/bivariate/violin_by_category_1.png",
+      "caption": "Location shifts \u2014 violins sit at different heights."
+    },
+    {
+      "src": "assets/examples/bivariate/violin_by_category_2.png",
+      "caption": "Bimodal group \u2014 category A shows two humps."
+    },
+    {
+      "src": "assets/examples/bivariate/violin_by_category_3.png",
+      "caption": "Right-skewed \u2014 long upper tails in every group."
+    },
+    {
+      "src": "assets/examples/bivariate/violin_by_category_4.png",
+      "caption": "Growing spread \u2014 violins widen from A to C."
+    }
+  ],
+  "crosstab_heatmap": [
+    {
+      "src": "assets/examples/bivariate/crosstab_heatmap_1.png",
+      "caption": "Independent factors \u2014 shares spread evenly across cells."
+    },
+    {
+      "src": "assets/examples/bivariate/crosstab_heatmap_2.png",
+      "caption": "Strong association \u2014 each region favours a different outcome."
+    },
+    {
+      "src": "assets/examples/bivariate/crosstab_heatmap_3.png",
+      "caption": "Row-normalised \u2014 rates comparable despite unequal group sizes."
+    },
+    {
+      "src": "assets/examples/bivariate/crosstab_heatmap_4.png",
+      "caption": "Rare combinations \u2014 some cells barely occur at all."
+    }
+  ],
+  "binned_mean_plot": [
+    {
+      "src": "assets/examples/bivariate/binned_mean_plot_1.png",
+      "caption": "Linear trend \u2014 binned means climb steadily."
+    },
+    {
+      "src": "assets/examples/bivariate/binned_mean_plot_2.png",
+      "caption": "Nonlinear wave \u2014 binning reveals a sinusoid under the noise."
+    },
+    {
+      "src": "assets/examples/bivariate/binned_mean_plot_3.png",
+      "caption": "No relationship \u2014 the binned means stay flat."
+    },
+    {
+      "src": "assets/examples/bivariate/binned_mean_plot_4.png",
+      "caption": "Stable mean, growing noise \u2014 trend holds while spread widens."
+    }
+  ],
+  "errorbar_plot": [
+    {
+      "src": "assets/examples/bivariate/errorbar_plot_1.png",
+      "caption": "Constant uncertainty \u2014 every estimate is equally precise."
+    },
+    {
+      "src": "assets/examples/bivariate/errorbar_plot_2.png",
+      "caption": "Growing uncertainty \u2014 later measurements are noisier."
+    },
+    {
+      "src": "assets/examples/bivariate/errorbar_plot_3.png",
+      "caption": "Two-dimensional error \u2014 both x and y carry uncertainty."
+    },
+    {
+      "src": "assets/examples/bivariate/errorbar_plot_4.png",
+      "caption": "Small samples \u2014 wide intervals warn against over-reading."
+    }
+  ],
+  "area_between": [
+    {
+      "src": "assets/examples/bivariate/area_between_1.png",
+      "caption": "Constant band \u2014 a fixed tolerance around the nominal curve."
+    },
+    {
+      "src": "assets/examples/bivariate/area_between_2.png",
+      "caption": "Widening band \u2014 uncertainty grows away from the origin."
+    },
+    {
+      "src": "assets/examples/bivariate/area_between_3.png",
+      "caption": "Confidence envelope \u2014 interval balloons at the edges."
+    },
+    {
+      "src": "assets/examples/bivariate/area_between_4.png",
+      "caption": "Seasonal envelope \u2014 the band breathes with the cycle."
+    }
+  ],
+  "step_plot": [
+    {
+      "src": "assets/examples/bivariate/step_plot_1.png",
+      "caption": "Random walk steps \u2014 level drifts up in discrete jumps."
+    },
+    {
+      "src": "assets/examples/bivariate/step_plot_2.png",
+      "caption": "Setpoint changes \u2014 the target holds between adjustments."
+    },
+    {
+      "src": "assets/examples/bivariate/step_plot_3.png",
+      "caption": "Countdown \u2014 a quantity decrements to zero."
+    },
+    {
+      "src": "assets/examples/bivariate/step_plot_4.png",
+      "caption": "Depletion \u2014 inventory falls in discrete withdrawals."
+    }
+  ],
+  "joint_scatter_hist": [
+    {
+      "src": "assets/examples/bivariate/joint_scatter_hist_1.png",
+      "caption": "Correlated pair \u2014 marginals are both bell-shaped."
+    },
+    {
+      "src": "assets/examples/bivariate/joint_scatter_hist_2.png",
+      "caption": "Independent normals \u2014 no joint or marginal surprises."
+    },
+    {
+      "src": "assets/examples/bivariate/joint_scatter_hist_3.png",
+      "caption": "Skewed marginals \u2014 both histograms lean right."
+    },
+    {
+      "src": "assets/examples/bivariate/joint_scatter_hist_4.png",
+      "caption": "Bimodal y \u2014 the side histogram exposes two groups."
+    }
+  ],
+  "bivariate_histogram": [
+    {
+      "src": "assets/examples/bivariate/bivariate_histogram_1.png",
+      "caption": "Correlated mass \u2014 density stretches along the diagonal."
+    },
+    {
+      "src": "assets/examples/bivariate/bivariate_histogram_2.png",
+      "caption": "Two clusters \u2014 the bins reveal two distinct groups."
+    },
+    {
+      "src": "assets/examples/bivariate/bivariate_histogram_3.png",
+      "caption": "Uniform spread \u2014 no concentration anywhere in the plane."
+    },
+    {
+      "src": "assets/examples/bivariate/bivariate_histogram_4.png",
+      "caption": "Skewed density \u2014 mass piles up near the origin."
+    }
+  ],
+  "outlier_scatter": [
+    {
+      "src": "assets/examples/bivariate/outlier_scatter_1.png",
+      "caption": "IQR fences \u2014 three points fall outside the whiskers."
+    },
+    {
+      "src": "assets/examples/bivariate/outlier_scatter_2.png",
+      "caption": "Z-score rule \u2014 extreme standardised values flagged."
+    },
+    {
+      "src": "assets/examples/bivariate/outlier_scatter_3.png",
+      "caption": "Tight fence \u2014 a strict threshold flags borderline points."
+    },
+    {
+      "src": "assets/examples/bivariate/outlier_scatter_4.png",
+      "caption": "Clean data \u2014 nothing exceeds the fences."
+    }
+  ],
+  "residual_relationship": [
+    {
+      "src": "assets/examples/bivariate/residual_relationship_1.png",
+      "caption": "Adequate fit \u2014 residuals scatter randomly around zero."
+    },
+    {
+      "src": "assets/examples/bivariate/residual_relationship_2.png",
+      "caption": "Missed curvature \u2014 residuals arc because the fit is too simple."
+    },
+    {
+      "src": "assets/examples/bivariate/residual_relationship_3.png",
+      "caption": "Heteroscedasticity \u2014 the residual spread fans out with x."
+    },
+    {
+      "src": "assets/examples/bivariate/residual_relationship_4.png",
+      "caption": "Influential outlier \u2014 one point dominates the residual scale."
+    }
+  ],
+  "quantile_bin_plot": [
+    {
+      "src": "assets/examples/bivariate/quantile_bin_plot_1.png",
+      "caption": "Linear rise \u2014 each decile of x adds the same amount."
+    },
+    {
+      "src": "assets/examples/bivariate/quantile_bin_plot_2.png",
+      "caption": "Diminishing returns \u2014 the curve flattens at high x."
+    },
+    {
+      "src": "assets/examples/bivariate/quantile_bin_plot_3.png",
+      "caption": "No effect \u2014 every quantile bin averages the same."
+    },
+    {
+      "src": "assets/examples/bivariate/quantile_bin_plot_4.png",
+      "caption": "Median robustness \u2014 the median ignores the injected outliers."
+    }
+  ],
+  "bland_altman": [
+    {
+      "src": "assets/examples/bivariate/bland_altman_1.png",
+      "caption": "Good agreement \u2014 differences hug zero inside narrow limits."
+    },
+    {
+      "src": "assets/examples/bivariate/bland_altman_2.png",
+      "caption": "Constant bias \u2014 method B reads six units high throughout."
+    },
+    {
+      "src": "assets/examples/bivariate/bland_altman_3.png",
+      "caption": "Proportional bias \u2014 the gap widens as magnitude grows."
+    },
+    {
+      "src": "assets/examples/bivariate/bland_altman_4.png",
+      "caption": "Poor agreement \u2014 wide limits of agreement reject interchangeability."
+    }
+  ],
+  "rank_scatter": [
+    {
+      "src": "assets/examples/bivariate/rank_scatter_1.png",
+      "caption": "Monotone linear \u2014 ranks fall neatly along the diagonal."
+    },
+    {
+      "src": "assets/examples/bivariate/rank_scatter_2.png",
+      "caption": "Monotone but curved \u2014 ranking straightens the square-root shape."
+    },
+    {
+      "src": "assets/examples/bivariate/rank_scatter_3.png",
+      "caption": "Weak association \u2014 ranks scatter broadly."
+    },
+    {
+      "src": "assets/examples/bivariate/rank_scatter_4.png",
+      "caption": "U-shaped \u2014 ranks reveal the reversal of direction."
+    }
+  ],
+  "lag_plot": [
+    {
+      "src": "assets/examples/bivariate/lag_plot_1.png",
+      "caption": "White noise \u2014 no structure, consecutive values independent."
+    },
+    {
+      "src": "assets/examples/bivariate/lag_plot_2.png",
+      "caption": "Autocorrelated \u2014 the diagonal band shows lag-1 dependence."
+    },
+    {
+      "src": "assets/examples/bivariate/lag_plot_3.png",
+      "caption": "Seasonal series \u2014 lag 12 exposes the repeating cycle."
+    },
+    {
+      "src": "assets/examples/bivariate/lag_plot_4.png",
+      "caption": "Trending series \u2014 the tight diagonal reflects the drift."
+    }
+  ],
+  "conditional_box": [
+    {
+      "src": "assets/examples/bivariate/conditional_box_1.png",
+      "caption": "Linear shift \u2014 box medians march upward across bins."
+    },
+    {
+      "src": "assets/examples/bivariate/conditional_box_2.png",
+      "caption": "Nonlinear \u2014 medians rise then fall with x."
+    },
+    {
+      "src": "assets/examples/bivariate/conditional_box_3.png",
+      "caption": "Widening spread \u2014 boxes grow taller toward high x."
+    },
+    {
+      "src": "assets/examples/bivariate/conditional_box_4.png",
+      "caption": "No relationship \u2014 every bin looks the same."
+    }
+  ]
+}

@@ -124,10 +124,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.histogram_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nax = dv.univariate.histogram_static(values, bins=30, title=\"Height distribution\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "histogram_interactive"
+      ],
+      "useCase": "Use the histogram as the first look at any numeric variable — a cycle time, a transaction amount, a measurement — to see its centre, spread, and shape at a glance. Binned counts make skewness, bimodality, gaps, and outliers immediately visible, which tells you whether summary statistics like the mean are trustworthy and which analyses are appropriate next.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/histogram_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/histogram_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/histogram_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/histogram_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "density_static": {
@@ -254,10 +273,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.density_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nax = dv.univariate.density_static(values, title=\"Height density\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "density_interactive"
+      ],
+      "useCase": "Use the density plot when you want a smooth estimate of a variable’s distribution instead of blocky histogram bins. The kernel density curve makes it easier to compare shape — skew, tails, and modes — without the result depending on where bin edges happen to fall, which is helpful when presenting distributions to non-technical audiences.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/density_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/density_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/density_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/density_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "box_plot_static": {
@@ -378,10 +416,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.box_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(5)\ndata = pd.DataFrame({\n    \"Line A\": rng.normal(10.0, 0.5, size=100),\n    \"Line B\": rng.normal(10.4, 0.5, size=100),\n    \"Line C\": rng.normal(9.8, 0.7, size=100),\n})\n\nax = dv.univariate.box_plot_static(data, ylabel=\"Measurement\", title=\"By production line\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "box_plot_interactive"
+      ],
+      "useCase": "Use the box plot to compare the distribution of a measurement across groups — production lines, stores, cohorts — in a compact form. Each box summarises the median, the middle 50% (IQR), and whiskers with outlier points, so differences in centre, spread, and extreme values between groups stand out side by side.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/box_plot_1.png",
+          "caption": "Aligned groups — all three lines share centre and spread."
+        },
+        {
+          "src": "assets/examples/univariate/box_plot_2.png",
+          "caption": "Shifted group — Line B runs consistently high."
+        },
+        {
+          "src": "assets/examples/univariate/box_plot_3.png",
+          "caption": "Unequal spread — Line C varies far more than the others."
+        },
+        {
+          "src": "assets/examples/univariate/box_plot_4.png",
+          "caption": "Contaminated group — a handful of extremes inflate Line C."
+        }
       ]
     },
     "violin_plot_static": {
@@ -532,10 +589,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.violin_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(5)\ndata = pd.DataFrame({\n    \"Line A\": rng.normal(10.0, 0.5, size=100),\n    \"Line B\": rng.normal(10.4, 0.5, size=100),\n    \"Line C\": rng.normal(9.8, 0.7, size=100),\n})\n\nax = dv.univariate.violin_plot_static(data, ylabel=\"Measurement\", title=\"By production line\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "violin_plot_interactive"
+      ],
+      "useCase": "Use the violin plot when a box plot hides too much — for example when a group is bimodal and the box alone looks unremarkable. Each violin mirrors the full density of a group around its summary statistics, so you can compare both the shape and the centre of several distributions at once.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/violin_plot_1.png",
+          "caption": "Aligned groups — all three lines share centre and spread."
+        },
+        {
+          "src": "assets/examples/univariate/violin_plot_2.png",
+          "caption": "Shifted group — Line B runs consistently high."
+        },
+        {
+          "src": "assets/examples/univariate/violin_plot_3.png",
+          "caption": "Unequal spread — Line C varies far more than the others."
+        },
+        {
+          "src": "assets/examples/univariate/violin_plot_4.png",
+          "caption": "Contaminated group — a handful of extremes inflate Line C."
+        }
       ]
     },
     "frequency_bar_static": {
@@ -644,10 +720,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nax = dv.univariate.frequency_bar_static(categories)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\ncategories = [\"Scratch\", \"Dent\", \"Misalign\", \"Color\", \"Crack\", \"Other\"]\nprobs = np.array([0.45, 0.25, 0.12, 0.08, 0.06, 0.04])\nvalues = pd.Series(rng.choice(categories, size=400, p=probs))\n\nax = dv.univariate.frequency_bar_static(values, title=\"Defect frequencies\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "frequency_bar_interactive"
+      ],
+      "useCase": "Use the frequency bar chart to see how often each category occurs — defect types, response codes, survey answers. Categories are sorted by count so the most and least common values are obvious, making it the standard first step when exploring a categorical column.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/frequency_bar_1.png",
+          "caption": "Vital few — two categories account for most records."
+        },
+        {
+          "src": "assets/examples/univariate/frequency_bar_2.png",
+          "caption": "Even spread — no single category dominates."
+        },
+        {
+          "src": "assets/examples/univariate/frequency_bar_3.png",
+          "caption": "Single dominant cause — one category dwarfs the rest."
+        },
+        {
+          "src": "assets/examples/univariate/frequency_bar_4.png",
+          "caption": "Long tail — many small contributors trail the leaders."
+        }
       ]
     },
     "pareto_chart_static": {
@@ -738,10 +833,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nax = dv.univariate.pareto_chart_static(categories)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\ncategories = [\"Scratch\", \"Dent\", \"Misalign\", \"Color\", \"Crack\", \"Other\"]\nprobs = np.array([0.45, 0.25, 0.12, 0.08, 0.06, 0.04])\nvalues = pd.Series(rng.choice(categories, size=400, p=probs))\n\nax = dv.univariate.pareto_chart_static(values, title=\"Defect Pareto\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "pareto_chart_interactive"
+      ],
+      "useCase": "Use the Pareto chart to prioritise effort by separating the vital few categories from the trivial many. Bars are sorted by frequency with a cumulative percentage line overlaid, so you can read directly which handful of causes accounts for most of the impact — the classic 80/20 view for quality and operations work.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/pareto_chart_1.png",
+          "caption": "Vital few — two categories account for most records."
+        },
+        {
+          "src": "assets/examples/univariate/pareto_chart_2.png",
+          "caption": "Even spread — no single category dominates."
+        },
+        {
+          "src": "assets/examples/univariate/pareto_chart_3.png",
+          "caption": "Single dominant cause — one category dwarfs the rest."
+        },
+        {
+          "src": "assets/examples/univariate/pareto_chart_4.png",
+          "caption": "Long tail — many small contributors trail the leaders."
+        }
       ]
     },
     "ecdf_plot_static": {
@@ -826,10 +940,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.ecdf_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nax = dv.univariate.ecdf_plot_static(values, title=\"Height ECDF\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "ecdf_plot_interactive"
+      ],
+      "useCase": "Use the empirical cumulative distribution function (ECDF) when you want every observation represented without any binning choices. Reading across from a probability gives quantiles directly — for example the value below which 90% of orders fall — and the curve’s shape makes it easy to compare against a theoretical distribution.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/ecdf_plot_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/ecdf_plot_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/ecdf_plot_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/ecdf_plot_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "cumulative_histogram_static": {
@@ -914,10 +1047,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.cumulative_histogram_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nax = dv.univariate.cumulative_histogram_static(values, bins=30, title=\"Cumulative heights\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "cumulative_histogram_interactive"
+      ],
+      "useCase": "Use the cumulative histogram to show how counts accumulate across the range of a variable. Where the ECDF plots exact proportions, the cumulative histogram keeps the familiar binned view, which works well for communicating “how many observations fall below a threshold” to audiences used to ordinary histograms.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/cumulative_histogram_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/cumulative_histogram_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/cumulative_histogram_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/cumulative_histogram_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "qq_plot_static": {
@@ -984,10 +1136,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.qq_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nax = dv.univariate.qq_plot_static(values, distribution=\"norm\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "qq_plot_interactive"
+      ],
+      "useCase": "Use the quantile-quantile (Q-Q) plot to judge whether a variable follows a theoretical distribution, most often the normal. Points that fall on the reference line indicate good agreement; systematic curves reveal skewness, while S-shaped ends reveal heavier or lighter tails. It is far more sensitive to departures in the tails than a histogram.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/qq_plot_1.png",
+          "caption": "Normal data — points hug the reference line."
+        },
+        {
+          "src": "assets/examples/univariate/qq_plot_2.png",
+          "caption": "Right-skewed — the points bend upward at the high end."
+        },
+        {
+          "src": "assets/examples/univariate/qq_plot_3.png",
+          "caption": "Heavy tails — both ends pull away from the line."
+        },
+        {
+          "src": "assets/examples/univariate/qq_plot_4.png",
+          "caption": "Light tails — bounded data flatten at the extremes."
+        }
       ]
     },
     "pp_plot_static": {
@@ -1054,10 +1225,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.pp_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nax = dv.univariate.pp_plot_static(values, distribution=\"norm\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "pp_plot_interactive"
+      ],
+      "useCase": "Use the probability-probability (P-P) plot as the CDF-level companion to the Q-Q plot when assessing fit to a theoretical distribution. Because it compares cumulative probabilities rather than quantiles, it emphasises agreement in the centre of the distribution, which is where the Q-Q plot is least sensitive.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/pp_plot_1.png",
+          "caption": "Normal data — cumulative probabilities track the diagonal."
+        },
+        {
+          "src": "assets/examples/univariate/pp_plot_2.png",
+          "caption": "Right-skewed — the centre sags below the diagonal."
+        },
+        {
+          "src": "assets/examples/univariate/pp_plot_3.png",
+          "caption": "Heavy tails — the curve bows in an S around the diagonal."
+        },
+        {
+          "src": "assets/examples/univariate/pp_plot_4.png",
+          "caption": "Light tails — the centre overshoots the diagonal."
+        }
       ]
     },
     "outlier_plot_static": {
@@ -1148,10 +1338,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.outlier_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(9)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=200), name=\"Value\")\nvalues.iloc[[25, 90, 150]] += [3.0, -2.8, 3.4]\n\nax = dv.univariate.outlier_plot_static(values, method=\"iqr\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. Outlier-related helpers should be treated as decision support; inspect the flagged records before removing or capping values. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "outlier_plot_interactive"
+      ],
+      "useCase": "Use the outlier plot to flag unusual observations before they distort averages, models, or control limits. Points are coloured by whether they breach an IQR-fence or z-score rule, so you can see at a glance how many outliers exist, where they sit, and whether they are isolated events or a systematic cluster.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/outlier_plot_1.png",
+          "caption": "Clean data — no points flagged by the IQR rule."
+        },
+        {
+          "src": "assets/examples/univariate/outlier_plot_2.png",
+          "caption": "Isolated spikes — three points break the fences."
+        },
+        {
+          "src": "assets/examples/univariate/outlier_plot_3.png",
+          "caption": "Outlier cluster — a run of high values is flagged."
+        },
+        {
+          "src": "assets/examples/univariate/outlier_plot_4.png",
+          "caption": "Skewed data — the natural tail trips the rule."
+        }
       ]
     },
     "percentile_plot_static": {
@@ -1230,10 +1439,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.percentile_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nax = dv.univariate.percentile_plot_static(values, step=5)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "percentile_plot_interactive"
+      ],
+      "useCase": "Use the percentile plot to read quantiles directly — the value at the 50th, 90th, or 99th percentile — without fitting any distribution. It is the natural display for service-level questions such as “what response time do 95% of requests beat?” and for spotting where the distribution stretches.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/percentile_plot_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/percentile_plot_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/percentile_plot_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/percentile_plot_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "univariate_diagnostic_panel_static": {
@@ -1288,10 +1516,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibFigure, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.univariate_diagnostic_panel_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.univariate_diagnostic_panel_static(values)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "univariate_diagnostic_panel_interactive"
+      ],
+      "useCase": "Use the diagnostic panel to run the standard battery of univariate checks in one figure — distribution shape, box-plot summary, and normality assessment side by side. It is ideal for exploratory reports where a single composite view answers “what does this variable look like?” without assembling separate charts by hand.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/univariate_diagnostic_panel_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/univariate_diagnostic_panel_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/univariate_diagnostic_panel_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/univariate_diagnostic_panel_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "fitted_distribution_histogram_static": {
@@ -1370,10 +1617,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.fitted_distribution_histogram_static(values, distribution=\"norm\")\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nax = dv.univariate.fitted_distribution_histogram_static(values, distribution=\"norm\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "fitted_distribution_histogram_interactive"
+      ],
+      "useCase": "Use the fitted distribution histogram to check how well a named probability distribution describes your data. Overlaying the fitted curve on the histogram turns an abstract fit into a visual judgement — you can see immediately whether the model captures the centre, the tails, and any skew before relying on it for simulation or probability calculations.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/fitted_distribution_histogram_1.png",
+          "caption": "Normal fit — the curve tracks the bars closely."
+        },
+        {
+          "src": "assets/examples/univariate/fitted_distribution_histogram_2.png",
+          "caption": "Lognormal fit — the model follows the skewed tail."
+        },
+        {
+          "src": "assets/examples/univariate/fitted_distribution_histogram_3.png",
+          "caption": "Gamma fit — a flexible match for positive skew."
+        },
+        {
+          "src": "assets/examples/univariate/fitted_distribution_histogram_4.png",
+          "caption": "Exponential fit — decay modelled from the origin."
+        }
       ]
     },
     "robust_location_plot_static": {
@@ -1440,10 +1706,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.robust_location_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(11)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=200), name=\"Value\")\nvalues.iloc[:5] += 6.0  # a few extreme values\n\nax = dv.univariate.robust_location_plot_static(values)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "robust_location_plot_interactive"
+      ],
+      "useCase": "Use the robust location plot to see how much your estimate of “typical value” depends on extreme observations. It compares the ordinary mean against the median, trimmed mean, and winsorised mean on the raw data, so when the estimates disagree you know the mean is being pulled by outliers or skew and a robust alternative is safer to report.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/robust_location_plot_1.png",
+          "caption": "Clean data — every location estimate agrees."
+        },
+        {
+          "src": "assets/examples/univariate/robust_location_plot_2.png",
+          "caption": "Contaminated — the mean is pulled; robust estimates resist."
+        },
+        {
+          "src": "assets/examples/univariate/robust_location_plot_3.png",
+          "caption": "Skewed data — the mean sits above the median."
+        },
+        {
+          "src": "assets/examples/univariate/robust_location_plot_4.png",
+          "caption": "Heavy tails — trimmed and winsorised means stay centred."
+        }
       ]
     },
     "rug_plot_static": {
@@ -1510,10 +1795,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.rug_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(21)\nvalues = pd.Series(rng.normal(170, 10, size=80), name=\"Height (cm)\")\n\nax = dv.univariate.rug_plot_static(values, title=\"Observed heights\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "rug_plot_interactive"
+      ],
+      "useCase": "Use the rug plot to show the exact position of every observation as tick marks along the axis. It adds the raw data footprint to distribution summaries — revealing clusters, gaps, and isolated points that smoothing can hide — and works well as a minimal standalone view for small samples.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/rug_plot_1.png",
+          "caption": "Even spread — observations fill the range uniformly."
+        },
+        {
+          "src": "assets/examples/univariate/rug_plot_2.png",
+          "caption": "Two clusters — a clear gap separates the subgroups."
+        },
+        {
+          "src": "assets/examples/univariate/rug_plot_3.png",
+          "caption": "Skewed sample — points pile up at the low end."
+        },
+        {
+          "src": "assets/examples/univariate/rug_plot_4.png",
+          "caption": "Small sample — every one of 25 observations is visible."
+        }
       ]
     },
     "strip_plot_static": {
@@ -1586,10 +1890,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.strip_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(21)\nvalues = pd.Series(rng.normal(170, 10, size=80), name=\"Height (cm)\")\n\nax = dv.univariate.strip_plot_static(values, ylabel=\"Height (cm)\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "strip_plot_interactive"
+      ],
+      "useCase": "Use the strip plot to display every observation of a single variable as a jittered one-dimensional scatter. Unlike a histogram it loses nothing to binning, so cluster structure, gaps, and exact outlier positions remain visible — most useful for small to medium samples where individual points matter.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/strip_plot_1.png",
+          "caption": "Even spread — observations fill the range uniformly."
+        },
+        {
+          "src": "assets/examples/univariate/strip_plot_2.png",
+          "caption": "Two clusters — a clear gap separates the subgroups."
+        },
+        {
+          "src": "assets/examples/univariate/strip_plot_3.png",
+          "caption": "Skewed sample — points pile up at the low end."
+        },
+        {
+          "src": "assets/examples/univariate/strip_plot_4.png",
+          "caption": "Small sample — every one of 25 observations is visible."
+        }
       ]
     },
     "dot_plot_static": {
@@ -1656,10 +1979,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.dot_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\ncategories = [\"Scratch\", \"Dent\", \"Misalign\", \"Color\", \"Crack\", \"Other\"]\nprobs = np.array([0.45, 0.25, 0.12, 0.08, 0.06, 0.04])\nvalues = pd.Series(rng.choice(categories, size=400, p=probs))\n\nax = dv.univariate.dot_plot_static(values, title=\"Defect counts\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "dot_plot_interactive"
+      ],
+      "useCase": "Use the Cleveland dot plot for category counts when bar charts feel heavy or category names are long. A dot on a common scale is easier to compare than bar lengths, and the horizontal layout keeps labels readable, making it a clean choice for ranked frequency displays in reports.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/dot_plot_1.png",
+          "caption": "Vital few — two categories account for most records."
+        },
+        {
+          "src": "assets/examples/univariate/dot_plot_2.png",
+          "caption": "Even spread — no single category dominates."
+        },
+        {
+          "src": "assets/examples/univariate/dot_plot_3.png",
+          "caption": "Single dominant cause — one category dwarfs the rest."
+        },
+        {
+          "src": "assets/examples/univariate/dot_plot_4.png",
+          "caption": "Long tail — many small contributors trail the leaders."
+        }
       ]
     },
     "lollipop_chart_static": {
@@ -1732,10 +2074,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.lollipop_chart_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\ncategories = [\"Scratch\", \"Dent\", \"Misalign\", \"Color\", \"Crack\", \"Other\"]\nprobs = np.array([0.45, 0.25, 0.12, 0.08, 0.06, 0.04])\nvalues = pd.Series(rng.choice(categories, size=400, p=probs))\n\nax = dv.univariate.lollipop_chart_static(values, title=\"Defect counts\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "lollipop_chart_interactive"
+      ],
+      "useCase": "Use the lollipop chart as a lighter alternative to bars for category frequencies. A thin stem with a marker at the count reduces ink while preserving an accurate position judgement, which keeps ranked categorical summaries readable when there are many categories.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/lollipop_chart_1.png",
+          "caption": "Vital few — two categories account for most records."
+        },
+        {
+          "src": "assets/examples/univariate/lollipop_chart_2.png",
+          "caption": "Even spread — no single category dominates."
+        },
+        {
+          "src": "assets/examples/univariate/lollipop_chart_3.png",
+          "caption": "Single dominant cause — one category dwarfs the rest."
+        },
+        {
+          "src": "assets/examples/univariate/lollipop_chart_4.png",
+          "caption": "Long tail — many small contributors trail the leaders."
+        }
       ]
     },
     "reference_band_histogram_static": {
@@ -1808,10 +2169,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.reference_band_histogram_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nax = dv.univariate.reference_band_histogram_static(values, bins=30)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "reference_band_histogram_interactive"
+      ],
+      "useCase": "Use the reference band histogram when the question is not just “what is the shape?” but “how much of the data sits in the normal range?”. A shaded central band around the mean with the histogram overlaid makes it immediate to see what fraction of observations fall inside versus outside typical variation.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/reference_band_histogram_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/reference_band_histogram_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/reference_band_histogram_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/reference_band_histogram_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "raincloud_plot_static": {
@@ -1872,10 +2252,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.raincloud_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(21)\nvalues = pd.Series(rng.normal(170, 10, size=120), name=\"Height (cm)\")\n\nax = dv.univariate.raincloud_plot_static(values, ylabel=\"Height (cm)\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "raincloud_plot_interactive"
+      ],
+      "useCase": "Use the raincloud plot to show a distribution honestly at three levels at once: the smooth density (cloud), the box-plot summary, and every raw observation (rain). It avoids the opacity of a lone box plot and the redundancy of a mirrored violin, which makes it a strong default for reporting a single sample.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/raincloud_plot_1.png",
+          "caption": "Symmetric sample — cloud, box, and points agree."
+        },
+        {
+          "src": "assets/examples/univariate/raincloud_plot_2.png",
+          "caption": "Right-skewed — the rain stretches into the upper tail."
+        },
+        {
+          "src": "assets/examples/univariate/raincloud_plot_3.png",
+          "caption": "Bimodal — two humps the box plot alone would hide."
+        },
+        {
+          "src": "assets/examples/univariate/raincloud_plot_4.png",
+          "caption": "Small sample — 40 observations, all visible."
+        }
       ]
     },
     "ridgeline_plot_static": {
@@ -1930,10 +2329,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.ridgeline_plot_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(13)\ndata = pd.DataFrame({\n    \"Week 1\": rng.normal(10.0, 0.5, size=120),\n    \"Week 2\": rng.normal(10.3, 0.5, size=120),\n    \"Week 3\": rng.normal(10.6, 0.5, size=120),\n    \"Week 4\": rng.normal(10.9, 0.5, size=120),\n})\n\nax = dv.univariate.ridgeline_plot_static(data, xlabel=\"Measurement\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "ridgeline_plot_interactive"
+      ],
+      "useCase": "Use the ridgeline plot to compare how a distribution evolves across ordered groups — weeks, batches, age bands. Stacking partially overlapping density curves vertically makes gradual shifts in centre, widening spread, or emerging skew easy to follow in a way that side-by-side violins cannot.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/ridgeline_plot_1.png",
+          "caption": "Drifting centre — the distribution walks upward week by week."
+        },
+        {
+          "src": "assets/examples/univariate/ridgeline_plot_2.png",
+          "caption": "Stable process — four weeks stack on the same centre."
+        },
+        {
+          "src": "assets/examples/univariate/ridgeline_plot_3.png",
+          "caption": "Widening spread — later weeks grow more variable."
+        },
+        {
+          "src": "assets/examples/univariate/ridgeline_plot_4.png",
+          "caption": "Emerging subgroup — week 4 splits toward a second mode."
+        }
       ]
     },
     "transformation_comparison_static": {
@@ -1982,10 +2400,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibFigure, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.transformation_comparison_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(29)\nvalues = pd.Series(rng.lognormal(0.0, 0.8, size=500), name=\"Value\")\n\nfig = dv.univariate.transformation_comparison_static(values)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "transformation_comparison_interactive"
+      ],
+      "useCase": "Use the transformation comparison to decide whether a log, square-root, or similar transform tames a skewed variable before modelling. Plotting the original and transformed distributions side by side shows which transform best symmetrises the data, replacing guesswork with a direct visual check.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/transformation_comparison_1.png",
+          "caption": "Strong skew — the log transform restores symmetry."
+        },
+        {
+          "src": "assets/examples/univariate/transformation_comparison_2.png",
+          "caption": "Gamma data — transforms pull in the long right tail."
+        },
+        {
+          "src": "assets/examples/univariate/transformation_comparison_3.png",
+          "caption": "Moderate skew — a milder transform suffices."
+        },
+        {
+          "src": "assets/examples/univariate/transformation_comparison_4.png",
+          "caption": "Near-symmetric — transforms change little."
+        }
       ]
     },
     "event_frequency_plot_static": {
@@ -2052,10 +2489,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ntimestamps = pd.to_datetime([\"2026-01-01\", \"2026-01-03\", \"2026-01-04\", \"2026-01-10\"])\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nax = dv.univariate.event_frequency_plot_static(timestamps)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(15)\ngaps = rng.exponential(12.0, size=300)  # hours between events\ntimes = pd.Series(pd.Timestamp(\"2024-01-01\") + pd.to_timedelta(gaps.cumsum(), unit=\"h\"))\n\nax = dv.univariate.event_frequency_plot_static(times, freq=\"W\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "event_frequency_plot_interactive"
+      ],
+      "useCase": "Use the event frequency plot to see how a stream of timestamped events — orders, failures, signups — is distributed over time. Resampling raw event times into daily, weekly, or monthly counts reveals surges, quiet periods, and growth trends that a list of timestamps cannot show.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/event_frequency_plot_1.png",
+          "caption": "Steady stream — weekly counts hover around a constant rate."
+        },
+        {
+          "src": "assets/examples/univariate/event_frequency_plot_2.png",
+          "caption": "Sudden surge — event volume jumps in the second half."
+        },
+        {
+          "src": "assets/examples/univariate/event_frequency_plot_3.png",
+          "caption": "Accelerating demand — intervals shrink as activity grows."
+        },
+        {
+          "src": "assets/examples/univariate/event_frequency_plot_4.png",
+          "caption": "Quiet gap — a two-month lull splits the timeline."
+        }
       ]
     },
     "interarrival_plot_static": {
@@ -2116,10 +2572,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ntimestamps = pd.to_datetime([\"2026-01-01\", \"2026-01-03\", \"2026-01-04\", \"2026-01-10\"])\n\nax = dv.univariate.interarrival_plot_static(timestamps)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(15)\ngaps = rng.exponential(12.0, size=300)  # hours between events\ntimes = pd.Series(pd.Timestamp(\"2024-01-01\") + pd.to_timedelta(gaps.cumsum(), unit=\"h\"))\n\nax = dv.univariate.interarrival_plot_static(times, unit=\"D\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "interarrival_plot_interactive"
+      ],
+      "useCase": "Use the interarrival plot to examine the waiting times between consecutive events. The histogram of gaps distinguishes a steady Poisson-like process (exponential shape) from bursty or clockwork-regular arrivals, which determines whether queueing assumptions and rate-based forecasts are valid.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/interarrival_plot_1.png",
+          "caption": "Poisson process — gaps follow the exponential shape."
+        },
+        {
+          "src": "assets/examples/univariate/interarrival_plot_2.png",
+          "caption": "Bursty arrivals — many short waits mixed with long silences."
+        },
+        {
+          "src": "assets/examples/univariate/interarrival_plot_3.png",
+          "caption": "Clockwork-regular — gaps cluster tightly around one day."
+        },
+        {
+          "src": "assets/examples/univariate/interarrival_plot_4.png",
+          "caption": "Two regimes — fast and slow phases form a bimodal gap mix."
+        }
       ]
     },
     "univariate_analysis_dashboard_static": {
@@ -2174,10 +2649,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibFigure, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.univariate_analysis_dashboard_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.univariate_analysis_dashboard_static(values)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "univariate_analysis_dashboard_interactive"
+      ],
+      "useCase": "Use the univariate analysis dashboard to profile a variable in one composite figure — distribution, cumulative view, summary statistics, and normality checks together. It is built for reports and handoffs where a single self-contained picture of a variable’s behaviour is more useful than a folder of separate charts.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/univariate_analysis_dashboard_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/univariate_analysis_dashboard_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/univariate_analysis_dashboard_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/univariate_analysis_dashboard_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "weighted_histogram_static": {
@@ -2250,10 +2744,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nweights = pd.Series([1.0, 1.5, 0.8, 1.2, 1.0, 1.1], name=\"Weight\")\n\nax = dv.univariate.weighted_histogram_static(values, weights)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(17)\nvalues = pd.Series(rng.normal(50.0, 10.0, size=500), name=\"Score\")\nweights = pd.Series(np.where(values > 55, 3.0, 1.0))\n\nax = dv.univariate.weighted_histogram_static(values, weights, bins=30)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "weighted_histogram_interactive"
+      ],
+      "useCase": "Use the weighted histogram when observations do not count equally — survey respondents with sampling weights, transactions weighted by amount, or records reweighted to match a population. Weighting each observation changes the apparent shape of the distribution, and this chart makes the corrected view visible instead of letting an unweighted histogram mislead.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/weighted_histogram_1.png",
+          "caption": "Uniform weights — the weighted view matches the raw sample."
+        },
+        {
+          "src": "assets/examples/univariate/weighted_histogram_2.png",
+          "caption": "Tail emphasis — large values count four times as much."
+        },
+        {
+          "src": "assets/examples/univariate/weighted_histogram_3.png",
+          "caption": "Survey weights — an oversampled segment is weighted down."
+        },
+        {
+          "src": "assets/examples/univariate/weighted_histogram_4.png",
+          "caption": "Amount-weighted — weighting by size shifts the mass rightward."
+        }
       ]
     },
     "quality_bar_static": {
@@ -2302,10 +2815,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.quality_bar_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(19)\nvalues = pd.Series(rng.normal(10.0, 1.0, size=300))\nvalues.iloc[:10] = np.nan\nvalues.iloc[10:20] = 0.0\n\nax = dv.univariate.quality_bar_static(values, title=\"Column quality\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "quality_bar_interactive"
+      ],
+      "useCase": "Use the quality bar chart for a fast data-quality audit of a single column. It reports the missing, duplicate, zero, and negative rates as bars on a common 0–1 scale, so the problems that need cleaning — and their relative size — are visible before any analysis begins.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/quality_bar_1.png",
+          "caption": "Mostly clean — only a sliver of missing values."
+        },
+        {
+          "src": "assets/examples/univariate/quality_bar_2.png",
+          "caption": "Messy column — missing, zeros, and duplicates all present."
+        },
+        {
+          "src": "assets/examples/univariate/quality_bar_3.png",
+          "caption": "Zero-inflated — two in five observations are exactly zero."
+        },
+        {
+          "src": "assets/examples/univariate/quality_bar_4.png",
+          "caption": "Signed values — about half the column is negative by design."
+        }
       ]
     },
     "survival_curve_static": {
@@ -2354,10 +2886,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.survival_curve_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(31)\ntimes = pd.Series(rng.weibull(2.0, size=400) * 365, name=\"Days to failure\")\n\nax = dv.univariate.survival_curve_static(times, title=\"Survival curve\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "survival_curve_interactive"
+      ],
+      "useCase": "Use the empirical survival curve to show the probability that a duration — time to failure, customer lifetime, days to delivery — exceeds any given value. Reading the curve at a point answers “what fraction survives past day 90?” without assuming any parametric lifetime distribution.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/survival_curve_1.png",
+          "caption": "Constant hazard — exponential lifetimes decay steadily."
+        },
+        {
+          "src": "assets/examples/univariate/survival_curve_2.png",
+          "caption": "Ageing population — Weibull wear-out accelerates over time."
+        },
+        {
+          "src": "assets/examples/univariate/survival_curve_3.png",
+          "caption": "Long-lived tail — a few units survive far beyond the rest."
+        },
+        {
+          "src": "assets/examples/univariate/survival_curve_4.png",
+          "caption": "Two subgroups — an early-failure cohort drops the curve fast."
+        }
       ]
     },
     "lorenz_curve_static": {
@@ -2412,10 +2963,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.lorenz_curve_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(35)\nincomes = pd.Series(rng.lognormal(10.5, 0.6, size=1000), name=\"Income\")\n\nax = dv.univariate.lorenz_curve_static(incomes, title=\"Income concentration\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "lorenz_curve_interactive"
+      ],
+      "useCase": "Use the Lorenz curve to quantify inequality or concentration — income across households, revenue across customers, defects across part numbers. Plotting the cumulative share of the total against the cumulative share of the population, with the equality line as reference, shows at a glance how far from even the distribution is; the area between the curves is half the Gini coefficient.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/lorenz_curve_1.png",
+          "caption": "Near-equal — the curve hugs the line of perfect equality."
+        },
+        {
+          "src": "assets/examples/univariate/lorenz_curve_2.png",
+          "caption": "Typical inequality — a moderate bow away from equality."
+        },
+        {
+          "src": "assets/examples/univariate/lorenz_curve_3.png",
+          "caption": "High concentration — the top share holds most of the total."
+        },
+        {
+          "src": "assets/examples/univariate/lorenz_curve_4.png",
+          "caption": "Extreme dominance — a handful of observations own almost everything."
+        }
       ]
     },
     "bootstrap_distribution_plot_static": {
@@ -2476,10 +3046,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.bootstrap_distribution_plot_static(values, seed=42)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=200), name=\"Height (cm)\")\n\nax = dv.univariate.bootstrap_distribution_plot_static(values, statistic=\"mean\", n_resamples=1000, seed=0)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "bootstrap_distribution_plot_interactive"
+      ],
+      "useCase": "Use the bootstrap distribution plot to see the sampling variability of a statistic — mean, median, or standard deviation — without any distributional formula. Resampling the data with replacement builds the statistic’s distribution empirically, so the histogram shows its uncertainty and skew directly, which is the honest basis for confidence intervals on small or non-normal samples.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/bootstrap_distribution_plot_1.png",
+          "caption": "Mean of normal data — a symmetric, narrow sampling distribution."
+        },
+        {
+          "src": "assets/examples/univariate/bootstrap_distribution_plot_2.png",
+          "caption": "Median of skewed data — the bootstrap stays well behaved."
+        },
+        {
+          "src": "assets/examples/univariate/bootstrap_distribution_plot_3.png",
+          "caption": "Standard deviation — wider and slightly right-skewed."
+        },
+        {
+          "src": "assets/examples/univariate/bootstrap_distribution_plot_4.png",
+          "caption": "Small sample — n=30 leaves visible resampling noise."
+        }
       ]
     },
     "boolean_bar_static": {
@@ -2528,10 +3117,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nflags = pd.Series([True, False, True, True, False], name=\"Passed\")\n\nax = dv.univariate.boolean_bar_static(flags)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(37)\nflags = pd.Series(rng.random(300) < 0.3)\n\nax = dv.univariate.boolean_bar_static(flags, title=\"Pass / fail split\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "boolean_bar_interactive"
+      ],
+      "useCase": "Use the boolean bar chart to show the split of a true/false flag — passed vs. failed, active vs. churned, fraud vs. legitimate. The two bars make class balance (or imbalance) immediately visible, which is a critical check before training classifiers or reporting conversion rates.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/boolean_bar_1.png",
+          "caption": "Balanced — true and false are nearly even."
+        },
+        {
+          "src": "assets/examples/univariate/boolean_bar_2.png",
+          "caption": "Imbalanced — true cases outnumber false four to one."
+        },
+        {
+          "src": "assets/examples/univariate/boolean_bar_3.png",
+          "caption": "Rare positives — only five percent of flags are true."
+        },
+        {
+          "src": "assets/examples/univariate/boolean_bar_4.png",
+          "caption": "Near-unanimous — almost every record is true."
+        }
       ]
     },
     "top_terms_bar_static": {
@@ -2586,10 +3194,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ntexts = pd.Series([\"fast reliable process\", \"reliable visual process\", \"fast chart\"], name=\"Comment\")\n\nax = dv.univariate.top_terms_bar_static(texts)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(23)\nterms = [\"delivery\", \"quality\", \"price\", \"support\", \"packaging\", \"refund\", \"shipping\"]\nprobs = np.array([0.30, 0.22, 0.16, 0.12, 0.09, 0.06, 0.05])\nwords = pd.Series(rng.choice(terms, size=500, p=probs))\n\nax = dv.univariate.top_terms_bar_static(words, top_n=10)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "top_terms_bar_interactive"
+      ],
+      "useCase": "Use the top terms bar chart to profile a free-text column — review comments, ticket subjects, search queries — by its most frequent terms. Ranking the commonest words surfaces dominant themes and data-entry artefacts quickly, which guides both cleaning and downstream text analysis.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/top_terms_bar_1.png",
+          "caption": "Support tickets — delivery and quality dominate the queue."
+        },
+        {
+          "src": "assets/examples/univariate/top_terms_bar_2.png",
+          "caption": "Product reviews — one term towers over the rest."
+        },
+        {
+          "src": "assets/examples/univariate/top_terms_bar_3.png",
+          "caption": "Search queries — a flat vocabulary with no clear leader."
+        },
+        {
+          "src": "assets/examples/univariate/top_terms_bar_4.png",
+          "caption": "Error logs — a long tail of rare messages."
+        }
       ]
     },
     "weighted_ecdf_plot_static": {
@@ -2644,10 +3271,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nweights = pd.Series([1.0, 1.5, 0.8, 1.2, 1.0, 1.1], name=\"Weight\")\n\nax = dv.univariate.weighted_ecdf_plot_static(values, weights)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(17)\nvalues = pd.Series(rng.normal(50.0, 10.0, size=500), name=\"Score\")\nweights = pd.Series(np.where(values > 55, 3.0, 1.0))\n\nax = dv.univariate.weighted_ecdf_plot_static(values, weights)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "weighted_ecdf_plot_interactive"
+      ],
+      "useCase": "Use the weighted ECDF when quantiles must reflect per-observation importance rather than raw counts — for example population percentiles from a survey with sampling weights. Each observation contributes its weight to the cumulative curve, so the quantiles you read off represent the reweighted population, not just the sample you happened to collect.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/weighted_ecdf_plot_1.png",
+          "caption": "Uniform weights — the weighted view matches the raw sample."
+        },
+        {
+          "src": "assets/examples/univariate/weighted_ecdf_plot_2.png",
+          "caption": "Tail emphasis — large values count four times as much."
+        },
+        {
+          "src": "assets/examples/univariate/weighted_ecdf_plot_3.png",
+          "caption": "Survey weights — an oversampled segment is weighted down."
+        },
+        {
+          "src": "assets/examples/univariate/weighted_ecdf_plot_4.png",
+          "caption": "Amount-weighted — weighting by size shifts the mass rightward."
+        }
       ]
     },
     "ordinal_bar_static": {
@@ -2708,10 +3354,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nax = dv.univariate.ordinal_bar_static(categories)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(25)\nscale = [\"Poor\", \"Fair\", \"Good\", \"Very good\", \"Excellent\"]\nprobs = np.array([0.05, 0.15, 0.35, 0.30, 0.15])\nratings = pd.Series(rng.choice(scale, size=400, p=probs))\n\nax = dv.univariate.ordinal_bar_static(ratings, order=scale, title=\"Satisfaction ratings\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "ordinal_bar_interactive"
+      ],
+      "useCase": "Use the ordinal bar chart for categories with a natural order — Likert ratings, severity levels, education bands. Supplying the explicit order keeps the bars in logical sequence instead of alphabetical, so shifts toward the positive or negative end of the scale read correctly.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/ordinal_bar_1.png",
+          "caption": "Positive skew — most ratings land at the top end."
+        },
+        {
+          "src": "assets/examples/univariate/ordinal_bar_2.png",
+          "caption": "Negative skew — dissatisfaction piles up at the low end."
+        },
+        {
+          "src": "assets/examples/univariate/ordinal_bar_3.png",
+          "caption": "Uniform — every rating is chosen about equally."
+        },
+        {
+          "src": "assets/examples/univariate/ordinal_bar_4.png",
+          "caption": "Polarised — opinions split between the two extremes."
+        }
       ]
     },
     "outlier_treatment_comparison_static": {
@@ -2772,10 +3437,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.univariate.outlier_treatment_comparison_static(values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(27)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=300), name=\"Value\")\nvalues.iloc[[10, 120, 250]] += [4.0, -3.5, 4.5]\n\nax = dv.univariate.outlier_treatment_comparison_static(values, rule=\"iqr\", treatment=\"cap\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. Outlier-related helpers should be treated as decision support; inspect the flagged records before removing or capping values. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "outlier_treatment_comparison_interactive"
+      ],
+      "useCase": "Use the outlier treatment comparison to see the effect of capping or removing outliers before committing to a cleaning rule. Showing the distribution before and after treatment makes the trade-off visible — how much of the tail was genuine signal versus noise — so the choice of rule is a reviewed decision, not an invisible preprocessing step.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/outlier_treatment_comparison_1.png",
+          "caption": "IQR capping — fences pull the spikes back to the whiskers."
+        },
+        {
+          "src": "assets/examples/univariate/outlier_treatment_comparison_2.png",
+          "caption": "IQR removal — flagged points are dropped entirely."
+        },
+        {
+          "src": "assets/examples/univariate/outlier_treatment_comparison_3.png",
+          "caption": "Z-score capping — a stricter 3σ rule trims the extremes."
+        },
+        {
+          "src": "assets/examples/univariate/outlier_treatment_comparison_4.png",
+          "caption": "MAD capping — the robust rule resists masking."
+        }
       ]
     },
     "histogram_interactive": {
@@ -2896,10 +3580,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.histogram_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.histogram_interactive(values, bins=30, title=\"Height distribution\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "histogram_static"
+      ],
+      "useCase": "Use the histogram as the first look at any numeric variable — a cycle time, a transaction amount, a measurement — to see its centre, spread, and shape at a glance. Binned counts make skewness, bimodality, gaps, and outliers immediately visible, which tells you whether summary statistics like the mean are trustworthy and which analyses are appropriate next.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/histogram_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/histogram_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/histogram_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/histogram_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "density_interactive": {
@@ -3014,10 +3717,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.density_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.density_interactive(values, title=\"Height density\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "density_static"
+      ],
+      "useCase": "Use the density plot when you want a smooth estimate of a variable’s distribution instead of blocky histogram bins. The kernel density curve makes it easier to compare shape — skew, tails, and modes — without the result depending on where bin edges happen to fall, which is helpful when presenting distributions to non-technical audiences.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/density_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/density_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/density_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/density_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "box_plot_interactive": {
@@ -3126,10 +3848,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.box_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(5)\ndata = pd.DataFrame({\n    \"Line A\": rng.normal(10.0, 0.5, size=100),\n    \"Line B\": rng.normal(10.4, 0.5, size=100),\n    \"Line C\": rng.normal(9.8, 0.7, size=100),\n})\n\nfig = dv.univariate.box_plot_interactive(data, ylabel=\"Measurement\", title=\"By production line\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "box_plot_static"
+      ],
+      "useCase": "Use the box plot to compare the distribution of a measurement across groups — production lines, stores, cohorts — in a compact form. Each box summarises the median, the middle 50% (IQR), and whiskers with outlier points, so differences in centre, spread, and extreme values between groups stand out side by side.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/box_plot_1.png",
+          "caption": "Aligned groups — all three lines share centre and spread."
+        },
+        {
+          "src": "assets/examples/univariate/box_plot_2.png",
+          "caption": "Shifted group — Line B runs consistently high."
+        },
+        {
+          "src": "assets/examples/univariate/box_plot_3.png",
+          "caption": "Unequal spread — Line C varies far more than the others."
+        },
+        {
+          "src": "assets/examples/univariate/box_plot_4.png",
+          "caption": "Contaminated group — a handful of extremes inflate Line C."
+        }
       ]
     },
     "violin_plot_interactive": {
@@ -3256,10 +3997,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.violin_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(5)\ndata = pd.DataFrame({\n    \"Line A\": rng.normal(10.0, 0.5, size=100),\n    \"Line B\": rng.normal(10.4, 0.5, size=100),\n    \"Line C\": rng.normal(9.8, 0.7, size=100),\n})\n\nfig = dv.univariate.violin_plot_interactive(data, ylabel=\"Measurement\", title=\"By production line\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "violin_plot_static"
+      ],
+      "useCase": "Use the violin plot when a box plot hides too much — for example when a group is bimodal and the box alone looks unremarkable. Each violin mirrors the full density of a group around its summary statistics, so you can compare both the shape and the centre of several distributions at once.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/violin_plot_1.png",
+          "caption": "Aligned groups — all three lines share centre and spread."
+        },
+        {
+          "src": "assets/examples/univariate/violin_plot_2.png",
+          "caption": "Shifted group — Line B runs consistently high."
+        },
+        {
+          "src": "assets/examples/univariate/violin_plot_3.png",
+          "caption": "Unequal spread — Line C varies far more than the others."
+        },
+        {
+          "src": "assets/examples/univariate/violin_plot_4.png",
+          "caption": "Contaminated group — a handful of extremes inflate Line C."
+        }
       ]
     },
     "frequency_bar_interactive": {
@@ -3356,10 +4116,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nfig = dv.univariate.frequency_bar_interactive(categories)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\ncategories = [\"Scratch\", \"Dent\", \"Misalign\", \"Color\", \"Crack\", \"Other\"]\nprobs = np.array([0.45, 0.25, 0.12, 0.08, 0.06, 0.04])\nvalues = pd.Series(rng.choice(categories, size=400, p=probs))\n\nfig = dv.univariate.frequency_bar_interactive(values, title=\"Defect frequencies\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "frequency_bar_static"
+      ],
+      "useCase": "Use the frequency bar chart to see how often each category occurs — defect types, response codes, survey answers. Categories are sorted by count so the most and least common values are obvious, making it the standard first step when exploring a categorical column.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/frequency_bar_1.png",
+          "caption": "Vital few — two categories account for most records."
+        },
+        {
+          "src": "assets/examples/univariate/frequency_bar_2.png",
+          "caption": "Even spread — no single category dominates."
+        },
+        {
+          "src": "assets/examples/univariate/frequency_bar_3.png",
+          "caption": "Single dominant cause — one category dwarfs the rest."
+        },
+        {
+          "src": "assets/examples/univariate/frequency_bar_4.png",
+          "caption": "Long tail — many small contributors trail the leaders."
+        }
       ]
     },
     "pareto_chart_interactive": {
@@ -3456,10 +4235,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nfig = dv.univariate.pareto_chart_interactive(categories)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\ncategories = [\"Scratch\", \"Dent\", \"Misalign\", \"Color\", \"Crack\", \"Other\"]\nprobs = np.array([0.45, 0.25, 0.12, 0.08, 0.06, 0.04])\nvalues = pd.Series(rng.choice(categories, size=400, p=probs))\n\nfig = dv.univariate.pareto_chart_interactive(values, title=\"Defect Pareto\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "pareto_chart_static"
+      ],
+      "useCase": "Use the Pareto chart to prioritise effort by separating the vital few categories from the trivial many. Bars are sorted by frequency with a cumulative percentage line overlaid, so you can read directly which handful of causes accounts for most of the impact — the classic 80/20 view for quality and operations work.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/pareto_chart_1.png",
+          "caption": "Vital few — two categories account for most records."
+        },
+        {
+          "src": "assets/examples/univariate/pareto_chart_2.png",
+          "caption": "Even spread — no single category dominates."
+        },
+        {
+          "src": "assets/examples/univariate/pareto_chart_3.png",
+          "caption": "Single dominant cause — one category dwarfs the rest."
+        },
+        {
+          "src": "assets/examples/univariate/pareto_chart_4.png",
+          "caption": "Long tail — many small contributors trail the leaders."
+        }
       ]
     },
     "ecdf_plot_interactive": {
@@ -3532,10 +4330,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.ecdf_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.ecdf_plot_interactive(values, title=\"Height ECDF\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "ecdf_plot_static"
+      ],
+      "useCase": "Use the empirical cumulative distribution function (ECDF) when you want every observation represented without any binning choices. Reading across from a probability gives quantiles directly — for example the value below which 90% of orders fall — and the curve’s shape makes it easy to compare against a theoretical distribution.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/ecdf_plot_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/ecdf_plot_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/ecdf_plot_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/ecdf_plot_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "cumulative_histogram_interactive": {
@@ -3626,10 +4443,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.cumulative_histogram_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.cumulative_histogram_interactive(values, bins=30, title=\"Cumulative heights\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "cumulative_histogram_static"
+      ],
+      "useCase": "Use the cumulative histogram to show how counts accumulate across the range of a variable. Where the ECDF plots exact proportions, the cumulative histogram keeps the familiar binned view, which works well for communicating “how many observations fall below a threshold” to audiences used to ordinary histograms.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/cumulative_histogram_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/cumulative_histogram_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/cumulative_histogram_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/cumulative_histogram_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "qq_plot_interactive": {
@@ -3702,10 +4538,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.qq_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.qq_plot_interactive(values, distribution=\"norm\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "qq_plot_static"
+      ],
+      "useCase": "Use the quantile-quantile (Q-Q) plot to judge whether a variable follows a theoretical distribution, most often the normal. Points that fall on the reference line indicate good agreement; systematic curves reveal skewness, while S-shaped ends reveal heavier or lighter tails. It is far more sensitive to departures in the tails than a histogram.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/qq_plot_1.png",
+          "caption": "Normal data — points hug the reference line."
+        },
+        {
+          "src": "assets/examples/univariate/qq_plot_2.png",
+          "caption": "Right-skewed — the points bend upward at the high end."
+        },
+        {
+          "src": "assets/examples/univariate/qq_plot_3.png",
+          "caption": "Heavy tails — both ends pull away from the line."
+        },
+        {
+          "src": "assets/examples/univariate/qq_plot_4.png",
+          "caption": "Light tails — bounded data flatten at the extremes."
+        }
       ]
     },
     "pp_plot_interactive": {
@@ -3778,10 +4633,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.pp_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.pp_plot_interactive(values, distribution=\"norm\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "pp_plot_static"
+      ],
+      "useCase": "Use the probability-probability (P-P) plot as the CDF-level companion to the Q-Q plot when assessing fit to a theoretical distribution. Because it compares cumulative probabilities rather than quantiles, it emphasises agreement in the centre of the distribution, which is where the Q-Q plot is least sensitive.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/pp_plot_1.png",
+          "caption": "Normal data — cumulative probabilities track the diagonal."
+        },
+        {
+          "src": "assets/examples/univariate/pp_plot_2.png",
+          "caption": "Right-skewed — the centre sags below the diagonal."
+        },
+        {
+          "src": "assets/examples/univariate/pp_plot_3.png",
+          "caption": "Heavy tails — the curve bows in an S around the diagonal."
+        },
+        {
+          "src": "assets/examples/univariate/pp_plot_4.png",
+          "caption": "Light tails — the centre overshoots the diagonal."
+        }
       ]
     },
     "outlier_plot_interactive": {
@@ -3878,10 +4752,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.outlier_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(9)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=200), name=\"Value\")\nvalues.iloc[[25, 90, 150]] += [3.0, -2.8, 3.4]\n\nfig = dv.univariate.outlier_plot_interactive(values, method=\"iqr\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. Outlier-related helpers should be treated as decision support; inspect the flagged records before removing or capping values. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "outlier_plot_static"
+      ],
+      "useCase": "Use the outlier plot to flag unusual observations before they distort averages, models, or control limits. Points are coloured by whether they breach an IQR-fence or z-score rule, so you can see at a glance how many outliers exist, where they sit, and whether they are isolated events or a systematic cluster.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/outlier_plot_1.png",
+          "caption": "Clean data — no points flagged by the IQR rule."
+        },
+        {
+          "src": "assets/examples/univariate/outlier_plot_2.png",
+          "caption": "Isolated spikes — three points break the fences."
+        },
+        {
+          "src": "assets/examples/univariate/outlier_plot_3.png",
+          "caption": "Outlier cluster — a run of high values is flagged."
+        },
+        {
+          "src": "assets/examples/univariate/outlier_plot_4.png",
+          "caption": "Skewed data — the natural tail trips the rule."
+        }
       ]
     },
     "percentile_plot_interactive": {
@@ -3960,10 +4853,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.percentile_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.percentile_plot_interactive(values, step=5)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "percentile_plot_static"
+      ],
+      "useCase": "Use the percentile plot to read quantiles directly — the value at the 50th, 90th, or 99th percentile — without fitting any distribution. It is the natural display for service-level questions such as “what response time do 95% of requests beat?” and for spotting where the distribution stretches.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/percentile_plot_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/percentile_plot_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/percentile_plot_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/percentile_plot_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "univariate_diagnostic_panel_interactive": {
@@ -4024,10 +4936,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.univariate_diagnostic_panel_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.univariate_diagnostic_panel_interactive(values)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "univariate_diagnostic_panel_static"
+      ],
+      "useCase": "Use the diagnostic panel to run the standard battery of univariate checks in one figure — distribution shape, box-plot summary, and normality assessment side by side. It is ideal for exploratory reports where a single composite view answers “what does this variable look like?” without assembling separate charts by hand.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/univariate_diagnostic_panel_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/univariate_diagnostic_panel_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/univariate_diagnostic_panel_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/univariate_diagnostic_panel_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "fitted_distribution_histogram_interactive": {
@@ -4112,10 +5043,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.fitted_distribution_histogram_interactive(values, distribution=\"norm\")\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.fitted_distribution_histogram_interactive(values, distribution=\"norm\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "fitted_distribution_histogram_static"
+      ],
+      "useCase": "Use the fitted distribution histogram to check how well a named probability distribution describes your data. Overlaying the fitted curve on the histogram turns an abstract fit into a visual judgement — you can see immediately whether the model captures the centre, the tails, and any skew before relying on it for simulation or probability calculations.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/fitted_distribution_histogram_1.png",
+          "caption": "Normal fit — the curve tracks the bars closely."
+        },
+        {
+          "src": "assets/examples/univariate/fitted_distribution_histogram_2.png",
+          "caption": "Lognormal fit — the model follows the skewed tail."
+        },
+        {
+          "src": "assets/examples/univariate/fitted_distribution_histogram_3.png",
+          "caption": "Gamma fit — a flexible match for positive skew."
+        },
+        {
+          "src": "assets/examples/univariate/fitted_distribution_histogram_4.png",
+          "caption": "Exponential fit — decay modelled from the origin."
+        }
       ]
     },
     "robust_location_plot_interactive": {
@@ -4188,10 +5138,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.robust_location_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(11)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=200), name=\"Value\")\nvalues.iloc[:5] += 6.0  # a few extreme values\n\nfig = dv.univariate.robust_location_plot_interactive(values)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "robust_location_plot_static"
+      ],
+      "useCase": "Use the robust location plot to see how much your estimate of “typical value” depends on extreme observations. It compares the ordinary mean against the median, trimmed mean, and winsorised mean on the raw data, so when the estimates disagree you know the mean is being pulled by outliers or skew and a robust alternative is safer to report.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/robust_location_plot_1.png",
+          "caption": "Clean data — every location estimate agrees."
+        },
+        {
+          "src": "assets/examples/univariate/robust_location_plot_2.png",
+          "caption": "Contaminated — the mean is pulled; robust estimates resist."
+        },
+        {
+          "src": "assets/examples/univariate/robust_location_plot_3.png",
+          "caption": "Skewed data — the mean sits above the median."
+        },
+        {
+          "src": "assets/examples/univariate/robust_location_plot_4.png",
+          "caption": "Heavy tails — trimmed and winsorised means stay centred."
+        }
       ]
     },
     "rug_plot_interactive": {
@@ -4252,10 +5221,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.rug_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(21)\nvalues = pd.Series(rng.normal(170, 10, size=80), name=\"Height (cm)\")\n\nfig = dv.univariate.rug_plot_interactive(values, title=\"Observed heights\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "rug_plot_static"
+      ],
+      "useCase": "Use the rug plot to show the exact position of every observation as tick marks along the axis. It adds the raw data footprint to distribution summaries — revealing clusters, gaps, and isolated points that smoothing can hide — and works well as a minimal standalone view for small samples.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/rug_plot_1.png",
+          "caption": "Even spread — observations fill the range uniformly."
+        },
+        {
+          "src": "assets/examples/univariate/rug_plot_2.png",
+          "caption": "Two clusters — a clear gap separates the subgroups."
+        },
+        {
+          "src": "assets/examples/univariate/rug_plot_3.png",
+          "caption": "Skewed sample — points pile up at the low end."
+        },
+        {
+          "src": "assets/examples/univariate/rug_plot_4.png",
+          "caption": "Small sample — every one of 25 observations is visible."
+        }
       ]
     },
     "strip_plot_interactive": {
@@ -4328,10 +5316,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.strip_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(21)\nvalues = pd.Series(rng.normal(170, 10, size=80), name=\"Height (cm)\")\n\nfig = dv.univariate.strip_plot_interactive(values, ylabel=\"Height (cm)\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "strip_plot_static"
+      ],
+      "useCase": "Use the strip plot to display every observation of a single variable as a jittered one-dimensional scatter. Unlike a histogram it loses nothing to binning, so cluster structure, gaps, and exact outlier positions remain visible — most useful for small to medium samples where individual points matter.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/strip_plot_1.png",
+          "caption": "Even spread — observations fill the range uniformly."
+        },
+        {
+          "src": "assets/examples/univariate/strip_plot_2.png",
+          "caption": "Two clusters — a clear gap separates the subgroups."
+        },
+        {
+          "src": "assets/examples/univariate/strip_plot_3.png",
+          "caption": "Skewed sample — points pile up at the low end."
+        },
+        {
+          "src": "assets/examples/univariate/strip_plot_4.png",
+          "caption": "Small sample — every one of 25 observations is visible."
+        }
       ]
     },
     "dot_plot_interactive": {
@@ -4404,10 +5411,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.dot_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\ncategories = [\"Scratch\", \"Dent\", \"Misalign\", \"Color\", \"Crack\", \"Other\"]\nprobs = np.array([0.45, 0.25, 0.12, 0.08, 0.06, 0.04])\nvalues = pd.Series(rng.choice(categories, size=400, p=probs))\n\nfig = dv.univariate.dot_plot_interactive(values, title=\"Defect counts\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "dot_plot_static"
+      ],
+      "useCase": "Use the Cleveland dot plot for category counts when bar charts feel heavy or category names are long. A dot on a common scale is easier to compare than bar lengths, and the horizontal layout keeps labels readable, making it a clean choice for ranked frequency displays in reports.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/dot_plot_1.png",
+          "caption": "Vital few — two categories account for most records."
+        },
+        {
+          "src": "assets/examples/univariate/dot_plot_2.png",
+          "caption": "Even spread — no single category dominates."
+        },
+        {
+          "src": "assets/examples/univariate/dot_plot_3.png",
+          "caption": "Single dominant cause — one category dwarfs the rest."
+        },
+        {
+          "src": "assets/examples/univariate/dot_plot_4.png",
+          "caption": "Long tail — many small contributors trail the leaders."
+        }
       ]
     },
     "lollipop_chart_interactive": {
@@ -4480,10 +5506,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.lollipop_chart_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\ncategories = [\"Scratch\", \"Dent\", \"Misalign\", \"Color\", \"Crack\", \"Other\"]\nprobs = np.array([0.45, 0.25, 0.12, 0.08, 0.06, 0.04])\nvalues = pd.Series(rng.choice(categories, size=400, p=probs))\n\nfig = dv.univariate.lollipop_chart_interactive(values, title=\"Defect counts\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "lollipop_chart_static"
+      ],
+      "useCase": "Use the lollipop chart as a lighter alternative to bars for category frequencies. A thin stem with a marker at the count reduces ink while preserving an accurate position judgement, which keeps ranked categorical summaries readable when there are many categories.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/lollipop_chart_1.png",
+          "caption": "Vital few — two categories account for most records."
+        },
+        {
+          "src": "assets/examples/univariate/lollipop_chart_2.png",
+          "caption": "Even spread — no single category dominates."
+        },
+        {
+          "src": "assets/examples/univariate/lollipop_chart_3.png",
+          "caption": "Single dominant cause — one category dwarfs the rest."
+        },
+        {
+          "src": "assets/examples/univariate/lollipop_chart_4.png",
+          "caption": "Long tail — many small contributors trail the leaders."
+        }
       ]
     },
     "reference_band_histogram_interactive": {
@@ -4562,10 +5607,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.reference_band_histogram_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.reference_band_histogram_interactive(values, bins=30)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "reference_band_histogram_static"
+      ],
+      "useCase": "Use the reference band histogram when the question is not just “what is the shape?” but “how much of the data sits in the normal range?”. A shaded central band around the mean with the histogram overlaid makes it immediate to see what fraction of observations fall inside versus outside typical variation.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/reference_band_histogram_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/reference_band_histogram_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/reference_band_histogram_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/reference_band_histogram_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "raincloud_plot_interactive": {
@@ -4626,10 +5690,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.raincloud_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(21)\nvalues = pd.Series(rng.normal(170, 10, size=120), name=\"Height (cm)\")\n\nfig = dv.univariate.raincloud_plot_interactive(values, ylabel=\"Height (cm)\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "raincloud_plot_static"
+      ],
+      "useCase": "Use the raincloud plot to show a distribution honestly at three levels at once: the smooth density (cloud), the box-plot summary, and every raw observation (rain). It avoids the opacity of a lone box plot and the redundancy of a mirrored violin, which makes it a strong default for reporting a single sample.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/raincloud_plot_1.png",
+          "caption": "Symmetric sample — cloud, box, and points agree."
+        },
+        {
+          "src": "assets/examples/univariate/raincloud_plot_2.png",
+          "caption": "Right-skewed — the rain stretches into the upper tail."
+        },
+        {
+          "src": "assets/examples/univariate/raincloud_plot_3.png",
+          "caption": "Bimodal — two humps the box plot alone would hide."
+        },
+        {
+          "src": "assets/examples/univariate/raincloud_plot_4.png",
+          "caption": "Small sample — 40 observations, all visible."
+        }
       ]
     },
     "ridgeline_plot_interactive": {
@@ -4684,10 +5767,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.ridgeline_plot_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(13)\ndata = pd.DataFrame({\n    \"Week 1\": rng.normal(10.0, 0.5, size=120),\n    \"Week 2\": rng.normal(10.3, 0.5, size=120),\n    \"Week 3\": rng.normal(10.6, 0.5, size=120),\n    \"Week 4\": rng.normal(10.9, 0.5, size=120),\n})\n\nfig = dv.univariate.ridgeline_plot_interactive(data, xlabel=\"Measurement\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "ridgeline_plot_static"
+      ],
+      "useCase": "Use the ridgeline plot to compare how a distribution evolves across ordered groups — weeks, batches, age bands. Stacking partially overlapping density curves vertically makes gradual shifts in centre, widening spread, or emerging skew easy to follow in a way that side-by-side violins cannot.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/ridgeline_plot_1.png",
+          "caption": "Drifting centre — the distribution walks upward week by week."
+        },
+        {
+          "src": "assets/examples/univariate/ridgeline_plot_2.png",
+          "caption": "Stable process — four weeks stack on the same centre."
+        },
+        {
+          "src": "assets/examples/univariate/ridgeline_plot_3.png",
+          "caption": "Widening spread — later weeks grow more variable."
+        },
+        {
+          "src": "assets/examples/univariate/ridgeline_plot_4.png",
+          "caption": "Emerging subgroup — week 4 splits toward a second mode."
+        }
       ]
     },
     "transformation_comparison_interactive": {
@@ -4748,10 +5850,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.transformation_comparison_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(29)\nvalues = pd.Series(rng.lognormal(0.0, 0.8, size=500), name=\"Value\")\n\nfig = dv.univariate.transformation_comparison_interactive(values)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "transformation_comparison_static"
+      ],
+      "useCase": "Use the transformation comparison to decide whether a log, square-root, or similar transform tames a skewed variable before modelling. Plotting the original and transformed distributions side by side shows which transform best symmetrises the data, replacing guesswork with a direct visual check.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/transformation_comparison_1.png",
+          "caption": "Strong skew — the log transform restores symmetry."
+        },
+        {
+          "src": "assets/examples/univariate/transformation_comparison_2.png",
+          "caption": "Gamma data — transforms pull in the long right tail."
+        },
+        {
+          "src": "assets/examples/univariate/transformation_comparison_3.png",
+          "caption": "Moderate skew — a milder transform suffices."
+        },
+        {
+          "src": "assets/examples/univariate/transformation_comparison_4.png",
+          "caption": "Near-symmetric — transforms change little."
+        }
       ]
     },
     "event_frequency_plot_interactive": {
@@ -4824,10 +5945,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ntimestamps = pd.to_datetime([\"2026-01-01\", \"2026-01-03\", \"2026-01-04\", \"2026-01-10\"])\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nfig = dv.univariate.event_frequency_plot_interactive(timestamps)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(15)\ngaps = rng.exponential(12.0, size=300)  # hours between events\ntimes = pd.Series(pd.Timestamp(\"2024-01-01\") + pd.to_timedelta(gaps.cumsum(), unit=\"h\"))\n\nfig = dv.univariate.event_frequency_plot_interactive(times, freq=\"W\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "event_frequency_plot_static"
+      ],
+      "useCase": "Use the event frequency plot to see how a stream of timestamped events — orders, failures, signups — is distributed over time. Resampling raw event times into daily, weekly, or monthly counts reveals surges, quiet periods, and growth trends that a list of timestamps cannot show.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/event_frequency_plot_1.png",
+          "caption": "Steady stream — weekly counts hover around a constant rate."
+        },
+        {
+          "src": "assets/examples/univariate/event_frequency_plot_2.png",
+          "caption": "Sudden surge — event volume jumps in the second half."
+        },
+        {
+          "src": "assets/examples/univariate/event_frequency_plot_3.png",
+          "caption": "Accelerating demand — intervals shrink as activity grows."
+        },
+        {
+          "src": "assets/examples/univariate/event_frequency_plot_4.png",
+          "caption": "Quiet gap — a two-month lull splits the timeline."
+        }
       ]
     },
     "interarrival_plot_interactive": {
@@ -4894,10 +6034,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ntimestamps = pd.to_datetime([\"2026-01-01\", \"2026-01-03\", \"2026-01-04\", \"2026-01-10\"])\n\nfig = dv.univariate.interarrival_plot_interactive(timestamps)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(15)\ngaps = rng.exponential(12.0, size=300)  # hours between events\ntimes = pd.Series(pd.Timestamp(\"2024-01-01\") + pd.to_timedelta(gaps.cumsum(), unit=\"h\"))\n\nfig = dv.univariate.interarrival_plot_interactive(times, unit=\"D\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "interarrival_plot_static"
+      ],
+      "useCase": "Use the interarrival plot to examine the waiting times between consecutive events. The histogram of gaps distinguishes a steady Poisson-like process (exponential shape) from bursty or clockwork-regular arrivals, which determines whether queueing assumptions and rate-based forecasts are valid.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/interarrival_plot_1.png",
+          "caption": "Poisson process — gaps follow the exponential shape."
+        },
+        {
+          "src": "assets/examples/univariate/interarrival_plot_2.png",
+          "caption": "Bursty arrivals — many short waits mixed with long silences."
+        },
+        {
+          "src": "assets/examples/univariate/interarrival_plot_3.png",
+          "caption": "Clockwork-regular — gaps cluster tightly around one day."
+        },
+        {
+          "src": "assets/examples/univariate/interarrival_plot_4.png",
+          "caption": "Two regimes — fast and slow phases form a bimodal gap mix."
+        }
       ]
     },
     "univariate_analysis_dashboard_interactive": {
@@ -4958,10 +6117,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.univariate_analysis_dashboard_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=500), name=\"Height (cm)\")\n\nfig = dv.univariate.univariate_analysis_dashboard_interactive(values)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "univariate_analysis_dashboard_static"
+      ],
+      "useCase": "Use the univariate analysis dashboard to profile a variable in one composite figure — distribution, cumulative view, summary statistics, and normality checks together. It is built for reports and handoffs where a single self-contained picture of a variable’s behaviour is more useful than a folder of separate charts.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/univariate_analysis_dashboard_1.png",
+          "caption": "Roughly normal — a symmetric spread around the centre."
+        },
+        {
+          "src": "assets/examples/univariate/univariate_analysis_dashboard_2.png",
+          "caption": "Right-skewed — a long upper tail of occasional large values."
+        },
+        {
+          "src": "assets/examples/univariate/univariate_analysis_dashboard_3.png",
+          "caption": "Bimodal — two overlapping subgroups form distinct humps."
+        },
+        {
+          "src": "assets/examples/univariate/univariate_analysis_dashboard_4.png",
+          "caption": "Heavy-tailed with spikes — extreme values stretch the scale."
+        }
       ]
     },
     "weighted_histogram_interactive": {
@@ -5040,10 +6218,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nweights = pd.Series([1.0, 1.5, 0.8, 1.2, 1.0, 1.1], name=\"Weight\")\n\nfig = dv.univariate.weighted_histogram_interactive(values, weights)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(17)\nvalues = pd.Series(rng.normal(50.0, 10.0, size=500), name=\"Score\")\nweights = pd.Series(np.where(values > 55, 3.0, 1.0))\n\nfig = dv.univariate.weighted_histogram_interactive(values, weights, bins=30)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "weighted_histogram_static"
+      ],
+      "useCase": "Use the weighted histogram when observations do not count equally — survey respondents with sampling weights, transactions weighted by amount, or records reweighted to match a population. Weighting each observation changes the apparent shape of the distribution, and this chart makes the corrected view visible instead of letting an unweighted histogram mislead.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/weighted_histogram_1.png",
+          "caption": "Uniform weights — the weighted view matches the raw sample."
+        },
+        {
+          "src": "assets/examples/univariate/weighted_histogram_2.png",
+          "caption": "Tail emphasis — large values count four times as much."
+        },
+        {
+          "src": "assets/examples/univariate/weighted_histogram_3.png",
+          "caption": "Survey weights — an oversampled segment is weighted down."
+        },
+        {
+          "src": "assets/examples/univariate/weighted_histogram_4.png",
+          "caption": "Amount-weighted — weighting by size shifts the mass rightward."
+        }
       ]
     },
     "quality_bar_interactive": {
@@ -5098,10 +6295,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.quality_bar_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(19)\nvalues = pd.Series(rng.normal(10.0, 1.0, size=300))\nvalues.iloc[:10] = np.nan\nvalues.iloc[10:20] = 0.0\n\nfig = dv.univariate.quality_bar_interactive(values, title=\"Column quality\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "quality_bar_static"
+      ],
+      "useCase": "Use the quality bar chart for a fast data-quality audit of a single column. It reports the missing, duplicate, zero, and negative rates as bars on a common 0–1 scale, so the problems that need cleaning — and their relative size — are visible before any analysis begins.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/quality_bar_1.png",
+          "caption": "Mostly clean — only a sliver of missing values."
+        },
+        {
+          "src": "assets/examples/univariate/quality_bar_2.png",
+          "caption": "Messy column — missing, zeros, and duplicates all present."
+        },
+        {
+          "src": "assets/examples/univariate/quality_bar_3.png",
+          "caption": "Zero-inflated — two in five observations are exactly zero."
+        },
+        {
+          "src": "assets/examples/univariate/quality_bar_4.png",
+          "caption": "Signed values — about half the column is negative by design."
+        }
       ]
     },
     "survival_curve_interactive": {
@@ -5156,10 +6372,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.survival_curve_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(31)\ntimes = pd.Series(rng.weibull(2.0, size=400) * 365, name=\"Days to failure\")\n\nfig = dv.univariate.survival_curve_interactive(times, title=\"Survival curve\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "survival_curve_static"
+      ],
+      "useCase": "Use the empirical survival curve to show the probability that a duration — time to failure, customer lifetime, days to delivery — exceeds any given value. Reading the curve at a point answers “what fraction survives past day 90?” without assuming any parametric lifetime distribution.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/survival_curve_1.png",
+          "caption": "Constant hazard — exponential lifetimes decay steadily."
+        },
+        {
+          "src": "assets/examples/univariate/survival_curve_2.png",
+          "caption": "Ageing population — Weibull wear-out accelerates over time."
+        },
+        {
+          "src": "assets/examples/univariate/survival_curve_3.png",
+          "caption": "Long-lived tail — a few units survive far beyond the rest."
+        },
+        {
+          "src": "assets/examples/univariate/survival_curve_4.png",
+          "caption": "Two subgroups — an early-failure cohort drops the curve fast."
+        }
       ]
     },
     "lorenz_curve_interactive": {
@@ -5220,10 +6455,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.lorenz_curve_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(35)\nincomes = pd.Series(rng.lognormal(10.5, 0.6, size=1000), name=\"Income\")\n\nfig = dv.univariate.lorenz_curve_interactive(incomes, title=\"Income concentration\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "lorenz_curve_static"
+      ],
+      "useCase": "Use the Lorenz curve to quantify inequality or concentration — income across households, revenue across customers, defects across part numbers. Plotting the cumulative share of the total against the cumulative share of the population, with the equality line as reference, shows at a glance how far from even the distribution is; the area between the curves is half the Gini coefficient.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/lorenz_curve_1.png",
+          "caption": "Near-equal — the curve hugs the line of perfect equality."
+        },
+        {
+          "src": "assets/examples/univariate/lorenz_curve_2.png",
+          "caption": "Typical inequality — a moderate bow away from equality."
+        },
+        {
+          "src": "assets/examples/univariate/lorenz_curve_3.png",
+          "caption": "High concentration — the top share holds most of the total."
+        },
+        {
+          "src": "assets/examples/univariate/lorenz_curve_4.png",
+          "caption": "Extreme dominance — a handful of observations own almost everything."
+        }
       ]
     },
     "bootstrap_distribution_plot_interactive": {
@@ -5296,10 +6550,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.bootstrap_distribution_plot_interactive(values, seed=42)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nvalues = pd.Series(rng.normal(170, 10, size=200), name=\"Height (cm)\")\n\nfig = dv.univariate.bootstrap_distribution_plot_interactive(values, statistic=\"mean\", n_resamples=1000, seed=0)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "bootstrap_distribution_plot_static"
+      ],
+      "useCase": "Use the bootstrap distribution plot to see the sampling variability of a statistic — mean, median, or standard deviation — without any distributional formula. Resampling the data with replacement builds the statistic’s distribution empirically, so the histogram shows its uncertainty and skew directly, which is the honest basis for confidence intervals on small or non-normal samples.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/bootstrap_distribution_plot_1.png",
+          "caption": "Mean of normal data — a symmetric, narrow sampling distribution."
+        },
+        {
+          "src": "assets/examples/univariate/bootstrap_distribution_plot_2.png",
+          "caption": "Median of skewed data — the bootstrap stays well behaved."
+        },
+        {
+          "src": "assets/examples/univariate/bootstrap_distribution_plot_3.png",
+          "caption": "Standard deviation — wider and slightly right-skewed."
+        },
+        {
+          "src": "assets/examples/univariate/bootstrap_distribution_plot_4.png",
+          "caption": "Small sample — n=30 leaves visible resampling noise."
+        }
       ]
     },
     "boolean_bar_interactive": {
@@ -5354,10 +6627,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nflags = pd.Series([True, False, True, True, False], name=\"Passed\")\n\nfig = dv.univariate.boolean_bar_interactive(flags)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(37)\nflags = pd.Series(rng.random(300) < 0.3)\n\nfig = dv.univariate.boolean_bar_interactive(flags, title=\"Pass / fail split\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "boolean_bar_static"
+      ],
+      "useCase": "Use the boolean bar chart to show the split of a true/false flag — passed vs. failed, active vs. churned, fraud vs. legitimate. The two bars make class balance (or imbalance) immediately visible, which is a critical check before training classifiers or reporting conversion rates.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/boolean_bar_1.png",
+          "caption": "Balanced — true and false are nearly even."
+        },
+        {
+          "src": "assets/examples/univariate/boolean_bar_2.png",
+          "caption": "Imbalanced — true cases outnumber false four to one."
+        },
+        {
+          "src": "assets/examples/univariate/boolean_bar_3.png",
+          "caption": "Rare positives — only five percent of flags are true."
+        },
+        {
+          "src": "assets/examples/univariate/boolean_bar_4.png",
+          "caption": "Near-unanimous — almost every record is true."
+        }
       ]
     },
     "top_terms_bar_interactive": {
@@ -5418,10 +6710,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ntexts = pd.Series([\"fast reliable process\", \"reliable visual process\", \"fast chart\"], name=\"Comment\")\n\nfig = dv.univariate.top_terms_bar_interactive(texts)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(23)\nterms = [\"delivery\", \"quality\", \"price\", \"support\", \"packaging\", \"refund\", \"shipping\"]\nprobs = np.array([0.30, 0.22, 0.16, 0.12, 0.09, 0.06, 0.05])\nwords = pd.Series(rng.choice(terms, size=500, p=probs))\n\nfig = dv.univariate.top_terms_bar_interactive(words, top_n=10)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "top_terms_bar_static"
+      ],
+      "useCase": "Use the top terms bar chart to profile a free-text column — review comments, ticket subjects, search queries — by its most frequent terms. Ranking the commonest words surfaces dominant themes and data-entry artefacts quickly, which guides both cleaning and downstream text analysis.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/top_terms_bar_1.png",
+          "caption": "Support tickets — delivery and quality dominate the queue."
+        },
+        {
+          "src": "assets/examples/univariate/top_terms_bar_2.png",
+          "caption": "Product reviews — one term towers over the rest."
+        },
+        {
+          "src": "assets/examples/univariate/top_terms_bar_3.png",
+          "caption": "Search queries — a flat vocabulary with no clear leader."
+        },
+        {
+          "src": "assets/examples/univariate/top_terms_bar_4.png",
+          "caption": "Error logs — a long tail of rare messages."
+        }
       ]
     },
     "weighted_ecdf_plot_interactive": {
@@ -5482,10 +6793,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\nweights = pd.Series([1.0, 1.5, 0.8, 1.2, 1.0, 1.1], name=\"Weight\")\n\nfig = dv.univariate.weighted_ecdf_plot_interactive(values, weights)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(17)\nvalues = pd.Series(rng.normal(50.0, 10.0, size=500), name=\"Score\")\nweights = pd.Series(np.where(values > 55, 3.0, 1.0))\n\nfig = dv.univariate.weighted_ecdf_plot_interactive(values, weights)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "weighted_ecdf_plot_static"
+      ],
+      "useCase": "Use the weighted ECDF when quantiles must reflect per-observation importance rather than raw counts — for example population percentiles from a survey with sampling weights. Each observation contributes its weight to the cumulative curve, so the quantiles you read off represent the reweighted population, not just the sample you happened to collect.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/weighted_ecdf_plot_1.png",
+          "caption": "Uniform weights — the weighted view matches the raw sample."
+        },
+        {
+          "src": "assets/examples/univariate/weighted_ecdf_plot_2.png",
+          "caption": "Tail emphasis — large values count four times as much."
+        },
+        {
+          "src": "assets/examples/univariate/weighted_ecdf_plot_3.png",
+          "caption": "Survey weights — an oversampled segment is weighted down."
+        },
+        {
+          "src": "assets/examples/univariate/weighted_ecdf_plot_4.png",
+          "caption": "Amount-weighted — weighting by size shifts the mass rightward."
+        }
       ]
     },
     "ordinal_bar_interactive": {
@@ -5552,10 +6882,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nfig = dv.univariate.ordinal_bar_interactive(categories)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(25)\nscale = [\"Poor\", \"Fair\", \"Good\", \"Very good\", \"Excellent\"]\nprobs = np.array([0.05, 0.15, 0.35, 0.30, 0.15])\nratings = pd.Series(rng.choice(scale, size=400, p=probs))\n\nfig = dv.univariate.ordinal_bar_interactive(ratings, order=scale, title=\"Satisfaction ratings\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "ordinal_bar_static"
+      ],
+      "useCase": "Use the ordinal bar chart for categories with a natural order — Likert ratings, severity levels, education bands. Supplying the explicit order keeps the bars in logical sequence instead of alphabetical, so shifts toward the positive or negative end of the scale read correctly.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/ordinal_bar_1.png",
+          "caption": "Positive skew — most ratings land at the top end."
+        },
+        {
+          "src": "assets/examples/univariate/ordinal_bar_2.png",
+          "caption": "Negative skew — dissatisfaction piles up at the low end."
+        },
+        {
+          "src": "assets/examples/univariate/ordinal_bar_3.png",
+          "caption": "Uniform — every rating is chosen about equally."
+        },
+        {
+          "src": "assets/examples/univariate/ordinal_bar_4.png",
+          "caption": "Polarised — opinions split between the two extremes."
+        }
       ]
     },
     "outlier_treatment_comparison_interactive": {
@@ -5622,10 +6971,29 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.univariate.outlier_treatment_comparison_interactive(values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(27)\nvalues = pd.Series(rng.normal(10.0, 0.5, size=300), name=\"Value\")\nvalues.iloc[[10, 120, 250]] += [4.0, -3.5, 4.5]\n\nfig = dv.univariate.outlier_treatment_comparison_interactive(values, rule=\"iqr\", treatment=\"cap\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. Outlier-related helpers should be treated as decision support; inspect the flagged records before removing or capping values. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "outlier_treatment_comparison_static"
+      ],
+      "useCase": "Use the outlier treatment comparison to see the effect of capping or removing outliers before committing to a cleaning rule. Showing the distribution before and after treatment makes the trade-off visible — how much of the tail was genuine signal versus noise — so the choice of rule is a reviewed decision, not an invisible preprocessing step.",
+      "images": [
+        {
+          "src": "assets/examples/univariate/outlier_treatment_comparison_1.png",
+          "caption": "IQR capping — fences pull the spikes back to the whiskers."
+        },
+        {
+          "src": "assets/examples/univariate/outlier_treatment_comparison_2.png",
+          "caption": "IQR removal — flagged points are dropped entirely."
+        },
+        {
+          "src": "assets/examples/univariate/outlier_treatment_comparison_3.png",
+          "caption": "Z-score capping — a stricter 3σ rule trims the extremes."
+        },
+        {
+          "src": "assets/examples/univariate/outlier_treatment_comparison_4.png",
+          "caption": "MAD capping — the robust rule resists masking."
+        }
       ]
     },
     "auto_profile_chart_interactive": {
@@ -7556,11 +8924,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.scatter_plot_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nx = pd.Series(rng.normal(50, 10, 200), name=\"Temperature\")\ny = pd.Series(2.5 * x + rng.normal(0, 15, 200), name=\"Cycle time\")\n\nax = dv.bivariate.scatter_plot_static(x, y, show_corr=True)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "scatter_plot_interactive",
         "scatter_plot"
+      ],
+      "useCase": "Use a scatter plot as the first look at any pairwise relationship — cycle time versus temperature, price versus demand — to judge direction, strength, and shape before modelling. Point clouds reveal correlation, clusters, curvature, and outliers that summary statistics hide, and optional fitted lines or correlation annotations quantify what the eye sees.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/scatter_plot_1.png",
+          "caption": "Strong linear trend — y rises steadily with x."
+        },
+        {
+          "src": "assets/examples/bivariate/scatter_plot_2.png",
+          "caption": "Curved relationship — a parabola the eye catches at once."
+        },
+        {
+          "src": "assets/examples/bivariate/scatter_plot_3.png",
+          "caption": "No correlation — the cloud is round and directionless."
+        },
+        {
+          "src": "assets/examples/bivariate/scatter_plot_4.png",
+          "caption": "Outlier-driven — three stray points dominate the picture."
+        }
       ]
     },
     "line_plot_static": {
@@ -7765,11 +9152,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.line_plot_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(1)\nx = pd.Series(np.arange(60), name=\"Day\")\ny = pd.Series(\n    100 + np.arange(60) * 0.4 + rng.normal(0, 3, 60), name=\"Throughput\"\n)\n\nax = dv.bivariate.line_plot_static(x, y, rolling_window=7)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "line_plot_interactive",
         "line_plot"
+      ],
+      "useCase": "Use a line plot when observations have a natural order — time, sequence, dose — and you want to trace how a value evolves along it. Connecting the points emphasises trends, cycles, and abrupt changes, and the optional rolling average overlay separates the underlying movement from point-to-point noise.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/line_plot_1.png",
+          "caption": "Upward trend — throughput climbs steadily over the period."
+        },
+        {
+          "src": "assets/examples/bivariate/line_plot_2.png",
+          "caption": "Seasonal cycle — a repeating wave rides on the noise."
+        },
+        {
+          "src": "assets/examples/bivariate/line_plot_3.png",
+          "caption": "Flat series — no trend, only point-to-point variation."
+        },
+        {
+          "src": "assets/examples/bivariate/line_plot_4.png",
+          "caption": "Step change — the level drops abruptly midway through."
+        }
       ]
     },
     "correlation_heatmap_static": {
@@ -7938,11 +9344,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns Union[MatplotlibAxes, Tuple[MatplotlibAxes, pd.DataFrame]], usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.correlation_heatmap_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(2)\na = rng.normal(0, 1, 200)\ndf = pd.DataFrame({\n    \"a\": a,\n    \"b\": 0.8 * a + rng.normal(0, 0.5, 200),\n    \"c\": rng.normal(0, 1, 200),\n    \"d\": -0.6 * a + rng.normal(0, 0.7, 200),\n})\n\nax = dv.bivariate.correlation_heatmap_static(df)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "correlation_heatmap_interactive",
         "correlation_heatmap"
+      ],
+      "useCase": "Use the correlation heatmap to screen many numeric variables at once before modelling or root-cause work. Colour-coding the full pairwise correlation matrix makes strong linear relationships, redundant variables, and unexpected sign patterns visible in one glance, and Pearson, Kendall, or Spearman methods cover both linear and monotonic association.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/correlation_heatmap_1.png",
+          "caption": "Strong blocks — high positive and negative correlations stand out."
+        },
+        {
+          "src": "assets/examples/bivariate/correlation_heatmap_2.png",
+          "caption": "Weak correlations — no meaningful structure between variables."
+        },
+        {
+          "src": "assets/examples/bivariate/correlation_heatmap_3.png",
+          "caption": "Mixed signs — positive and negative associations side by side."
+        },
+        {
+          "src": "assets/examples/bivariate/correlation_heatmap_4.png",
+          "caption": "One dominant pair — a single strong link among independents."
+        }
       ]
     },
     "bubble_plot_static": {
@@ -8045,11 +9470,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.bubble_plot_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(3)\nx = rng.normal(50, 12, 60)\ny = 0.7 * x + rng.normal(0, 8, 60)\nsize = rng.uniform(50, 500, 60)\ncolor = rng.uniform(0, 1, 60)\n\nax = dv.bivariate.bubble_plot_static(x, y, size, color)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "bubble_plot_interactive",
         "bubble_plot"
+      ],
+      "useCase": "Use a bubble plot when a third (and optionally fourth) variable matters alongside the two positional axes — for example revenue versus margin with bubble size for volume and colour for growth. Encoding extra dimensions in size and colour lets one chart carry the information of several scatter plots while staying readable.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/bubble_plot_1.png",
+          "caption": "Size tracks x — larger bubbles cluster to the right."
+        },
+        {
+          "src": "assets/examples/bivariate/bubble_plot_2.png",
+          "caption": "Unrelated size — bubble area carries no signal."
+        },
+        {
+          "src": "assets/examples/bivariate/bubble_plot_3.png",
+          "caption": "Colour gradient — a fourth variable encoded as colour."
+        },
+        {
+          "src": "assets/examples/bivariate/bubble_plot_4.png",
+          "caption": "Few large players — a handful of bubbles dominate the field."
+        }
       ]
     },
     "hexbin_plot_static": {
@@ -8140,11 +9584,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.hexbin_plot_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(4)\nx = rng.normal(0, 1, 5000)\ny = 0.6 * x + rng.normal(0, 0.8, 5000)\n\nax = dv.bivariate.hexbin_plot_static(x, y, gridsize=30)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "hexbin_plot_interactive",
         "hexbin_plot"
+      ],
+      "useCase": "Use a hexbin plot instead of a scatter plot when thousands of points overlap into an unreadable blob. Binning the plane into hexagons and colouring by count reveals where the density actually concentrates — hotspots, ridges, and empty regions — without the overplotting that hides structure in large samples.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/hexbin_plot_1.png",
+          "caption": "Correlated mass — density stretches along the diagonal."
+        },
+        {
+          "src": "assets/examples/bivariate/hexbin_plot_2.png",
+          "caption": "Two clusters — the bins reveal two distinct groups."
+        },
+        {
+          "src": "assets/examples/bivariate/hexbin_plot_3.png",
+          "caption": "Uniform spread — no concentration anywhere in the plane."
+        },
+        {
+          "src": "assets/examples/bivariate/hexbin_plot_4.png",
+          "caption": "Skewed density — mass piles up near the origin."
+        }
       ]
     },
     "regression_plot_static": {
@@ -8235,11 +9698,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.regression_plot_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(5)\nx = rng.uniform(0, 10, 150)\ny = 3 + 2 * x + rng.normal(0, 3, 150)\n\nax = dv.bivariate.regression_plot_static(x, y, degree=1)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "regression_plot_interactive",
         "regression_plot"
+      ],
+      "useCase": "Use a regression plot to overlay a fitted line or curve on raw observations so you can judge how well a simple model captures the relationship. The scatter shows the data, the fitted line shows the trend, and the gap between them — systematic curvature or funnel-shaped spread — tells you whether a linear model is adequate or a higher degree is needed.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/regression_plot_1.png",
+          "caption": "Linear fit — the degree-1 line tracks the data well."
+        },
+        {
+          "src": "assets/examples/bivariate/regression_plot_2.png",
+          "caption": "Curved trend — degree 2 follows the acceleration."
+        },
+        {
+          "src": "assets/examples/bivariate/regression_plot_3.png",
+          "caption": "Weak slope — the fit is nearly flat against the noise."
+        },
+        {
+          "src": "assets/examples/bivariate/regression_plot_4.png",
+          "caption": "Outliers pull — a few points bend the fitted line."
+        }
       ]
     },
     "density_contour_static": {
@@ -8330,11 +9812,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.density_contour_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(6)\nx = rng.normal(0, 1, 1500)\ny = 0.7 * x + rng.normal(0, 0.7, 1500)\n\nax = dv.bivariate.density_contour_static(x, y)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "density_contour_interactive",
         "density_contour"
+      ],
+      "useCase": "Use a density contour plot to show the shape of a bivariate distribution when individual points would overlap. Contour lines trace regions of equal estimated density, so multiple modes, elongated correlation structure, and skew appear as terrain-like features rather than an undifferentiated point cloud.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/density_contour_1.png",
+          "caption": "Correlated mass — density stretches along the diagonal."
+        },
+        {
+          "src": "assets/examples/bivariate/density_contour_2.png",
+          "caption": "Two clusters — the bins reveal two distinct groups."
+        },
+        {
+          "src": "assets/examples/bivariate/density_contour_3.png",
+          "caption": "Uniform spread — no concentration anywhere in the plane."
+        },
+        {
+          "src": "assets/examples/bivariate/density_contour_4.png",
+          "caption": "Skewed density — mass piles up near the origin."
+        }
       ]
     },
     "grouped_bar_static": {
@@ -8419,11 +9920,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nax = dv.bivariate.grouped_bar_static(categories, values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\ncategory = pd.Series(rng.choice([\"A\", \"B\", \"C\", \"D\"], 400))\nvalues = pd.Series(rng.normal(100, 15, 400) + category.map(\n    {\"A\": 0, \"B\": 12, \"C\": -8, \"D\": 20}\n))\n\nax = dv.bivariate.grouped_bar_static(category, values)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "grouped_bar_interactive",
         "grouped_bar"
+      ],
+      "useCase": "Use a grouped bar chart to compare an aggregated metric — mean, sum, or any custom function — across categories such as product lines, regions, or shifts. Bar height makes differences in level immediate, which suits ranked comparisons and presentations to audiences who read bars more easily than distributions.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/grouped_bar_1.png",
+          "caption": "Shifted levels — group means differ clearly."
+        },
+        {
+          "src": "assets/examples/bivariate/grouped_bar_2.png",
+          "caption": "No group effect — all categories average the same."
+        },
+        {
+          "src": "assets/examples/bivariate/grouped_bar_3.png",
+          "caption": "One dominant group — totals driven by category A."
+        },
+        {
+          "src": "assets/examples/bivariate/grouped_bar_4.png",
+          "caption": "Mixed signs — some groups average below zero."
+        }
       ]
     },
     "box_by_category_static": {
@@ -8496,11 +10016,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nax = dv.bivariate.box_by_category_static(categories, values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(8)\ncategory = pd.Series(rng.choice([\"Line 1\", \"Line 2\", \"Line 3\"], 300))\nvalues = pd.Series(rng.normal(50, 5, 300) + category.map(\n    {\"Line 1\": 0, \"Line 2\": 4, \"Line 3\": -3}\n))\n\nax = dv.bivariate.box_by_category_static(category, values)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "box_by_category_interactive",
         "box_by_category"
+      ],
+      "useCase": "Use box plots by category to compare the distribution of a continuous measure across groups — fill weight across machines, response time across servers. The median, quartiles, whiskers, and flier points expose shifts in location, differences in spread, and outliers per group without assuming any distribution shape.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/box_by_category_1.png",
+          "caption": "Shifted levels — group means differ clearly."
+        },
+        {
+          "src": "assets/examples/bivariate/box_by_category_2.png",
+          "caption": "No group effect — all categories average the same."
+        },
+        {
+          "src": "assets/examples/bivariate/box_by_category_3.png",
+          "caption": "One dominant group — totals driven by category A."
+        },
+        {
+          "src": "assets/examples/bivariate/box_by_category_4.png",
+          "caption": "Mixed signs — some groups average below zero."
+        }
       ]
     },
     "violin_by_category_static": {
@@ -8573,11 +10112,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nax = dv.bivariate.violin_by_category_static(categories, values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(9)\ncategory = pd.Series(rng.choice([\"A\", \"B\", \"C\"], 450))\nvalues = pd.Series(\n    np.where(\n        category == \"B\",\n        rng.normal(40, 4, 450),\n        rng.normal(50, 6, 450),\n    )\n)\n\nax = dv.bivariate.violin_by_category_static(category, values)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "violin_by_category_interactive",
         "violin_by_category"
+      ],
+      "useCase": "Use violin plots by category when the box plot's five-number summary is too coarse — when you suspect bimodality, skew, or shoulder shapes within groups. The mirrored density trace shows the full estimated distribution per category, making multimodal or asymmetric groups obvious where a box plot would look identical.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/violin_by_category_1.png",
+          "caption": "Location shifts — violins sit at different heights."
+        },
+        {
+          "src": "assets/examples/bivariate/violin_by_category_2.png",
+          "caption": "Bimodal group — category A shows two humps."
+        },
+        {
+          "src": "assets/examples/bivariate/violin_by_category_3.png",
+          "caption": "Right-skewed — long upper tails in every group."
+        },
+        {
+          "src": "assets/examples/bivariate/violin_by_category_4.png",
+          "caption": "Growing spread — violins widen from A to C."
+        }
       ]
     },
     "crosstab_heatmap_static": {
@@ -8650,11 +10208,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.crosstab_heatmap_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(10)\nrows = pd.Series(rng.choice([\"North\", \"South\", \"East\"], 500, p=[0.5, 0.3, 0.2]))\ncols = pd.Series(rng.choice([\"Pass\", \"Rework\", \"Scrap\"], 500))\n\nax = dv.bivariate.crosstab_heatmap_static(rows, cols, normalize=\"index\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "crosstab_heatmap_interactive",
         "crosstab_heatmap"
+      ],
+      "useCase": "Use a crosstab heatmap to examine how two categorical variables co-occur — defect type by shift, segment by channel. Colour intensity over the contingency table highlights combinations that are unusually frequent or rare, and row or column normalisation converts raw counts into comparable rates when group sizes differ.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/crosstab_heatmap_1.png",
+          "caption": "Independent factors — shares spread evenly across cells."
+        },
+        {
+          "src": "assets/examples/bivariate/crosstab_heatmap_2.png",
+          "caption": "Strong association — each region favours a different outcome."
+        },
+        {
+          "src": "assets/examples/bivariate/crosstab_heatmap_3.png",
+          "caption": "Row-normalised — rates comparable despite unequal group sizes."
+        },
+        {
+          "src": "assets/examples/bivariate/crosstab_heatmap_4.png",
+          "caption": "Rare combinations — some cells barely occur at all."
+        }
       ]
     },
     "binned_mean_plot_static": {
@@ -8745,11 +10322,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.binned_mean_plot_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(11)\nx = rng.uniform(0, 10, 2000)\ny = 2 * x + rng.normal(0, 5, 2000)\n\nax = dv.bivariate.binned_mean_plot_static(x, y, bins=12)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "binned_mean_plot_interactive",
         "binned_mean_plot"
+      ],
+      "useCase": "Use a binned mean plot to extract the trend from a noisy scatter by averaging y within equal-width bins of x. Binning suppresses point-level noise so the underlying shape — linear, saturating, U-shaped — stands out, which is especially useful for large datasets where the raw cloud is too dense to read.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/binned_mean_plot_1.png",
+          "caption": "Linear trend — binned means climb steadily."
+        },
+        {
+          "src": "assets/examples/bivariate/binned_mean_plot_2.png",
+          "caption": "Nonlinear wave — binning reveals a sinusoid under the noise."
+        },
+        {
+          "src": "assets/examples/bivariate/binned_mean_plot_3.png",
+          "caption": "No relationship — the binned means stay flat."
+        },
+        {
+          "src": "assets/examples/bivariate/binned_mean_plot_4.png",
+          "caption": "Stable mean, growing noise — trend holds while spread widens."
+        }
       ]
     },
     "errorbar_plot_static": {
@@ -8852,11 +10448,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.errorbar_plot_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(12)\nx = np.arange(1, 9)\ny = 10 + 2 * x + rng.normal(0, 0.5, 8)\nyerr = rng.uniform(0.5, 2.0, 8)\n\nax = dv.bivariate.errorbar_plot_static(x, y, yerr=yerr)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "errorbar_plot_interactive",
         "errorbar_plot"
+      ],
+      "useCase": "Use an errorbar plot when each point carries uncertainty — replicated measurements, survey estimates, simulation means. Drawing the error bars alongside the central values shows which differences between conditions are larger than their uncertainty and which could easily be noise, preventing over-reading of small gaps.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/errorbar_plot_1.png",
+          "caption": "Constant uncertainty — every estimate is equally precise."
+        },
+        {
+          "src": "assets/examples/bivariate/errorbar_plot_2.png",
+          "caption": "Growing uncertainty — later measurements are noisier."
+        },
+        {
+          "src": "assets/examples/bivariate/errorbar_plot_3.png",
+          "caption": "Two-dimensional error — both x and y carry uncertainty."
+        },
+        {
+          "src": "assets/examples/bivariate/errorbar_plot_4.png",
+          "caption": "Small samples — wide intervals warn against over-reading."
+        }
       ]
     },
     "area_between_static": {
@@ -8947,11 +10562,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.area_between_static(x)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(13)\nx = np.linspace(0, 10, 100)\nmid = np.sin(x)\ny_lower = mid - 0.3\ny_upper = mid + 0.3\n\nax = dv.bivariate.area_between_static(x, y_lower, y_upper)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "area_between_interactive",
         "area_between"
+      ],
+      "useCase": "Use an area-between plot to display a band bounded by two curves — a confidence interval around a forecast, tolerance limits around a nominal profile, or a min-max envelope from repeated runs. The shaded region communicates the range of plausible values directly, which is clearer than two separate boundary lines.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/area_between_1.png",
+          "caption": "Constant band — a fixed tolerance around the nominal curve."
+        },
+        {
+          "src": "assets/examples/bivariate/area_between_2.png",
+          "caption": "Widening band — uncertainty grows away from the origin."
+        },
+        {
+          "src": "assets/examples/bivariate/area_between_3.png",
+          "caption": "Confidence envelope — interval balloons at the edges."
+        },
+        {
+          "src": "assets/examples/bivariate/area_between_4.png",
+          "caption": "Seasonal envelope — the band breathes with the cycle."
+        }
       ]
     },
     "step_plot_static": {
@@ -9036,11 +10670,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.step_plot_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(14)\nx = np.arange(0, 20)\ny = np.cumsum(rng.choice([-1, 0, 1, 2], 20, p=[0.2, 0.3, 0.3, 0.2])) + 20\n\nax = dv.bivariate.step_plot_static(x, y, where=\"post\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "step_plot_interactive",
         "step_plot"
+      ],
+      "useCase": "Use a step plot for values that change discretely and hold until the next change — price tiers, setpoint adjustments, staffing levels, cumulative counts. The horizontal-then-vertical trace correctly shows that the value is constant between events, where a sloped line would falsely imply gradual transitions.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/step_plot_1.png",
+          "caption": "Random walk steps — level drifts up in discrete jumps."
+        },
+        {
+          "src": "assets/examples/bivariate/step_plot_2.png",
+          "caption": "Setpoint changes — the target holds between adjustments."
+        },
+        {
+          "src": "assets/examples/bivariate/step_plot_3.png",
+          "caption": "Countdown — a quantity decrements to zero."
+        },
+        {
+          "src": "assets/examples/bivariate/step_plot_4.png",
+          "caption": "Depletion — inventory falls in discrete withdrawals."
+        }
       ]
     },
     "joint_scatter_hist_static": {
@@ -9125,11 +10778,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.joint_scatter_hist_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(15)\nx = rng.normal(0, 1, 500)\ny = 0.6 * x + rng.normal(0, 0.8, 500)\n\nax = dv.bivariate.joint_scatter_hist_static(x, y)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "joint_scatter_hist_interactive",
         "joint_scatter_hist"
+      ],
+      "useCase": "Use a joint scatter-histogram plot to see the bivariate relationship and both marginal distributions at once. The central scatter shows how the variables move together while the side histograms reveal skew, bimodality, or outliers in each variable alone — context that changes how the joint pattern should be interpreted.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/joint_scatter_hist_1.png",
+          "caption": "Correlated pair — marginals are both bell-shaped."
+        },
+        {
+          "src": "assets/examples/bivariate/joint_scatter_hist_2.png",
+          "caption": "Independent normals — no joint or marginal surprises."
+        },
+        {
+          "src": "assets/examples/bivariate/joint_scatter_hist_3.png",
+          "caption": "Skewed marginals — both histograms lean right."
+        },
+        {
+          "src": "assets/examples/bivariate/joint_scatter_hist_4.png",
+          "caption": "Bimodal y — the side histogram exposes two groups."
+        }
       ]
     },
     "bivariate_histogram_static": {
@@ -9208,11 +10880,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.bivariate_histogram_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(16)\nx = rng.normal(0, 1, 3000)\ny = 0.5 * x + rng.normal(0, 0.9, 3000)\n\nax = dv.bivariate.bivariate_histogram_static(x, y, bins=30)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "bivariate_histogram_interactive",
         "bivariate_histogram"
+      ],
+      "useCase": "Use a bivariate histogram to map the joint density of two continuous variables as a gridded heatmap. Rectangular bin counts make concentration regions, correlation ridges, and sparse tails quantitatively readable, and the regular grid is easy to tune (bins) or export for further numeric analysis.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/bivariate_histogram_1.png",
+          "caption": "Correlated mass — density stretches along the diagonal."
+        },
+        {
+          "src": "assets/examples/bivariate/bivariate_histogram_2.png",
+          "caption": "Two clusters — the bins reveal two distinct groups."
+        },
+        {
+          "src": "assets/examples/bivariate/bivariate_histogram_3.png",
+          "caption": "Uniform spread — no concentration anywhere in the plane."
+        },
+        {
+          "src": "assets/examples/bivariate/bivariate_histogram_4.png",
+          "caption": "Skewed density — mass piles up near the origin."
+        }
       ]
     },
     "outlier_scatter_static": {
@@ -9297,11 +10988,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.outlier_scatter_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(17)\nx = rng.normal(50, 8, 300)\ny = 0.8 * x + rng.normal(0, 6, 300)\nx = np.r_[x, [95, 20, 105]]\ny = np.r_[y, [30, 90, 110]]\n\nax = dv.bivariate.outlier_scatter_static(x, y, method=\"iqr\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. Outlier-related helpers should be treated as decision support; inspect the flagged records before removing or capping values. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "outlier_scatter_interactive",
         "outlier_scatter"
+      ],
+      "useCase": "Use an outlier scatter plot to separate anomalous points from the bulk of the data using IQR fences or z-scores on both variables. Colour-coding flagged points shows immediately whether outliers are isolated data-entry errors, extreme but plausible values, or a distinct sub-population that deserves separate treatment.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/outlier_scatter_1.png",
+          "caption": "IQR fences — three points fall outside the whiskers."
+        },
+        {
+          "src": "assets/examples/bivariate/outlier_scatter_2.png",
+          "caption": "Z-score rule — extreme standardised values flagged."
+        },
+        {
+          "src": "assets/examples/bivariate/outlier_scatter_3.png",
+          "caption": "Tight fence — a strict threshold flags borderline points."
+        },
+        {
+          "src": "assets/examples/bivariate/outlier_scatter_4.png",
+          "caption": "Clean data — nothing exceeds the fences."
+        }
       ]
     },
     "residual_relationship_static": {
@@ -9368,11 +11078,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.residual_relationship_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(18)\nx = rng.uniform(0, 10, 200)\ny = 2 * x + 0.3 * x**2 + rng.normal(0, 2, 200)\n\nax = dv.bivariate.residual_relationship_static(x, y, degree=1)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "residual_relationship_interactive",
         "residual_relationship"
+      ],
+      "useCase": "Use the residual relationship plot to diagnose how well a polynomial fit of a given degree captures the relationship between two variables. Plotting the fit residuals against the predictor exposes systematic curvature, fan-shaped heteroscedasticity, and influential points — patterns that mean the chosen degree or a linear model itself is inadequate.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/residual_relationship_1.png",
+          "caption": "Adequate fit — residuals scatter randomly around zero."
+        },
+        {
+          "src": "assets/examples/bivariate/residual_relationship_2.png",
+          "caption": "Missed curvature — residuals arc because the fit is too simple."
+        },
+        {
+          "src": "assets/examples/bivariate/residual_relationship_3.png",
+          "caption": "Heteroscedasticity — the residual spread fans out with x."
+        },
+        {
+          "src": "assets/examples/bivariate/residual_relationship_4.png",
+          "caption": "Influential outlier — one point dominates the residual scale."
+        }
       ]
     },
     "quantile_bin_plot_static": {
@@ -9445,11 +11174,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.quantile_bin_plot_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(19)\nx = rng.gamma(2.0, 1.5, 1500)\ny = 5 + 3 * np.log1p(x) + rng.normal(0, 1.5, 1500)\n\nax = dv.bivariate.quantile_bin_plot_static(x, y, q=10)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "quantile_bin_plot_interactive",
         "quantile_bin_plot"
+      ],
+      "useCase": "Use a quantile bin plot to summarise how the mean or median of y changes across equal-count bins of x. Because each bin holds the same number of observations, every point is estimated with equal precision, giving a cleaner dose-response or trend curve than equal-width bins when x is unevenly distributed.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/quantile_bin_plot_1.png",
+          "caption": "Linear rise — each decile of x adds the same amount."
+        },
+        {
+          "src": "assets/examples/bivariate/quantile_bin_plot_2.png",
+          "caption": "Diminishing returns — the curve flattens at high x."
+        },
+        {
+          "src": "assets/examples/bivariate/quantile_bin_plot_3.png",
+          "caption": "No effect — every quantile bin averages the same."
+        },
+        {
+          "src": "assets/examples/bivariate/quantile_bin_plot_4.png",
+          "caption": "Median robustness — the median ignores the injected outliers."
+        }
       ]
     },
     "bland_altman_static": {
@@ -9510,11 +11258,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.bland_altman_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(20)\nmethod_a = rng.normal(100, 15, 150)\nmethod_b = method_a + rng.normal(2.0, 4.0, 150)\n\nax = dv.bivariate.bland_altman_static(method_a, method_b)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "bland_altman_interactive",
         "bland_altman"
+      ],
+      "useCase": "Use the Bland-Altman plot to assess agreement between two measurement methods — a new sensor against a reference instrument, one lab assay against another. Plotting the difference against the mean reveals systematic bias (the mean-difference line), the limits of agreement within which 95% of differences fall, and whether disagreement grows with magnitude.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/bland_altman_1.png",
+          "caption": "Good agreement — differences hug zero inside narrow limits."
+        },
+        {
+          "src": "assets/examples/bivariate/bland_altman_2.png",
+          "caption": "Constant bias — method B reads six units high throughout."
+        },
+        {
+          "src": "assets/examples/bivariate/bland_altman_3.png",
+          "caption": "Proportional bias — the gap widens as magnitude grows."
+        },
+        {
+          "src": "assets/examples/bivariate/bland_altman_4.png",
+          "caption": "Poor agreement — wide limits of agreement reject interchangeability."
+        }
       ]
     },
     "rank_scatter_static": {
@@ -9575,11 +11342,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.rank_scatter_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(21)\nx = rng.uniform(0, 100, 200)\ny = np.sqrt(x) * 10 + rng.normal(0, 8, 200)\n\nax = dv.bivariate.rank_scatter_static(x, y)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "rank_scatter_interactive",
         "rank_scatter"
+      ],
+      "useCase": "Use a rank scatter plot to visualise monotonic association after replacing raw values with their ranks, the basis of Spearman's correlation. Ranking removes the influence of outliers and non-linear scales, so the plot shows whether one variable consistently increases with the other even when the raw relationship is curved or heavy-tailed.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/rank_scatter_1.png",
+          "caption": "Monotone linear — ranks fall neatly along the diagonal."
+        },
+        {
+          "src": "assets/examples/bivariate/rank_scatter_2.png",
+          "caption": "Monotone but curved — ranking straightens the square-root shape."
+        },
+        {
+          "src": "assets/examples/bivariate/rank_scatter_3.png",
+          "caption": "Weak association — ranks scatter broadly."
+        },
+        {
+          "src": "assets/examples/bivariate/rank_scatter_4.png",
+          "caption": "U-shaped — ranks reveal the reversal of direction."
+        }
       ]
     },
     "lag_plot_static": {
@@ -9646,11 +11432,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.lag_plot_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(22)\nnoise = rng.normal(0, 1, 300)\nseries = pd.Series(np.convolve(noise, [0.8, 0.2], mode=\"same\")[:300])\n\nax = dv.bivariate.lag_plot_static(series, series, lag=1)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "lag_plot_interactive",
         "lag_plot"
+      ],
+      "useCase": "Use a lag plot to check time-ordered data for autocorrelation by plotting each value against the value k periods earlier. Random scatter along no particular pattern indicates independence, while structure — a diagonal band, a curve, or an ellipse — reveals serial dependence that violates the assumptions of many control charts and time-series models.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/lag_plot_1.png",
+          "caption": "White noise — no structure, consecutive values independent."
+        },
+        {
+          "src": "assets/examples/bivariate/lag_plot_2.png",
+          "caption": "Autocorrelated — the diagonal band shows lag-1 dependence."
+        },
+        {
+          "src": "assets/examples/bivariate/lag_plot_3.png",
+          "caption": "Seasonal series — lag 12 exposes the repeating cycle."
+        },
+        {
+          "src": "assets/examples/bivariate/lag_plot_4.png",
+          "caption": "Trending series — the tight diagonal reflects the drift."
+        }
       ]
     },
     "conditional_box_static": {
@@ -9717,11 +11522,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nax = dv.bivariate.conditional_box_static(x, y)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(23)\nx = rng.uniform(0, 10, 800)\ny = 3 * x + rng.normal(0, 1 + 0.4 * x, 800)\n\nax = dv.bivariate.conditional_box_static(x, y, bins=8)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "conditional_box_interactive",
         "conditional_box"
+      ],
+      "useCase": "Use a conditional box plot to see how the full distribution of y changes as x increases by binning x and drawing a box plot per bin. Unlike a mean line, the boxes expose where spread widens, where medians shift non-linearly, and where outliers concentrate — a distribution-aware view of the conditional relationship.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/conditional_box_1.png",
+          "caption": "Linear shift — box medians march upward across bins."
+        },
+        {
+          "src": "assets/examples/bivariate/conditional_box_2.png",
+          "caption": "Nonlinear — medians rise then fall with x."
+        },
+        {
+          "src": "assets/examples/bivariate/conditional_box_3.png",
+          "caption": "Widening spread — boxes grow taller toward high x."
+        },
+        {
+          "src": "assets/examples/bivariate/conditional_box_4.png",
+          "caption": "No relationship — every bin looks the same."
+        }
       ]
     },
     "scatter_plot_interactive": {
@@ -9902,11 +11726,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.scatter_plot_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nx = pd.Series(rng.normal(50, 10, 200), name=\"Temperature\")\ny = pd.Series(2.5 * x + rng.normal(0, 15, 200), name=\"Cycle time\")\n\nfig = dv.bivariate.scatter_plot_interactive(x, y, show_corr=True)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "scatter_plot_static",
         "scatter_plot"
+      ],
+      "useCase": "Use a scatter plot as the first look at any pairwise relationship — cycle time versus temperature, price versus demand — to judge direction, strength, and shape before modelling. Point clouds reveal correlation, clusters, curvature, and outliers that summary statistics hide, and optional fitted lines or correlation annotations quantify what the eye sees.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/scatter_plot_1.png",
+          "caption": "Strong linear trend — y rises steadily with x."
+        },
+        {
+          "src": "assets/examples/bivariate/scatter_plot_2.png",
+          "caption": "Curved relationship — a parabola the eye catches at once."
+        },
+        {
+          "src": "assets/examples/bivariate/scatter_plot_3.png",
+          "caption": "No correlation — the cloud is round and directionless."
+        },
+        {
+          "src": "assets/examples/bivariate/scatter_plot_4.png",
+          "caption": "Outlier-driven — three stray points dominate the picture."
+        }
       ]
     },
     "line_plot_interactive": {
@@ -10081,11 +11924,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.line_plot_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(1)\nx = pd.Series(np.arange(60), name=\"Day\")\ny = pd.Series(\n    100 + np.arange(60) * 0.4 + rng.normal(0, 3, 60), name=\"Throughput\"\n)\n\nfig = dv.bivariate.line_plot_interactive(x, y, rolling_window=7)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "line_plot_static",
         "line_plot"
+      ],
+      "useCase": "Use a line plot when observations have a natural order — time, sequence, dose — and you want to trace how a value evolves along it. Connecting the points emphasises trends, cycles, and abrupt changes, and the optional rolling average overlay separates the underlying movement from point-to-point noise.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/line_plot_1.png",
+          "caption": "Upward trend — throughput climbs steadily over the period."
+        },
+        {
+          "src": "assets/examples/bivariate/line_plot_2.png",
+          "caption": "Seasonal cycle — a repeating wave rides on the noise."
+        },
+        {
+          "src": "assets/examples/bivariate/line_plot_3.png",
+          "caption": "Flat series — no trend, only point-to-point variation."
+        },
+        {
+          "src": "assets/examples/bivariate/line_plot_4.png",
+          "caption": "Step change — the level drops abruptly midway through."
+        }
       ]
     },
     "correlation_heatmap_interactive": {
@@ -10212,11 +12074,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns Union[PlotlyFigure, Tuple[PlotlyFigure, pd.DataFrame]], usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.correlation_heatmap_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(2)\na = rng.normal(0, 1, 200)\ndf = pd.DataFrame({\n    \"a\": a,\n    \"b\": 0.8 * a + rng.normal(0, 0.5, 200),\n    \"c\": rng.normal(0, 1, 200),\n    \"d\": -0.6 * a + rng.normal(0, 0.7, 200),\n})\n\nfig = dv.bivariate.correlation_heatmap_interactive(df)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "correlation_heatmap_static",
         "correlation_heatmap"
+      ],
+      "useCase": "Use the correlation heatmap to screen many numeric variables at once before modelling or root-cause work. Colour-coding the full pairwise correlation matrix makes strong linear relationships, redundant variables, and unexpected sign patterns visible in one glance, and Pearson, Kendall, or Spearman methods cover both linear and monotonic association.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/correlation_heatmap_1.png",
+          "caption": "Strong blocks — high positive and negative correlations stand out."
+        },
+        {
+          "src": "assets/examples/bivariate/correlation_heatmap_2.png",
+          "caption": "Weak correlations — no meaningful structure between variables."
+        },
+        {
+          "src": "assets/examples/bivariate/correlation_heatmap_3.png",
+          "caption": "Mixed signs — positive and negative associations side by side."
+        },
+        {
+          "src": "assets/examples/bivariate/correlation_heatmap_4.png",
+          "caption": "One dominant pair — a single strong link among independents."
+        }
       ]
     },
     "bubble_plot_interactive": {
@@ -10319,11 +12200,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.bubble_plot_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(3)\nx = rng.normal(50, 12, 60)\ny = 0.7 * x + rng.normal(0, 8, 60)\nsize = rng.uniform(50, 500, 60)\ncolor = rng.uniform(0, 1, 60)\n\nfig = dv.bivariate.bubble_plot_interactive(x, y, size, color)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "bubble_plot_static",
         "bubble_plot"
+      ],
+      "useCase": "Use a bubble plot when a third (and optionally fourth) variable matters alongside the two positional axes — for example revenue versus margin with bubble size for volume and colour for growth. Encoding extra dimensions in size and colour lets one chart carry the information of several scatter plots while staying readable.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/bubble_plot_1.png",
+          "caption": "Size tracks x — larger bubbles cluster to the right."
+        },
+        {
+          "src": "assets/examples/bivariate/bubble_plot_2.png",
+          "caption": "Unrelated size — bubble area carries no signal."
+        },
+        {
+          "src": "assets/examples/bivariate/bubble_plot_3.png",
+          "caption": "Colour gradient — a fourth variable encoded as colour."
+        },
+        {
+          "src": "assets/examples/bivariate/bubble_plot_4.png",
+          "caption": "Few large players — a handful of bubbles dominate the field."
+        }
       ]
     },
     "hexbin_plot_interactive": {
@@ -10414,11 +12314,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.hexbin_plot_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(4)\nx = rng.normal(0, 1, 5000)\ny = 0.6 * x + rng.normal(0, 0.8, 5000)\n\nfig = dv.bivariate.hexbin_plot_interactive(x, y, gridsize=30)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "hexbin_plot_static",
         "hexbin_plot"
+      ],
+      "useCase": "Use a hexbin plot instead of a scatter plot when thousands of points overlap into an unreadable blob. Binning the plane into hexagons and colouring by count reveals where the density actually concentrates — hotspots, ridges, and empty regions — without the overplotting that hides structure in large samples.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/hexbin_plot_1.png",
+          "caption": "Correlated mass — density stretches along the diagonal."
+        },
+        {
+          "src": "assets/examples/bivariate/hexbin_plot_2.png",
+          "caption": "Two clusters — the bins reveal two distinct groups."
+        },
+        {
+          "src": "assets/examples/bivariate/hexbin_plot_3.png",
+          "caption": "Uniform spread — no concentration anywhere in the plane."
+        },
+        {
+          "src": "assets/examples/bivariate/hexbin_plot_4.png",
+          "caption": "Skewed density — mass piles up near the origin."
+        }
       ]
     },
     "regression_plot_interactive": {
@@ -10509,11 +12428,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.regression_plot_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(5)\nx = rng.uniform(0, 10, 150)\ny = 3 + 2 * x + rng.normal(0, 3, 150)\n\nfig = dv.bivariate.regression_plot_interactive(x, y, degree=1)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "regression_plot_static",
         "regression_plot"
+      ],
+      "useCase": "Use a regression plot to overlay a fitted line or curve on raw observations so you can judge how well a simple model captures the relationship. The scatter shows the data, the fitted line shows the trend, and the gap between them — systematic curvature or funnel-shaped spread — tells you whether a linear model is adequate or a higher degree is needed.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/regression_plot_1.png",
+          "caption": "Linear fit — the degree-1 line tracks the data well."
+        },
+        {
+          "src": "assets/examples/bivariate/regression_plot_2.png",
+          "caption": "Curved trend — degree 2 follows the acceleration."
+        },
+        {
+          "src": "assets/examples/bivariate/regression_plot_3.png",
+          "caption": "Weak slope — the fit is nearly flat against the noise."
+        },
+        {
+          "src": "assets/examples/bivariate/regression_plot_4.png",
+          "caption": "Outliers pull — a few points bend the fitted line."
+        }
       ]
     },
     "density_contour_interactive": {
@@ -10598,11 +12536,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.density_contour_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(6)\nx = rng.normal(0, 1, 1500)\ny = 0.7 * x + rng.normal(0, 0.7, 1500)\n\nfig = dv.bivariate.density_contour_interactive(x, y)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "density_contour_static",
         "density_contour"
+      ],
+      "useCase": "Use a density contour plot to show the shape of a bivariate distribution when individual points would overlap. Contour lines trace regions of equal estimated density, so multiple modes, elongated correlation structure, and skew appear as terrain-like features rather than an undifferentiated point cloud.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/density_contour_1.png",
+          "caption": "Correlated mass — density stretches along the diagonal."
+        },
+        {
+          "src": "assets/examples/bivariate/density_contour_2.png",
+          "caption": "Two clusters — the bins reveal two distinct groups."
+        },
+        {
+          "src": "assets/examples/bivariate/density_contour_3.png",
+          "caption": "Uniform spread — no concentration anywhere in the plane."
+        },
+        {
+          "src": "assets/examples/bivariate/density_contour_4.png",
+          "caption": "Skewed density — mass piles up near the origin."
+        }
       ]
     },
     "grouped_bar_interactive": {
@@ -10687,11 +12644,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nfig = dv.bivariate.grouped_bar_interactive(categories, values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\ncategory = pd.Series(rng.choice([\"A\", \"B\", \"C\", \"D\"], 400))\nvalues = pd.Series(rng.normal(100, 15, 400) + category.map(\n    {\"A\": 0, \"B\": 12, \"C\": -8, \"D\": 20}\n))\n\nfig = dv.bivariate.grouped_bar_interactive(category, values)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "grouped_bar_static",
         "grouped_bar"
+      ],
+      "useCase": "Use a grouped bar chart to compare an aggregated metric — mean, sum, or any custom function — across categories such as product lines, regions, or shifts. Bar height makes differences in level immediate, which suits ranked comparisons and presentations to audiences who read bars more easily than distributions.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/grouped_bar_1.png",
+          "caption": "Shifted levels — group means differ clearly."
+        },
+        {
+          "src": "assets/examples/bivariate/grouped_bar_2.png",
+          "caption": "No group effect — all categories average the same."
+        },
+        {
+          "src": "assets/examples/bivariate/grouped_bar_3.png",
+          "caption": "One dominant group — totals driven by category A."
+        },
+        {
+          "src": "assets/examples/bivariate/grouped_bar_4.png",
+          "caption": "Mixed signs — some groups average below zero."
+        }
       ]
     },
     "box_by_category_interactive": {
@@ -10764,11 +12740,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nfig = dv.bivariate.box_by_category_interactive(categories, values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(8)\ncategory = pd.Series(rng.choice([\"Line 1\", \"Line 2\", \"Line 3\"], 300))\nvalues = pd.Series(rng.normal(50, 5, 300) + category.map(\n    {\"Line 1\": 0, \"Line 2\": 4, \"Line 3\": -3}\n))\n\nfig = dv.bivariate.box_by_category_interactive(category, values)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "box_by_category_static",
         "box_by_category"
+      ],
+      "useCase": "Use box plots by category to compare the distribution of a continuous measure across groups — fill weight across machines, response time across servers. The median, quartiles, whiskers, and flier points expose shifts in location, differences in spread, and outliers per group without assuming any distribution shape.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/box_by_category_1.png",
+          "caption": "Shifted levels — group means differ clearly."
+        },
+        {
+          "src": "assets/examples/bivariate/box_by_category_2.png",
+          "caption": "No group effect — all categories average the same."
+        },
+        {
+          "src": "assets/examples/bivariate/box_by_category_3.png",
+          "caption": "One dominant group — totals driven by category A."
+        },
+        {
+          "src": "assets/examples/bivariate/box_by_category_4.png",
+          "caption": "Mixed signs — some groups average below zero."
+        }
       ]
     },
     "violin_by_category_interactive": {
@@ -10841,11 +12836,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nfig = dv.bivariate.violin_by_category_interactive(categories, values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(9)\ncategory = pd.Series(rng.choice([\"A\", \"B\", \"C\"], 450))\nvalues = pd.Series(\n    np.where(\n        category == \"B\",\n        rng.normal(40, 4, 450),\n        rng.normal(50, 6, 450),\n    )\n)\n\nfig = dv.bivariate.violin_by_category_interactive(category, values)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "violin_by_category_static",
         "violin_by_category"
+      ],
+      "useCase": "Use violin plots by category when the box plot's five-number summary is too coarse — when you suspect bimodality, skew, or shoulder shapes within groups. The mirrored density trace shows the full estimated distribution per category, making multimodal or asymmetric groups obvious where a box plot would look identical.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/violin_by_category_1.png",
+          "caption": "Location shifts — violins sit at different heights."
+        },
+        {
+          "src": "assets/examples/bivariate/violin_by_category_2.png",
+          "caption": "Bimodal group — category A shows two humps."
+        },
+        {
+          "src": "assets/examples/bivariate/violin_by_category_3.png",
+          "caption": "Right-skewed — long upper tails in every group."
+        },
+        {
+          "src": "assets/examples/bivariate/violin_by_category_4.png",
+          "caption": "Growing spread — violins widen from A to C."
+        }
       ]
     },
     "crosstab_heatmap_interactive": {
@@ -10918,11 +12932,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.crosstab_heatmap_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(10)\nrows = pd.Series(rng.choice([\"North\", \"South\", \"East\"], 500, p=[0.5, 0.3, 0.2]))\ncols = pd.Series(rng.choice([\"Pass\", \"Rework\", \"Scrap\"], 500))\n\nfig = dv.bivariate.crosstab_heatmap_interactive(rows, cols, normalize=\"index\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "crosstab_heatmap_static",
         "crosstab_heatmap"
+      ],
+      "useCase": "Use a crosstab heatmap to examine how two categorical variables co-occur — defect type by shift, segment by channel. Colour intensity over the contingency table highlights combinations that are unusually frequent or rare, and row or column normalisation converts raw counts into comparable rates when group sizes differ.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/crosstab_heatmap_1.png",
+          "caption": "Independent factors — shares spread evenly across cells."
+        },
+        {
+          "src": "assets/examples/bivariate/crosstab_heatmap_2.png",
+          "caption": "Strong association — each region favours a different outcome."
+        },
+        {
+          "src": "assets/examples/bivariate/crosstab_heatmap_3.png",
+          "caption": "Row-normalised — rates comparable despite unequal group sizes."
+        },
+        {
+          "src": "assets/examples/bivariate/crosstab_heatmap_4.png",
+          "caption": "Rare combinations — some cells barely occur at all."
+        }
       ]
     },
     "binned_mean_plot_interactive": {
@@ -11007,11 +13040,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.binned_mean_plot_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(11)\nx = rng.uniform(0, 10, 2000)\ny = 2 * x + rng.normal(0, 5, 2000)\n\nfig = dv.bivariate.binned_mean_plot_interactive(x, y, bins=12)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "binned_mean_plot_static",
         "binned_mean_plot"
+      ],
+      "useCase": "Use a binned mean plot to extract the trend from a noisy scatter by averaging y within equal-width bins of x. Binning suppresses point-level noise so the underlying shape — linear, saturating, U-shaped — stands out, which is especially useful for large datasets where the raw cloud is too dense to read.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/binned_mean_plot_1.png",
+          "caption": "Linear trend — binned means climb steadily."
+        },
+        {
+          "src": "assets/examples/bivariate/binned_mean_plot_2.png",
+          "caption": "Nonlinear wave — binning reveals a sinusoid under the noise."
+        },
+        {
+          "src": "assets/examples/bivariate/binned_mean_plot_3.png",
+          "caption": "No relationship — the binned means stay flat."
+        },
+        {
+          "src": "assets/examples/bivariate/binned_mean_plot_4.png",
+          "caption": "Stable mean, growing noise — trend holds while spread widens."
+        }
       ]
     },
     "errorbar_plot_interactive": {
@@ -11102,11 +13154,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.errorbar_plot_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(12)\nx = np.arange(1, 9)\ny = 10 + 2 * x + rng.normal(0, 0.5, 8)\nyerr = rng.uniform(0.5, 2.0, 8)\n\nfig = dv.bivariate.errorbar_plot_interactive(x, y, yerr=yerr)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "errorbar_plot_static",
         "errorbar_plot"
+      ],
+      "useCase": "Use an errorbar plot when each point carries uncertainty — replicated measurements, survey estimates, simulation means. Drawing the error bars alongside the central values shows which differences between conditions are larger than their uncertainty and which could easily be noise, preventing over-reading of small gaps.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/errorbar_plot_1.png",
+          "caption": "Constant uncertainty — every estimate is equally precise."
+        },
+        {
+          "src": "assets/examples/bivariate/errorbar_plot_2.png",
+          "caption": "Growing uncertainty — later measurements are noisier."
+        },
+        {
+          "src": "assets/examples/bivariate/errorbar_plot_3.png",
+          "caption": "Two-dimensional error — both x and y carry uncertainty."
+        },
+        {
+          "src": "assets/examples/bivariate/errorbar_plot_4.png",
+          "caption": "Small samples — wide intervals warn against over-reading."
+        }
       ]
     },
     "area_between_interactive": {
@@ -11191,11 +13262,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.area_between_interactive(x)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(13)\nx = np.linspace(0, 10, 100)\nmid = np.sin(x)\ny_lower = mid - 0.3\ny_upper = mid + 0.3\n\nfig = dv.bivariate.area_between_interactive(x, y_lower, y_upper)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "area_between_static",
         "area_between"
+      ],
+      "useCase": "Use an area-between plot to display a band bounded by two curves — a confidence interval around a forecast, tolerance limits around a nominal profile, or a min-max envelope from repeated runs. The shaded region communicates the range of plausible values directly, which is clearer than two separate boundary lines.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/area_between_1.png",
+          "caption": "Constant band — a fixed tolerance around the nominal curve."
+        },
+        {
+          "src": "assets/examples/bivariate/area_between_2.png",
+          "caption": "Widening band — uncertainty grows away from the origin."
+        },
+        {
+          "src": "assets/examples/bivariate/area_between_3.png",
+          "caption": "Confidence envelope — interval balloons at the edges."
+        },
+        {
+          "src": "assets/examples/bivariate/area_between_4.png",
+          "caption": "Seasonal envelope — the band breathes with the cycle."
+        }
       ]
     },
     "step_plot_interactive": {
@@ -11280,11 +13370,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.step_plot_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(14)\nx = np.arange(0, 20)\ny = np.cumsum(rng.choice([-1, 0, 1, 2], 20, p=[0.2, 0.3, 0.3, 0.2])) + 20\n\nfig = dv.bivariate.step_plot_interactive(x, y, where=\"post\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "step_plot_static",
         "step_plot"
+      ],
+      "useCase": "Use a step plot for values that change discretely and hold until the next change — price tiers, setpoint adjustments, staffing levels, cumulative counts. The horizontal-then-vertical trace correctly shows that the value is constant between events, where a sloped line would falsely imply gradual transitions.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/step_plot_1.png",
+          "caption": "Random walk steps — level drifts up in discrete jumps."
+        },
+        {
+          "src": "assets/examples/bivariate/step_plot_2.png",
+          "caption": "Setpoint changes — the target holds between adjustments."
+        },
+        {
+          "src": "assets/examples/bivariate/step_plot_3.png",
+          "caption": "Countdown — a quantity decrements to zero."
+        },
+        {
+          "src": "assets/examples/bivariate/step_plot_4.png",
+          "caption": "Depletion — inventory falls in discrete withdrawals."
+        }
       ]
     },
     "joint_scatter_hist_interactive": {
@@ -11375,11 +13484,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.joint_scatter_hist_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(15)\nx = rng.normal(0, 1, 500)\ny = 0.6 * x + rng.normal(0, 0.8, 500)\n\nfig = dv.bivariate.joint_scatter_hist_interactive(x, y)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "joint_scatter_hist_static",
         "joint_scatter_hist"
+      ],
+      "useCase": "Use a joint scatter-histogram plot to see the bivariate relationship and both marginal distributions at once. The central scatter shows how the variables move together while the side histograms reveal skew, bimodality, or outliers in each variable alone — context that changes how the joint pattern should be interpreted.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/joint_scatter_hist_1.png",
+          "caption": "Correlated pair — marginals are both bell-shaped."
+        },
+        {
+          "src": "assets/examples/bivariate/joint_scatter_hist_2.png",
+          "caption": "Independent normals — no joint or marginal surprises."
+        },
+        {
+          "src": "assets/examples/bivariate/joint_scatter_hist_3.png",
+          "caption": "Skewed marginals — both histograms lean right."
+        },
+        {
+          "src": "assets/examples/bivariate/joint_scatter_hist_4.png",
+          "caption": "Bimodal y — the side histogram exposes two groups."
+        }
       ]
     },
     "bivariate_histogram_interactive": {
@@ -11470,11 +13598,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.bivariate_histogram_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(16)\nx = rng.normal(0, 1, 3000)\ny = 0.5 * x + rng.normal(0, 0.9, 3000)\n\nfig = dv.bivariate.bivariate_histogram_interactive(x, y, bins=30)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "bivariate_histogram_static",
         "bivariate_histogram"
+      ],
+      "useCase": "Use a bivariate histogram to map the joint density of two continuous variables as a gridded heatmap. Rectangular bin counts make concentration regions, correlation ridges, and sparse tails quantitatively readable, and the regular grid is easy to tune (bins) or export for further numeric analysis.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/bivariate_histogram_1.png",
+          "caption": "Correlated mass — density stretches along the diagonal."
+        },
+        {
+          "src": "assets/examples/bivariate/bivariate_histogram_2.png",
+          "caption": "Two clusters — the bins reveal two distinct groups."
+        },
+        {
+          "src": "assets/examples/bivariate/bivariate_histogram_3.png",
+          "caption": "Uniform spread — no concentration anywhere in the plane."
+        },
+        {
+          "src": "assets/examples/bivariate/bivariate_histogram_4.png",
+          "caption": "Skewed density — mass piles up near the origin."
+        }
       ]
     },
     "outlier_scatter_interactive": {
@@ -11553,11 +13700,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.outlier_scatter_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(17)\nx = rng.normal(50, 8, 300)\ny = 0.8 * x + rng.normal(0, 6, 300)\nx = np.r_[x, [95, 20, 105]]\ny = np.r_[y, [30, 90, 110]]\n\nfig = dv.bivariate.outlier_scatter_interactive(x, y, method=\"iqr\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. Outlier-related helpers should be treated as decision support; inspect the flagged records before removing or capping values. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "outlier_scatter_static",
         "outlier_scatter"
+      ],
+      "useCase": "Use an outlier scatter plot to separate anomalous points from the bulk of the data using IQR fences or z-scores on both variables. Colour-coding flagged points shows immediately whether outliers are isolated data-entry errors, extreme but plausible values, or a distinct sub-population that deserves separate treatment.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/outlier_scatter_1.png",
+          "caption": "IQR fences — three points fall outside the whiskers."
+        },
+        {
+          "src": "assets/examples/bivariate/outlier_scatter_2.png",
+          "caption": "Z-score rule — extreme standardised values flagged."
+        },
+        {
+          "src": "assets/examples/bivariate/outlier_scatter_3.png",
+          "caption": "Tight fence — a strict threshold flags borderline points."
+        },
+        {
+          "src": "assets/examples/bivariate/outlier_scatter_4.png",
+          "caption": "Clean data — nothing exceeds the fences."
+        }
       ]
     },
     "residual_relationship_interactive": {
@@ -11630,11 +13796,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.residual_relationship_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(18)\nx = rng.uniform(0, 10, 200)\ny = 2 * x + 0.3 * x**2 + rng.normal(0, 2, 200)\n\nfig = dv.bivariate.residual_relationship_interactive(x, y, degree=1)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "residual_relationship_static",
         "residual_relationship"
+      ],
+      "useCase": "Use the residual relationship plot to diagnose how well a polynomial fit of a given degree captures the relationship between two variables. Plotting the fit residuals against the predictor exposes systematic curvature, fan-shaped heteroscedasticity, and influential points — patterns that mean the chosen degree or a linear model itself is inadequate.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/residual_relationship_1.png",
+          "caption": "Adequate fit — residuals scatter randomly around zero."
+        },
+        {
+          "src": "assets/examples/bivariate/residual_relationship_2.png",
+          "caption": "Missed curvature — residuals arc because the fit is too simple."
+        },
+        {
+          "src": "assets/examples/bivariate/residual_relationship_3.png",
+          "caption": "Heteroscedasticity — the residual spread fans out with x."
+        },
+        {
+          "src": "assets/examples/bivariate/residual_relationship_4.png",
+          "caption": "Influential outlier — one point dominates the residual scale."
+        }
       ]
     },
     "quantile_bin_plot_interactive": {
@@ -11713,11 +13898,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.quantile_bin_plot_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(19)\nx = rng.gamma(2.0, 1.5, 1500)\ny = 5 + 3 * np.log1p(x) + rng.normal(0, 1.5, 1500)\n\nfig = dv.bivariate.quantile_bin_plot_interactive(x, y, q=10)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "quantile_bin_plot_static",
         "quantile_bin_plot"
+      ],
+      "useCase": "Use a quantile bin plot to summarise how the mean or median of y changes across equal-count bins of x. Because each bin holds the same number of observations, every point is estimated with equal precision, giving a cleaner dose-response or trend curve than equal-width bins when x is unevenly distributed.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/quantile_bin_plot_1.png",
+          "caption": "Linear rise — each decile of x adds the same amount."
+        },
+        {
+          "src": "assets/examples/bivariate/quantile_bin_plot_2.png",
+          "caption": "Diminishing returns — the curve flattens at high x."
+        },
+        {
+          "src": "assets/examples/bivariate/quantile_bin_plot_3.png",
+          "caption": "No effect — every quantile bin averages the same."
+        },
+        {
+          "src": "assets/examples/bivariate/quantile_bin_plot_4.png",
+          "caption": "Median robustness — the median ignores the injected outliers."
+        }
       ]
     },
     "bland_altman_interactive": {
@@ -11784,11 +13988,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.bland_altman_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(20)\nmethod_a = rng.normal(100, 15, 150)\nmethod_b = method_a + rng.normal(2.0, 4.0, 150)\n\nfig = dv.bivariate.bland_altman_interactive(method_a, method_b)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "bland_altman_static",
         "bland_altman"
+      ],
+      "useCase": "Use the Bland-Altman plot to assess agreement between two measurement methods — a new sensor against a reference instrument, one lab assay against another. Plotting the difference against the mean reveals systematic bias (the mean-difference line), the limits of agreement within which 95% of differences fall, and whether disagreement grows with magnitude.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/bland_altman_1.png",
+          "caption": "Good agreement — differences hug zero inside narrow limits."
+        },
+        {
+          "src": "assets/examples/bivariate/bland_altman_2.png",
+          "caption": "Constant bias — method B reads six units high throughout."
+        },
+        {
+          "src": "assets/examples/bivariate/bland_altman_3.png",
+          "caption": "Proportional bias — the gap widens as magnitude grows."
+        },
+        {
+          "src": "assets/examples/bivariate/bland_altman_4.png",
+          "caption": "Poor agreement — wide limits of agreement reject interchangeability."
+        }
       ]
     },
     "rank_scatter_interactive": {
@@ -11855,11 +14078,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.rank_scatter_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(21)\nx = rng.uniform(0, 100, 200)\ny = np.sqrt(x) * 10 + rng.normal(0, 8, 200)\n\nfig = dv.bivariate.rank_scatter_interactive(x, y)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "rank_scatter_static",
         "rank_scatter"
+      ],
+      "useCase": "Use a rank scatter plot to visualise monotonic association after replacing raw values with their ranks, the basis of Spearman's correlation. Ranking removes the influence of outliers and non-linear scales, so the plot shows whether one variable consistently increases with the other even when the raw relationship is curved or heavy-tailed.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/rank_scatter_1.png",
+          "caption": "Monotone linear — ranks fall neatly along the diagonal."
+        },
+        {
+          "src": "assets/examples/bivariate/rank_scatter_2.png",
+          "caption": "Monotone but curved — ranking straightens the square-root shape."
+        },
+        {
+          "src": "assets/examples/bivariate/rank_scatter_3.png",
+          "caption": "Weak association — ranks scatter broadly."
+        },
+        {
+          "src": "assets/examples/bivariate/rank_scatter_4.png",
+          "caption": "U-shaped — ranks reveal the reversal of direction."
+        }
       ]
     },
     "lag_plot_interactive": {
@@ -11932,11 +14174,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.lag_plot_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(22)\nnoise = rng.normal(0, 1, 300)\nseries = pd.Series(np.convolve(noise, [0.8, 0.2], mode=\"same\")[:300])\n\nfig = dv.bivariate.lag_plot_interactive(series, series, lag=1)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "lag_plot_static",
         "lag_plot"
+      ],
+      "useCase": "Use a lag plot to check time-ordered data for autocorrelation by plotting each value against the value k periods earlier. Random scatter along no particular pattern indicates independence, while structure — a diagonal band, a curve, or an ellipse — reveals serial dependence that violates the assumptions of many control charts and time-series models.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/lag_plot_1.png",
+          "caption": "White noise — no structure, consecutive values independent."
+        },
+        {
+          "src": "assets/examples/bivariate/lag_plot_2.png",
+          "caption": "Autocorrelated — the diagonal band shows lag-1 dependence."
+        },
+        {
+          "src": "assets/examples/bivariate/lag_plot_3.png",
+          "caption": "Seasonal series — lag 12 exposes the repeating cycle."
+        },
+        {
+          "src": "assets/examples/bivariate/lag_plot_4.png",
+          "caption": "Trending series — the tight diagonal reflects the drift."
+        }
       ]
     },
     "conditional_box_interactive": {
@@ -12009,11 +14270,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nfig = dv.bivariate.conditional_box_interactive(x, y)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(23)\nx = rng.uniform(0, 10, 800)\ny = 3 * x + rng.normal(0, 1 + 0.4 * x, 800)\n\nfig = dv.bivariate.conditional_box_interactive(x, y, bins=8)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "conditional_box_static",
         "conditional_box"
+      ],
+      "useCase": "Use a conditional box plot to see how the full distribution of y changes as x increases by binning x and drawing a box plot per bin. Unlike a mean line, the boxes expose where spread widens, where medians shift non-linearly, and where outliers concentrate — a distribution-aware view of the conditional relationship.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/conditional_box_1.png",
+          "caption": "Linear shift — box medians march upward across bins."
+        },
+        {
+          "src": "assets/examples/bivariate/conditional_box_2.png",
+          "caption": "Nonlinear — medians rise then fall with x."
+        },
+        {
+          "src": "assets/examples/bivariate/conditional_box_3.png",
+          "caption": "Widening spread — boxes grow taller toward high x."
+        },
+        {
+          "src": "assets/examples/bivariate/conditional_box_4.png",
+          "caption": "No relationship — every bin looks the same."
+        }
       ]
     },
     "BivariateStats": {
@@ -12107,11 +14387,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.scatter_plot(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nx = pd.Series(rng.normal(50, 10, 200), name=\"Temperature\")\ny = pd.Series(2.5 * x + rng.normal(0, 15, 200), name=\"Cycle time\")\n\nax = dv.bivariate.scatter_plot_static(x, y, show_corr=True)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "scatter_plot_static",
         "scatter_plot_interactive"
+      ],
+      "useCase": "Use a scatter plot as the first look at any pairwise relationship — cycle time versus temperature, price versus demand — to judge direction, strength, and shape before modelling. Point clouds reveal correlation, clusters, curvature, and outliers that summary statistics hide, and optional fitted lines or correlation annotations quantify what the eye sees.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/scatter_plot_1.png",
+          "caption": "Strong linear trend — y rises steadily with x."
+        },
+        {
+          "src": "assets/examples/bivariate/scatter_plot_2.png",
+          "caption": "Curved relationship — a parabola the eye catches at once."
+        },
+        {
+          "src": "assets/examples/bivariate/scatter_plot_3.png",
+          "caption": "No correlation — the cloud is round and directionless."
+        },
+        {
+          "src": "assets/examples/bivariate/scatter_plot_4.png",
+          "caption": "Outlier-driven — three stray points dominate the picture."
+        }
       ]
     },
     "line_plot": {
@@ -12142,11 +14441,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.line_plot(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(1)\nx = pd.Series(np.arange(60), name=\"Day\")\ny = pd.Series(\n    100 + np.arange(60) * 0.4 + rng.normal(0, 3, 60), name=\"Throughput\"\n)\n\nax = dv.bivariate.line_plot_static(x, y, rolling_window=7)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "line_plot_static",
         "line_plot_interactive"
+      ],
+      "useCase": "Use a line plot when observations have a natural order — time, sequence, dose — and you want to trace how a value evolves along it. Connecting the points emphasises trends, cycles, and abrupt changes, and the optional rolling average overlay separates the underlying movement from point-to-point noise.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/line_plot_1.png",
+          "caption": "Upward trend — throughput climbs steadily over the period."
+        },
+        {
+          "src": "assets/examples/bivariate/line_plot_2.png",
+          "caption": "Seasonal cycle — a repeating wave rides on the noise."
+        },
+        {
+          "src": "assets/examples/bivariate/line_plot_3.png",
+          "caption": "Flat series — no trend, only point-to-point variation."
+        },
+        {
+          "src": "assets/examples/bivariate/line_plot_4.png",
+          "caption": "Step change — the level drops abruptly midway through."
+        }
       ]
     },
     "correlation_heatmap": {
@@ -12177,11 +14495,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.correlation_heatmap(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(2)\na = rng.normal(0, 1, 200)\ndf = pd.DataFrame({\n    \"a\": a,\n    \"b\": 0.8 * a + rng.normal(0, 0.5, 200),\n    \"c\": rng.normal(0, 1, 200),\n    \"d\": -0.6 * a + rng.normal(0, 0.7, 200),\n})\n\nax = dv.bivariate.correlation_heatmap_static(df)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "correlation_heatmap_static",
         "correlation_heatmap_interactive"
+      ],
+      "useCase": "Use the correlation heatmap to screen many numeric variables at once before modelling or root-cause work. Colour-coding the full pairwise correlation matrix makes strong linear relationships, redundant variables, and unexpected sign patterns visible in one glance, and Pearson, Kendall, or Spearman methods cover both linear and monotonic association.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/correlation_heatmap_1.png",
+          "caption": "Strong blocks — high positive and negative correlations stand out."
+        },
+        {
+          "src": "assets/examples/bivariate/correlation_heatmap_2.png",
+          "caption": "Weak correlations — no meaningful structure between variables."
+        },
+        {
+          "src": "assets/examples/bivariate/correlation_heatmap_3.png",
+          "caption": "Mixed signs — positive and negative associations side by side."
+        },
+        {
+          "src": "assets/examples/bivariate/correlation_heatmap_4.png",
+          "caption": "One dominant pair — a single strong link among independents."
+        }
       ]
     },
     "bubble_plot": {
@@ -12284,11 +14621,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.bubble_plot(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(3)\nx = rng.normal(50, 12, 60)\ny = 0.7 * x + rng.normal(0, 8, 60)\nsize = rng.uniform(50, 500, 60)\ncolor = rng.uniform(0, 1, 60)\n\nax = dv.bivariate.bubble_plot_static(x, y, size, color)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "bubble_plot_static",
         "bubble_plot_interactive"
+      ],
+      "useCase": "Use a bubble plot when a third (and optionally fourth) variable matters alongside the two positional axes — for example revenue versus margin with bubble size for volume and colour for growth. Encoding extra dimensions in size and colour lets one chart carry the information of several scatter plots while staying readable.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/bubble_plot_1.png",
+          "caption": "Size tracks x — larger bubbles cluster to the right."
+        },
+        {
+          "src": "assets/examples/bivariate/bubble_plot_2.png",
+          "caption": "Unrelated size — bubble area carries no signal."
+        },
+        {
+          "src": "assets/examples/bivariate/bubble_plot_3.png",
+          "caption": "Colour gradient — a fourth variable encoded as colour."
+        },
+        {
+          "src": "assets/examples/bivariate/bubble_plot_4.png",
+          "caption": "Few large players — a handful of bubbles dominate the field."
+        }
       ]
     },
     "hexbin_plot": {
@@ -12379,11 +14735,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.hexbin_plot(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(4)\nx = rng.normal(0, 1, 5000)\ny = 0.6 * x + rng.normal(0, 0.8, 5000)\n\nax = dv.bivariate.hexbin_plot_static(x, y, gridsize=30)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "hexbin_plot_static",
         "hexbin_plot_interactive"
+      ],
+      "useCase": "Use a hexbin plot instead of a scatter plot when thousands of points overlap into an unreadable blob. Binning the plane into hexagons and colouring by count reveals where the density actually concentrates — hotspots, ridges, and empty regions — without the overplotting that hides structure in large samples.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/hexbin_plot_1.png",
+          "caption": "Correlated mass — density stretches along the diagonal."
+        },
+        {
+          "src": "assets/examples/bivariate/hexbin_plot_2.png",
+          "caption": "Two clusters — the bins reveal two distinct groups."
+        },
+        {
+          "src": "assets/examples/bivariate/hexbin_plot_3.png",
+          "caption": "Uniform spread — no concentration anywhere in the plane."
+        },
+        {
+          "src": "assets/examples/bivariate/hexbin_plot_4.png",
+          "caption": "Skewed density — mass piles up near the origin."
+        }
       ]
     },
     "regression_plot": {
@@ -12474,11 +14849,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.regression_plot(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(5)\nx = rng.uniform(0, 10, 150)\ny = 3 + 2 * x + rng.normal(0, 3, 150)\n\nax = dv.bivariate.regression_plot_static(x, y, degree=1)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "regression_plot_static",
         "regression_plot_interactive"
+      ],
+      "useCase": "Use a regression plot to overlay a fitted line or curve on raw observations so you can judge how well a simple model captures the relationship. The scatter shows the data, the fitted line shows the trend, and the gap between them — systematic curvature or funnel-shaped spread — tells you whether a linear model is adequate or a higher degree is needed.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/regression_plot_1.png",
+          "caption": "Linear fit — the degree-1 line tracks the data well."
+        },
+        {
+          "src": "assets/examples/bivariate/regression_plot_2.png",
+          "caption": "Curved trend — degree 2 follows the acceleration."
+        },
+        {
+          "src": "assets/examples/bivariate/regression_plot_3.png",
+          "caption": "Weak slope — the fit is nearly flat against the noise."
+        },
+        {
+          "src": "assets/examples/bivariate/regression_plot_4.png",
+          "caption": "Outliers pull — a few points bend the fitted line."
+        }
       ]
     },
     "density_contour": {
@@ -12569,11 +14963,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.density_contour(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(6)\nx = rng.normal(0, 1, 1500)\ny = 0.7 * x + rng.normal(0, 0.7, 1500)\n\nax = dv.bivariate.density_contour_static(x, y)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "density_contour_static",
         "density_contour_interactive"
+      ],
+      "useCase": "Use a density contour plot to show the shape of a bivariate distribution when individual points would overlap. Contour lines trace regions of equal estimated density, so multiple modes, elongated correlation structure, and skew appear as terrain-like features rather than an undifferentiated point cloud.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/density_contour_1.png",
+          "caption": "Correlated mass — density stretches along the diagonal."
+        },
+        {
+          "src": "assets/examples/bivariate/density_contour_2.png",
+          "caption": "Two clusters — the bins reveal two distinct groups."
+        },
+        {
+          "src": "assets/examples/bivariate/density_contour_3.png",
+          "caption": "Uniform spread — no concentration anywhere in the plane."
+        },
+        {
+          "src": "assets/examples/bivariate/density_contour_4.png",
+          "caption": "Skewed density — mass piles up near the origin."
+        }
       ]
     },
     "grouped_bar": {
@@ -12658,11 +15071,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\n\nresult = dv.bivariate.grouped_bar(categories, values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\ncategory = pd.Series(rng.choice([\"A\", \"B\", \"C\", \"D\"], 400))\nvalues = pd.Series(rng.normal(100, 15, 400) + category.map(\n    {\"A\": 0, \"B\": 12, \"C\": -8, \"D\": 20}\n))\n\nax = dv.bivariate.grouped_bar_static(category, values)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "grouped_bar_static",
         "grouped_bar_interactive"
+      ],
+      "useCase": "Use a grouped bar chart to compare an aggregated metric — mean, sum, or any custom function — across categories such as product lines, regions, or shifts. Bar height makes differences in level immediate, which suits ranked comparisons and presentations to audiences who read bars more easily than distributions.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/grouped_bar_1.png",
+          "caption": "Shifted levels — group means differ clearly."
+        },
+        {
+          "src": "assets/examples/bivariate/grouped_bar_2.png",
+          "caption": "No group effect — all categories average the same."
+        },
+        {
+          "src": "assets/examples/bivariate/grouped_bar_3.png",
+          "caption": "One dominant group — totals driven by category A."
+        },
+        {
+          "src": "assets/examples/bivariate/grouped_bar_4.png",
+          "caption": "Mixed signs — some groups average below zero."
+        }
       ]
     },
     "box_by_category": {
@@ -12735,11 +15167,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nresult = dv.bivariate.box_by_category(categories, values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(8)\ncategory = pd.Series(rng.choice([\"Line 1\", \"Line 2\", \"Line 3\"], 300))\nvalues = pd.Series(rng.normal(50, 5, 300) + category.map(\n    {\"Line 1\": 0, \"Line 2\": 4, \"Line 3\": -3}\n))\n\nax = dv.bivariate.box_by_category_static(category, values)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "box_by_category_static",
         "box_by_category_interactive"
+      ],
+      "useCase": "Use box plots by category to compare the distribution of a continuous measure across groups — fill weight across machines, response time across servers. The median, quartiles, whiskers, and flier points expose shifts in location, differences in spread, and outliers per group without assuming any distribution shape.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/box_by_category_1.png",
+          "caption": "Shifted levels — group means differ clearly."
+        },
+        {
+          "src": "assets/examples/bivariate/box_by_category_2.png",
+          "caption": "No group effect — all categories average the same."
+        },
+        {
+          "src": "assets/examples/bivariate/box_by_category_3.png",
+          "caption": "One dominant group — totals driven by category A."
+        },
+        {
+          "src": "assets/examples/bivariate/box_by_category_4.png",
+          "caption": "Mixed signs — some groups average below zero."
+        }
       ]
     },
     "violin_by_category": {
@@ -12812,11 +15263,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\nvalues = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name=\"Value\")\ncategories = pd.Series([\"low\", \"medium\", \"high\", \"medium\", \"low\"], name=\"Priority\")\n\nresult = dv.bivariate.violin_by_category(categories, values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(9)\ncategory = pd.Series(rng.choice([\"A\", \"B\", \"C\"], 450))\nvalues = pd.Series(\n    np.where(\n        category == \"B\",\n        rng.normal(40, 4, 450),\n        rng.normal(50, 6, 450),\n    )\n)\n\nax = dv.bivariate.violin_by_category_static(category, values)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "violin_by_category_static",
         "violin_by_category_interactive"
+      ],
+      "useCase": "Use violin plots by category when the box plot's five-number summary is too coarse — when you suspect bimodality, skew, or shoulder shapes within groups. The mirrored density trace shows the full estimated distribution per category, making multimodal or asymmetric groups obvious where a box plot would look identical.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/violin_by_category_1.png",
+          "caption": "Location shifts — violins sit at different heights."
+        },
+        {
+          "src": "assets/examples/bivariate/violin_by_category_2.png",
+          "caption": "Bimodal group — category A shows two humps."
+        },
+        {
+          "src": "assets/examples/bivariate/violin_by_category_3.png",
+          "caption": "Right-skewed — long upper tails in every group."
+        },
+        {
+          "src": "assets/examples/bivariate/violin_by_category_4.png",
+          "caption": "Growing spread — violins widen from A to C."
+        }
       ]
     },
     "crosstab_heatmap": {
@@ -12889,11 +15359,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.crosstab_heatmap(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(10)\nrows = pd.Series(rng.choice([\"North\", \"South\", \"East\"], 500, p=[0.5, 0.3, 0.2]))\ncols = pd.Series(rng.choice([\"Pass\", \"Rework\", \"Scrap\"], 500))\n\nax = dv.bivariate.crosstab_heatmap_static(rows, cols, normalize=\"index\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "crosstab_heatmap_static",
         "crosstab_heatmap_interactive"
+      ],
+      "useCase": "Use a crosstab heatmap to examine how two categorical variables co-occur — defect type by shift, segment by channel. Colour intensity over the contingency table highlights combinations that are unusually frequent or rare, and row or column normalisation converts raw counts into comparable rates when group sizes differ.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/crosstab_heatmap_1.png",
+          "caption": "Independent factors — shares spread evenly across cells."
+        },
+        {
+          "src": "assets/examples/bivariate/crosstab_heatmap_2.png",
+          "caption": "Strong association — each region favours a different outcome."
+        },
+        {
+          "src": "assets/examples/bivariate/crosstab_heatmap_3.png",
+          "caption": "Row-normalised — rates comparable despite unequal group sizes."
+        },
+        {
+          "src": "assets/examples/bivariate/crosstab_heatmap_4.png",
+          "caption": "Rare combinations — some cells barely occur at all."
+        }
       ]
     },
     "binned_mean_plot": {
@@ -12984,11 +15473,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.binned_mean_plot(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(11)\nx = rng.uniform(0, 10, 2000)\ny = 2 * x + rng.normal(0, 5, 2000)\n\nax = dv.bivariate.binned_mean_plot_static(x, y, bins=12)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "binned_mean_plot_static",
         "binned_mean_plot_interactive"
+      ],
+      "useCase": "Use a binned mean plot to extract the trend from a noisy scatter by averaging y within equal-width bins of x. Binning suppresses point-level noise so the underlying shape — linear, saturating, U-shaped — stands out, which is especially useful for large datasets where the raw cloud is too dense to read.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/binned_mean_plot_1.png",
+          "caption": "Linear trend — binned means climb steadily."
+        },
+        {
+          "src": "assets/examples/bivariate/binned_mean_plot_2.png",
+          "caption": "Nonlinear wave — binning reveals a sinusoid under the noise."
+        },
+        {
+          "src": "assets/examples/bivariate/binned_mean_plot_3.png",
+          "caption": "No relationship — the binned means stay flat."
+        },
+        {
+          "src": "assets/examples/bivariate/binned_mean_plot_4.png",
+          "caption": "Stable mean, growing noise — trend holds while spread widens."
+        }
       ]
     },
     "errorbar_plot": {
@@ -13091,11 +15599,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.errorbar_plot(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(12)\nx = np.arange(1, 9)\ny = 10 + 2 * x + rng.normal(0, 0.5, 8)\nyerr = rng.uniform(0.5, 2.0, 8)\n\nax = dv.bivariate.errorbar_plot_static(x, y, yerr=yerr)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "errorbar_plot_static",
         "errorbar_plot_interactive"
+      ],
+      "useCase": "Use an errorbar plot when each point carries uncertainty — replicated measurements, survey estimates, simulation means. Drawing the error bars alongside the central values shows which differences between conditions are larger than their uncertainty and which could easily be noise, preventing over-reading of small gaps.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/errorbar_plot_1.png",
+          "caption": "Constant uncertainty — every estimate is equally precise."
+        },
+        {
+          "src": "assets/examples/bivariate/errorbar_plot_2.png",
+          "caption": "Growing uncertainty — later measurements are noisier."
+        },
+        {
+          "src": "assets/examples/bivariate/errorbar_plot_3.png",
+          "caption": "Two-dimensional error — both x and y carry uncertainty."
+        },
+        {
+          "src": "assets/examples/bivariate/errorbar_plot_4.png",
+          "caption": "Small samples — wide intervals warn against over-reading."
+        }
       ]
     },
     "area_between": {
@@ -13186,11 +15713,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.area_between(x)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(13)\nx = np.linspace(0, 10, 100)\nmid = np.sin(x)\ny_lower = mid - 0.3\ny_upper = mid + 0.3\n\nax = dv.bivariate.area_between_static(x, y_lower, y_upper)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "area_between_static",
         "area_between_interactive"
+      ],
+      "useCase": "Use an area-between plot to display a band bounded by two curves — a confidence interval around a forecast, tolerance limits around a nominal profile, or a min-max envelope from repeated runs. The shaded region communicates the range of plausible values directly, which is clearer than two separate boundary lines.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/area_between_1.png",
+          "caption": "Constant band — a fixed tolerance around the nominal curve."
+        },
+        {
+          "src": "assets/examples/bivariate/area_between_2.png",
+          "caption": "Widening band — uncertainty grows away from the origin."
+        },
+        {
+          "src": "assets/examples/bivariate/area_between_3.png",
+          "caption": "Confidence envelope — interval balloons at the edges."
+        },
+        {
+          "src": "assets/examples/bivariate/area_between_4.png",
+          "caption": "Seasonal envelope — the band breathes with the cycle."
+        }
       ]
     },
     "step_plot": {
@@ -13275,11 +15821,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.step_plot(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(14)\nx = np.arange(0, 20)\ny = np.cumsum(rng.choice([-1, 0, 1, 2], 20, p=[0.2, 0.3, 0.3, 0.2])) + 20\n\nax = dv.bivariate.step_plot_static(x, y, where=\"post\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "step_plot_static",
         "step_plot_interactive"
+      ],
+      "useCase": "Use a step plot for values that change discretely and hold until the next change — price tiers, setpoint adjustments, staffing levels, cumulative counts. The horizontal-then-vertical trace correctly shows that the value is constant between events, where a sloped line would falsely imply gradual transitions.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/step_plot_1.png",
+          "caption": "Random walk steps — level drifts up in discrete jumps."
+        },
+        {
+          "src": "assets/examples/bivariate/step_plot_2.png",
+          "caption": "Setpoint changes — the target holds between adjustments."
+        },
+        {
+          "src": "assets/examples/bivariate/step_plot_3.png",
+          "caption": "Countdown — a quantity decrements to zero."
+        },
+        {
+          "src": "assets/examples/bivariate/step_plot_4.png",
+          "caption": "Depletion — inventory falls in discrete withdrawals."
+        }
       ]
     },
     "joint_scatter_hist": {
@@ -13364,11 +15929,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.joint_scatter_hist(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(15)\nx = rng.normal(0, 1, 500)\ny = 0.6 * x + rng.normal(0, 0.8, 500)\n\nax = dv.bivariate.joint_scatter_hist_static(x, y)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "joint_scatter_hist_static",
         "joint_scatter_hist_interactive"
+      ],
+      "useCase": "Use a joint scatter-histogram plot to see the bivariate relationship and both marginal distributions at once. The central scatter shows how the variables move together while the side histograms reveal skew, bimodality, or outliers in each variable alone — context that changes how the joint pattern should be interpreted.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/joint_scatter_hist_1.png",
+          "caption": "Correlated pair — marginals are both bell-shaped."
+        },
+        {
+          "src": "assets/examples/bivariate/joint_scatter_hist_2.png",
+          "caption": "Independent normals — no joint or marginal surprises."
+        },
+        {
+          "src": "assets/examples/bivariate/joint_scatter_hist_3.png",
+          "caption": "Skewed marginals — both histograms lean right."
+        },
+        {
+          "src": "assets/examples/bivariate/joint_scatter_hist_4.png",
+          "caption": "Bimodal y — the side histogram exposes two groups."
+        }
       ]
     },
     "bivariate_histogram": {
@@ -13447,11 +16031,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.bivariate_histogram(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(16)\nx = rng.normal(0, 1, 3000)\ny = 0.5 * x + rng.normal(0, 0.9, 3000)\n\nax = dv.bivariate.bivariate_histogram_static(x, y, bins=30)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "bivariate_histogram_static",
         "bivariate_histogram_interactive"
+      ],
+      "useCase": "Use a bivariate histogram to map the joint density of two continuous variables as a gridded heatmap. Rectangular bin counts make concentration regions, correlation ridges, and sparse tails quantitatively readable, and the regular grid is easy to tune (bins) or export for further numeric analysis.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/bivariate_histogram_1.png",
+          "caption": "Correlated mass — density stretches along the diagonal."
+        },
+        {
+          "src": "assets/examples/bivariate/bivariate_histogram_2.png",
+          "caption": "Two clusters — the bins reveal two distinct groups."
+        },
+        {
+          "src": "assets/examples/bivariate/bivariate_histogram_3.png",
+          "caption": "Uniform spread — no concentration anywhere in the plane."
+        },
+        {
+          "src": "assets/examples/bivariate/bivariate_histogram_4.png",
+          "caption": "Skewed density — mass piles up near the origin."
+        }
       ]
     },
     "outlier_scatter": {
@@ -13536,11 +16139,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.outlier_scatter(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(17)\nx = rng.normal(50, 8, 300)\ny = 0.8 * x + rng.normal(0, 6, 300)\nx = np.r_[x, [95, 20, 105]]\ny = np.r_[y, [30, 90, 110]]\n\nax = dv.bivariate.outlier_scatter_static(x, y, method=\"iqr\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step. Outlier-related helpers should be treated as decision support; inspect the flagged records before removing or capping values.",
       "related": [
         "outlier_scatter_static",
         "outlier_scatter_interactive"
+      ],
+      "useCase": "Use an outlier scatter plot to separate anomalous points from the bulk of the data using IQR fences or z-scores on both variables. Colour-coding flagged points shows immediately whether outliers are isolated data-entry errors, extreme but plausible values, or a distinct sub-population that deserves separate treatment.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/outlier_scatter_1.png",
+          "caption": "IQR fences — three points fall outside the whiskers."
+        },
+        {
+          "src": "assets/examples/bivariate/outlier_scatter_2.png",
+          "caption": "Z-score rule — extreme standardised values flagged."
+        },
+        {
+          "src": "assets/examples/bivariate/outlier_scatter_3.png",
+          "caption": "Tight fence — a strict threshold flags borderline points."
+        },
+        {
+          "src": "assets/examples/bivariate/outlier_scatter_4.png",
+          "caption": "Clean data — nothing exceeds the fences."
+        }
       ]
     },
     "residual_relationship": {
@@ -13607,11 +16229,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.residual_relationship(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(18)\nx = rng.uniform(0, 10, 200)\ny = 2 * x + 0.3 * x**2 + rng.normal(0, 2, 200)\n\nax = dv.bivariate.residual_relationship_static(x, y, degree=1)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "residual_relationship_static",
         "residual_relationship_interactive"
+      ],
+      "useCase": "Use the residual relationship plot to diagnose how well a polynomial fit of a given degree captures the relationship between two variables. Plotting the fit residuals against the predictor exposes systematic curvature, fan-shaped heteroscedasticity, and influential points — patterns that mean the chosen degree or a linear model itself is inadequate.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/residual_relationship_1.png",
+          "caption": "Adequate fit — residuals scatter randomly around zero."
+        },
+        {
+          "src": "assets/examples/bivariate/residual_relationship_2.png",
+          "caption": "Missed curvature — residuals arc because the fit is too simple."
+        },
+        {
+          "src": "assets/examples/bivariate/residual_relationship_3.png",
+          "caption": "Heteroscedasticity — the residual spread fans out with x."
+        },
+        {
+          "src": "assets/examples/bivariate/residual_relationship_4.png",
+          "caption": "Influential outlier — one point dominates the residual scale."
+        }
       ]
     },
     "quantile_bin_plot": {
@@ -13684,11 +16325,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.quantile_bin_plot(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(19)\nx = rng.gamma(2.0, 1.5, 1500)\ny = 5 + 3 * np.log1p(x) + rng.normal(0, 1.5, 1500)\n\nax = dv.bivariate.quantile_bin_plot_static(x, y, q=10)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "quantile_bin_plot_static",
         "quantile_bin_plot_interactive"
+      ],
+      "useCase": "Use a quantile bin plot to summarise how the mean or median of y changes across equal-count bins of x. Because each bin holds the same number of observations, every point is estimated with equal precision, giving a cleaner dose-response or trend curve than equal-width bins when x is unevenly distributed.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/quantile_bin_plot_1.png",
+          "caption": "Linear rise — each decile of x adds the same amount."
+        },
+        {
+          "src": "assets/examples/bivariate/quantile_bin_plot_2.png",
+          "caption": "Diminishing returns — the curve flattens at high x."
+        },
+        {
+          "src": "assets/examples/bivariate/quantile_bin_plot_3.png",
+          "caption": "No effect — every quantile bin averages the same."
+        },
+        {
+          "src": "assets/examples/bivariate/quantile_bin_plot_4.png",
+          "caption": "Median robustness — the median ignores the injected outliers."
+        }
       ]
     },
     "bland_altman": {
@@ -13749,11 +16409,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.bland_altman(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(20)\nmethod_a = rng.normal(100, 15, 150)\nmethod_b = method_a + rng.normal(2.0, 4.0, 150)\n\nax = dv.bivariate.bland_altman_static(method_a, method_b)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "bland_altman_static",
         "bland_altman_interactive"
+      ],
+      "useCase": "Use the Bland-Altman plot to assess agreement between two measurement methods — a new sensor against a reference instrument, one lab assay against another. Plotting the difference against the mean reveals systematic bias (the mean-difference line), the limits of agreement within which 95% of differences fall, and whether disagreement grows with magnitude.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/bland_altman_1.png",
+          "caption": "Good agreement — differences hug zero inside narrow limits."
+        },
+        {
+          "src": "assets/examples/bivariate/bland_altman_2.png",
+          "caption": "Constant bias — method B reads six units high throughout."
+        },
+        {
+          "src": "assets/examples/bivariate/bland_altman_3.png",
+          "caption": "Proportional bias — the gap widens as magnitude grows."
+        },
+        {
+          "src": "assets/examples/bivariate/bland_altman_4.png",
+          "caption": "Poor agreement — wide limits of agreement reject interchangeability."
+        }
       ]
     },
     "rank_scatter": {
@@ -13814,11 +16493,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.rank_scatter(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(21)\nx = rng.uniform(0, 100, 200)\ny = np.sqrt(x) * 10 + rng.normal(0, 8, 200)\n\nax = dv.bivariate.rank_scatter_static(x, y)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "rank_scatter_static",
         "rank_scatter_interactive"
+      ],
+      "useCase": "Use a rank scatter plot to visualise monotonic association after replacing raw values with their ranks, the basis of Spearman's correlation. Ranking removes the influence of outliers and non-linear scales, so the plot shows whether one variable consistently increases with the other even when the raw relationship is curved or heavy-tailed.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/rank_scatter_1.png",
+          "caption": "Monotone linear — ranks fall neatly along the diagonal."
+        },
+        {
+          "src": "assets/examples/bivariate/rank_scatter_2.png",
+          "caption": "Monotone but curved — ranking straightens the square-root shape."
+        },
+        {
+          "src": "assets/examples/bivariate/rank_scatter_3.png",
+          "caption": "Weak association — ranks scatter broadly."
+        },
+        {
+          "src": "assets/examples/bivariate/rank_scatter_4.png",
+          "caption": "U-shaped — ranks reveal the reversal of direction."
+        }
       ]
     },
     "lag_plot": {
@@ -13885,11 +16583,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.lag_plot(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(22)\nnoise = rng.normal(0, 1, 300)\nseries = pd.Series(np.convolve(noise, [0.8, 0.2], mode=\"same\")[:300])\n\nax = dv.bivariate.lag_plot_static(series, series, lag=1)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "lag_plot_static",
         "lag_plot_interactive"
+      ],
+      "useCase": "Use a lag plot to check time-ordered data for autocorrelation by plotting each value against the value k periods earlier. Random scatter along no particular pattern indicates independence, while structure — a diagonal band, a curve, or an ellipse — reveals serial dependence that violates the assumptions of many control charts and time-series models.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/lag_plot_1.png",
+          "caption": "White noise — no structure, consecutive values independent."
+        },
+        {
+          "src": "assets/examples/bivariate/lag_plot_2.png",
+          "caption": "Autocorrelated — the diagonal band shows lag-1 dependence."
+        },
+        {
+          "src": "assets/examples/bivariate/lag_plot_3.png",
+          "caption": "Seasonal series — lag 12 exposes the repeating cycle."
+        },
+        {
+          "src": "assets/examples/bivariate/lag_plot_4.png",
+          "caption": "Trending series — the tight diagonal reflects the drift."
+        }
       ]
     },
     "conditional_box": {
@@ -13956,11 +16673,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\n\nresult = dv.bivariate.conditional_box(x, y)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(23)\nx = rng.uniform(0, 10, 800)\ny = 3 * x + rng.normal(0, 1 + 0.4 * x, 800)\n\nax = dv.bivariate.conditional_box_static(x, y, bins=8)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "conditional_box_static",
         "conditional_box_interactive"
+      ],
+      "useCase": "Use a conditional box plot to see how the full distribution of y changes as x increases by binning x and drawing a box plot per bin. Unlike a mean line, the boxes expose where spread widens, where medians shift non-linearly, and where outliers concentrate — a distribution-aware view of the conditional relationship.",
+      "images": [
+        {
+          "src": "assets/examples/bivariate/conditional_box_1.png",
+          "caption": "Linear shift — box medians march upward across bins."
+        },
+        {
+          "src": "assets/examples/bivariate/conditional_box_2.png",
+          "caption": "Nonlinear — medians rise then fall with x."
+        },
+        {
+          "src": "assets/examples/bivariate/conditional_box_3.png",
+          "caption": "Widening spread — boxes grow taller toward high x."
+        },
+        {
+          "src": "assets/examples/bivariate/conditional_box_4.png",
+          "caption": "No relationship — every bin looks the same."
+        }
       ]
     }
   },
@@ -19150,11 +21886,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibFigure, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nax = dv.multivariate.pairplot_static(df)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(3)\nx1 = rng.normal(0.0, 1.0, 200)\ndf = pd.DataFrame(\n    {\n        \"length\": x1,\n        \"weight\": 0.8 * x1 + rng.normal(0.0, 0.4, 200),\n        \"age\": rng.normal(5.0, 1.5, 200),\n    }\n)\n\nfig = dv.multivariate.pairplot_static(df, title=\"Feature pairplot\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "pairplot_interactive",
         "pairplot"
+      ],
+      "useCase": "Use a pairplot to scan every pairwise relationship in a small set of numeric variables at once. The off-diagonal scatter plots expose correlations, clusters, and non-linear shapes, while the diagonal shows each variable’s own distribution. It is the fastest way to spot redundant features and promising interactions before modelling.",
+      "images": [
+        {
+          "src": "assets/examples/multivariate/pairplot_1.png",
+          "caption": "Correlated pair — length and weight rise together."
+        },
+        {
+          "src": "assets/examples/multivariate/pairplot_2.png",
+          "caption": "Uncorrelated features — scatter clouds show no structure."
+        },
+        {
+          "src": "assets/examples/multivariate/pairplot_3.png",
+          "caption": "Two clusters — distinct groups separate in every panel."
+        },
+        {
+          "src": "assets/examples/multivariate/pairplot_4.png",
+          "caption": "Non-linear link — a curved relationship appears in one panel."
+        }
       ]
     },
     "heatmap_static": {
@@ -19281,11 +22036,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nax = dv.multivariate.heatmap_static(df)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(5)\nx1 = rng.normal(0.0, 1.0, 300)\nx2 = 0.9 * x1 + rng.normal(0.0, 0.3, 300)\ndf = pd.DataFrame(\n    {\n        \"length\": x1,\n        \"weight\": x2,\n        \"age\": rng.normal(0.0, 1.0, 300),\n        \"price\": -0.6 * x1 + rng.normal(0.0, 0.8, 300),\n    }\n)\ncorr = df.corr()\n\nax = dv.multivariate.heatmap_static(corr, title=\"Correlation heatmap\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "heatmap_interactive",
         "heatmap"
+      ],
+      "useCase": "Use a heatmap to read a whole matrix at a glance — most often a correlation matrix, where colour intensity turns dozens of coefficients into an instantly scannable pattern. Blocks of strong colour reveal groups of variables that move together, which helps detect multicollinearity, redundant features, and hidden structure in wide datasets.",
+      "images": [
+        {
+          "src": "assets/examples/multivariate/heatmap_1.png",
+          "caption": "Mixed correlations — strong positive and negative links."
+        },
+        {
+          "src": "assets/examples/multivariate/heatmap_2.png",
+          "caption": "No structure — near-zero correlations across the board."
+        },
+        {
+          "src": "assets/examples/multivariate/heatmap_3.png",
+          "caption": "Trade-off — one driver pushes variables in opposite directions."
+        },
+        {
+          "src": "assets/examples/multivariate/heatmap_4.png",
+          "caption": "Two blocks — variable pairs cluster into independent groups."
+        }
       ]
     },
     "parallel_coordinates_static": {
@@ -19376,11 +22150,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nax = dv.multivariate.parallel_coordinates_static(df)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(9)\nn = 60\ndf = pd.DataFrame(\n    {\n        \"speed\": rng.normal(50.0, 8.0, n),\n        \"power\": rng.normal(120.0, 15.0, n),\n        \"weight\": rng.normal(900.0, 80.0, n),\n        \"range\": rng.normal(300.0, 40.0, n),\n    }\n)\n\nax = dv.multivariate.parallel_coordinates_static(df, title=\"Vehicle profiles\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "parallel_coordinates_interactive",
         "parallel_coordinates"
+      ],
+      "useCase": "Use a parallel coordinates plot to compare many multi-dimensional records at once by drawing each row as a line across one vertical axis per variable. Clusters of lines that travel together reveal shared profiles, while lines that cross the pack mark unusual combinations. It shines for spotting groups and outliers in medium-dimensional data where scatter plots run out of dimensions.",
+      "images": [
+        {
+          "src": "assets/examples/multivariate/parallel_coordinates_1.png",
+          "caption": "Uniform profiles — records overlap with no clear grouping."
+        },
+        {
+          "src": "assets/examples/multivariate/parallel_coordinates_2.png",
+          "caption": "Three profiles — lines bundle into distinct tiers."
+        },
+        {
+          "src": "assets/examples/multivariate/parallel_coordinates_3.png",
+          "caption": "Outlier — one record breaks away from the pack."
+        },
+        {
+          "src": "assets/examples/multivariate/parallel_coordinates_4.png",
+          "caption": "Graduated order — profiles form a smooth low-to-high ladder."
+        }
       ]
     },
     "pairplot_interactive": {
@@ -19471,11 +22264,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nfig = dv.multivariate.pairplot_interactive(df)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(3)\nx1 = rng.normal(0.0, 1.0, 200)\ndf = pd.DataFrame(\n    {\n        \"length\": x1,\n        \"weight\": 0.8 * x1 + rng.normal(0.0, 0.4, 200),\n        \"age\": rng.normal(5.0, 1.5, 200),\n    }\n)\n\nfig = dv.multivariate.pairplot_interactive(df, title=\"Feature pairplot\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "pairplot_static",
         "pairplot"
+      ],
+      "useCase": "Use a pairplot to scan every pairwise relationship in a small set of numeric variables at once. The off-diagonal scatter plots expose correlations, clusters, and non-linear shapes, while the diagonal shows each variable’s own distribution. It is the fastest way to spot redundant features and promising interactions before modelling.",
+      "images": [
+        {
+          "src": "assets/examples/multivariate/pairplot_1.png",
+          "caption": "Correlated pair — length and weight rise together."
+        },
+        {
+          "src": "assets/examples/multivariate/pairplot_2.png",
+          "caption": "Uncorrelated features — scatter clouds show no structure."
+        },
+        {
+          "src": "assets/examples/multivariate/pairplot_3.png",
+          "caption": "Two clusters — distinct groups separate in every panel."
+        },
+        {
+          "src": "assets/examples/multivariate/pairplot_4.png",
+          "caption": "Non-linear link — a curved relationship appears in one panel."
+        }
       ]
     },
     "heatmap_interactive": {
@@ -19566,11 +22378,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nfig = dv.multivariate.heatmap_interactive(df)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(5)\nx1 = rng.normal(0.0, 1.0, 300)\nx2 = 0.9 * x1 + rng.normal(0.0, 0.3, 300)\ndf = pd.DataFrame(\n    {\n        \"length\": x1,\n        \"weight\": x2,\n        \"age\": rng.normal(0.0, 1.0, 300),\n        \"price\": -0.6 * x1 + rng.normal(0.0, 0.8, 300),\n    }\n)\ncorr = df.corr()\n\nfig = dv.multivariate.heatmap_interactive(corr, title=\"Correlation heatmap\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "heatmap_static",
         "heatmap"
+      ],
+      "useCase": "Use a heatmap to read a whole matrix at a glance — most often a correlation matrix, where colour intensity turns dozens of coefficients into an instantly scannable pattern. Blocks of strong colour reveal groups of variables that move together, which helps detect multicollinearity, redundant features, and hidden structure in wide datasets.",
+      "images": [
+        {
+          "src": "assets/examples/multivariate/heatmap_1.png",
+          "caption": "Mixed correlations — strong positive and negative links."
+        },
+        {
+          "src": "assets/examples/multivariate/heatmap_2.png",
+          "caption": "No structure — near-zero correlations across the board."
+        },
+        {
+          "src": "assets/examples/multivariate/heatmap_3.png",
+          "caption": "Trade-off — one driver pushes variables in opposite directions."
+        },
+        {
+          "src": "assets/examples/multivariate/heatmap_4.png",
+          "caption": "Two blocks — variable pairs cluster into independent groups."
+        }
       ]
     },
     "parallel_coordinates_interactive": {
@@ -19661,11 +22492,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nfig = dv.multivariate.parallel_coordinates_interactive(df)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(9)\nn = 60\ndf = pd.DataFrame(\n    {\n        \"speed\": rng.normal(50.0, 8.0, n),\n        \"power\": rng.normal(120.0, 15.0, n),\n        \"weight\": rng.normal(900.0, 80.0, n),\n        \"range\": rng.normal(300.0, 40.0, n),\n    }\n)\n\nfig = dv.multivariate.parallel_coordinates_interactive(df, color_col=\"speed\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "parallel_coordinates_static",
         "parallel_coordinates"
+      ],
+      "useCase": "Use a parallel coordinates plot to compare many multi-dimensional records at once by drawing each row as a line across one vertical axis per variable. Clusters of lines that travel together reveal shared profiles, while lines that cross the pack mark unusual combinations. It shines for spotting groups and outliers in medium-dimensional data where scatter plots run out of dimensions.",
+      "images": [
+        {
+          "src": "assets/examples/multivariate/parallel_coordinates_1.png",
+          "caption": "Uniform profiles — records overlap with no clear grouping."
+        },
+        {
+          "src": "assets/examples/multivariate/parallel_coordinates_2.png",
+          "caption": "Three profiles — lines bundle into distinct tiers."
+        },
+        {
+          "src": "assets/examples/multivariate/parallel_coordinates_3.png",
+          "caption": "Outlier — one record breaks away from the pack."
+        },
+        {
+          "src": "assets/examples/multivariate/parallel_coordinates_4.png",
+          "caption": "Graduated order — profiles form a smooth low-to-high ladder."
+        }
       ]
     },
     "pairplot": {
@@ -19702,11 +22552,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibFigure; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nresult = dv.multivariate.pairplot(df)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(3)\nx1 = rng.normal(0.0, 1.0, 200)\ndf = pd.DataFrame(\n    {\n        \"length\": x1,\n        \"weight\": 0.8 * x1 + rng.normal(0.0, 0.4, 200),\n        \"age\": rng.normal(5.0, 1.5, 200),\n    }\n)\n\nfig = dv.multivariate.pairplot_static(df, title=\"Feature pairplot\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "pairplot_static",
         "pairplot_interactive"
+      ],
+      "useCase": "Use a pairplot to scan every pairwise relationship in a small set of numeric variables at once. The off-diagonal scatter plots expose correlations, clusters, and non-linear shapes, while the diagonal shows each variable’s own distribution. It is the fastest way to spot redundant features and promising interactions before modelling.",
+      "images": [
+        {
+          "src": "assets/examples/multivariate/pairplot_1.png",
+          "caption": "Correlated pair — length and weight rise together."
+        },
+        {
+          "src": "assets/examples/multivariate/pairplot_2.png",
+          "caption": "Uncorrelated features — scatter clouds show no structure."
+        },
+        {
+          "src": "assets/examples/multivariate/pairplot_3.png",
+          "caption": "Two clusters — distinct groups separate in every panel."
+        },
+        {
+          "src": "assets/examples/multivariate/pairplot_4.png",
+          "caption": "Non-linear link — a curved relationship appears in one panel."
+        }
       ]
     },
     "heatmap": {
@@ -19749,11 +22618,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nresult = dv.multivariate.heatmap(df)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(5)\nx1 = rng.normal(0.0, 1.0, 300)\nx2 = 0.9 * x1 + rng.normal(0.0, 0.3, 300)\ndf = pd.DataFrame(\n    {\n        \"length\": x1,\n        \"weight\": x2,\n        \"age\": rng.normal(0.0, 1.0, 300),\n        \"price\": -0.6 * x1 + rng.normal(0.0, 0.8, 300),\n    }\n)\ncorr = df.corr()\n\nax = dv.multivariate.heatmap_static(corr, title=\"Correlation heatmap\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "heatmap_static",
         "heatmap_interactive"
+      ],
+      "useCase": "Use a heatmap to read a whole matrix at a glance — most often a correlation matrix, where colour intensity turns dozens of coefficients into an instantly scannable pattern. Blocks of strong colour reveal groups of variables that move together, which helps detect multicollinearity, redundant features, and hidden structure in wide datasets.",
+      "images": [
+        {
+          "src": "assets/examples/multivariate/heatmap_1.png",
+          "caption": "Mixed correlations — strong positive and negative links."
+        },
+        {
+          "src": "assets/examples/multivariate/heatmap_2.png",
+          "caption": "No structure — near-zero correlations across the board."
+        },
+        {
+          "src": "assets/examples/multivariate/heatmap_3.png",
+          "caption": "Trade-off — one driver pushes variables in opposite directions."
+        },
+        {
+          "src": "assets/examples/multivariate/heatmap_4.png",
+          "caption": "Two blocks — variable pairs cluster into independent groups."
+        }
       ]
     },
     "parallel_coordinates": {
@@ -19790,11 +22678,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nresult = dv.multivariate.parallel_coordinates(df)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(9)\nn = 60\ndf = pd.DataFrame(\n    {\n        \"speed\": rng.normal(50.0, 8.0, n),\n        \"power\": rng.normal(120.0, 15.0, n),\n        \"weight\": rng.normal(900.0, 80.0, n),\n        \"range\": rng.normal(300.0, 40.0, n),\n    }\n)\n\nax = dv.multivariate.parallel_coordinates_static(df, title=\"Vehicle profiles\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "parallel_coordinates_static",
         "parallel_coordinates_interactive"
+      ],
+      "useCase": "Use a parallel coordinates plot to compare many multi-dimensional records at once by drawing each row as a line across one vertical axis per variable. Clusters of lines that travel together reveal shared profiles, while lines that cross the pack mark unusual combinations. It shines for spotting groups and outliers in medium-dimensional data where scatter plots run out of dimensions.",
+      "images": [
+        {
+          "src": "assets/examples/multivariate/parallel_coordinates_1.png",
+          "caption": "Uniform profiles — records overlap with no clear grouping."
+        },
+        {
+          "src": "assets/examples/multivariate/parallel_coordinates_2.png",
+          "caption": "Three profiles — lines bundle into distinct tiers."
+        },
+        {
+          "src": "assets/examples/multivariate/parallel_coordinates_3.png",
+          "caption": "Outlier — one record breaks away from the pack."
+        },
+        {
+          "src": "assets/examples/multivariate/parallel_coordinates_4.png",
+          "caption": "Graduated order — profiles form a smooth low-to-high ladder."
+        }
       ]
     }
   },
@@ -19911,11 +22818,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nax = dv.eda.missing_data_plot_static(df)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(11)\nn = 300\ndf = pd.DataFrame(\n    {\n        \"age\": rng.normal(40.0, 12.0, n),\n        \"income\": rng.normal(60000.0, 15000.0, n),\n        \"score\": rng.normal(0.5, 0.2, n),\n    }\n)\ndf.loc[rng.choice(n, 45, replace=False), \"income\"] = np.nan\ndf.loc[rng.choice(n, 12, replace=False), \"score\"] = np.nan\n\nax = dv.eda.missing_data_plot_static(df, title=\"Missing values per column\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "missing_data_plot_interactive",
         "missing_data_plot"
+      ],
+      "useCase": "Use the missing data plot before any cleaning or modelling to see how many values are absent in every column. The bar heights make it obvious whether missingness is a scattered minor nuisance or concentrated in specific fields that need imputation, indicator flags, or upstream fixes. Checking this first prevents silent row loss when models drop incomplete cases.",
+      "images": [
+        {
+          "src": "assets/examples/eda/missing_data_plot_1.png",
+          "caption": "Complete data — no missing values in any column."
+        },
+        {
+          "src": "assets/examples/eda/missing_data_plot_2.png",
+          "caption": "Scattered missingness — small random gaps across all columns."
+        },
+        {
+          "src": "assets/examples/eda/missing_data_plot_3.png",
+          "caption": "Structured missingness — income and score are absent together."
+        },
+        {
+          "src": "assets/examples/eda/missing_data_plot_4.png",
+          "caption": "One heavy column — income is missing for most records."
+        }
       ]
     },
     "distribution_summary_static": {
@@ -20030,11 +22956,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibFigure, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nax = dv.eda.distribution_summary_static(df)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(13)\nn = 400\ndf = pd.DataFrame(\n    {\n        \"age\": rng.normal(40.0, 12.0, n),\n        \"income\": rng.gamma(2.0, 20000.0, n),\n        \"visits\": rng.poisson(4.0, n),\n    }\n)\n\nfig = dv.eda.distribution_summary_static(df, title=\"Column distributions\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. Summary helpers are especially useful as the numeric companion to visual exploration. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "distribution_summary_interactive",
         "distribution_summary"
+      ],
+      "useCase": "Use the distribution summary to review the shape of every numeric column in one figure before analysis. Placing the histograms side by side makes skewness, outliers, bimodality, and scale differences visible immediately, so you can decide on transforms, robust statistics, or per-column treatment rather than discovering problems mid-modelling.",
+      "images": [
+        {
+          "src": "assets/examples/eda/distribution_summary_1.png",
+          "caption": "Mixed shapes — normal, skewed, and count columns side by side."
+        },
+        {
+          "src": "assets/examples/eda/distribution_summary_2.png",
+          "caption": "Bimodal column — two overlapping groups in one variable."
+        },
+        {
+          "src": "assets/examples/eda/distribution_summary_3.png",
+          "caption": "Heavy tails — extreme values stretch the axes."
+        },
+        {
+          "src": "assets/examples/eda/distribution_summary_4.png",
+          "caption": "Different scales — each column lives on its own range."
+        }
       ]
     },
     "class_distribution_static": {
@@ -20161,11 +23106,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nax = dv.eda.class_distribution_static(categories)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(17)\nlabels = rng.choice(\n    [\"approved\", \"review\", \"rejected\"], size=500, p=[0.6, 0.3, 0.1]\n)\nclasses = pd.Series(labels, name=\"outcome\")\n\nax = dv.eda.class_distribution_static(classes, title=\"Class balance\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "class_distribution_interactive",
         "class_distribution"
+      ],
+      "useCase": "Use the class distribution plot to check the balance of a categorical target before training a classifier. Bars that differ wildly in height warn that accuracy alone will be misleading and that you may need stratified sampling, class weights, or resampling. It is a one-second check that prevents the classic mistake of modelling a rare class with default settings.",
+      "images": [
+        {
+          "src": "assets/examples/eda/class_distribution_1.png",
+          "caption": "Balanced classes — each category appears about equally often."
+        },
+        {
+          "src": "assets/examples/eda/class_distribution_2.png",
+          "caption": "Imbalanced classes — one category dominates the sample."
+        },
+        {
+          "src": "assets/examples/eda/class_distribution_3.png",
+          "caption": "Rare class — the minority category is under 2% of records."
+        },
+        {
+          "src": "assets/examples/eda/class_distribution_4.png",
+          "caption": "Many classes — a long tail of small categories."
+        }
       ]
     },
     "missing_data_plot_interactive": {
@@ -20256,11 +23220,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nfig = dv.eda.missing_data_plot_interactive(df)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(11)\nn = 300\ndf = pd.DataFrame(\n    {\n        \"age\": rng.normal(40.0, 12.0, n),\n        \"income\": rng.normal(60000.0, 15000.0, n),\n        \"score\": rng.normal(0.5, 0.2, n),\n    }\n)\ndf.loc[rng.choice(n, 45, replace=False), \"income\"] = np.nan\ndf.loc[rng.choice(n, 12, replace=False), \"score\"] = np.nan\n\nfig = dv.eda.missing_data_plot_interactive(df, title=\"Missing values per column\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "missing_data_plot_static",
         "missing_data_plot"
+      ],
+      "useCase": "Use the missing data plot before any cleaning or modelling to see how many values are absent in every column. The bar heights make it obvious whether missingness is a scattered minor nuisance or concentrated in specific fields that need imputation, indicator flags, or upstream fixes. Checking this first prevents silent row loss when models drop incomplete cases.",
+      "images": [
+        {
+          "src": "assets/examples/eda/missing_data_plot_1.png",
+          "caption": "Complete data — no missing values in any column."
+        },
+        {
+          "src": "assets/examples/eda/missing_data_plot_2.png",
+          "caption": "Scattered missingness — small random gaps across all columns."
+        },
+        {
+          "src": "assets/examples/eda/missing_data_plot_3.png",
+          "caption": "Structured missingness — income and score are absent together."
+        },
+        {
+          "src": "assets/examples/eda/missing_data_plot_4.png",
+          "caption": "One heavy column — income is missing for most records."
+        }
       ]
     },
     "distribution_summary_interactive": {
@@ -20351,11 +23334,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nfig = dv.eda.distribution_summary_interactive(df)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(13)\nn = 400\ndf = pd.DataFrame(\n    {\n        \"age\": rng.normal(40.0, 12.0, n),\n        \"income\": rng.gamma(2.0, 20000.0, n),\n        \"visits\": rng.poisson(4.0, n),\n    }\n)\n\nfig = dv.eda.distribution_summary_interactive(df, title=\"Column distributions\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. Summary helpers are especially useful as the numeric companion to visual exploration. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "distribution_summary_static",
         "distribution_summary"
+      ],
+      "useCase": "Use the distribution summary to review the shape of every numeric column in one figure before analysis. Placing the histograms side by side makes skewness, outliers, bimodality, and scale differences visible immediately, so you can decide on transforms, robust statistics, or per-column treatment rather than discovering problems mid-modelling.",
+      "images": [
+        {
+          "src": "assets/examples/eda/distribution_summary_1.png",
+          "caption": "Mixed shapes — normal, skewed, and count columns side by side."
+        },
+        {
+          "src": "assets/examples/eda/distribution_summary_2.png",
+          "caption": "Bimodal column — two overlapping groups in one variable."
+        },
+        {
+          "src": "assets/examples/eda/distribution_summary_3.png",
+          "caption": "Heavy tails — extreme values stretch the axes."
+        },
+        {
+          "src": "assets/examples/eda/distribution_summary_4.png",
+          "caption": "Different scales — each column lives on its own range."
+        }
       ]
     },
     "class_distribution_interactive": {
@@ -20458,11 +23460,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nfig = dv.eda.class_distribution_interactive(categories)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(17)\nlabels = rng.choice(\n    [\"approved\", \"review\", \"rejected\"], size=500, p=[0.6, 0.3, 0.1]\n)\nclasses = pd.Series(labels, name=\"outcome\")\n\nfig = dv.eda.class_distribution_interactive(classes, title=\"Class balance\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "class_distribution_static",
         "class_distribution"
+      ],
+      "useCase": "Use the class distribution plot to check the balance of a categorical target before training a classifier. Bars that differ wildly in height warn that accuracy alone will be misleading and that you may need stratified sampling, class weights, or resampling. It is a one-second check that prevents the classic mistake of modelling a rare class with default settings.",
+      "images": [
+        {
+          "src": "assets/examples/eda/class_distribution_1.png",
+          "caption": "Balanced classes — each category appears about equally often."
+        },
+        {
+          "src": "assets/examples/eda/class_distribution_2.png",
+          "caption": "Imbalanced classes — one category dominates the sample."
+        },
+        {
+          "src": "assets/examples/eda/class_distribution_3.png",
+          "caption": "Rare class — the minority category is under 2% of records."
+        },
+        {
+          "src": "assets/examples/eda/class_distribution_4.png",
+          "caption": "Many classes — a long tail of small categories."
+        }
       ]
     },
     "missing_data_plot": {
@@ -20499,11 +23520,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nresult = dv.eda.missing_data_plot(df)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(11)\nn = 300\ndf = pd.DataFrame(\n    {\n        \"age\": rng.normal(40.0, 12.0, n),\n        \"income\": rng.normal(60000.0, 15000.0, n),\n        \"score\": rng.normal(0.5, 0.2, n),\n    }\n)\ndf.loc[rng.choice(n, 45, replace=False), \"income\"] = np.nan\ndf.loc[rng.choice(n, 12, replace=False), \"score\"] = np.nan\n\nax = dv.eda.missing_data_plot_static(df, title=\"Missing values per column\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "missing_data_plot_static",
         "missing_data_plot_interactive"
+      ],
+      "useCase": "Use the missing data plot before any cleaning or modelling to see how many values are absent in every column. The bar heights make it obvious whether missingness is a scattered minor nuisance or concentrated in specific fields that need imputation, indicator flags, or upstream fixes. Checking this first prevents silent row loss when models drop incomplete cases.",
+      "images": [
+        {
+          "src": "assets/examples/eda/missing_data_plot_1.png",
+          "caption": "Complete data — no missing values in any column."
+        },
+        {
+          "src": "assets/examples/eda/missing_data_plot_2.png",
+          "caption": "Scattered missingness — small random gaps across all columns."
+        },
+        {
+          "src": "assets/examples/eda/missing_data_plot_3.png",
+          "caption": "Structured missingness — income and score are absent together."
+        },
+        {
+          "src": "assets/examples/eda/missing_data_plot_4.png",
+          "caption": "One heavy column — income is missing for most records."
+        }
       ]
     },
     "distribution_summary": {
@@ -20540,11 +23580,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibFigure; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nresult = dv.eda.distribution_summary(df)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(13)\nn = 400\ndf = pd.DataFrame(\n    {\n        \"age\": rng.normal(40.0, 12.0, n),\n        \"income\": rng.gamma(2.0, 20000.0, n),\n        \"visits\": rng.poisson(4.0, n),\n    }\n)\n\nfig = dv.eda.distribution_summary_static(df, title=\"Column distributions\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step. Summary helpers are especially useful as the numeric companion to visual exploration.",
       "related": [
         "distribution_summary_static",
         "distribution_summary_interactive"
+      ],
+      "useCase": "Use the distribution summary to review the shape of every numeric column in one figure before analysis. Placing the histograms side by side makes skewness, outliers, bimodality, and scale differences visible immediately, so you can decide on transforms, robust statistics, or per-column treatment rather than discovering problems mid-modelling.",
+      "images": [
+        {
+          "src": "assets/examples/eda/distribution_summary_1.png",
+          "caption": "Mixed shapes — normal, skewed, and count columns side by side."
+        },
+        {
+          "src": "assets/examples/eda/distribution_summary_2.png",
+          "caption": "Bimodal column — two overlapping groups in one variable."
+        },
+        {
+          "src": "assets/examples/eda/distribution_summary_3.png",
+          "caption": "Heavy tails — extreme values stretch the axes."
+        },
+        {
+          "src": "assets/examples/eda/distribution_summary_4.png",
+          "caption": "Different scales — each column lives on its own range."
+        }
       ]
     },
     "class_distribution": {
@@ -20581,11 +23640,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ndf = pd.DataFrame({\"a\": [1, 2, np.nan, 4], \"b\": [4, 3, 2, 1], \"segment\": [\"A\", \"A\", \"B\", \"B\"]})\n\nresult = dv.eda.class_distribution(categories)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(17)\nlabels = rng.choice(\n    [\"approved\", \"review\", \"rejected\"], size=500, p=[0.6, 0.3, 0.1]\n)\nclasses = pd.Series(labels, name=\"outcome\")\n\nax = dv.eda.class_distribution_static(classes, title=\"Class balance\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "class_distribution_static",
         "class_distribution_interactive"
+      ],
+      "useCase": "Use the class distribution plot to check the balance of a categorical target before training a classifier. Bars that differ wildly in height warn that accuracy alone will be misleading and that you may need stratified sampling, class weights, or resampling. It is a one-second check that prevents the classic mistake of modelling a rare class with default settings.",
+      "images": [
+        {
+          "src": "assets/examples/eda/class_distribution_1.png",
+          "caption": "Balanced classes — each category appears about equally often."
+        },
+        {
+          "src": "assets/examples/eda/class_distribution_2.png",
+          "caption": "Imbalanced classes — one category dominates the sample."
+        },
+        {
+          "src": "assets/examples/eda/class_distribution_3.png",
+          "caption": "Rare class — the minority category is under 2% of records."
+        },
+        {
+          "src": "assets/examples/eda/class_distribution_4.png",
+          "caption": "Many classes — a long tail of small categories."
+        }
       ]
     }
   },
@@ -20708,11 +23786,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ncm = np.array([[32, 4], [5, 29]])\nfpr = np.array([0.0, 0.1, 0.3, 1.0])\ntpr = np.array([0.0, 0.7, 0.9, 1.0])\nprecision = np.array([1.0, 0.86, 0.72])\nrecall = np.array([0.2, 0.7, 1.0])\n\nax = dv.classification.confusion_matrix_plot_static(cm)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\ncm = [[48, 2, 0], [3, 44, 3], [0, 4, 46]]\nlabels = [\"Setosa\", \"Versicolor\", \"Virginica\"]\n\nax = dv.classification.confusion_matrix_plot_static(\n    cm, labels=labels, title=\"Confusion matrix\"\n)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "confusion_matrix_plot_interactive",
         "confusion_matrix_plot"
+      ],
+      "useCase": "Use the confusion matrix to see not just how often a classifier is wrong but exactly where the errors go — which classes are mistaken for which. Rows are the true classes and columns the predictions, so off-diagonal cells reveal systematic confusions that a single accuracy score would hide. It is especially valuable with imbalanced data, where high accuracy can mask poor performance on the minority class.",
+      "images": [
+        {
+          "src": "assets/examples/classification/confusion_matrix_plot_1.png",
+          "caption": "Strong classifier — nearly all predictions land on the diagonal."
+        },
+        {
+          "src": "assets/examples/classification/confusion_matrix_plot_2.png",
+          "caption": "Weak classifier — predictions scatter well off the diagonal."
+        },
+        {
+          "src": "assets/examples/classification/confusion_matrix_plot_3.png",
+          "caption": "Imbalanced classes — the majority class dominates the counts."
+        },
+        {
+          "src": "assets/examples/classification/confusion_matrix_plot_4.png",
+          "caption": "Systematic confusion — Versicolor and Virginica blur together."
+        }
       ]
     },
     "roc_curve_static": {
@@ -20851,11 +23948,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ncm = np.array([[32, 4], [5, 29]])\nfpr = np.array([0.0, 0.1, 0.3, 1.0])\ntpr = np.array([0.0, 0.7, 0.9, 1.0])\nprecision = np.array([1.0, 0.86, 0.72])\nrecall = np.array([0.2, 0.7, 1.0])\n\nax = dv.classification.roc_curve_static(fpr, tpr)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nfpr = np.linspace(0.0, 1.0, 50)\ntpr = fpr ** 0.2\nauc = float(np.trapezoid(tpr, fpr))\n\nax = dv.classification.roc_curve_static(\n    fpr, tpr, auc=auc, title=\"ROC curve\"\n)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "roc_curve_interactive",
         "roc_curve"
+      ],
+      "useCase": "Use the ROC curve to judge how well a classifier's scores separate the positive class from the negative across every possible decision threshold. Each point trades true positive rate against false positive rate, and the area under the curve (AUC) summarises ranking quality: 1.0 is perfect, 0.5 is no better than chance. Because it is threshold-independent, it is the standard way to compare models before choosing an operating point.",
+      "images": [
+        {
+          "src": "assets/examples/classification/roc_curve_1.png",
+          "caption": "Excellent separation — the curve hugs the top-left corner."
+        },
+        {
+          "src": "assets/examples/classification/roc_curve_2.png",
+          "caption": "Good separation — solid lift over the chance diagonal."
+        },
+        {
+          "src": "assets/examples/classification/roc_curve_3.png",
+          "caption": "Weak separation — only a modest bow above chance."
+        },
+        {
+          "src": "assets/examples/classification/roc_curve_4.png",
+          "caption": "Near chance — the curve collapses onto the diagonal."
+        }
       ]
     },
     "precision_recall_curve_static": {
@@ -20976,11 +24092,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ncm = np.array([[32, 4], [5, 29]])\nfpr = np.array([0.0, 0.1, 0.3, 1.0])\ntpr = np.array([0.0, 0.7, 0.9, 1.0])\nprecision = np.array([1.0, 0.86, 0.72])\nrecall = np.array([0.2, 0.7, 1.0])\n\nax = dv.classification.precision_recall_curve_static(precision, recall)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrecall = np.linspace(0.0, 1.0, 50)\nprecision = 1.0 - 0.3 * recall ** 3\nap = float(np.trapezoid(precision, recall))\n\nax = dv.classification.precision_recall_curve_static(\n    precision, recall, ap=ap, title=\"Precision–recall curve\"\n)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "precision_recall_curve_interactive",
         "precision_recall_curve"
+      ],
+      "useCase": "Use the precision–recall curve instead of ROC when the positive class is rare — fraud detection, defect screening, medical diagnosis. ROC can look optimistic on imbalanced data because the false positive rate stays low simply due to the huge number of negatives; precision–recall focuses only on the positives and shows how much precision you sacrifice as you push recall higher. The average precision (AP) score summarises the curve in one number.",
+      "images": [
+        {
+          "src": "assets/examples/classification/precision_recall_curve_1.png",
+          "caption": "Strong on balanced data — precision stays high to the end."
+        },
+        {
+          "src": "assets/examples/classification/precision_recall_curve_2.png",
+          "caption": "Imbalanced but strong — precision holds until high recall."
+        },
+        {
+          "src": "assets/examples/classification/precision_recall_curve_3.png",
+          "caption": "Moderate model — precision erodes steadily with recall."
+        },
+        {
+          "src": "assets/examples/classification/precision_recall_curve_4.png",
+          "caption": "Weak on imbalanced data — precision collapses early."
+        }
       ]
     },
     "confusion_matrix_plot_interactive": {
@@ -21077,11 +24212,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ncm = np.array([[32, 4], [5, 29]])\nfpr = np.array([0.0, 0.1, 0.3, 1.0])\ntpr = np.array([0.0, 0.7, 0.9, 1.0])\nprecision = np.array([1.0, 0.86, 0.72])\nrecall = np.array([0.2, 0.7, 1.0])\n\nfig = dv.classification.confusion_matrix_plot_interactive(cm)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\ncm = [[48, 2, 0], [3, 44, 3], [0, 4, 46]]\nlabels = [\"Setosa\", \"Versicolor\", \"Virginica\"]\n\nfig = dv.classification.confusion_matrix_plot_interactive(\n    cm, labels=labels, title=\"Confusion matrix\"\n)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "confusion_matrix_plot_static",
         "confusion_matrix_plot"
+      ],
+      "useCase": "Use the confusion matrix to see not just how often a classifier is wrong but exactly where the errors go — which classes are mistaken for which. Rows are the true classes and columns the predictions, so off-diagonal cells reveal systematic confusions that a single accuracy score would hide. It is especially valuable with imbalanced data, where high accuracy can mask poor performance on the minority class.",
+      "images": [
+        {
+          "src": "assets/examples/classification/confusion_matrix_plot_1.png",
+          "caption": "Strong classifier — nearly all predictions land on the diagonal."
+        },
+        {
+          "src": "assets/examples/classification/confusion_matrix_plot_2.png",
+          "caption": "Weak classifier — predictions scatter well off the diagonal."
+        },
+        {
+          "src": "assets/examples/classification/confusion_matrix_plot_3.png",
+          "caption": "Imbalanced classes — the majority class dominates the counts."
+        },
+        {
+          "src": "assets/examples/classification/confusion_matrix_plot_4.png",
+          "caption": "Systematic confusion — Versicolor and Virginica blur together."
+        }
       ]
     },
     "roc_curve_interactive": {
@@ -21208,11 +24362,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ncm = np.array([[32, 4], [5, 29]])\nfpr = np.array([0.0, 0.1, 0.3, 1.0])\ntpr = np.array([0.0, 0.7, 0.9, 1.0])\nprecision = np.array([1.0, 0.86, 0.72])\nrecall = np.array([0.2, 0.7, 1.0])\n\nfig = dv.classification.roc_curve_interactive(fpr, tpr)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nfpr = np.linspace(0.0, 1.0, 50)\ntpr = fpr ** 0.2\nauc = float(np.trapezoid(tpr, fpr))\n\nfig = dv.classification.roc_curve_interactive(\n    fpr, tpr, auc=auc, title=\"ROC curve\"\n)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "roc_curve_static",
         "roc_curve"
+      ],
+      "useCase": "Use the ROC curve to judge how well a classifier's scores separate the positive class from the negative across every possible decision threshold. Each point trades true positive rate against false positive rate, and the area under the curve (AUC) summarises ranking quality: 1.0 is perfect, 0.5 is no better than chance. Because it is threshold-independent, it is the standard way to compare models before choosing an operating point.",
+      "images": [
+        {
+          "src": "assets/examples/classification/roc_curve_1.png",
+          "caption": "Excellent separation — the curve hugs the top-left corner."
+        },
+        {
+          "src": "assets/examples/classification/roc_curve_2.png",
+          "caption": "Good separation — solid lift over the chance diagonal."
+        },
+        {
+          "src": "assets/examples/classification/roc_curve_3.png",
+          "caption": "Weak separation — only a modest bow above chance."
+        },
+        {
+          "src": "assets/examples/classification/roc_curve_4.png",
+          "caption": "Near chance — the curve collapses onto the diagonal."
+        }
       ]
     },
     "precision_recall_curve_interactive": {
@@ -21321,11 +24494,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ncm = np.array([[32, 4], [5, 29]])\nfpr = np.array([0.0, 0.1, 0.3, 1.0])\ntpr = np.array([0.0, 0.7, 0.9, 1.0])\nprecision = np.array([1.0, 0.86, 0.72])\nrecall = np.array([0.2, 0.7, 1.0])\n\nfig = dv.classification.precision_recall_curve_interactive(precision, recall)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrecall = np.linspace(0.0, 1.0, 50)\nprecision = 1.0 - 0.3 * recall ** 3\nap = float(np.trapezoid(precision, recall))\n\nfig = dv.classification.precision_recall_curve_interactive(\n    precision, recall, ap=ap, title=\"Precision–recall curve\"\n)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "precision_recall_curve_static",
         "precision_recall_curve"
+      ],
+      "useCase": "Use the precision–recall curve instead of ROC when the positive class is rare — fraud detection, defect screening, medical diagnosis. ROC can look optimistic on imbalanced data because the false positive rate stays low simply due to the huge number of negatives; precision–recall focuses only on the positives and shows how much precision you sacrifice as you push recall higher. The average precision (AP) score summarises the curve in one number.",
+      "images": [
+        {
+          "src": "assets/examples/classification/precision_recall_curve_1.png",
+          "caption": "Strong on balanced data — precision stays high to the end."
+        },
+        {
+          "src": "assets/examples/classification/precision_recall_curve_2.png",
+          "caption": "Imbalanced but strong — precision holds until high recall."
+        },
+        {
+          "src": "assets/examples/classification/precision_recall_curve_3.png",
+          "caption": "Moderate model — precision erodes steadily with recall."
+        },
+        {
+          "src": "assets/examples/classification/precision_recall_curve_4.png",
+          "caption": "Weak on imbalanced data — precision collapses early."
+        }
       ]
     },
     "confusion_matrix_plot": {
@@ -21368,11 +24560,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ncm = np.array([[32, 4], [5, 29]])\nfpr = np.array([0.0, 0.1, 0.3, 1.0])\ntpr = np.array([0.0, 0.7, 0.9, 1.0])\nprecision = np.array([1.0, 0.86, 0.72])\nrecall = np.array([0.2, 0.7, 1.0])\n\nresult = dv.classification.confusion_matrix_plot(cm)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\ncm = [[48, 2, 0], [3, 44, 3], [0, 4, 46]]\nlabels = [\"Setosa\", \"Versicolor\", \"Virginica\"]\n\nax = dv.classification.confusion_matrix_plot_static(\n    cm, labels=labels, title=\"Confusion matrix\"\n)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "confusion_matrix_plot_static",
         "confusion_matrix_plot_interactive"
+      ],
+      "useCase": "Use the confusion matrix to see not just how often a classifier is wrong but exactly where the errors go — which classes are mistaken for which. Rows are the true classes and columns the predictions, so off-diagonal cells reveal systematic confusions that a single accuracy score would hide. It is especially valuable with imbalanced data, where high accuracy can mask poor performance on the minority class.",
+      "images": [
+        {
+          "src": "assets/examples/classification/confusion_matrix_plot_1.png",
+          "caption": "Strong classifier — nearly all predictions land on the diagonal."
+        },
+        {
+          "src": "assets/examples/classification/confusion_matrix_plot_2.png",
+          "caption": "Weak classifier — predictions scatter well off the diagonal."
+        },
+        {
+          "src": "assets/examples/classification/confusion_matrix_plot_3.png",
+          "caption": "Imbalanced classes — the majority class dominates the counts."
+        },
+        {
+          "src": "assets/examples/classification/confusion_matrix_plot_4.png",
+          "caption": "Systematic confusion — Versicolor and Virginica blur together."
+        }
       ]
     },
     "roc_curve": {
@@ -21421,11 +24632,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ncm = np.array([[32, 4], [5, 29]])\nfpr = np.array([0.0, 0.1, 0.3, 1.0])\ntpr = np.array([0.0, 0.7, 0.9, 1.0])\nprecision = np.array([1.0, 0.86, 0.72])\nrecall = np.array([0.2, 0.7, 1.0])\n\nresult = dv.classification.roc_curve(fpr, tpr)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nfpr = np.linspace(0.0, 1.0, 50)\ntpr = fpr ** 0.2\nauc = float(np.trapezoid(tpr, fpr))\n\nax = dv.classification.roc_curve_static(\n    fpr, tpr, auc=auc, title=\"ROC curve\"\n)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "roc_curve_static",
         "roc_curve_interactive"
+      ],
+      "useCase": "Use the ROC curve to judge how well a classifier's scores separate the positive class from the negative across every possible decision threshold. Each point trades true positive rate against false positive rate, and the area under the curve (AUC) summarises ranking quality: 1.0 is perfect, 0.5 is no better than chance. Because it is threshold-independent, it is the standard way to compare models before choosing an operating point.",
+      "images": [
+        {
+          "src": "assets/examples/classification/roc_curve_1.png",
+          "caption": "Excellent separation — the curve hugs the top-left corner."
+        },
+        {
+          "src": "assets/examples/classification/roc_curve_2.png",
+          "caption": "Good separation — solid lift over the chance diagonal."
+        },
+        {
+          "src": "assets/examples/classification/roc_curve_3.png",
+          "caption": "Weak separation — only a modest bow above chance."
+        },
+        {
+          "src": "assets/examples/classification/roc_curve_4.png",
+          "caption": "Near chance — the curve collapses onto the diagonal."
+        }
       ]
     },
     "precision_recall_curve": {
@@ -21474,11 +24704,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ncm = np.array([[32, 4], [5, 29]])\nfpr = np.array([0.0, 0.1, 0.3, 1.0])\ntpr = np.array([0.0, 0.7, 0.9, 1.0])\nprecision = np.array([1.0, 0.86, 0.72])\nrecall = np.array([0.2, 0.7, 1.0])\n\nresult = dv.classification.precision_recall_curve(precision, recall)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrecall = np.linspace(0.0, 1.0, 50)\nprecision = 1.0 - 0.3 * recall ** 3\nap = float(np.trapezoid(precision, recall))\n\nax = dv.classification.precision_recall_curve_static(\n    precision, recall, ap=ap, title=\"Precision–recall curve\"\n)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "precision_recall_curve_static",
         "precision_recall_curve_interactive"
+      ],
+      "useCase": "Use the precision–recall curve instead of ROC when the positive class is rare — fraud detection, defect screening, medical diagnosis. ROC can look optimistic on imbalanced data because the false positive rate stays low simply due to the huge number of negatives; precision–recall focuses only on the positives and shows how much precision you sacrifice as you push recall higher. The average precision (AP) score summarises the curve in one number.",
+      "images": [
+        {
+          "src": "assets/examples/classification/precision_recall_curve_1.png",
+          "caption": "Strong on balanced data — precision stays high to the end."
+        },
+        {
+          "src": "assets/examples/classification/precision_recall_curve_2.png",
+          "caption": "Imbalanced but strong — precision holds until high recall."
+        },
+        {
+          "src": "assets/examples/classification/precision_recall_curve_3.png",
+          "caption": "Moderate model — precision erodes steadily with recall."
+        },
+        {
+          "src": "assets/examples/classification/precision_recall_curve_4.png",
+          "caption": "Weak on imbalanced data — precision collapses early."
+        }
       ]
     }
   },
@@ -21619,11 +24868,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ny_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])\ny_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])\ntrain_sizes = np.array([50, 100, 200])\ntrain_scores = np.array([0.82, 0.86, 0.89])\nvalidation_scores = np.array([0.76, 0.81, 0.84])\n\nax = dv.regression.residual_plot_static(y_true, y_pred)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\ny_true = rng.uniform(10.0, 50.0, size=120)\ny_pred = y_true + rng.normal(0.0, 3.0, size=120)\n\nax = dv.regression.residual_plot_static(\n    y_true, y_pred, title=\"Residual plot\"\n)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "residual_plot_interactive",
         "residual_plot"
+      ],
+      "useCase": "Use the residual plot to check whether a regression model's errors look like random noise or carry structure the model failed to capture. Plotting residuals against the fitted values should show a shapeless cloud around zero; a funnel shape signals heteroscedasticity, a curve signals a missed nonlinear effect, and isolated points flag outliers. It is the fastest visual test of whether the model assumptions hold.",
+      "images": [
+        {
+          "src": "assets/examples/regression/residual_plot_1.png",
+          "caption": "Well specified — residuals form a shapeless cloud around zero."
+        },
+        {
+          "src": "assets/examples/regression/residual_plot_2.png",
+          "caption": "Heteroscedastic — the residual spread fans out with the fit."
+        },
+        {
+          "src": "assets/examples/regression/residual_plot_3.png",
+          "caption": "Nonlinear misfit — a curved pattern the model failed to capture."
+        },
+        {
+          "src": "assets/examples/regression/residual_plot_4.png",
+          "caption": "Outliers — a few extreme residuals stand apart from the rest."
+        }
       ]
     },
     "prediction_plot_static": {
@@ -21768,11 +25036,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ny_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])\ny_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])\ntrain_sizes = np.array([50, 100, 200])\ntrain_scores = np.array([0.82, 0.86, 0.89])\nvalidation_scores = np.array([0.76, 0.81, 0.84])\n\nax = dv.regression.prediction_plot_static(y_true, y_pred)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(1)\ny_true = rng.uniform(10.0, 50.0, size=120)\ny_pred = y_true + rng.normal(0.0, 2.5, size=120)\n\nax = dv.regression.prediction_plot_static(\n    y_true, y_pred, title=\"Predicted vs. observed\"\n)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "prediction_plot_interactive",
         "prediction_plot"
+      ],
+      "useCase": "Use the prediction plot to see how closely predicted values track the observed ones by comparing both against the 45-degree identity line. Points hugging the line mean accurate predictions; systematic departure above or below it reveals bias, and widening scatter shows where the model loses precision. It communicates overall fit to non-technical audiences more directly than error metrics alone.",
+      "images": [
+        {
+          "src": "assets/examples/regression/prediction_plot_1.png",
+          "caption": "Accurate model — points hug the 45-degree identity line."
+        },
+        {
+          "src": "assets/examples/regression/prediction_plot_2.png",
+          "caption": "Biased model — predictions drift off the line at high values."
+        },
+        {
+          "src": "assets/examples/regression/prediction_plot_3.png",
+          "caption": "Noisy model — wide scatter around the identity line."
+        },
+        {
+          "src": "assets/examples/regression/prediction_plot_4.png",
+          "caption": "Saturating model — predictions plateau for large targets."
+        }
       ]
     },
     "learning_curve_static": {
@@ -21905,11 +25192,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ny_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])\ny_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])\ntrain_sizes = np.array([50, 100, 200])\ntrain_scores = np.array([0.82, 0.86, 0.89])\nvalidation_scores = np.array([0.76, 0.81, 0.84])\n\nax = dv.regression.learning_curve_static(train_sizes, train_scores)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\ntrain_sizes = np.linspace(0.1, 1.0, 8)\ntrain_scores = np.array(\n    [0.98, 0.95, 0.92, 0.90, 0.89, 0.88, 0.87, 0.86]\n)\nval_scores = np.array(\n    [0.72, 0.78, 0.82, 0.84, 0.85, 0.86, 0.86, 0.86]\n)\n\nax = dv.regression.learning_curve_static(\n    train_sizes, train_scores, val_scores, title=\"Learning curve\"\n)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "learning_curve_interactive",
         "learning_curve"
+      ],
+      "useCase": "Use the learning curve to diagnose whether a model suffers from high bias, high variance, or simply needs more data. It plots training and validation scores against training-set size: converging curves mean more data will not help, a persistent wide gap signals overfitting that regularisation or more samples may close, and both curves plateauing low signal underfitting. It guides the next modelling decision instead of guesswork.",
+      "images": [
+        {
+          "src": "assets/examples/regression/learning_curve_1.png",
+          "caption": "Good fit — training and validation scores converge."
+        },
+        {
+          "src": "assets/examples/regression/learning_curve_2.png",
+          "caption": "Overfit — a wide, persistent gap between the two curves."
+        },
+        {
+          "src": "assets/examples/regression/learning_curve_3.png",
+          "caption": "Underfit — both curves plateau at a low score."
+        },
+        {
+          "src": "assets/examples/regression/learning_curve_4.png",
+          "caption": "More data helps — the validation score is still climbing."
+        }
       ]
     },
     "residual_plot_interactive": {
@@ -22024,11 +25330,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ny_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])\ny_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])\ntrain_sizes = np.array([50, 100, 200])\ntrain_scores = np.array([0.82, 0.86, 0.89])\nvalidation_scores = np.array([0.76, 0.81, 0.84])\n\nfig = dv.regression.residual_plot_interactive(y_true, y_pred)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\ny_true = rng.uniform(10.0, 50.0, size=120)\ny_pred = y_true + rng.normal(0.0, 3.0, size=120)\n\nfig = dv.regression.residual_plot_interactive(\n    y_true, y_pred, title=\"Residual plot\"\n)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "residual_plot_static",
         "residual_plot"
+      ],
+      "useCase": "Use the residual plot to check whether a regression model's errors look like random noise or carry structure the model failed to capture. Plotting residuals against the fitted values should show a shapeless cloud around zero; a funnel shape signals heteroscedasticity, a curve signals a missed nonlinear effect, and isolated points flag outliers. It is the fastest visual test of whether the model assumptions hold.",
+      "images": [
+        {
+          "src": "assets/examples/regression/residual_plot_1.png",
+          "caption": "Well specified — residuals form a shapeless cloud around zero."
+        },
+        {
+          "src": "assets/examples/regression/residual_plot_2.png",
+          "caption": "Heteroscedastic — the residual spread fans out with the fit."
+        },
+        {
+          "src": "assets/examples/regression/residual_plot_3.png",
+          "caption": "Nonlinear misfit — a curved pattern the model failed to capture."
+        },
+        {
+          "src": "assets/examples/regression/residual_plot_4.png",
+          "caption": "Outliers — a few extreme residuals stand apart from the rest."
+        }
       ]
     },
     "prediction_plot_interactive": {
@@ -22143,11 +25468,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ny_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])\ny_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])\ntrain_sizes = np.array([50, 100, 200])\ntrain_scores = np.array([0.82, 0.86, 0.89])\nvalidation_scores = np.array([0.76, 0.81, 0.84])\n\nfig = dv.regression.prediction_plot_interactive(y_true, y_pred)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(1)\ny_true = rng.uniform(10.0, 50.0, size=120)\ny_pred = y_true + rng.normal(0.0, 2.5, size=120)\n\nfig = dv.regression.prediction_plot_interactive(\n    y_true, y_pred, title=\"Predicted vs. observed\"\n)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "prediction_plot_static",
         "prediction_plot"
+      ],
+      "useCase": "Use the prediction plot to see how closely predicted values track the observed ones by comparing both against the 45-degree identity line. Points hugging the line mean accurate predictions; systematic departure above or below it reveals bias, and widening scatter shows where the model loses precision. It communicates overall fit to non-technical audiences more directly than error metrics alone.",
+      "images": [
+        {
+          "src": "assets/examples/regression/prediction_plot_1.png",
+          "caption": "Accurate model — points hug the 45-degree identity line."
+        },
+        {
+          "src": "assets/examples/regression/prediction_plot_2.png",
+          "caption": "Biased model — predictions drift off the line at high values."
+        },
+        {
+          "src": "assets/examples/regression/prediction_plot_3.png",
+          "caption": "Noisy model — wide scatter around the identity line."
+        },
+        {
+          "src": "assets/examples/regression/prediction_plot_4.png",
+          "caption": "Saturating model — predictions plateau for large targets."
+        }
       ]
     },
     "learning_curve_interactive": {
@@ -22262,11 +25606,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ny_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])\ny_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])\ntrain_sizes = np.array([50, 100, 200])\ntrain_scores = np.array([0.82, 0.86, 0.89])\nvalidation_scores = np.array([0.76, 0.81, 0.84])\n\nfig = dv.regression.learning_curve_interactive(train_sizes, train_scores)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\ntrain_sizes = np.linspace(0.1, 1.0, 8)\ntrain_scores = np.array(\n    [0.98, 0.95, 0.92, 0.90, 0.89, 0.88, 0.87, 0.86]\n)\nval_scores = np.array(\n    [0.72, 0.78, 0.82, 0.84, 0.85, 0.86, 0.86, 0.86]\n)\n\nfig = dv.regression.learning_curve_interactive(\n    train_sizes, train_scores, val_scores, title=\"Learning curve\"\n)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "learning_curve_static",
         "learning_curve"
+      ],
+      "useCase": "Use the learning curve to diagnose whether a model suffers from high bias, high variance, or simply needs more data. It plots training and validation scores against training-set size: converging curves mean more data will not help, a persistent wide gap signals overfitting that regularisation or more samples may close, and both curves plateauing low signal underfitting. It guides the next modelling decision instead of guesswork.",
+      "images": [
+        {
+          "src": "assets/examples/regression/learning_curve_1.png",
+          "caption": "Good fit — training and validation scores converge."
+        },
+        {
+          "src": "assets/examples/regression/learning_curve_2.png",
+          "caption": "Overfit — a wide, persistent gap between the two curves."
+        },
+        {
+          "src": "assets/examples/regression/learning_curve_3.png",
+          "caption": "Underfit — both curves plateau at a low score."
+        },
+        {
+          "src": "assets/examples/regression/learning_curve_4.png",
+          "caption": "More data helps — the validation score is still climbing."
+        }
       ]
     },
     "residual_plot": {
@@ -22309,11 +25672,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ny_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])\ny_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])\ntrain_sizes = np.array([50, 100, 200])\ntrain_scores = np.array([0.82, 0.86, 0.89])\nvalidation_scores = np.array([0.76, 0.81, 0.84])\n\nresult = dv.regression.residual_plot(y_true, y_pred)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\ny_true = rng.uniform(10.0, 50.0, size=120)\ny_pred = y_true + rng.normal(0.0, 3.0, size=120)\n\nax = dv.regression.residual_plot_static(\n    y_true, y_pred, title=\"Residual plot\"\n)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "residual_plot_static",
         "residual_plot_interactive"
+      ],
+      "useCase": "Use the residual plot to check whether a regression model's errors look like random noise or carry structure the model failed to capture. Plotting residuals against the fitted values should show a shapeless cloud around zero; a funnel shape signals heteroscedasticity, a curve signals a missed nonlinear effect, and isolated points flag outliers. It is the fastest visual test of whether the model assumptions hold.",
+      "images": [
+        {
+          "src": "assets/examples/regression/residual_plot_1.png",
+          "caption": "Well specified — residuals form a shapeless cloud around zero."
+        },
+        {
+          "src": "assets/examples/regression/residual_plot_2.png",
+          "caption": "Heteroscedastic — the residual spread fans out with the fit."
+        },
+        {
+          "src": "assets/examples/regression/residual_plot_3.png",
+          "caption": "Nonlinear misfit — a curved pattern the model failed to capture."
+        },
+        {
+          "src": "assets/examples/regression/residual_plot_4.png",
+          "caption": "Outliers — a few extreme residuals stand apart from the rest."
+        }
       ]
     },
     "prediction_plot": {
@@ -22356,11 +25738,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ny_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])\ny_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])\ntrain_sizes = np.array([50, 100, 200])\ntrain_scores = np.array([0.82, 0.86, 0.89])\nvalidation_scores = np.array([0.76, 0.81, 0.84])\n\nresult = dv.regression.prediction_plot(y_true, y_pred)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(1)\ny_true = rng.uniform(10.0, 50.0, size=120)\ny_pred = y_true + rng.normal(0.0, 2.5, size=120)\n\nax = dv.regression.prediction_plot_static(\n    y_true, y_pred, title=\"Predicted vs. observed\"\n)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "prediction_plot_static",
         "prediction_plot_interactive"
+      ],
+      "useCase": "Use the prediction plot to see how closely predicted values track the observed ones by comparing both against the 45-degree identity line. Points hugging the line mean accurate predictions; systematic departure above or below it reveals bias, and widening scatter shows where the model loses precision. It communicates overall fit to non-technical audiences more directly than error metrics alone.",
+      "images": [
+        {
+          "src": "assets/examples/regression/prediction_plot_1.png",
+          "caption": "Accurate model — points hug the 45-degree identity line."
+        },
+        {
+          "src": "assets/examples/regression/prediction_plot_2.png",
+          "caption": "Biased model — predictions drift off the line at high values."
+        },
+        {
+          "src": "assets/examples/regression/prediction_plot_3.png",
+          "caption": "Noisy model — wide scatter around the identity line."
+        },
+        {
+          "src": "assets/examples/regression/prediction_plot_4.png",
+          "caption": "Saturating model — predictions plateau for large targets."
+        }
       ]
     },
     "learning_curve": {
@@ -22409,11 +25810,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\ny_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])\ny_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])\ntrain_sizes = np.array([50, 100, 200])\ntrain_scores = np.array([0.82, 0.86, 0.89])\nvalidation_scores = np.array([0.76, 0.81, 0.84])\n\nresult = dv.regression.learning_curve(train_sizes, train_scores)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\ntrain_sizes = np.linspace(0.1, 1.0, 8)\ntrain_scores = np.array(\n    [0.98, 0.95, 0.92, 0.90, 0.89, 0.88, 0.87, 0.86]\n)\nval_scores = np.array(\n    [0.72, 0.78, 0.82, 0.84, 0.85, 0.86, 0.86, 0.86]\n)\n\nax = dv.regression.learning_curve_static(\n    train_sizes, train_scores, val_scores, title=\"Learning curve\"\n)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "learning_curve_static",
         "learning_curve_interactive"
+      ],
+      "useCase": "Use the learning curve to diagnose whether a model suffers from high bias, high variance, or simply needs more data. It plots training and validation scores against training-set size: converging curves mean more data will not help, a persistent wide gap signals overfitting that regularisation or more samples may close, and both curves plateauing low signal underfitting. It guides the next modelling decision instead of guesswork.",
+      "images": [
+        {
+          "src": "assets/examples/regression/learning_curve_1.png",
+          "caption": "Good fit — training and validation scores converge."
+        },
+        {
+          "src": "assets/examples/regression/learning_curve_2.png",
+          "caption": "Overfit — a wide, persistent gap between the two curves."
+        },
+        {
+          "src": "assets/examples/regression/learning_curve_3.png",
+          "caption": "Underfit — both curves plateau at a low score."
+        },
+        {
+          "src": "assets/examples/regression/learning_curve_4.png",
+          "caption": "More data helps — the validation score is still climbing."
+        }
       ]
     }
   },
@@ -22602,11 +26022,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\nx = np.array([1.0, 1.2, 4.1, 4.3])\ny = np.array([1.1, 0.9, 4.0, 4.4])\nlabels = np.array([0, 0, 1, 1])\nk_values = np.array([1, 2, 3, 4])\ninertias = np.array([10.0, 4.2, 2.6, 2.1])\nlinkage_matrix = np.array([[0, 1, 0.3, 2], [2, 3, 0.4, 2], [4, 5, 3.0, 4]])\n\nax = dv.clustering.scatter_clusters_static(x, y, labels)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nx = np.concatenate(\n    [rng.normal(0.0, 0.4, 40), rng.normal(3.0, 0.4, 40), rng.normal(1.5, 0.4, 40)]\n)\ny = np.concatenate(\n    [rng.normal(0.0, 0.4, 40), rng.normal(3.0, 0.4, 40), rng.normal(5.0, 0.4, 40)]\n)\nlabels = np.repeat([0, 1, 2], 40)\n\nax = dv.clustering.scatter_clusters_static(\n    x, y, labels, title=\"Cluster assignments\"\n)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "scatter_clusters_interactive",
         "scatter_clusters"
+      ],
+      "useCase": "Use the cluster scatter plot to see how an algorithm has partitioned two features — whether groups are compact and well separated or bleed into one another. Colouring points by their assigned label exposes borderline assignments, oddly shaped clusters, and outliers at a glance. It is the natural sanity check after running k-means or any flat clustering on two-dimensional data or a 2-D projection.",
+      "images": [
+        {
+          "src": "assets/examples/clustering/scatter_clusters_1.png",
+          "caption": "Well separated — three compact clusters with clear gaps."
+        },
+        {
+          "src": "assets/examples/clustering/scatter_clusters_2.png",
+          "caption": "Overlapping clusters — boundaries blur between groups."
+        },
+        {
+          "src": "assets/examples/clustering/scatter_clusters_3.png",
+          "caption": "Non-spherical structure — ring shapes defeat distance-based splits."
+        },
+        {
+          "src": "assets/examples/clustering/scatter_clusters_4.png",
+          "caption": "With centroids — markers locate each cluster centre."
+        }
       ]
     },
     "dendrogram_static": {
@@ -22763,11 +26202,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = np.array([1.0, 1.2, 4.1, 4.3])\ny = np.array([1.1, 0.9, 4.0, 4.4])\nlabels = np.array([0, 0, 1, 1])\nk_values = np.array([1, 2, 3, 4])\ninertias = np.array([10.0, 4.2, 2.6, 2.1])\nlinkage_matrix = np.array([[0, 1, 0.3, 2], [2, 3, 0.4, 2], [4, 5, 3.0, 4]])\n\nax = dv.clustering.dendrogram_static(linkage_matrix)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nlinkage_matrix = np.array(\n    [\n        [0.0, 1.0, 0.15, 2.0],\n        [2.0, 3.0, 0.22, 2.0],\n        [4.0, 5.0, 0.18, 2.0],\n        [6.0, 7.0, 0.55, 4.0],\n        [8.0, 9.0, 1.10, 6.0],\n    ]\n)\nlabels = [\"S1\", \"S2\", \"S3\", \"S4\", \"S5\", \"S6\"]\n\nax = dv.clustering.dendrogram_static(\n    linkage_matrix, labels=labels, title=\"Hierarchical clustering\"\n)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "dendrogram_interactive",
         "dendrogram"
+      ],
+      "useCase": "Use the dendrogram to read the full merge history of a hierarchical clustering as a tree. The height of each merge shows the distance at which clusters were combined, so long vertical gaps suggest natural places to cut the tree into flat clusters. It reveals nested subgroup structure that a single flat partition hides, and works for any number of clusters without choosing k up front.",
+      "images": [
+        {
+          "src": "assets/examples/clustering/dendrogram_1.png",
+          "caption": "Clear structure — long final gaps mark three natural clusters."
+        },
+        {
+          "src": "assets/examples/clustering/dendrogram_2.png",
+          "caption": "Chained merges — no gap suggests a clean place to cut."
+        },
+        {
+          "src": "assets/examples/clustering/dendrogram_3.png",
+          "caption": "Two dominant groups — one large merge splits the tree in half."
+        },
+        {
+          "src": "assets/examples/clustering/dendrogram_4.png",
+          "caption": "Cut by threshold — colouring marks clusters below the line."
+        }
       ]
     },
     "elbow_plot_static": {
@@ -22948,11 +26406,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = np.array([1.0, 1.2, 4.1, 4.3])\ny = np.array([1.1, 0.9, 4.0, 4.4])\nlabels = np.array([0, 0, 1, 1])\nk_values = np.array([1, 2, 3, 4])\ninertias = np.array([10.0, 4.2, 2.6, 2.1])\nlinkage_matrix = np.array([[0, 1, 0.3, 2], [2, 3, 0.4, 2], [4, 5, 3.0, 4]])\n\nax = dv.clustering.elbow_plot_static(inertias)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nn_clusters = np.arange(1, 11)\ninertias = np.array(\n    [900.0, 420.0, 260.0, 190.0, 160.0, 140.0, 128.0, 120.0, 115.0, 110.0]\n)\n\nax = dv.clustering.elbow_plot_static(\n    n_clusters, inertias, elbow_idx=2, title=\"Elbow plot\"\n)\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "elbow_plot_interactive",
         "elbow_plot"
+      ],
+      "useCase": "Use the elbow plot to pick the number of clusters for k-means by plotting within-cluster inertia against k. Inertia always falls as k grows, but the curve typically bends where adding another cluster stops paying off — the “elbow” is the smallest k that captures most of the structure. When no clear bend appears, that is itself evidence that the data may not contain well-separated groups.",
+      "images": [
+        {
+          "src": "assets/examples/clustering/elbow_plot_1.png",
+          "caption": "Clear elbow — the curve bends sharply at three clusters."
+        },
+        {
+          "src": "assets/examples/clustering/elbow_plot_2.png",
+          "caption": "No elbow — a smooth decline offers no obvious choice."
+        },
+        {
+          "src": "assets/examples/clustering/elbow_plot_3.png",
+          "caption": "Elbow at four — the bend arrives one cluster later."
+        },
+        {
+          "src": "assets/examples/clustering/elbow_plot_4.png",
+          "caption": "Steep drop, quick plateau — two clusters capture most structure."
+        }
       ]
     },
     "scatter_clusters_interactive": {
@@ -23121,11 +26598,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\nx = np.array([1.0, 1.2, 4.1, 4.3])\ny = np.array([1.1, 0.9, 4.0, 4.4])\nlabels = np.array([0, 0, 1, 1])\nk_values = np.array([1, 2, 3, 4])\ninertias = np.array([10.0, 4.2, 2.6, 2.1])\nlinkage_matrix = np.array([[0, 1, 0.3, 2], [2, 3, 0.4, 2], [4, 5, 3.0, 4]])\n\nfig = dv.clustering.scatter_clusters_interactive(x, y, labels)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nx = np.concatenate(\n    [rng.normal(0.0, 0.4, 40), rng.normal(3.0, 0.4, 40), rng.normal(1.5, 0.4, 40)]\n)\ny = np.concatenate(\n    [rng.normal(0.0, 0.4, 40), rng.normal(3.0, 0.4, 40), rng.normal(5.0, 0.4, 40)]\n)\nlabels = np.repeat([0, 1, 2], 40)\n\nfig = dv.clustering.scatter_clusters_interactive(\n    x, y, labels, title=\"Cluster assignments\"\n)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "scatter_clusters_static",
         "scatter_clusters"
+      ],
+      "useCase": "Use the cluster scatter plot to see how an algorithm has partitioned two features — whether groups are compact and well separated or bleed into one another. Colouring points by their assigned label exposes borderline assignments, oddly shaped clusters, and outliers at a glance. It is the natural sanity check after running k-means or any flat clustering on two-dimensional data or a 2-D projection.",
+      "images": [
+        {
+          "src": "assets/examples/clustering/scatter_clusters_1.png",
+          "caption": "Well separated — three compact clusters with clear gaps."
+        },
+        {
+          "src": "assets/examples/clustering/scatter_clusters_2.png",
+          "caption": "Overlapping clusters — boundaries blur between groups."
+        },
+        {
+          "src": "assets/examples/clustering/scatter_clusters_3.png",
+          "caption": "Non-spherical structure — ring shapes defeat distance-based splits."
+        },
+        {
+          "src": "assets/examples/clustering/scatter_clusters_4.png",
+          "caption": "With centroids — markers locate each cluster centre."
+        }
       ]
     },
     "dendrogram_interactive": {
@@ -23246,11 +26742,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = np.array([1.0, 1.2, 4.1, 4.3])\ny = np.array([1.1, 0.9, 4.0, 4.4])\nlabels = np.array([0, 0, 1, 1])\nk_values = np.array([1, 2, 3, 4])\ninertias = np.array([10.0, 4.2, 2.6, 2.1])\nlinkage_matrix = np.array([[0, 1, 0.3, 2], [2, 3, 0.4, 2], [4, 5, 3.0, 4]])\n\nfig = dv.clustering.dendrogram_interactive(linkage_matrix)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nlinkage_matrix = np.array(\n    [\n        [0.0, 1.0, 0.15, 2.0],\n        [2.0, 3.0, 0.22, 2.0],\n        [4.0, 5.0, 0.18, 2.0],\n        [6.0, 7.0, 0.55, 4.0],\n        [8.0, 9.0, 1.10, 6.0],\n    ]\n)\nlabels = [\"S1\", \"S2\", \"S3\", \"S4\", \"S5\", \"S6\"]\n\nfig = dv.clustering.dendrogram_interactive(\n    linkage_matrix, labels=labels, title=\"Hierarchical clustering\"\n)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "dendrogram_static",
         "dendrogram"
+      ],
+      "useCase": "Use the dendrogram to read the full merge history of a hierarchical clustering as a tree. The height of each merge shows the distance at which clusters were combined, so long vertical gaps suggest natural places to cut the tree into flat clusters. It reveals nested subgroup structure that a single flat partition hides, and works for any number of clusters without choosing k up front.",
+      "images": [
+        {
+          "src": "assets/examples/clustering/dendrogram_1.png",
+          "caption": "Clear structure — long final gaps mark three natural clusters."
+        },
+        {
+          "src": "assets/examples/clustering/dendrogram_2.png",
+          "caption": "Chained merges — no gap suggests a clean place to cut."
+        },
+        {
+          "src": "assets/examples/clustering/dendrogram_3.png",
+          "caption": "Two dominant groups — one large merge splits the tree in half."
+        },
+        {
+          "src": "assets/examples/clustering/dendrogram_4.png",
+          "caption": "Cut by threshold — colouring marks clusters below the line."
+        }
       ]
     },
     "elbow_plot_interactive": {
@@ -23407,11 +26922,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = np.array([1.0, 1.2, 4.1, 4.3])\ny = np.array([1.1, 0.9, 4.0, 4.4])\nlabels = np.array([0, 0, 1, 1])\nk_values = np.array([1, 2, 3, 4])\ninertias = np.array([10.0, 4.2, 2.6, 2.1])\nlinkage_matrix = np.array([[0, 1, 0.3, 2], [2, 3, 0.4, 2], [4, 5, 3.0, 4]])\n\nfig = dv.clustering.elbow_plot_interactive(inertias)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nn_clusters = np.arange(1, 11)\ninertias = np.array(\n    [900.0, 420.0, 260.0, 190.0, 160.0, 140.0, 128.0, 120.0, 115.0, 110.0]\n)\n\nfig = dv.clustering.elbow_plot_interactive(\n    n_clusters, inertias, elbow_idx=2, title=\"Elbow plot\"\n)\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "elbow_plot_static",
         "elbow_plot"
+      ],
+      "useCase": "Use the elbow plot to pick the number of clusters for k-means by plotting within-cluster inertia against k. Inertia always falls as k grows, but the curve typically bends where adding another cluster stops paying off — the “elbow” is the smallest k that captures most of the structure. When no clear bend appears, that is itself evidence that the data may not contain well-separated groups.",
+      "images": [
+        {
+          "src": "assets/examples/clustering/elbow_plot_1.png",
+          "caption": "Clear elbow — the curve bends sharply at three clusters."
+        },
+        {
+          "src": "assets/examples/clustering/elbow_plot_2.png",
+          "caption": "No elbow — a smooth decline offers no obvious choice."
+        },
+        {
+          "src": "assets/examples/clustering/elbow_plot_3.png",
+          "caption": "Elbow at four — the bend arrives one cluster later."
+        },
+        {
+          "src": "assets/examples/clustering/elbow_plot_4.png",
+          "caption": "Steep drop, quick plateau — two clusters capture most structure."
+        }
       ]
     },
     "scatter_clusters": {
@@ -23460,11 +26994,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = pd.Series([1, 2, 3, 4, 5], name=\"Input\")\ny = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name=\"Output\")\nx = np.array([1.0, 1.2, 4.1, 4.3])\ny = np.array([1.1, 0.9, 4.0, 4.4])\nlabels = np.array([0, 0, 1, 1])\nk_values = np.array([1, 2, 3, 4])\ninertias = np.array([10.0, 4.2, 2.6, 2.1])\nlinkage_matrix = np.array([[0, 1, 0.3, 2], [2, 3, 0.4, 2], [4, 5, 3.0, 4]])\n\nresult = dv.clustering.scatter_clusters(x, y, labels)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(0)\nx = np.concatenate(\n    [rng.normal(0.0, 0.4, 40), rng.normal(3.0, 0.4, 40), rng.normal(1.5, 0.4, 40)]\n)\ny = np.concatenate(\n    [rng.normal(0.0, 0.4, 40), rng.normal(3.0, 0.4, 40), rng.normal(5.0, 0.4, 40)]\n)\nlabels = np.repeat([0, 1, 2], 40)\n\nax = dv.clustering.scatter_clusters_static(\n    x, y, labels, title=\"Cluster assignments\"\n)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "scatter_clusters_static",
         "scatter_clusters_interactive"
+      ],
+      "useCase": "Use the cluster scatter plot to see how an algorithm has partitioned two features — whether groups are compact and well separated or bleed into one another. Colouring points by their assigned label exposes borderline assignments, oddly shaped clusters, and outliers at a glance. It is the natural sanity check after running k-means or any flat clustering on two-dimensional data or a 2-D projection.",
+      "images": [
+        {
+          "src": "assets/examples/clustering/scatter_clusters_1.png",
+          "caption": "Well separated — three compact clusters with clear gaps."
+        },
+        {
+          "src": "assets/examples/clustering/scatter_clusters_2.png",
+          "caption": "Overlapping clusters — boundaries blur between groups."
+        },
+        {
+          "src": "assets/examples/clustering/scatter_clusters_3.png",
+          "caption": "Non-spherical structure — ring shapes defeat distance-based splits."
+        },
+        {
+          "src": "assets/examples/clustering/scatter_clusters_4.png",
+          "caption": "With centroids — markers locate each cluster centre."
+        }
       ]
     },
     "dendrogram": {
@@ -23507,11 +27060,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = np.array([1.0, 1.2, 4.1, 4.3])\ny = np.array([1.1, 0.9, 4.0, 4.4])\nlabels = np.array([0, 0, 1, 1])\nk_values = np.array([1, 2, 3, 4])\ninertias = np.array([10.0, 4.2, 2.6, 2.1])\nlinkage_matrix = np.array([[0, 1, 0.3, 2], [2, 3, 0.4, 2], [4, 5, 3.0, 4]])\n\nresult = dv.clustering.dendrogram(linkage_matrix)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nlinkage_matrix = np.array(\n    [\n        [0.0, 1.0, 0.15, 2.0],\n        [2.0, 3.0, 0.22, 2.0],\n        [4.0, 5.0, 0.18, 2.0],\n        [6.0, 7.0, 0.55, 4.0],\n        [8.0, 9.0, 1.10, 6.0],\n    ]\n)\nlabels = [\"S1\", \"S2\", \"S3\", \"S4\", \"S5\", \"S6\"]\n\nax = dv.clustering.dendrogram_static(\n    linkage_matrix, labels=labels, title=\"Hierarchical clustering\"\n)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "dendrogram_static",
         "dendrogram_interactive"
+      ],
+      "useCase": "Use the dendrogram to read the full merge history of a hierarchical clustering as a tree. The height of each merge shows the distance at which clusters were combined, so long vertical gaps suggest natural places to cut the tree into flat clusters. It reveals nested subgroup structure that a single flat partition hides, and works for any number of clusters without choosing k up front.",
+      "images": [
+        {
+          "src": "assets/examples/clustering/dendrogram_1.png",
+          "caption": "Clear structure — long final gaps mark three natural clusters."
+        },
+        {
+          "src": "assets/examples/clustering/dendrogram_2.png",
+          "caption": "Chained merges — no gap suggests a clean place to cut."
+        },
+        {
+          "src": "assets/examples/clustering/dendrogram_3.png",
+          "caption": "Two dominant groups — one large merge splits the tree in half."
+        },
+        {
+          "src": "assets/examples/clustering/dendrogram_4.png",
+          "caption": "Cut by threshold — colouring marks clusters below the line."
+        }
       ]
     },
     "elbow_plot": {
@@ -23554,11 +27126,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nx = np.array([1.0, 1.2, 4.1, 4.3])\ny = np.array([1.1, 0.9, 4.0, 4.4])\nlabels = np.array([0, 0, 1, 1])\nk_values = np.array([1, 2, 3, 4])\ninertias = np.array([10.0, 4.2, 2.6, 2.1])\nlinkage_matrix = np.array([[0, 1, 0.3, 2], [2, 3, 0.4, 2], [4, 5, 3.0, 4]])\n\nresult = dv.clustering.elbow_plot(inertias)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nn_clusters = np.arange(1, 11)\ninertias = np.array(\n    [900.0, 420.0, 260.0, 190.0, 160.0, 140.0, 128.0, 120.0, 115.0, 110.0]\n)\n\nax = dv.clustering.elbow_plot_static(\n    n_clusters, inertias, elbow_idx=2, title=\"Elbow plot\"\n)\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "elbow_plot_static",
         "elbow_plot_interactive"
+      ],
+      "useCase": "Use the elbow plot to pick the number of clusters for k-means by plotting within-cluster inertia against k. Inertia always falls as k grows, but the curve typically bends where adding another cluster stops paying off — the “elbow” is the smallest k that captures most of the structure. When no clear bend appears, that is itself evidence that the data may not contain well-separated groups.",
+      "images": [
+        {
+          "src": "assets/examples/clustering/elbow_plot_1.png",
+          "caption": "Clear elbow — the curve bends sharply at three clusters."
+        },
+        {
+          "src": "assets/examples/clustering/elbow_plot_2.png",
+          "caption": "No elbow — a smooth decline offers no obvious choice."
+        },
+        {
+          "src": "assets/examples/clustering/elbow_plot_3.png",
+          "caption": "Elbow at four — the bend arrives one cluster later."
+        },
+        {
+          "src": "assets/examples/clustering/elbow_plot_4.png",
+          "caption": "Steep drop, quick plateau — two clusters capture most structure."
+        }
       ]
     }
   },
@@ -23717,11 +27308,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nimportances = np.array([0.42, 0.31, 0.18])\nfeature_names = [\"age\", \"income\", \"tenure\"]\nshap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])\nfeature_values = np.array([0, 1, 2, 3])\npd_values = np.array([0.2, 0.25, 0.31, 0.34])\n\nax = dv.xai.feature_importance_static(importances)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nfeatures = [\"Age\", \"Income\", \"Tenure\", \"Region\", \"Device\", \"Channel\"]\nimportances = pd.Series(\n    [0.42, 0.21, 0.14, 0.09, 0.08, 0.06], index=features\n)\n\nax = dv.xai.feature_importance_static(importances, title=\"Permutation importance\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "feature_importance_interactive",
         "feature_importance"
+      ],
+      "useCase": "Use the feature importance chart to rank which inputs drive a model’s predictions most. Comparing bar lengths separates the few features that carry the signal from the many that contribute little, which guides feature selection, debugging, and stakeholder communication. Impacts are most trustworthy when importances come from a held-out set (for example permutation importance) rather than training data.",
+      "images": [
+        {
+          "src": "assets/examples/xai/feature_importance_1.png",
+          "caption": "Dominant driver — one feature carries most of the signal."
+        },
+        {
+          "src": "assets/examples/xai/feature_importance_2.png",
+          "caption": "Even spread — contributions are shared across features."
+        },
+        {
+          "src": "assets/examples/xai/feature_importance_3.png",
+          "caption": "Long tail — two leaders ahead of many weak contributors."
+        },
+        {
+          "src": "assets/examples/xai/feature_importance_4.png",
+          "caption": "Weak model — all importances hover near zero."
+        }
       ]
     },
     "shap_plot_static": {
@@ -23884,11 +27494,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nimportances = np.array([0.42, 0.31, 0.18])\nfeature_names = [\"age\", \"income\", \"tenure\"]\nshap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])\nfeature_values = np.array([0, 1, 2, 3])\npd_values = np.array([0.2, 0.25, 0.31, 0.34])\n\nax = dv.xai.shap_plot_static(shap_values, feature_names)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\nfeature_names = [\"Age\", \"Income\", \"Tenure\", \"Region\"]\nshap_values = np.column_stack(\n    [\n        rng.normal(0.0, 0.9, 200),\n        rng.normal(0.0, 0.45, 200),\n        rng.normal(0.0, 0.2, 200),\n        rng.normal(0.0, 0.05, 200),\n    ]\n)\n\nax = dv.xai.shap_plot_static(shap_values, feature_names, title=\"SHAP feature impact\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "shap_plot_interactive",
         "shap_plot"
+      ],
+      "useCase": "Use the SHAP summary plot to see which features have the largest average effect on a model’s output. Each feature is ranked by its mean absolute SHAP value — the average magnitude of its contribution per prediction — so the chart answers “what does the model rely on overall?” Pair it with per-observation plots when you also need to explain individual predictions.",
+      "images": [
+        {
+          "src": "assets/examples/xai/shap_plot_1.png",
+          "caption": "Single driver — one feature dominates the average impact."
+        },
+        {
+          "src": "assets/examples/xai/shap_plot_2.png",
+          "caption": "Opposing effects — two features push predictions in opposite directions."
+        },
+        {
+          "src": "assets/examples/xai/shap_plot_3.png",
+          "caption": "Uniform impact — all features contribute small, similar effects."
+        },
+        {
+          "src": "assets/examples/xai/shap_plot_4.png",
+          "caption": "Graded impacts — contributions taper smoothly across features."
+        }
       ]
     },
     "partial_dependence_static": {
@@ -24063,11 +27692,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes, usually a matplotlib Axes object with the chart already drawn.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nimportances = np.array([0.42, 0.31, 0.18])\nfeature_names = [\"age\", \"income\", \"tenure\"]\nshap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])\nfeature_values = np.array([0, 1, 2, 3])\npd_values = np.array([0.2, 0.25, 0.31, 0.34])\n\nax = dv.xai.partial_dependence_static(feature_values)\nprint(ax)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\ngrid = np.linspace(0.0, 10.0, 30)\npredictions = 2.0 + 1.5 * np.log1p(grid)\n\nax = dv.xai.partial_dependence_static(grid, predictions, feature_name=\"Income\")\nplt.show()",
       "explanation": "Prefer this function for scripts, reports, notebooks, and saved image outputs where deterministic layout matters. The returned axis can be further customized with normal matplotlib calls before saving.",
       "related": [
         "partial_dependence_interactive",
         "partial_dependence"
+      ],
+      "useCase": "Use a partial dependence plot to see how a model’s prediction changes as one feature varies, averaged over everything else. The curve reveals whether the learned relationship is linear, saturating, threshold-like, or non-monotonic — essential for sanity-checking that a black-box model behaves the way domain knowledge says it should before it goes into production.",
+      "images": [
+        {
+          "src": "assets/examples/xai/partial_dependence_1.png",
+          "caption": "Linear effect — the prediction rises steadily with the feature."
+        },
+        {
+          "src": "assets/examples/xai/partial_dependence_2.png",
+          "caption": "Saturating effect — gains flatten out at higher values."
+        },
+        {
+          "src": "assets/examples/xai/partial_dependence_3.png",
+          "caption": "Non-monotonic effect — the response peaks in the mid-range."
+        },
+        {
+          "src": "assets/examples/xai/partial_dependence_4.png",
+          "caption": "No effect — the feature barely changes the prediction."
+        }
       ]
     },
     "feature_importance_interactive": {
@@ -24194,11 +27842,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nimportances = np.array([0.42, 0.31, 0.18])\nfeature_names = [\"age\", \"income\", \"tenure\"]\nshap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])\nfeature_values = np.array([0, 1, 2, 3])\npd_values = np.array([0.2, 0.25, 0.31, 0.34])\n\nfig = dv.xai.feature_importance_interactive(importances)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nfeatures = [\"Age\", \"Income\", \"Tenure\", \"Region\", \"Device\", \"Channel\"]\nimportances = pd.Series(\n    [0.42, 0.21, 0.14, 0.09, 0.08, 0.06], index=features\n)\n\nfig = dv.xai.feature_importance_interactive(importances, title=\"Permutation importance\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "feature_importance_static",
         "feature_importance"
+      ],
+      "useCase": "Use the feature importance chart to rank which inputs drive a model’s predictions most. Comparing bar lengths separates the few features that carry the signal from the many that contribute little, which guides feature selection, debugging, and stakeholder communication. Impacts are most trustworthy when importances come from a held-out set (for example permutation importance) rather than training data.",
+      "images": [
+        {
+          "src": "assets/examples/xai/feature_importance_1.png",
+          "caption": "Dominant driver — one feature carries most of the signal."
+        },
+        {
+          "src": "assets/examples/xai/feature_importance_2.png",
+          "caption": "Even spread — contributions are shared across features."
+        },
+        {
+          "src": "assets/examples/xai/feature_importance_3.png",
+          "caption": "Long tail — two leaders ahead of many weak contributors."
+        },
+        {
+          "src": "assets/examples/xai/feature_importance_4.png",
+          "caption": "Weak model — all importances hover near zero."
+        }
       ]
     },
     "shap_plot_interactive": {
@@ -24337,11 +28004,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nimportances = np.array([0.42, 0.31, 0.18])\nfeature_names = [\"age\", \"income\", \"tenure\"]\nshap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])\nfeature_values = np.array([0, 1, 2, 3])\npd_values = np.array([0.2, 0.25, 0.31, 0.34])\n\nfig = dv.xai.shap_plot_interactive(shap_values, feature_names)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\nfeature_names = [\"Age\", \"Income\", \"Tenure\", \"Region\"]\nshap_values = np.column_stack(\n    [\n        rng.normal(0.0, 0.9, 200),\n        rng.normal(0.0, 0.45, 200),\n        rng.normal(0.0, 0.2, 200),\n        rng.normal(0.0, 0.05, 200),\n    ]\n)\n\nfig = dv.xai.shap_plot_interactive(shap_values, feature_names, title=\"SHAP feature impact\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "shap_plot_static",
         "shap_plot"
+      ],
+      "useCase": "Use the SHAP summary plot to see which features have the largest average effect on a model’s output. Each feature is ranked by its mean absolute SHAP value — the average magnitude of its contribution per prediction — so the chart answers “what does the model rely on overall?” Pair it with per-observation plots when you also need to explain individual predictions.",
+      "images": [
+        {
+          "src": "assets/examples/xai/shap_plot_1.png",
+          "caption": "Single driver — one feature dominates the average impact."
+        },
+        {
+          "src": "assets/examples/xai/shap_plot_2.png",
+          "caption": "Opposing effects — two features push predictions in opposite directions."
+        },
+        {
+          "src": "assets/examples/xai/shap_plot_3.png",
+          "caption": "Uniform impact — all features contribute small, similar effects."
+        },
+        {
+          "src": "assets/examples/xai/shap_plot_4.png",
+          "caption": "Graded impacts — contributions taper smoothly across features."
+        }
       ]
     },
     "partial_dependence_interactive": {
@@ -24486,11 +28172,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns PlotlyFigure, usually a Plotly Figure that can be shown, exported, or embedded in a dashboard.",
       "errors": "Raises ValueError for empty, incompatible, or length-mismatched data. Backend errors from matplotlib, seaborn, Plotly, NumPy, pandas, or SciPy may be propagated when inputs cannot be rendered.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nimportances = np.array([0.42, 0.31, 0.18])\nfeature_names = [\"age\", \"income\", \"tenure\"]\nshap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])\nfeature_values = np.array([0, 1, 2, 3])\npd_values = np.array([0.2, 0.25, 0.31, 0.34])\n\nfig = dv.xai.partial_dependence_interactive(feature_values)\nprint(fig)",
+      "example": "import numpy as np\nimport pandas as pd\nimport dataviz as dv\n\ngrid = np.linspace(0.0, 10.0, 30)\npredictions = 2.0 + 1.5 * np.log1p(grid)\n\nfig = dv.xai.partial_dependence_interactive(grid, predictions, feature_name=\"Income\")\nfig.show()",
       "explanation": "Prefer this function when users need hover inspection, zooming, browser embedding, or interactive legends. The returned figure can be modified with regular Plotly methods such as update_layout or add_trace.",
       "related": [
         "partial_dependence_static",
         "partial_dependence"
+      ],
+      "useCase": "Use a partial dependence plot to see how a model’s prediction changes as one feature varies, averaged over everything else. The curve reveals whether the learned relationship is linear, saturating, threshold-like, or non-monotonic — essential for sanity-checking that a black-box model behaves the way domain knowledge says it should before it goes into production.",
+      "images": [
+        {
+          "src": "assets/examples/xai/partial_dependence_1.png",
+          "caption": "Linear effect — the prediction rises steadily with the feature."
+        },
+        {
+          "src": "assets/examples/xai/partial_dependence_2.png",
+          "caption": "Saturating effect — gains flatten out at higher values."
+        },
+        {
+          "src": "assets/examples/xai/partial_dependence_3.png",
+          "caption": "Non-monotonic effect — the response peaks in the mid-range."
+        },
+        {
+          "src": "assets/examples/xai/partial_dependence_4.png",
+          "caption": "No effect — the feature barely changes the prediction."
+        }
       ]
     },
     "feature_importance": {
@@ -24533,11 +28238,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nimportances = np.array([0.42, 0.31, 0.18])\nfeature_names = [\"age\", \"income\", \"tenure\"]\nshap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])\nfeature_values = np.array([0, 1, 2, 3])\npd_values = np.array([0.2, 0.25, 0.31, 0.34])\n\nresult = dv.xai.feature_importance(importances)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nfeatures = [\"Age\", \"Income\", \"Tenure\", \"Region\", \"Device\", \"Channel\"]\nimportances = pd.Series(\n    [0.42, 0.21, 0.14, 0.09, 0.08, 0.06], index=features\n)\n\nax = dv.xai.feature_importance_static(importances, title=\"Permutation importance\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "feature_importance_static",
         "feature_importance_interactive"
+      ],
+      "useCase": "Use the feature importance chart to rank which inputs drive a model’s predictions most. Comparing bar lengths separates the few features that carry the signal from the many that contribute little, which guides feature selection, debugging, and stakeholder communication. Impacts are most trustworthy when importances come from a held-out set (for example permutation importance) rather than training data.",
+      "images": [
+        {
+          "src": "assets/examples/xai/feature_importance_1.png",
+          "caption": "Dominant driver — one feature carries most of the signal."
+        },
+        {
+          "src": "assets/examples/xai/feature_importance_2.png",
+          "caption": "Even spread — contributions are shared across features."
+        },
+        {
+          "src": "assets/examples/xai/feature_importance_3.png",
+          "caption": "Long tail — two leaders ahead of many weak contributors."
+        },
+        {
+          "src": "assets/examples/xai/feature_importance_4.png",
+          "caption": "Weak model — all importances hover near zero."
+        }
       ]
     },
     "shap_plot": {
@@ -24580,11 +28304,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nimportances = np.array([0.42, 0.31, 0.18])\nfeature_names = [\"age\", \"income\", \"tenure\"]\nshap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])\nfeature_values = np.array([0, 1, 2, 3])\npd_values = np.array([0.2, 0.25, 0.31, 0.34])\n\nresult = dv.xai.shap_plot(shap_values, feature_names)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\nrng = np.random.default_rng(7)\nfeature_names = [\"Age\", \"Income\", \"Tenure\", \"Region\"]\nshap_values = np.column_stack(\n    [\n        rng.normal(0.0, 0.9, 200),\n        rng.normal(0.0, 0.45, 200),\n        rng.normal(0.0, 0.2, 200),\n        rng.normal(0.0, 0.05, 200),\n    ]\n)\n\nax = dv.xai.shap_plot_static(shap_values, feature_names, title=\"SHAP feature impact\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "shap_plot_static",
         "shap_plot_interactive"
+      ],
+      "useCase": "Use the SHAP summary plot to see which features have the largest average effect on a model’s output. Each feature is ranked by its mean absolute SHAP value — the average magnitude of its contribution per prediction — so the chart answers “what does the model rely on overall?” Pair it with per-observation plots when you also need to explain individual predictions.",
+      "images": [
+        {
+          "src": "assets/examples/xai/shap_plot_1.png",
+          "caption": "Single driver — one feature dominates the average impact."
+        },
+        {
+          "src": "assets/examples/xai/shap_plot_2.png",
+          "caption": "Opposing effects — two features push predictions in opposite directions."
+        },
+        {
+          "src": "assets/examples/xai/shap_plot_3.png",
+          "caption": "Uniform impact — all features contribute small, similar effects."
+        },
+        {
+          "src": "assets/examples/xai/shap_plot_4.png",
+          "caption": "Graded impacts — contributions taper smoothly across features."
+        }
       ]
     },
     "partial_dependence": {
@@ -24633,11 +28376,30 @@ window.DATAVIZ_FUNCTION_DOCS = {
       ],
       "returns": "Returns MatplotlibAxes; the exact object is chosen to make downstream analysis and plotting convenient.",
       "errors": "Raises ValueError for invalid configuration or empty inputs, TypeError for unsupported input shapes or dtypes, and may propagate pandas/NumPy validation errors.",
-      "example": "import dataviz as dv\nimport pandas as pd\nimport numpy as np\nimportances = np.array([0.42, 0.31, 0.18])\nfeature_names = [\"age\", \"income\", \"tenure\"]\nshap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])\nfeature_values = np.array([0, 1, 2, 3])\npd_values = np.array([0.2, 0.25, 0.31, 0.34])\n\nresult = dv.xai.partial_dependence(feature_values)\nprint(result)",
+      "example": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport dataviz as dv\n\ngrid = np.linspace(0.0, 10.0, 30)\npredictions = 2.0 + 1.5 * np.log1p(grid)\n\nax = dv.xai.partial_dependence_static(grid, predictions, feature_name=\"Income\")\nplt.show()",
       "explanation": "Run this helper before plotting when you want to validate assumptions, reuse calculated values, or add tests around the analysis step.",
       "related": [
         "partial_dependence_static",
         "partial_dependence_interactive"
+      ],
+      "useCase": "Use a partial dependence plot to see how a model’s prediction changes as one feature varies, averaged over everything else. The curve reveals whether the learned relationship is linear, saturating, threshold-like, or non-monotonic — essential for sanity-checking that a black-box model behaves the way domain knowledge says it should before it goes into production.",
+      "images": [
+        {
+          "src": "assets/examples/xai/partial_dependence_1.png",
+          "caption": "Linear effect — the prediction rises steadily with the feature."
+        },
+        {
+          "src": "assets/examples/xai/partial_dependence_2.png",
+          "caption": "Saturating effect — gains flatten out at higher values."
+        },
+        {
+          "src": "assets/examples/xai/partial_dependence_3.png",
+          "caption": "Non-monotonic effect — the response peaks in the mid-range."
+        },
+        {
+          "src": "assets/examples/xai/partial_dependence_4.png",
+          "caption": "No effect — the feature barely changes the prediction."
+        }
       ]
     }
   },

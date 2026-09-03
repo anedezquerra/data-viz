@@ -1,0 +1,650 @@
+{
+  "histogram": [
+    {
+      "src": "assets/examples/univariate/histogram_1.png",
+      "caption": "Roughly normal \u2014 a symmetric spread around the centre."
+    },
+    {
+      "src": "assets/examples/univariate/histogram_2.png",
+      "caption": "Right-skewed \u2014 a long upper tail of occasional large values."
+    },
+    {
+      "src": "assets/examples/univariate/histogram_3.png",
+      "caption": "Bimodal \u2014 two overlapping subgroups form distinct humps."
+    },
+    {
+      "src": "assets/examples/univariate/histogram_4.png",
+      "caption": "Heavy-tailed with spikes \u2014 extreme values stretch the scale."
+    }
+  ],
+  "density": [
+    {
+      "src": "assets/examples/univariate/density_1.png",
+      "caption": "Roughly normal \u2014 a symmetric spread around the centre."
+    },
+    {
+      "src": "assets/examples/univariate/density_2.png",
+      "caption": "Right-skewed \u2014 a long upper tail of occasional large values."
+    },
+    {
+      "src": "assets/examples/univariate/density_3.png",
+      "caption": "Bimodal \u2014 two overlapping subgroups form distinct humps."
+    },
+    {
+      "src": "assets/examples/univariate/density_4.png",
+      "caption": "Heavy-tailed with spikes \u2014 extreme values stretch the scale."
+    }
+  ],
+  "box_plot": [
+    {
+      "src": "assets/examples/univariate/box_plot_1.png",
+      "caption": "Aligned groups \u2014 all three lines share centre and spread."
+    },
+    {
+      "src": "assets/examples/univariate/box_plot_2.png",
+      "caption": "Shifted group \u2014 Line B runs consistently high."
+    },
+    {
+      "src": "assets/examples/univariate/box_plot_3.png",
+      "caption": "Unequal spread \u2014 Line C varies far more than the others."
+    },
+    {
+      "src": "assets/examples/univariate/box_plot_4.png",
+      "caption": "Contaminated group \u2014 a handful of extremes inflate Line C."
+    }
+  ],
+  "violin_plot": [
+    {
+      "src": "assets/examples/univariate/violin_plot_1.png",
+      "caption": "Aligned groups \u2014 all three lines share centre and spread."
+    },
+    {
+      "src": "assets/examples/univariate/violin_plot_2.png",
+      "caption": "Shifted group \u2014 Line B runs consistently high."
+    },
+    {
+      "src": "assets/examples/univariate/violin_plot_3.png",
+      "caption": "Unequal spread \u2014 Line C varies far more than the others."
+    },
+    {
+      "src": "assets/examples/univariate/violin_plot_4.png",
+      "caption": "Contaminated group \u2014 a handful of extremes inflate Line C."
+    }
+  ],
+  "frequency_bar": [
+    {
+      "src": "assets/examples/univariate/frequency_bar_1.png",
+      "caption": "Vital few \u2014 two categories account for most records."
+    },
+    {
+      "src": "assets/examples/univariate/frequency_bar_2.png",
+      "caption": "Even spread \u2014 no single category dominates."
+    },
+    {
+      "src": "assets/examples/univariate/frequency_bar_3.png",
+      "caption": "Single dominant cause \u2014 one category dwarfs the rest."
+    },
+    {
+      "src": "assets/examples/univariate/frequency_bar_4.png",
+      "caption": "Long tail \u2014 many small contributors trail the leaders."
+    }
+  ],
+  "pareto_chart": [
+    {
+      "src": "assets/examples/univariate/pareto_chart_1.png",
+      "caption": "Vital few \u2014 two categories account for most records."
+    },
+    {
+      "src": "assets/examples/univariate/pareto_chart_2.png",
+      "caption": "Even spread \u2014 no single category dominates."
+    },
+    {
+      "src": "assets/examples/univariate/pareto_chart_3.png",
+      "caption": "Single dominant cause \u2014 one category dwarfs the rest."
+    },
+    {
+      "src": "assets/examples/univariate/pareto_chart_4.png",
+      "caption": "Long tail \u2014 many small contributors trail the leaders."
+    }
+  ],
+  "ecdf_plot": [
+    {
+      "src": "assets/examples/univariate/ecdf_plot_1.png",
+      "caption": "Roughly normal \u2014 a symmetric spread around the centre."
+    },
+    {
+      "src": "assets/examples/univariate/ecdf_plot_2.png",
+      "caption": "Right-skewed \u2014 a long upper tail of occasional large values."
+    },
+    {
+      "src": "assets/examples/univariate/ecdf_plot_3.png",
+      "caption": "Bimodal \u2014 two overlapping subgroups form distinct humps."
+    },
+    {
+      "src": "assets/examples/univariate/ecdf_plot_4.png",
+      "caption": "Heavy-tailed with spikes \u2014 extreme values stretch the scale."
+    }
+  ],
+  "cumulative_histogram": [
+    {
+      "src": "assets/examples/univariate/cumulative_histogram_1.png",
+      "caption": "Roughly normal \u2014 a symmetric spread around the centre."
+    },
+    {
+      "src": "assets/examples/univariate/cumulative_histogram_2.png",
+      "caption": "Right-skewed \u2014 a long upper tail of occasional large values."
+    },
+    {
+      "src": "assets/examples/univariate/cumulative_histogram_3.png",
+      "caption": "Bimodal \u2014 two overlapping subgroups form distinct humps."
+    },
+    {
+      "src": "assets/examples/univariate/cumulative_histogram_4.png",
+      "caption": "Heavy-tailed with spikes \u2014 extreme values stretch the scale."
+    }
+  ],
+  "qq_plot": [
+    {
+      "src": "assets/examples/univariate/qq_plot_1.png",
+      "caption": "Normal data \u2014 points hug the reference line."
+    },
+    {
+      "src": "assets/examples/univariate/qq_plot_2.png",
+      "caption": "Right-skewed \u2014 the points bend upward at the high end."
+    },
+    {
+      "src": "assets/examples/univariate/qq_plot_3.png",
+      "caption": "Heavy tails \u2014 both ends pull away from the line."
+    },
+    {
+      "src": "assets/examples/univariate/qq_plot_4.png",
+      "caption": "Light tails \u2014 bounded data flatten at the extremes."
+    }
+  ],
+  "pp_plot": [
+    {
+      "src": "assets/examples/univariate/pp_plot_1.png",
+      "caption": "Normal data \u2014 cumulative probabilities track the diagonal."
+    },
+    {
+      "src": "assets/examples/univariate/pp_plot_2.png",
+      "caption": "Right-skewed \u2014 the centre sags below the diagonal."
+    },
+    {
+      "src": "assets/examples/univariate/pp_plot_3.png",
+      "caption": "Heavy tails \u2014 the curve bows in an S around the diagonal."
+    },
+    {
+      "src": "assets/examples/univariate/pp_plot_4.png",
+      "caption": "Light tails \u2014 the centre overshoots the diagonal."
+    }
+  ],
+  "outlier_plot": [
+    {
+      "src": "assets/examples/univariate/outlier_plot_1.png",
+      "caption": "Clean data \u2014 no points flagged by the IQR rule."
+    },
+    {
+      "src": "assets/examples/univariate/outlier_plot_2.png",
+      "caption": "Isolated spikes \u2014 three points break the fences."
+    },
+    {
+      "src": "assets/examples/univariate/outlier_plot_3.png",
+      "caption": "Outlier cluster \u2014 a run of high values is flagged."
+    },
+    {
+      "src": "assets/examples/univariate/outlier_plot_4.png",
+      "caption": "Skewed data \u2014 the natural tail trips the rule."
+    }
+  ],
+  "percentile_plot": [
+    {
+      "src": "assets/examples/univariate/percentile_plot_1.png",
+      "caption": "Roughly normal \u2014 a symmetric spread around the centre."
+    },
+    {
+      "src": "assets/examples/univariate/percentile_plot_2.png",
+      "caption": "Right-skewed \u2014 a long upper tail of occasional large values."
+    },
+    {
+      "src": "assets/examples/univariate/percentile_plot_3.png",
+      "caption": "Bimodal \u2014 two overlapping subgroups form distinct humps."
+    },
+    {
+      "src": "assets/examples/univariate/percentile_plot_4.png",
+      "caption": "Heavy-tailed with spikes \u2014 extreme values stretch the scale."
+    }
+  ],
+  "univariate_diagnostic_panel": [
+    {
+      "src": "assets/examples/univariate/univariate_diagnostic_panel_1.png",
+      "caption": "Roughly normal \u2014 a symmetric spread around the centre."
+    },
+    {
+      "src": "assets/examples/univariate/univariate_diagnostic_panel_2.png",
+      "caption": "Right-skewed \u2014 a long upper tail of occasional large values."
+    },
+    {
+      "src": "assets/examples/univariate/univariate_diagnostic_panel_3.png",
+      "caption": "Bimodal \u2014 two overlapping subgroups form distinct humps."
+    },
+    {
+      "src": "assets/examples/univariate/univariate_diagnostic_panel_4.png",
+      "caption": "Heavy-tailed with spikes \u2014 extreme values stretch the scale."
+    }
+  ],
+  "fitted_distribution_histogram": [
+    {
+      "src": "assets/examples/univariate/fitted_distribution_histogram_1.png",
+      "caption": "Normal fit \u2014 the curve tracks the bars closely."
+    },
+    {
+      "src": "assets/examples/univariate/fitted_distribution_histogram_2.png",
+      "caption": "Lognormal fit \u2014 the model follows the skewed tail."
+    },
+    {
+      "src": "assets/examples/univariate/fitted_distribution_histogram_3.png",
+      "caption": "Gamma fit \u2014 a flexible match for positive skew."
+    },
+    {
+      "src": "assets/examples/univariate/fitted_distribution_histogram_4.png",
+      "caption": "Exponential fit \u2014 decay modelled from the origin."
+    }
+  ],
+  "robust_location_plot": [
+    {
+      "src": "assets/examples/univariate/robust_location_plot_1.png",
+      "caption": "Clean data \u2014 every location estimate agrees."
+    },
+    {
+      "src": "assets/examples/univariate/robust_location_plot_2.png",
+      "caption": "Contaminated \u2014 the mean is pulled; robust estimates resist."
+    },
+    {
+      "src": "assets/examples/univariate/robust_location_plot_3.png",
+      "caption": "Skewed data \u2014 the mean sits above the median."
+    },
+    {
+      "src": "assets/examples/univariate/robust_location_plot_4.png",
+      "caption": "Heavy tails \u2014 trimmed and winsorised means stay centred."
+    }
+  ],
+  "rug_plot": [
+    {
+      "src": "assets/examples/univariate/rug_plot_1.png",
+      "caption": "Even spread \u2014 observations fill the range uniformly."
+    },
+    {
+      "src": "assets/examples/univariate/rug_plot_2.png",
+      "caption": "Two clusters \u2014 a clear gap separates the subgroups."
+    },
+    {
+      "src": "assets/examples/univariate/rug_plot_3.png",
+      "caption": "Skewed sample \u2014 points pile up at the low end."
+    },
+    {
+      "src": "assets/examples/univariate/rug_plot_4.png",
+      "caption": "Small sample \u2014 every one of 25 observations is visible."
+    }
+  ],
+  "strip_plot": [
+    {
+      "src": "assets/examples/univariate/strip_plot_1.png",
+      "caption": "Even spread \u2014 observations fill the range uniformly."
+    },
+    {
+      "src": "assets/examples/univariate/strip_plot_2.png",
+      "caption": "Two clusters \u2014 a clear gap separates the subgroups."
+    },
+    {
+      "src": "assets/examples/univariate/strip_plot_3.png",
+      "caption": "Skewed sample \u2014 points pile up at the low end."
+    },
+    {
+      "src": "assets/examples/univariate/strip_plot_4.png",
+      "caption": "Small sample \u2014 every one of 25 observations is visible."
+    }
+  ],
+  "dot_plot": [
+    {
+      "src": "assets/examples/univariate/dot_plot_1.png",
+      "caption": "Vital few \u2014 two categories account for most records."
+    },
+    {
+      "src": "assets/examples/univariate/dot_plot_2.png",
+      "caption": "Even spread \u2014 no single category dominates."
+    },
+    {
+      "src": "assets/examples/univariate/dot_plot_3.png",
+      "caption": "Single dominant cause \u2014 one category dwarfs the rest."
+    },
+    {
+      "src": "assets/examples/univariate/dot_plot_4.png",
+      "caption": "Long tail \u2014 many small contributors trail the leaders."
+    }
+  ],
+  "lollipop_chart": [
+    {
+      "src": "assets/examples/univariate/lollipop_chart_1.png",
+      "caption": "Vital few \u2014 two categories account for most records."
+    },
+    {
+      "src": "assets/examples/univariate/lollipop_chart_2.png",
+      "caption": "Even spread \u2014 no single category dominates."
+    },
+    {
+      "src": "assets/examples/univariate/lollipop_chart_3.png",
+      "caption": "Single dominant cause \u2014 one category dwarfs the rest."
+    },
+    {
+      "src": "assets/examples/univariate/lollipop_chart_4.png",
+      "caption": "Long tail \u2014 many small contributors trail the leaders."
+    }
+  ],
+  "reference_band_histogram": [
+    {
+      "src": "assets/examples/univariate/reference_band_histogram_1.png",
+      "caption": "Roughly normal \u2014 a symmetric spread around the centre."
+    },
+    {
+      "src": "assets/examples/univariate/reference_band_histogram_2.png",
+      "caption": "Right-skewed \u2014 a long upper tail of occasional large values."
+    },
+    {
+      "src": "assets/examples/univariate/reference_band_histogram_3.png",
+      "caption": "Bimodal \u2014 two overlapping subgroups form distinct humps."
+    },
+    {
+      "src": "assets/examples/univariate/reference_band_histogram_4.png",
+      "caption": "Heavy-tailed with spikes \u2014 extreme values stretch the scale."
+    }
+  ],
+  "raincloud_plot": [
+    {
+      "src": "assets/examples/univariate/raincloud_plot_1.png",
+      "caption": "Symmetric sample \u2014 cloud, box, and points agree."
+    },
+    {
+      "src": "assets/examples/univariate/raincloud_plot_2.png",
+      "caption": "Right-skewed \u2014 the rain stretches into the upper tail."
+    },
+    {
+      "src": "assets/examples/univariate/raincloud_plot_3.png",
+      "caption": "Bimodal \u2014 two humps the box plot alone would hide."
+    },
+    {
+      "src": "assets/examples/univariate/raincloud_plot_4.png",
+      "caption": "Small sample \u2014 40 observations, all visible."
+    }
+  ],
+  "ridgeline_plot": [
+    {
+      "src": "assets/examples/univariate/ridgeline_plot_1.png",
+      "caption": "Drifting centre \u2014 the distribution walks upward week by week."
+    },
+    {
+      "src": "assets/examples/univariate/ridgeline_plot_2.png",
+      "caption": "Stable process \u2014 four weeks stack on the same centre."
+    },
+    {
+      "src": "assets/examples/univariate/ridgeline_plot_3.png",
+      "caption": "Widening spread \u2014 later weeks grow more variable."
+    },
+    {
+      "src": "assets/examples/univariate/ridgeline_plot_4.png",
+      "caption": "Emerging subgroup \u2014 week 4 splits toward a second mode."
+    }
+  ],
+  "transformation_comparison": [
+    {
+      "src": "assets/examples/univariate/transformation_comparison_1.png",
+      "caption": "Strong skew \u2014 the log transform restores symmetry."
+    },
+    {
+      "src": "assets/examples/univariate/transformation_comparison_2.png",
+      "caption": "Gamma data \u2014 transforms pull in the long right tail."
+    },
+    {
+      "src": "assets/examples/univariate/transformation_comparison_3.png",
+      "caption": "Moderate skew \u2014 a milder transform suffices."
+    },
+    {
+      "src": "assets/examples/univariate/transformation_comparison_4.png",
+      "caption": "Near-symmetric \u2014 transforms change little."
+    }
+  ],
+  "event_frequency_plot": [
+    {
+      "src": "assets/examples/univariate/event_frequency_plot_1.png",
+      "caption": "Steady stream \u2014 weekly counts hover around a constant rate."
+    },
+    {
+      "src": "assets/examples/univariate/event_frequency_plot_2.png",
+      "caption": "Sudden surge \u2014 event volume jumps in the second half."
+    },
+    {
+      "src": "assets/examples/univariate/event_frequency_plot_3.png",
+      "caption": "Accelerating demand \u2014 intervals shrink as activity grows."
+    },
+    {
+      "src": "assets/examples/univariate/event_frequency_plot_4.png",
+      "caption": "Quiet gap \u2014 a two-month lull splits the timeline."
+    }
+  ],
+  "interarrival_plot": [
+    {
+      "src": "assets/examples/univariate/interarrival_plot_1.png",
+      "caption": "Poisson process \u2014 gaps follow the exponential shape."
+    },
+    {
+      "src": "assets/examples/univariate/interarrival_plot_2.png",
+      "caption": "Bursty arrivals \u2014 many short waits mixed with long silences."
+    },
+    {
+      "src": "assets/examples/univariate/interarrival_plot_3.png",
+      "caption": "Clockwork-regular \u2014 gaps cluster tightly around one day."
+    },
+    {
+      "src": "assets/examples/univariate/interarrival_plot_4.png",
+      "caption": "Two regimes \u2014 fast and slow phases form a bimodal gap mix."
+    }
+  ],
+  "univariate_analysis_dashboard": [
+    {
+      "src": "assets/examples/univariate/univariate_analysis_dashboard_1.png",
+      "caption": "Roughly normal \u2014 a symmetric spread around the centre."
+    },
+    {
+      "src": "assets/examples/univariate/univariate_analysis_dashboard_2.png",
+      "caption": "Right-skewed \u2014 a long upper tail of occasional large values."
+    },
+    {
+      "src": "assets/examples/univariate/univariate_analysis_dashboard_3.png",
+      "caption": "Bimodal \u2014 two overlapping subgroups form distinct humps."
+    },
+    {
+      "src": "assets/examples/univariate/univariate_analysis_dashboard_4.png",
+      "caption": "Heavy-tailed with spikes \u2014 extreme values stretch the scale."
+    }
+  ],
+  "weighted_histogram": [
+    {
+      "src": "assets/examples/univariate/weighted_histogram_1.png",
+      "caption": "Uniform weights \u2014 the weighted view matches the raw sample."
+    },
+    {
+      "src": "assets/examples/univariate/weighted_histogram_2.png",
+      "caption": "Tail emphasis \u2014 large values count four times as much."
+    },
+    {
+      "src": "assets/examples/univariate/weighted_histogram_3.png",
+      "caption": "Survey weights \u2014 an oversampled segment is weighted down."
+    },
+    {
+      "src": "assets/examples/univariate/weighted_histogram_4.png",
+      "caption": "Amount-weighted \u2014 weighting by size shifts the mass rightward."
+    }
+  ],
+  "quality_bar": [
+    {
+      "src": "assets/examples/univariate/quality_bar_1.png",
+      "caption": "Mostly clean \u2014 only a sliver of missing values."
+    },
+    {
+      "src": "assets/examples/univariate/quality_bar_2.png",
+      "caption": "Messy column \u2014 missing, zeros, and duplicates all present."
+    },
+    {
+      "src": "assets/examples/univariate/quality_bar_3.png",
+      "caption": "Zero-inflated \u2014 two in five observations are exactly zero."
+    },
+    {
+      "src": "assets/examples/univariate/quality_bar_4.png",
+      "caption": "Signed values \u2014 about half the column is negative by design."
+    }
+  ],
+  "survival_curve": [
+    {
+      "src": "assets/examples/univariate/survival_curve_1.png",
+      "caption": "Constant hazard \u2014 exponential lifetimes decay steadily."
+    },
+    {
+      "src": "assets/examples/univariate/survival_curve_2.png",
+      "caption": "Ageing population \u2014 Weibull wear-out accelerates over time."
+    },
+    {
+      "src": "assets/examples/univariate/survival_curve_3.png",
+      "caption": "Long-lived tail \u2014 a few units survive far beyond the rest."
+    },
+    {
+      "src": "assets/examples/univariate/survival_curve_4.png",
+      "caption": "Two subgroups \u2014 an early-failure cohort drops the curve fast."
+    }
+  ],
+  "lorenz_curve": [
+    {
+      "src": "assets/examples/univariate/lorenz_curve_1.png",
+      "caption": "Near-equal \u2014 the curve hugs the line of perfect equality."
+    },
+    {
+      "src": "assets/examples/univariate/lorenz_curve_2.png",
+      "caption": "Typical inequality \u2014 a moderate bow away from equality."
+    },
+    {
+      "src": "assets/examples/univariate/lorenz_curve_3.png",
+      "caption": "High concentration \u2014 the top share holds most of the total."
+    },
+    {
+      "src": "assets/examples/univariate/lorenz_curve_4.png",
+      "caption": "Extreme dominance \u2014 a handful of observations own almost everything."
+    }
+  ],
+  "bootstrap_distribution_plot": [
+    {
+      "src": "assets/examples/univariate/bootstrap_distribution_plot_1.png",
+      "caption": "Mean of normal data \u2014 a symmetric, narrow sampling distribution."
+    },
+    {
+      "src": "assets/examples/univariate/bootstrap_distribution_plot_2.png",
+      "caption": "Median of skewed data \u2014 the bootstrap stays well behaved."
+    },
+    {
+      "src": "assets/examples/univariate/bootstrap_distribution_plot_3.png",
+      "caption": "Standard deviation \u2014 wider and slightly right-skewed."
+    },
+    {
+      "src": "assets/examples/univariate/bootstrap_distribution_plot_4.png",
+      "caption": "Small sample \u2014 n=30 leaves visible resampling noise."
+    }
+  ],
+  "boolean_bar": [
+    {
+      "src": "assets/examples/univariate/boolean_bar_1.png",
+      "caption": "Balanced \u2014 true and false are nearly even."
+    },
+    {
+      "src": "assets/examples/univariate/boolean_bar_2.png",
+      "caption": "Imbalanced \u2014 true cases outnumber false four to one."
+    },
+    {
+      "src": "assets/examples/univariate/boolean_bar_3.png",
+      "caption": "Rare positives \u2014 only five percent of flags are true."
+    },
+    {
+      "src": "assets/examples/univariate/boolean_bar_4.png",
+      "caption": "Near-unanimous \u2014 almost every record is true."
+    }
+  ],
+  "top_terms_bar": [
+    {
+      "src": "assets/examples/univariate/top_terms_bar_1.png",
+      "caption": "Support tickets \u2014 delivery and quality dominate the queue."
+    },
+    {
+      "src": "assets/examples/univariate/top_terms_bar_2.png",
+      "caption": "Product reviews \u2014 one term towers over the rest."
+    },
+    {
+      "src": "assets/examples/univariate/top_terms_bar_3.png",
+      "caption": "Search queries \u2014 a flat vocabulary with no clear leader."
+    },
+    {
+      "src": "assets/examples/univariate/top_terms_bar_4.png",
+      "caption": "Error logs \u2014 a long tail of rare messages."
+    }
+  ],
+  "weighted_ecdf_plot": [
+    {
+      "src": "assets/examples/univariate/weighted_ecdf_plot_1.png",
+      "caption": "Uniform weights \u2014 the weighted view matches the raw sample."
+    },
+    {
+      "src": "assets/examples/univariate/weighted_ecdf_plot_2.png",
+      "caption": "Tail emphasis \u2014 large values count four times as much."
+    },
+    {
+      "src": "assets/examples/univariate/weighted_ecdf_plot_3.png",
+      "caption": "Survey weights \u2014 an oversampled segment is weighted down."
+    },
+    {
+      "src": "assets/examples/univariate/weighted_ecdf_plot_4.png",
+      "caption": "Amount-weighted \u2014 weighting by size shifts the mass rightward."
+    }
+  ],
+  "ordinal_bar": [
+    {
+      "src": "assets/examples/univariate/ordinal_bar_1.png",
+      "caption": "Positive skew \u2014 most ratings land at the top end."
+    },
+    {
+      "src": "assets/examples/univariate/ordinal_bar_2.png",
+      "caption": "Negative skew \u2014 dissatisfaction piles up at the low end."
+    },
+    {
+      "src": "assets/examples/univariate/ordinal_bar_3.png",
+      "caption": "Uniform \u2014 every rating is chosen about equally."
+    },
+    {
+      "src": "assets/examples/univariate/ordinal_bar_4.png",
+      "caption": "Polarised \u2014 opinions split between the two extremes."
+    }
+  ],
+  "outlier_treatment_comparison": [
+    {
+      "src": "assets/examples/univariate/outlier_treatment_comparison_1.png",
+      "caption": "IQR capping \u2014 fences pull the spikes back to the whiskers."
+    },
+    {
+      "src": "assets/examples/univariate/outlier_treatment_comparison_2.png",
+      "caption": "IQR removal \u2014 flagged points are dropped entirely."
+    },
+    {
+      "src": "assets/examples/univariate/outlier_treatment_comparison_3.png",
+      "caption": "Z-score capping \u2014 a stricter 3\u03c3 rule trims the extremes."
+    },
+    {
+      "src": "assets/examples/univariate/outlier_treatment_comparison_4.png",
+      "caption": "MAD capping \u2014 the robust rule resists masking."
+    }
+  ]
+}

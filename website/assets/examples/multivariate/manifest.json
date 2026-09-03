@@ -1,0 +1,56 @@
+{
+  "pairplot": [
+    {
+      "src": "assets/examples/multivariate/pairplot_1.png",
+      "caption": "Correlated pair \u2014 length and weight rise together."
+    },
+    {
+      "src": "assets/examples/multivariate/pairplot_2.png",
+      "caption": "Uncorrelated features \u2014 scatter clouds show no structure."
+    },
+    {
+      "src": "assets/examples/multivariate/pairplot_3.png",
+      "caption": "Two clusters \u2014 distinct groups separate in every panel."
+    },
+    {
+      "src": "assets/examples/multivariate/pairplot_4.png",
+      "caption": "Non-linear link \u2014 a curved relationship appears in one panel."
+    }
+  ],
+  "heatmap": [
+    {
+      "src": "assets/examples/multivariate/heatmap_1.png",
+      "caption": "Mixed correlations \u2014 strong positive and negative links."
+    },
+    {
+      "src": "assets/examples/multivariate/heatmap_2.png",
+      "caption": "No structure \u2014 near-zero correlations across the board."
+    },
+    {
+      "src": "assets/examples/multivariate/heatmap_3.png",
+      "caption": "Trade-off \u2014 one driver pushes variables in opposite directions."
+    },
+    {
+      "src": "assets/examples/multivariate/heatmap_4.png",
+      "caption": "Two blocks \u2014 variable pairs cluster into independent groups."
+    }
+  ],
+  "parallel_coordinates": [
+    {
+      "src": "assets/examples/multivariate/parallel_coordinates_1.png",
+      "caption": "Uniform profiles \u2014 records overlap with no clear grouping."
+    },
+    {
+      "src": "assets/examples/multivariate/parallel_coordinates_2.png",
+      "caption": "Three profiles \u2014 lines bundle into distinct tiers."
+    },
+    {
+      "src": "assets/examples/multivariate/parallel_coordinates_3.png",
+      "caption": "Outlier \u2014 one record breaks away from the pack."
+    },
+    {
+      "src": "assets/examples/multivariate/parallel_coordinates_4.png",
+      "caption": "Graduated order \u2014 profiles form a smooth low-to-high ladder."
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "residual_plot": [
+    {
+      "src": "assets/examples/regression/residual_plot_1.png",
+      "caption": "Well specified \u2014 residuals form a shapeless cloud around zero."
+    },
+    {
+      "src": "assets/examples/regression/residual_plot_2.png",
+      "caption": "Heteroscedastic \u2014 the residual spread fans out with the fit."
+    },
+    {
+      "src": "assets/examples/regression/residual_plot_3.png",
+      "caption": "Nonlinear misfit \u2014 a curved pattern the model failed to capture."
+    },
+    {
+      "src": "assets/examples/regression/residual_plot_4.png",
+      "caption": "Outliers \u2014 a few extreme residuals stand apart from the rest."
+    }
+  ],
+  "prediction_plot": [
+    {
+      "src": "assets/examples/regression/prediction_plot_1.png",
+      "caption": "Accurate model \u2014 points hug the 45-degree identity line."
+    },
+    {
+      "src": "assets/examples/regression/prediction_plot_2.png",
+      "caption": "Biased model \u2014 predictions drift off the line at high values."
+    },
+    {
+      "src": "assets/examples/regression/prediction_plot_3.png",
+      "caption": "Noisy model \u2014 wide scatter around the identity line."
+    },
+    {
+      "src": "assets/examples/regression/prediction_plot_4.png",
+      "caption": "Saturating model \u2014 predictions plateau for large targets."
+    }
+  ],
+  "learning_curve": [
+    {
+      "src": "assets/examples/regression/learning_curve_1.png",
+      "caption": "Good fit \u2014 training and validation scores converge."
+    },
+    {
+      "src": "assets/examples/regression/learning_curve_2.png",
+      "caption": "Overfit \u2014 a wide, persistent gap between the two curves."
+    },
+    {
+      "src": "assets/examples/regression/learning_curve_3.png",
+      "caption": "Underfit \u2014 both curves plateau at a low score."
+    },
+    {
+      "src": "assets/examples/regression/learning_curve_4.png",
+      "caption": "More data helps \u2014 the validation score is still climbing."
+    }
+  ]
+}
