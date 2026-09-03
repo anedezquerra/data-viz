@@ -1,5 +1,6 @@
 # Changelog
 
+- Unreleased: docs(api): render real example outputs in member-page galleries — new `docs/_tools/generate_api_images.py` captures each Complete example's figure (matplotlib savefig / plotly via kaleido) to `docs/source/_static/api/` in CI, with placeholder fallback.
 - Unreleased: ci(docs): autogenerate and verify runnable "Complete example" sections in the docs workflow — regenerate API pages, execute all examples via new `docs/generate_api.py --verify` harness, and commit drift back to the branch.
 - Unreleased: docs(api): standardize all 837 Sphinx member pages to the SPC layout (hero banner, runnable Complete example, Output gallery); generalize `docs/generate_api.py` with curated per-module examples in `docs/_examples/` and an execution harness `docs/_tools/verify_api_examples.py`.
 - Unreleased: docs(website): standardize univariate, bivariate, multivariate, eda, classification, regression, clustering, and xai function pages to the SPC layout (curated use case, copy-paste sample, four-image gallery per chart family); generalize `_generate_function_docs.mjs` to per-module `_<slug>_docs.mjs` overrides and image manifests.

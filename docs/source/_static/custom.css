@@ -134,6 +134,22 @@
   font-weight: 600;
 }
 
+.spc-image-grid:has(.spc-image-real:only-child) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.spc-image-real {
+  min-height: 0;
+  border: 1px solid #d5e0e8;
+  background: #fff;
+}
+
+.spc-image-real img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 @media screen and (max-width: 768px) {
   .wy-nav-content {
     padding: 1.5rem 1rem;

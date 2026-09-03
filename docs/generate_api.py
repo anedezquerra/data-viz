@@ -204,8 +204,30 @@ def spc_example(dotted_module: str, member: Member) -> str:
     return "\n".join(lines)
 
 
-def spc_gallery() -> str:
-    """Return four future-image placeholders in a responsive gallery."""
+IMAGE_ROOT = ROOT / "docs" / "source" / "_static" / "api"
+
+
+def member_image_path(dotted_module: str, member: Member) -> Path:
+    """Return the PNG path mirroring the generated member-page layout."""
+    return IMAGE_ROOT / Path(*dotted_module.split(".")) / f"{member.name}.png"
+
+
+def gallery_for(dotted_module: str, member: Member) -> str:
+    """Return the real example image when rendered, else placeholders."""
+    image = member_image_path(dotted_module, member)
+    if image.exists():
+        rst = member_rst_path(dotted_module, member)
+        src = Path(*[".."] * len(rst.relative_to(OUTPUT_ROOT).parts[:-1]))
+        src = src / image.relative_to(ROOT / "docs" / "source")
+        card = (
+            f'<figure class="spc-image-slot spc-image-real">'
+            f'<img src="{src.as_posix()}" alt="{member.name} example output">'
+            f"<figcaption>Example output</figcaption></figure>"
+        )
+        return (
+            "\nOutput gallery\n--------------\n\n.. raw:: html\n\n"
+            f'   <div class="spc-image-grid">{card}</div>\n'
+        )
     cards = "".join(
         f'<figure class="spc-image-slot"><div aria-hidden="true">{index:02d}</div><figcaption>Future example image {index}</figcaption></figure>'
         for index in range(1, 5)
@@ -637,7 +659,7 @@ def write_member_page(dotted_module: str, member: Member) -> str:
         "Complete example\n----------------\n\n"
         "The following example is self-contained and can be copied into a Python session or script.\n\n"
         f".. code-block:: python\n\n{code_block}"
-        f"{spc_gallery()}"
+        f"{gallery_for(dotted_module, member)}"
     )
     path.write_text(content, encoding="utf-8")
     return path.relative_to(OUTPUT_ROOT).with_suffix("").as_posix()

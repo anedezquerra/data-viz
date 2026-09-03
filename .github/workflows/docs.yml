@@ -46,7 +46,10 @@ jobs:
       - name: Install package and documentation dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e ".[docs]"
+          python -m pip install -e ".[docs,export]"
+
+      - name: Render API example images
+        run: python docs/_tools/generate_api_images.py
 
       - name: Generate API member pages
         run: python docs/generate_api.py
