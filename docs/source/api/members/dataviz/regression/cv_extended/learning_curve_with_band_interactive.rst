@@ -1,6 +1,36 @@
 dataviz.regression.cv_extended.learning_curve_with_band_interactive
 ===================================================================
 
+.. raw:: html
+
+   <div class="spc-api-hero"><span>Function</span><p>dataviz.regression.cv_extended</p></div>
+
 .. currentmodule:: dataviz.regression.cv_extended
 
 .. autofunction:: learning_curve_with_band_interactive
+
+Complete example
+----------------
+
+The following example is self-contained and can be copied into a Python session or script.
+
+.. code-block:: python
+
+   import numpy as np
+   from dataviz.regression.cv_extended import learning_curve_with_band_interactive
+
+   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
+   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
+   train_sizes = np.array([50, 100, 200])
+   train_scores = np.array([0.82, 0.86, 0.89])
+   validation_scores = np.array([0.76, 0.81, 0.84])
+
+   fig = learning_curve_with_band_interactive(train_sizes, train_scores, validation_scores)
+   fig.show()
+
+Output gallery
+--------------
+
+.. raw:: html
+
+   <div class="spc-image-grid"><figure class="spc-image-slot"><div aria-hidden="true">01</div><figcaption>Future example image 1</figcaption></figure><figure class="spc-image-slot"><div aria-hidden="true">02</div><figcaption>Future example image 2</figcaption></figure><figure class="spc-image-slot"><div aria-hidden="true">03</div><figcaption>Future example image 3</figcaption></figure><figure class="spc-image-slot"><div aria-hidden="true">04</div><figcaption>Future example image 4</figcaption></figure></div>

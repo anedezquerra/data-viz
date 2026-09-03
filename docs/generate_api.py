@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import ast
+import importlib
+import inspect
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
@@ -206,6 +208,367 @@ def spc_gallery() -> str:
     return f'\nOutput gallery\n--------------\n\n.. raw:: html\n\n   <div class="spc-image-grid">{cards}</div>\n'
 
 
+MODULE_TOOLKITS = {
+    "bivariate": "Bivariate toolkit",
+    "classification": "Classification toolkit",
+    "clustering": "Clustering toolkit",
+    "eda": "EDA toolkit",
+    "multivariate": "Multivariate toolkit",
+    "regression": "Regression toolkit",
+    "spc": "SPC toolkit",
+    "univariate": "Univariate toolkit",
+    "utils": "Utilities",
+    "xai": "XAI toolkit",
+}
+
+PACKAGE_SUMMARIES = {
+    "bivariate": "Explore relationships between two variables.",
+    "classification": "Evaluate and compare classification models.",
+    "clustering": "Inspect cluster structure and choose cluster counts.",
+    "eda": "Audit data quality, missingness, and class balance.",
+    "multivariate": "Visualize structure across many variables at once.",
+    "regression": "Diagnose and compare regression models.",
+    "univariate": "Profile, test, and visualize a single variable.",
+    "utils": "Shared validation, theming, and plotting helpers.",
+    "xai": "Explain model predictions and feature effects.",
+}
+
+# Deterministic sample data, keyed by the parameter or variable name used in
+# generated examples. Ported from the website docs generator.
+GENERIC_FIXTURES = {
+    "x": 'x = pd.Series([1, 2, 3, 4, 5], name="Input")',
+    "y": 'y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")',
+    "values": 'values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")',
+    "df": 'df = pd.DataFrame({"a": [1, 2, np.nan, 4], "b": [4, 3, 2, 1], "segment": ["A", "A", "B", "B"]})',
+    "cm": "cm = np.array([[32, 4], [5, 29]])",
+    "fpr": "fpr = np.array([0.0, 0.1, 0.3, 1.0])",
+    "tpr": "tpr = np.array([0.0, 0.7, 0.9, 1.0])",
+    "precision": "precision = np.array([1.0, 0.86, 0.72])",
+    "recall": "recall = np.array([0.2, 0.7, 1.0])",
+    "y_true": "y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])",
+    "y_pred": "y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])",
+    "train_sizes": "train_sizes = np.array([50, 100, 200])",
+    "train_scores": "train_scores = np.array([0.82, 0.86, 0.89])",
+    "validation_scores": "validation_scores = np.array([0.76, 0.81, 0.84])",
+    "labels": "labels = np.array([0, 0, 1, 1])",
+    "k_values": "k_values = np.array([1, 2, 3, 4])",
+    "inertias": "inertias = np.array([10.0, 4.2, 2.6, 2.1])",
+    "linkage_matrix": "linkage_matrix = np.array([[0, 1, 0.3, 2], [2, 3, 0.4, 2], [4, 5, 3.0, 4]])",
+    "importances": "importances = np.array([0.42, 0.31, 0.18])",
+    "feature_names": 'feature_names = ["age", "income", "tenure"]',
+    "shap_values": "shap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])",
+    "feature_values": "feature_values = np.array([0, 1, 2, 3])",
+    "pd_values": "pd_values = np.array([0.2, 0.25, 0.31, 0.34])",
+    "weights": 'weights = pd.Series([1.0, 1.5, 0.8, 1.2, 1.0, 1.1], name="Weight")',
+    "sentinels": 'sentinels = [-1, 999, "missing"]',
+    "thresholds": "thresholds = [10, 12, 14]",
+    "timestamps": 'timestamps = pd.to_datetime(["2026-01-01", "2026-01-03", "2026-01-04", "2026-01-10"])',
+    "texts": 'texts = pd.Series(["fast reliable process", "reliable visual process", "fast chart"], name="Comment")',
+    "flags": 'flags = pd.Series([True, False, True, True, False], name="Passed")',
+    "categories": 'categories = pd.Series(["low", "medium", "high", "medium", "low"], name="Priority")',
+    "defects": "defects = pd.Series([2, 1, 3, 0, 2, 1])",
+    "defectives": "defectives = pd.Series([3, 2, 5, 1, 4, 2])",
+    "n": "n = pd.Series([100, 100, 100, 100, 100, 100])",
+    "units": "units = pd.Series([50, 48, 52, 51, 50, 49])",
+    "matrix": 'matrix = pd.DataFrame({"x1": [1.0, 1.1, 0.9, 1.2], "x2": [2.0, 2.1, 1.8, 2.2]})',
+}
+
+# Parameter name -> argument expression used in generated calls.
+GENERIC_ARGS = {
+    "values": "values",
+    "value": '"Value"',
+    "x": "x",
+    "y": "y",
+    "data": "values",
+    "category": "categories",
+    "categories": "categories",
+    "group": "categories",
+    "groups": "categories",
+    "hue": "categories",
+    "weights": "weights",
+    "sentinels": "sentinels",
+    "thresholds": "thresholds",
+    "labels": "labels",
+    "cm": "cm",
+    "fpr": "fpr",
+    "tpr": "tpr",
+    "precision": "precision",
+    "recall": "recall",
+    "y_true": "y_true",
+    "y_pred": "y_pred",
+    "train_sizes": "train_sizes",
+    "train_scores": "train_scores",
+    "validation_scores": "validation_scores",
+    "importances": "importances",
+    "feature_names": "feature_names",
+    "shap_values": "shap_values",
+    "feature_values": "feature_values",
+    "pd_values": "pd_values",
+    "k_values": "k_values",
+    "inertias": "inertias",
+    "linkage_matrix": "linkage_matrix",
+    "defects": "defects",
+    "defectives": "defectives",
+    "n": "n",
+    "units": "units",
+    "matrix": "matrix",
+    "lsl": "9.5",
+    "usl": "10.5",
+    "subgroup_size": "5",
+    "sample_size": "100",
+    "alpha": "0.05",
+}
+
+# Extra keyword arguments for functions whose defaults are not illustrative.
+GENERIC_EXTRA_KWARGS = (
+    (("capability",), "lsl=9.5, usl=10.5"),
+    (("bootstrap",), "seed=42"),
+    (("fit_distribution", "fitted_distribution"), 'distribution="norm"'),
+    (("compare_distributions",), 'distributions=["norm", "lognorm"]'),
+    (("weighted_quantile",), "quantile=0.5"),
+)
+
+
+def resolve_member(dotted_module: str, name: str) -> object | None:
+    """Import *dotted_module* and return the member object, if available."""
+    try:
+        module = importlib.import_module(dotted_module)
+        return getattr(module, name, None)
+    except Exception:
+        return None
+
+
+def required_params(dotted_module: str, member: Member) -> list[str]:
+    """Return required parameter names for a function, by introspection."""
+    if member.kind != "function":
+        return []
+    target = resolve_member(dotted_module, member.name)
+    if target is None:
+        return []
+    try:
+        signature = inspect.signature(target)
+    except (TypeError, ValueError):
+        return []
+    return [
+        param.name
+        for param in signature.parameters.values()
+        if param.default is inspect.Parameter.empty
+        and param.kind
+        in (param.POSITIONAL_ONLY, param.POSITIONAL_OR_KEYWORD, param.KEYWORD_ONLY)
+    ]
+
+
+def generic_fixture(pkg: str, name: str, required: list[str]) -> list[str]:
+    """Return deterministic setup lines for a generated example."""
+    keys: list[str] = []
+    required_set = set(required)
+
+    def need(*fixture_keys: str) -> None:
+        for key in fixture_keys:
+            if key not in keys:
+                keys.append(key)
+
+    if pkg == "bivariate" or {"x", "y"} & required_set:
+        need("x", "y")
+    if pkg == "univariate" or {"data", "values", "value"} & required_set:
+        need("values")
+    if pkg in {"eda", "multivariate"} or "missing" in name:
+        need("df")
+    if pkg == "classification" or "cm" in required_set:
+        need("cm", "fpr", "tpr", "precision", "recall")
+    if pkg == "regression" or {"y_true", "y_pred"} & required_set:
+        need("y_true", "y_pred", "train_sizes", "train_scores", "validation_scores")
+    if pkg == "clustering":
+        need("x", "y", "labels", "k_values", "inertias", "linkage_matrix")
+    if pkg == "xai":
+        need("importances", "feature_names", "shap_values", "feature_values", "pd_values")
+    if "weighted" in name:
+        need("weights")
+    if "sentinel" in name:
+        need("sentinels")
+    if "exceedance" in name:
+        need("thresholds")
+    if "event" in name or "interarrival" in name:
+        need("timestamps")
+    if "term" in name or "string" in name or "token" in name:
+        need("texts")
+    if "boolean" in name:
+        need("flags")
+    if any(
+        token in name
+        for token in ("category", "frequency", "pareto", "ordinal", "likert")
+    ):
+        need("categories")
+    for param in required:
+        if param in GENERIC_FIXTURES:
+            need(param)
+    return [GENERIC_FIXTURES[key] for key in keys]
+
+
+def generic_fallback_args(pkg: str, name: str) -> list[str]:
+    """Return fallback positional arguments when introspection is unavailable."""
+    if pkg == "spc":
+        if "np_chart" in name:
+            return ["defectives"]
+        if "p_chart" in name:
+            return ["defectives", "n"]
+        if "c_chart" in name:
+            return ["defects"]
+        if "u_chart" in name:
+            return ["defects", "units"]
+        if "hotelling" in name:
+            return ["matrix"]
+        return ["values"]
+    if pkg == "classification":
+        if "roc" in name:
+            return ["fpr", "tpr"]
+        if "precision" in name:
+            return ["precision", "recall"]
+        return ["cm"]
+    if pkg == "regression":
+        if "learning" in name:
+            return ["train_sizes", "train_scores", "validation_scores"]
+        return ["y_true", "y_pred"]
+    if pkg == "clustering":
+        if "dendrogram" in name:
+            return ["linkage_matrix"]
+        if "elbow" in name:
+            return ["k_values", "inertias"]
+        return ["x", "y", "labels"]
+    if pkg == "xai":
+        if "shap" in name:
+            return ["shap_values", "feature_names"]
+        if "partial" in name or "dependence" in name:
+            return ["feature_values", "pd_values"]
+        return ["importances", "feature_names"]
+    if pkg == "bivariate":
+        return ["x", "y"]
+    if pkg in {"eda", "multivariate"}:
+        if pkg == "eda" and "class" in name:
+            return ["categories"]
+        return ["df"]
+    if "weighted" in name:
+        return ["values", "weights"]
+    if "sentinel" in name:
+        return ["values", "sentinels"]
+    if "exceedance" in name:
+        return ["values", "thresholds"]
+    if "event" in name or "interarrival" in name:
+        return ["timestamps"]
+    if "term" in name or "string" in name or "token" in name:
+        return ["texts"]
+    if "boolean" in name:
+        return ["flags"]
+    if any(
+        token in name
+        for token in ("category", "frequency", "pareto", "ordinal", "likert")
+    ):
+        return ["categories"]
+    return ["values"]
+
+
+def class_value_for(name: str, annotation: object) -> str:
+    """Return a representative literal for a dataclass field."""
+    text = str(annotation)
+    if "float" in text:
+        return "0.5"
+    if "int" in text:
+        return "5"
+    if "bool" in text:
+        return "True"
+    if "str" in text:
+        return '"label"'
+    if "DataFrame" in text:
+        return 'pd.DataFrame({"a": [1, 2], "b": [3, 4]})'
+    if "Series" in text or "ArrayLike" in text:
+        return 'pd.Series([1.0, 2.0, 3.0], name="Value")'
+    if "dict" in text or "Mapping" in text:
+        return '{"a": 1.0}'
+    if "list" in text or "Sequence" in text or "tuple" in text:
+        return "[1.0, 2.0, 3.0]"
+    return "None"
+
+
+def generic_call(dotted_module: str, member: Member) -> tuple[list[str], list[str]]:
+    """Return invocation and result-display lines for a generated example."""
+    pkg = dotted_module.split(".")[1]
+    name = member.name
+    if member.kind == "class":
+        target = resolve_member(dotted_module, name)
+        try:
+            signature = inspect.signature(target) if target is not None else None
+        except (TypeError, ValueError):
+            signature = None
+        kwargs = []
+        if signature is not None:
+            for param in signature.parameters.values():
+                if param.default is inspect.Parameter.empty:
+                    kwargs.append(f"{param.name}={class_value_for(param.name, param.annotation)}")
+        return [f"result = {name}({', '.join(kwargs)})"], ["print(result)"]
+
+    required = required_params(dotted_module, member)
+    args = [GENERIC_ARGS[param] for param in required if param in GENERIC_ARGS]
+    if len(args) != len(required):
+        args = generic_fallback_args(pkg, name)
+    extra = ""
+    for tokens, suffix in GENERIC_EXTRA_KWARGS:
+        if any(token in name for token in tokens):
+            extra = f", {suffix}"
+            break
+    if name.endswith("_static"):
+        return [f"ax = {name}({', '.join(args)}{extra})"], ["plt.show()"]
+    if name.endswith("_interactive"):
+        return [f"fig = {name}({', '.join(args)}{extra})"], ["fig.show()"]
+    return [f"result = {name}({', '.join(args)}{extra})"], ["print(result)"]
+
+
+def generic_example(dotted_module: str, member: Member) -> str:
+    """Build a standalone, copy-pasteable example for a non-SPC API member."""
+    pkg = dotted_module.split(".")[1]
+    required = required_params(dotted_module, member)
+    fixture = generic_fixture(pkg, member.name, required)
+    invocation, display = generic_call(dotted_module, member)
+    imports = []
+    if any("np." in line for line in fixture):
+        imports.append("import numpy as np")
+    if any(("pd." in line) for line in fixture):
+        imports.append("import pandas as pd")
+    if member.name.endswith("_static"):
+        imports.append("import matplotlib.pyplot as plt")
+    imports.append(f"from {dotted_module} import {member.name}")
+    lines = imports + ([""] + fixture if fixture else []) + [""] + invocation + display
+    return "\n".join(lines)
+
+
+def curated_examples() -> dict[str, str]:
+    """Load curated per-module examples from docs/_examples/<pkg>.py files."""
+    registry: dict[str, str] = {}
+    examples_dir = ROOT / "docs" / "_examples"
+    if not examples_dir.exists():
+        return registry
+    for path in sorted(examples_dir.glob("*.py")):
+        namespace: dict[str, object] = {}
+        exec(path.read_text(encoding="utf-8"), namespace)  # noqa: S102
+        registry.update(namespace.get("EXAMPLES", {}))
+    return registry
+
+
+CURATED_EXAMPLES = curated_examples()
+
+
+def example_for(dotted_module: str, member: Member) -> str:
+    """Build a standalone, copy-pasteable example for an API member."""
+    curated = CURATED_EXAMPLES.get(f"{dotted_module}.{member.name}")
+    if curated is not None:
+        return curated
+    if dotted_module.startswith("dataviz.spc."):
+        try:
+            return spc_example(dotted_module, member)
+        except KeyError:
+            pass  # member added after the curated SPC table; use generic sample
+    return generic_example(dotted_module, member)
+
+
 def heading(title: str, marker: str = "=") -> str:
     """Return a reStructuredText heading."""
     return f"{title}\n{marker * len(title)}\n"
@@ -253,31 +616,24 @@ def write_member_page(dotted_module: str, member: Member) -> str:
     qualified_name = f"{dotted_module}.{member.name}"
     directive = "autofunction" if member.kind == "function" else "autoclass"
     options = "\n   :members:\n   :show-inheritance:" if member.kind == "class" else ""
-    if dotted_module.startswith("dataviz.spc."):
-        member_label = "Class" if member.kind == "class" else "Function"
-        intro = (
-            ".. raw:: html\n\n"
-            f'   <div class="spc-api-hero"><span>{member_label}</span><p>{dotted_module}</p></div>\n\n'
-        )
-        example = spc_example(dotted_module, member)
-        code_block = "".join(
-            f"   {line}\n" if line else "\n" for line in example.splitlines()
-        )
-        content = (
-            f"{heading(qualified_name)}\n{intro}"
-            f".. currentmodule:: {dotted_module}\n\n"
-            f".. {directive}:: {member.name}{options}\n\n"
-            "Complete example\n----------------\n\n"
-            "The following example is self-contained and can be copied into a Python session or script.\n\n"
-            f".. code-block:: python\n\n{code_block}"
-            f"{spc_gallery()}"
-        )
-    else:
-        content = (
-            f"{heading(qualified_name)}\n"
-            f".. currentmodule:: {dotted_module}\n\n"
-            f".. {directive}:: {member.name}{options}\n"
-        )
+    member_label = "Class" if member.kind == "class" else "Function"
+    intro = (
+        ".. raw:: html\n\n"
+        f'   <div class="spc-api-hero"><span>{member_label}</span><p>{dotted_module}</p></div>\n\n'
+    )
+    example = example_for(dotted_module, member)
+    code_block = "".join(
+        f"   {line}\n" if line else "\n" for line in example.splitlines()
+    )
+    content = (
+        f"{heading(qualified_name)}\n{intro}"
+        f".. currentmodule:: {dotted_module}\n\n"
+        f".. {directive}:: {member.name}{options}\n\n"
+        "Complete example\n----------------\n\n"
+        "The following example is self-contained and can be copied into a Python session or script.\n\n"
+        f".. code-block:: python\n\n{code_block}"
+        f"{spc_gallery()}"
+    )
     path.write_text(content, encoding="utf-8")
     return path.relative_to(OUTPUT_ROOT).with_suffix("").as_posix()
 
@@ -287,14 +643,21 @@ def write_module_page(path: Path) -> None:
     dotted_name = module_name(path)
     members = public_members(path)
     lines = [heading(f"{dotted_name} module")]
-    if dotted_name.startswith("dataviz.spc."):
-        leaf = dotted_name.rsplit(".", 1)[-1]
-        summary = SPC_MODULE_SUMMARIES.get(
-            leaf, "Statistical process control tools and visualizations."
-        )
+    parts = dotted_name.split(".")
+    if len(parts) >= 2:
+        pkg, leaf = parts[1], parts[-1]
+        if dotted_name.startswith("dataviz.spc."):
+            summary = SPC_MODULE_SUMMARIES.get(
+                leaf, "Statistical process control tools and visualizations."
+            )
+        else:
+            summary = PACKAGE_SUMMARIES.get(
+                pkg, "Tools and visualizations from the DataViz package."
+            )
+        toolkit = MODULE_TOOLKITS.get(pkg, "DataViz toolkit")
         lines.append(
             "\n.. raw:: html\n\n"
-            f'   <div class="spc-module-hero"><span>SPC toolkit</span><h2>{leaf.replace("_", " ").title()}</h2><p>{summary}</p></div>\n'
+            f'   <div class="spc-module-hero"><span>{toolkit}</span><h2>{leaf.replace("_", " ").title()}</h2><p>{summary}</p></div>\n'
         )
     lines.append(f"\n.. automodule:: {dotted_name}\n")
     if members:

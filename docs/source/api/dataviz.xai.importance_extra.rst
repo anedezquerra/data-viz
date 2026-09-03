@@ -1,6 +1,10 @@
 dataviz.xai.importance_extra module
 ===================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>XAI toolkit</span><h2>Importance Extra</h2><p>Explain model predictions and feature effects.</p></div>
+
 .. automodule:: dataviz.xai.importance_extra
 
 Public API

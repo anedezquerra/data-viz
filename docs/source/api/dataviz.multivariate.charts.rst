@@ -1,6 +1,10 @@
 dataviz.multivariate.charts module
 ==================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Multivariate toolkit</span><h2>Charts</h2><p>Visualize structure across many variables at once.</p></div>
+
 .. automodule:: dataviz.multivariate.charts
 
 Public API

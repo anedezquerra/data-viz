@@ -1,6 +1,10 @@
 dataviz.regression.forecast module
 ==================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Regression toolkit</span><h2>Forecast</h2><p>Diagnose and compare regression models.</p></div>
+
 .. automodule:: dataviz.regression.forecast
 
 Public API

@@ -1,6 +1,10 @@
 dataviz.classification.calibration_extra module
 ===============================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Classification toolkit</span><h2>Calibration Extra</h2><p>Evaluate and compare classification models.</p></div>
+
 .. automodule:: dataviz.classification.calibration_extra
 
 Public API

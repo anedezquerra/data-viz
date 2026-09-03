@@ -1,6 +1,10 @@
 dataviz.classification.gain_lift module
 =======================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Classification toolkit</span><h2>Gain Lift</h2><p>Evaluate and compare classification models.</p></div>
+
 .. automodule:: dataviz.classification.gain_lift
 
 Public API

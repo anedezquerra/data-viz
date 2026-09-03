@@ -1,6 +1,10 @@
 dataviz.classification.confusion_matrix module
 ==============================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Classification toolkit</span><h2>Confusion Matrix</h2><p>Evaluate and compare classification models.</p></div>
+
 .. automodule:: dataviz.classification.confusion_matrix
 
 Public API

@@ -1,6 +1,10 @@
 dataviz.classification.score_dist module
 ========================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Classification toolkit</span><h2>Score Dist</h2><p>Evaluate and compare classification models.</p></div>
+
 .. automodule:: dataviz.classification.score_dist
 
 Public API

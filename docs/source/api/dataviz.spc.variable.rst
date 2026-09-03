@@ -23,3 +23,9 @@ Public API
    members/dataviz/spc/variable/ewma_chart_interactive
    members/dataviz/spc/variable/cusum_chart_static
    members/dataviz/spc/variable/cusum_chart_interactive
+   members/dataviz/spc/variable/imr_chart_static
+   members/dataviz/spc/variable/imr_chart_interactive
+   members/dataviz/spc/variable/median_chart_static
+   members/dataviz/spc/variable/median_chart_interactive
+   members/dataviz/spc/variable/levey_jennings_chart_static
+   members/dataviz/spc/variable/levey_jennings_chart_interactive

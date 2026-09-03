@@ -1,6 +1,10 @@
 dataviz.xai.shap module
 =======================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>XAI toolkit</span><h2>Shap</h2><p>Explain model predictions and feature effects.</p></div>
+
 .. automodule:: dataviz.xai.shap
 
 Public API

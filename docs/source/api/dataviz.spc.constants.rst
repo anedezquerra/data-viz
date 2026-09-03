@@ -14,4 +14,5 @@ Public API
    :maxdepth: 1
 
    members/dataviz/spc/constants/SPCConstants
+   members/dataviz/spc/constants/get_d2
    members/dataviz/spc/constants/get_spc_constants

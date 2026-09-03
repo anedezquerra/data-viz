@@ -1,6 +1,10 @@
 dataviz.univariate.robust module
 ================================
 
+.. raw:: html
+
+   <div class="spc-module-hero"><span>Univariate toolkit</span><h2>Robust</h2><p>Profile, test, and visualize a single variable.</p></div>
+
 .. automodule:: dataviz.univariate.robust
 
 Public API
