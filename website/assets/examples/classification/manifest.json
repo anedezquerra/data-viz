@@ -1,0 +1,56 @@
+{
+  "confusion_matrix_plot": [
+    {
+      "src": "assets/examples/classification/confusion_matrix_plot_1.png",
+      "caption": "Strong classifier \u2014 nearly all predictions land on the diagonal."
+    },
+    {
+      "src": "assets/examples/classification/confusion_matrix_plot_2.png",
+      "caption": "Weak classifier \u2014 predictions scatter well off the diagonal."
+    },
+    {
+      "src": "assets/examples/classification/confusion_matrix_plot_3.png",
+      "caption": "Imbalanced classes \u2014 the majority class dominates the counts."
+    },
+    {
+      "src": "assets/examples/classification/confusion_matrix_plot_4.png",
+      "caption": "Systematic confusion \u2014 Versicolor and Virginica blur together."
+    }
+  ],
+  "roc_curve": [
+    {
+      "src": "assets/examples/classification/roc_curve_1.png",
+      "caption": "Excellent separation \u2014 the curve hugs the top-left corner."
+    },
+    {
+      "src": "assets/examples/classification/roc_curve_2.png",
+      "caption": "Good separation \u2014 solid lift over the chance diagonal."
+    },
+    {
+      "src": "assets/examples/classification/roc_curve_3.png",
+      "caption": "Weak separation \u2014 only a modest bow above chance."
+    },
+    {
+      "src": "assets/examples/classification/roc_curve_4.png",
+      "caption": "Near chance \u2014 the curve collapses onto the diagonal."
+    }
+  ],
+  "precision_recall_curve": [
+    {
+      "src": "assets/examples/classification/precision_recall_curve_1.png",
+      "caption": "Strong on balanced data \u2014 precision stays high to the end."
+    },
+    {
+      "src": "assets/examples/classification/precision_recall_curve_2.png",
+      "caption": "Imbalanced but strong \u2014 precision holds until high recall."
+    },
+    {
+      "src": "assets/examples/classification/precision_recall_curve_3.png",
+      "caption": "Moderate model \u2014 precision erodes steadily with recall."
+    },
+    {
+      "src": "assets/examples/classification/precision_recall_curve_4.png",
+      "caption": "Weak on imbalanced data \u2014 precision collapses early."
+    }
+  ]
+}

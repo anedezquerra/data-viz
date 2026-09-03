@@ -1,0 +1,56 @@
+{
+  "missing_data_plot": [
+    {
+      "src": "assets/examples/eda/missing_data_plot_1.png",
+      "caption": "Complete data \u2014 no missing values in any column."
+    },
+    {
+      "src": "assets/examples/eda/missing_data_plot_2.png",
+      "caption": "Scattered missingness \u2014 small random gaps across all columns."
+    },
+    {
+      "src": "assets/examples/eda/missing_data_plot_3.png",
+      "caption": "Structured missingness \u2014 income and score are absent together."
+    },
+    {
+      "src": "assets/examples/eda/missing_data_plot_4.png",
+      "caption": "One heavy column \u2014 income is missing for most records."
+    }
+  ],
+  "distribution_summary": [
+    {
+      "src": "assets/examples/eda/distribution_summary_1.png",
+      "caption": "Mixed shapes \u2014 normal, skewed, and count columns side by side."
+    },
+    {
+      "src": "assets/examples/eda/distribution_summary_2.png",
+      "caption": "Bimodal column \u2014 two overlapping groups in one variable."
+    },
+    {
+      "src": "assets/examples/eda/distribution_summary_3.png",
+      "caption": "Heavy tails \u2014 extreme values stretch the axes."
+    },
+    {
+      "src": "assets/examples/eda/distribution_summary_4.png",
+      "caption": "Different scales \u2014 each column lives on its own range."
+    }
+  ],
+  "class_distribution": [
+    {
+      "src": "assets/examples/eda/class_distribution_1.png",
+      "caption": "Balanced classes \u2014 each category appears about equally often."
+    },
+    {
+      "src": "assets/examples/eda/class_distribution_2.png",
+      "caption": "Imbalanced classes \u2014 one category dominates the sample."
+    },
+    {
+      "src": "assets/examples/eda/class_distribution_3.png",
+      "caption": "Rare class \u2014 the minority category is under 2% of records."
+    },
+    {
+      "src": "assets/examples/eda/class_distribution_4.png",
+      "caption": "Many classes \u2014 a long tail of small categories."
+    }
+  ]
+}
