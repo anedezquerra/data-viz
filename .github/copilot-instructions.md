@@ -1,112 +1,115 @@
-# DataViz Project Instructions
+# DataViz — Copilot Instructions
 
-This is a Python data visualization package project with modular organization and dual rendering modes.
+Python data visualization package with modular organization, dual rendering backends (matplotlib/plotly), and ML/statistical diagnostics.
 
-## Project Overview
+## Core Architecture
 
-- **Type**: Python Package
-- **Purpose**: Comprehensive data visualization library organized by chart type with static and interactive versions
-- **Main Dependencies**: matplotlib, seaborn, numpy, pandas, plotly
-- **Python Version**: >=3.8
+**Dual-Mode Pattern**: Every chart function has `_static` (matplotlib/seaborn) and `_interactive` (plotly) variants with identical signatures. A convenience default alias (no suffix) points to `_static`. Example: `dv.histogram()` → `histogram_static()`, `dv.histogram_interactive()`.
 
-## Project Structure
+**Module Organization** (in `dataviz/`):
+- **univariate/** — histograms, density, box plots, diagnostics, fits, bootstrap
+- **bivariate/** — scatter, line, correlation, joint plots, categorical relationships
+- **multivariate/** — heatmaps, parallel coordinates, PCA, 3D plots
+- **eda/** — missing data, distribution summaries, class balance
+- **spc/** — control charts, run charts, Levey-Jennings, trend analysis (20+ families)
+- **regression/** — residuals, partial residuals, influence, diagnostics, learning curves (160+ families)
+- **classification/** — confusion, ROC, PR, calibration, fairness, multilabel (72+ families)
+- **clustering/** — scatter clusters, dendrograms, elbow, silhouette
+- **xai/** — SHAP, importance (permutation, grouped, drop-column), PDP, ICE, ALE, LIME (66+ families)
+- **types.py** — Shared type aliases (`ArrayLike`, `MatrixLike`, `MatplotlibAxes`, `PlotlyFigure`)
+- **utils/** — Validation, error handling, theme utilities
 
-The `dataviz/` package is organized into specialized modules, with each chart type in a separate file:
+**Re-export Pattern**: Each module's `__init__.py` imports both `_static` and `_interactive` versions, plus a convenience default alias. The top-level `dataviz/__init__.py` re-exports the full public API.
 
-- **spc/** - Statistical Process Control charts
-  - `control.py` - control_chart_static, control_chart_interactive
-  - `x_range.py` - x_range_chart_static, x_range_chart_interactive
-- **univariate/** - Single variable visualizations
-  - `histogram.py` - histogram_static, histogram_interactive
-  - `density.py` - density_static, density_interactive
-  - `box_plot.py` - box_plot_static, box_plot_interactive
-  - `violin_plot.py` - violin_plot_static, violin_plot_interactive
-- **bivariate/** - Two variable relationships
-  - `scatter.py` - scatter_plot_static, scatter_plot_interactive
-  - `line.py` - line_plot_static, line_plot_interactive
-  - `correlation.py` - correlation_heatmap_static, correlation_heatmap_interactive
-- **multivariate/** - Multiple variable analysis
-  - `pairplot.py` - pairplot_static, pairplot_interactive
-  - `heatmap.py` - heatmap_static, heatmap_interactive
-  - `parallel.py` - parallel_coordinates_static, parallel_coordinates_interactive
-- **eda/** - Exploratory Data Analysis visualizations
-  - `missing_data.py` - missing_data_plot_static, missing_data_plot_interactive
-  - `distribution.py` - distribution_summary_static, distribution_summary_interactive
-  - `class_dist.py` - class_distribution_static, class_distribution_interactive
-- **xai/** - Explainable AI & feature importance charts
-  - `feature_imp.py` - feature_importance_static, feature_importance_interactive
-  - `shap.py` - shap_plot_static, shap_plot_interactive
-  - `partial_dep.py` - partial_dependence_static, partial_dependence_interactive
-- **regression/** - Regression model diagnostic plots
-  - `residual.py` - residual_plot_static, residual_plot_interactive
-  - `prediction.py` - prediction_plot_static, prediction_plot_interactive
-  - `learning.py` - learning_curve_static, learning_curve_interactive
-- **classification/** - Classification model evaluation
-  - `confusion_matrix.py` - confusion_matrix_plot_static, confusion_matrix_plot_interactive
-  - `roc.py` - roc_curve_static, roc_curve_interactive
-  - `pr_curve.py` - precision_recall_curve_static, precision_recall_curve_interactive
-- **clustering/** - Clustering analyses
-  - `scatter_clusters.py` - scatter_clusters_static, scatter_clusters_interactive
-  - `elbow.py` - elbow_plot_static, elbow_plot_interactive
-  - `dendrogram.py` - dendrogram_static, dendrogram_interactive
-- **utils/** - Helper functions and utility modules
-  - `helpers.py` - setup_plot, apply_theme
+## Build, Test, Lint
 
-## Key Features
-
-- **Dual Versioning**: Every chart has static (matplotlib/seaborn) and interactive (plotly) versions
-- **Naming Convention**: 
-  - Static: `function_static` (e.g., `histogram_static`)
-  - Interactive: `function_interactive` (e.g., `histogram_interactive`)
-  - Default alias: `function` defaults to static version (e.g., `histogram`)
-- **Modular Files**: Each chart type is in its own `.py` file for maintainability
-- **Consistent API**: Both versions share the same parameters and interface
-
-## Adding New Chart Types
-
-1. Create new function in appropriate module file:
-   ```python
-   def chart_name_static(...) -> plt.Axes:
-       # matplotlib/seaborn implementation
-       pass
-   
-   def chart_name_interactive(...) -> go.Figure:
-       # plotly implementation
-       pass
-   ```
-
-2. Export both versions in module `__init__.py`
-3. Add convenience alias for static version (default)
-4. Add tests for both static and interactive versions
-5. Update main `dataviz/__init__.py` if adding top-level convenience imports
-
-## Dependencies
-
-- **Required**: matplotlib, seaborn, numpy, pandas, plotly
-- **Optional**: scipy (for hierarchical clustering), kaleido (for plotly image export)
-
-## Development Commands
-
-- Install: `pip install -e ".[dev]"`
-- Test: `pytest`
-- Format: `black dataviz tests`
-- Lint: `flake8 dataviz tests`
-- Type check: `mypy dataviz`
-
-## Usage Examples
-
-```python
-import dataviz as dv
-
-# Static (default)
-ax = dv.histogram(data)
-
-# Interactive
-fig = dv.histogram_interactive(data)
-
-# Via submodule
-ax = dv.univariate.histogram_static(data)
-fig = dv.univariate.histogram_interactive(data)
+**Install (development)**:
+```bash
+pip install -e ".[dev,docs]"
 ```
+
+**Run locally before opening a PR** (same commands run in CI):
+```bash
+black --check dataviz tests              # Format check
+flake8 dataviz tests                     # Lint
+mypy dataviz                             # Type check
+pytest --cov=dataviz --cov-report=term-missing  # Test with coverage
+```
+
+**Rebuild Sphinx documentation**:
+```bash
+python -m sphinx -b html -W --keep-going docs/source docs/build/html
+```
+
+**Single test** (not full suite):
+```bash
+pytest tests/test_univariate_core.py::test_histogram_static -v
+```
+
+## Key Conventions
+
+**Code Style & Comments**:
+- Minimal comments; one short line maximum for non-obvious logic only.
+- No narration, decorative banners, or ASCII headers.
+- Match existing formatting (Black line-length 88, indentation 4).
+- Use type hints; Google-style docstrings with `Args`, `Returns`, `Raises`, `Example`.
+- Clear identifiers; single-letter names only for trivial loop indices.
+- Avoid dead code (commented-out code, unused imports, debug prints).
+
+**Python Version**: >=3.9 (check `pyproject.toml`)
+
+**Dependencies** (from `pyproject.toml`):
+- **Runtime**: matplotlib >=3.9.4,<3.11; seaborn >=0.13.2; numpy >=2.0.2; pandas >=2.3.3; plotly >=5.0,<7; scipy >=1.13.1
+- **Dev**: pytest, pytest-cov, black, flake8, mypy, build, twine
+- **Docs**: sphinx >=8.0, sphinx-rtd-theme >=3.0, sphinx-copybutton, sphinx-design
+- **Export**: kaleido (for Plotly static image export)
+
+**Naming & Branches**:
+- Functions: snake_case with `_static` / `_interactive` suffixes.
+- Branches: `<type>/<description>` (no personal names). Types: `feat/`, `fix/`, `docs/`, `chore/`, `refactor/`, `test/`.
+- Include issue ID when available: `feat/123-spc-cusum-chart`.
+
+**Commits & Changelog**:
+- Conventional Commits format: `<type>(<scope>): <subject>` (imperative, lowercase, max 72 chars, no period).
+- Changelog entries (in `CHANGELOG.md` under `Unreleased`) are single-line summaries: `- <type>: <what changed>`.
+- Detailed rationale, migration steps, and examples belong in `README.md`, not CHANGELOG.
+
+**Adding a New Chart**:
+1. Place `chart_name_static(...)` and `chart_name_interactive(...)` in appropriate module (e.g., `dataviz/univariate/histogram.py`).
+2. Both versions must have identical parameter signatures and return correct types (`plt.Axes` vs. `go.Figure`).
+3. Export both from module `__init__.py`; add convenience alias (default to static).
+4. Add tests for both variants in `tests/` (smoke tests and edge cases).
+5. Add docstring with `Args`, `Returns`, `Raises`, `Example`.
+6. If adding top-level convenience import, update `dataviz/__init__.py`.
+7. Update `CHANGELOG.md` with a single-line entry.
+
+**Error Handling**:
+- Validate inputs at boundaries; raise specific errors with actionable messages.
+- Catch specific exception types, not bare `except`.
+- Preserve root-cause context and stack traces (use `raise ... from e` where appropriate).
+
+**No Over-Engineering**: 
+- Solve only the stated problem.
+- Prefer simplest solution; avoid speculative abstractions, plugins, or premature optimization.
+- Reuse existing patterns; do not invent new ones.
+
+## Files to Know
+
+- `README.md` — canonical source for usage, rationale, configuration, examples, migration steps
+- `CONTRIBUTING.md` — setup, QA commands, branch naming, commit format, PR structure
+- `AGENTS.md` — detailed Copilot/agent rules (response style, code quality, no over-engineering)
+- `pyproject.toml` — dependencies, versions, tool configuration (Black, pytest, mypy, coverage)
+- `.github/workflows/tests.yml` — CI pipeline (format, lint, type-check, test, build across Linux/macOS/Windows × Python 3.9–3.12)
+- `.github/dependabot.yml` — weekly pip and Actions updates (grouped, pinned ranges)
+
+## Example Workflow
+
+1. Pick a module (e.g., `univariate`).
+2. Create `def chart_name_static(...)` and `def chart_name_interactive(...)`.
+3. Export in module `__init__.py`; alias default to static.
+4. Test: `pytest tests/test_univariate_core.py -v`.
+5. Lint/format: `black dataviz tests && flake8 dataviz tests && mypy dataviz`.
+6. Update `CHANGELOG.md` and commit: `feat(univariate): add chart_name function`.
+7. Push to branch and open PR with detailed summary.
 
 
