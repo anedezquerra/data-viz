@@ -9,6 +9,11 @@ dataviz.univariate.treatment.remove_outliers
 
 .. autofunction:: remove_outliers
 
+Use case
+--------
+
+Use to drop flagged outliers when shrinking the sample is acceptable for the analysis.
+
 Complete example
 ----------------
 

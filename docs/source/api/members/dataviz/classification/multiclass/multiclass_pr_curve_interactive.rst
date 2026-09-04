@@ -9,6 +9,11 @@ dataviz.classification.multiclass.multiclass_pr_curve_interactive
 
 .. autofunction:: multiclass_pr_curve_interactive
 
+Use case
+--------
+
+Use when comparing one-vs-rest precision-recall trade-offs across classes, especially on imbalanced multiclass problems where ROC looks overly optimistic.
+
 Complete example
 ----------------
 

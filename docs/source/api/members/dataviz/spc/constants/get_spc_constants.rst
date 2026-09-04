@@ -9,6 +9,11 @@ dataviz.spc.constants.get_spc_constants
 
 .. autofunction:: get_spc_constants
 
+Use case
+--------
+
+Use to fetch the full set of control-chart constants for a subgroup size before computing Xbar-R or Xbar-S limits.
+
 Complete example
 ----------------
 

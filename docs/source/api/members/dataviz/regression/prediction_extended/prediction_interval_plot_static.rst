@@ -9,6 +9,11 @@ dataviz.regression.prediction_extended.prediction_interval_plot_static
 
 .. autofunction:: prediction_interval_plot_static
 
+Use case
+--------
+
+Use to show predictions with an empirical or Gaussian interval band and see which actuals fall outside it.
+
 Complete example
 ----------------
 

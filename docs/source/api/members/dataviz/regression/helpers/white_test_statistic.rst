@@ -9,6 +9,11 @@ dataviz.regression.helpers.white_test_statistic
 
 .. autofunction:: white_test_statistic
 
+Use case
+--------
+
+Use to compute the White test statistic when checking heteroscedasticity without assuming its form.
+
 Complete example
 ----------------
 

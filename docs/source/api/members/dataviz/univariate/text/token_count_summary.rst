@@ -9,6 +9,11 @@ dataviz.univariate.text.token_count_summary
 
 .. autofunction:: token_count_summary
 
+Use case
+--------
+
+Use to profile text fields by whitespace token count, for example message or description verbosity.
+
 Complete example
 ----------------
 

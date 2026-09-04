@@ -9,6 +9,11 @@ dataviz.univariate.charts.density_plot
 
 .. autofunction:: density_plot
 
+Use case
+--------
+
+Use to view a smooth kernel density estimate of a numeric variable when bin edges of a histogram would distract.
+
 Complete example
 ----------------
 

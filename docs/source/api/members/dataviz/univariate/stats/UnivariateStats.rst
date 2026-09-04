@@ -11,6 +11,11 @@ dataviz.univariate.stats.UnivariateStats
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Immutable record of count, center, spread, shape, and robust spread statistics returned by univariate_summary; convertible with dataclasses.asdict.
+
 Complete example
 ----------------
 

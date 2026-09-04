@@ -9,6 +9,11 @@ dataviz.regression.quantile.quantile_regression_band_static
 
 .. autofunction:: quantile_regression_band_static
 
+Use case
+--------
+
+Use to visualize fitted low/median/high quantile curves against the data when modeling more than the conditional mean.
+
 Complete example
 ----------------
 

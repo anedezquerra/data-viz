@@ -9,6 +9,11 @@ dataviz.regression.residual_extended.scale_location_plot_static
 
 .. autofunction:: scale_location_plot_static
 
+Use case
+--------
+
+Use to check homoscedasticity by plotting sqrt of absolute standardized residuals against fitted values.
+
 Complete example
 ----------------
 

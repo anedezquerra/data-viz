@@ -9,6 +9,11 @@ dataviz.univariate.diagnostics.outlier_plot_interactive
 
 .. autofunction:: outlier_plot_interactive
 
+Use case
+--------
+
+Use an index plot that flags univariate outliers to locate which observations sit outside expected bounds.
+
 Complete example
 ----------------
 

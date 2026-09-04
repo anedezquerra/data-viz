@@ -9,6 +9,11 @@ dataviz.spc.rules.detect_rule_violations
 
 .. autofunction:: detect_rule_violations
 
+Use case
+--------
+
+Use to flag Western Electric and Nelson rule violations, such as runs and trends, on a series of process observations.
+
 Complete example
 ----------------
 

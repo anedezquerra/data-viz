@@ -9,6 +9,11 @@ dataviz.classification.multiclass_extra.confusion_sankey_interactive
 
 .. autofunction:: confusion_sankey_interactive
 
+Use case
+--------
+
+Use to see where examples flow from true to predicted classes; band width shows which confusions dominate.
+
 Complete example
 ----------------
 

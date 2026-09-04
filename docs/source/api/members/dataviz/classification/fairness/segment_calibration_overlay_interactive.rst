@@ -9,6 +9,11 @@ dataviz.classification.fairness.segment_calibration_overlay_interactive
 
 .. autofunction:: segment_calibration_overlay_interactive
 
+Use case
+--------
+
+Use to check whether probability calibration holds equally well across subgroups.
+
 Complete example
 ----------------
 

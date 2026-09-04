@@ -9,6 +9,11 @@ dataviz.regression.mixed_effects.random_effect_caterpillar_interactive
 
 .. autofunction:: random_effect_caterpillar_interactive
 
+Use case
+--------
+
+Use to rank group-level random effects with standard-error bars and see which groups differ significantly from zero.
+
 Complete example
 ----------------
 

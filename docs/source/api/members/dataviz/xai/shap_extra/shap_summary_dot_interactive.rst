@@ -9,6 +9,11 @@ dataviz.xai.shap_extra.shap_summary_dot_interactive
 
 .. autofunction:: shap_summary_dot_interactive
 
+Use case
+--------
+
+Use as the canonical SHAP beeswarm: per-instance SHAP values per feature, colored by feature value to expose direction and spread.
+
 Complete example
 ----------------
 

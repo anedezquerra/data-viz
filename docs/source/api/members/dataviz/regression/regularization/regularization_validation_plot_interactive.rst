@@ -9,6 +9,11 @@ dataviz.regression.regularization.regularization_validation_plot_interactive
 
 .. autofunction:: regularization_validation_plot_interactive
 
+Use case
+--------
+
+Use to pick a penalty strength by comparing train and validation scores, with a fold std band when available.
+
 Complete example
 ----------------
 

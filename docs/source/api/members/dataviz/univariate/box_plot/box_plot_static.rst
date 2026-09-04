@@ -9,6 +9,11 @@ dataviz.univariate.box_plot.box_plot_static
 
 .. autofunction:: box_plot_static
 
+Use case
+--------
+
+Use to summarize quartiles, spread, and outliers of a numeric variable, with an optional notch for median comparison.
+
 Complete example
 ----------------
 

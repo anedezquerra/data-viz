@@ -9,6 +9,11 @@ dataviz.regression.mixed_effects.group_means_vs_predicted_interactive
 
 .. autofunction:: group_means_vs_predicted_interactive
 
+Use case
+--------
+
+Use to compare observed group means against mixed-model predicted means to spot groups the model fits poorly.
+
 Complete example
 ----------------
 

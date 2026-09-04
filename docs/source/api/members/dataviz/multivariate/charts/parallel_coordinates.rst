@@ -9,6 +9,11 @@ dataviz.multivariate.charts.parallel_coordinates
 
 .. autofunction:: parallel_coordinates
 
+Use case
+--------
+
+Use to compare many observations across several numeric variables at once and spot multivariate outliers or clusters.
+
 Complete example
 ----------------
 

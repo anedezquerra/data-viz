@@ -9,6 +9,11 @@ dataviz.univariate.weighted.resolve_weighted_series
 
 .. autofunction:: resolve_weighted_series
 
+Use case
+--------
+
+Use to align and validate values with non-negative weights, dropping incomplete rows, before weighted computations.
+
 Complete example
 ----------------
 

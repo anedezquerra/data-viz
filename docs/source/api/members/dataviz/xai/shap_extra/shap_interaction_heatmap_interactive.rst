@@ -9,6 +9,11 @@ dataviz.xai.shap_extra.shap_interaction_heatmap_interactive
 
 .. autofunction:: shap_interaction_heatmap_interactive
 
+Use case
+--------
+
+Use to find which feature pairs carry the strongest SHAP interaction effects before drilling into dependence plots.
+
 Complete example
 ----------------
 

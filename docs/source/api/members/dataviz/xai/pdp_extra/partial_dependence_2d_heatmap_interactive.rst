@@ -9,6 +9,11 @@ dataviz.xai.pdp_extra.partial_dependence_2d_heatmap_interactive
 
 .. autofunction:: partial_dependence_2d_heatmap_interactive
 
+Use case
+--------
+
+Use to inspect pairwise feature interactions on a precomputed 2-D partial dependence grid.
+
 Complete example
 ----------------
 

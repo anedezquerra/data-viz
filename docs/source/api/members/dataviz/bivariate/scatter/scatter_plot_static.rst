@@ -9,6 +9,11 @@ dataviz.bivariate.scatter.scatter_plot_static
 
 .. autofunction:: scatter_plot_static
 
+Use case
+--------
+
+Use as a first look at the relationship between two numeric variables before choosing a more specialized view.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.prediction.prediction_plot_static
 
 .. autofunction:: prediction_plot_static
 
+Use case
+--------
+
+Use to compare predicted against actual values with a perfect-preference reference line for a quick fit-quality check.
+
 Complete example
 ----------------
 

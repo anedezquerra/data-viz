@@ -9,6 +9,11 @@ dataviz.classification.threshold.threshold_metric_curve_static
 
 .. autofunction:: threshold_metric_curve_static
 
+Use case
+--------
+
+Use to pick an operating threshold; sweeps precision, recall, F1, accuracy, and specificity across thresholds.
+
 Complete example
 ----------------
 

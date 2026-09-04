@@ -9,6 +9,11 @@ dataviz.regression.forecast.expanding_window_metric_curve_static
 
 .. autofunction:: expanding_window_metric_curve_static
 
+Use case
+--------
+
+Use to see whether forecast accuracy improves as the training window expands.
+
 Complete example
 ----------------
 

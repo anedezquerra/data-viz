@@ -9,6 +9,11 @@ dataviz.univariate.tail.survival_curve_interactive
 
 .. autofunction:: survival_curve_interactive
 
+Use case
+--------
+
+Use to emphasize upper-tail behavior by plotting the probability of exceeding each value instead of a density.
+
 Complete example
 ----------------
 

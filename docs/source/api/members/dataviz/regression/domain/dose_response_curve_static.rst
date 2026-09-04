@@ -9,6 +9,11 @@ dataviz.regression.domain.dose_response_curve_static
 
 .. autofunction:: dose_response_curve_static
 
+Use case
+--------
+
+Use in pharmacology or toxicology to plot response versus dose with an optional CI band and log-scaled dose axis.
+
 Complete example
 ----------------
 

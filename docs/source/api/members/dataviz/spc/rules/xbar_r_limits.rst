@@ -9,6 +9,11 @@ dataviz.spc.rules.xbar_r_limits
 
 .. autofunction:: xbar_r_limits
 
+Use case
+--------
+
+Use to compute Xbar and R chart limits for small subgroups, typically size 2 to 10, using the average range.
+
 Complete example
 ----------------
 

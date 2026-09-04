@@ -11,6 +11,11 @@ dataviz.univariate.weighted.WeightedStats
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Immutable record of weighted count, weight sum, mean, population variance, std, and quartiles for survey or grouped data.
+
 Complete example
 ----------------
 

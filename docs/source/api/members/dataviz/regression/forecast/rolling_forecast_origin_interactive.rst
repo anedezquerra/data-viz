@@ -9,6 +9,11 @@ dataviz.regression.forecast.rolling_forecast_origin_interactive
 
 .. autofunction:: rolling_forecast_origin_interactive
 
+Use case
+--------
+
+Use to check forecast stability by plotting scores across rolling forecast origins.
+
 Complete example
 ----------------
 

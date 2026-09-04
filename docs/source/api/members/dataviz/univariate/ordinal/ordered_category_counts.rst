@@ -9,6 +9,11 @@ dataviz.univariate.ordinal.ordered_category_counts
 
 .. autofunction:: ordered_category_counts
 
+Use case
+--------
+
+Use to count or normalize ordinal responses in a meaningful category order instead of frequency-sorted order.
+
 Complete example
 ----------------
 

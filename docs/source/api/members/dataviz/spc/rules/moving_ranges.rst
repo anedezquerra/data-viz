@@ -9,6 +9,11 @@ dataviz.spc.rules.moving_ranges
 
 .. autofunction:: moving_ranges
 
+Use case
+--------
+
+Use to compute moving ranges between consecutive observations as the basis for individuals and moving-range chart limits.
+
 Complete example
 ----------------
 

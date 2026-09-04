@@ -9,6 +9,11 @@ dataviz.regression.diagnostics_panel.regression_diagnostic_panel_static
 
 .. autofunction:: regression_diagnostic_panel_static
 
+Use case
+--------
+
+Use as a one-shot check of classic OLS assumptions: residuals-vs-fitted, QQ, scale-location, and leverage in four panels.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.xai.local_explanations.shap_decision_plot_interactive
 
 .. autofunction:: shap_decision_plot_interactive
 
+Use case
+--------
+
+Use to trace cumulative SHAP paths from base to prediction for many instances at once, exposing typical and atypical decision routes.
+
 Complete example
 ----------------
 

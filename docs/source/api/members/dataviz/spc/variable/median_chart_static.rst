@@ -9,6 +9,11 @@ dataviz.spc.variable.median_chart_static
 
 .. autofunction:: median_chart_static
 
+Use case
+--------
+
+Use when monitoring subgrouped measurements by subgroup median, a robust X-tilde alternative when outliers skew the mean.
+
 Complete example
 ----------------
 

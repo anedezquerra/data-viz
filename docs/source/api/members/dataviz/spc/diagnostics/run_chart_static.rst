@@ -9,6 +9,11 @@ dataviz.spc.diagnostics.run_chart_static
 
 .. autofunction:: run_chart_static
 
+Use case
+--------
+
+Use to plot observations in time order against a median reference to spot runs, trends, and shifts before formal control charting.
+
 Complete example
 ----------------
 

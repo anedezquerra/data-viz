@@ -9,6 +9,11 @@ dataviz.bivariate.stats.quantile_bin_plot_static
 
 .. autofunction:: quantile_bin_plot_static
 
+Use case
+--------
+
+Use to summarize how a y statistic, mean or median, varies across quantile bins of x for a robust trend view.
+
 Complete example
 ----------------
 

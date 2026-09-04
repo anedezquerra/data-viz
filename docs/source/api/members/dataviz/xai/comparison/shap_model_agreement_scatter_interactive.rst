@@ -9,6 +9,11 @@ dataviz.xai.comparison.shap_model_agreement_scatter_interactive
 
 .. autofunction:: shap_model_agreement_scatter_interactive
 
+Use case
+--------
+
+Check whether two models attribute predictions to the same features per instance, quantified by Pearson r.
+
 Complete example
 ----------------
 

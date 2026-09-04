@@ -9,6 +9,11 @@ dataviz.univariate.diagnostics.normality_test
 
 .. autofunction:: normality_test
 
+Use case
+--------
+
+Use to formally test whether a numeric variable departs from normality before applying methods that assume it.
+
 Complete example
 ----------------
 

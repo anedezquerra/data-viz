@@ -9,6 +9,11 @@ dataviz.regression.autocorrelation.residual_time_plot_static
 
 .. autofunction:: residual_time_plot_static
 
+Use case
+--------
+
+Use to plot residuals over time or observation order to reveal drift, trends, or regime changes hidden by aggregate metrics.
+
 Complete example
 ----------------
 

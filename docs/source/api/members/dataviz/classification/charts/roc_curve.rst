@@ -9,6 +9,11 @@ dataviz.classification.charts.roc_curve
 
 .. autofunction:: roc_curve
 
+Use case
+--------
+
+Use to summarize ranking quality across all thresholds from known fpr/tpr arrays, with optional AUC in the legend.
+
 Complete example
 ----------------
 

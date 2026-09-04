@@ -9,6 +9,11 @@ dataviz.classification.training.training_history_curve_static
 
 .. autofunction:: training_history_curve_static
 
+Use case
+--------
+
+Use to monitor fit quality over epochs; plots loss or metric series with validation curves dashed.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.xai.counterfactuals.counterfactual_path_plot_interactive
 
 .. autofunction:: counterfactual_path_plot_interactive
 
+Use case
+--------
+
+Use to show the sequence of feature changes needed to flip a single prediction, e.g. a loan denial.
+
 Complete example
 ----------------
 

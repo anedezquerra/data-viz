@@ -9,6 +9,11 @@ dataviz.classification.multiclass.pr_curve_comparison_interactive
 
 .. autofunction:: pr_curve_comparison_interactive
 
+Use case
+--------
+
+Use to compare candidate models on average precision when positives are rare; overlays one PR curve per model.
+
 Complete example
 ----------------
 

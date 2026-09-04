@@ -9,6 +9,11 @@ dataviz.regression.transforms.yeojohnson_lambda_search_interactive
 
 .. autofunction:: yeojohnson_lambda_search_interactive
 
+Use case
+--------
+
+Use to pick a Yeo-Johnson transform for data that include zeros or negatives, reading the optimal lambda from the log-likelihood curve.
+
 Complete example
 ----------------
 

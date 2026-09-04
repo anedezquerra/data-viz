@@ -9,6 +9,11 @@ dataviz.univariate.robust.validate_proportion
 
 .. autofunction:: validate_proportion
 
+Use case
+--------
+
+Use to validate a trim or winsorize tail proportion is in [0, 0.5) before calling robust helpers.
+
 Complete example
 ----------------
 

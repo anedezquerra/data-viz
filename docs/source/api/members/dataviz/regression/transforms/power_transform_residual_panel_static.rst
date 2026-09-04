@@ -9,6 +9,11 @@ dataviz.regression.transforms.power_transform_residual_panel_static
 
 .. autofunction:: power_transform_residual_panel_static
 
+Use case
+--------
+
+Compare residuals-vs-fitted for raw, log, and sqrt transforms side by side to choose the response transform that best stabilizes variance.
+
 Complete example
 ----------------
 

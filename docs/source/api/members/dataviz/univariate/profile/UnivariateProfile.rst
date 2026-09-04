@@ -11,6 +11,11 @@ dataviz.univariate.profile.UnivariateProfile
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Immutable result carrying the variable name, inferred kind, data quality summary, and a type-specific summary payload from auto_profile.
+
 Complete example
 ----------------
 

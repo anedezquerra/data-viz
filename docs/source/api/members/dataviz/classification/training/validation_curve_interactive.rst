@@ -9,6 +9,11 @@ dataviz.classification.training.validation_curve_interactive
 
 .. autofunction:: validation_curve_interactive
 
+Use case
+--------
+
+Use to tune a hyperparameter; plots train and validation score means with std bands over the swept values.
+
 Complete example
 ----------------
 

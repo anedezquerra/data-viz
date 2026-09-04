@@ -9,6 +9,11 @@ dataviz.univariate.datetime.as_datetime_series
 
 .. autofunction:: as_datetime_series
 
+Use case
+--------
+
+Use to convert series-like values into a clean datetime Series before event counting or interarrival analysis.
+
 Complete example
 ----------------
 

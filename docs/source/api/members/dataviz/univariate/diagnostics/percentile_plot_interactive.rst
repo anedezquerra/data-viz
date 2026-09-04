@@ -9,6 +9,11 @@ dataviz.univariate.diagnostics.percentile_plot_interactive
 
 .. autofunction:: percentile_plot_interactive
 
+Use case
+--------
+
+Use to profile a variable across its percentiles, revealing tail behavior and skew beyond mean and standard deviation.
+
 Complete example
 ----------------
 

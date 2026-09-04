@@ -11,6 +11,11 @@ dataviz.spc.rules.ControlLimits
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Carries center line, lower/upper limits, and sigma estimate for a control chart; consumed by charting and rule-detection functions.
+
 Complete example
 ----------------
 

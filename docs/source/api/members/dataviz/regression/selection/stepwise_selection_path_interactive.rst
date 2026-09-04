@@ -9,6 +9,11 @@ dataviz.regression.selection.stepwise_selection_path_interactive
 
 .. autofunction:: stepwise_selection_path_interactive
 
+Use case
+--------
+
+Use to trace a forward or backward stepwise search step by step, showing how the score evolves as features enter or leave the model.
+
 Complete example
 ----------------
 

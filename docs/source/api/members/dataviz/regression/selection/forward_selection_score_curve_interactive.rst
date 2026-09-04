@@ -9,6 +9,11 @@ dataviz.regression.selection.forward_selection_score_curve_interactive
 
 .. autofunction:: forward_selection_score_curve_interactive
 
+Use case
+--------
+
+Use to pick how many features to keep in forward selection by finding the point where adding more features stops improving the score.
+
 Complete example
 ----------------
 

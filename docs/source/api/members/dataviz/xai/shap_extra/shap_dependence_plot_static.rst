@@ -9,6 +9,11 @@ dataviz.xai.shap_extra.shap_dependence_plot_static
 
 .. autofunction:: shap_dependence_plot_static
 
+Use case
+--------
+
+Use to see how one feature's SHAP value varies with its raw value, optionally colored by a second feature to surface interactions.
+
 Complete example
 ----------------
 

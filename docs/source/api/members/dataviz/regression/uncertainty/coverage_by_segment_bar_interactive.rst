@@ -9,6 +9,11 @@ dataviz.regression.uncertainty.coverage_by_segment_bar_interactive
 
 .. autofunction:: coverage_by_segment_bar_interactive
 
+Use case
+--------
+
+Use to detect coverage gaps across data segments; bars below the nominal line show subgroups where intervals under-cover.
+
 Complete example
 ----------------
 

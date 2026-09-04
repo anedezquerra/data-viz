@@ -9,6 +9,11 @@ dataviz.xai.concept.concept_activation_bar_interactive
 
 .. autofunction:: concept_activation_bar_interactive
 
+Use case
+--------
+
+Use to test whether human-interpretable concepts influence a neural network, with non-significant concepts greyed out.
+
 Complete example
 ----------------
 

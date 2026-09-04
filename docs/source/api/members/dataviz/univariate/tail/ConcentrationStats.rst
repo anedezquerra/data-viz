@@ -11,6 +11,11 @@ dataviz.univariate.tail.ConcentrationStats
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Immutable record of total, Gini coefficient, and top-10/top-20 shares summarizing inequality in non-negative values.
+
 Complete example
 ----------------
 

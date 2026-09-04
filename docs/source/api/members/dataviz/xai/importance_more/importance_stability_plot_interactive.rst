@@ -9,6 +9,11 @@ dataviz.xai.importance_more.importance_stability_plot_interactive
 
 .. autofunction:: importance_stability_plot_interactive
 
+Use case
+--------
+
+Use to check whether feature rankings are stable across CV folds or seeds; wide error bars flag unreliable importances.
+
 Complete example
 ----------------
 

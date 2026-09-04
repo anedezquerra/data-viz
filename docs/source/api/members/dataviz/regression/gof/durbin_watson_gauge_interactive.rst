@@ -9,6 +9,11 @@ dataviz.regression.gof.durbin_watson_gauge_interactive
 
 .. autofunction:: durbin_watson_gauge_interactive
 
+Use case
+--------
+
+Use to read the Durbin-Watson statistic on a 0-4 gauge when checking residuals for autocorrelation.
+
 Complete example
 ----------------
 

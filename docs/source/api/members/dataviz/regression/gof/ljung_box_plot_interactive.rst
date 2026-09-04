@@ -9,6 +9,11 @@ dataviz.regression.gof.ljung_box_plot_interactive
 
 .. autofunction:: ljung_box_plot_interactive
 
+Use case
+--------
+
+Use to plot Ljung-Box p-values across lags to detect residual autocorrelation after fitting.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.spc.x_range.x_range_chart_static
 
 .. autofunction:: x_range_chart_static
 
+Use case
+--------
+
+Use to plot individual values with their moving ranges for processes measured one part at a time.
+
 Complete example
 ----------------
 

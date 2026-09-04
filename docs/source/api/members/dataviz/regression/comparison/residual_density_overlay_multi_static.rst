@@ -9,6 +9,11 @@ dataviz.regression.comparison.residual_density_overlay_multi_static
 
 .. autofunction:: residual_density_overlay_multi_static
 
+Use case
+--------
+
+Use to compare residual distributions across models; tighter, zero-centered KDEs indicate better calibrated errors.
+
 Complete example
 ----------------
 

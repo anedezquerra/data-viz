@@ -9,6 +9,11 @@ dataviz.classification.model_comparison.pareto_tradeoff_bubble_interactive
 
 .. autofunction:: pareto_tradeoff_bubble_interactive
 
+Use case
+--------
+
+Compare models on two competing metrics and highlight the Pareto frontier of non-dominated candidates.
+
 Complete example
 ----------------
 

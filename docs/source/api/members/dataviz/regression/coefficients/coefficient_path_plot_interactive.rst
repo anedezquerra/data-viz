@@ -9,6 +9,11 @@ dataviz.regression.coefficients.coefficient_path_plot_interactive
 
 .. autofunction:: coefficient_path_plot_interactive
 
+Use case
+--------
+
+Use to trace coefficient paths across a regularization parameter and see which features shrink out first in ridge or lasso fits.
+
 Complete example
 ----------------
 

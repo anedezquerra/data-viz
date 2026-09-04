@@ -9,6 +9,11 @@ dataviz.regression.metrics.per_segment_metrics_heatmap_interactive
 
 .. autofunction:: per_segment_metrics_heatmap_interactive
 
+Use case
+--------
+
+Use to compare model performance across data segments with a metrics heatmap.
+
 Complete example
 ----------------
 

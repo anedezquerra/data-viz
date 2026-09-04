@@ -9,6 +9,11 @@ dataviz.regression.var_engineering.target_vs_feature_smooth_grid_interactive
 
 .. autofunction:: target_vs_feature_smooth_grid_interactive
 
+Use case
+--------
+
+Use in early EDA to screen many features at once via smoothed E[y|x] curves and spot which predictors have nonlinear target relationships.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.bivariate.stats.bivariate_summary
 
 .. autofunction:: bivariate_summary
 
+Use case
+--------
+
+Use when you need numeric evidence of association, such as Pearson or Spearman correlation, rather than a chart.
+
 Complete example
 ----------------
 

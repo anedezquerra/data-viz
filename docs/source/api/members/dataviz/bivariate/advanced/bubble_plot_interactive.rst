@@ -9,6 +9,11 @@ dataviz.bivariate.advanced.bubble_plot_interactive
 
 .. autofunction:: bubble_plot_interactive
 
+Use case
+--------
+
+Use when you need to show a third numeric dimension on a scatter plot by encoding it as point size.
+
 Complete example
 ----------------
 

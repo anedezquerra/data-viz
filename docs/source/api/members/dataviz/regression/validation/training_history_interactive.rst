@@ -9,6 +9,11 @@ dataviz.regression.validation.training_history_interactive
 
 .. autofunction:: training_history_interactive
 
+Use case
+--------
+
+Use to monitor training by plotting per-epoch metric curves such as loss and val_loss to spot divergence, plateaus, or overfitting.
+
 Complete example
 ----------------
 

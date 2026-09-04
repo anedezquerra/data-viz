@@ -9,6 +9,11 @@ dataviz.regression.calibration_regression.calibration_curve_regression_static
 
 .. autofunction:: calibration_curve_regression_static
 
+Use case
+--------
+
+Use when predicted values should match observed means in each bin; systematic deviation from the diagonal signals a miscalibrated regressor.
+
 Complete example
 ----------------
 

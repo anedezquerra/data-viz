@@ -9,6 +9,11 @@ dataviz.xai.comparison.importance_comparison_heatmap_static
 
 .. autofunction:: importance_comparison_heatmap_static
 
+Use case
+--------
+
+Use to compare feature importances across several models side by side before selecting a champion model.
+
 Complete example
 ----------------
 

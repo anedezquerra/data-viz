@@ -9,6 +9,11 @@ dataviz.classification.model_comparison.score_distribution_drift_interactive
 
 .. autofunction:: score_distribution_drift_interactive
 
+Use case
+--------
+
+Use to monitor production models by overlaying reference vs. current score distributions for drift.
+
 Complete example
 ----------------
 

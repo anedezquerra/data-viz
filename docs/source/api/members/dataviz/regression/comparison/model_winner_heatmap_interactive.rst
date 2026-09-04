@@ -9,6 +9,11 @@ dataviz.regression.comparison.model_winner_heatmap_interactive
 
 .. autofunction:: model_winner_heatmap_interactive
 
+Use case
+--------
+
+Use to summarize which model wins on each metric in one matrix, avoiding cherry-picking a single score when selecting a champion.
+
 Complete example
 ----------------
 

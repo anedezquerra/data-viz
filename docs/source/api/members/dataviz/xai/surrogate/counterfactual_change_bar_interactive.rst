@@ -9,6 +9,11 @@ dataviz.xai.surrogate.counterfactual_change_bar_interactive
 
 .. autofunction:: counterfactual_change_bar_interactive
 
+Use case
+--------
+
+Use to show the smallest per-feature changes needed to flip a prediction, annotated with original to counterfactual values.
+
 Complete example
 ----------------
 

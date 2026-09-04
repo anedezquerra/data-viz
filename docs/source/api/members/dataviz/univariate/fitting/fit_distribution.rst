@@ -9,6 +9,11 @@ dataviz.univariate.fitting.fit_distribution
 
 .. autofunction:: fit_distribution
 
+Use case
+--------
+
+Use to fit a named SciPy continuous distribution to a numeric variable and recover its estimated parameters.
+
 Complete example
 ----------------
 

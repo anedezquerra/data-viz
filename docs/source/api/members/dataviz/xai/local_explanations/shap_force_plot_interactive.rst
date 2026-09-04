@@ -9,6 +9,11 @@ dataviz.xai.local_explanations.shap_force_plot_interactive
 
 .. autofunction:: shap_force_plot_interactive
 
+Use case
+--------
+
+Use to explain one prediction as a horizontal push-pull of features from the base value to f(x), ideal for single-case narratives.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.glm.variance_function_plot_static
 
 .. autofunction:: variance_function_plot_static
 
+Use case
+--------
+
+Use to visualize the mean-variance relationship V(mu) implied by the chosen GLM family.
+
 Complete example
 ----------------
 

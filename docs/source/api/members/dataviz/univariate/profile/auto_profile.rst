@@ -9,6 +9,11 @@ dataviz.univariate.profile.auto_profile
 
 .. autofunction:: auto_profile
 
+Use case
+--------
+
+Use to get a type-aware first-pass profile of one variable, including quality metrics and kind-appropriate summary statistics.
+
 Complete example
 ----------------
 

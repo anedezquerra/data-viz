@@ -9,6 +9,11 @@ dataviz.classification.threshold_extra.likelihood_ratio_curve_interactive
 
 .. autofunction:: likelihood_ratio_curve_interactive
 
+Use case
+--------
+
+Use in clinical diagnostics to see how LR+ and LR- vary with the cut-off; log scale highlights informative thresholds.
+
 Complete example
 ----------------
 

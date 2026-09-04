@@ -9,6 +9,11 @@ dataviz.univariate.charts.violin_plot
 
 .. autofunction:: violin_plot
 
+Use case
+--------
+
+Use to see the full distribution shape of a numeric variable, including multimodality that a box plot hides.
+
 Complete example
 ----------------
 

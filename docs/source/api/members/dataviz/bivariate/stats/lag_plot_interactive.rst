@@ -9,6 +9,11 @@ dataviz.bivariate.stats.lag_plot_interactive
 
 .. autofunction:: lag_plot_interactive
 
+Use case
+--------
+
+Use to check for delayed or leading-lag relationships between two ordered series, such as time-shifted signals.
+
 Complete example
 ----------------
 

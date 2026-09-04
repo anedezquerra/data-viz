@@ -9,6 +9,11 @@ dataviz.regression.validation.bias_variance_plot_interactive
 
 .. autofunction:: bias_variance_plot_interactive
 
+Use case
+--------
+
+Use to visualize the bias-variance trade-off across model complexity and locate the complexity that minimizes total error.
+
 Complete example
 ----------------
 

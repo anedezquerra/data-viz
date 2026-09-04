@@ -9,6 +9,11 @@ dataviz.xai.importance_extra.permutation_importance_bar_interactive
 
 .. autofunction:: permutation_importance_bar_interactive
 
+Use case
+--------
+
+Use for model-agnostic importance estimates measured by the performance drop when each feature is shuffled.
+
 Complete example
 ----------------
 

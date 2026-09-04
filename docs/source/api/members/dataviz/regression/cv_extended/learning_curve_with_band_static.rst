@@ -9,6 +9,11 @@ dataviz.regression.cv_extended.learning_curve_with_band_static
 
 .. autofunction:: learning_curve_with_band_static
 
+Use case
+--------
+
+Use to show mean CV score versus training size with a plus/minus std band, revealing both bias and variance as data grows.
+
 Complete example
 ----------------
 

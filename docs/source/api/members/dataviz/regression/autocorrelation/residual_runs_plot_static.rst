@@ -9,6 +9,11 @@ dataviz.regression.autocorrelation.residual_runs_plot_static
 
 .. autofunction:: residual_runs_plot_static
 
+Use case
+--------
+
+Use to spot non-random runs of positive or negative residuals, a quick check for structure the model failed to capture.
+
 Complete example
 ----------------
 

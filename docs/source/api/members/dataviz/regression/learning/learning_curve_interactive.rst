@@ -9,6 +9,11 @@ dataviz.regression.learning.learning_curve_interactive
 
 .. autofunction:: learning_curve_interactive
 
+Use case
+--------
+
+Use to plot score against training-set size when diagnosing under- or overfitting.
+
 Complete example
 ----------------
 

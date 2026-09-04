@@ -9,6 +9,11 @@ dataviz.regression.var_engineering.feature_target_correlation_bar_interactive
 
 .. autofunction:: feature_target_correlation_bar_interactive
 
+Use case
+--------
+
+Use to rank features by Pearson correlation with the target, sorted by magnitude, as a quick univariate screen before modeling.
+
 Complete example
 ----------------
 

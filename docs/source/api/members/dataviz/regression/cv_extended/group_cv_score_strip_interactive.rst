@@ -9,6 +9,11 @@ dataviz.regression.cv_extended.group_cv_score_strip_interactive
 
 .. autofunction:: group_cv_score_strip_interactive
 
+Use case
+--------
+
+Use to plot CV scores per group in grouped cross-validation, exposing groups where the model generalizes poorly.
+
 Complete example
 ----------------
 

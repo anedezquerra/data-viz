@@ -9,6 +9,11 @@ dataviz.classification.multiclass.roc_curve_comparison_static
 
 .. autofunction:: roc_curve_comparison_static
 
+Use case
+--------
+
+Use to overlay ROC curves from several candidate models on one axes and pick the best discriminator by AUC.
+
 Complete example
 ----------------
 

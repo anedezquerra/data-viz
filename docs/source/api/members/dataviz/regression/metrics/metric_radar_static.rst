@@ -9,6 +9,11 @@ dataviz.regression.metrics.metric_radar_static
 
 .. autofunction:: metric_radar_static
 
+Use case
+--------
+
+Use to compare normalized metric profiles of several models at a glance on a radar chart.
+
 Complete example
 ----------------
 

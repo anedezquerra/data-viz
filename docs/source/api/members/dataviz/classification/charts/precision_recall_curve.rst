@@ -9,6 +9,11 @@ dataviz.classification.charts.precision_recall_curve
 
 .. autofunction:: precision_recall_curve
 
+Use case
+--------
+
+Use when tuning a classifier's decision threshold to trade off precision against recall, especially on imbalanced data.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.univariate.transforms.transform_series
 
 .. autofunction:: transform_series
 
+Use case
+--------
+
+Use to apply log, sqrt, Box-Cox, or Yeo-Johnson transformations to tame skew before analysis or modeling.
+
 Complete example
 ----------------
 

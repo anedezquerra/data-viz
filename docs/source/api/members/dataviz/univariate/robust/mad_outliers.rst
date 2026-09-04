@@ -9,6 +9,11 @@ dataviz.univariate.robust.mad_outliers
 
 .. autofunction:: mad_outliers
 
+Use case
+--------
+
+Use to flag outliers with a robust MAD-based rule on heavy-tailed data where z-scores break down.
+
 Complete example
 ----------------
 

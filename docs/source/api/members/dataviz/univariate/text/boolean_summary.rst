@@ -9,6 +9,11 @@ dataviz.univariate.text.boolean_summary
 
 .. autofunction:: boolean_summary
 
+Use case
+--------
+
+Use to summarize a binary flag with true/false counts and the true rate.
+
 Complete example
 ----------------
 

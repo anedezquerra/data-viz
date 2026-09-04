@@ -9,6 +9,11 @@ dataviz.xai.partial_dep.partial_dependence_static
 
 .. autofunction:: partial_dependence_static
 
+Use case
+--------
+
+Use to show the average marginal effect of one feature on predictions, with optional confidence band and rug marks for data density.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.xai.shap_extra.shap_bar_global_static
 
 .. autofunction:: shap_bar_global_static
 
+Use case
+--------
+
+Use to rank features by mean absolute SHAP when only magnitude of impact matters, not direction.
+
 Complete example
 ----------------
 

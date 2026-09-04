@@ -9,6 +9,11 @@ dataviz.regression.multicollinearity.tolerance_bar_interactive
 
 .. autofunction:: tolerance_bar_interactive
 
+Use case
+--------
+
+Use to flag predictors with low tolerance (1/VIF), the reciprocal view of variance inflation.
+
 Complete example
 ----------------
 

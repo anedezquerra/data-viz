@@ -9,6 +9,11 @@ dataviz.univariate.diagnostics.percentile_plot_static
 
 .. autofunction:: percentile_plot_static
 
+Use case
+--------
+
+Use to profile a variable across its percentiles, revealing tail behavior and skew beyond mean and standard deviation.
+
 Complete example
 ----------------
 

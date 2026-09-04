@@ -9,6 +9,11 @@ dataviz.xai.importance_extra.importance_method_scatter_static
 
 .. autofunction:: importance_method_scatter_static
 
+Use case
+--------
+
+Check agreement between two importance methods to validate that conclusions do not depend on one technique.
+
 Complete example
 ----------------
 

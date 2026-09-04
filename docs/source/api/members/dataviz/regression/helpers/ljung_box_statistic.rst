@@ -9,6 +9,11 @@ dataviz.regression.helpers.ljung_box_statistic
 
 .. autofunction:: ljung_box_statistic
 
+Use case
+--------
+
+Use to compute the Ljung-Box Q statistic and p-value when testing residuals for autocorrelation.
+
 Complete example
 ----------------
 

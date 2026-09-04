@@ -9,6 +9,11 @@ dataviz.spc.charts.x_range_chart
 
 .. autofunction:: x_range_chart
 
+Use case
+--------
+
+Use as the default static entry point for plotting individual values alongside their moving ranges when subgrouping is impractical.
+
 Complete example
 ----------------
 

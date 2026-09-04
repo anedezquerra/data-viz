@@ -9,6 +9,11 @@ dataviz.regression.errors_loss.ranked_error_plot_interactive
 
 .. autofunction:: ranked_error_plot_interactive
 
+Use case
+--------
+
+Use to see how quickly errors grow from typical to worst case by plotting errors sorted by magnitude.
+
 Complete example
 ----------------
 

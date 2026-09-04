@@ -9,6 +9,11 @@ dataviz.univariate.quality.data_quality_summary
 
 .. autofunction:: data_quality_summary
 
+Use case
+--------
+
+Use as a first-pass screen of one variable for missingness, duplicates, zeros, and negatives before choosing downstream visualizations.
+
 Complete example
 ----------------
 

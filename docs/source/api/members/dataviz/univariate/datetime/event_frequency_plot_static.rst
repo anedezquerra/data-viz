@@ -9,6 +9,11 @@ dataviz.univariate.datetime.event_frequency_plot_static
 
 .. autofunction:: event_frequency_plot_static
 
+Use case
+--------
+
+Use to chart how event counts evolve over time from raw datetime observations at a chosen frequency.
+
 Complete example
 ----------------
 

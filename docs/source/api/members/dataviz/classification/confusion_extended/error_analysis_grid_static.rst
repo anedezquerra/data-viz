@@ -9,6 +9,11 @@ dataviz.classification.confusion_extended.error_analysis_grid_static
 
 .. autofunction:: error_analysis_grid_static
 
+Use case
+--------
+
+Use to isolate which class pairs get confused; shows only off-diagonal mistake rates per true class.
+
 Complete example
 ----------------
 

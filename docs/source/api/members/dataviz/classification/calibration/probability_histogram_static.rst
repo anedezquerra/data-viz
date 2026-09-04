@@ -9,6 +9,11 @@ dataviz.classification.calibration.probability_histogram_static
 
 .. autofunction:: probability_histogram_static
 
+Use case
+--------
+
+Use to inspect class separability in predicted probabilities; well-separated peaks indicate a discriminative classifier.
+
 Complete example
 ----------------
 

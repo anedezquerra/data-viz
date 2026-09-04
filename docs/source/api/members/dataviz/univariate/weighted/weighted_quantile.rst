@@ -9,6 +9,11 @@ dataviz.univariate.weighted.weighted_quantile
 
 .. autofunction:: weighted_quantile
 
+Use case
+--------
+
+Use to compute quantiles that respect per-observation weights, for example a weighted median of survey responses.
+
 Complete example
 ----------------
 

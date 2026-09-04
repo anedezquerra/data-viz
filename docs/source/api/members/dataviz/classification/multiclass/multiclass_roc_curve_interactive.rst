@@ -9,6 +9,11 @@ dataviz.classification.multiclass.multiclass_roc_curve_interactive
 
 .. autofunction:: multiclass_roc_curve_interactive
 
+Use case
+--------
+
+Use when evaluating a multiclass classifier one class at a time; plots one-vs-rest ROC per class with optional macro average and random baseline.
+
 Complete example
 ----------------
 

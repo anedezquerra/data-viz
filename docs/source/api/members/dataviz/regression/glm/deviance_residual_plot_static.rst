@@ -9,6 +9,11 @@ dataviz.regression.glm.deviance_residual_plot_static
 
 .. autofunction:: deviance_residual_plot_static
 
+Use case
+--------
+
+Use to plot deviance residuals against fitted values to detect lack of fit in a GLM.
+
 Complete example
 ----------------
 

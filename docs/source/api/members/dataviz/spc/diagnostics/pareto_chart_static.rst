@@ -9,6 +9,11 @@ dataviz.spc.diagnostics.pareto_chart_static
 
 .. autofunction:: pareto_chart_static
 
+Use case
+--------
+
+Use to rank defect categories by frequency so improvement teams target the vital few causes driving most nonconformances.
+
 Complete example
 ----------------
 

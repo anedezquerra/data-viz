@@ -9,6 +9,11 @@ dataviz.classification.threshold_extra.f_beta_curve_interactive
 
 .. autofunction:: f_beta_curve_interactive
 
+Use case
+--------
+
+Use when recall matters more or less than precision; sweeps F-beta for several beta values across thresholds.
+
 Complete example
 ----------------
 

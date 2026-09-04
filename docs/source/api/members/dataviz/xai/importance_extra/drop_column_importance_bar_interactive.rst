@@ -9,6 +9,11 @@ dataviz.xai.importance_extra.drop_column_importance_bar_interactive
 
 .. autofunction:: drop_column_importance_bar_interactive
 
+Use case
+--------
+
+Use to measure each feature's contribution by retraining without it; signed values show helpful vs. harmful columns.
+
 Complete example
 ----------------
 

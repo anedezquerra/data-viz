@@ -9,6 +9,11 @@ dataviz.regression.helpers.runs_test_signs
 
 .. autofunction:: runs_test_signs
 
+Use case
+--------
+
+Use to get run counts of residual signs when testing residuals for randomness.
+
 Complete example
 ----------------
 

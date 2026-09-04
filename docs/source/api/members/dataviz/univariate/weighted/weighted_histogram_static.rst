@@ -9,6 +9,11 @@ dataviz.univariate.weighted.weighted_histogram_static
 
 .. autofunction:: weighted_histogram_static
 
+Use case
+--------
+
+Use to plot a histogram where rows carry unequal sample mass, such as weighted survey records.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.classification.threshold.det_curve_static
 
 .. autofunction:: det_curve_static
 
+Use case
+--------
+
+Use for detection or biometric systems; plots FNR vs FPR on a probit scale to spread out low-error operating regions.
+
 Complete example
 ----------------
 

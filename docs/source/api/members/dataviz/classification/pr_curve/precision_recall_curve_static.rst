@@ -9,6 +9,11 @@ dataviz.classification.pr_curve.precision_recall_curve_static
 
 .. autofunction:: precision_recall_curve_static
 
+Use case
+--------
+
+Use for imbalanced binary problems; plots precomputed precision vs recall with an optional AP value in the legend.
+
 Complete example
 ----------------
 

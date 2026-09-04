@@ -9,6 +9,11 @@ dataviz.classification.calibration_extra.calibration_with_confidence_static
 
 .. autofunction:: calibration_with_confidence_static
 
+Use case
+--------
+
+Use when a plain reliability diagram is ambiguous on small data; bootstrap bands show whether deviations are significant.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.gof.normality_test_panel_interactive
 
 .. autofunction:: normality_test_panel_interactive
 
+Use case
+--------
+
+Use to assess residual normality with a histogram, Q-Q plot, and Jarque-Bera annotation in one view.
+
 Complete example
 ----------------
 

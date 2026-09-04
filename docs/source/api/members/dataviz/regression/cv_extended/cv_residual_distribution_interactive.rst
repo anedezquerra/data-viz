@@ -9,6 +9,11 @@ dataviz.regression.cv_extended.cv_residual_distribution_interactive
 
 .. autofunction:: cv_residual_distribution_interactive
 
+Use case
+--------
+
+Use to compare residual boxplots across CV folds and check that errors are stable rather than driven by one lucky or unlucky split.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.helpers.box_cox_loglikelihood
 
 .. autofunction:: box_cox_loglikelihood
 
+Use case
+--------
+
+Use to compute the Box-Cox profile log-likelihood across lambdas when choosing a response transform.
+
 Complete example
 ----------------
 

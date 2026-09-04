@@ -9,6 +9,11 @@ dataviz.regression.importance.permutation_importance_regression_interactive
 
 .. autofunction:: permutation_importance_regression_interactive
 
+Use case
+--------
+
+Use to measure feature impact by permutation with mean and standard-deviation error bars.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.spc.rules.individuals_limits
 
 .. autofunction:: individuals_limits
 
+Use case
+--------
+
+Use to compute individuals chart limits from single observations via the moving-range sigma estimate.
+
 Complete example
 ----------------
 

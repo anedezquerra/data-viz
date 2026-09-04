@@ -9,6 +9,11 @@ dataviz.univariate.categorical.pareto_chart_interactive
 
 .. autofunction:: pareto_chart_interactive
 
+Use case
+--------
+
+Use to rank categories by frequency with a cumulative percentage line, highlighting the vital few that drive most cases.
+
 Complete example
 ----------------
 

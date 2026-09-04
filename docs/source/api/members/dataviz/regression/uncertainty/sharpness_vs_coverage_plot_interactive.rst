@@ -9,6 +9,11 @@ dataviz.regression.uncertainty.sharpness_vs_coverage_plot_interactive
 
 .. autofunction:: sharpness_vs_coverage_plot_interactive
 
+Use case
+--------
+
+Compare models on the interval-width vs coverage trade-off to find the one with the sharpest intervals that still cover the target rate.
+
 Complete example
 ----------------
 

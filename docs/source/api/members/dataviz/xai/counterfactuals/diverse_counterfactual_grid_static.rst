@@ -9,6 +9,11 @@ dataviz.xai.counterfactuals.diverse_counterfactual_grid_static
 
 .. autofunction:: diverse_counterfactual_grid_static
 
+Use case
+--------
+
+Compare several diverse counterfactuals at once to offer users multiple actionable ways to change an outcome.
+
 Complete example
 ----------------
 

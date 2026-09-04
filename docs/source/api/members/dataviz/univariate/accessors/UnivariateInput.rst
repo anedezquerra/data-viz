@@ -11,6 +11,11 @@ dataviz.univariate.accessors.UnivariateInput
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Immutable resolved input carrying the cleaned Series, display name, inferred kind, and missing count; consumed by wrappers that normalize univariate inputs.
+
 Complete example
 ----------------
 

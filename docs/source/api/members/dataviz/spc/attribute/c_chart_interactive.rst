@@ -9,6 +9,11 @@ dataviz.spc.attribute.c_chart_interactive
 
 .. autofunction:: c_chart_interactive
 
+Use case
+--------
+
+Use when counting defects per inspection unit of constant size, such as flaws per painted panel or solder defects per board.
+
 Complete example
 ----------------
 

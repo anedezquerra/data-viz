@@ -9,6 +9,11 @@ dataviz.univariate.tail.survival_values
 
 .. autofunction:: survival_values
 
+Use case
+--------
+
+Use to get sorted values and empirical survival probabilities (1 - ECDF) for custom upper-tail plots or calculations.
+
 Complete example
 ----------------
 

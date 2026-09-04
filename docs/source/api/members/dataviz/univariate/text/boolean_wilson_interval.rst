@@ -9,6 +9,11 @@ dataviz.univariate.text.boolean_wilson_interval
 
 .. autofunction:: boolean_wilson_interval
 
+Use case
+--------
+
+Use to attach a Wilson confidence interval to a boolean rate, which behaves better than Wald near 0 or 1.
+
 Complete example
 ----------------
 

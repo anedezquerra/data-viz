@@ -9,6 +9,11 @@ dataviz.regression.bayesian.credible_interval_forest_interactive
 
 .. autofunction:: credible_interval_forest_interactive
 
+Use case
+--------
+
+Use to compare credible intervals across coefficients at a glance, seeing which effects are credibly different from zero.
+
 Complete example
 ----------------
 

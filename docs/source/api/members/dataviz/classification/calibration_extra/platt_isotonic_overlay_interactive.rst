@@ -9,6 +9,11 @@ dataviz.classification.calibration_extra.platt_isotonic_overlay_interactive
 
 .. autofunction:: platt_isotonic_overlay_interactive
 
+Use case
+--------
+
+Use when choosing a recalibration method by comparing raw, Platt-scaled and isotonic mappings against binned observations.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.residual_features.added_variable_plot_interactive
 
 .. autofunction:: added_variable_plot_interactive
 
+Use case
+--------
+
+Use to decide whether adding a candidate predictor helps an OLS model; a strong slope in the partial-regression scatter means the feature adds information beyond the others.
+
 Complete example
 ----------------
 

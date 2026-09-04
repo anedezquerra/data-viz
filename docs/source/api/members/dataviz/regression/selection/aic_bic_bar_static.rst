@@ -9,6 +9,11 @@ dataviz.regression.selection.aic_bic_bar_static
 
 .. autofunction:: aic_bic_bar_static
 
+Use case
+--------
+
+Compare candidate models on AIC and BIC side by side when picking a final specification; lower bars indicate better fit penalized for complexity.
+
 Complete example
 ----------------
 

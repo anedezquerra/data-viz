@@ -9,6 +9,11 @@ dataviz.regression.glm.glm_diagnostic_panel_interactive
 
 .. autofunction:: glm_diagnostic_panel_interactive
 
+Use case
+--------
+
+Use to review deviance, Pearson, working, and link diagnostics for a GLM in one panel.
+
 Complete example
 ----------------
 

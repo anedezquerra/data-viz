@@ -9,6 +9,11 @@ dataviz.univariate.stats.percentile_table
 
 .. autofunction:: percentile_table
 
+Use case
+--------
+
+Use to build a percentile-versus-value table for distribution reporting or threshold selection.
+
 Complete example
 ----------------
 

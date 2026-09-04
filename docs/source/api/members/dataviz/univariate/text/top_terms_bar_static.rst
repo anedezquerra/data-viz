@@ -9,6 +9,11 @@ dataviz.univariate.text.top_terms_bar_static
 
 .. autofunction:: top_terms_bar_static
 
+Use case
+--------
+
+Use to chart the most common terms in a text column for quick exploratory profiling.
+
 Complete example
 ----------------
 

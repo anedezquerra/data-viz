@@ -9,6 +9,11 @@ dataviz.regression.prediction_extended.error_by_magnitude_plot_interactive
 
 .. autofunction:: error_by_magnitude_plot_interactive
 
+Use case
+--------
+
+Use to check whether errors grow with the size of the target by binning MAE over quantiles of actual values.
+
 Complete example
 ----------------
 

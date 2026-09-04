@@ -9,6 +9,11 @@ dataviz.spc.attribute.g_chart_interactive
 
 .. autofunction:: g_chart_interactive
 
+Use case
+--------
+
+Use when monitoring opportunities or units produced between rare events, such as defects on a high-yield line.
+
 Complete example
 ----------------
 

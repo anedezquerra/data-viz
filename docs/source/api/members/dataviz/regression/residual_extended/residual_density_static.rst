@@ -9,6 +9,11 @@ dataviz.regression.residual_extended.residual_density_static
 
 .. autofunction:: residual_density_static
 
+Use case
+--------
+
+Use to assess the shape of the residual distribution with a smooth kernel-density estimate.
+
 Complete example
 ----------------
 

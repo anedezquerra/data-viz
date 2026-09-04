@@ -9,6 +9,11 @@ dataviz.classification.threshold_extra.predictive_value_curve_interactive
 
 .. autofunction:: predictive_value_curve_interactive
 
+Use case
+--------
+
+Use to show how PPV and NPV shift with prevalence for a test of fixed sensitivity and specificity.
+
 Complete example
 ----------------
 

@@ -11,6 +11,11 @@ dataviz.regression.helpers.RegressionMetrics
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Returned by compute_regression_metrics; carries the summary metrics (e.g., MAE, RMSE, R2) for a regression prediction.
+
 Complete example
 ----------------
 

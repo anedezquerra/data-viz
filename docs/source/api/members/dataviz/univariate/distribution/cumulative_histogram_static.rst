@@ -9,6 +9,11 @@ dataviz.univariate.distribution.cumulative_histogram_static
 
 .. autofunction:: cumulative_histogram_static
 
+Use case
+--------
+
+Use to show cumulative counts across bins when the running total of observations matters more than per-bin frequency.
+
 Complete example
 ----------------
 

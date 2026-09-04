@@ -9,6 +9,11 @@ dataviz.spc.rules.xbar_s_limits
 
 .. autofunction:: xbar_s_limits
 
+Use case
+--------
+
+Use to compute Xbar and S chart limits for larger subgroups where the standard deviation estimates spread better than the range.
+
 Complete example
 ----------------
 

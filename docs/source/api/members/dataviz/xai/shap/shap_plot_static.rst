@@ -9,6 +9,11 @@ dataviz.xai.shap.shap_plot_static
 
 .. autofunction:: shap_plot_static
 
+Use case
+--------
+
+Use to rank features by mean signed SHAP value with direction-coded bars, a quick global read on which features push predictions up or down.
+
 Complete example
 ----------------
 

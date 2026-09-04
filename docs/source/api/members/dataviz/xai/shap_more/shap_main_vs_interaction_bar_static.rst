@@ -9,6 +9,11 @@ dataviz.xai.shap_more.shap_main_vs_interaction_bar_static
 
 .. autofunction:: shap_main_vs_interaction_bar_static
 
+Use case
+--------
+
+Use to decompose each feature's impact into main effects versus interaction effects, flagging features that only matter in combination.
+
 Complete example
 ----------------
 

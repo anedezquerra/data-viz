@@ -9,6 +9,11 @@ dataviz.bivariate.charts.line_plot
 
 .. autofunction:: line_plot
 
+Use case
+--------
+
+Use to show how a numeric variable changes across an ordered axis such as time or sequence index.
+
 Complete example
 ----------------
 

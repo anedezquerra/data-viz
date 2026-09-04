@@ -9,6 +9,11 @@ dataviz.bivariate.advanced.regression_plot_static
 
 .. autofunction:: regression_plot_static
 
+Use case
+--------
+
+Use to overlay a polynomial trend line on a scatter plot when assessing whether a simple curve fits the relationship.
+
 Complete example
 ----------------
 

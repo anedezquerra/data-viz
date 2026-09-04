@@ -9,6 +9,11 @@ dataviz.classification.calibration_extra.sharpness_resolution_decomposition_stat
 
 .. autofunction:: sharpness_resolution_decomposition_static
 
+Use case
+--------
+
+Use to decompose the Brier score into reliability, resolution and uncertainty to see why probability quality is poor.
+
 Complete example
 ----------------
 

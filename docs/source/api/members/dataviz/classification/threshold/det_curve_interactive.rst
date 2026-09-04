@@ -9,6 +9,11 @@ dataviz.classification.threshold.det_curve_interactive
 
 .. autofunction:: det_curve_interactive
 
+Use case
+--------
+
+Use for detection or biometric systems; plots FNR vs FPR on log axes to spread out low-error operating regions.
+
 Complete example
 ----------------
 

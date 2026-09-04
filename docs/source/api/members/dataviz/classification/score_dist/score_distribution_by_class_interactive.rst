@@ -9,6 +9,11 @@ dataviz.classification.score_dist.score_distribution_by_class_interactive
 
 .. autofunction:: score_distribution_by_class_interactive
 
+Use case
+--------
+
+Use to check score separation between true classes; violin, box, or strip views reveal overlap that limits any threshold.
+
 Complete example
 ----------------
 

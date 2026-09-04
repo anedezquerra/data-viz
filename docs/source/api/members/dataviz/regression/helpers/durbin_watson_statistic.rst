@@ -9,6 +9,11 @@ dataviz.regression.helpers.durbin_watson_statistic
 
 .. autofunction:: durbin_watson_statistic
 
+Use case
+--------
+
+Use to compute the Durbin-Watson statistic when checking residuals for first-order autocorrelation.
+
 Complete example
 ----------------
 

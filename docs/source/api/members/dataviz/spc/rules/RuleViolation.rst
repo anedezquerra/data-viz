@@ -11,6 +11,11 @@ dataviz.spc.rules.RuleViolation
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Carries the observation index, value, violated rule name, and a message for one detected violation; consumed when annotating or grouping rule failures.
+
 Complete example
 ----------------
 

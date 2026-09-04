@@ -9,6 +9,11 @@ dataviz.regression.prediction_extended.prediction_error_histogram_interactive
 
 .. autofunction:: prediction_error_histogram_interactive
 
+Use case
+--------
+
+Use to inspect the distribution of prediction errors for bias, skew, or heavy tails, optionally cumulatively.
+
 Complete example
 ----------------
 

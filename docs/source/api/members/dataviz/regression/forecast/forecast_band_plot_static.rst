@@ -9,6 +9,11 @@ dataviz.regression.forecast.forecast_band_plot_static
 
 .. autofunction:: forecast_band_plot_static
 
+Use case
+--------
+
+Use to show the forecast path with its prediction band and check how often actuals fall inside it.
+
 Complete example
 ----------------
 

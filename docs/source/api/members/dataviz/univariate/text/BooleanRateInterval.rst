@@ -11,6 +11,11 @@ dataviz.univariate.text.BooleanRateInterval
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Immutable record of an observed true rate with Wilson confidence bounds; consumed when reporting binary proportions.
+
 Complete example
 ----------------
 

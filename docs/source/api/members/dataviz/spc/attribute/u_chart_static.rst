@@ -9,6 +9,11 @@ dataviz.spc.attribute.u_chart_static
 
 .. autofunction:: u_chart_static
 
+Use case
+--------
+
+Use when tracking defects per unit across samples of varying size, such as scratches per square meter of rolled sheet.
+
 Complete example
 ----------------
 

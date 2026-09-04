@@ -9,6 +9,11 @@ dataviz.univariate.fitting.fitted_distribution_histogram_static
 
 .. autofunction:: fitted_distribution_histogram_static
 
+Use case
+--------
+
+Use to overlay a fitted probability density on a histogram to visually judge how well the chosen distribution fits.
+
 Complete example
 ----------------
 

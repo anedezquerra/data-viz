@@ -9,6 +9,11 @@ dataviz.xai.importance_more.importance_correlation_heatmap_interactive
 
 .. autofunction:: importance_correlation_heatmap_interactive
 
+Use case
+--------
+
+Use to verify that different models agree on which features matter by correlating their importance vectors.
+
 Complete example
 ----------------
 

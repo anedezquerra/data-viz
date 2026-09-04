@@ -9,6 +9,11 @@ dataviz.univariate.density.density_interactive
 
 .. autofunction:: density_interactive
 
+Use case
+--------
+
+Use to estimate the smooth probability density of a numeric variable with hover inspection of the curve.
+
 Complete example
 ----------------
 

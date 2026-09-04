@@ -9,6 +9,11 @@ dataviz.classification.gain_lift.cumulative_accuracy_profile_interactive
 
 .. autofunction:: cumulative_accuracy_profile_interactive
 
+Use case
+--------
+
+Use to compare the model CAP curve against perfect and random baselines and read the accuracy ratio.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.residual_extended.residual_boxplot_by_group_static
 
 .. autofunction:: residual_boxplot_by_group_static
 
+Use case
+--------
+
+Use to compare residual spread and bias across categorical groups such as sites, cohorts, or segments.
+
 Complete example
 ----------------
 

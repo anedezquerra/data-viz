@@ -9,6 +9,11 @@ dataviz.univariate.transforms.transformation_comparison_interactive
 
 .. autofunction:: transformation_comparison_interactive
 
+Use case
+--------
+
+Use to compare histograms of common transformations side by side when deciding how to handle skewed data.
+
 Complete example
 ----------------
 

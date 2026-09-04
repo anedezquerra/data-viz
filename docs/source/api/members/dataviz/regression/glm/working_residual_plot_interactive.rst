@@ -9,6 +9,11 @@ dataviz.regression.glm.working_residual_plot_interactive
 
 .. autofunction:: working_residual_plot_interactive
 
+Use case
+--------
+
+Use to plot working residuals against the linear predictor when diagnosing the IRLS fit.
+
 Complete example
 ----------------
 

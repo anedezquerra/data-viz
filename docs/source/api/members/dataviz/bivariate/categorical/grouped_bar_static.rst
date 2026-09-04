@@ -9,6 +9,11 @@ dataviz.bivariate.categorical.grouped_bar_static
 
 .. autofunction:: grouped_bar_static
 
+Use case
+--------
+
+Use to compare an aggregated numeric value, such as a mean or sum, across the levels of a categorical variable.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.selection.best_subset_metric_bar_interactive
 
 .. autofunction:: best_subset_metric_bar_interactive
 
+Use case
+--------
+
+Compare a fit metric across candidate feature subsets in best-subset selection; the highlighted minimum marks the subset to keep.
+
 Complete example
 ----------------
 

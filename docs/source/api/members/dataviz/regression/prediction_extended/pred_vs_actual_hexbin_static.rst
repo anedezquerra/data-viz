@@ -9,6 +9,11 @@ dataviz.regression.prediction_extended.pred_vs_actual_hexbin_static
 
 .. autofunction:: pred_vs_actual_hexbin_static
 
+Use case
+--------
+
+Use when many points overplot a predicted-vs-actual scatter; the hexbin density reveals where predictions concentrate.
+
 Complete example
 ----------------
 

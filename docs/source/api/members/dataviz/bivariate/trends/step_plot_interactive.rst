@@ -9,6 +9,11 @@ dataviz.bivariate.trends.step_plot_interactive
 
 .. autofunction:: step_plot_interactive
 
+Use case
+--------
+
+Use for values that change discretely at known points, such as cumulative counts or rate changes over time.
+
 Complete example
 ----------------
 

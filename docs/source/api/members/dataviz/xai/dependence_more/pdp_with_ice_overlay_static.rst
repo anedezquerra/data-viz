@@ -9,6 +9,11 @@ dataviz.xai.dependence_more.pdp_with_ice_overlay_static
 
 .. autofunction:: pdp_with_ice_overlay_static
 
+Use case
+--------
+
+Use to show the average feature effect while revealing heterogeneous per-instance behavior hidden by a plain PDP.
+
 Complete example
 ----------------
 

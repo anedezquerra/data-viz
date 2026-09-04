@@ -9,6 +9,11 @@ dataviz.regression.effects.elasticity_plot_static
 
 .. autofunction:: elasticity_plot_static
 
+Use case
+--------
+
+Use to plot elasticity, the percent change in prediction per percent change in a feature, when scale-free sensitivity matters.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.univariate.density.density_static
 
 .. autofunction:: density_static
 
+Use case
+--------
+
+Use to estimate the smooth probability density of a numeric variable without committing to histogram bins.
+
 Complete example
 ----------------
 

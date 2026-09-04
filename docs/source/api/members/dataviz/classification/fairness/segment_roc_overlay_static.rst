@@ -9,6 +9,11 @@ dataviz.classification.fairness.segment_roc_overlay_static
 
 .. autofunction:: segment_roc_overlay_static
 
+Use case
+--------
+
+Use to expose ranking-performance disparity by overlaying one ROC curve per subgroup.
+
 Complete example
 ----------------
 

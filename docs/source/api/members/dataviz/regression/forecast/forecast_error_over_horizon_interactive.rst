@@ -9,6 +9,11 @@ dataviz.regression.forecast.forecast_error_over_horizon_interactive
 
 .. autofunction:: forecast_error_over_horizon_interactive
 
+Use case
+--------
+
+Use to see how an error metric such as MAE or RMSE grows as the forecast horizon lengthens.
+
 Complete example
 ----------------
 

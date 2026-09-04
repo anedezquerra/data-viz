@@ -9,6 +9,11 @@ dataviz.xai.feature_imp.feature_importance_static
 
 .. autofunction:: feature_importance_static
 
+Use case
+--------
+
+Use when presenting which features drive a model's predictions to non-technical stakeholders.
+
 Complete example
 ----------------
 

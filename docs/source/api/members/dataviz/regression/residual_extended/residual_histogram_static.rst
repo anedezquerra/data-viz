@@ -9,6 +9,11 @@ dataviz.regression.residual_extended.residual_histogram_static
 
 .. autofunction:: residual_histogram_static
 
+Use case
+--------
+
+Use to check whether residuals are roughly centered and symmetric, with an optional normal overlay.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.classification.training.cv_score_boxplot_interactive
 
 .. autofunction:: cv_score_boxplot_interactive
 
+Use case
+--------
+
+Use to compare model candidates on cross-validation stability; one box per model over per-fold scores.
+
 Complete example
 ----------------
 

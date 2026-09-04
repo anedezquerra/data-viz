@@ -9,6 +9,11 @@ dataviz.regression.mixed_effects.random_intercept_slope_scatter_interactive
 
 .. autofunction:: random_intercept_slope_scatter_interactive
 
+Use case
+--------
+
+Use to check whether groups with higher random intercepts also show stronger or weaker random slopes.
+
 Complete example
 ----------------
 

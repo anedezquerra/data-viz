@@ -11,6 +11,11 @@ dataviz.univariate.text.BooleanSummary
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Immutable record of true/false counts and the true rate for one boolean indicator variable.
+
 Complete example
 ----------------
 

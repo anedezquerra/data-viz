@@ -9,6 +9,11 @@ dataviz.eda.class_dist.class_distribution_interactive
 
 .. autofunction:: class_distribution_interactive
 
+Use case
+--------
+
+Use to check target class balance before training a classifier and decide whether rebalancing is needed.
+
 Complete example
 ----------------
 

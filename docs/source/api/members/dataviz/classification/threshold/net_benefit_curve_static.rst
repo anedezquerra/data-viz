@@ -9,6 +9,11 @@ dataviz.classification.threshold.net_benefit_curve_static
 
 .. autofunction:: net_benefit_curve_static
 
+Use case
+--------
+
+Use for decision-curve analysis in clinical or policy settings; compares model net benefit against treat-all and treat-none.
+
 Complete example
 ----------------
 

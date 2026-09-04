@@ -9,6 +9,11 @@ dataviz.regression.comparison.error_ecdf_overlay_interactive
 
 .. autofunction:: error_ecdf_overlay_interactive
 
+Use case
+--------
+
+Compare empirical CDFs of absolute error per model; the curve farthest up and left dominates on typical error magnitude.
+
 Complete example
 ----------------
 

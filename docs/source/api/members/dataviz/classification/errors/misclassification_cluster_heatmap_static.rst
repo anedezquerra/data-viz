@@ -9,6 +9,11 @@ dataviz.classification.errors.misclassification_cluster_heatmap_static
 
 .. autofunction:: misclassification_cluster_heatmap_static
 
+Use case
+--------
+
+Use to localize errors by true class and score bin, revealing where in the score range mistakes concentrate.
+
 Complete example
 ----------------
 

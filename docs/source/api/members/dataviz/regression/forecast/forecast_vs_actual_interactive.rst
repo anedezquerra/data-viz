@@ -9,6 +9,11 @@ dataviz.regression.forecast.forecast_vs_actual_interactive
 
 .. autofunction:: forecast_vs_actual_interactive
 
+Use case
+--------
+
+Use to overlay actual and forecast series and spot systematic over- or under-prediction over time.
+
 Complete example
 ----------------
 

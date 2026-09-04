@@ -9,6 +9,11 @@ dataviz.xai.shap_more.shap_monotonicity_plot_interactive
 
 .. autofunction:: shap_monotonicity_plot_interactive
 
+Use case
+--------
+
+Use to check whether a feature's SHAP values rise monotonically with its value, with an isotonic fit overlay for validation audits.
+
 Complete example
 ----------------
 

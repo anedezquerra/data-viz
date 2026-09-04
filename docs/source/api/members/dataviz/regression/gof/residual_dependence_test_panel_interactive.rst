@@ -9,6 +9,11 @@ dataviz.regression.gof.residual_dependence_test_panel_interactive
 
 .. autofunction:: residual_dependence_test_panel_interactive
 
+Use case
+--------
+
+Use to review BP, White, Durbin-Watson, and Ljung-Box residual-dependence checks in one panel.
+
 Complete example
 ----------------
 

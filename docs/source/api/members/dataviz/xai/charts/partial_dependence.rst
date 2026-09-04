@@ -9,6 +9,11 @@ dataviz.xai.charts.partial_dependence
 
 .. autofunction:: partial_dependence
 
+Use case
+--------
+
+Use to show how one feature affects the predicted outcome on average, holding other features constant.
+
 Complete example
 ----------------
 

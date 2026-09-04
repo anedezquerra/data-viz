@@ -9,6 +9,11 @@ dataviz.xai.shap_more.shap_force_stacked_static
 
 .. autofunction:: shap_force_stacked_static
 
+Use case
+--------
+
+Use to visualize how each feature's contributions stack up across many instances relative to the base value.
+
 Complete example
 ----------------
 

@@ -11,6 +11,11 @@ dataviz.spc.capability.CapabilityStats
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Carries sample size, mean, std, spec limits, Cp/Cpk, and PPM out-of-spec estimates; consumed when reporting whether a process meets customer specifications.
+
 Complete example
 ----------------
 

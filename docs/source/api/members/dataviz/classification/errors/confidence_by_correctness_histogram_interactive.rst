@@ -9,6 +9,11 @@ dataviz.classification.errors.confidence_by_correctness_histogram_interactive
 
 .. autofunction:: confidence_by_correctness_histogram_interactive
 
+Use case
+--------
+
+Use to check whether the model is confident when right and uncertain when wrong; overlapping tails flag overconfidence.
+
 Complete example
 ----------------
 

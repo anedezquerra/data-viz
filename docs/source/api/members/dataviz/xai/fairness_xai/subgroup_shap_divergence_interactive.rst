@@ -9,6 +9,11 @@ dataviz.xai.fairness_xai.subgroup_shap_divergence_interactive
 
 .. autofunction:: subgroup_shap_divergence_interactive
 
+Use case
+--------
+
+Check whether a model relies on features differently across protected subgroups by comparing SHAP distributions.
+
 Complete example
 ----------------
 

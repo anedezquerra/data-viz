@@ -9,6 +9,11 @@ dataviz.univariate.tail.lorenz_curve_values
 
 .. autofunction:: lorenz_curve_values
 
+Use case
+--------
+
+Use to get cumulative population and value share coordinates for custom Lorenz curve rendering.
+
 Complete example
 ----------------
 

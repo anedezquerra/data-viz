@@ -9,6 +9,11 @@ dataviz.univariate.quality.quality_bar_static
 
 .. autofunction:: quality_bar_static
 
+Use case
+--------
+
+Use to compare missing, duplicate, zero, and negative rates side by side when triaging data quality issues.
+
 Complete example
 ----------------
 

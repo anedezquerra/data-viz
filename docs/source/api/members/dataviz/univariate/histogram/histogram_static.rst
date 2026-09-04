@@ -9,6 +9,11 @@ dataviz.univariate.histogram.histogram_static
 
 .. autofunction:: histogram_static
 
+Use case
+--------
+
+Use when profiling a numeric column for the first time to see shape, spread, and outliers at a glance.
+
 Complete example
 ----------------
 

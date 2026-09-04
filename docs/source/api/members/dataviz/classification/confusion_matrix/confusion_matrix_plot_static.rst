@@ -9,6 +9,11 @@ dataviz.classification.confusion_matrix.confusion_matrix_plot_static
 
 .. autofunction:: confusion_matrix_plot_static
 
+Use case
+--------
+
+Use for a publication-style confusion matrix heatmap with counts, labels and colorbar.
+
 Complete example
 ----------------
 

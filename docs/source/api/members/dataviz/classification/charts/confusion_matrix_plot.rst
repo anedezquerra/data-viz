@@ -9,6 +9,11 @@ dataviz.classification.charts.confusion_matrix_plot
 
 .. autofunction:: confusion_matrix_plot
 
+Use case
+--------
+
+Use for a quick annotated confusion matrix heatmap of actual vs. predicted class counts.
+
 Complete example
 ----------------
 

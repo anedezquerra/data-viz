@@ -9,6 +9,11 @@ dataviz.regression.prediction_extended.pred_vs_actual_hexbin_interactive
 
 .. autofunction:: pred_vs_actual_hexbin_interactive
 
+Use case
+--------
+
+Use when many points overplot a predicted-vs-actual scatter; the 2-D histogram reveals where predictions concentrate.
+
 Complete example
 ----------------
 

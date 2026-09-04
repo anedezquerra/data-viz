@@ -32,6 +32,11 @@ page embeds a self-contained "Complete example" that `--verify` executes
 headlessly. `docs/_tools/verify_api_examples.py` is a backward-compatible
 alias for `--verify`.
 
+Curated "Use case" blurbs live in `docs/_use_cases/<pkg>.py` files as
+`USE_CASES` dicts keyed by fully-qualified member name
+(`dataviz.<pkg>.<module>.<member>`); pages without an entry omit the section.
+Add an entry there when introducing a new public function or class.
+
 In CI, `.github/workflows/docs.yml` regenerates the pages, verifies that
 every example runs, and commits any drift back to the branch, so new or
 updated integrations automatically ship with runnable examples. Forked pull

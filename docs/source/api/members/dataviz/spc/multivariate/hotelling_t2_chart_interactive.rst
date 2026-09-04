@@ -9,6 +9,11 @@ dataviz.spc.multivariate.hotelling_t2_chart_interactive
 
 .. autofunction:: hotelling_t2_chart_interactive
 
+Use case
+--------
+
+Use to chart Hotelling T-squared scores against a control limit to detect multivariate shifts in correlated process variables.
+
 Complete example
 ----------------
 

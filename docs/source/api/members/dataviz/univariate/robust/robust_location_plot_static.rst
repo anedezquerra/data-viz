@@ -9,6 +9,11 @@ dataviz.univariate.robust.robust_location_plot_static
 
 .. autofunction:: robust_location_plot_static
 
+Use case
+--------
+
+Use to see where the median, trimmed mean, and winsorized mean fall on the histogram and spot disagreement between centers.
+
 Complete example
 ----------------
 

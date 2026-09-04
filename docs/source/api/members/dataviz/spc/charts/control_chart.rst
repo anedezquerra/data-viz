@@ -9,6 +9,11 @@ dataviz.spc.charts.control_chart
 
 .. autofunction:: control_chart
 
+Use case
+--------
+
+Use as the default static control chart entry point when plotting process observations against computed control limits.
+
 Complete example
 ----------------
 

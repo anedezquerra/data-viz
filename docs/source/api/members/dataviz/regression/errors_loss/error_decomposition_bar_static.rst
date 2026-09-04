@@ -9,6 +9,11 @@ dataviz.regression.errors_loss.error_decomposition_bar_static
 
 .. autofunction:: error_decomposition_bar_static
 
+Use case
+--------
+
+Use to break total error into components such as bias squared, variance, and noise when explaining where error comes from.
+
 Complete example
 ----------------
 

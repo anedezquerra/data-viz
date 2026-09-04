@@ -9,6 +9,11 @@ dataviz.classification.multilabel.label_cooccurrence_heatmap_static
 
 .. autofunction:: label_cooccurrence_heatmap_static
 
+Use case
+--------
+
+Use during EDA of multilabel targets to find label pairs that co-occur; supports raw counts or Jaccard normalization.
+
 Complete example
 ----------------
 

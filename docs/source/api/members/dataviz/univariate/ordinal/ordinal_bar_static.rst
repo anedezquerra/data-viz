@@ -9,6 +9,11 @@ dataviz.univariate.ordinal.ordinal_bar_static
 
 .. autofunction:: ordinal_bar_static
 
+Use case
+--------
+
+Use to plot ordinal category counts or proportions in a fixed meaningful order, avoiding misleading frequency sorting.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.uncertainty.quantile_calibration_plot_interactive
 
 .. autofunction:: quantile_calibration_plot_interactive
 
+Use case
+--------
+
+Use to check whether predicted quantiles are calibrated by plotting nominal vs empirical coverage against the ideal diagonal.
+
 Complete example
 ----------------
 

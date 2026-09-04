@@ -9,6 +9,11 @@ dataviz.bivariate.stats.conditional_box_static
 
 .. autofunction:: conditional_box_static
 
+Use case
+--------
+
+Use to see how the full distribution of y changes as a numeric conditioning variable x increases across bins.
+
 Complete example
 ----------------
 

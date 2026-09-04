@@ -9,6 +9,11 @@ dataviz.bivariate.categorical.violin_by_category_interactive
 
 .. autofunction:: violin_by_category_interactive
 
+Use case
+--------
+
+Use when box plots hide bimodal or skewed shapes and you need the full distribution per category.
+
 Complete example
 ----------------
 

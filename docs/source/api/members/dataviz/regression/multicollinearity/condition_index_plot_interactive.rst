@@ -9,6 +9,11 @@ dataviz.regression.multicollinearity.condition_index_plot_interactive
 
 .. autofunction:: condition_index_plot_interactive
 
+Use case
+--------
+
+Use to detect near-collinearity in the design matrix via condition indices, complementing per-feature VIF checks.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.univariate.treatment.cap_outliers
 
 .. autofunction:: cap_outliers
 
+Use case
+--------
+
+Use to clip outliers to the non-outlier range while preserving sample size.
+
 Complete example
 ----------------
 

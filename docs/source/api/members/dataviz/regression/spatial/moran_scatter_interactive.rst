@@ -9,6 +9,11 @@ dataviz.regression.spatial.moran_scatter_interactive
 
 .. autofunction:: moran_scatter_interactive
 
+Use case
+--------
+
+Use to test for spatial autocorrelation by plotting each standardized value against its spatial lag; the slope approximates Moran's I.
+
 Complete example
 ----------------
 

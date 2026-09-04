@@ -9,6 +9,11 @@ dataviz.regression.glm.link_function_plot_interactive
 
 .. autofunction:: link_function_plot_interactive
 
+Use case
+--------
+
+Use to check the GLM link choice by comparing the linear predictor against the (optionally binned) response.
+
 Complete example
 ----------------
 

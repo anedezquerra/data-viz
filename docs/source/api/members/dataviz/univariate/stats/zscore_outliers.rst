@@ -9,6 +9,11 @@ dataviz.univariate.stats.zscore_outliers
 
 .. autofunction:: zscore_outliers
 
+Use case
+--------
+
+Use to flag observations whose absolute z-score exceeds a threshold on roughly symmetric, light-tailed data.
+
 Complete example
 ----------------
 

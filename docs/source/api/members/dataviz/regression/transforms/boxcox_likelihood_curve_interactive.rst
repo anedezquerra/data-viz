@@ -9,6 +9,11 @@ dataviz.regression.transforms.boxcox_likelihood_curve_interactive
 
 .. autofunction:: boxcox_likelihood_curve_interactive
 
+Use case
+--------
+
+Use to choose a Box-Cox power for the response by reading the profile log-likelihood over lambda and its maximizer.
+
 Complete example
 ----------------
 

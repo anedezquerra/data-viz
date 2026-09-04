@@ -11,6 +11,11 @@ dataviz.regression.helpers.InfluenceStatistics
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Returned by influence_statistics; carries per-observation leverage, Cook's distance, DFFITS, and DFBETAS.
+
 Complete example
 ----------------
 

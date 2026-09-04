@@ -9,6 +9,11 @@ dataviz.spc.variable.imr_chart_interactive
 
 .. autofunction:: imr_chart_interactive
 
+Use case
+--------
+
+Use when monitoring individual measurements with no rational subgrouping, pairing the individuals and moving-range views.
+
 Complete example
 ----------------
 

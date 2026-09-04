@@ -9,6 +9,11 @@ dataviz.univariate.stats.as_numeric_series
 
 .. autofunction:: as_numeric_series
 
+Use case
+--------
+
+Use to coerce series-like input into a clean non-missing numeric Series before computing univariate statistics.
+
 Complete example
 ----------------
 

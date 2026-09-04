@@ -9,6 +9,11 @@ dataviz.univariate.tail.concentration_summary
 
 .. autofunction:: concentration_summary
 
+Use case
+--------
+
+Use to quantify inequality or concentration with Gini and top-share metrics for revenue, income, or claim amounts.
+
 Complete example
 ----------------
 

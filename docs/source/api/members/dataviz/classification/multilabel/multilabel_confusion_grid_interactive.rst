@@ -9,6 +9,11 @@ dataviz.classification.multilabel.multilabel_confusion_grid_interactive
 
 .. autofunction:: multilabel_confusion_grid_interactive
 
+Use case
+--------
+
+Use to audit a multilabel model label by label; small-multiples grid holds one 2x2 confusion matrix per label.
+
 Complete example
 ----------------
 

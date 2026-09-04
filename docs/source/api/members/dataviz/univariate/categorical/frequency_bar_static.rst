@@ -9,6 +9,11 @@ dataviz.univariate.categorical.frequency_bar_static
 
 .. autofunction:: frequency_bar_static
 
+Use case
+--------
+
+Use to show how often each category occurs, with normalize=True when proportions matter more than raw counts.
+
 Complete example
 ----------------
 

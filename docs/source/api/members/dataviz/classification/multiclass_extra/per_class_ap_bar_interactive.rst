@@ -9,6 +9,11 @@ dataviz.classification.multiclass_extra.per_class_ap_bar_interactive
 
 .. autofunction:: per_class_ap_bar_interactive
 
+Use case
+--------
+
+Use to rank classes by Average Precision and find classes whose ranking quality drags down a multiclass model.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.helpers.breusch_pagan_statistic
 
 .. autofunction:: breusch_pagan_statistic
 
+Use case
+--------
+
+Use to compute the Breusch-Pagan LM statistic when testing residuals for heteroscedasticity.
+
 Complete example
 ----------------
 

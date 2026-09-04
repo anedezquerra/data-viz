@@ -9,6 +9,11 @@ dataviz.regression.selection.nested_model_comparison_plot_interactive
 
 .. autofunction:: nested_model_comparison_plot_interactive
 
+Use case
+--------
+
+Use when adding terms step by step to see how log-likelihood improves across nested models and where extra parameters stop paying off.
+
 Complete example
 ----------------
 

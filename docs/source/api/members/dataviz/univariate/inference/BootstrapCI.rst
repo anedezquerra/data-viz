@@ -11,6 +11,11 @@ dataviz.univariate.inference.BootstrapCI
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Immutable result carrying the original estimate, percentile bootstrap bounds, confidence level, and resample count; consumed by reports and downstream interval checks.
+
 Complete example
 ----------------
 

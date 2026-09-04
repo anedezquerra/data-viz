@@ -9,6 +9,11 @@ dataviz.regression.helpers.compute_regression_metrics
 
 .. autofunction:: compute_regression_metrics
 
+Use case
+--------
+
+Use to compute standard regression metrics from y_true and y_pred without external dependencies.
+
 Complete example
 ----------------
 

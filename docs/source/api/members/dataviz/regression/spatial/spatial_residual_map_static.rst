@@ -9,6 +9,11 @@ dataviz.regression.spatial.spatial_residual_map_static
 
 .. autofunction:: spatial_residual_map_static
 
+Use case
+--------
+
+Use to map regression residuals by longitude and latitude to reveal geographic clusters of over- or under-prediction the model missed.
+
 Complete example
 ----------------
 

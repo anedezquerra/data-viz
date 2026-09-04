@@ -9,6 +9,11 @@ dataviz.regression.regularization.compute_regularization_path
 
 .. autofunction:: compute_regularization_path
 
+Use case
+--------
+
+Use to compute lasso, ridge, or elastic-net coefficient paths over a grid of penalties before plotting them.
+
 Complete example
 ----------------
 

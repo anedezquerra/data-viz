@@ -9,6 +9,11 @@ dataviz.regression.survival.cox_residual_plot_static
 
 .. autofunction:: cox_residual_plot_static
 
+Use case
+--------
+
+Use to diagnose a Cox model by plotting martingale, deviance, or Schoenfeld residuals against time; patterns indicate bad fit or violated assumptions.
+
 Complete example
 ----------------
 

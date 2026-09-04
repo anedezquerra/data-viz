@@ -9,6 +9,11 @@ dataviz.univariate.inference.bootstrap_distribution_plot_static
 
 .. autofunction:: bootstrap_distribution_plot_static
 
+Use case
+--------
+
+Use to visualize the bootstrap distribution of a statistic with the observed estimate marked, to judge stability and skew of the interval.
+
 Complete example
 ----------------
 

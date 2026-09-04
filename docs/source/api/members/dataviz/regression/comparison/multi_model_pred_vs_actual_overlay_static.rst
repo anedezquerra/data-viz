@@ -9,6 +9,11 @@ dataviz.regression.comparison.multi_model_pred_vs_actual_overlay_static
 
 .. autofunction:: multi_model_pred_vs_actual_overlay_static
 
+Use case
+--------
+
+Use to overlay predicted-vs-actual scatters from several models and spot which one tracks the diagonal most tightly.
+
 Complete example
 ----------------
 

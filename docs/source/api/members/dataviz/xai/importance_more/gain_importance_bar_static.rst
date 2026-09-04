@@ -9,6 +9,11 @@ dataviz.xai.importance_more.gain_importance_bar_static
 
 .. autofunction:: gain_importance_bar_static
 
+Use case
+--------
+
+Use to rank features by gradient-boosting gain, optionally overlaying split counts on a second axis to spot overused weak splits.
+
 Complete example
 ----------------
 

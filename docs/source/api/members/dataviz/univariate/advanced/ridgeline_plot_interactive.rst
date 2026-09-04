@@ -9,6 +9,11 @@ dataviz.univariate.advanced.ridgeline_plot_interactive
 
 .. autofunction:: ridgeline_plot_interactive
 
+Use case
+--------
+
+Use to stack density curves for several numeric dataframe columns to compare distribution shapes across variables at a glance.
+
 Complete example
 ----------------
 

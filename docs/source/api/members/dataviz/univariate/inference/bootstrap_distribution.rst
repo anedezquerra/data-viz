@@ -9,6 +9,11 @@ dataviz.univariate.inference.bootstrap_distribution
 
 .. autofunction:: bootstrap_distribution
 
+Use case
+--------
+
+Use to generate resampled values of a mean, median, or std so you can inspect sampling variability without parametric assumptions.
+
 Complete example
 ----------------
 

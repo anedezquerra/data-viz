@@ -11,6 +11,11 @@ dataviz.univariate.transforms.TransformResult
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Immutable record of transformed values, method name, and fitted parameter (for Box-Cox or Yeo-Johnson) returned by transform_series.
+
 Complete example
 ----------------
 

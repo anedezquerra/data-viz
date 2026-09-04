@@ -9,6 +9,11 @@ dataviz.univariate.robust.trimmed_mean
 
 .. autofunction:: trimmed_mean
 
+Use case
+--------
+
+Use to estimate central tendency after dropping a fraction of each tail, reducing the influence of extreme values.
+
 Complete example
 ----------------
 

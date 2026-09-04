@@ -9,6 +9,11 @@ dataviz.classification.multiclass_extra.top_k_accuracy_curve_static
 
 .. autofunction:: top_k_accuracy_curve_static
 
+Use case
+--------
+
+Use when predictions feed a downstream re-ranker; shows how accuracy grows as the top-K candidate set widens.
+
 Complete example
 ----------------
 

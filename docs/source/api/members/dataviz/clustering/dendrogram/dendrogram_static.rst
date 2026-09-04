@@ -9,6 +9,11 @@ dataviz.clustering.dendrogram.dendrogram_static
 
 .. autofunction:: dendrogram_static
 
+Use case
+--------
+
+Use to inspect hierarchical clustering merges and decide where to cut the tree into flat clusters.
+
 Complete example
 ----------------
 

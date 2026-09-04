@@ -9,6 +9,11 @@ dataviz.regression.residual_extended.residual_qq_static
 
 .. autofunction:: residual_qq_static
 
+Use case
+--------
+
+Use to test the normality assumption by plotting residual quantiles against a normal reference line.
+
 Complete example
 ----------------
 

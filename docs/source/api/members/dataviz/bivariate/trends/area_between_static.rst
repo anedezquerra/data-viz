@@ -9,6 +9,11 @@ dataviz.bivariate.trends.area_between_static
 
 .. autofunction:: area_between_static
 
+Use case
+--------
+
+Use to highlight the gap between two y-series over a shared x axis, such as forecast bounds or tolerance bands.
+
 Complete example
 ----------------
 

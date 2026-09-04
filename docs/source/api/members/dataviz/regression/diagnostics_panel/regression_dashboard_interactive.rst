@@ -9,6 +9,11 @@ dataviz.regression.diagnostics_panel.regression_dashboard_interactive
 
 .. autofunction:: regression_dashboard_interactive
 
+Use case
+--------
+
+Use for a compact model overview combining predicted-vs-actual, residual scatter, error histogram, and summary metrics.
+
 Complete example
 ----------------
 

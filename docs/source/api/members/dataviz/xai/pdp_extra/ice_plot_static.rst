@@ -9,6 +9,11 @@ dataviz.xai.pdp_extra.ice_plot_static
 
 .. autofunction:: ice_plot_static
 
+Use case
+--------
+
+Use to reveal heterogeneous effects hidden by PDP: each ICE curve shows one instance's response as a feature sweeps its range.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.univariate.datetime.event_counts
 
 .. autofunction:: event_counts
 
+Use case
+--------
+
+Use to aggregate datetime observations into counts per calendar frequency such as day, week, or month.
+
 Complete example
 ----------------
 

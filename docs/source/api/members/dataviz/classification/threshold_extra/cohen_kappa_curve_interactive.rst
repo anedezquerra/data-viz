@@ -9,6 +9,11 @@ dataviz.classification.threshold_extra.cohen_kappa_curve_interactive
 
 .. autofunction:: cohen_kappa_curve_interactive
 
+Use case
+--------
+
+Use to maximize agreement beyond chance; sweeps Cohen's kappa across thresholds and marks the optimum.
+
 Complete example
 ----------------
 

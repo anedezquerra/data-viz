@@ -9,6 +9,11 @@ dataviz.classification.model_comparison.critical_difference_diagram_static
 
 .. autofunction:: critical_difference_diagram_static
 
+Use case
+--------
+
+Use to compare classifiers across multiple datasets via average ranks and a critical-difference threshold.
+
 Complete example
 ----------------
 

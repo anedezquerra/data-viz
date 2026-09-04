@@ -9,6 +9,11 @@ dataviz.xai.local_more.nearest_neighbor_explanation_interactive
 
 .. autofunction:: nearest_neighbor_explanation_interactive
 
+Use case
+--------
+
+Use to justify a prediction by comparing the query row's feature values against its k nearest neighbors in a heatmap.
+
 Complete example
 ----------------
 

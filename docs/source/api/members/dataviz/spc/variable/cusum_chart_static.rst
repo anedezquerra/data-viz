@@ -9,6 +9,11 @@ dataviz.spc.variable.cusum_chart_static
 
 .. autofunction:: cusum_chart_static
 
+Use case
+--------
+
+Use to detect small persistent drifts in the process mean by accumulating deviations from target over time.
+
 Complete example
 ----------------
 

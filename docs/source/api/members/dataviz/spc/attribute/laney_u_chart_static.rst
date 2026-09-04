@@ -9,6 +9,11 @@ dataviz.spc.attribute.laney_u_chart_static
 
 .. autofunction:: laney_u_chart_static
 
+Use case
+--------
+
+Use when a u chart shows over-dispersion from large or varying areas of opportunity; the Laney u' chart widens limits to match actual variation.
+
 Complete example
 ----------------
 

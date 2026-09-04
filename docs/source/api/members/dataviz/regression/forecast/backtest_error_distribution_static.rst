@@ -9,6 +9,11 @@ dataviz.regression.forecast.backtest_error_distribution_static
 
 .. autofunction:: backtest_error_distribution_static
 
+Use case
+--------
+
+Use to inspect the distribution of backtest errors for bias, skew, and heavy tails.
+
 Complete example
 ----------------
 

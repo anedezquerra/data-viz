@@ -9,6 +9,11 @@ dataviz.regression.helpers.jarque_bera_statistic
 
 .. autofunction:: jarque_bera_statistic
 
+Use case
+--------
+
+Use to compute the Jarque-Bera statistic and p-value when testing residuals for normality.
+
 Complete example
 ----------------
 

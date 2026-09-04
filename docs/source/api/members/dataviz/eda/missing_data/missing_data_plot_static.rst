@@ -9,6 +9,11 @@ dataviz.eda.missing_data.missing_data_plot_static
 
 .. autofunction:: missing_data_plot_static
 
+Use case
+--------
+
+Use when auditing a dataset for missing values before modeling to see which columns need imputation.
+
 Complete example
 ----------------
 

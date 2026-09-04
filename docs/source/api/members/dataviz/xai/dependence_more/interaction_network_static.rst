@@ -9,6 +9,11 @@ dataviz.xai.dependence_more.interaction_network_static
 
 .. autofunction:: interaction_network_static
 
+Use case
+--------
+
+Use to communicate the strongest feature interactions as a network graph for reports or presentations.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.classification.fairness.fairness_disparity_heatmap_static
 
 .. autofunction:: fairness_disparity_heatmap_static
 
+Use case
+--------
+
+Use to spot which groups deviate from the population mean on fairness metrics such as TPR or selection rate.
+
 Complete example
 ----------------
 

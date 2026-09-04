@@ -9,6 +9,11 @@ dataviz.xai.dependence_more.h_statistic_heatmap_interactive
 
 .. autofunction:: h_statistic_heatmap_interactive
 
+Use case
+--------
+
+Use to screen for pairwise feature interactions with Friedman's H-statistic before deeper interaction analysis.
+
 Complete example
 ----------------
 

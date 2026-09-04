@@ -9,6 +9,11 @@ dataviz.classification.report.per_class_metrics_bar_static
 
 .. autofunction:: per_class_metrics_bar_static
 
+Use case
+--------
+
+Use to compare precision, recall, and F1 side by side per class with grouped bars.
+
 Complete example
 ----------------
 

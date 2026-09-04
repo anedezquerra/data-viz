@@ -9,6 +9,11 @@ dataviz.spc.multivariate.hotelling_t2_summary
 
 .. autofunction:: hotelling_t2_summary
 
+Use case
+--------
+
+Use to compute Hotelling T-squared scores when several correlated process variables must be monitored jointly rather than on separate charts.
+
 Complete example
 ----------------
 

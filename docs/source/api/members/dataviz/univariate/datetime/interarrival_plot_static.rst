@@ -9,6 +9,11 @@ dataviz.univariate.datetime.interarrival_plot_static
 
 .. autofunction:: interarrival_plot_static
 
+Use case
+--------
+
+Use to histogram the gaps between consecutive events to spot burstiness or regularity in timing.
+
 Complete example
 ----------------
 

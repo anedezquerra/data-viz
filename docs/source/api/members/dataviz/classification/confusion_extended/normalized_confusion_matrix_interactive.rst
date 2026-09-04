@@ -9,6 +9,11 @@ dataviz.classification.confusion_extended.normalized_confusion_matrix_interactiv
 
 .. autofunction:: normalized_confusion_matrix_interactive
 
+Use case
+--------
+
+Use instead of raw counts when classes are imbalanced; normalize by true, pred or all to read recall or precision per class.
+
 Complete example
 ----------------
 

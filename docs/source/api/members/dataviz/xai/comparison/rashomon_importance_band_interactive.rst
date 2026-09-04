@@ -9,6 +9,11 @@ dataviz.xai.comparison.rashomon_importance_band_interactive
 
 .. autofunction:: rashomon_importance_band_interactive
 
+Use case
+--------
+
+Use when several near-optimal models disagree, to show the min-to-max range of plausible feature importances.
+
 Complete example
 ----------------
 

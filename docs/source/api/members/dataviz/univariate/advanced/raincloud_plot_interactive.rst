@@ -9,6 +9,11 @@ dataviz.univariate.advanced.raincloud_plot_interactive
 
 .. autofunction:: raincloud_plot_interactive
 
+Use case
+--------
+
+Use to combine density, box plot, and raw points in one raincloud view showing shape, quartiles, and observations together.
+
 Complete example
 ----------------
 

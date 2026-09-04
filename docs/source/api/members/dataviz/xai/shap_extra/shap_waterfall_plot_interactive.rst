@@ -9,6 +9,11 @@ dataviz.xai.shap_extra.shap_waterfall_plot_interactive
 
 .. autofunction:: shap_waterfall_plot_interactive
 
+Use case
+--------
+
+Use to walk one prediction from base value to f(x) feature by feature; small contributions collapse into an 'other' bar via top_n.
+
 Complete example
 ----------------
 

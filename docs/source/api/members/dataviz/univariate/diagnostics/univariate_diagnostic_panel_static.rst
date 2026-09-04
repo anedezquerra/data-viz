@@ -9,6 +9,11 @@ dataviz.univariate.diagnostics.univariate_diagnostic_panel_static
 
 .. autofunction:: univariate_diagnostic_panel_static
 
+Use case
+--------
+
+Use to run a four-panel diagnostic figure when you want a quick, broad health check of one variable in a single view.
+
 Complete example
 ----------------
 

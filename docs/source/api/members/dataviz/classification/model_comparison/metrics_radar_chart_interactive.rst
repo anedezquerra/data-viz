@@ -9,6 +9,11 @@ dataviz.classification.model_comparison.metrics_radar_chart_interactive
 
 .. autofunction:: metrics_radar_chart_interactive
 
+Use case
+--------
+
+Compare several models across the same metric set at a glance with a radar/spider chart.
+
 Complete example
 ----------------
 

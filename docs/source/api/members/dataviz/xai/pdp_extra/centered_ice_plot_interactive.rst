@@ -9,6 +9,11 @@ dataviz.xai.pdp_extra.centered_ice_plot_interactive
 
 .. autofunction:: centered_ice_plot_interactive
 
+Use case
+--------
+
+Use to compare ICE curves anchored at zero at the left endpoint, making differences in slope and shape easier to read than raw levels.
+
 Complete example
 ----------------
 

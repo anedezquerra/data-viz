@@ -9,6 +9,11 @@ dataviz.regression.survival.km_predicted_vs_observed_interactive
 
 .. autofunction:: km_predicted_vs_observed_interactive
 
+Use case
+--------
+
+Use to validate a survival model by overlaying predicted and observed Kaplan-Meier curves; divergence signals poor calibration of survival probabilities.
+
 Complete example
 ----------------
 

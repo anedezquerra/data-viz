@@ -9,6 +9,11 @@ dataviz.univariate.advanced.rug_plot_interactive
 
 .. autofunction:: rug_plot_interactive
 
+Use case
+--------
+
+Use to show every individual observation as ticks along an axis, revealing clustering and gaps that bins can hide.
+
 Complete example
 ----------------
 

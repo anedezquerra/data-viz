@@ -9,6 +9,11 @@ dataviz.xai.cohort.importance_by_segment_heatmap_interactive
 
 .. autofunction:: importance_by_segment_heatmap_interactive
 
+Use case
+--------
+
+Use to compare which features matter across cohorts, e.g. regions or customer tiers, in one annotated heatmap.
+
 Complete example
 ----------------
 

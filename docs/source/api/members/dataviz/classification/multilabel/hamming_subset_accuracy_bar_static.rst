@@ -9,6 +9,11 @@ dataviz.classification.multilabel.hamming_subset_accuracy_bar_static
 
 .. autofunction:: hamming_subset_accuracy_bar_static
 
+Use case
+--------
+
+Use to contrast lenient Hamming accuracy with strict exact-subset accuracy when summarizing a multilabel model.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.univariate.ordinal.likert_summary
 
 .. autofunction:: likert_summary
 
+Use case
+--------
+
+Use to tabulate one Likert-scale item with counts, proportions, and cumulative proportions for survey reporting.
+
 Complete example
 ----------------
 

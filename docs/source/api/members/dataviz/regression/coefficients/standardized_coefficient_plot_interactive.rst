@@ -9,6 +9,11 @@ dataviz.regression.coefficients.standardized_coefficient_plot_interactive
 
 .. autofunction:: standardized_coefficient_plot_interactive
 
+Use case
+--------
+
+Use to compare relative feature importance on a common scale via beta times sigma_x over sigma_y, when raw units are not comparable.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.bivariate.joint.joint_scatter_hist_interactive
 
 .. autofunction:: joint_scatter_hist_interactive
 
+Use case
+--------
+
+Use to see a two-variable relationship and each marginal distribution in one figure during exploratory analysis.
+
 Complete example
 ----------------
 

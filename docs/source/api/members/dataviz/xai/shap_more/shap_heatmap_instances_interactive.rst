@@ -9,6 +9,11 @@ dataviz.xai.shap_more.shap_heatmap_instances_interactive
 
 .. autofunction:: shap_heatmap_instances_interactive
 
+Use case
+--------
+
+Use to spot clusters of similarly explained instances by plotting the SHAP matrix sorted by instance similarity.
+
 Complete example
 ----------------
 

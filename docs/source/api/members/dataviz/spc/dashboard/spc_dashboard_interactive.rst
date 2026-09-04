@@ -9,6 +9,11 @@ dataviz.spc.dashboard.spc_dashboard_interactive
 
 .. autofunction:: spc_dashboard_interactive
 
+Use case
+--------
+
+Use to review control, range, distribution, and rule-violation panels together for a compact daily process health check.
+
 Complete example
 ----------------
 

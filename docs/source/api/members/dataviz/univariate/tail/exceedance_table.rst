@@ -9,6 +9,11 @@ dataviz.univariate.tail.exceedance_table
 
 .. autofunction:: exceedance_table
 
+Use case
+--------
+
+Use to tabulate how often values exceed candidate thresholds, for example SLA breaches or regulatory limits.
+
 Complete example
 ----------------
 

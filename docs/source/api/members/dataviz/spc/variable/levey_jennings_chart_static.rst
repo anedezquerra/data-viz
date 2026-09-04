@@ -9,6 +9,11 @@ dataviz.spc.variable.levey_jennings_chart_static
 
 .. autofunction:: levey_jennings_chart_static
 
+Use case
+--------
+
+Use in laboratories to monitor assay or instrument QC results against 1, 2, and 3 sigma zones around the mean.
+
 Complete example
 ----------------
 

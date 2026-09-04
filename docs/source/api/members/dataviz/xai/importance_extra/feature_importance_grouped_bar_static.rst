@@ -9,6 +9,11 @@ dataviz.xai.importance_extra.feature_importance_grouped_bar_static
 
 .. autofunction:: feature_importance_grouped_bar_static
 
+Use case
+--------
+
+Compare importance rankings across multiple models to confirm key drivers are consistent before deployment.
+
 Complete example
 ----------------
 

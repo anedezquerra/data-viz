@@ -9,6 +9,11 @@ dataviz.xai.shap_more.shap_beeswarm_plot_static
 
 .. autofunction:: shap_beeswarm_plot_static
 
+Use case
+--------
+
+Use as a density-jittered SHAP beeswarm colored by feature value; tighter packing than the dot summary for large datasets.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.influence.leverage_plot_static
 
 .. autofunction:: leverage_plot_static
 
+Use case
+--------
+
+Use to flag high-leverage observations against the 2p/n threshold before refitting a model.
+
 Complete example
 ----------------
 

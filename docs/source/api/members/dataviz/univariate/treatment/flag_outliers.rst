@@ -9,6 +9,11 @@ dataviz.univariate.treatment.flag_outliers
 
 .. autofunction:: flag_outliers
 
+Use case
+--------
+
+Use to keep all values but add an explicit is_outlier column when downstream users need transparency.
+
 Complete example
 ----------------
 

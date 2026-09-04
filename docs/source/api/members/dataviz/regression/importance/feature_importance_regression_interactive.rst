@@ -9,6 +9,11 @@ dataviz.regression.importance.feature_importance_regression_interactive
 
 .. autofunction:: feature_importance_regression_interactive
 
+Use case
+--------
+
+Use to rank regression features by the model's built-in importance scores in a descending bar chart.
+
 Complete example
 ----------------
 

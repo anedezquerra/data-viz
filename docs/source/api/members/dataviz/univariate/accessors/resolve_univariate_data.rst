@@ -9,6 +9,11 @@ dataviz.univariate.accessors.resolve_univariate_data
 
 .. autofunction:: resolve_univariate_data
 
+Use case
+--------
+
+Use to resolve a column name or series-like into a validated UnivariateInput, applying missing-value policy and optional numeric coercion before plotting.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.spc.variable.moving_range_chart_static
 
 .. autofunction:: moving_range_chart_static
 
+Use case
+--------
+
+Use to monitor short-term variation between consecutive individual measurements, companion to an individuals chart.
+
 Complete example
 ----------------
 

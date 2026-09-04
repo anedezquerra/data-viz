@@ -9,6 +9,11 @@ dataviz.xai.uncertainty.confidence_attribution_bar_static
 
 .. autofunction:: confidence_attribution_bar_static
 
+Use case
+--------
+
+Use to attribute predictive uncertainty to individual features, identifying which inputs drive the model's lack of confidence.
+
 Complete example
 ----------------
 

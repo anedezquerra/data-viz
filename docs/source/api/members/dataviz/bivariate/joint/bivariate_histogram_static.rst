@@ -9,6 +9,11 @@ dataviz.bivariate.joint.bivariate_histogram_static
 
 .. autofunction:: bivariate_histogram_static
 
+Use case
+--------
+
+Use to summarize the joint distribution of two variables as rectangular bins when points overplot.
+
 Complete example
 ----------------
 

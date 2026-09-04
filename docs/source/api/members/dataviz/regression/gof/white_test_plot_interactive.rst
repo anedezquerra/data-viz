@@ -9,6 +9,11 @@ dataviz.regression.gof.white_test_plot_interactive
 
 .. autofunction:: white_test_plot_interactive
 
+Use case
+--------
+
+Use to screen for heteroscedasticity with the White test across predictors without assuming a specific form.
+
 Complete example
 ----------------
 

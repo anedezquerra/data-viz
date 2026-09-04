@@ -9,6 +9,11 @@ dataviz.classification.errors.discrimination_threshold_dashboard_static
 
 .. autofunction:: discrimination_threshold_dashboard_static
 
+Use case
+--------
+
+Use to pick an operating threshold by viewing precision, recall, F1 and queue rate together across all thresholds.
+
 Complete example
 ----------------
 

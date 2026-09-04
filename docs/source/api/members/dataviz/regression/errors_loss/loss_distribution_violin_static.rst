@@ -9,6 +9,11 @@ dataviz.regression.errors_loss.loss_distribution_violin_static
 
 .. autofunction:: loss_distribution_violin_static
 
+Use case
+--------
+
+Use to compare full per-observation loss distributions across models, catching heavy tails that mean error hides.
+
 Complete example
 ----------------
 

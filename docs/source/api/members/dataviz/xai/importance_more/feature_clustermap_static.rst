@@ -9,6 +9,11 @@ dataviz.xai.importance_more.feature_clustermap_static
 
 .. autofunction:: feature_clustermap_static
 
+Use case
+--------
+
+Use to group features that share an importance signature across models or folds, revealing redundant or cohort-specific signals.
+
 Complete example
 ----------------
 

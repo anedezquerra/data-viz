@@ -9,6 +9,11 @@ dataviz.classification.model_comparison.psi_bar_interactive
 
 .. autofunction:: psi_bar_interactive
 
+Use case
+--------
+
+Use to quantify population stability with per-bin PSI contributions and the total PSI against stability tiers.
+
 Complete example
 ----------------
 

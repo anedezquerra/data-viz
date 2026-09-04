@@ -9,6 +9,11 @@ dataviz.spc.rules.as_numeric_series
 
 .. autofunction:: as_numeric_series
 
+Use case
+--------
+
+Use to coerce raw array-like process data into a numeric Series before computing limits or detecting rule violations.
+
 Complete example
 ----------------
 

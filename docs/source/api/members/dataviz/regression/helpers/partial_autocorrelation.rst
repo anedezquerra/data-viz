@@ -9,6 +9,11 @@ dataviz.regression.helpers.partial_autocorrelation
 
 .. autofunction:: partial_autocorrelation
 
+Use case
+--------
+
+Use to compute partial autocorrelations via Durbin-Levinson when identifying lag structure in residuals.
+
 Complete example
 ----------------
 

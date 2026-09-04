@@ -9,6 +9,11 @@ dataviz.univariate.distribution.pp_plot_interactive
 
 .. autofunction:: pp_plot_interactive
 
+Use case
+--------
+
+Use to compare cumulative probabilities between data and a theoretical distribution to check fit near the center.
+
 Complete example
 ----------------
 

@@ -11,6 +11,11 @@ dataviz.spc.multivariate.HotellingT2Result
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Carries T-squared scores, center vector, covariance matrix, and the control limit; consumed when charting or summarizing multivariate process stability.
+
 Complete example
 ----------------
 

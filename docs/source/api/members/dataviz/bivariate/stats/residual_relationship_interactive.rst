@@ -9,6 +9,11 @@ dataviz.bivariate.stats.residual_relationship_interactive
 
 .. autofunction:: residual_relationship_interactive
 
+Use case
+--------
+
+Use to check whether a polynomial fit leaves structure in the residuals, signaling a poor model choice.
+
 Complete example
 ----------------
 

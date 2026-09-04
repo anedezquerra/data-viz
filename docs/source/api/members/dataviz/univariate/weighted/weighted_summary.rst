@@ -9,6 +9,11 @@ dataviz.univariate.weighted.weighted_summary
 
 .. autofunction:: weighted_summary
 
+Use case
+--------
+
+Use to summarize survey, grouped, or importance-weighted data with weighted center, spread, and quartiles.
+
 Complete example
 ----------------
 

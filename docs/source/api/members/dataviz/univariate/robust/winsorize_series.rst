@@ -9,6 +9,11 @@ dataviz.univariate.robust.winsorize_series
 
 .. autofunction:: winsorize_series
 
+Use case
+--------
+
+Use to clip both tails to quantile bounds while preserving sample size, softening extreme values before modeling.
+
 Complete example
 ----------------
 

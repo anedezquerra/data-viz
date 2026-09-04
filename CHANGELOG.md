@@ -1,5 +1,6 @@
 # Changelog
 
+- Unreleased: docs(api): add curated "Use case" section to all 826 visualization member pages via new `docs/_use_cases/` registry loaded by `generate_api.py`.
 - Unreleased: docs(api): drop nested "Public API" links from package index pages — submodule toctrees now use maxdepth 1.
 - Unreleased: docs(api): render real example outputs in member-page galleries — new `docs/_tools/generate_api_images.py` captures each Complete example's figure (matplotlib savefig / plotly via kaleido) to `docs/source/_static/api/` in CI, with placeholder fallback.
 - Unreleased: ci(docs): autogenerate and verify runnable "Complete example" sections in the docs workflow — regenerate API pages, execute all examples via new `docs/generate_api.py --verify` harness, and commit drift back to the branch.

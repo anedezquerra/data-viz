@@ -9,6 +9,11 @@ dataviz.classification.calibration_extra.score_ecdf_by_class_interactive
 
 .. autofunction:: score_ecdf_by_class_interactive
 
+Use case
+--------
+
+Use to compare full score distributions per class without binning; separated ECDFs signal good ranking power.
+
 Complete example
 ----------------
 

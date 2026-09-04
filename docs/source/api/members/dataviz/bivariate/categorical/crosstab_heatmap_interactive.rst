@@ -9,6 +9,11 @@ dataviz.bivariate.categorical.crosstab_heatmap_interactive
 
 .. autofunction:: crosstab_heatmap_interactive
 
+Use case
+--------
+
+Use to spot associations between two categorical variables by mapping their contingency table to color intensity.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.multicollinearity.eigenvalue_scree_predictors_interactive
 
 .. autofunction:: eigenvalue_scree_predictors_interactive
 
+Use case
+--------
+
+Use to see how much predictor variance concentrates in a few components, a sign of multicollinearity.
+
 Complete example
 ----------------
 

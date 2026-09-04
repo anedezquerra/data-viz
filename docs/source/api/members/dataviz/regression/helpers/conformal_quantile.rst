@@ -9,6 +9,11 @@ dataviz.regression.helpers.conformal_quantile
 
 .. autofunction:: conformal_quantile
 
+Use case
+--------
+
+Use to get the split-conformal quantile of absolute residuals for distribution-free interval calibration.
+
 Complete example
 ----------------
 

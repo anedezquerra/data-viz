@@ -9,6 +9,11 @@ dataviz.regression.learning.learning_curve_static
 
 .. autofunction:: learning_curve_static
 
+Use case
+--------
+
+Use to plot score against training-set size when diagnosing under- or overfitting.
+
 Complete example
 ----------------
 

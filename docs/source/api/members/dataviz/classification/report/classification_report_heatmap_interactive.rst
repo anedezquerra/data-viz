@@ -9,6 +9,11 @@ dataviz.classification.report.classification_report_heatmap_interactive
 
 .. autofunction:: classification_report_heatmap_interactive
 
+Use case
+--------
+
+Use to replace a text classification report with a scannable heatmap of per-class precision, recall, and F1.
+
 Complete example
 ----------------
 

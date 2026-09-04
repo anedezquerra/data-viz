@@ -9,6 +9,11 @@ dataviz.regression.influence.influence_bubble_plot_interactive
 
 .. autofunction:: influence_bubble_plot_interactive
 
+Use case
+--------
+
+Use to view leverage and studentized residuals together, with bubble size encoding Cook's distance.
+
 Complete example
 ----------------
 

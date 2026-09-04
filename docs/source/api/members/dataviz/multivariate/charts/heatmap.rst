@@ -9,6 +9,11 @@ dataviz.multivariate.charts.heatmap
 
 .. autofunction:: heatmap
 
+Use case
+--------
+
+Use to display a numeric matrix as color intensity when patterns across two dimensions matter.
+
 Complete example
 ----------------
 

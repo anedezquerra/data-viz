@@ -9,6 +9,11 @@ dataviz.regression.domain.yield_curve_fit_plot_static
 
 .. autofunction:: yield_curve_fit_plot_static
 
+Use case
+--------
+
+Use in fixed-income work to compare observed bond yields against a fitted curve across maturities and spot mispriced points.
+
 Complete example
 ----------------
 

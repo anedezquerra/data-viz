@@ -9,6 +9,11 @@ dataviz.univariate.categorical.frequency_bar_interactive
 
 .. autofunction:: frequency_bar_interactive
 
+Use case
+--------
+
+Use to show how often each category occurs with hover labels, with normalize=True when proportions matter more than raw counts.
+
 Complete example
 ----------------
 

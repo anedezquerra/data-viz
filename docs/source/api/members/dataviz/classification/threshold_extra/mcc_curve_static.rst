@@ -9,6 +9,11 @@ dataviz.classification.threshold_extra.mcc_curve_static
 
 .. autofunction:: mcc_curve_static
 
+Use case
+--------
+
+Use to choose a threshold with a balanced single-number quality score; MCC vs threshold with the argmax marked.
+
 Complete example
 ----------------
 

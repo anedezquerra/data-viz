@@ -9,6 +9,11 @@ dataviz.xai.local_more.anchor_explanation_plot_interactive
 
 .. autofunction:: anchor_explanation_plot_interactive
 
+Use case
+--------
+
+Use to present anchor rules with precision and coverage side by side, showing how reliable and how broad each if-then rule is.
+
 Complete example
 ----------------
 

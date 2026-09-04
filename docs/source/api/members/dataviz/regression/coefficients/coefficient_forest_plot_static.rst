@@ -9,6 +9,11 @@ dataviz.regression.coefficients.coefficient_forest_plot_static
 
 .. autofunction:: coefficient_forest_plot_static
 
+Use case
+--------
+
+Use to show OLS coefficients with 95% confidence intervals so viewers can see which effects are statistically distinguishable from zero.
+
 Complete example
 ----------------
 

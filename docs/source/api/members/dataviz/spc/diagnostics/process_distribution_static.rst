@@ -9,6 +9,11 @@ dataviz.spc.diagnostics.process_distribution_static
 
 .. autofunction:: process_distribution_static
 
+Use case
+--------
+
+Use to check the shape, center, and sigma spread of process output with a histogram and sigma bands before assuming normality.
+
 Complete example
 ----------------
 

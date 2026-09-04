@@ -9,6 +9,11 @@ dataviz.univariate.stats.univariate_summary
 
 .. autofunction:: univariate_summary
 
+Use case
+--------
+
+Use for a complete descriptive summary of one numeric variable, including quartiles, skewness, kurtosis, SEM, and MAD.
+
 Complete example
 ----------------
 

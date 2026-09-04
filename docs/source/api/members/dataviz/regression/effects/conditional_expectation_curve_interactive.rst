@@ -9,6 +9,11 @@ dataviz.regression.effects.conditional_expectation_curve_interactive
 
 .. autofunction:: conditional_expectation_curve_interactive
 
+Use case
+--------
+
+Use to plot E[Y|x] with an optional confidence band when summarizing the expected outcome as a smooth function of one predictor.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.univariate.distribution.ecdf_values
 
 .. autofunction:: ecdf_values
 
+Use case
+--------
+
+Use to compute sorted values and cumulative probabilities for an empirical CDF when you need the arrays, not the chart.
+
 Complete example
 ----------------
 

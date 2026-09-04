@@ -9,6 +9,11 @@ dataviz.xai.surrogate.surrogate_tree_plot_static
 
 .. autofunction:: surrogate_tree_plot_static
 
+Use case
+--------
+
+Use to render a shallow interpretable tree distilled from a black-box model, supplied as a list of depth/condition/prediction rule dicts.
+
 Complete example
 ----------------
 

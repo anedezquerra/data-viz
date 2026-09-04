@@ -11,6 +11,11 @@ dataviz.univariate.robust.RobustStats
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Immutable record of median, MAD, scaled MAD, trimmed and winsorized means, quartiles, IQR, and Tukey fences for one numeric variable.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.classification.multiclass_extra.per_class_auc_bar_static
 
 .. autofunction:: per_class_auc_bar_static
 
+Use case
+--------
+
+Use to spot weak classes at a glance; bars show per-class one-vs-rest AUC against the 0.5 random line.
+
 Complete example
 ----------------
 

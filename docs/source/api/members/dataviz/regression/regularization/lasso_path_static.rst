@@ -9,6 +9,11 @@ dataviz.regression.regularization.lasso_path_static
 
 .. autofunction:: lasso_path_static
 
+Use case
+--------
+
+Use to see which coefficients shrink to zero as the lasso penalty grows, guiding feature selection.
+
 Complete example
 ----------------
 

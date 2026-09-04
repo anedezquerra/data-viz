@@ -9,6 +9,11 @@ dataviz.univariate.charts.histogram
 
 .. autofunction:: histogram
 
+Use case
+--------
+
+Use when profiling a numeric column for the first time to see shape, spread, and outliers at a glance.
+
 Complete example
 ----------------
 

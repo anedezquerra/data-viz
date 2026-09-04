@@ -11,6 +11,11 @@ dataviz.spc.constants.SPCConstants
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Carries the traditional bias-correction constants (A2, D3, D4, d2, and related) for a subgroup size; consumed when computing classic Xbar-R/S limits.
+
 Complete example
 ----------------
 

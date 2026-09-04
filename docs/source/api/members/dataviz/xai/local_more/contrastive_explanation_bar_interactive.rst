@@ -9,6 +9,11 @@ dataviz.xai.local_more.contrastive_explanation_bar_interactive
 
 .. autofunction:: contrastive_explanation_bar_interactive
 
+Use case
+--------
+
+Use to show why a prediction holds (pertinent positives) versus what minimal changes would flip it (pertinent negatives).
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.bivariate.stats.outlier_scatter_interactive
 
 .. autofunction:: outlier_scatter_interactive
 
+Use case
+--------
+
+Use to flag unusual points in a two-variable relationship using z-score or IQR rules before fitting models.
+
 Complete example
 ----------------
 

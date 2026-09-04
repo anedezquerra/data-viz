@@ -9,6 +9,11 @@ dataviz.univariate.distribution.ecdf_plot_interactive
 
 .. autofunction:: ecdf_plot_interactive
 
+Use case
+--------
+
+Use to plot the empirical cumulative distribution, reading off medians and quantiles directly without binning.
+
 Complete example
 ----------------
 

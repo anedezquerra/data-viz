@@ -9,6 +9,11 @@ dataviz.univariate.charts.box_plot
 
 .. autofunction:: box_plot
 
+Use case
+--------
+
+Use to summarize quartiles, spread, and outliers of a numeric variable in a compact box plot.
+
 Complete example
 ----------------
 

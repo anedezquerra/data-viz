@@ -9,6 +9,11 @@ dataviz.regression.multicollinearity.correlation_heatmap_with_clustering_interac
 
 .. autofunction:: correlation_heatmap_with_clustering_interactive
 
+Use case
+--------
+
+Use to surface clusters of highly correlated predictors so redundant features can be dropped or combined.
+
 Complete example
 ----------------
 

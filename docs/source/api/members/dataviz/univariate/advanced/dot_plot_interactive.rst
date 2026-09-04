@@ -9,6 +9,11 @@ dataviz.univariate.advanced.dot_plot_interactive
 
 .. autofunction:: dot_plot_interactive
 
+Use case
+--------
+
+Use as a Cleveland dot plot to compare category counts with less ink than bars, emphasizing position over length.
+
 Complete example
 ----------------
 

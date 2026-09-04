@@ -9,6 +9,11 @@ dataviz.classification.threshold.cost_curve_interactive
 
 .. autofunction:: cost_curve_interactive
 
+Use case
+--------
+
+Use when false positives and false negatives carry different costs; finds the threshold minimizing total misclassification cost.
+
 Complete example
 ----------------
 

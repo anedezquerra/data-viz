@@ -9,6 +9,11 @@ dataviz.regression.helpers.autocorrelation
 
 .. autofunction:: autocorrelation
 
+Use case
+--------
+
+Use to compute the sample autocorrelation function when checking residuals for serial correlation.
+
 Complete example
 ----------------
 

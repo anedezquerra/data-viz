@@ -11,6 +11,11 @@ dataviz.univariate.quality.DataQualitySummary
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Immutable record of count, missingness, uniqueness, duplicate, zero, and negative rates; consumed as a quick screening profile for one variable.
+
 Complete example
 ----------------
 

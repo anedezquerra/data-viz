@@ -9,6 +9,11 @@ dataviz.regression.residual_features.residual_vs_feature_static
 
 .. autofunction:: residual_vs_feature_static
 
+Use case
+--------
+
+Use to check whether a single feature still carries structure the model missed; a curved trend in residuals vs that feature signals nonlinearity or a missing interaction.
+
 Complete example
 ----------------
 

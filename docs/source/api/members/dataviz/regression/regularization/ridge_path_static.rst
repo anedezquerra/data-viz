@@ -9,6 +9,11 @@ dataviz.regression.regularization.ridge_path_static
 
 .. autofunction:: ridge_path_static
 
+Use case
+--------
+
+Use to see how coefficients shrink smoothly under ridge penalties when keeping all features in the model.
+
 Complete example
 ----------------
 

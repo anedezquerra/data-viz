@@ -9,6 +9,11 @@ dataviz.univariate.violin_plot.violin_plot_static
 
 .. autofunction:: violin_plot_static
 
+Use case
+--------
+
+Use to show the full distribution shape with density width plus an inner box, revealing modality that a box plot hides.
+
 Complete example
 ----------------
 

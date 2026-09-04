@@ -9,6 +9,11 @@ dataviz.classification.confusion_matrix.confusion_matrix_plot_interactive
 
 .. autofunction:: confusion_matrix_plot_interactive
 
+Use case
+--------
+
+Use for an explorable confusion matrix heatmap with hover values, e.g. in dashboards or notebooks.
+
 Complete example
 ----------------
 

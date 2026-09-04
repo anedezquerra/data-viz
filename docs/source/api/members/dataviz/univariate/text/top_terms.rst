@@ -9,6 +9,11 @@ dataviz.univariate.text.top_terms
 
 .. autofunction:: top_terms
 
+Use case
+--------
+
+Use to list the most frequent whitespace-delimited terms for lightweight text profiling without NLP dependencies.
+
 Complete example
 ----------------
 

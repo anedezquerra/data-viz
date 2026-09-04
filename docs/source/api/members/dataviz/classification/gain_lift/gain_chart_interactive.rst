@@ -9,6 +9,11 @@ dataviz.classification.gain_lift.gain_chart_interactive
 
 .. autofunction:: gain_chart_interactive
 
+Use case
+--------
+
+Use to show what fraction of positives is captured by targeting the top-scored fraction of the population.
+
 Complete example
 ----------------
 

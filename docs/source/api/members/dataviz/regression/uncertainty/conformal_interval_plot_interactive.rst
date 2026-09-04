@@ -9,6 +9,11 @@ dataviz.regression.uncertainty.conformal_interval_plot_interactive
 
 .. autofunction:: conformal_interval_plot_interactive
 
+Use case
+--------
+
+Use to audit conformal prediction intervals by viewing the band, predictions, and actuals sorted by prediction; uncovered points reveal weak coverage.
+
 Complete example
 ----------------
 

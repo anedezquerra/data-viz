@@ -9,6 +9,11 @@ dataviz.univariate.advanced.lollipop_chart_static
 
 .. autofunction:: lollipop_chart_static
 
+Use case
+--------
+
+Use to compare category counts with stems and markers when bars feel too heavy for a slim ranking view.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.forecast.forecast_vs_actual_static
 
 .. autofunction:: forecast_vs_actual_static
 
+Use case
+--------
+
+Use to overlay actual and forecast series and spot systematic over- or under-prediction over time.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.univariate.weighted.weighted_ecdf_values
 
 .. autofunction:: weighted_ecdf_values
 
+Use case
+--------
+
+Use to get sorted values and weight-normalized cumulative probabilities for custom weighted ECDF rendering.
+
 Complete example
 ----------------
 

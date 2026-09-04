@@ -9,6 +9,11 @@ dataviz.classification.decision_boundary.decision_boundary_plot_interactive
 
 .. autofunction:: decision_boundary_plot_interactive
 
+Use case
+--------
+
+Use to visualize how a 2-D classifier partitions feature space, given any predict function over (n, 2) points.
+
 Complete example
 ----------------
 

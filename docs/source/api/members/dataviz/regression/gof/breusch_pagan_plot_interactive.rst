@@ -9,6 +9,11 @@ dataviz.regression.gof.breusch_pagan_plot_interactive
 
 .. autofunction:: breusch_pagan_plot_interactive
 
+Use case
+--------
+
+Use to check heteroscedasticity by plotting squared residuals against fitted values with the BP statistic.
+
 Complete example
 ----------------
 

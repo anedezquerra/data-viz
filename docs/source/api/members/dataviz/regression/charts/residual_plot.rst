@@ -9,6 +9,11 @@ dataviz.regression.charts.residual_plot
 
 .. autofunction:: residual_plot
 
+Use case
+--------
+
+Use as a first-pass diagnostic: residual patterns versus fitted values expose nonlinearity and heteroscedasticity before trusting inference.
+
 Complete example
 ----------------
 

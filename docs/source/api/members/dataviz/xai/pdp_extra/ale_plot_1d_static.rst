@@ -9,6 +9,11 @@ dataviz.xai.pdp_extra.ale_plot_1d_static
 
 .. autofunction:: ale_plot_1d_static
 
+Use case
+--------
+
+Use instead of PDP when features are correlated; ALE accumulates local effects within data-supported bins to avoid extrapolation bias.
+
 Complete example
 ----------------
 

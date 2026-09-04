@@ -9,6 +9,11 @@ dataviz.xai.charts.feature_importance
 
 .. autofunction:: feature_importance
 
+Use case
+--------
+
+Use when presenting which features drive a model's predictions to non-technical stakeholders.
+
 Complete example
 ----------------
 

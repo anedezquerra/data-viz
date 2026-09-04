@@ -9,6 +9,11 @@ dataviz.regression.multicollinearity.vif_bar_interactive
 
 .. autofunction:: vif_bar_interactive
 
+Use case
+--------
+
+Use to flag predictors whose variance inflation factor exceeds a threshold before fitting a linear model.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.xai.local_more.prototype_criticism_grid_static
 
 .. autofunction:: prototype_criticism_grid_static
 
+Use case
+--------
+
+Use to contrast representative prototypes with atypical criticisms side by side, summarizing what is typical and what the model may mishandle.
+
 Complete example
 ----------------
 

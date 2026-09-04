@@ -9,6 +9,11 @@ dataviz.regression.cv_extended.repeated_kfold_violin_interactive
 
 .. autofunction:: repeated_kfold_violin_interactive
 
+Use case
+--------
+
+Use to show the full score distribution per repeat in repeated K-fold, quantifying how much results vary with the random split.
+
 Complete example
 ----------------
 

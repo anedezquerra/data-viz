@@ -9,6 +9,11 @@ dataviz.univariate.treatment.outlier_treatment_comparison_interactive
 
 .. autofunction:: outlier_treatment_comparison_interactive
 
+Use case
+--------
+
+Use to review original versus capped or removed distributions side by side before approving a treatment.
+
 Complete example
 ----------------
 

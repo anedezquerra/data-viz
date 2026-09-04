@@ -9,6 +9,11 @@ dataviz.univariate.robust.robust_summary
 
 .. autofunction:: robust_summary
 
+Use case
+--------
+
+Use to get center, spread, and fence statistics that resist heavy tails and isolated extreme observations.
+
 Complete example
 ----------------
 

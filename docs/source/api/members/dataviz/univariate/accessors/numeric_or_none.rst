@@ -9,6 +9,11 @@ dataviz.univariate.accessors.numeric_or_none
 
 .. autofunction:: numeric_or_none
 
+Use case
+--------
+
+Use in permissive profiling code to attempt numeric coercion, returning None instead of raising when no usable numeric values remain.
+
 Complete example
 ----------------
 

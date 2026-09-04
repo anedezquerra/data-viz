@@ -9,6 +9,11 @@ dataviz.classification.calibration_extra.score_qq_by_class_interactive
 
 .. autofunction:: score_qq_by_class_interactive
 
+Use case
+--------
+
+Use to spot distributional skew in scores per class by plotting class quantiles against a uniform reference.
+
 Complete example
 ----------------
 

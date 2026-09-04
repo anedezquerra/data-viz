@@ -9,6 +9,11 @@ dataviz.spc.capability.capability_summary
 
 .. autofunction:: capability_summary
 
+Use case
+--------
+
+Use to quantify whether a stable process meets specifications by computing Cp, Cpk, and PPM defect estimates against LSL/USL.
+
 Complete example
 ----------------
 

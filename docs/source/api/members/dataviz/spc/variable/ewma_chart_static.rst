@@ -9,6 +9,11 @@ dataviz.spc.variable.ewma_chart_static
 
 .. autofunction:: ewma_chart_static
 
+Use case
+--------
+
+Use to detect small sustained shifts in the process mean earlier than a Shewhart chart by weighting recent observations more heavily.
+
 Complete example
 ----------------
 

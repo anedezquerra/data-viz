@@ -9,6 +9,11 @@ dataviz.classification.calibration.brier_score_bar_static
 
 .. autofunction:: brier_score_bar_static
 
+Use case
+--------
+
+Compare models or classes on Brier score to rank probability quality; lower bars are better.
+
 Complete example
 ----------------
 

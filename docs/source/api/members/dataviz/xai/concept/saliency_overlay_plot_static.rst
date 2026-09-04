@@ -9,6 +9,11 @@ dataviz.xai.concept.saliency_overlay_plot_static
 
 .. autofunction:: saliency_overlay_plot_static
 
+Use case
+--------
+
+Use to inspect which image regions drive a vision model by overlaying saliency or Grad-CAM heatmaps on the inputs.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.xai.fairness_xai.disparate_impact_by_segment_interactive
 
 .. autofunction:: disparate_impact_by_segment_interactive
 
+Use case
+--------
+
+Use in fairness audits to see which features drive predictions per segment alongside each segment's outcome rate.
+
 Complete example
 ----------------
 

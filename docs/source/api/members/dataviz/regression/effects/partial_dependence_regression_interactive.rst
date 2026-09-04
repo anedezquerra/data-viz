@@ -9,6 +9,11 @@ dataviz.regression.effects.partial_dependence_regression_interactive
 
 .. autofunction:: partial_dependence_regression_interactive
 
+Use case
+--------
+
+Use to show the marginal effect of one feature on the predicted target, averaged over all other features.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.validation.cv_score_plot_static
 
 .. autofunction:: cv_score_plot_static
 
+Use case
+--------
+
+Use to judge model stability by inspecting per-fold cross-validation scores against their mean; high variance across folds warns of sensitivity.
+
 Complete example
 ----------------
 

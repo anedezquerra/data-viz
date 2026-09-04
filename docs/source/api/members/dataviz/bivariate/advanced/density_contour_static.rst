@@ -9,6 +9,11 @@ dataviz.bivariate.advanced.density_contour_static
 
 .. autofunction:: density_contour_static
 
+Use case
+--------
+
+Use to visualize the joint density of two variables as contour lines when individual points are too dense to read.
+
 Complete example
 ----------------
 

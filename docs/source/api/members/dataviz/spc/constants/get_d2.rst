@@ -9,6 +9,11 @@ dataviz.spc.constants.get_d2
 
 .. autofunction:: get_d2
 
+Use case
+--------
+
+Use to look up the d2 constant for a moving-range span when deriving sigma estimates for individuals charts.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.classification.threshold_extra.balanced_accuracy_curve_interactive
 
 .. autofunction:: balanced_accuracy_curve_interactive
 
+Use case
+--------
+
+Use on imbalanced data to pick a threshold by balanced accuracy, the mean of sensitivity and specificity.
+
 Complete example
 ----------------
 

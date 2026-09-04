@@ -9,6 +9,11 @@ dataviz.bivariate.trends.errorbar_plot_interactive
 
 .. autofunction:: errorbar_plot_interactive
 
+Use case
+--------
+
+Use to compare group means with uncertainty intervals along an ordered or categorical x axis.
+
 Complete example
 ----------------
 

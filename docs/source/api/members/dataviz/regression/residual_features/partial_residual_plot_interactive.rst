@@ -9,6 +9,11 @@ dataviz.regression.residual_features.partial_residual_plot_interactive
 
 .. autofunction:: partial_residual_plot_interactive
 
+Use case
+--------
+
+Use to inspect the marginal effect of one predictor in an OLS fit while adjusting for the others; curvature suggests the feature needs a nonlinear term.
+
 Complete example
 ----------------
 

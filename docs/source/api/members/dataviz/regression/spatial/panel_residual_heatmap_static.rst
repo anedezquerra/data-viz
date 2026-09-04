@@ -9,6 +9,11 @@ dataviz.regression.spatial.panel_residual_heatmap_static
 
 .. autofunction:: panel_residual_heatmap_static
 
+Use case
+--------
+
+Use to scan panel-data residuals across units and time periods at once, spotting unit-specific bias or temporal drift in the model.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.univariate.weighted.weighted_ecdf_plot_interactive
 
 .. autofunction:: weighted_ecdf_plot_interactive
 
+Use case
+--------
+
+Use to plot the empirical cumulative distribution when observations contribute unequal weight.
+
 Complete example
 ----------------
 

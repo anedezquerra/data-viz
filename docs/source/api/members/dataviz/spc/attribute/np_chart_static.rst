@@ -9,6 +9,11 @@ dataviz.spc.attribute.np_chart_static
 
 .. autofunction:: np_chart_static
 
+Use case
+--------
+
+Use when counting defective units per lot of constant size, such as daily rejected parts from a fixed production batch.
+
 Complete example
 ----------------
 

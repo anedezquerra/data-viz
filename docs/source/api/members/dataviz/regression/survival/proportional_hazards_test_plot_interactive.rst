@@ -9,6 +9,11 @@ dataviz.regression.survival.proportional_hazards_test_plot_interactive
 
 .. autofunction:: proportional_hazards_test_plot_interactive
 
+Use case
+--------
+
+Use to check the Cox proportional-hazards assumption per covariate; bars below the alpha line flag Schoenfeld test violations.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.bivariate.advanced.hexbin_plot_static
 
 .. autofunction:: hexbin_plot_static
 
+Use case
+--------
+
+Use when a scatter plot of a large dataset overplots, to see point density as hexagonal bins.
+
 Complete example
 ----------------
 

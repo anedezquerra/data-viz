@@ -11,6 +11,11 @@ dataviz.bivariate.stats.BivariateStats
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Returned by bivariate_summary; carries correlations, covariance, fit coefficients, and descriptive statistics for downstream reporting.
+
 Complete example
 ----------------
 

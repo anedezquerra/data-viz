@@ -9,6 +9,11 @@ dataviz.regression.calibration_regression.calibration_curve_regression_interacti
 
 .. autofunction:: calibration_curve_regression_interactive
 
+Use case
+--------
+
+Use when predicted values should match observed means in each bin; systematic deviation from the diagonal signals a miscalibrated regressor.
+
 Complete example
 ----------------
 

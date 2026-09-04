@@ -9,6 +9,11 @@ dataviz.univariate.robust.mad_zscores
 
 .. autofunction:: mad_zscores
 
+Use case
+--------
+
+Use to score points by distance from the median in MAD units when mean and standard deviation are distorted by extremes.
+
 Complete example
 ----------------
 

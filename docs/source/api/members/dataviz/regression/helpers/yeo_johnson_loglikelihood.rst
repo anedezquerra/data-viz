@@ -9,6 +9,11 @@ dataviz.regression.helpers.yeo_johnson_loglikelihood
 
 .. autofunction:: yeo_johnson_loglikelihood
 
+Use case
+--------
+
+Use to compute the Yeo-Johnson profile log-likelihood when transforming responses that include negatives.
+
 Complete example
 ----------------
 

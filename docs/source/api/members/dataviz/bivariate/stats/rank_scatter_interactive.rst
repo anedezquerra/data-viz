@@ -9,6 +9,11 @@ dataviz.bivariate.stats.rank_scatter_interactive
 
 .. autofunction:: rank_scatter_interactive
 
+Use case
+--------
+
+Use to compare the rank ordering of two variables when monotonic association matters more than raw values.
+
 Complete example
 ----------------
 

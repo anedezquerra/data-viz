@@ -9,6 +9,11 @@ dataviz.regression.helpers.influence_statistics
 
 .. autofunction:: influence_statistics
 
+Use case
+--------
+
+Use to compute leverage, Cook's distance, DFFITS, and DFBETAS when screening OLS fits for influential points.
+
 Complete example
 ----------------
 

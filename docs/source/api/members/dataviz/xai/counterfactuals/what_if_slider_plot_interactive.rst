@@ -9,6 +9,11 @@ dataviz.xai.counterfactuals.what_if_slider_plot_interactive
 
 .. autofunction:: what_if_slider_plot_interactive
 
+Use case
+--------
+
+Use to sweep one feature and watch the predicted outcome change, answering what-if questions for end users.
+
 Complete example
 ----------------
 

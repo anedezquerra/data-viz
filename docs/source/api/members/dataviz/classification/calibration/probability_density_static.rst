@@ -9,6 +9,11 @@ dataviz.classification.calibration.probability_density_static
 
 .. autofunction:: probability_density_static
 
+Use case
+--------
+
+Use for a smooth per-class view of predicted probability density when histograms are too coarse or noisy.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.quantile.quantile_loss_curve_static
 
 .. autofunction:: quantile_loss_curve_static
 
+Use case
+--------
+
+Use to compare pinball loss across quantile levels when selecting or evaluating quantile-regression models.
+
 Complete example
 ----------------
 

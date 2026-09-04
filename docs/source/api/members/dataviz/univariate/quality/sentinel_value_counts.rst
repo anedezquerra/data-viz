@@ -9,6 +9,11 @@ dataviz.univariate.quality.sentinel_value_counts
 
 .. autofunction:: sentinel_value_counts
 
+Use case
+--------
+
+Use to count configured placeholder values such as -999 or N/A that encode missingness without being null.
+
 Complete example
 ----------------
 

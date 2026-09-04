@@ -9,6 +9,11 @@ dataviz.univariate.fitting.fitted_pdf_values
 
 .. autofunction:: fitted_pdf_values
 
+Use case
+--------
+
+Use to compute x and density values of a fitted distribution when you need the curve arrays rather than a chart.
+
 Complete example
 ----------------
 

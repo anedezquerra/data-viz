@@ -9,6 +9,11 @@ dataviz.clustering.elbow.elbow_plot_static
 
 .. autofunction:: elbow_plot_static
 
+Use case
+--------
+
+Use when choosing k for k-means by looking for the bend where added clusters stop reducing inertia much.
+
 Complete example
 ----------------
 

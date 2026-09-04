@@ -9,6 +9,11 @@ dataviz.regression.coefficients.coefficient_plot_static
 
 .. autofunction:: coefficient_plot_static
 
+Use case
+--------
+
+Use for a quick read of coefficient magnitude and sign, colored by direction, when communicating which drivers push predictions up or down.
+
 Complete example
 ----------------
 

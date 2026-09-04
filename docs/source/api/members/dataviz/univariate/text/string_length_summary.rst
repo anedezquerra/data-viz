@@ -9,6 +9,11 @@ dataviz.univariate.text.string_length_summary
 
 .. autofunction:: string_length_summary
 
+Use case
+--------
+
+Use to profile text fields by character length, for example to spot truncation or outlier records.
+
 Complete example
 ----------------
 

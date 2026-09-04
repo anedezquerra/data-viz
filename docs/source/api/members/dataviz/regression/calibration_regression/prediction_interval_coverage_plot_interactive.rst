@@ -9,6 +9,11 @@ dataviz.regression.calibration_regression.prediction_interval_coverage_plot_inte
 
 .. autofunction:: prediction_interval_coverage_plot_interactive
 
+Use case
+--------
+
+Use to verify that nominal prediction intervals (e.g. 90%) actually cover the observed target at the advertised rate.
+
 Complete example
 ----------------
 

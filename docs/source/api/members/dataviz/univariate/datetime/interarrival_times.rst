@@ -9,6 +9,11 @@ dataviz.univariate.datetime.interarrival_times
 
 .. autofunction:: interarrival_times
 
+Use case
+--------
+
+Use to compute elapsed time between consecutive events, e.g. gaps between orders or failures, in a chosen unit.
+
 Complete example
 ----------------
 

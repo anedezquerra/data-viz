@@ -9,6 +9,11 @@ dataviz.univariate.stats.iqr_outliers
 
 .. autofunction:: iqr_outliers
 
+Use case
+--------
+
+Use to flag observations outside Tukey IQR fences for classic box-plot-style outlier detection.
+
 Complete example
 ----------------
 

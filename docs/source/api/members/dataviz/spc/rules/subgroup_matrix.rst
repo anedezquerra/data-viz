@@ -9,6 +9,11 @@ dataviz.spc.rules.subgroup_matrix
 
 .. autofunction:: subgroup_matrix
 
+Use case
+--------
+
+Use to reshape raw or grouped observations into a subgroup matrix before computing Xbar-R or Xbar-S limits.
+
 Complete example
 ----------------
 

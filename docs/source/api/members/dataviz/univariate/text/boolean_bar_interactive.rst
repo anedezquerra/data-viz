@@ -9,6 +9,11 @@ dataviz.univariate.text.boolean_bar_interactive
 
 .. autofunction:: boolean_bar_interactive
 
+Use case
+--------
+
+Use to plot true/false counts for a binary indicator as a semantic wrapper around categorical frequency bars.
+
 Complete example
 ----------------
 

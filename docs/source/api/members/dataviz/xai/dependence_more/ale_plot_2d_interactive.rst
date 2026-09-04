@@ -9,6 +9,11 @@ dataviz.xai.dependence_more.ale_plot_2d_interactive
 
 .. autofunction:: ale_plot_2d_interactive
 
+Use case
+--------
+
+Use to visualize the joint effect of two correlated features without the extrapolation bias of 2-D PDPs.
+
 Complete example
 ----------------
 

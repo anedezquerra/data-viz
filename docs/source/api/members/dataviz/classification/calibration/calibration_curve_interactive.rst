@@ -9,6 +9,11 @@ dataviz.classification.calibration.calibration_curve_interactive
 
 .. autofunction:: calibration_curve_interactive
 
+Use case
+--------
+
+Use to check whether predicted probabilities match observed frequencies, e.g. before trusting scores as risk estimates.
+
 Complete example
 ----------------
 

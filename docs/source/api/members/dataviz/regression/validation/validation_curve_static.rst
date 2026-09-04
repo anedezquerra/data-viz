@@ -9,6 +9,11 @@ dataviz.regression.validation.validation_curve_static
 
 .. autofunction:: validation_curve_static
 
+Use case
+--------
+
+Use to tune a hyperparameter by plotting train and validation scores against its values; widening gaps signal overfitting.
+
 Complete example
 ----------------
 

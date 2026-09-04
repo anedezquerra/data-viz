@@ -9,6 +9,11 @@ dataviz.clustering.charts.scatter_clusters
 
 .. autofunction:: scatter_clusters
 
+Use case
+--------
+
+Use to sanity-check clustering results by coloring points by cluster label in a two-dimensional view.
+
 Complete example
 ----------------
 

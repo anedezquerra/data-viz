@@ -9,6 +9,11 @@ dataviz.regression.errors_loss.worst_k_predictions_chart_interactive
 
 .. autofunction:: worst_k_predictions_chart_interactive
 
+Use case
+--------
+
+Use to surface the k predictions with the largest absolute error for targeted inspection and debugging.
+
 Complete example
 ----------------
 

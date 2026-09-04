@@ -9,6 +9,11 @@ dataviz.bivariate.categorical.box_by_category_static
 
 .. autofunction:: box_by_category_static
 
+Use case
+--------
+
+Use to compare the spread, median, and outliers of a numeric variable across categories.
+
 Complete example
 ----------------
 

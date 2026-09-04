@@ -9,6 +9,11 @@ dataviz.xai.uncertainty.prediction_uncertainty_plot_static
 
 .. autofunction:: prediction_uncertainty_plot_static
 
+Use case
+--------
+
+Use to plot predictions against a feature with a plus/minus uncertainty band, locating regions where the model is unsure.
+
 Complete example
 ----------------
 

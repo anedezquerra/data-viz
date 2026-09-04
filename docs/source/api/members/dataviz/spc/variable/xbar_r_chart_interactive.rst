@@ -9,6 +9,11 @@ dataviz.spc.variable.xbar_r_chart_interactive
 
 .. autofunction:: xbar_r_chart_interactive
 
+Use case
+--------
+
+Use when monitoring subgrouped measurements of small size (2-10) to track both process center and within-subgroup spread.
+
 Complete example
 ----------------
 

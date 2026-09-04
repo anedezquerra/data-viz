@@ -9,6 +9,11 @@ dataviz.univariate.profile.auto_profile_chart_interactive
 
 .. autofunction:: auto_profile_chart_interactive
 
+Use case
+--------
+
+Use when you want one sensible interactive chart chosen automatically from the inferred variable type.
+
 Complete example
 ----------------
 

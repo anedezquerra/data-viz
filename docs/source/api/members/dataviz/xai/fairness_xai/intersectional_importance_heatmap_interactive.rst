@@ -9,6 +9,11 @@ dataviz.xai.fairness_xai.intersectional_importance_heatmap_interactive
 
 .. autofunction:: intersectional_importance_heatmap_interactive
 
+Use case
+--------
+
+Use to audit feature importance across intersectional segments, e.g. gender by age group, in one heatmap.
+
 Complete example
 ----------------
 

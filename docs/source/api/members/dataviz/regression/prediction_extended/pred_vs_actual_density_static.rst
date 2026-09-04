@@ -9,6 +9,11 @@ dataviz.regression.prediction_extended.pred_vs_actual_density_static
 
 .. autofunction:: pred_vs_actual_density_static
 
+Use case
+--------
+
+Use to compare the marginal distributions of actual and predicted values and expose systematic shift or shrinkage.
+
 Complete example
 ----------------
 

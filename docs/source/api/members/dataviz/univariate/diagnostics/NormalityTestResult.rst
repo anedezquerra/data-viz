@@ -11,6 +11,11 @@ dataviz.univariate.diagnostics.NormalityTestResult
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Result of a normality test carrying the statistic, p-value, and verdict; consumed when deciding if a variable is plausibly normal.
+
 Complete example
 ----------------
 

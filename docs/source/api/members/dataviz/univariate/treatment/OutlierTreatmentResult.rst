@@ -11,6 +11,11 @@ dataviz.univariate.treatment.OutlierTreatmentResult
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Immutable record of original values, treated values, outlier mask, method, and rule, preserving both series for auditability.
+
 Complete example
 ----------------
 

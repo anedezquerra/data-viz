@@ -9,6 +9,11 @@ dataviz.regression.effects.marginal_effects_plot_static
 
 .. autofunction:: marginal_effects_plot_static
 
+Use case
+--------
+
+Use to report average marginal effect per feature with optional confidence intervals, e.g. for econometric model interpretation.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.effects.interaction_effect_plot_static
 
 .. autofunction:: interaction_effect_plot_static
 
+Use case
+--------
+
+Use to show how the effect of one feature changes across levels of a second feature, exposing interactions.
+
 Complete example
 ----------------
 

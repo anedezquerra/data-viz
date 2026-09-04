@@ -9,6 +9,11 @@ dataviz.regression.uncertainty.jackknife_plus_band_static
 
 .. autofunction:: jackknife_plus_band_static
 
+Use case
+--------
+
+Use to visualize jackknife+ predictive bands around sorted predictions and see where actuals fall outside the interval.
+
 Complete example
 ----------------
 

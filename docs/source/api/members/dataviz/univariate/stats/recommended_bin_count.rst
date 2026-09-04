@@ -9,6 +9,11 @@ dataviz.univariate.stats.recommended_bin_count
 
 .. autofunction:: recommended_bin_count
 
+Use case
+--------
+
+Use to pick a defensible histogram bin count from Freedman-Diaconis, Sturges, Rice, or square-root rules.
+
 Complete example
 ----------------
 

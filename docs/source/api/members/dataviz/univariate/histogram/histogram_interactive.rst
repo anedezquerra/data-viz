@@ -9,6 +9,11 @@ dataviz.univariate.histogram.histogram_interactive
 
 .. autofunction:: histogram_interactive
 
+Use case
+--------
+
+Use when profiling a numeric column for the first time with hoverable bin counts and zoomable ranges.
+
 Complete example
 ----------------
 

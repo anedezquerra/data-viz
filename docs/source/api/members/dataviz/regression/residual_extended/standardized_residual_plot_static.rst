@@ -9,6 +9,11 @@ dataviz.regression.residual_extended.standardized_residual_plot_static
 
 .. autofunction:: standardized_residual_plot_static
 
+Use case
+--------
+
+Use to flag outlying observations by plotting residuals scaled by their estimated standard deviation.
+
 Complete example
 ----------------
 

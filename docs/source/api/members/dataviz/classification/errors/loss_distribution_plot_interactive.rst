@@ -9,6 +9,11 @@ dataviz.classification.errors.loss_distribution_plot_interactive
 
 .. autofunction:: loss_distribution_plot_interactive
 
+Use case
+--------
+
+Use to surface high-loss outlier samples driving log loss, split by true class with the mean marked.
+
 Complete example
 ----------------
 

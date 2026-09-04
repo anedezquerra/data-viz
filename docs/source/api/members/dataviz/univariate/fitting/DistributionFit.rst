@@ -11,6 +11,11 @@ dataviz.univariate.fitting.DistributionFit
    :members:
    :show-inheritance:
 
+Use case
+--------
+
+Fitted SciPy distribution summary carrying the distribution name, parameters, and fit quality; consumed by ranking and overlay helpers.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.calibration_regression.uncertainty_band_plot_static
 
 .. autofunction:: uncertainty_band_plot_static
 
+Use case
+--------
+
+Use to visualize predictive mean with a plus/minus z-sigma band, e.g. for Gaussian process regression, to see where the model is uncertain.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.domain.demand_forecast_fan_chart_static
 
 .. autofunction:: demand_forecast_fan_chart_static
 
+Use case
+--------
+
+Use to present demand forecasts with nested quantile bands, communicating growing uncertainty the further out the horizon extends.
+
 Complete example
 ----------------
 

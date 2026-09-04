@@ -9,6 +9,11 @@ dataviz.classification.threshold.ks_statistic_plot_static
 
 .. autofunction:: ks_statistic_plot_static
 
+Use case
+--------
+
+Use in credit scoring to measure class separation; plots class CDFs and marks the maximum KS gap.
+
 Complete example
 ----------------
 

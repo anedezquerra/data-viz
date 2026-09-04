@@ -9,6 +9,11 @@ dataviz.spc.capability.capability_histogram_interactive
 
 .. autofunction:: capability_histogram_interactive
 
+Use case
+--------
+
+Use to show a process histogram against specification limits with a fitted normal curve, for capability reviews with customers or auditors.
+
 Complete example
 ----------------
 

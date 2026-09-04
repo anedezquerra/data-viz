@@ -9,6 +9,11 @@ dataviz.spc.diagnostics.zone_chart_interactive
 
 .. autofunction:: zone_chart_interactive
 
+Use case
+--------
+
+Use to score points by sigma zone (1, 2, and 3 sigma bands) as a simple alternative to full run-rule control charts.
+
 Complete example
 ----------------
 

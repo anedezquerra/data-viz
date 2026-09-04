@@ -9,6 +9,11 @@ dataviz.regression.transforms.log_log_diagnostic_interactive
 
 .. autofunction:: log_log_diagnostic_interactive
 
+Use case
+--------
+
+Use to test a power-law relationship between x and y; a straight line in log-log space justifies a log-log model and its slope is the exponent.
+
 Complete example
 ----------------
 

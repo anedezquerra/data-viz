@@ -9,6 +9,11 @@ dataviz.univariate.fitting.compare_distributions
 
 .. autofunction:: compare_distributions
 
+Use case
+--------
+
+Use to fit and rank several candidate distributions to find which family best describes a numeric variable.
+
 Complete example
 ----------------
 

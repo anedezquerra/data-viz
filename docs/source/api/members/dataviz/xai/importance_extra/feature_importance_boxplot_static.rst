@@ -9,6 +9,11 @@ dataviz.xai.importance_extra.feature_importance_boxplot_static
 
 .. autofunction:: feature_importance_boxplot_static
 
+Use case
+--------
+
+Use to assess the stability of importance estimates across CV folds or repeated runs via per-feature spread.
+
 Complete example
 ----------------
 

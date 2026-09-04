@@ -9,6 +9,11 @@ dataviz.regression.quantile.huber_vs_ols_overlay_static
 
 .. autofunction:: huber_vs_ols_overlay_static
 
+Use case
+--------
+
+Use to show how a robust Huber fit diverges from OLS on data containing outliers.
+
 Complete example
 ----------------
 

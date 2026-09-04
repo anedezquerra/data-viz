@@ -9,6 +9,11 @@ dataviz.univariate.transforms.transformation_summary
 
 .. autofunction:: transformation_summary
 
+Use case
+--------
+
+Use to compare skewness, kurtosis, and spread across candidate transformations and pick the most normalizing one.
+
 Complete example
 ----------------
 

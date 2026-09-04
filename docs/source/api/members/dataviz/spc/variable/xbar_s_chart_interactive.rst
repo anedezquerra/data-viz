@@ -9,6 +9,11 @@ dataviz.spc.variable.xbar_s_chart_interactive
 
 .. autofunction:: xbar_s_chart_interactive
 
+Use case
+--------
+
+Use when monitoring larger subgroups where the standard deviation tracks within-subgroup spread more precisely than the range.
+
 Complete example
 ----------------
 

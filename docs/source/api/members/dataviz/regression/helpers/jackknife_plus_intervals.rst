@@ -9,6 +9,11 @@ dataviz.regression.helpers.jackknife_plus_intervals
 
 .. autofunction:: jackknife_plus_intervals
 
+Use case
+--------
+
+Use to build Jackknife+ prediction intervals when you need coverage guarantees without distribution assumptions.
+
 Complete example
 ----------------
 

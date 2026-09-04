@@ -9,6 +9,11 @@ dataviz.classification.fairness.per_segment_metric_bar_interactive
 
 .. autofunction:: per_segment_metric_bar_interactive
 
+Use case
+--------
+
+Use to audit accuracy, F1, TPR or FPR side by side across demographic or segment groups.
+
 Complete example
 ----------------
 

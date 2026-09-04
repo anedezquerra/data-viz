@@ -9,6 +9,11 @@ dataviz.regression.metrics.metric_comparison_bar_interactive
 
 .. autofunction:: metric_comparison_bar_interactive
 
+Use case
+--------
+
+Use to compare regression metrics across multiple models with a grouped bar chart.
+
 Complete example
 ----------------
 

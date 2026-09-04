@@ -9,6 +9,11 @@ dataviz.univariate.accessors.infer_univariate_kind
 
 .. autofunction:: infer_univariate_kind
 
+Use case
+--------
+
+Use to classify a column as numeric, categorical, datetime, boolean, or text so downstream code can pick the right chart.
+
 Complete example
 ----------------
 

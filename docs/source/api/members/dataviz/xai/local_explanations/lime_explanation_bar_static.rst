@@ -9,6 +9,11 @@ dataviz.xai.local_explanations.lime_explanation_bar_static
 
 .. autofunction:: lime_explanation_bar_static
 
+Use case
+--------
+
+Use to show a LIME-style signed bar of which feature conditions raised or lowered one instance's prediction.
+
 Complete example
 ----------------
 

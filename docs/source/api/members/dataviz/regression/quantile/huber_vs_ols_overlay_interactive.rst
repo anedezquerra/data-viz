@@ -9,6 +9,11 @@ dataviz.regression.quantile.huber_vs_ols_overlay_interactive
 
 .. autofunction:: huber_vs_ols_overlay_interactive
 
+Use case
+--------
+
+Use to show how a robust Huber fit diverges from OLS on data containing outliers.
+
 Complete example
 ----------------
 

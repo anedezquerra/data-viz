@@ -9,6 +9,11 @@ dataviz.univariate.categorical.category_counts
 
 .. autofunction:: category_counts
 
+Use case
+--------
+
+Use to compute sorted category counts or proportions, optionally limited to the top N, as input for categorical charts.
+
 Complete example
 ----------------
 

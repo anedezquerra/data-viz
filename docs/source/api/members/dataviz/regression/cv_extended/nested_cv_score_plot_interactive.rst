@@ -9,6 +9,11 @@ dataviz.regression.cv_extended.nested_cv_score_plot_interactive
 
 .. autofunction:: nested_cv_score_plot_interactive
 
+Use case
+--------
+
+Use to display outer-fold scores from nested CV, giving an unbiased estimate of performance after hyperparameter tuning.
+
 Complete example
 ----------------
 

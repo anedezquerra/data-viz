@@ -9,6 +9,11 @@ dataviz.regression.var_engineering.target_encoding_curve_static
 
 .. autofunction:: target_encoding_curve_static
 
+Use case
+--------
+
+Use to sanity-check target encoding by plotting category mean target vs sample size; small-n categories far from the prior are unreliable.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.charts.prediction_plot
 
 .. autofunction:: prediction_plot
 
+Use case
+--------
+
+Use to compare observed versus predicted values; points off the diagonal reveal bias and where the model under- or over-predicts.
+
 Complete example
 ----------------
 

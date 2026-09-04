@@ -9,6 +9,11 @@ dataviz.regression.glm.pearson_residual_plot_static
 
 .. autofunction:: pearson_residual_plot_static
 
+Use case
+--------
+
+Use to plot Pearson residuals against fitted means to check the assumed variance structure.
+
 Complete example
 ----------------
 

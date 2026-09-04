@@ -9,6 +9,11 @@ dataviz.univariate.tail.lorenz_curve_interactive
 
 .. autofunction:: lorenz_curve_interactive
 
+Use case
+--------
+
+Use to visualize inequality in non-negative values against the perfect-equality reference line.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.autocorrelation.residual_acf_static
 
 .. autofunction:: residual_acf_static
 
+Use case
+--------
+
+Use to check whether regression residuals are autocorrelated across lags, which invalidates standard OLS inference for time-ordered data.
+
 Complete example
 ----------------
 

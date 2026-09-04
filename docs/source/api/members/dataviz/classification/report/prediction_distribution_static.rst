@@ -9,6 +9,11 @@ dataviz.classification.report.prediction_distribution_static
 
 .. autofunction:: prediction_distribution_static
 
+Use case
+--------
+
+Use to see, per true class, how predictions split across predicted classes; a row-normalized view of the confusion matrix.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.univariate.distribution.qq_plot_interactive
 
 .. autofunction:: qq_plot_interactive
 
+Use case
+--------
+
+Use to compare sample quantiles against a theoretical distribution to assess fit, especially in the tails.
+
 Complete example
 ----------------
 

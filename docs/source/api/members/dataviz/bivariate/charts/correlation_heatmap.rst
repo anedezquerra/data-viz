@@ -9,6 +9,11 @@ dataviz.bivariate.charts.correlation_heatmap
 
 .. autofunction:: correlation_heatmap
 
+Use case
+--------
+
+Use to scan pairwise correlations among dataframe columns and quickly find strongly related variable pairs.
+
 Complete example
 ----------------
 

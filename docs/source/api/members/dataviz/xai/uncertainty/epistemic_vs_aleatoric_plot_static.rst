@@ -9,6 +9,11 @@ dataviz.xai.uncertainty.epistemic_vs_aleatoric_plot_static
 
 .. autofunction:: epistemic_vs_aleatoric_plot_static
 
+Use case
+--------
+
+Use to decompose uncertainty into reducible epistemic (model) and irreducible aleatoric (data) components across bins.
+
 Complete example
 ----------------
 

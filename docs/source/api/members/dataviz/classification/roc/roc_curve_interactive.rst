@@ -9,6 +9,11 @@ dataviz.classification.roc.roc_curve_interactive
 
 .. autofunction:: roc_curve_interactive
 
+Use case
+--------
+
+Use to assess a binary classifier from precomputed fpr/tpr arrays, with optional AUC label and random-chance reference line.
+
 Complete example
 ----------------
 

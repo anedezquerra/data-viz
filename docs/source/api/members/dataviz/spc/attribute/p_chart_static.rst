@@ -9,6 +9,11 @@ dataviz.spc.attribute.p_chart_static
 
 .. autofunction:: p_chart_static
 
+Use case
+--------
+
+Use when monitoring a supplier's defect rate across lots of varying size to catch special-cause shifts in proportion nonconforming.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.spc.diagnostics.rule_violation_chart_static
 
 .. autofunction:: rule_violation_chart_static
 
+Use case
+--------
+
+Use to highlight Western Electric or Nelson rule violations on a control chart so operators see exactly where special causes occurred.
+
 Complete example
 ----------------
 

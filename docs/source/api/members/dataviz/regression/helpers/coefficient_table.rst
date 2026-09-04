@@ -9,6 +9,11 @@ dataviz.regression.helpers.coefficient_table
 
 .. autofunction:: coefficient_table
 
+Use case
+--------
+
+Use to fit OLS and get coefficients with standard errors, t-statistics, and 95% confidence intervals.
+
 Complete example
 ----------------
 

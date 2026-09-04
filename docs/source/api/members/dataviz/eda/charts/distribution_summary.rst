@@ -9,6 +9,11 @@ dataviz.eda.charts.distribution_summary
 
 .. autofunction:: distribution_summary
 
+Use case
+--------
+
+Use at the start of exploratory analysis to review the distribution of every dataframe column at once.
+
 Complete example
 ----------------
 

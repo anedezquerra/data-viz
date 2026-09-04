@@ -9,6 +9,11 @@ dataviz.classification.threshold_extra.youden_j_curve_static
 
 .. autofunction:: youden_j_curve_static
 
+Use case
+--------
+
+Use to find the threshold maximizing sensitivity plus specificity; plots both components and Youden's J.
+
 Complete example
 ----------------
 

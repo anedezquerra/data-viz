@@ -9,6 +9,11 @@ dataviz.regression.domain.price_elasticity_curve_interactive
 
 .. autofunction:: price_elasticity_curve_interactive
 
+Use case
+--------
+
+Use in pricing analysis to plot quantity versus price with an elasticity fit, showing how demand responds to price changes.
+
 Complete example
 ----------------
 

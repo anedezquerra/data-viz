@@ -9,6 +9,11 @@ dataviz.regression.bayesian.trace_plot_coefficients_interactive
 
 .. autofunction:: trace_plot_coefficients_interactive
 
+Use case
+--------
+
+Use to diagnose MCMC sampling health, checking chains for good mixing and stationarity before trusting posterior summaries.
+
 Complete example
 ----------------
 

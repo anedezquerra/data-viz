@@ -9,6 +9,11 @@ dataviz.regression.influence.cooks_distance_plot_interactive
 
 .. autofunction:: cooks_distance_plot_interactive
 
+Use case
+--------
+
+Use to flag influential observations whose removal would shift the fit, using a 4/n threshold.
+
 Complete example
 ----------------
 

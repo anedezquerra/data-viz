@@ -9,6 +9,11 @@ dataviz.xai.concept.embedding_projection_plot_static
 
 .. autofunction:: embedding_projection_plot_static
 
+Use case
+--------
+
+Use to explore a 2-D embedding projection colored by class or feature value to spot clusters and outliers.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.metrics.regression_metrics_bar_interactive
 
 .. autofunction:: regression_metrics_bar_interactive
 
+Use case
+--------
+
+Use to summarize a single model's regression metrics side by side in a bar chart.
+
 Complete example
 ----------------
 

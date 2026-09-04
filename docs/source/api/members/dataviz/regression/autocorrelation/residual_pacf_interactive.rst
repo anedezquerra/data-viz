@@ -9,6 +9,11 @@ dataviz.regression.autocorrelation.residual_pacf_interactive
 
 .. autofunction:: residual_pacf_interactive
 
+Use case
+--------
+
+Use to identify the direct lag order of residual dependence when choosing an AR term or diagnosing model misspecification.
+
 Complete example
 ----------------
 

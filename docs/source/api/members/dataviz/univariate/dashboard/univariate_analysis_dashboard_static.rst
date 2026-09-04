@@ -9,6 +9,11 @@ dataviz.univariate.dashboard.univariate_analysis_dashboard_static
 
 .. autofunction:: univariate_analysis_dashboard_static
 
+Use case
+--------
+
+Use to get a multi-panel overview of one variable combining several univariate views in a single figure.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.spc.rules.violations_by_index
 
 .. autofunction:: violations_by_index
 
+Use case
+--------
+
+Use to group detected rule violations by observation index when annotating multiple rules on a single chart point.
+
 Complete example
 ----------------
 

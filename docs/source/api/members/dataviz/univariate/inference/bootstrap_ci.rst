@@ -9,6 +9,11 @@ dataviz.univariate.inference.bootstrap_ci
 
 .. autofunction:: bootstrap_ci
 
+Use case
+--------
+
+Use when you need a confidence interval for a mean, median, or std but cannot rely on normality or a closed-form formula.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.residual_features.ccpr_plot_static
 
 .. autofunction:: ccpr_plot_static
 
+Use case
+--------
+
+Use to judge where the linear component of one predictor fits well and where residuals spread out, helping spot nonlinearity or heteroscedasticity per feature.
+
 Complete example
 ----------------
 

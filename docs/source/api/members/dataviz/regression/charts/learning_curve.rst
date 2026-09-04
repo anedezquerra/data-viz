@@ -9,6 +9,11 @@ dataviz.regression.charts.learning_curve
 
 .. autofunction:: learning_curve
 
+Use case
+--------
+
+Use to see how model performance scales with training-set size and decide whether more data or a different model will help.
+
 Complete example
 ----------------
 

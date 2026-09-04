@@ -9,6 +9,11 @@ dataviz.regression.prediction.prediction_plot_interactive
 
 .. autofunction:: prediction_plot_interactive
 
+Use case
+--------
+
+Use to compare predicted against actual values with a perfect-prediction reference line for a quick fit-quality check.
+
 Complete example
 ----------------
 

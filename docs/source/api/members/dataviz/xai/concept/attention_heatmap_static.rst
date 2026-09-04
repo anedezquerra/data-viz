@@ -9,6 +9,11 @@ dataviz.xai.concept.attention_heatmap_static
 
 .. autofunction:: attention_heatmap_static
 
+Use case
+--------
+
+Use to visualize attention weights across tokens or features in transformer-style models during error analysis.
+
 Complete example
 ----------------
 

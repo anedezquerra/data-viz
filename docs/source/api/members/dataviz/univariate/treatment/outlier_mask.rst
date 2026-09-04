@@ -9,6 +9,11 @@ dataviz.univariate.treatment.outlier_mask
 
 .. autofunction:: outlier_mask
 
+Use case
+--------
+
+Use to get a boolean outlier mask from a named rule (iqr, zscore, or mad) as a shared input to treatment workflows.
+
 Complete example
 ----------------
 

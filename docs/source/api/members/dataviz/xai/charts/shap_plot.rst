@@ -9,6 +9,11 @@ dataviz.xai.charts.shap_plot
 
 .. autofunction:: shap_plot
 
+Use case
+--------
+
+Use to explain individual and global predictions with SHAP values during model review or debugging.
+
 Complete example
 ----------------
 

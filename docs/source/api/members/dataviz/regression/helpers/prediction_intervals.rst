@@ -9,6 +9,11 @@ dataviz.regression.helpers.prediction_intervals
 
 .. autofunction:: prediction_intervals
 
+Use case
+--------
+
+Use to build symmetric prediction intervals around point predictions at a chosen confidence level.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.multivariate.pairplot.pairplot_static
 
 .. autofunction:: pairplot_static
 
+Use case
+--------
+
+Use to survey all pairwise relationships and marginal distributions among several variables in one grid.
+
 Complete example
 ----------------
 

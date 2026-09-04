@@ -9,6 +9,11 @@ dataviz.regression.residual.residual_plot_interactive
 
 .. autofunction:: residual_plot_interactive
 
+Use case
+--------
+
+Use as the first residual diagnostic: plot residuals vs fitted values to reveal nonlinearity or heteroscedasticity.
+
 Complete example
 ----------------
 

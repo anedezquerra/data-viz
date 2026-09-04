@@ -9,6 +9,11 @@ dataviz.spc.attribute.t_chart_static
 
 .. autofunction:: t_chart_static
 
+Use case
+--------
+
+Use when monitoring elapsed time between rare events, such as hours between equipment failures or safety incidents.
+
 Complete example
 ----------------
 

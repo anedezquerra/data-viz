@@ -9,6 +9,11 @@ dataviz.classification.gain_lift.lift_chart_static
 
 .. autofunction:: lift_chart_static
 
+Use case
+--------
+
+Use to quantify how much better than random each score decile performs, e.g. for campaign targeting.
+
 Complete example
 ----------------
 

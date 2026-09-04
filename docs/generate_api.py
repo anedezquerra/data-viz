@@ -583,6 +583,22 @@ def curated_examples() -> dict[str, str]:
 CURATED_EXAMPLES = curated_examples()
 
 
+def curated_use_cases() -> dict[str, str]:
+    """Load curated per-member use cases from docs/_use_cases/*.py files."""
+    registry: dict[str, str] = {}
+    cases_dir = ROOT / "docs" / "_use_cases"
+    if not cases_dir.exists():
+        return registry
+    for path in sorted(cases_dir.glob("*.py")):
+        namespace: dict[str, object] = {}
+        exec(path.read_text(encoding="utf-8"), namespace)  # noqa: S102
+        registry.update(namespace.get("USE_CASES", {}))
+    return registry
+
+
+CURATED_USE_CASES = curated_use_cases()
+
+
 def example_for(dotted_module: str, member: Member) -> str:
     """Build a standalone, copy-pasteable example for an API member."""
     curated = CURATED_EXAMPLES.get(f"{dotted_module}.{member.name}")
@@ -652,10 +668,13 @@ def write_member_page(dotted_module: str, member: Member) -> str:
     code_block = "".join(
         f"   {line}\n" if line else "\n" for line in example.splitlines()
     )
+    use_case = CURATED_USE_CASES.get(qualified_name)
+    use_case_block = f"Use case\n--------\n\n{use_case}\n\n" if use_case else ""
     content = (
         f"{heading(qualified_name)}\n{intro}"
         f".. currentmodule:: {dotted_module}\n\n"
         f".. {directive}:: {member.name}{options}\n\n"
+        f"{use_case_block}"
         "Complete example\n----------------\n\n"
         "The following example is self-contained and can be copied into a Python session or script.\n\n"
         f".. code-block:: python\n\n{code_block}"

@@ -9,6 +9,11 @@ dataviz.spc.attribute.laney_p_chart_interactive
 
 .. autofunction:: laney_p_chart_interactive
 
+Use case
+--------
+
+Use when a p chart shows over-dispersion from large sample sizes; the Laney p' chart adjusts limits so only true special causes signal.
+
 Complete example
 ----------------
 

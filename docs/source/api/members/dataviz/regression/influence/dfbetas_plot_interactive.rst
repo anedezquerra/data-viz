@@ -9,6 +9,11 @@ dataviz.regression.influence.dfbetas_plot_interactive
 
 .. autofunction:: dfbetas_plot_interactive
 
+Use case
+--------
+
+Use to see which observations most change each coefficient via a DFBETAS heatmap.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.classification.confusion_extended.confusion_matrix_diff_static
 
 .. autofunction:: confusion_matrix_diff_static
 
+Use case
+--------
+
+Compare two models by plotting the element-wise difference of their confusion matrices to see where errors shift.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.univariate.advanced.reference_band_histogram_interactive
 
 .. autofunction:: reference_band_histogram_interactive
 
+Use case
+--------
+
+Use when you need a histogram annotated with mean and standard-deviation bands to judge spread against typical reference ranges.
+
 Complete example
 ----------------
 

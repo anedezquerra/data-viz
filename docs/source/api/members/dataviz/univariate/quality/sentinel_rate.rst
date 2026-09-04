@@ -9,6 +9,11 @@ dataviz.univariate.quality.sentinel_rate
 
 .. autofunction:: sentinel_rate
 
+Use case
+--------
+
+Use to quantify how much of a variable is made of sentinel placeholders so you can decide on recoding.
+
 Complete example
 ----------------
 

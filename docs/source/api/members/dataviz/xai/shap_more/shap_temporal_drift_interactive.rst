@@ -9,6 +9,11 @@ dataviz.xai.shap_more.shap_temporal_drift_interactive
 
 .. autofunction:: shap_temporal_drift_interactive
 
+Use case
+--------
+
+Use to track mean absolute SHAP per feature over time windows, detecting when the model's driving features drift.
+
 Complete example
 ----------------
 

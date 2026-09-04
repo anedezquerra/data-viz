@@ -9,6 +9,11 @@ dataviz.regression.bayesian.posterior_predictive_check_static
 
 .. autofunction:: posterior_predictive_check_static
 
+Use case
+--------
+
+Use to compare posterior-predictive draws against observed y and confirm the fitted Bayesian model can reproduce the data it was trained on.
+
 Complete example
 ----------------
 

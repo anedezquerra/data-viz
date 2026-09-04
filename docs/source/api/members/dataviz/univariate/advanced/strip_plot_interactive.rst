@@ -9,6 +9,11 @@ dataviz.univariate.advanced.strip_plot_interactive
 
 .. autofunction:: strip_plot_interactive
 
+Use case
+--------
+
+Use to display each observation as a jittered point, ideal for small samples where exact values and density matter.
+
 Complete example
 ----------------
 

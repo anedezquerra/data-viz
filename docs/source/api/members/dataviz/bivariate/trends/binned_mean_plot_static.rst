@@ -9,6 +9,11 @@ dataviz.bivariate.trends.binned_mean_plot_static
 
 .. autofunction:: binned_mean_plot_static
 
+Use case
+--------
+
+Use to smooth noisy scatter data into mean y values per x bin and reveal the underlying trend.
+
 Complete example
 ----------------
 

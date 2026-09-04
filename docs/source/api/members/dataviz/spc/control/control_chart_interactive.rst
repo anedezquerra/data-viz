@@ -9,6 +9,11 @@ dataviz.spc.control.control_chart_interactive
 
 .. autofunction:: control_chart_interactive
 
+Use case
+--------
+
+Use to plot process observations against computed control limits to judge whether a process is in statistical control.
+
 Complete example
 ----------------
 

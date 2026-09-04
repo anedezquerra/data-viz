@@ -9,6 +9,11 @@ dataviz.xai.shap_extra.shap_violin_static
 
 .. autofunction:: shap_violin_static
 
+Use case
+--------
+
+Use to compare the full distribution of SHAP values per feature, revealing skew and outliers that bars hide.
+
 Complete example
 ----------------
 

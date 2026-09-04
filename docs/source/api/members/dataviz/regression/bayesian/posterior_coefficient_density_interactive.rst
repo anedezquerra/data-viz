@@ -9,6 +9,11 @@ dataviz.regression.bayesian.posterior_coefficient_density_interactive
 
 .. autofunction:: posterior_coefficient_density_interactive
 
+Use case
+--------
+
+Use to inspect the full posterior distribution of each coefficient from MCMC samples instead of relying on a single point estimate.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.regression.quantile.weighted_residual_plot_static
 
 .. autofunction:: weighted_residual_plot_static
 
+Use case
+--------
+
+Use to check whether high-weight observations drive residual patterns in weighted or robust fits.
+
 Complete example
 ----------------
 

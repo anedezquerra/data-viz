@@ -9,6 +9,11 @@ dataviz.xai.cohort.shap_cluster_heatmap_interactive
 
 .. autofunction:: shap_cluster_heatmap_interactive
 
+Use case
+--------
+
+Use to discover groups of instances with similar SHAP explanation patterns via clustered heatmap ordering.
+
 Complete example
 ----------------
 

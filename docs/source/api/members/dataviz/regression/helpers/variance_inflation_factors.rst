@@ -9,6 +9,11 @@ dataviz.regression.helpers.variance_inflation_factors
 
 .. autofunction:: variance_inflation_factors
 
+Use case
+--------
+
+Use to compute one VIF per predictor column when screening a design matrix for multicollinearity.
+
 Complete example
 ----------------
 

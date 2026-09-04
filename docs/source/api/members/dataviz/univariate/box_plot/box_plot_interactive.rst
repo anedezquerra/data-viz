@@ -9,6 +9,11 @@ dataviz.univariate.box_plot.box_plot_interactive
 
 .. autofunction:: box_plot_interactive
 
+Use case
+--------
+
+Use to summarize quartiles, spread, and outliers of a numeric variable with hover detail; DataFrame input draws one box per column.
+
 Complete example
 ----------------
 

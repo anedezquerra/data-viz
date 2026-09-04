@@ -9,6 +9,11 @@ dataviz.regression.effects.ice_plot_regression_interactive
 
 .. autofunction:: ice_plot_regression_interactive
 
+Use case
+--------
+
+Use to reveal heterogeneous feature effects hidden by PDP: per-observation ICE lines with the average overlaid.
+
 Complete example
 ----------------
 

@@ -9,6 +9,11 @@ dataviz.bivariate.stats.bland_altman_interactive
 
 .. autofunction:: bland_altman_interactive
 
+Use case
+--------
+
+Use when comparing two measurement methods to assess their agreement and bias rather than their correlation.
+
 Complete example
 ----------------
 

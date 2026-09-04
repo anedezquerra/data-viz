@@ -9,6 +9,11 @@ dataviz.classification.calibration_extra.multiclass_calibration_curve_interactiv
 
 .. autofunction:: multiclass_calibration_curve_interactive
 
+Use case
+--------
+
+Use to audit one-vs-rest calibration per class in a multiclass problem, one reliability panel per class.
+
 Complete example
 ----------------
 

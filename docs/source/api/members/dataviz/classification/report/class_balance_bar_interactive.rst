@@ -9,6 +9,11 @@ dataviz.classification.report.class_balance_bar_interactive
 
 .. autofunction:: class_balance_bar_interactive
 
+Use case
+--------
+
+Use before training to check target imbalance, or after to compare predicted class counts against ground truth.
+
 Complete example
 ----------------
 
