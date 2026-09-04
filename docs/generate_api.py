@@ -779,6 +779,58 @@ def write_package_page(package_dir: Path) -> None:
     rst_path_for_module(dotted_name).write_text("".join(lines), encoding="utf-8")
 
 
+def docstring_summary(dotted_module: str, member: Member) -> str:
+    """Return the first line of a member's docstring, if available."""
+    target = resolve_member(dotted_module, member.name)
+    if target is None:
+        return ""
+    doc = inspect.getdoc(target)
+    return doc.splitlines()[0] if doc else ""
+
+
+def cell_text(text: str) -> str:
+    """Escape text for a list-table cell."""
+    return text.replace("|", "\\|").replace("\n", " ")
+
+
+def write_function_index() -> None:
+    """Write one page grouping every public member by package."""
+    rows: dict[str, list[str]] = {}
+    for path in sorted(PACKAGE_ROOT.rglob("*.py")):
+        if path.name == "__init__.py":
+            continue
+        dotted = module_name(path)
+        pkg = dotted.split(".")[1]
+        for member in public_members(path):
+            qualified = f"{dotted}.{member.name}"
+            use_case = CURATED_USE_CASES.get(qualified) or docstring_summary(
+                dotted, member
+            )
+            page = f"members/{dotted.replace('.', '/')}/{member.name}"
+            rows.setdefault(pkg, []).append(
+                f"   * - :doc:`{dotted} <{dotted}>`\n"
+                f"     - :doc:`{member.name} <{page}>`\n"
+                f"     - {member.kind}\n"
+                f"     - {cell_text(use_case)}\n"
+            )
+    parts = [
+        heading("Function index"),
+        "\nEvery public function and class, grouped by package. Use cases come "
+        "from the curated registry where available, else the docstring summary.\n",
+    ]
+    for pkg in sorted(rows):
+        summary = PACKAGE_SUMMARIES.get(pkg, "")
+        parts.append(f"\n{heading(f'dataviz.{pkg}', '-')}\n")
+        if summary:
+            parts.append(f"\n{summary}\n")
+        parts.append(
+            "\n.. list-table::\n   :header-rows: 1\n   :widths: 22 26 10 42\n\n"
+            "   * - Module\n     - Name\n     - Kind\n     - Use case\n"
+        )
+        parts.extend(sorted(rows[pkg]))
+    (OUTPUT_ROOT / "function_index.rst").write_text("".join(parts), encoding="utf-8")
+
+
 def generate() -> None:
     """Replace the generated API tree with the current package structure."""
     if OUTPUT_ROOT.exists():
@@ -796,8 +848,10 @@ def generate() -> None:
         if path.name != "__init__.py":
             write_module_page(path)
 
+    write_function_index()
+
     (OUTPUT_ROOT / "modules.rst").write_text(
-        f"{heading('API reference')}\n.. toctree::\n   :maxdepth: 4\n\n   dataviz\n",
+        f"{heading('API reference')}\n.. toctree::\n   :maxdepth: 4\n\n   dataviz\n   function_index\n",
         encoding="utf-8",
     )
 

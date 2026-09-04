@@ -27,10 +27,11 @@ python docs/generate_api.py --verify   # execute every "Complete example"
 ```
 
 The generator creates navigational package and submodule pages plus one page
-per public function or class under `docs/source/api/members`. Every member
-page embeds a self-contained "Complete example" that `--verify` executes
-headlessly. `docs/_tools/verify_api_examples.py` is a backward-compatible
-alias for `--verify`.
+per public function or class under `docs/source/api/members`, and a
+`function_index` page tabulating every member by package (module, name, kind,
+use case). Every member page embeds a self-contained "Complete example" that
+`--verify` executes headlessly. `docs/_tools/verify_api_examples.py` is a
+backward-compatible alias for `--verify`.
 
 Curated "Use case" blurbs live in `docs/_use_cases/<pkg>.py` files as
 `USE_CASES` dicts keyed by fully-qualified member name

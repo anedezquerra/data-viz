@@ -1,5 +1,6 @@
 # Changelog
 
+- Unreleased: docs(api): add generated "Function index" page listing every public member by package with module, kind, and use-case summary.
 - Unreleased: docs(api): richer curated Complete examples for all 826 visualization members (realistic seeded scenarios, non-default args) and legends rendered outside the chart, centered below it.
 - Unreleased: docs(api): add curated "Use case" section to all 826 visualization member pages via new `docs/_use_cases/` registry loaded by `generate_api.py`.
 - Unreleased: docs(api): drop nested "Public API" links from package index pages — submodule toctrees now use maxdepth 1.
