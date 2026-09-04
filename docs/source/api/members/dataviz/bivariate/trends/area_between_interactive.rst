@@ -22,13 +22,25 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.bivariate.trends import area_between_interactive
 
-   x = np.arange(30)
-   y_lower = np.sin(x / 5.0)
-   y_upper = y_lower + 0.5
+   rng = np.random.default_rng(42)
+   month = pd.Series(np.arange(1, 37), name="Month")
+   forecast = 100.0 + 1.5 * month + np.cumsum(rng.normal(loc=0.0, scale=0.5, size=36))
+   lower = pd.Series(forecast - 8.0, name="Lower bound")
+   upper = pd.Series(forecast + 8.0, name="Upper bound")
 
-   fig = area_between_interactive(x, y_lower, y_upper, title="Tolerance band")
+   fig = area_between_interactive(
+       month,
+       lower,
+       upper,
+       title="Demand Forecast Tolerance Band",
+       xlabel="Month",
+       ylabel="Demand (units)",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

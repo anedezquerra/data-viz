@@ -23,10 +23,22 @@ The following example is self-contained and can be copied into a Python session 
 
    from dataviz.xai.surrogate import counterfactual_change_bar_interactive
 
-   original = {"income": 45.0, "debt": 30.0, "tenure": 2.0}
-   counterfactual = {"income": 58.0, "debt": 22.0, "tenure": 2.0}
-
-   fig = counterfactual_change_bar_interactive(original, counterfactual)
+   original = {
+       "credit_score": 598.0, "debt_to_income": 0.46,
+       "loan_amount": 22000.0, "annual_income": 48000.0,
+       "employment_years": 1.0, "late_payments": 2.0,
+   }
+   counterfactual = {
+       "credit_score": 645.0, "debt_to_income": 0.38,
+       "loan_amount": 18000.0, "annual_income": 48000.0,
+       "employment_years": 1.0, "late_payments": 0.0,
+   }
+   fig = counterfactual_change_bar_interactive(
+       original, counterfactual, top_n=6,
+       title="Smallest changes to flip applicant #2048 to approval",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

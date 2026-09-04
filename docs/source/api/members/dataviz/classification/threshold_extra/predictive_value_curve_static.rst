@@ -21,14 +21,17 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.threshold_extra import predictive_value_curve_static
 
-   prevalences = np.linspace(0.01, 0.5, 25)
-
-   ax = predictive_value_curve_static(0.85, 0.90, prevalences=prevalences)
+   # fixed test characteristics: PPV collapses at low prevalence
+   ax = predictive_value_curve_static(
+       sensitivity=0.92, specificity=0.88,
+       prevalences=np.linspace(0.001, 0.5, 150),
+       title="Screening test: PPV / NPV vs prevalence")
+   ax.axvline(0.02, color="grey", linestyle=":", linewidth=1)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

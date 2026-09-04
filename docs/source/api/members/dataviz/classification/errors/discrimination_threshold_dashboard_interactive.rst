@@ -21,15 +21,25 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
-   from dataviz.classification.errors import discrimination_threshold_dashboard_interactive
+   from dataviz.classification.errors import (
+       discrimination_threshold_dashboard_interactive,
+   )
 
-   rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   rng = np.random.default_rng(37)
+   n_pos, n_neg = 45, 115
+   y_true = np.concatenate([np.ones(n_pos, int), np.zeros(n_neg, int)])
+   y_prob = np.concatenate([
+       rng.normal(0.66, 0.16, n_pos),
+       rng.normal(0.34, 0.16, n_neg),
+   ]).clip(0.01, 0.99)
 
-   fig = discrimination_threshold_dashboard_interactive(y_true, y_prob)
+   fig = discrimination_threshold_dashboard_interactive(
+       y_true, y_prob, n_thresholds=80,
+       title="Churn outreach: picking the operating threshold",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

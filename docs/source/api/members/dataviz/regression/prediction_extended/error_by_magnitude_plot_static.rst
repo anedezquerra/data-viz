@@ -22,16 +22,27 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.prediction_extended import error_by_magnitude_plot_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   stores = pd.Series([f"Store {s:02d}" for s in range(1, 41)], name="store")
+   actual_revenue = pd.Series(
+       rng.uniform(50, 900, 40).round(0), name="actual_revenue_kusd"
+   )
+   predicted_revenue = pd.Series(
+       actual_revenue * rng.normal(1.0, 0.08, 40) + rng.normal(0, 15, 40),
+       name="predicted_revenue_kusd",
+   )
 
-   ax = error_by_magnitude_plot_static(y_true, y_pred)
+   ax = error_by_magnitude_plot_static(
+       actual_revenue, predicted_revenue, n_bins=8,
+       title="Store revenue model: MAE by revenue magnitude",
+       color="#4878d0", line_color="#d62728", theme="minimal",
+   )
+   ax.set_xlabel("Actual revenue midpoint (kUSD)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

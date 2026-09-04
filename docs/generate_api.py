@@ -599,17 +599,47 @@ def curated_use_cases() -> dict[str, str]:
 CURATED_USE_CASES = curated_use_cases()
 
 
+def with_legend_below(code: str) -> str:
+    """Move the legend outside the chart, centered below it."""
+    if "legend(" in code:
+        return code
+    lines = code.splitlines()
+    if "fig.show()" in code and "fig = " in code:
+        line = (
+            "fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))\n"
+            "fig.update_layout(legend=dict(orientation='h', yanchor='top', "
+            "y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))"
+        )
+        anchor = "fig.show()"
+    elif "import matplotlib.pyplot as plt" in code:
+        if "fig = " in code:
+            line = 'fig.legend(loc="lower center", bbox_to_anchor=(0.5, -0.05), ncols=3, frameon=False)'
+        elif "ax = " in code or "result = " in code:
+            line = 'plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)'
+        else:
+            return code
+        anchor = "plt.show()"
+    else:
+        return code
+    idx = next(
+        (i for i in range(len(lines) - 1, -1, -1) if lines[i].strip() == anchor),
+        len(lines),
+    )
+    lines.insert(idx, line)
+    return "\n".join(lines)
+
+
 def example_for(dotted_module: str, member: Member) -> str:
     """Build a standalone, copy-pasteable example for an API member."""
     curated = CURATED_EXAMPLES.get(f"{dotted_module}.{member.name}")
     if curated is not None:
-        return curated
+        return with_legend_below(curated)
     if dotted_module.startswith("dataviz.spc."):
         try:
-            return spc_example(dotted_module, member)
+            return with_legend_below(spc_example(dotted_module, member))
         except KeyError:
             pass  # member added after the curated SPC table; use generic sample
-    return generic_example(dotted_module, member)
+    return with_legend_below(generic_example(dotted_module, member))
 
 
 def heading(title: str, marker: str = "=") -> str:

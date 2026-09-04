@@ -26,10 +26,14 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.dashboard import spc_dashboard_static
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Moisture content (%) of granola batches across 36 production runs
+   moisture = rng.normal(12.0, 0.3, size=36)
+   moisture[26] = 13.4  # dryer malfunction on run 26
 
-   fig = spc_dashboard_static(data, bins=12, title="Filling process overview")
+   fig = spc_dashboard_static(
+       moisture, span=2, bins=15, title="Granola Moisture Content - SPC Dashboard"
+   )
+   fig.legend(loc="lower center", bbox_to_anchor=(0.5, -0.05), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

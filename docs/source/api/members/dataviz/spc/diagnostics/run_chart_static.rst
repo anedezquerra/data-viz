@@ -26,10 +26,13 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.diagnostics import run_chart_static
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Changeover time (minutes) for 32 consecutive line changeovers
+   changeover = rng.normal(45.0, 3.0, size=32)
+   changeover[24:] -= 6.0  # improvement after SMED kaizen event
 
-   ax = run_chart_static(data, title="Filling process run chart")
+   ax = run_chart_static(changeover, title="Changeover Time Run Chart", show_median=True)
+   ax.set_ylabel("Changeover time (min)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

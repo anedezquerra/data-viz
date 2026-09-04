@@ -23,10 +23,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import numpy as np
    from dataviz.spc.capability import CapabilityStats
 
-   result = CapabilityStats(n=30, mean=10.0, std=0.4, lsl=9.0, usl=11.0, cp=0.833, cpk=0.833, ppm_below=0.0, ppm_above=0.0, ppm_below_normal=6209.7, ppm_above_normal=6209.7, ppm_total_normal=12419.4)
+   # Capability summary recorded for a 500 g filling process
+   result = CapabilityStats(
+       n=60,
+       mean=500.1,
+       std=1.2,
+       lsl=497.0,
+       usl=503.0,
+       cp=0.833,
+       cpk=0.806,
+       ppm_below=0.0,
+       ppm_above=0.0,
+       ppm_below_normal=5123.4,
+       ppm_above_normal=4012.6,
+       ppm_total_normal=9136.0,
+   )
    print(result)
 
 Output gallery

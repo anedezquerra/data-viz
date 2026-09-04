@@ -25,10 +25,11 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.rules import individuals_limits
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Fill weights (g) from 30 consecutive bottles on a filling line
+   weights = rng.normal(500.0, 1.1, size=30)
+   weights[24] = 504.9  # overfill after valve wear
 
-   result = individuals_limits(data)
+   result = individuals_limits(weights, sigma_multiplier=3.0)
    print(result)
 
 Output gallery

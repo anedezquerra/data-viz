@@ -24,14 +24,17 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.xai.uncertainty import prediction_uncertainty_plot_interactive
 
-   rng = np.random.default_rng(53)
-   feature_values = np.sort(rng.uniform(20.0, 80.0, 40))
-   predictions = 1.0 / (1.0 + np.exp(-(feature_values - 50.0) / 10.0))
-   uncertainty = 0.05 + 0.04 * np.abs(feature_values - 50.0) / 30.0
-
+   rng = np.random.default_rng(42)
+   annual_income = np.linspace(20000, 150000, 50)
+   logit = -2.5 + 2.0 * (annual_income - 20000) / 130000
+   predictions = 1.0 / (1.0 + np.exp(-logit))
+   uncertainty = 0.03 + 0.10 * np.abs(annual_income - 85000) / 65000
    fig = prediction_uncertainty_plot_interactive(
-       feature_values, predictions, uncertainty, feature_name="income",
+       annual_income, predictions, uncertainty, "annual_income",
+       title="Approval probability with ensemble std band",
    )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

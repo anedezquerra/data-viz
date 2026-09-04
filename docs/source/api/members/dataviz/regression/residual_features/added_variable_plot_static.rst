@@ -22,14 +22,25 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.residual_features import added_variable_plot_static
 
    rng = np.random.default_rng(42)
-   X = rng.normal(0.0, 1.0, size=(60, 3))
-   y_true = 10 + X @ np.array([2.0, -1.0, 0.5]) + rng.normal(0.0, 0.5, size=60)
+   n = 35
+   cars = pd.DataFrame({
+       "horsepower": rng.uniform(90, 320, n),
+       "weight_kg": rng.uniform(900, 2100, n),
+       "age_years": rng.uniform(0, 12, n),
+   })
+   mpg = (52 - 0.045 * cars["horsepower"] - 0.008 * cars["weight_kg"]
+          - 0.6 * cars["age_years"] + rng.normal(0, 1.5, n))
 
-   ax = added_variable_plot_static(X, y_true, feature_index=0, feature_name="x1")
+   ax = added_variable_plot_static(
+       cars, mpg, feature_index=2, feature_name="age_years",
+       title="Fuel economy study: added-variable plot for car age",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

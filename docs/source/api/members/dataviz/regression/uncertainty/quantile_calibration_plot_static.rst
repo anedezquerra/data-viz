@@ -25,13 +25,14 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.regression.uncertainty import quantile_calibration_plot_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   nominal = np.linspace(0.05, 0.95, 19)
+   empirical = nominal + 0.04 * np.sin(2 * np.pi * nominal) - 0.015
 
-   ax = quantile_calibration_plot_static(y_true, y_pred)
+   ax = quantile_calibration_plot_static(
+       nominal, empirical,
+       title="Rainfall quantile regression: nominal vs empirical coverage",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

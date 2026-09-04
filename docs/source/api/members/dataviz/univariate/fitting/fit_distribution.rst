@@ -21,12 +21,18 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.fitting import fit_distribution
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Insurance claim severities recorded by an auto portfolio
+   rng = np.random.default_rng(42)
+   claims = pd.Series(
+       np.round(rng.lognormal(mean=8.1, sigma=0.9, size=56), 0),
+       name="claim_usd",
+   )
 
-   result = fit_distribution(values, distribution="norm")
+   result = fit_distribution(claims, distribution="lognorm")
    print(result)
 
 Output gallery

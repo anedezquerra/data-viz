@@ -21,17 +21,41 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.classification.multiclass import roc_curve_comparison_interactive
 
+   rng = np.random.default_rng(42)
+   # churn screening: compare three candidate models on the same holdout
+   n = 150
+   y_true = (rng.random(n) < 0.3).astype(int)
+
+   def roc(scores):
+       order = np.argsort(-scores)
+       fpr, tpr, tp, fp = [0.0], [0.0], 0, 0
+       for i in order:
+           if y_true[i] == 1:
+               tp += 1
+           else:
+               fp += 1
+           tpr.append(tp / max(y_true.sum(), 1))
+           fpr.append(fp / max((1 - y_true).sum(), 1))
+       return np.array(fpr), np.array(tpr)
+
+   def scores(a_pos, b_pos, a_neg, b_neg):
+       return np.clip(y_true * rng.beta(a_pos, b_pos, n)
+                      + (1 - y_true) * rng.beta(a_neg, b_neg, n), 0, 1)
+
    models = {
-       "Logistic regression": (np.array([0.0, 0.1, 0.3, 1.0]), np.array([0.0, 0.7, 0.9, 1.0])),
-       "Random forest": (np.array([0.0, 0.05, 0.2, 1.0]), np.array([0.0, 0.8, 0.95, 1.0])),
-       "Gradient boosting": (np.array([0.0, 0.08, 0.25, 1.0]), np.array([0.0, 0.75, 0.92, 1.0])),
+       "Gradient boosting": roc(scores(8, 2, 2, 8)),
+       "Logistic regression": roc(scores(6, 3, 3, 6)),
+       "Naive Bayes": roc(scores(4, 3, 3, 4)),
    }
 
-   fig = roc_curve_comparison_interactive(models)
+   fig = roc_curve_comparison_interactive(models,
+                                          title="Churn models: ROC comparison")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

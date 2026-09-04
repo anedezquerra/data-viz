@@ -22,15 +22,28 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
-   from dataviz.classification.confusion_extended import error_analysis_grid_interactive
+   from dataviz.classification.confusion_extended import (
+       error_analysis_grid_interactive,
+   )
 
-   cm = np.array([[32, 4], [5, 29]])
-   fpr = np.array([0.0, 0.1, 0.3, 1.0])
-   tpr = np.array([0.0, 0.7, 0.9, 1.0])
-   precision = np.array([1.0, 0.86, 0.72])
-   recall = np.array([0.2, 0.7, 1.0])
+   rng = np.random.default_rng(23)
+   n = 200
+   true_labels = rng.choice(4, size=n, p=[0.4, 0.3, 0.2, 0.1])
+   pred_labels = true_labels.copy()
+   flip = rng.uniform(size=n) < 0.2
+   pred_labels[flip] = np.clip(true_labels[flip] + rng.choice([-1, 1],
+                               size=int(flip.sum())), 0, 3)
+   cm = np.zeros((4, 4), dtype=int)
+   for t, p in zip(true_labels, pred_labels):
+       cm[t, p] += 1
+   classes = ["sedan", "SUV", "truck", "van"]
 
-   fig = error_analysis_grid_interactive(cm)
+   fig = error_analysis_grid_interactive(
+       cm, labels=classes,
+       title="Vehicle image classifier: which classes get confused?",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

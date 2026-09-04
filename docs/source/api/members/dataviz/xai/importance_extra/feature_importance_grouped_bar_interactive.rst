@@ -21,14 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import matplotlib.pyplot as plt
    from dataviz.xai.importance_extra import feature_importance_grouped_bar_interactive
 
+   features = [
+       "credit_score", "debt_to_income", "utilization",
+       "annual_income", "loan_amount", "account_age",
+   ]
    importances = {
-       "permutation": {"age": 0.05, "income": 0.12, "tenure": 0.02},
-       "gain": {"age": 0.08, "income": 0.15, "tenure": 0.03},
+       "LogisticReg": dict(zip(features, [0.35, 0.22, 0.15, 0.12, 0.09, 0.07])),
+       "RandomForest": dict(zip(features, [0.28, 0.25, 0.18, 0.11, 0.10, 0.08])),
+       "XGBoost": dict(zip(features, [0.31, 0.21, 0.20, 0.10, 0.12, 0.06])),
    }
 
-   fig = feature_importance_grouped_bar_interactive(importances)
+   fig = feature_importance_grouped_bar_interactive(
+       importances,
+       top_n=6,
+       title="Feature Importance Agreement Across Candidate Models",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

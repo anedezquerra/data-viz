@@ -22,19 +22,23 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.comparison import multi_model_pred_vs_actual_overlay_static
 
    rng = np.random.default_rng(42)
-   y_true = rng.normal(10.0, 2.0, size=60)
-   predictions_per_model = [
-       y_true + rng.normal(0.0, 0.5, size=60),
-       y_true + rng.normal(0.0, 0.8, size=60),
-   ]
+   actual = pd.Series(rng.uniform(40, 160, 30), name="actual_throughput")
+   preds = [actual + rng.normal(0, 6, 30),
+            actual * rng.normal(1.0, 0.09, 30),
+            actual + rng.normal(4, 10, 30)]
+   labels = ["Linear", "Random Forest", "Gradient Boosting"]
 
    ax = multi_model_pred_vs_actual_overlay_static(
-       y_true, predictions_per_model, ["OLS", "Ridge"]
-   )
+       actual, preds, labels,
+       title="Line Throughput: Predicted vs Actual by Model",
+       cmap="Dark2")
+   ax.set_xlabel("Actual units/hour")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

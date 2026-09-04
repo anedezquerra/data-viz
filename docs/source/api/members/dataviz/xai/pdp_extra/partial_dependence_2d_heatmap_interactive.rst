@@ -24,14 +24,19 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.xai.pdp_extra import partial_dependence_2d_heatmap_interactive
 
-   rng = np.random.default_rng(31)
-   x_grid = np.linspace(0.0, 5.0, 6)
-   y_grid = np.linspace(0.0, 4.0, 5)
-   pdp = rng.normal(0.5, 0.1, size=(5, 6))
-
+   credit_score = np.linspace(300, 850, 25)
+   dti = np.linspace(0.0, 0.6, 20)
+   xx, yy = np.meshgrid(credit_score, dti)
+   logit = -3.0 + 0.008 * (xx - 300) + 6.0 * yy - 0.006 * (xx - 300) * yy
+   pdp = 1.0 / (1.0 + np.exp(-logit))
    fig = partial_dependence_2d_heatmap_interactive(
-       x_grid, y_grid, pdp, feature_x="income", feature_y="tenure",
+       credit_score, dti, pdp,
+       feature_x="credit_score", feature_y="debt_to_income",
+       title="Default risk: credit score x debt-to-income interaction",
+       colorscale="Magma",
    )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

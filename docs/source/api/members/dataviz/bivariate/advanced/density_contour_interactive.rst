@@ -21,13 +21,24 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.bivariate.advanced import density_contour_interactive
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
+   rng = np.random.default_rng(42)
+   n = 800
+   temperature = pd.Series(rng.normal(loc=22.0, scale=3.0, size=n), name="Temperature (C)")
+   humidity = pd.Series(80.0 - 1.5 * temperature + rng.normal(loc=0.0, scale=5.0, size=n), name="Humidity (%)")
 
-   fig = density_contour_interactive(x, y)
+   fig = density_contour_interactive(
+       temperature,
+       humidity,
+       title="Greenhouse Climate Density",
+       colorscale="Cividis",
+       contours_coloring="heatmap",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

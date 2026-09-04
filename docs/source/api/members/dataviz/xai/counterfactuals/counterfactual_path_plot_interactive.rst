@@ -22,18 +22,30 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.xai.counterfactuals import counterfactual_path_plot_interactive
 
+   cols = ["credit_score", "debt_to_income", "utilization"]
    steps = pd.DataFrame(
-       {
-           "income": [45.0, 52.0, 52.0, 61.0],
-           "debt": [30.0, 30.0, 22.0, 22.0],
-           "tenure": [2.0, 2.0, 2.0, 3.5],
-       }
+       [
+           [612, 0.48, 0.81],
+           [630, 0.46, 0.74],
+           [655, 0.42, 0.66],
+           [690, 0.37, 0.55],
+           [718, 0.33, 0.44],
+       ],
+       columns=cols,
    )
-   predictions = [0.32, 0.41, 0.47, 0.58]
+   predictions = [0.71, 0.66, 0.58, 0.47, 0.39]
 
-   fig = counterfactual_path_plot_interactive(steps, predictions)
+   fig = counterfactual_path_plot_interactive(
+       steps,
+       predictions,
+       target_threshold=0.5,
+       title="Counterfactual Path to Loan Approval (P(default) below 0.5)",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

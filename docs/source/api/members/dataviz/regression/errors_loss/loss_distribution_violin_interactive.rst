@@ -25,12 +25,18 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.errors_loss import loss_distribution_violin_interactive
 
    rng = np.random.default_rng(42)
-   losses_per_model = [
-       np.abs(rng.normal(0.0, 0.5, size=60)),
-       np.abs(rng.normal(0.0, 0.8, size=60)),
-   ]
+   models = ["Ridge", "Random Forest", "XGBoost"]
+   losses = [np.abs(rng.normal(0, 5, 30)),
+             np.abs(rng.normal(0, 3.5, 30)),
+             np.abs(rng.normal(0, 3.0, 30))]
 
-   fig = loss_distribution_violin_interactive(["OLS", "Ridge"], losses_per_model, metric_name="MAE")
+   fig = loss_distribution_violin_interactive(
+       models, losses,
+       title="Freight Cost Models: Per-Shipment Absolute Loss",
+       metric_name="absolute error (USD)", color="#1f6fb2",
+       template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

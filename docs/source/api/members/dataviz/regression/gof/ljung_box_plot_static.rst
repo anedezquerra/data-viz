@@ -22,13 +22,22 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.gof import ljung_box_plot_static
 
    rng = np.random.default_rng(42)
-   residuals = rng.normal(0.0, 1.0, size=80)
+   n = 30
+   noise = rng.normal(0.0, 1.0, n)
+   residuals = pd.Series(
+       np.array([noise[0]] + [0.6 * noise[i - 1] + noise[i] for i in range(1, n)]),
+       index=pd.date_range("2025-04-01", periods=n, freq="D"),
+       name="daily_yield_residuals")
 
-   ax = ljung_box_plot_static(residuals, lags=10)
+   ax = ljung_box_plot_static(residuals, lags=12, alpha=0.05,
+                              title="Crop Yield Model: Ljung-Box p-values",
+                              color="#2ca02c")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

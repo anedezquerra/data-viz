@@ -22,16 +22,19 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.effects import elasticity_plot_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   price_grid = pd.Series(np.linspace(5, 40, 22), name="price_usd")
+   elasticity = pd.Series(-1.8 + 0.9 * np.exp(-price_grid / 12),
+                          name="elasticity")
 
-   ax = elasticity_plot_static(y_true, y_pred)
+   ax = elasticity_plot_static(price_grid, elasticity,
+                               title="Own-Price Elasticity by Price Point",
+                               feature_name="price (USD)", color="#1f6fb2")
+   ax.axhline(-1.0, color="#c0392b", linestyle=":", linewidth=1)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

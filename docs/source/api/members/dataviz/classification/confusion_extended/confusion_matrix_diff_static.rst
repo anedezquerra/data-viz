@@ -21,15 +21,33 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.confusion_extended import confusion_matrix_diff_static
 
-   cm_a = np.array([[32, 4], [5, 29]])
-   cm_b = np.array([[28, 8], [7, 27]])
+   rng = np.random.default_rng(19)
+   n = 160
+   true_labels = rng.choice(2, size=n, p=[0.7, 0.3])
 
-   ax = confusion_matrix_diff_static(cm_a, cm_b)
+
+   def make_cm(error_rate):
+       preds = true_labels.copy()
+       flips = rng.uniform(size=n) < error_rate
+       preds[flips] = 1 - preds[flips]
+       m = np.zeros((2, 2), dtype=int)
+       for t, p in zip(true_labels, preds):
+           m[t, p] += 1
+       return m
+
+
+   cm_new = make_cm(0.12)
+   cm_baseline = make_cm(0.25)
+
+   ax = confusion_matrix_diff_static(
+       cm_new, cm_baseline, labels=["no-churn", "churn"],
+       title="New churn model minus baseline (positive = improvement)",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -21,13 +21,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.fitting import fitted_pdf_values
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Insurance claim severities recorded by an auto portfolio
+   rng = np.random.default_rng(42)
+   claims = pd.Series(
+       np.round(rng.lognormal(mean=8.1, sigma=0.9, size=56), 0),
+       name="claim_usd",
+   )
 
-   result = fitted_pdf_values(values)
-   print(result)
+   x_values, pdf_values, fit = fitted_pdf_values(
+       claims,
+       distribution="lognorm",
+       points=150,
+   )
+   print("curve points:", len(x_values), "KS p-value:", round(fit.p_value, 3))
 
 Output gallery
 --------------

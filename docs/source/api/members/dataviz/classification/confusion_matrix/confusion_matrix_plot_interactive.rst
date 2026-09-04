@@ -22,15 +22,26 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
-   from dataviz.classification.confusion_matrix import confusion_matrix_plot_interactive
+   from dataviz.classification.confusion_matrix import (
+       confusion_matrix_plot_interactive,
+   )
 
-   cm = np.array([[32, 4], [5, 29]])
-   fpr = np.array([0.0, 0.1, 0.3, 1.0])
-   tpr = np.array([0.0, 0.7, 0.9, 1.0])
-   precision = np.array([1.0, 0.86, 0.72])
-   recall = np.array([0.2, 0.7, 1.0])
+   rng = np.random.default_rng(42)
+   n = 160
+   y_prob = np.clip(rng.beta(2, 4, n), 0.01, 0.99)
+   y_true = (rng.uniform(size=n) < y_prob).astype(int)
+   y_pred = (y_prob >= 0.35).astype(int)  # low threshold: fraud recall first
+   cm = np.zeros((2, 2), dtype=int)
+   for t, p in zip(y_true, y_pred):
+       cm[t, p] += 1
 
-   fig = confusion_matrix_plot_interactive(cm)
+   fig = confusion_matrix_plot_interactive(
+       cm, labels=["legitimate", "fraud"],
+       title="Fraud detector at 0.35 alert threshold",
+       colorscale="Oranges",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

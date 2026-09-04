@@ -22,16 +22,25 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.residual_extended import residual_histogram_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   patients = pd.Series(np.arange(1, 41), name="patient")
+   actual_bp = pd.Series(rng.normal(128, 14, 40).round(1), name="actual_sbp")
+   predicted_bp = pd.Series(
+       actual_bp + rng.normal(0, 6.5, 40), name="predicted_sbp"
+   )
 
-   ax = residual_histogram_static(y_true, y_pred)
+   ax = residual_histogram_static(
+       actual_bp, predicted_bp, bins=12,
+       title="Blood-pressure model: residual distribution",
+       color="#4878d0", edgecolor="white", overlay_color="#d62728",
+       theme="minimal",
+   )
+   ax.set_xlabel("Residual (mmHg)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

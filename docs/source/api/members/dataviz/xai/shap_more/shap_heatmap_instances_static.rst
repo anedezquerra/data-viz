@@ -25,13 +25,21 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.shap_more import shap_heatmap_instances_static
 
-   importances = np.array([0.42, 0.31, 0.18])
-   feature_names = ["age", "income", "tenure"]
-   shap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])
-   feature_values = np.array([0, 1, 2, 3])
-   pd_values = np.array([0.2, 0.25, 0.31, 0.34])
-
-   ax = shap_heatmap_instances_static(shap_values, feature_names)
+   rng = np.random.default_rng(42)
+   feature_names = [
+       "credit_score", "debt_to_income", "loan_amount",
+       "employment_years", "annual_income", "late_payments",
+       "num_open_accounts", "age",
+   ]
+   coef = np.array([-0.6, 0.5, 0.3, -0.25, -0.2, 0.35, 0.1, -0.05])
+   group_a = rng.normal(-1, 0.5, size=(20, 8)) * coef
+   group_b = rng.normal(1, 0.5, size=(20, 8)) * coef
+   shap_values = np.vstack([group_a, group_b])
+   ax = shap_heatmap_instances_static(
+       shap_values, feature_names, top_n_features=8,
+       title="Per-instance SHAP heatmap reveals two applicant segments",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

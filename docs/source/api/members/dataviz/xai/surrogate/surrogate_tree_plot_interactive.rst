@@ -24,13 +24,23 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.xai.surrogate import surrogate_tree_plot_interactive
 
    rules = [
-       {"depth": 0, "condition": "income <= 50k"},
-       {"depth": 1, "condition": "debt <= 10k", "parent": 0, "prediction": "approve"},
-       {"depth": 1, "condition": "debt > 10k", "parent": 0, "prediction": "review"},
-       {"depth": 0, "condition": "income > 50k", "prediction": "approve"},
+       {"depth": 0, "condition": "credit_score < 620"},
+       {"depth": 1, "parent": 0, "condition": "debt_to_income >= 0.43"},
+       {"depth": 1, "parent": 0, "condition": "debt_to_income < 0.43"},
+       {"depth": 2, "parent": 1, "condition": "late_payments > 0",
+        "prediction": "deny (p=0.91)"},
+       {"depth": 2, "parent": 1, "condition": "late_payments = 0",
+        "prediction": "manual review (p=0.55)"},
+       {"depth": 2, "parent": 2, "condition": "employment_years < 2",
+        "prediction": "deny (p=0.74)"},
+       {"depth": 2, "parent": 2, "condition": "employment_years >= 2",
+        "prediction": "approve (p=0.68)"},
    ]
-
-   fig = surrogate_tree_plot_interactive(rules)
+   fig = surrogate_tree_plot_interactive(
+       rules, title="Surrogate tree approximating the credit-risk black box",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

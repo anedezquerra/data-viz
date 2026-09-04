@@ -22,13 +22,21 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.forecast import backtest_error_distribution_static
 
    rng = np.random.default_rng(42)
-   errors = rng.normal(0.0, 0.7, size=120)
+   backtest_errors = pd.Series(
+       rng.normal(0.5, 4.0, 400) + rng.choice([0.0, 6.0], size=400, p=[0.9, 0.1]),
+       name="backtest_error_bbl")
 
-   ax = backtest_error_distribution_static(errors)
+   ax = backtest_error_distribution_static(
+       backtest_errors,
+       title="Oil Production Forecast: Backtest Error Distribution",
+       bins=40, color="#17becf")
+   ax.set_xlabel("Forecast error (bbl/day)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

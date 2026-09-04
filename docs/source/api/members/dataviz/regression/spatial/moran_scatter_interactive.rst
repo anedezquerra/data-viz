@@ -22,17 +22,20 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
-   import pandas as pd
    from dataviz.regression.spatial import moran_scatter_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   n = 48  # continental US states
+   base = rng.normal(0, 1, n)
+   unemployment = 4.5 + 1.2 * base + rng.normal(0, 0.4, n)
+   spatial_lag = 4.5 + 1.2 * (0.6 * base + 0.4 * rng.normal(0, 1, n))
 
-   fig = moran_scatter_interactive(y_true, y_pred)
+   fig = moran_scatter_interactive(
+       unemployment, spatial_lag,
+       title="State unemployment: Moran scatter of spatial autocorrelation",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -21,18 +21,25 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
-   import numpy as np
-   from dataviz.classification.model_comparison import pareto_tradeoff_bubble_interactive
+   from dataviz.classification.model_comparison import (
+       pareto_tradeoff_bubble_interactive,
+   )
 
    models = {
-       "Logistic regression": {"precision": 0.81, "recall": 0.86, "auc": 0.90},
-       "Random forest": {"precision": 0.88, "recall": 0.90, "auc": 0.95},
-       "Gradient boosting": {"precision": 0.85, "recall": 0.89, "auc": 0.93},
-       "k-NN": {"precision": 0.78, "recall": 0.80, "auc": 0.84},
+       "logreg": {"precision": 0.78, "recall": 0.72, "auc": 0.85},
+       "rf-shallow": {"precision": 0.83, "recall": 0.75, "auc": 0.89},
+       "rf-deep": {"precision": 0.86, "recall": 0.70, "auc": 0.91},
+       "gbm": {"precision": 0.84, "recall": 0.81, "auc": 0.92},
+       "knn": {"precision": 0.70, "recall": 0.65, "auc": 0.76},
+       "mlp": {"precision": 0.80, "recall": 0.78, "auc": 0.88},
    }
 
-   fig = pareto_tradeoff_bubble_interactive(models)
+   fig = pareto_tradeoff_bubble_interactive(
+       models, x_metric="precision", y_metric="recall", size_metric="auc",
+       title="Fraud models: precision-recall trade-off (bubble = AUC)",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

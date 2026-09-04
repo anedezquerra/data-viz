@@ -26,9 +26,13 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.attribute import t_chart_static
 
    rng = np.random.default_rng(42)
-   times = rng.exponential(scale=2.0, size=30)
+   # Hours between recordable safety incidents across a plant
+   times = rng.exponential(scale=12.0, size=25)
+   times[14] = 85.0  # long incident-free stretch after retraining
 
-   ax = t_chart_static(times, title="Hours between failures")
+   ax = t_chart_static(times, title="Safety Incidents - Hours Between Events")
+   ax.set_xlabel("Event Number")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

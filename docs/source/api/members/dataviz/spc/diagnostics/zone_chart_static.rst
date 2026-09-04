@@ -26,10 +26,13 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.diagnostics import zone_chart_static
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Reactor temperature (deg C) sampled hourly with a slow upward drift
+   temps = rng.normal(85.0, 0.8, size=30)
+   temps[22:] += np.linspace(0.0, 1.8, 8)  # fouling heat exchanger
 
-   ax = zone_chart_static(data, title="Process zones")
+   ax = zone_chart_static(temps, title="Reactor Temperature Zone Chart")
+   ax.set_ylabel("Temperature (deg C)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

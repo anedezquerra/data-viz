@@ -25,13 +25,18 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.xai.uncertainty import confidence_attribution_bar_static
 
    attribution = {
-       "entropy": 0.42,
-       "margin": 0.31,
-       "variance": 0.18,
-       "disagreement": 0.09,
+       "thin_credit_history": 0.142,
+       "num_open_accounts": 0.087,
+       "employment_years": 0.064,
+       "loan_amount": 0.031,
+       "annual_income": -0.028,
+       "credit_score": -0.052,
    }
-
-   ax = confidence_attribution_bar_static(attribution)
+   ax = confidence_attribution_bar_static(
+       attribution,
+       title="Which features drive predictive uncertainty - applicant #992",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

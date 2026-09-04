@@ -25,13 +25,20 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.shap_extra import shap_violin_static
 
-   importances = np.array([0.42, 0.31, 0.18])
-   feature_names = ["age", "income", "tenure"]
-   shap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])
-   feature_values = np.array([0, 1, 2, 3])
-   pd_values = np.array([0.2, 0.25, 0.31, 0.34])
-
-   ax = shap_violin_static(shap_values, feature_names)
+   rng = np.random.default_rng(42)
+   feature_names = [
+       "tenure_months", "monthly_charges", "contract_two_year",
+       "num_support_calls", "avg_session_min", "late_payments",
+       "plan_premium", "age",
+   ]
+   X = rng.normal(0, 1, size=(60, 8))
+   coef = np.array([-0.7, 0.4, -0.5, 0.35, -0.15, 0.3, 0.1, -0.08])
+   shap_values = X * coef + rng.normal(0, 0.05, size=(60, 8))
+   ax = shap_violin_static(
+       shap_values, feature_names, top_n=8,
+       title="Distribution of SHAP values per churn feature",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

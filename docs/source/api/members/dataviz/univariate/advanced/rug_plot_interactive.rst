@@ -21,12 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.advanced import rug_plot_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Packet round-trip times captured on a network link
+   rng = np.random.default_rng(42)
+   latency_ms = pd.Series(
+       np.round(rng.lognormal(mean=3.4, sigma=0.35, size=45), 1),
+       name="latency_ms",
+   )
 
-   fig = rug_plot_interactive(values)
+   fig = rug_plot_interactive(
+       latency_ms,
+       title="Round-Trip Latency Observations",
+       xlabel="Latency (ms)",
+       color="steelblue",
+       template="plotly_white",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

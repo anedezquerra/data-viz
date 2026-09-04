@@ -24,6 +24,8 @@ The following example is self-contained and can be copied into a Python session 
    fig = go.Figure(go.Scatter(y=rng.normal(loc=10.0, scale=0.4, size=30)))
 
    add_plotly_reference_lines(fig, hline=10.0)
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

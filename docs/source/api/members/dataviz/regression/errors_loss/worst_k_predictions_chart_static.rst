@@ -22,16 +22,20 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.errors_loss import worst_k_predictions_chart_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   actual = pd.Series(rng.uniform(10, 120, 25), name="actual_los_days")
+   predicted = pd.Series(actual + rng.normal(0, 9, 25), name="predicted_los_days")
 
-   ax = worst_k_predictions_chart_static(y_true, y_pred)
+   ax = worst_k_predictions_chart_static(
+       actual, predicted, k=8,
+       title="Hospital Stay Model: 8 Worst Predictions",
+       color="#c0392b")
+   ax.set_ylabel("Absolute error (days)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

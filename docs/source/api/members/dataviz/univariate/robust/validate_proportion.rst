@@ -23,7 +23,7 @@ The following example is self-contained and can be copied into a Python session 
 
    from dataviz.univariate.robust import validate_proportion
 
-   result = validate_proportion(0.05, name="alpha")
+   result = validate_proportion(0.1, "trim_proportion")
    print(result)
 
 Output gallery

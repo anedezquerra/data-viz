@@ -25,10 +25,15 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.pdp_extra import ale_plot_1d_static
 
-   bin_edges = np.linspace(20.0, 80.0, 7)
-   ale = np.array([-0.12, -0.05, 0.01, 0.06, 0.10, 0.14])
-
-   ax = ale_plot_1d_static(bin_edges, ale, feature_name="income")
+   bin_edges = np.linspace(0.0, 0.6, 11)
+   centers = (bin_edges[:-1] + bin_edges[1:]) / 2
+   ale = 2.1 * centers - 0.9 * centers ** 2
+   ale = ale - ale.mean()
+   ax = ale_plot_1d_static(
+       bin_edges, ale, feature_name="debt_to_income",
+       title="ALE of debt-to-income on default log-odds",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

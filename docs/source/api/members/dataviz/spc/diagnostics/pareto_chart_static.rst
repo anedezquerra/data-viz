@@ -21,14 +21,15 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.spc.diagnostics import pareto_chart_static
 
-   categories = ["Surface", "Dimension", "Assembly", "Packaging"]
-   counts = [38, 24, 13, 7]
+   # Surface defect tally from a quarter of final visual inspection
+   categories = ["Scratch", "Dent", "Contamination", "Misprint", "Crack", "Discoloration"]
+   counts = [87, 54, 38, 22, 11, 6]
 
-   ax = pareto_chart_static(categories, counts, title="Defect priorities")
+   ax = pareto_chart_static(categories, counts, title="Q3 Surface Defect Pareto")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

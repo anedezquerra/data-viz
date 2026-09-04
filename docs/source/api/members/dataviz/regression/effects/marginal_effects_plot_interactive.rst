@@ -24,14 +24,17 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.regression.effects import marginal_effects_plot_interactive
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
-   feature_names = ["age", "income", "tenure"]
+   features = ["discount_pct", "shelf_position", "weekend", "ad_impressions_k"]
+   effects = np.array([1.9, 0.7, 0.4, 0.15])
+   lo = effects - np.array([0.4, 0.3, 0.35, 0.2])
+   hi = effects + np.array([0.45, 0.3, 0.35, 0.22])
 
-   fig = marginal_effects_plot_interactive(y_true, y_pred)
+   fig = marginal_effects_plot_interactive(
+       features, effects, ci_lower=lo, ci_upper=hi,
+       title="Promo Response Model: Average Marginal Effects",
+       color="#2a7f62", template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

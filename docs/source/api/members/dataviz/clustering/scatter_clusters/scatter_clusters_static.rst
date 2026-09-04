@@ -26,11 +26,21 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.clustering.scatter_clusters import scatter_clusters_static
 
    rng = np.random.default_rng(42)
-   x = np.concatenate([rng.normal(loc=0.0, size=20), rng.normal(loc=5.0, size=20)])
-   y = np.concatenate([rng.normal(loc=0.0, size=20), rng.normal(loc=5.0, size=20)])
-   labels = np.repeat([0, 1], 20)
+   centers = [(2.0, 2.0), (8.0, 3.0), (5.0, 9.0)]
+   points = [rng.normal(loc=c, scale=0.9, size=(30, 2)) for c in centers]
+   data = np.vstack(points)
+   labels = np.repeat([0, 1, 2], 30)
 
-   ax = scatter_clusters_static(x, y, labels, title="Cluster visualization")
+   ax = scatter_clusters_static(
+       data[:, 0],
+       data[:, 1],
+       labels,
+       title="Customer Segment Clusters",
+       xlabel="Annual spending (k USD)",
+       ylabel="Visit frequency",
+       show_centroids=True,
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -25,9 +25,16 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.regression.comparison import model_winner_heatmap_static
 
-   win_matrix = np.array([[3, 1], [1, 3]])
+   models = ["Linear", "Random Forest", "XGBoost"]
+   metrics = ["MAE", "RMSE", "MAPE", "R2"]
+   wins = np.array([[0, 0, 0, 0],
+                    [1, 0, 1, 0],
+                    [0, 1, 0, 1]])
 
-   ax = model_winner_heatmap_static(["OLS", "Ridge"], ["MAE", "RMSE"], win_matrix)
+   ax = model_winner_heatmap_static(models, metrics, wins,
+                                    title="Warranty Cost Models: Winner per Metric",
+                                    cmap="YlGn")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -22,14 +22,27 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.multicollinearity import correlation_heatmap_with_clustering_static
 
    rng = np.random.default_rng(42)
-   x1 = rng.normal(0.0, 1.0, size=60)
-   X = np.column_stack([x1, 0.9 * x1 + rng.normal(0.0, 0.1, size=60), rng.normal(0.0, 1.0, size=60)])
+   n = 48
+   ad_spend = rng.normal(50, 12, n)
+   marketing = pd.DataFrame({
+       "tv_spend_k": ad_spend + rng.normal(0, 4, n),
+       "radio_spend_k": 0.6 * ad_spend + rng.normal(0, 6, n),
+       "social_spend_k": rng.normal(20, 6, n),
+       "email_campaigns": rng.integers(1, 9, n).astype(float),
+       "web_traffic_k": 1.4 * ad_spend + rng.normal(0, 10, n),
+   })
 
-   ax = correlation_heatmap_with_clustering_static(X, feature_names=["x1", "x2", "x3"])
+   ax = correlation_heatmap_with_clustering_static(
+       marketing, feature_names=list(marketing.columns),
+       title="Marketing mix model: clustered predictor correlations",
+       cmap="RdBu_r", theme="minimal",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

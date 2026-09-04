@@ -25,14 +25,21 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.shap_more import shap_main_vs_interaction_bar_static
 
-   rng = np.random.default_rng(45)
-   main_effects = rng.normal([0.20, 0.12, 0.05, 0.03], 0.05, size=(50, 4))
-   interaction_effects = rng.normal([0.04, 0.06, 0.01, 0.02], 0.02, size=(50, 4))
-   feature_names = ["age", "income", "tenure", "debt"]
-
+   rng = np.random.default_rng(42)
+   feature_names = [
+       "tenure_months", "monthly_charges", "contract_two_year",
+       "num_support_calls", "avg_session_min", "late_payments",
+       "plan_premium", "age",
+   ]
+   main_scale = np.array([0.7, 0.45, 0.5, 0.3, 0.15, 0.28, 0.12, 0.08])
+   inter_scale = np.array([0.15, 0.25, 0.08, 0.12, 0.05, 0.07, 0.04, 0.02])
+   main_effects = rng.normal(0, 1, size=(60, 8)) * main_scale
+   interaction_effects = rng.normal(0, 1, size=(60, 8)) * inter_scale
    ax = shap_main_vs_interaction_bar_static(
-       main_effects, interaction_effects, feature_names,
+       main_effects, interaction_effects, feature_names, top_n=8,
+       title="Main effects dominate, but charges interact strongly",
    )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

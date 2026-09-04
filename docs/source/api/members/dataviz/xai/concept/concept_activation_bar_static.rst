@@ -24,10 +24,30 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.concept import concept_activation_bar_static
 
-   scores = {"striped": 0.62, "dotted": 0.35, "metallic": 0.12, "wooden": 0.48}
-   p_values = {"striped": 0.001, "dotted": 0.04, "metallic": 0.30, "wooden": 0.008}
+   scores = {
+       "lung opacity": 0.88,
+       "pleural effusion": 0.82,
+       "cardiomegaly": 0.74,
+       "rib fracture": 0.61,
+       "medical device": 0.55,
+       "text marker": 0.42,
+   }
+   p_values = {
+       "lung opacity": 0.001,
+       "pleural effusion": 0.004,
+       "cardiomegaly": 0.012,
+       "rib fracture": 0.03,
+       "medical device": 0.08,
+       "text marker": 0.21,
+   }
 
-   ax = concept_activation_bar_static(scores, p_values=p_values)
+   ax = concept_activation_bar_static(
+       scores,
+       p_values=p_values,
+       significance=0.05,
+       title="TCAV Concept Scores - Pneumonia X-Ray Classifier",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -25,13 +25,21 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.partial_dep import partial_dependence_static
 
-   importances = np.array([0.42, 0.31, 0.18])
-   feature_names = ["age", "income", "tenure"]
-   shap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])
-   feature_values = np.array([0, 1, 2, 3])
-   pd_values = np.array([0.2, 0.25, 0.31, 0.34])
-
-   ax = partial_dependence_static(feature_values, pd_values)
+   rng = np.random.default_rng(42)
+   credit_score = np.linspace(300, 850, 40)
+   logit = -4.0 + 0.010 * (credit_score - 300)
+   predictions = 1.0 / (1.0 + np.exp(-logit))
+   predictions = predictions + rng.normal(0, 0.01, size=credit_score.size)
+   spread = 0.04 + 0.02 * (credit_score - 300) / 550
+   ci = np.column_stack([predictions - spread, predictions + spread])
+   ax = partial_dependence_static(
+       credit_score, predictions, feature_name="credit_score",
+       title="Partial dependence of default risk on credit score",
+       ylabel="Predicted default probability", color="darkred",
+       show_confidence=True, confidence_interval=ci,
+   )
+   ax.set_ylim(0, 1)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -21,16 +21,22 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
-   from dataviz.classification.model_comparison import score_distribution_drift_static
+   from dataviz.classification.model_comparison import (
+       score_distribution_drift_static,
+   )
 
-   rng = np.random.default_rng(42)
-   scores_reference = rng.beta(2.0, 5.0, size=400)
-   scores_current = rng.beta(2.5, 4.5, size=400)
+   rng = np.random.default_rng(79)
+   scores_reference = np.clip(rng.beta(2, 4, 150), 0.01, 0.99)
+   # production traffic shifted toward higher risk scores last month
+   scores_current = np.clip(rng.beta(2.6, 3.6, 150), 0.01, 0.99)
 
-   ax = score_distribution_drift_static(scores_reference, scores_current)
+   ax = score_distribution_drift_static(
+       scores_reference, scores_current, bins=30,
+       title="Fraud scoring service: training vs last-month traffic",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

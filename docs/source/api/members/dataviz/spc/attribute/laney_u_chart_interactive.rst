@@ -21,13 +21,18 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
+   import numpy as np
    from dataviz.spc.attribute import laney_u_chart_interactive
 
-   defects = pd.Series([2, 1, 3, 0, 2, 1])
-   units = pd.Series([50, 48, 52, 51, 50, 49])
+   rng = np.random.default_rng(42)
+   # Cable defects per unit with varying production volumes and overdispersion
+   units = rng.integers(20, 60, size=28)
+   defects = rng.poisson(units * 0.6)
+   defects[20] = 70  # extruder contamination event
 
-   fig = laney_u_chart_interactive(defects, units)
+   fig = laney_u_chart_interactive(defects, units, title="Cable Production - Defects per Unit (Laney u-prime)")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

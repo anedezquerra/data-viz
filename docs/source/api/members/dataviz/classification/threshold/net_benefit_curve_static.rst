@@ -21,16 +21,21 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.threshold import net_benefit_curve_static
 
    rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   # medical screening: decision-curve analysis vs treat-all / treat-none
+   n = 150
+   y_true = (rng.random(n) < 0.2).astype(int)
+   y_prob = np.clip(
+       y_true * rng.beta(6, 2.5, n) + (1 - y_true) * rng.beta(2.5, 6, n), 0, 1)
 
-   ax = net_benefit_curve_static(y_true, y_prob)
+   ax = net_benefit_curve_static(y_true, y_prob,
+                                 title="Screening test: net benefit")
+   ax.set_ylim(-0.05, 0.25)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

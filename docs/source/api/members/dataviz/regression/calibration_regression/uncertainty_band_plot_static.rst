@@ -22,15 +22,23 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.calibration_regression import uncertainty_band_plot_static
 
    rng = np.random.default_rng(42)
-   y_true = rng.normal(10.0, 2.0, size=60)
-   y_pred = y_true + rng.normal(0.0, 0.5, size=60)
-   y_std = np.full(60, 0.6)
+   n = 30
+   mean_pred = pd.Series(np.sort(rng.uniform(200, 800, n)), name="gp_mean_cycles")
+   sigma = pd.Series(rng.uniform(20, 60, n), name="gp_std_cycles")
+   observed = pd.Series(mean_pred + rng.normal(0, 1, n) * sigma,
+                        name="observed_cycles")
 
-   ax = uncertainty_band_plot_static(y_true, y_pred, y_std)
+   ax = uncertainty_band_plot_static(
+       observed, mean_pred, sigma, z=1.96,
+       title="Battery Life GP Model: Predictive Uncertainty Band",
+       line_color="#c0392b")
+   ax.set_ylabel("Charge cycles")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

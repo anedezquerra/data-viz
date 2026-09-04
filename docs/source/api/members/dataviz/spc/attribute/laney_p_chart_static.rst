@@ -26,10 +26,14 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.attribute import laney_p_chart_static
 
    rng = np.random.default_rng(42)
-   defects = rng.binomial(n=100, p=0.05, size=30)
-   sample_sizes = rng.integers(low=80, high=150, size=30)
+   # Large, widely varying supplier-lot samples with overdispersion
+   sample_sizes = rng.integers(400, 900, size=30)
+   defects = rng.binomial(sample_sizes, 0.05)
+   defects[24] = 120  # special cause from a tooling drift
 
-   ax = laney_p_chart_static(defects, sample_sizes, title="Defect rate (p')")
+   ax = laney_p_chart_static(defects, sample_sizes, title="Supplier Lots - Defect Rate (Laney p-prime)")
+   ax.set_xlabel("Lot")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

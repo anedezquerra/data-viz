@@ -22,15 +22,21 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.helpers import compute_regression_metrics
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   n = 30
+   square_feet = rng.uniform(900.0, 3500.0, n)
+   bedrooms = rng.integers(1, 6, n).astype(float)
+   age_years = rng.uniform(0.0, 40.0, n)
+   X = pd.DataFrame({"square_feet": square_feet, "bedrooms": bedrooms,
+                      "age_years": age_years})
+   y = pd.Series(60.0 + 0.16 * square_feet + 10.0 * bedrooms - 0.8 * age_years
+                 + rng.normal(0.0, 15.0, n), name="price_kusd")
 
-   result = compute_regression_metrics(y_true, y_pred)
+   y_pred = 60.0 + 0.16 * square_feet + 10.0 * bedrooms - 0.8 * age_years
+   result = compute_regression_metrics(y, y_pred, n_features=3)
    print(result)
 
 Output gallery

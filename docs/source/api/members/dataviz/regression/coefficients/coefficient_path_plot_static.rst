@@ -25,13 +25,17 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.regression.coefficients import coefficient_path_plot_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   alphas = np.logspace(-3, 1, 20)
+   features = ["income", "debt_ratio", "credit_age", "utilization"]
+   true_betas = np.array([0.9, -1.4, 0.5, -0.8])
+   paths = true_betas[None, :] * (1 - np.exp(-alphas[:, None] * 5))
 
-   ax = coefficient_path_plot_static(y_true, y_pred)
+   ax = coefficient_path_plot_static(alphas, paths, feature_names=features,
+                                     log_x=True,
+                                     title="Credit Risk Lasso: Coefficient Path",
+                                     cmap="tab10")
+   ax.set_xlabel("Regularization strength (log)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

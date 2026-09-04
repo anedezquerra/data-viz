@@ -25,15 +25,24 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.comparison import shap_model_agreement_scatter_static
 
-   rng = np.random.default_rng(11)
-   shap_a = rng.normal(0.0, 0.3, size=(60, 4))
-   shap_b = shap_a + rng.normal(0.0, 0.05, size=(60, 4))
-   feature_names = ["age", "income", "tenure", "debt"]
+   rng = np.random.default_rng(42)
+   features = [
+       "credit_score", "debt_to_income", "utilization",
+       "annual_income", "loan_amount", "account_age",
+   ]
+   base = rng.normal(0.0, [0.40, 0.30, 0.25, 0.15, 0.10, 0.05], size=(60, 6))
+   shap_rf = base + rng.normal(0.0, 0.05, size=base.shape)
+   shap_xgb = base * 1.1 + rng.normal(0.0, 0.08, size=base.shape)
 
    ax = shap_model_agreement_scatter_static(
-       shap_a, shap_b, model_a="random forest", model_b="xgboost",
-       feature_names=feature_names,
+       shap_rf,
+       shap_xgb,
+       model_a="RandomForest",
+       model_b="XGBoost",
+       feature_names=features,
+       title="Per-Instance SHAP Agreement: RandomForest vs XGBoost",
    )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

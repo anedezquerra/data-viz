@@ -25,9 +25,14 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.spc.attribute import np_chart_static
 
-   defects = np.array([3, 5, 4, 6, 2, 7, 4, 5, 3, 6])
+   rng = np.random.default_rng(42)
+   # 28 incoming lots, 200 parts inspected from each lot
+   defects = rng.binomial(200, 0.04, size=28)
+   defects[19] = 19  # lot from a new supplier runs high
 
-   ax = np_chart_static(defects, sample_size=100, title="Defectives per lot")
+   ax = np_chart_static(defects, sample_size=200, title="Incoming Inspection - Defective Parts per Lot")
+   ax.set_xlabel("Lot")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -25,12 +25,23 @@ The following example is self-contained and can be copied into a Python session 
    import pandas as pd
    from dataviz.xai.shap_more import shap_temporal_drift_interactive
 
-   rng = np.random.default_rng(49)
-   timestamps = pd.Series(pd.date_range("2024-01-01", periods=56, freq="D"))
-   shap_values = rng.normal(0.0, 0.2, size=(56, 4))
-   feature_names = ["age", "income", "tenure", "debt"]
-
-   fig = shap_temporal_drift_interactive(timestamps, shap_values, feature_names)
+   rng = np.random.default_rng(42)
+   feature_names = [
+       "tenure_months", "monthly_charges", "contract_two_year",
+       "num_support_calls", "avg_session_min", "late_payments",
+   ]
+   n_days = 84
+   timestamps = pd.Series(pd.date_range("2024-01-01", periods=n_days, freq="D"))
+   scale = np.array([0.8, 0.4, 0.6, 0.35, 0.15, 0.3])
+   shap_values = rng.normal(0, 1, size=(n_days, len(feature_names))) * scale
+   trend = np.linspace(0, 0.5, n_days)
+   shap_values[:, 3] = shap_values[:, 3] + trend
+   fig = shap_temporal_drift_interactive(
+       timestamps, shap_values, feature_names, freq="W", top_n=4,
+       title="Weekly SHAP drift - support calls gain importance",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

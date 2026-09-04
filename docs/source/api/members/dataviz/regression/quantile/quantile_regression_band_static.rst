@@ -22,17 +22,27 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.quantile import quantile_regression_band_static
 
    rng = np.random.default_rng(42)
-   x = np.linspace(0.0, 10.0, 60)
-   y = 2 * x + rng.normal(0.0, 1.0, size=60)
-   y_low = 2 * x - 1.5
-   y_med = 2 * x
-   y_high = 2 * x + 1.5
+   distance_km = pd.Series(rng.uniform(2, 60, 25).round(1), name="distance_km")
+   delivery_min = pd.Series(
+       8 + 1.6 * distance_km + rng.gamma(2.0, 3.0, 25), name="delivery_min"
+   )
+   q10 = 6 + 1.45 * distance_km
+   q50 = 8 + 1.60 * distance_km
+   q90 = 11 + 1.85 * distance_km
 
-   ax = quantile_regression_band_static(x, y, y_low, y_med, y_high)
+   ax = quantile_regression_band_static(
+       distance_km, delivery_min, q10, q50, q90,
+       title="Courier delivery time: 10/50/90% quantile band",
+       color="#2a6f97", band_color="#a8d5e5", theme="minimal",
+   )
+   ax.set_xlabel("Distance (km)")
+   ax.set_ylabel("Delivery time (min)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

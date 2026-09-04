@@ -21,12 +21,16 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.tail import survival_values
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = survival_values(values)
+   rng = np.random.default_rng(42)
+   claim_amounts = pd.Series(
+       (rng.pareto(a=2.5, size=160) * 5000 + 1000).round(0),
+       name="claim_amount",
+   )
+   result = survival_values(claim_amounts)
    print(result)
 
 Output gallery

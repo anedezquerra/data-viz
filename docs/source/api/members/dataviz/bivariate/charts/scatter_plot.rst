@@ -27,10 +27,23 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.bivariate.charts import scatter_plot
 
    rng = np.random.default_rng(42)
-   x = pd.Series(rng.normal(loc=10.0, scale=2.0, size=30), name="Input")
-   y = pd.Series(2.0 * x + rng.normal(loc=0.0, scale=1.0, size=30), name="Output")
+   n = 60
+   df = pd.DataFrame({
+       "Ad Spend (k USD)": rng.uniform(low=10.0, high=200.0, size=n),
+       "Segment": rng.choice(["Retail", "Online"], size=n),
+   })
+   df["Revenue (k USD)"] = 80.0 + 2.5 * df["Ad Spend (k USD)"] + rng.normal(loc=0.0, scale=30.0, size=n)
 
-   ax = scatter_plot(x, y, title="Input vs output")
+   ax = scatter_plot(
+       "Ad Spend (k USD)",
+       "Revenue (k USD)",
+       data=df,
+       hue="Segment",
+       title="Marketing Spend vs Revenue",
+       fit_degree=1,
+       show_corr=True,
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

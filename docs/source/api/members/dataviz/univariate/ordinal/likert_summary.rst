@@ -26,10 +26,12 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.univariate.ordinal import likert_summary
 
    rng = np.random.default_rng(42)
-   order = ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]
-   data = pd.Series(rng.choice(order, size=60), name="Response")
-
-   result = likert_summary(data, order=order)
+   scale = ["Very dissatisfied", "Dissatisfied", "Neutral", "Satisfied", "Very satisfied"]
+   satisfaction = pd.Series(
+       rng.choice(scale, size=220, p=[0.08, 0.17, 0.20, 0.35, 0.20]),
+       name="satisfaction",
+   )
+   result = likert_summary(satisfaction, order=scale)
    print(result)
 
 Output gallery

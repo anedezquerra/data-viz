@@ -23,10 +23,22 @@ The following example is self-contained and can be copied into a Python session 
 
    from dataviz.xai.importance_more import gain_importance_bar_interactive
 
-   gain = {"age": 0.18, "income": 0.34, "tenure": 0.07, "debt": 0.12}
-   split_count = {"age": 42.0, "income": 65.0, "tenure": 18.0, "debt": 27.0}
-
-   fig = gain_importance_bar_interactive(gain, split_count=split_count)
+   gain = {
+       "credit_score": 42.7, "debt_to_income": 31.4, "loan_amount": 24.9,
+       "employment_years": 18.2, "annual_income": 15.6,
+       "num_open_accounts": 9.8, "age": 7.3, "num_credit_cards": 5.1,
+   }
+   split_count = {
+       "credit_score": 184, "debt_to_income": 152, "loan_amount": 131,
+       "employment_years": 98, "annual_income": 87, "num_open_accounts": 54,
+       "age": 41, "num_credit_cards": 26,
+   }
+   fig = gain_importance_bar_interactive(
+       gain, split_count=split_count, top_n=8,
+       title="XGBoost gain importance - credit default model",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

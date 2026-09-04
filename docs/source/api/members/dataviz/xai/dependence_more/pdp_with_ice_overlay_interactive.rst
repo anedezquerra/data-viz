@@ -22,17 +22,26 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.xai.dependence_more import pdp_with_ice_overlay_interactive
 
-   rng = np.random.default_rng(17)
-   grid = np.linspace(0.0, 10.0, 20)
-   ice_curves = (
-       np.sin(grid)[None, :] * rng.uniform(0.5, 1.5, size=(15, 1))
-       + rng.normal(0.0, 0.05, size=(15, 20))
-   )
+   rng = np.random.default_rng(42)
+   grid = np.linspace(300, 850, 30)
+   base = 1.0 / (1.0 + np.exp((grid - 600.0) / 70.0))
+   offsets = rng.normal(0.0, 0.08, size=(40, 1))
+   ice_curves = base[None, :] + offsets + rng.normal(0.0, 0.02, size=(40, grid.size))
    pdp = ice_curves.mean(axis=0)
+   rug = rng.uniform(300, 850, size=25)
 
-   fig = pdp_with_ice_overlay_interactive(grid, ice_curves, pdp, feature_name="income")
+   fig = pdp_with_ice_overlay_interactive(
+       grid,
+       ice_curves,
+       pdp,
+       feature_name="Credit score",
+       title="PDP + ICE: Default Risk vs Credit Score",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

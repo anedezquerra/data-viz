@@ -22,16 +22,23 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.xai.charts import partial_dependence
 
-   importances = np.array([0.42, 0.31, 0.18])
-   feature_names = ["age", "income", "tenure"]
-   shap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])
-   feature_values = np.array([0, 1, 2, 3])
-   pd_values = np.array([0.2, 0.25, 0.31, 0.34])
+   grid = np.linspace(300, 850, 40)
+   pred_default = 1.0 / (1.0 + np.exp((grid - 580.0) / 60.0))
 
-   result = partial_dependence(feature_values, pd_values)
-   print(result)
+   ax = partial_dependence(
+       grid,
+       pred_default,
+       feature_name="Credit score",
+       title="Partial Dependence of Default Risk on Credit Score",
+       color="darkred",
+       linewidth=2,
+   )
+   ax.set_ylabel("P(default)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
+   plt.show()
 
 Output gallery
 --------------

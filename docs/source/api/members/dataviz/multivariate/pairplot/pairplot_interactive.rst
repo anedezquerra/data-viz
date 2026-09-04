@@ -25,9 +25,23 @@ The following example is self-contained and can be copied into a Python session 
    import pandas as pd
    from dataviz.multivariate.pairplot import pairplot_interactive
 
-   df = pd.DataFrame({"a": [1, 2, np.nan, 4], "b": [4, 3, 2, 1], "segment": ["A", "A", "B", "B"]})
+   rng = np.random.default_rng(42)
+   n = 80
+   horsepower = rng.normal(loc=150.0, scale=30.0, size=n)
+   df = pd.DataFrame({
+       "Horsepower": horsepower,
+       "Weight (kg)": 1200.0 + 3.0 * horsepower + rng.normal(loc=0.0, scale=100.0, size=n),
+       "Fuel economy (mpg)": 45.0 - 0.08 * horsepower + rng.normal(loc=0.0, scale=2.0, size=n),
+       "Price (k USD)": 15.0 + 0.12 * horsepower + rng.normal(loc=0.0, scale=3.0, size=n),
+   })
 
-   fig = pairplot_interactive(df)
+   fig = pairplot_interactive(
+       df,
+       title="Vehicle Specs Pairplot",
+       marker_size=5,
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

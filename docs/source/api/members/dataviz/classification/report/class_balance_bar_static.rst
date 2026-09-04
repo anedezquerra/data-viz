@@ -25,18 +25,17 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.classification.report import class_balance_bar_static
 
-   cm = np.array([[32, 4], [5, 29]])
-   fpr = np.array([0.0, 0.1, 0.3, 1.0])
-   tpr = np.array([0.0, 0.7, 0.9, 1.0])
-   precision = np.array([1.0, 0.86, 0.72])
-   recall = np.array([0.2, 0.7, 1.0])
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   # imbalanced support-ticket queue: does the model under-predict "urgent"?
+   labels = ["low", "normal", "high", "urgent"]
+   y_true = np.array([labels[i] for i in rng.choice(4, 140, p=[0.4, 0.35, 0.18, 0.07])])
+   y_pred = y_true.copy()
+   shift = rng.random(140) < 0.2
+   y_pred[shift] = "normal"  # model collapses rare classes toward "normal"
 
-   ax = class_balance_bar_static(y_true)
+   ax = class_balance_bar_static(y_true, y_pred, labels=labels,
+                                 title="Ticket priority: true vs predicted balance")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

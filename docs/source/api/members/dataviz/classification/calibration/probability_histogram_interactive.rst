@@ -21,15 +21,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    from dataviz.classification.calibration import probability_histogram_interactive
 
-   rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   rng = np.random.default_rng(7)
+   n_fraud, n_legit = 40, 120
+   y_true = np.concatenate([np.ones(n_fraud, int), np.zeros(n_legit, int)])
+   y_prob = np.concatenate([
+       np.clip(rng.normal(0.72, 0.18, n_fraud), 0.01, 0.99),
+       np.clip(rng.normal(0.18, 0.12, n_legit), 0.01, 0.99),
+   ])
 
-   fig = probability_histogram_interactive(y_true, y_prob)
+   fig = probability_histogram_interactive(
+       y_true, y_prob, bins=25,
+       title="Card fraud detector: score separation by class",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

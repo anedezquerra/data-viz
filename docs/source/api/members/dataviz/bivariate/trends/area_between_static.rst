@@ -22,14 +22,27 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.bivariate.trends import area_between_static
 
-   x = np.arange(30)
-   y_lower = np.sin(x / 5.0)
-   y_upper = y_lower + 0.5
+   rng = np.random.default_rng(42)
+   month = pd.Series(np.arange(1, 37), name="Month")
+   forecast = 100.0 + 1.5 * month + np.cumsum(rng.normal(loc=0.0, scale=0.5, size=36))
+   lower = pd.Series(forecast - 8.0, name="Lower bound")
+   upper = pd.Series(forecast + 8.0, name="Upper bound")
 
-   ax = area_between_static(x, y_lower, y_upper, title="Tolerance band")
+   ax = area_between_static(
+       month,
+       lower,
+       upper,
+       title="Demand Forecast Tolerance Band",
+       xlabel="Month",
+       ylabel="Demand (units)",
+       color="steelblue",
+       alpha=0.35,
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

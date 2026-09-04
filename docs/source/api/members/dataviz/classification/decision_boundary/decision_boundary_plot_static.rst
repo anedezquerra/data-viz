@@ -21,20 +21,31 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.decision_boundary import decision_boundary_plot_static
 
    rng = np.random.default_rng(42)
-   x = rng.normal(size=120)
-   y = rng.normal(size=120)
-   labels = (x + y > 0).astype(int)
+   n = 120
+   x = rng.uniform(-3, 3, n)
+   y = rng.uniform(-3, 3, n)
+   labels = (x ** 2 + y ** 2 + rng.normal(0, 0.4, n) > 2.5).astype(int)
 
-   def predict_fn(points):
-       return (points[:, 0] + points[:, 1] > 0).astype(int)
 
-   ax = decision_boundary_plot_static(x, y, labels, predict_fn, resolution=80)
+   def knn_predict(points, k=5):
+       train = np.column_stack([x, y])
+       d = ((points[:, None, :] - train[None, :, :]) ** 2).sum(axis=2)
+       nearest = np.argsort(d, axis=1)[:, :k]
+       return (labels[nearest].mean(axis=1) >= 0.5).astype(int)
+
+
+   ax = decision_boundary_plot_static(
+       x, y, labels, knn_predict, resolution=100,
+       title="5-NN ring classifier: decision boundary",
+   )
+   ax.set_xlabel("sensor reading A")
+   ax.set_ylabel("sensor reading B")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

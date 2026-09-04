@@ -22,13 +22,22 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.gof import normality_test_panel_static
 
    rng = np.random.default_rng(42)
-   residuals = rng.normal(0.0, 1.0, size=80)
+   n = 40
+   square_feet = rng.uniform(800.0, 4000.0, n)
+   bedrooms = rng.integers(1, 6, n).astype(float)
+   X = pd.DataFrame({"square_feet": square_feet, "bedrooms": bedrooms})
+   price = 50.0 + 0.15 * square_feet + 12.0 * bedrooms
+   residuals = pd.Series(rng.normal(0.0, 18.0, n), name="price_residuals_kusd")
 
-   result = normality_test_panel_static(residuals)
+   fig = normality_test_panel_static(residuals,
+                                     title="Housing Price Model: Residual Normality",
+                                     bins=20, color="#1f77b4")
+   fig.legend(loc="lower center", bbox_to_anchor=(0.5, -0.05), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

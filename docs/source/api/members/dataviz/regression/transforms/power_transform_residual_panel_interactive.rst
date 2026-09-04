@@ -25,14 +25,19 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.transforms import power_transform_residual_panel_interactive
 
    rng = np.random.default_rng(42)
-   y_pred = rng.normal(10.0, 2.0, size=60)
-   residuals_orig = rng.normal(0.0, 1.2, size=60)
-   residuals_log = residuals_orig * 0.6
-   residuals_sqrt = residuals_orig * 0.8
+   n = 36
+   y_pred = np.sort(rng.uniform(20, 400, n))              # fitted claim cost (k$)
+   spread = 0.04 * y_pred                                 # heteroscedastic noise
+   resid_orig = rng.normal(0, 1, n) * spread
+   resid_log = rng.normal(0, 0.06, n)
+   resid_sqrt = rng.normal(0, 0.35, n)
 
    fig = power_transform_residual_panel_interactive(
-       y_pred, residuals_orig, residuals_log, residuals_sqrt
+       y_pred, resid_orig, resid_log, resid_sqrt,
+       title="Claim cost model: residual panel across power transforms",
    )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

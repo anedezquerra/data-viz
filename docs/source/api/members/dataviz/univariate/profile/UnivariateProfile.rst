@@ -23,12 +23,19 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
    from dataviz.univariate.profile import UnivariateProfile
+   from dataviz.univariate.quality import DataQualitySummary
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = UnivariateProfile(name="label", kind="label", quality=None, summary="label")
+   quality = DataQualitySummary(
+       count=150, missing=3, missing_rate=0.02, unique=118,
+       duplicate_rate=0.19, zero_rate=0.0, negative_rate=0.0,
+   )
+   result = UnivariateProfile(
+       name="monthly_spend",
+       kind="numeric",
+       quality=quality,
+       summary={"count": 147, "mean": 82.4},
+   )
    print(result)
 
 Output gallery

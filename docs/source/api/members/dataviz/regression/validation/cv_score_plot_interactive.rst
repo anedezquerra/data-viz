@@ -21,13 +21,16 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import numpy as np
    from dataviz.regression.validation import cv_score_plot_interactive
 
-   rng = np.random.default_rng(42)
-   fold_scores = rng.normal(0.85, 0.03, size=10)
+   fold_r2 = [0.812, 0.795, 0.834, 0.807, 0.851, 0.788, 0.822, 0.815]
 
-   fig = cv_score_plot_interactive(fold_scores, model_name="Ridge")
+   fig = cv_score_plot_interactive(
+       fold_r2, model_name="Gradient boosting (wine quality)",
+       title="8-fold cross-validation R-squared",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

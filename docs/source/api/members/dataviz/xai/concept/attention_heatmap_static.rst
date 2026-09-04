@@ -25,11 +25,18 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.concept import attention_heatmap_static
 
-   rng = np.random.default_rng(5)
-   attention = rng.random((4, 4))
-   tokens_x = ["loan", "amount", "risk", "score"]
+   rng = np.random.default_rng(42)
+   tokens = ["the", "model", "denied", "the", "loan", "due", "to", "debt"]
+   weights = rng.random((len(tokens), len(tokens))) + 0.6 * np.eye(len(tokens))
+   attention = weights / weights.sum(axis=1, keepdims=True)
 
-   ax = attention_heatmap_static(attention, tokens_x)
+   ax = attention_heatmap_static(
+       attention,
+       tokens,
+       title="Attention Weights - Adverse-Action Explanation Head",
+       cmap="Blues",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

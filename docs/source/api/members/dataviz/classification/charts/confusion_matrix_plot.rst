@@ -22,16 +22,25 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.classification.charts import confusion_matrix_plot
 
-   cm = np.array([[32, 4], [5, 29]])
-   fpr = np.array([0.0, 0.1, 0.3, 1.0])
-   tpr = np.array([0.0, 0.7, 0.9, 1.0])
-   precision = np.array([1.0, 0.86, 0.72])
-   recall = np.array([0.2, 0.7, 1.0])
+   rng = np.random.default_rng(42)
+   n = 150
+   true_labels = rng.choice(3, size=n, p=[0.5, 0.3, 0.2])
+   pred_labels = true_labels.copy()
+   flip = rng.uniform(size=n) < 0.18
+   pred_labels[flip] = rng.choice(3, size=int(flip.sum()))
+   classes = ["retained", "at-risk", "churned"]
+   cm = np.zeros((3, 3), dtype=int)
+   for t, p in zip(true_labels, pred_labels):
+       cm[t, p] += 1
 
-   result = confusion_matrix_plot(cm)
-   print(result)
+   ax = confusion_matrix_plot(
+       cm, labels=classes, title="Customer retention model: confusion matrix",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
+   plt.show()
 
 Output gallery
 --------------

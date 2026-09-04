@@ -21,12 +21,17 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
+   import numpy as np
    from dataviz.spc.variable import imr_chart_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   rng = np.random.default_rng(42)
+   # Product purity (%) measured once per batch (individuals data)
+   purity = rng.normal(99.2, 0.15, size=30)
+   purity[23] = 98.4  # contaminated raw-material drum
 
-   fig = imr_chart_interactive(values)
+   fig = imr_chart_interactive(purity, span=2, title="Batch Purity I-MR Chart")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

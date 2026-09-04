@@ -25,13 +25,22 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.xai.surrogate import surrogate_tree_plot_static
 
    rules = [
-       {"depth": 0, "condition": "income <= 50k"},
-       {"depth": 1, "condition": "debt <= 10k", "parent": 0, "prediction": "approve"},
-       {"depth": 1, "condition": "debt > 10k", "parent": 0, "prediction": "review"},
-       {"depth": 0, "condition": "income > 50k", "prediction": "approve"},
+       {"depth": 0, "condition": "credit_score < 620"},
+       {"depth": 1, "parent": 0, "condition": "debt_to_income >= 0.43"},
+       {"depth": 1, "parent": 0, "condition": "debt_to_income < 0.43"},
+       {"depth": 2, "parent": 1, "condition": "late_payments > 0",
+        "prediction": "deny (p=0.91)"},
+       {"depth": 2, "parent": 1, "condition": "late_payments = 0",
+        "prediction": "manual review (p=0.55)"},
+       {"depth": 2, "parent": 2, "condition": "employment_years < 2",
+        "prediction": "deny (p=0.74)"},
+       {"depth": 2, "parent": 2, "condition": "employment_years >= 2",
+        "prediction": "approve (p=0.68)"},
    ]
-
-   ax = surrogate_tree_plot_static(rules)
+   ax = surrogate_tree_plot_static(
+       rules, title="Surrogate tree approximating the credit-risk black box",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

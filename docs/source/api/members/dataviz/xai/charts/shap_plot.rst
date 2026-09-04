@@ -22,16 +22,25 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.xai.charts import shap_plot
 
-   importances = np.array([0.42, 0.31, 0.18])
-   feature_names = ["age", "income", "tenure"]
-   shap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])
-   feature_values = np.array([0, 1, 2, 3])
-   pd_values = np.array([0.2, 0.25, 0.31, 0.34])
+   rng = np.random.default_rng(42)
+   features = [
+       "tenure_months", "monthly_charges", "support_tickets", "contract_type",
+       "num_products", "payment_delay", "usage_score", "discount_pct",
+   ]
+   scales = np.array([0.45, 0.30, 0.22, 0.15, 0.10, 0.07, 0.05, 0.03])
+   shap_values = rng.normal(0.0, scales, size=(80, len(features)))
 
-   result = shap_plot(shap_values, feature_names)
-   print(result)
+   ax = shap_plot(
+       shap_values,
+       features,
+       title="SHAP Feature Impact: Subscription Churn Model",
+       color="teal",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
+   plt.show()
 
 Output gallery
 --------------

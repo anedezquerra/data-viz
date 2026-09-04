@@ -21,13 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.univariate.charts import box_plot
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Commute times reported by employees in a hybrid-work survey
+   rng = np.random.default_rng(42)
+   commute_min = pd.Series(
+       np.round(rng.gamma(shape=3.0, scale=8.0, size=55), 1),
+       name="commute_min",
+   )
 
-   result = box_plot(values)
-   print(result)
+   ax = box_plot(
+       commute_min,
+       title="Employee Commute Time Spread",
+       patch_artist=True,
+   )
+   ax.set_ylabel("Commute Time (min)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
+   plt.show()
 
 Output gallery
 --------------

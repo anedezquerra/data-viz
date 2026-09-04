@@ -21,15 +21,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    from dataviz.classification.calibration import probability_density_interactive
 
-   rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   rng = np.random.default_rng(11)
+   n_pos, n_neg = 50, 100
+   y_true = np.concatenate([np.ones(n_pos, int), np.zeros(n_neg, int)])
+   y_prob = np.concatenate([
+       np.clip(rng.beta(6, 2, n_pos), 0.01, 0.99),
+       np.clip(rng.beta(2, 6, n_neg), 0.01, 0.99),
+   ])
 
-   fig = probability_density_interactive(y_true, y_prob)
+   fig = probability_density_interactive(
+       y_true, y_prob, bandwidth=0.08,
+       title="Diabetes screening test: probability density by outcome",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -21,16 +21,20 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.model_comparison import psi_bar_static
 
-   rng = np.random.default_rng(42)
-   scores_reference = rng.beta(2.0, 5.0, size=400)
-   scores_current = rng.beta(2.5, 4.5, size=400)
+   rng = np.random.default_rng(83)
+   scores_reference = np.clip(rng.beta(2, 4, 150), 0.01, 0.99)
+   # seasonal campaign pushed noticeably higher-risk applicants into the funnel
+   scores_current = np.clip(rng.beta(3.0, 3.4, 150), 0.01, 0.99)
 
-   ax = psi_bar_static(scores_reference, scores_current)
+   ax = psi_bar_static(
+       scores_reference, scores_current, n_bins=8,
+       title="Application risk score: PSI vs training baseline",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

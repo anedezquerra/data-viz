@@ -25,16 +25,28 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.counterfactuals import diverse_counterfactual_grid_static
 
-   original = {"income": 45.0, "debt": 30.0, "tenure": 2.0}
+   original = {
+       "credit_score": 612,
+       "debt_to_income": 0.48,
+       "utilization": 0.81,
+       "annual_income": 52000,
+   }
    counterfactuals = pd.DataFrame(
-       {
-           "income": [55.0, 48.0, 62.0],
-           "debt": [24.0, 26.0, 30.0],
-           "tenure": [2.0, 3.0, 4.0],
-       }
+       [
+           [660, 0.48, 0.81, 52000],
+           [612, 0.34, 0.60, 52000],
+           [648, 0.40, 0.81, 61000],
+           [612, 0.38, 0.62, 57500],
+       ],
+       columns=list(original),
    )
 
-   ax = diverse_counterfactual_grid_static(original, counterfactuals)
+   ax = diverse_counterfactual_grid_static(
+       original,
+       counterfactuals,
+       title="Diverse Counterfactuals for Denied Applicant #417",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

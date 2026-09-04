@@ -26,13 +26,24 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.bivariate.correlation import correlation_heatmap_interactive
 
    rng = np.random.default_rng(42)
+   n = 80
+   speed = rng.normal(loc=120.0, scale=6.0, size=n)
    df = pd.DataFrame({
-       "Speed": rng.normal(loc=100.0, scale=5.0, size=30),
-       "Pressure": rng.normal(loc=50.0, scale=2.0, size=30),
-       "Yield": rng.normal(loc=90.0, scale=3.0, size=30),
+       "Speed": speed,
+       "Pressure": 40.0 + 0.3 * speed + rng.normal(loc=0.0, scale=2.0, size=n),
+       "Temperature": rng.normal(loc=180.0, scale=5.0, size=n),
+       "Yield": 95.0 - 0.2 * speed + rng.normal(loc=0.0, scale=1.5, size=n),
    })
 
-   fig = correlation_heatmap_interactive(df, title="Process correlation")
+   fig = correlation_heatmap_interactive(
+       df,
+       method="spearman",
+       mask_upper=True,
+       title="Process Variable Correlations",
+       colorscale="RdBu",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

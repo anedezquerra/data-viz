@@ -23,10 +23,10 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import numpy as np
    from dataviz.spc.rules import ControlLimits
 
-   result = ControlLimits(center=10.0, lower=8.8, upper=11.2, sigma=0.4)
+   # Individuals-chart limits for a 500 g filling process
+   result = ControlLimits(center=500.2, lower=497.1, upper=503.3, sigma=1.03)
    print(result)
 
 Output gallery

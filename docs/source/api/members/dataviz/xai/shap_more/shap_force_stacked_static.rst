@@ -25,11 +25,19 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.shap_more import shap_force_stacked_static
 
-   rng = np.random.default_rng(43)
-   shap_values = rng.normal(0.0, 0.15, size=(6, 4))
-   feature_names = ["age", "income", "tenure", "debt"]
-
-   ax = shap_force_stacked_static(shap_values, base_value=0.5, feature_names=feature_names)
+   rng = np.random.default_rng(42)
+   feature_names = [
+       "tenure_months", "monthly_charges", "contract_two_year",
+       "num_support_calls", "avg_session_min", "late_payments",
+       "plan_premium", "age",
+   ]
+   scale = np.array([0.8, 0.4, 0.6, 0.35, 0.15, 0.3, 0.15, 0.1])
+   shap_values = rng.normal(0, 1, size=(40, 8)) * scale
+   ax = shap_force_stacked_static(
+       shap_values, -1.10, feature_names, top_n=6,
+       title="Stacked SHAP forces across 40 scored customers",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -21,14 +21,16 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.regression.validation import cv_score_plot_static
 
-   rng = np.random.default_rng(42)
-   fold_scores = rng.normal(0.85, 0.03, size=10)
+   fold_r2 = [0.812, 0.795, 0.834, 0.807, 0.851, 0.788, 0.822, 0.815]
 
-   ax = cv_score_plot_static(fold_scores, model_name="Ridge")
+   ax = cv_score_plot_static(
+       fold_r2, model_name="Gradient boosting (wine quality)",
+       title="8-fold cross-validation R-squared",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

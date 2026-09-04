@@ -21,15 +21,22 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
-   from dataviz.classification.calibration_extra import sharpness_resolution_decomposition_interactive
+   from dataviz.classification.calibration_extra import (
+       sharpness_resolution_decomposition_interactive,
+   )
 
-   rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   rng = np.random.default_rng(9)
+   n = 160
+   y_prob = np.clip(rng.beta(2.5, 2.5, n), 0.01, 0.99)
+   y_true = (rng.uniform(size=n) < y_prob).astype(int)
 
-   fig = sharpness_resolution_decomposition_interactive(y_true, y_prob)
+   fig = sharpness_resolution_decomposition_interactive(
+       y_true, y_prob, n_bins=8,
+       title="Readmission risk model: Murphy decomposition of Brier score",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

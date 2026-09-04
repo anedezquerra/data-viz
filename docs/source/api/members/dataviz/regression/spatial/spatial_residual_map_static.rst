@@ -26,11 +26,18 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.spatial import spatial_residual_map_static
 
    rng = np.random.default_rng(42)
-   longitudes = rng.uniform(-5.0, 5.0, size=60)
-   latitudes = rng.uniform(40.0, 50.0, size=60)
-   residuals = rng.normal(0.0, 0.7, size=60)
+   n = 45
+   lon = -104.99 + rng.uniform(-0.25, 0.25, n)   # Denver metro
+   lat = 39.74 + rng.uniform(-0.20, 0.20, n)
+   true_price = 320 + 180 * (lat - 39.74) + rng.normal(0, 25, n)
+   pred_price = 320 + 90 * (lat - 39.74)          # underfits the north-south gradient
+   residuals = true_price - pred_price
 
-   ax = spatial_residual_map_static(longitudes, latitudes, residuals)
+   ax = spatial_residual_map_static(
+       lon, lat, residuals, cmap="coolwarm",
+       title="Denver housing model: geographic residual map (k$)",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

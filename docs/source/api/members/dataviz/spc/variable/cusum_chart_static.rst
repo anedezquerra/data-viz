@@ -26,10 +26,14 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.variable import cusum_chart_static
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Fill weights (g) with a small sustained shift that a Shewhart chart misses
+   weights = rng.normal(500.0, 1.0, size=32)
+   weights[22:] += 1.5  # slow valve drift shifts the mean
 
-   ax = cusum_chart_static(data, target=10.0, k=0.25, h=4.0)
+   ax = cusum_chart_static(
+       weights, target=500.0, k=0.5, h=5.0, title="Fill Weight CUSUM Chart"
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

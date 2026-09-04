@@ -26,9 +26,13 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.variable import median_chart_static
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
+   # Hardness readings (HRC): 24 subgroups of 5 parts from heat treatment
+   hardness = rng.normal(58.0, 1.2, size=120)
+   hardness[75:80] -= 3.5  # quench-tank temperature drop in subgroup 15
 
-   ax = median_chart_static(data, subgroup_size=5, title="Filling process")
+   ax = median_chart_static(hardness, subgroup_size=5, title="Part Hardness Median Chart")
+   ax.set_ylabel("Subgroup median (HRC)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

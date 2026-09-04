@@ -21,14 +21,34 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.categorical import pareto_chart_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-   categories = pd.Series(["low", "medium", "high", "medium", "low"], name="Priority")
+   # Assembly-line defect codes logged during a quality audit
+   rng = np.random.default_rng(42)
+   defects = pd.Series(
+       rng.choice(
+           ["Scratch", "Misalignment", "Dent", "Paint Void", "Loose Fastener", "Label Error"],
+           size=260,
+           p=[0.34, 0.26, 0.16, 0.11, 0.08, 0.05],
+       ),
+       name="defect_code",
+   )
 
-   ax = pareto_chart_static(values)
+   ax = pareto_chart_static(
+       defects,
+       top_n=6,
+       title="Pareto Chart of Assembly Defects",
+       xlabel="Defect Code",
+       ylabel="Occurrences",
+       color="steelblue",
+       line_color="firebrick",
+       theme="default",
+   )
+   ax.set_ylabel("Occurrences")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

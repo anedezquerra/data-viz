@@ -21,16 +21,28 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.xai.charts import feature_importance
 
+   rng = np.random.default_rng(42)
+   features = [
+       "credit_score", "debt_to_income", "payment_history", "utilization",
+       "annual_income", "loan_amount", "account_age", "inquiries_6m",
+   ]
+   weights = np.array([0.31, 0.22, 0.17, 0.11, 0.08, 0.05, 0.04, 0.02])
    importances = pd.Series(
-       [0.32, 0.21, 0.15, 0.09],
-       index=["age", "income", "tenure", "region_score"],
+       weights + rng.normal(0, 0.004, size=len(features)), index=features
    )
 
-   ax = feature_importance(importances)
+   ax = feature_importance(
+       importances,
+       title="Credit-Risk Model: Gradient-Boosting Feature Importance",
+       top_n=8,
+   )
+   ax.set_xlabel("Mean decrease in impurity")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

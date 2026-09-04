@@ -21,16 +21,20 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.threshold_extra import balanced_accuracy_curve_static
 
    rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   # imbalanced fraud model: balanced accuracy is fairer than raw accuracy
+   n = 150
+   y_true = (rng.random(n) < 0.1).astype(int)
+   y_prob = np.clip(
+       y_true * rng.beta(6, 2, n) + (1 - y_true) * rng.beta(2, 6, n), 0, 1)
 
-   ax = balanced_accuracy_curve_static(y_true, y_prob)
+   ax = balanced_accuracy_curve_static(y_true, y_prob,
+                                       title="Fraud model: balanced accuracy")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

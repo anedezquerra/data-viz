@@ -21,13 +21,32 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.box_plot import box_plot_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Daily household electricity consumption with a few heavy-usage days
+   rng = np.random.default_rng(42)
+   usage_kwh = pd.Series(
+       np.concatenate([
+           rng.normal(loc=18.0, scale=3.5, size=36),
+           np.array([34.2, 37.8]),
+       ]),
+       name="usage_kwh",
+   )
 
-   ax = box_plot_static(values)
+   ax = box_plot_static(
+       usage_kwh,
+       title="Daily Electricity Consumption",
+       ylabel="Consumption (kWh)",
+       color="lightsteelblue",
+       notch=True,
+       widths=0.4,
+       theme="minimal",
+   )
+   ax.axhline(usage_kwh.mean(), color="crimson", linestyle="--", linewidth=1)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

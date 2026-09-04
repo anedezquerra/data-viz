@@ -23,12 +23,16 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
    from dataviz.univariate.diagnostics import NormalityTestResult
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = NormalityTestResult(statistic=0.5, p_value=0.5, method="label", is_normal=True, alpha=0.5)
+   # Summary object returned by a Shapiro-Wilk check on exam scores
+   result = NormalityTestResult(
+       statistic=0.973,
+       p_value=0.31,
+       method="shapiro",
+       is_normal=True,
+       alpha=0.05,
+   )
    print(result)
 
 Output gallery

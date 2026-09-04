@@ -22,14 +22,27 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.bivariate.advanced import bubble_plot_interactive
 
    rng = np.random.default_rng(42)
-   x = rng.normal(loc=10.0, scale=2.0, size=30)
-   y = 2.0 * x + rng.normal(loc=0.0, scale=1.0, size=30)
-   size = rng.uniform(low=10.0, high=100.0, size=30)
+   n = 60
+   gdp = pd.Series(rng.normal(loc=45.0, scale=12.0, size=n), name="GDP per capita (k USD)")
+   life = pd.Series(60.0 + 0.4 * gdp + rng.normal(loc=0.0, scale=3.0, size=n), name="Life expectancy (years)")
+   population = pd.Series(rng.uniform(low=2.0, high=300.0, size=n), name="Population (millions)")
+   co2 = pd.Series(rng.uniform(low=1.0, high=20.0, size=n), name="CO2 per capita (t)")
 
-   fig = bubble_plot_interactive(x, y, size, title="Bubble plot")
+   fig = bubble_plot_interactive(
+       gdp,
+       life,
+       population,
+       color=co2,
+       title="Life Expectancy vs Wealth by Country",
+       size_scale=55.0,
+       colorscale="Plasma",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

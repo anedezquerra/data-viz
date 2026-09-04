@@ -25,12 +25,17 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.regression.bayesian import credible_interval_forest_static
 
-   coef_names = ["beta0", "beta1", "beta2"]
-   means = np.array([2.0, -1.0, 0.5])
-   lower = means - 0.4
-   upper = means + 0.4
+   names = ["ad_spend", "price_index", "seasonality", "distribution"]
+   means = np.array([0.42, -1.15, 0.28, 0.66])
+   lower = means - np.array([0.18, 0.30, 0.22, 0.25])
+   upper = means + np.array([0.20, 0.28, 0.24, 0.27])
 
-   ax = credible_interval_forest_static(coef_names, means, lower, upper)
+   ax = credible_interval_forest_static(
+       names, means, lower, upper,
+       title="Marketing Mix Model: 94% Credible Intervals",
+       color="#2a7f62")
+   ax.set_xlabel("Effect on weekly sales (log units)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

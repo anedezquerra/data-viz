@@ -24,10 +24,19 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.local_more import contrastive_explanation_bar_static
 
-   pertinent_positives = {"income": 52.0, "tenure": 4.0}
-   pertinent_negatives = {"debt": 8.0, "region_score": 0.3}
-
-   ax = contrastive_explanation_bar_static(pertinent_positives, pertinent_negatives)
+   pertinent_positives = {
+       "credit_score": 0.34, "employment_years": 0.21,
+       "annual_income": 0.18, "debt_to_income": 0.12,
+   }
+   pertinent_negatives = {
+       "late_payments": 0.27, "num_open_accounts": 0.15,
+       "loan_amount": 0.09, "debt_to_income": 0.05,
+   }
+   ax = contrastive_explanation_bar_static(
+       pertinent_positives, pertinent_negatives,
+       title="Why approved vs what would flip to denial - applicant #771",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -25,12 +25,12 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.rules import xbar_s_limits
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.35, size=(20, 5))
+   # Viscosity readings (cP): 22 subgroups of 6 samples per batch
+   viscosity = rng.normal(350.0, 4.0, size=132)
+   viscosity[90:96] += 14.0  # raw-material change in subgroup 15
 
-   x_limits, s_limits, means, stds = xbar_s_limits(data)
-   print(x_limits)
-   print(s_limits)
-   print(stds.head())
+   result = xbar_s_limits(viscosity, subgroup_size=6)
+   print(result)
 
 Output gallery
 --------------

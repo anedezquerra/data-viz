@@ -26,10 +26,15 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.capability import capability_histogram_static
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Fill weights (g) from a bottling line, spec 497-503 g
+   weights = rng.normal(500.0, 1.2, size=60)
+   weights[41] = 504.8  # overfilled bottle after valve wear
 
-   ax = capability_histogram_static(data, lsl=9.0, usl=11.0, bins=12)
+   ax = capability_histogram_static(
+       weights, lsl=497.0, usl=503.0, bins=20, title="Fill Weight Capability"
+   )
+   ax.set_xlabel("Fill weight (g)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

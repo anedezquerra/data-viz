@@ -25,10 +25,18 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.cv_extended import cv_residual_distribution_interactive
 
    rng = np.random.default_rng(42)
-   fold_labels = ["Fold 1", "Fold 2", "Fold 3", "Fold 4", "Fold 5"]
-   residuals_per_fold = [rng.normal(0.0, 0.5 + 0.1 * i, size=20) for i in range(5)]
+   folds = ["Fold 1", "Fold 2", "Fold 3", "Fold 4"]
+   residuals = [rng.normal(0, 4, 15),
+                rng.normal(1.5, 5, 15),
+                rng.normal(-0.8, 3.5, 15),
+                rng.normal(0.4, 6, 15)]
 
-   fig = cv_residual_distribution_interactive(fold_labels, residuals_per_fold)
+   fig = cv_residual_distribution_interactive(
+       folds, residuals,
+       title="Concrete Strength Model: Residuals per CV Fold",
+       color="#1f6fb2", template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -21,13 +21,17 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.ordinal import ordered_category_counts
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-   categories = pd.Series(["low", "medium", "high", "medium", "low"], name="Priority")
-
-   result = ordered_category_counts(values)
+   rng = np.random.default_rng(42)
+   scale = ["Very dissatisfied", "Dissatisfied", "Neutral", "Satisfied", "Very satisfied"]
+   satisfaction = pd.Series(
+       rng.choice(scale, size=220, p=[0.08, 0.17, 0.20, 0.35, 0.20]),
+       name="satisfaction",
+   )
+   result = ordered_category_counts(satisfaction, order=scale, normalize=True)
    print(result)
 
 Output gallery

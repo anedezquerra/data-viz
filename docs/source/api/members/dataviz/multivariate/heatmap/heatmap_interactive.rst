@@ -26,13 +26,19 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.multivariate.heatmap import heatmap_interactive
 
    rng = np.random.default_rng(42)
-   df = pd.DataFrame({
-       "Speed": rng.normal(loc=100.0, scale=5.0, size=30),
-       "Pressure": rng.normal(loc=50.0, scale=2.0, size=30),
-       "Yield": rng.normal(loc=90.0, scale=3.0, size=30),
-   })
+   days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+   hours = [f"{h}:00" for h in range(6, 22, 2)]
+   traffic = rng.integers(50, 500, size=(len(days), len(hours))).astype(float)
+   traffic[5:, :3] *= 0.4
+   df = pd.DataFrame(traffic, index=days, columns=hours)
 
-   fig = heatmap_interactive(df, title="Process heatmap")
+   fig = heatmap_interactive(
+       df,
+       title="Store Foot Traffic by Day and Hour",
+       colorscale="YlOrRd",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

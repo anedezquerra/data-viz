@@ -22,16 +22,35 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.quantile import huber_vs_ols_overlay_static
 
    rng = np.random.default_rng(42)
-   x = np.linspace(0.0, 10.0, 60)
-   y = 2 * x + rng.normal(0.0, 1.0, size=60)
-   y_ols = 2 * x + 0.1
-   y_huber = 2 * x - 0.05
+   experience_yr = pd.Series(rng.uniform(0, 25, 24).round(1), name="experience_yr")
+   salary_kusd = pd.Series(
+       45 + 3.2 * experience_yr + rng.normal(0, 6, 24), name="salary_kusd"
+   )
+   salary_kusd.iloc[[3, 11]] += 55  # executive outliers
+   ols_coef = np.polyfit(experience_yr, salary_kusd, 1)
+   y_ols = pd.Series(np.polyval(ols_coef, experience_yr), name="ols_fit")
+   weights = np.ones(24)
+   for _ in range(8):
+       resid = salary_kusd.to_numpy() - np.polyval(ols_coef, experience_yr)
+       scale = max(1.345 * np.median(np.abs(resid)) / 0.6745, 1e-6)
+       weights = np.minimum(1.0, scale / np.maximum(np.abs(resid), 1e-9))
+       w_fit = np.polyfit(experience_yr, salary_kusd, 1, w=weights)
+       ols_coef_huber = w_fit
+   y_huber = pd.Series(np.polyval(ols_coef_huber, experience_yr), name="huber_fit")
 
-   ax = huber_vs_ols_overlay_static(x, y, y_ols, y_huber)
+   ax = huber_vs_ols_overlay_static(
+       experience_yr, salary_kusd, y_ols, y_huber,
+       title="Compensation study: Huber vs OLS with outliers",
+       ols_color="#4878d0", huber_color="#d62728", theme="minimal",
+   )
+   ax.set_xlabel("Experience (years)")
+   ax.set_ylabel("Salary (kUSD)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -26,12 +26,17 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.comparison import residual_density_overlay_multi_static
 
    rng = np.random.default_rng(42)
-   residuals_per_model = [
-       rng.normal(0.0, 0.5, size=60),
-       rng.normal(0.0, 0.8, size=60),
-   ]
+   residuals = [rng.normal(0, 5, 40),
+                rng.normal(0.5, 8, 40),
+                rng.normal(-1.5, 12, 40)]
+   labels = ["Ridge", "SVR", "KNN"]
 
-   ax = residual_density_overlay_multi_static(residuals_per_model, ["OLS", "Ridge"])
+   ax = residual_density_overlay_multi_static(
+       residuals, labels,
+       title="Energy Demand Models: Residual Density Overlay",
+       cmap="viridis")
+   ax.set_xlabel("Residual (MWh)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

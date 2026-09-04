@@ -22,15 +22,23 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.classification.multilabel import label_cooccurrence_heatmap_interactive
 
-   cm = np.array([[32, 4], [5, 29]])
-   fpr = np.array([0.0, 0.1, 0.3, 1.0])
-   tpr = np.array([0.0, 0.7, 0.9, 1.0])
-   precision = np.array([1.0, 0.86, 0.72])
-   recall = np.array([0.2, 0.7, 1.0])
+   rng = np.random.default_rng(42)
+   # symptom tags on clinic visits; "fever" and "cough" co-occur often
+   n = 150
+   labels = ["fever", "cough", "fatigue", "nausea", "rash"]
+   base = rng.random((n, len(labels)))
+   Y = (base < 0.25).astype(int)
+   pair = rng.random(n) < 0.6
+   Y[pair, 0] = 1
+   Y[pair, 1] = 1
 
-   fig = label_cooccurrence_heatmap_interactive(cm)
+   fig = label_cooccurrence_heatmap_interactive(Y, labels=labels,
+                                                title="Symptom tag co-occurrence (Jaccard)")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -22,12 +22,23 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.regression.gof import durbin_watson_gauge_interactive
 
    rng = np.random.default_rng(42)
-   residuals = rng.normal(0.0, 1.0, size=80)
+   n = 30
+   noise = rng.normal(0.0, 1.0, n)
+   residuals = pd.Series(
+       np.array([noise[0]] + [0.6 * noise[i - 1] + noise[i] for i in range(1, n)]),
+       index=pd.date_range("2025-04-01", periods=n, freq="D"),
+       name="daily_yield_residuals")
 
-   fig = durbin_watson_gauge_interactive(residuals)
+   fig = durbin_watson_gauge_interactive(
+       residuals, title="Crop Yield Model: Durbin-Watson Gauge",
+       template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

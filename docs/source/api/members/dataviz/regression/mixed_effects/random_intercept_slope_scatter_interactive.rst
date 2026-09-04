@@ -22,15 +22,23 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.mixed_effects import random_intercept_slope_scatter_interactive
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   schools = pd.Series([f"School {s:02d}" for s in range(1, 21)], name="school")
+   random_intercepts = pd.Series(rng.normal(0.0, 2.5, size=20), name="intercept")
+   random_slopes = pd.Series(
+       -0.4 * random_intercepts + rng.normal(0.0, 0.6, size=20), name="slope"
+   )
 
-   fig = random_intercept_slope_scatter_interactive(y_true, y_pred)
+   fig = random_intercept_slope_scatter_interactive(
+       random_intercepts, random_slopes,
+       title="Education study: intercept vs slope per school",
+       color="#6a4c93", template="plotly_white",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -24,13 +24,21 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.xai.shap_extra import shap_bar_global_interactive
 
-   importances = np.array([0.42, 0.31, 0.18])
-   feature_names = ["age", "income", "tenure"]
-   shap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])
-   feature_values = np.array([0, 1, 2, 3])
-   pd_values = np.array([0.2, 0.25, 0.31, 0.34])
-
-   fig = shap_bar_global_interactive(shap_values, feature_names)
+   rng = np.random.default_rng(42)
+   feature_names = [
+       "tenure_months", "monthly_charges", "contract_two_year",
+       "num_support_calls", "avg_session_min", "late_payments",
+       "plan_premium", "age",
+   ]
+   X = rng.normal(0, 1, size=(60, 8))
+   coef = np.array([-0.7, 0.4, -0.5, 0.35, -0.15, 0.3, 0.1, -0.08])
+   shap_values = X * coef + rng.normal(0, 0.05, size=(60, 8))
+   fig = shap_bar_global_interactive(
+       shap_values, feature_names, top_n=8,
+       title="Global SHAP importance - churn model",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

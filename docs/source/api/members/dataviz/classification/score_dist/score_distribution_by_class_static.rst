@@ -21,16 +21,22 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.score_dist import score_distribution_by_class_static
 
    rng = np.random.default_rng(42)
-   y_score = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_score)
+   # credit-default scorecard: score spread for defaulters vs payers
+   n = 160
+   is_default = (rng.random(n) < 0.25).astype(int)
+   y_true = np.where(is_default == 1, "defaulter", "payer")
+   y_score = np.clip(
+       is_default * rng.beta(6, 3, n) + (1 - is_default) * rng.beta(3, 6, n), 0, 1)
 
-   ax = score_distribution_by_class_static(y_true, y_score)
+   ax = score_distribution_by_class_static(
+       y_true, y_score, labels=["payer", "defaulter"], kind="violin",
+       title="Credit scorecard: score distribution by outcome")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

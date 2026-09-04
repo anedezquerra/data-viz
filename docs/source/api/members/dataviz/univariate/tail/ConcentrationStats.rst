@@ -23,12 +23,14 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
    from dataviz.univariate.tail import ConcentrationStats
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = ConcentrationStats(total=0.5, gini=0.5, top_10_share=0.5, top_20_share=0.5)
+   result = ConcentrationStats(
+       total=1240500.0,
+       gini=0.47,
+       top_10_share=0.38,
+       top_20_share=0.56,
+   )
    print(result)
 
 Output gallery

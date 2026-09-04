@@ -23,12 +23,9 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
    from dataviz.univariate.text import BooleanSummary
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = BooleanSummary(count=5, true_count=5, false_count=5, true_rate=0.5)
+   result = BooleanSummary(count=120, true_count=50, false_count=70, true_rate=50 / 120)
    print(result)
 
 Output gallery

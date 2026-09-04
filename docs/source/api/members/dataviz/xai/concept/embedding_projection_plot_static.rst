@@ -25,11 +25,25 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.concept import embedding_projection_plot_static
 
-   rng = np.random.default_rng(9)
-   coords = rng.normal(0.0, 1.0, size=(40, 2))
-   labels = ["low" if v < 0 else "high" for v in coords[:, 0]]
+   rng = np.random.default_rng(42)
+   segments = {
+       "loyal": (-2.0, 0.5),
+       "at-risk": (0.5, 2.0),
+       "churned": (2.0, -1.5),
+   }
+   coords, labels = [], []
+   for name, (cx, cy) in segments.items():
+       pts = rng.normal([cx, cy], 0.6, size=(30, 2))
+       coords.append(pts)
+       labels.extend([name] * len(pts))
+   coords = np.vstack(coords)
 
-   ax = embedding_projection_plot_static(coords, labels=labels)
+   ax = embedding_projection_plot_static(
+       coords,
+       labels=labels,
+       title="Customer Embedding Projection (UMAP 2-D) - Churn Model",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -24,9 +24,18 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.regression.comparison import model_winner_heatmap_interactive
 
-   win_matrix = np.array([[3, 1], [1, 3]])
+   models = ["Linear", "Random Forest", "XGBoost"]
+   metrics = ["MAE", "RMSE", "MAPE", "R2"]
+   wins = np.array([[0, 0, 0, 0],
+                    [1, 0, 1, 0],
+                    [0, 1, 0, 1]])
 
-   fig = model_winner_heatmap_interactive(["OLS", "Ridge"], ["MAE", "RMSE"], win_matrix)
+   fig = model_winner_heatmap_interactive(models, metrics, wins,
+                                          title="Warranty Cost Models: Winner per Metric",
+                                          colorscale="YlGn",
+                                          template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

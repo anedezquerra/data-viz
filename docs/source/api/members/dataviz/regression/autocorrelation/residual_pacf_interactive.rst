@@ -22,13 +22,20 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.autocorrelation import residual_pacf_interactive
 
    rng = np.random.default_rng(42)
-   y_true = rng.normal(10.0, 2.0, size=60)
-   y_pred = y_true + rng.normal(0.0, 0.5, size=60)
+   week = np.arange(30)
+   sales = pd.Series(1200 + 40 * np.sin(week / 2.5) + rng.normal(0, 25, 30),
+                     name="weekly_units")
+   fitted = pd.Series(1200 + 38 * np.sin(week / 2.5), name="fitted_units")
 
-   fig = residual_pacf_interactive(y_true, y_pred, max_lag=10)
+   fig = residual_pacf_interactive(sales, fitted, max_lag=10,
+                                   title="Weekly Demand Model: Residual PACF",
+                                   color="#8c5aa8", template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -21,13 +21,17 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
+   import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.spc.variable import imr_chart_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   rng = np.random.default_rng(42)
+   # Product purity (%) measured once per batch (individuals data)
+   purity = rng.normal(99.2, 0.15, size=30)
+   purity[23] = 98.4  # contaminated raw-material drum
 
-   ax = imr_chart_static(values)
+   ax_i, ax_mr = imr_chart_static(purity, span=2, title="Batch Purity I-MR Chart")
+   ax_i.set_ylabel("Purity (%)")
    plt.show()
 
 Output gallery

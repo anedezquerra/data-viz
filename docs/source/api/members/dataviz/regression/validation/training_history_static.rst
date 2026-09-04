@@ -25,13 +25,18 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.regression.validation import training_history_static
 
-   epochs = np.linspace(0.0, 2.0, 50)
-   history = {
-       "loss": list(np.exp(-epochs) + 0.10),
-       "val_loss": list(np.exp(-0.8 * epochs) + 0.15),
-   }
+   rng = np.random.default_rng(42)
+   epochs = np.arange(1, 21)
+   train_rmse = 42 * np.exp(-epochs / 6.0) + 8.5 + rng.normal(0, 0.25, 20)
+   val_rmse = 42 * np.exp(-epochs / 6.5) + 10.8 + rng.normal(0, 0.35, 20)
+   val_rmse[14:] += np.linspace(0, 1.8, 6)  # onset of overfitting
+   history = {"train_rmse": train_rmse, "val_rmse": val_rmse}
 
-   ax = training_history_static(history)
+   ax = training_history_static(
+       history,
+       title="Demand forecasting MLP: training history (RMSE, k units)",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

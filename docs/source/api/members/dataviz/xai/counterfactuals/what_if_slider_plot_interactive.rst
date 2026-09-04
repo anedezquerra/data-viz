@@ -22,15 +22,22 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.xai.counterfactuals import what_if_slider_plot_interactive
 
-   feature_grid = np.linspace(20.0, 80.0, 25)
-   predictions = 1.0 / (1.0 + np.exp(-(feature_grid - 50.0) / 8.0))
+   grid = np.linspace(500, 800, 60)
+   pred_default = 1.0 / (1.0 + np.exp((grid - 645.0) / 45.0))
 
    fig = what_if_slider_plot_interactive(
-       feature_grid, predictions, feature_name="income",
-       current_value=45.0, threshold=0.5,
+       grid,
+       pred_default,
+       feature_name="Credit score",
+       current_value=612,
+       threshold=0.5,
+       title="What-If: Sweeping Credit Score for Applicant #417",
    )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

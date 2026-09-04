@@ -21,14 +21,25 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.bivariate.trends import step_plot_static
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
+   quarter = pd.Series(np.arange(1, 13), name="Quarter")
+   price = pd.Series(
+       [9.99, 9.99, 10.49, 10.49, 10.49, 10.99, 10.99, 11.49, 11.49, 11.49, 11.99, 11.99],
+       name="Subscription price (USD)",
+   )
 
-   ax = step_plot_static(x, y)
+   ax = step_plot_static(
+       quarter,
+       price,
+       where="post",
+       title="Subscription Price Changes Over Time",
+       color="darkorange",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

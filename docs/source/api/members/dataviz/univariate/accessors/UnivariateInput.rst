@@ -26,9 +26,17 @@ The following example is self-contained and can be copied into a Python session 
    import pandas as pd
    from dataviz.univariate.accessors import UnivariateInput
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = UnivariateInput(values=pd.Series([1.0, 2.0, 3.0], name="Value"), name="label", kind="label", missing_count=5)
+   # Resolved input summary produced by a support-ticket logging system
+   wait_times = pd.Series(
+       [4.2, 6.1, 3.8, 5.5, 7.0, 4.9, 6.6, 5.1, 3.4, 8.2],
+       name="wait_time_min",
+   )
+   result = UnivariateInput(
+       values=wait_times,
+       name="wait_time_min",
+       kind="numeric",
+       missing_count=0,
+   )
    print(result)
 
 Output gallery

@@ -25,17 +25,19 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.validation import validation_curve_interactive
 
    rng = np.random.default_rng(42)
-   param_values = np.arange(1, 11)
-   train_scores = np.clip(
-       0.90 + 0.01 * param_values[:, None] + rng.normal(0.0, 0.01, size=(10, 5)), 0, 1
-   )
-   test_scores = np.clip(
-       0.75 + 0.015 * param_values[:, None] - 0.002 * param_values[:, None] ** 2
-       + rng.normal(0.0, 0.015, size=(10, 5)),
-       0, 1,
-   )
+   alphas = np.logspace(-3, 2, 12)
+   base_train = 0.55 + 0.40 * (1 - np.exp(-alphas))
+   base_test = 0.88 - 0.0011 * (np.log10(alphas) + 1.2) ** 4
+   train_scores = base_train[:, None] + rng.normal(0, 0.012, (12, 5))
+   test_scores = base_test[:, None] + rng.normal(0, 0.020, (12, 5))
 
-   fig = validation_curve_interactive(param_values, train_scores, test_scores, param_name="depth")
+   fig = validation_curve_interactive(
+       alphas, train_scores, test_scores,
+       param_name="Ridge alpha", score_name="R-squared", log_x=True,
+       title="Ridge regression on concrete strength: validation curve",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

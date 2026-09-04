@@ -23,10 +23,12 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import numpy as np
    from dataviz.spc.constants import SPCConstants
 
-   result = SPCConstants(n=5, a2=0.577, d3=0.0, d4=2.114, a3=1.427, b3=0.0, b4=2.089, c4=0.94)
+   # Constants for a subgroup size of 5, as used on a machining line
+   result = SPCConstants(
+       n=5, a2=0.577, d3=0.0, d4=2.114, a3=1.427, b3=0.0, b4=2.089, c4=0.94
+   )
    print(result)
 
 Output gallery

@@ -24,13 +24,16 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.xai.pdp_extra import ale_plot_1d_interactive
 
-   importances = np.array([0.42, 0.31, 0.18])
-   feature_names = ["age", "income", "tenure"]
-   shap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])
-   feature_values = np.array([0, 1, 2, 3])
-   pd_values = np.array([0.2, 0.25, 0.31, 0.34])
-
-   fig = ale_plot_1d_interactive(importances, feature_names)
+   bin_edges = np.linspace(0.0, 0.6, 11)
+   centers = (bin_edges[:-1] + bin_edges[1:]) / 2
+   ale = 2.1 * centers - 0.9 * centers ** 2
+   ale = ale - ale.mean()
+   fig = ale_plot_1d_interactive(
+       bin_edges, ale, feature_name="debt_to_income",
+       title="ALE of debt-to-income on default log-odds",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

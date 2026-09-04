@@ -24,10 +24,15 @@ The following example is self-contained and can be copied into a Python session 
    import pandas as pd
    from dataviz.univariate.accessors import numeric_or_none
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Device readings exported as text, with occasional sensor error codes
+   readings = pd.Series(
+       ["21.4", "22.0", "ERR", "21.8", "23.1", "ERR", "22.6", "21.9",
+        "22.3", "21.7", "22.8", "ERR", "21.5", "22.1", "22.4"],
+       name="temperature_c",
+   )
 
-   result = numeric_or_none(values)
-   print(result)
+   result = numeric_or_none(readings)
+   print(result.describe())
 
 Output gallery
 --------------

@@ -21,14 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.bivariate.advanced import density_contour_static
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
+   rng = np.random.default_rng(42)
+   n = 800
+   temperature = pd.Series(rng.normal(loc=22.0, scale=3.0, size=n), name="Temperature (C)")
+   humidity = pd.Series(80.0 - 1.5 * temperature + rng.normal(loc=0.0, scale=5.0, size=n), name="Humidity (%)")
 
-   ax = density_contour_static(x, y)
+   ax = density_contour_static(
+       temperature,
+       humidity,
+       bins=25,
+       levels=10,
+       title="Greenhouse Climate Density",
+       cmap="cividis",
+       fill=True,
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

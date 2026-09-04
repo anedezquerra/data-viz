@@ -22,13 +22,22 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.helpers import variance_inflation_factors
 
    rng = np.random.default_rng(42)
-   X = rng.normal(0.0, 1.0, size=(50, 3))
+   n = 30
+   square_feet = rng.uniform(900.0, 3500.0, n)
+   bedrooms = rng.integers(1, 6, n).astype(float)
+   age_years = rng.uniform(0.0, 40.0, n)
+   X = pd.DataFrame({"square_feet": square_feet, "bedrooms": bedrooms,
+                      "age_years": age_years})
+   y = pd.Series(60.0 + 0.16 * square_feet + 10.0 * bedrooms - 0.8 * age_years
+                 + rng.normal(0.0, 15.0, n), name="price_kusd")
 
-   result = variance_inflation_factors(X)
-   print(result)
+   X["lot_size_sqft"] = X["square_feet"] * 2.5 + rng.normal(0.0, 100.0, n)
+   result = variance_inflation_factors(X, include_intercept=True)
+   print(pd.Series(result.round(2), index=X.columns, name="vif"))
 
 Output gallery
 --------------

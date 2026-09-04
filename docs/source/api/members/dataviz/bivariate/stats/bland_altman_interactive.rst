@@ -21,13 +21,22 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.bivariate.stats import bland_altman_interactive
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
+   rng = np.random.default_rng(42)
+   n = 60
+   lab_test = pd.Series(rng.normal(loc=120.0, scale=18.0, size=n), name="Lab assay (mg/dL)")
+   home_test = pd.Series(lab_test + rng.normal(loc=2.0, scale=6.0, size=n), name="Home kit (mg/dL)")
 
-   fig = bland_altman_interactive(x, y)
+   fig = bland_altman_interactive(
+       lab_test,
+       home_test,
+       title="Bland-Altman: Lab vs Home Kit",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

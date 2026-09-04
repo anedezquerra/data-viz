@@ -22,15 +22,24 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.quantile import weighted_residual_plot_static
 
    rng = np.random.default_rng(42)
-   y_pred = rng.normal(10.0, 2.0, size=60)
-   residuals = rng.normal(0.0, 0.7, size=60)
-   weights = rng.uniform(0.5, 1.5, size=60)
+   towns = pd.Series(np.arange(1, 26), name="town")
+   predicted_cases = pd.Series(rng.uniform(20, 220, 25).round(1), name="predicted")
+   residuals = pd.Series(rng.normal(0, 14, 25).round(2), name="residual")
+   sample_size = pd.Series(rng.integers(120, 4000, 25), name="survey_n")
+   weights = sample_size / sample_size.max()
 
-   ax = weighted_residual_plot_static(y_pred, residuals, weights)
+   ax = weighted_residual_plot_static(
+       predicted_cases, residuals, weights,
+       title="Epidemiology survey: residuals weighted by sample size",
+       cmap="plasma", theme="minimal",
+   )
+   ax.set_xlabel("Predicted weekly cases")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

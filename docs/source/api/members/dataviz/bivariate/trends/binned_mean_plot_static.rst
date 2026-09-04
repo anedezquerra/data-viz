@@ -21,14 +21,24 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.bivariate.trends import binned_mean_plot_static
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
+   rng = np.random.default_rng(42)
+   n = 160
+   depth = pd.Series(rng.uniform(low=0.0, high=200.0, size=n), name="Depth (m)")
+   temperature = pd.Series(25.0 - 0.08 * depth + rng.normal(loc=0.0, scale=1.5, size=n), name="Water temperature (C)")
 
-   ax = binned_mean_plot_static(x, y)
+   ax = binned_mean_plot_static(
+       depth,
+       temperature,
+       bins=8,
+       title="Mean Water Temperature by Depth Bin",
+       color="darkcyan",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

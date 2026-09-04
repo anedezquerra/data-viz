@@ -25,9 +25,15 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.variable import xbar_r_chart_interactive
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.35, size=(20, 5))
+   # Shaft diameters (mm): 25 subgroups of 5 parts from a CNC lathe
+   diameters = rng.normal(25.0, 0.08, size=125)
+   diameters[100:105] += 0.25  # tool wear shift in subgroup 20
 
-   fig = xbar_r_chart_interactive(data)
+   fig = xbar_r_chart_interactive(
+       diameters, subgroup_size=5, title="Shaft Diameter Xbar-R Chart"
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

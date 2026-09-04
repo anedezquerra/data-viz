@@ -22,15 +22,25 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.residual_extended import residual_boxplot_by_group_static
 
    rng = np.random.default_rng(42)
-   y_true = rng.normal(10.0, 2.0, size=60)
-   y_pred = y_true + rng.normal(0.0, 0.5, size=60)
-   groups = rng.choice(["A", "B", "C"], size=60)
+   n = 36
+   shifts = pd.Series(np.repeat(["Day", "Swing", "Night"], 12), name="shift")
+   actual_output = pd.Series(rng.normal(480, 45, n).round(0), name="actual_units")
+   shift_bias = shifts.map({"Day": 4.0, "Swing": -2.0, "Night": -9.0})
+   predicted_output = pd.Series(
+       actual_output + shift_bias + rng.normal(0, 18, n), name="predicted_units"
+   )
 
-   ax = residual_boxplot_by_group_static(y_true, y_pred, groups)
+   ax = residual_boxplot_by_group_static(
+       actual_output, predicted_output, shifts,
+       title="Factory output model: residuals by shift",
+       color="#4878d0", theme="minimal",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -21,16 +21,22 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
-   from dataviz.classification.calibration_extra import sharpness_resolution_decomposition_static
+   from dataviz.classification.calibration_extra import (
+       sharpness_resolution_decomposition_static,
+   )
 
-   rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   rng = np.random.default_rng(9)
+   n = 160
+   y_prob = np.clip(rng.beta(2.5, 2.5, n), 0.01, 0.99)
+   y_true = (rng.uniform(size=n) < y_prob).astype(int)
 
-   ax = sharpness_resolution_decomposition_static(y_true, y_prob)
+   ax = sharpness_resolution_decomposition_static(
+       y_true, y_prob, n_bins=8,
+       title="Readmission risk model: Murphy decomposition of Brier score",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

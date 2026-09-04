@@ -21,18 +21,24 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.fairness import per_segment_metric_bar_static
 
-   rng = np.random.default_rng(42)
-   groups = rng.choice(["Group A", "Group B"], size=200)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
-   y_pred = (y_prob > 0.3).astype(int)
+   rng = np.random.default_rng(47)
+   n = 180
+   groups = rng.choice(["urban", "suburban", "rural"], size=n, p=[0.45, 0.35, 0.2])
+   base = {"urban": 0.55, "suburban": 0.50, "rural": 0.42}
+   y_prob = np.array([base[g] for g in groups]) + rng.normal(0, 0.2, n)
+   y_true = (rng.uniform(size=n) < np.clip(y_prob, 0.02, 0.98)).astype(int)
+   y_pred = (y_prob >= 0.5).astype(int)
 
-   ax = per_segment_metric_bar_static(y_true, y_pred, groups)
+   ax = per_segment_metric_bar_static(
+       y_true, y_pred, groups,
+       metrics=("accuracy", "tpr", "fpr", "selection_rate"),
+       title="Housing assistance model: metrics by region",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

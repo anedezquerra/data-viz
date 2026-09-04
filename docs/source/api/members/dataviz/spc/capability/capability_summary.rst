@@ -25,10 +25,11 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.capability import capability_summary
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Fill weights (g) from a bottling line, spec 497-503 g
+   weights = rng.normal(500.0, 1.2, size=60)
+   weights[41] = 504.8  # overfilled bottle after valve wear
 
-   result = capability_summary(data, lsl=9.0, usl=11.0)
+   result = capability_summary(weights, lsl=497.0, usl=503.0)
    print(result)
 
 Output gallery

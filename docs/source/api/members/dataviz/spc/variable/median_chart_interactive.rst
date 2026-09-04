@@ -25,9 +25,13 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.variable import median_chart_interactive
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
+   # Hardness readings (HRC): 24 subgroups of 5 parts from heat treatment
+   hardness = rng.normal(58.0, 1.2, size=120)
+   hardness[75:80] -= 3.5  # quench-tank temperature drop in subgroup 15
 
-   fig = median_chart_interactive(data, subgroup_size=5, title="Filling process")
+   fig = median_chart_interactive(hardness, subgroup_size=5, title="Part Hardness Median Chart")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -27,10 +27,18 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.bivariate.categorical import crosstab_heatmap_static
 
    rng = np.random.default_rng(42)
-   row_category = pd.Series(rng.choice(["Line A", "Line B", "Line C"], size=60), name="Line")
-   column_category = pd.Series(rng.choice(["Pass", "Fail"], size=60), name="Result")
+   n = 200
+   channel = pd.Series(rng.choice(["Email", "Social", "Search", "Referral"], size=n), name="Channel")
+   converted = pd.Series(rng.choice(["Converted", "Bounced"], size=n, p=[0.35, 0.65]), name="Outcome")
 
-   ax = crosstab_heatmap_static(row_category, column_category, normalize="index")
+   ax = crosstab_heatmap_static(
+       channel,
+       converted,
+       normalize="index",
+       title="Conversion Rate by Channel",
+       cmap="YlGn",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

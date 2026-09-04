@@ -21,17 +21,25 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    from dataviz.classification.fairness import fairness_disparity_heatmap_interactive
 
-   rng = np.random.default_rng(42)
-   groups = rng.choice(["Group A", "Group B"], size=200)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
-   y_pred = (y_prob > 0.3).astype(int)
+   rng = np.random.default_rng(53)
+   n = 180
+   groups = rng.choice(["group A", "group B", "group C"], size=n,
+                       p=[0.5, 0.3, 0.2])
+   shift = {"group A": 0.08, "group B": 0.0, "group C": -0.10}
+   y_prob = np.clip(0.5 + np.array([shift[g] for g in groups])
+                    + rng.normal(0, 0.22, n), 0.02, 0.98)
+   y_true = (rng.uniform(size=n) < y_prob).astype(int)
+   y_pred = (y_prob >= 0.5).astype(int)
 
-   fig = fairness_disparity_heatmap_interactive(y_true, y_pred, groups)
+   fig = fairness_disparity_heatmap_interactive(
+       y_true, y_pred, groups,
+       title="Hiring screen: deviation from population mean per group",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

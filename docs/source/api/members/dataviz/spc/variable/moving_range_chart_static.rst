@@ -26,10 +26,13 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.variable import moving_range_chart_static
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Fill weights (g) from 30 consecutive bottles on a filling line
+   weights = rng.normal(500.0, 1.1, size=30)
+   weights[24] = 504.9  # overfill after valve wear
 
-   ax = moving_range_chart_static(data, span=2)
+   ax = moving_range_chart_static(weights, span=2, title="Fill Weight Moving Range")
+   ax.set_ylabel("Moving range (g)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

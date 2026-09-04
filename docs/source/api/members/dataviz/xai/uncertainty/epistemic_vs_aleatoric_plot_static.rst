@@ -25,11 +25,15 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.uncertainty import epistemic_vs_aleatoric_plot_static
 
-   bin_centers = np.linspace(0.1, 0.9, 9)
-   epistemic = np.array([0.08, 0.06, 0.05, 0.04, 0.04, 0.05, 0.05, 0.06, 0.08])
-   aleatoric = np.array([0.03, 0.04, 0.05, 0.07, 0.08, 0.07, 0.05, 0.04, 0.03])
-
-   ax = epistemic_vs_aleatoric_plot_static(bin_centers, epistemic, aleatoric)
+   bin_centers = np.linspace(0.0, 1.0, 20)
+   epistemic = 0.05 + 0.12 * (bin_centers - 0.5) ** 2 * 4
+   aleatoric = 0.08 + 0.05 * np.sin(np.pi * bin_centers)
+   ax = epistemic_vs_aleatoric_plot_static(
+       bin_centers, epistemic, aleatoric,
+       title="Uncertainty decomposition across predicted-risk deciles",
+   )
+   ax.set_xlabel("Predicted default risk (binned)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -21,12 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.distribution import ecdf_plot_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Rental durations for a bike-share station over one week
+   rng = np.random.default_rng(42)
+   duration_min = pd.Series(
+       np.round(rng.gamma(shape=2.2, scale=9.0, size=38), 1),
+       name="rental_min",
+   )
 
-   fig = ecdf_plot_interactive(values)
+   fig = ecdf_plot_interactive(
+       duration_min,
+       title="Bike-Share Rental Duration ECDF",
+       xlabel="Rental Duration (min)",
+       color="darkgreen",
+       template="plotly_white",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

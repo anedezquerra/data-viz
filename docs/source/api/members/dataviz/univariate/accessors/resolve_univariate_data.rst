@@ -25,11 +25,21 @@ The following example is self-contained and can be copied into a Python session 
    import pandas as pd
    from dataviz.univariate.accessors import resolve_univariate_data
 
+   # Call-center log with a few abandoned calls recorded as missing
    rng = np.random.default_rng(42)
-   value = pd.Series(rng.normal(loc=10.0, scale=0.4, size=30), name="Value")
+   calls = pd.DataFrame({
+       "wait_time_min": np.round(rng.gamma(shape=2.0, scale=2.5, size=60), 1),
+       "agent": rng.choice(["North", "South", "East", "West"], size=60),
+   })
+   calls.loc[rng.choice(calls.index, size=4, replace=False), "wait_time_min"] = np.nan
 
-   result = resolve_univariate_data(value)
-   print(result)
+   result = resolve_univariate_data(
+       "wait_time_min",
+       data=calls,
+       na_policy="drop",
+       require_numeric=True,
+   )
+   print(result.name, result.kind, result.missing_count)
 
 Output gallery
 --------------

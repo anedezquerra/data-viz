@@ -21,12 +21,34 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import matplotlib.pyplot as plt
    from dataviz.xai.concept import concept_activation_bar_interactive
 
-   scores = {"striped": 0.62, "dotted": 0.35, "metallic": 0.12, "wooden": 0.48}
-   p_values = {"striped": 0.001, "dotted": 0.04, "metallic": 0.30, "wooden": 0.008}
+   scores = {
+       "lung opacity": 0.88,
+       "pleural effusion": 0.82,
+       "cardiomegaly": 0.74,
+       "rib fracture": 0.61,
+       "medical device": 0.55,
+       "text marker": 0.42,
+   }
+   p_values = {
+       "lung opacity": 0.001,
+       "pleural effusion": 0.004,
+       "cardiomegaly": 0.012,
+       "rib fracture": 0.03,
+       "medical device": 0.08,
+       "text marker": 0.21,
+   }
 
-   fig = concept_activation_bar_interactive(scores, p_values=p_values)
+   fig = concept_activation_bar_interactive(
+       scores,
+       p_values=p_values,
+       significance=0.05,
+       title="TCAV Concept Scores - Pneumonia X-Ray Classifier",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

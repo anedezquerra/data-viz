@@ -21,19 +21,31 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
-   from dataviz.classification.decision_boundary import decision_boundary_plot_interactive
+   from dataviz.classification.decision_boundary import (
+       decision_boundary_plot_interactive,
+   )
 
    rng = np.random.default_rng(42)
-   x = rng.normal(size=120)
-   y = rng.normal(size=120)
-   labels = (x + y > 0).astype(int)
+   n = 120
+   x = rng.uniform(-3, 3, n)
+   y = rng.uniform(-3, 3, n)
+   labels = (x ** 2 + y ** 2 + rng.normal(0, 0.4, n) > 2.5).astype(int)
 
-   def predict_fn(points):
-       return (points[:, 0] + points[:, 1] > 0).astype(int)
 
-   fig = decision_boundary_plot_interactive(x, y, labels, predict_fn, resolution=60)
+   def knn_predict(points, k=5):
+       train = np.column_stack([x, y])
+       d = ((points[:, None, :] - train[None, :, :]) ** 2).sum(axis=2)
+       nearest = np.argsort(d, axis=1)[:, :k]
+       return (labels[nearest].mean(axis=1) >= 0.5).astype(int)
+
+
+   fig = decision_boundary_plot_interactive(
+       x, y, labels, knn_predict, resolution=80,
+       title="5-NN ring classifier: decision boundary",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

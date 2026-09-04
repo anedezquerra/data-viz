@@ -21,13 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.dashboard import univariate_analysis_dashboard_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Quarterly revenue per store for a regional retail chain
+   rng = np.random.default_rng(42)
+   revenue_k = pd.Series(
+       np.round(rng.lognormal(mean=11.2, sigma=0.4, size=46) / 1000.0, 1),
+       name="revenue_kusd",
+   )
 
-   ax = univariate_analysis_dashboard_static(values)
+   fig = univariate_analysis_dashboard_static(
+       revenue_k,
+       bins=12,
+       title="Store Revenue Profile (USD thousands)",
+       color="steelblue",
+       theme="default",
+   )
+   fig.legend(loc="lower center", bbox_to_anchor=(0.5, -0.05), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

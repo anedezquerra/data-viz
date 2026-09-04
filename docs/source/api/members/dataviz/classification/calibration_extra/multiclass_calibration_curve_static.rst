@@ -21,18 +21,24 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
-   from dataviz.classification.calibration_extra import multiclass_calibration_curve_static
+   from dataviz.classification.calibration_extra import (
+       multiclass_calibration_curve_static,
+   )
 
-   rng = np.random.default_rng(42)
-   logits = rng.normal(size=(200, 3))
-   exp_logits = np.exp(logits - logits.max(axis=1, keepdims=True))
-   y_prob_matrix = exp_logits / exp_logits.sum(axis=1, keepdims=True)
-   y_true = rng.choice(3, size=200, p=[0.4, 0.35, 0.25])
+   rng = np.random.default_rng(3)
+   n = 180
+   y_true = rng.choice(3, size=n, p=[0.5, 0.3, 0.2])
+   logits = rng.normal(0, 1.0, (n, 3))
+   logits[np.arange(n), y_true] += 2.0
+   y_prob_matrix = np.exp(logits) / np.exp(logits).sum(axis=1, keepdims=True)
 
-   ax = multiclass_calibration_curve_static(y_true, y_prob_matrix, labels=["A", "B", "C"])
+   axes = multiclass_calibration_curve_static(
+       y_true, y_prob_matrix,
+       labels=["standard", "premium", "enterprise"], n_bins=6,
+       title="Subscription tier classifier: per-class calibration",
+   )
    plt.show()
 
 Output gallery

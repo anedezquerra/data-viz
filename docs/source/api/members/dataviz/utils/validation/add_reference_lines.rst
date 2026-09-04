@@ -25,6 +25,7 @@ The following example is self-contained and can be copied into a Python session 
    ax.plot(np.arange(30), rng.normal(loc=10.0, scale=0.4, size=30))
 
    add_reference_lines(ax, hline=10.0, vline=15)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -21,16 +21,25 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    from dataviz.classification.fairness import segment_roc_overlay_interactive
 
-   rng = np.random.default_rng(42)
-   groups = rng.choice(["Group A", "Group B"], size=200)
-   y_score = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_score)
+   rng = np.random.default_rng(59)
+   n = 180
+   groups = rng.choice(["north", "south", "west"], size=n, p=[0.4, 0.35, 0.25])
+   sep = {"north": 0.9, "south": 0.7, "west": 0.45}  # weaker signal out west
+   y_true = (rng.uniform(size=n) < 0.35).astype(int)
+   y_score = np.array([
+       rng.normal(sep[g], 0.55) if t == 1 else rng.normal(0.0, 0.55)
+       for g, t in zip(groups, y_true)
+   ])
 
-   fig = segment_roc_overlay_interactive(y_true, y_score, groups)
+   fig = segment_roc_overlay_interactive(
+       y_true, y_score, groups,
+       title="Fraud model ROC by region: disparity check",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

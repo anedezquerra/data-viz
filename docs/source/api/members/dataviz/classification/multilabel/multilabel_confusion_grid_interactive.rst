@@ -21,15 +21,22 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.classification.multilabel import multilabel_confusion_grid_interactive
 
    rng = np.random.default_rng(42)
-   Y_true = rng.binomial(1, 0.4, size=(120, 4))
-   Y_pred = rng.binomial(1, 0.4, size=(120, 4))
+   # multilabel movie-tagging model: 5 genre tags, 120 movies
+   n, n_labels = 120, 5
+   labels = ["action", "comedy", "drama", "romance", "scifi"]
+   Y_true = (rng.random((n, n_labels)) < 0.3).astype(int)
+   noise = rng.random((n, n_labels)) < 0.12
+   Y_pred = np.where(noise, 1 - Y_true, Y_true)
 
-   fig = multilabel_confusion_grid_interactive(Y_true, Y_pred, labels=["sports", "tech", "politics", "health"])
+   fig = multilabel_confusion_grid_interactive(Y_true, Y_pred, labels=labels,
+                                               title="Movie tagger: per-tag matrices")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

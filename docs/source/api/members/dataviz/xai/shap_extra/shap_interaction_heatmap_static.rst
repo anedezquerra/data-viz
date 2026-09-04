@@ -25,17 +25,28 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.shap_extra import shap_interaction_heatmap_static
 
-   interaction_matrix = np.array(
-       [
-           [0.20, 0.05, 0.02, 0.01],
-           [0.05, 0.30, 0.04, 0.02],
-           [0.02, 0.04, 0.15, 0.03],
-           [0.01, 0.02, 0.03, 0.10],
-       ]
+   feature_names = [
+       "tenure_months", "monthly_charges", "contract_two_year",
+       "num_support_calls", "avg_session_min", "late_payments",
+       "plan_premium", "age",
+   ]
+   diag = np.array([0.55, 0.40, 0.38, 0.30, 0.16, 0.26, 0.12, 0.09])
+   off = np.array([
+       [0.00, 0.21, 0.12, 0.10, 0.05, 0.06, 0.03, 0.02],
+       [0.21, 0.00, 0.09, 0.08, 0.04, 0.05, 0.04, 0.02],
+       [0.12, 0.09, 0.00, 0.06, 0.03, 0.04, 0.05, 0.01],
+       [0.10, 0.08, 0.06, 0.00, 0.04, 0.07, 0.02, 0.02],
+       [0.05, 0.04, 0.03, 0.04, 0.00, 0.02, 0.02, 0.01],
+       [0.06, 0.05, 0.04, 0.07, 0.02, 0.00, 0.01, 0.01],
+       [0.03, 0.04, 0.05, 0.02, 0.02, 0.01, 0.00, 0.01],
+       [0.02, 0.02, 0.01, 0.02, 0.01, 0.01, 0.01, 0.00],
+   ])
+   interaction_matrix = off + np.diag(diag)
+   ax = shap_interaction_heatmap_static(
+       interaction_matrix, feature_names, top_n=8,
+       title="Mean absolute SHAP interactions - churn model",
    )
-   feature_names = ["age", "income", "tenure", "debt"]
-
-   ax = shap_interaction_heatmap_static(interaction_matrix, feature_names)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

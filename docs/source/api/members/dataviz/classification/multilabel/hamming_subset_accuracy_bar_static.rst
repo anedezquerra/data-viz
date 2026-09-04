@@ -21,16 +21,20 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.multilabel import hamming_subset_accuracy_bar_static
 
    rng = np.random.default_rng(42)
-   Y_true = rng.binomial(1, 0.4, size=(120, 4))
-   Y_pred = rng.binomial(1, 0.4, size=(120, 4))
+   # multilabel movie tagger: per-tag accuracy vs exact full-tag-set accuracy
+   n, n_labels = 120, 5
+   Y_true = (rng.random((n, n_labels)) < 0.3).astype(int)
+   noise = rng.random((n, n_labels)) < 0.09
+   Y_pred = np.where(noise, 1 - Y_true, Y_true)
 
-   ax = hamming_subset_accuracy_bar_static(Y_true, Y_pred)
+   ax = hamming_subset_accuracy_bar_static(
+       Y_true, Y_pred, title="Movie tagger: Hamming vs subset accuracy")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

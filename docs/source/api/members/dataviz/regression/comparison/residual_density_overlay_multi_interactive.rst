@@ -25,12 +25,17 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.comparison import residual_density_overlay_multi_interactive
 
    rng = np.random.default_rng(42)
-   residuals_per_model = [
-       rng.normal(0.0, 0.5, size=60),
-       rng.normal(0.0, 0.8, size=60),
-   ]
+   residuals = [rng.normal(0, 5, 40),
+                rng.normal(0.5, 8, 40),
+                rng.normal(-1.5, 12, 40)]
+   labels = ["Ridge", "SVR", "KNN"]
 
-   fig = residual_density_overlay_multi_interactive(residuals_per_model, ["OLS", "Ridge"])
+   fig = residual_density_overlay_multi_interactive(
+       residuals, labels,
+       title="Energy Demand Models: Residual Density Overlay",
+       template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

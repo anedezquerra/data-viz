@@ -23,12 +23,18 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
    from dataviz.univariate.weighted import WeightedStats
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = WeightedStats(count=5, weight_sum=0.5, mean=0.5, variance=0.5, std=0.5, q1=0.5, median=0.5, q3=0.5)
+   result = WeightedStats(
+       count=250,
+       weight_sum=372.5,
+       mean=6.8,
+       variance=5.1,
+       std=2.26,
+       q1=5.0,
+       median=7.0,
+       q3=9.0,
+   )
    print(result)
 
 Output gallery

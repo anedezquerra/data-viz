@@ -24,9 +24,14 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.spc.attribute import c_chart_interactive
 
-   defects = np.array([8, 12, 9, 15, 7, 11, 10, 13, 8, 12])
+   rng = np.random.default_rng(42)
+   # Surface defects counted on 28 painted panels (constant inspection area)
+   defects = rng.poisson(3.5, size=28)
+   defects[21] = 14  # spray nozzle clog on panel 21
 
-   fig = c_chart_interactive(defects, title="Surface defects per panel")
+   fig = c_chart_interactive(defects, title="Painted Panels - Surface Defects per Panel")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

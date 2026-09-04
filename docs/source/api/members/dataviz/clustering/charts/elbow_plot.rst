@@ -22,18 +22,15 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
-   import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.clustering.charts import elbow_plot
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
-   labels = np.array([0, 0, 1, 1])
-   k_values = np.array([1, 2, 3, 4])
-   inertias = np.array([10.0, 4.2, 2.6, 2.1])
-   linkage_matrix = np.array([[0, 1, 0.3, 2], [2, 3, 0.4, 2], [4, 5, 3.0, 4]])
+   n_clusters = np.arange(1, 11)
+   inertias = np.array([520.0, 210.0, 120.0, 90.0, 74.0, 66.0, 61.0, 57.0, 54.0, 52.0])
 
-   result = elbow_plot(k_values, inertias)
-   print(result)
+   ax = elbow_plot(n_clusters, inertias, title="K-Means Elbow Plot")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
+   plt.show()
 
 Output gallery
 --------------

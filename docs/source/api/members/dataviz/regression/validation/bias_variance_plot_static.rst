@@ -25,12 +25,16 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.regression.validation import bias_variance_plot_static
 
-   complexity = np.arange(1, 11)
-   bias_squared = 0.5 / complexity
-   variance = 0.002 * complexity**2
-   noise = np.full(10, 0.05)
+   degree = np.arange(1, 11)
+   bias_sq = 14.0 / degree ** 1.6
+   variance = 0.35 * degree ** 1.8
+   noise = np.full_like(degree, 4.0, dtype=float)
 
-   ax = bias_variance_plot_static(complexity, bias_squared, variance, noise=noise)
+   ax = bias_variance_plot_static(
+       degree, bias_sq, variance, noise=noise,
+       title="Polynomial fit of compressor efficiency: bias-variance trade-off",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

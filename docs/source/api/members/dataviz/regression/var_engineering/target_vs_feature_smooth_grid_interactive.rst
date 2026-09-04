@@ -25,15 +25,24 @@ The following example is self-contained and can be copied into a Python session 
    import pandas as pd
    from dataviz.regression.var_engineering import target_vs_feature_smooth_grid_interactive
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   n = 60
+   X = pd.DataFrame({
+       "temperature": rng.uniform(15, 35, n),
+       "humidity": rng.uniform(20, 95, n),
+       "wind_speed": rng.uniform(0, 40, n),
+       "hour": rng.uniform(0, 24, n),
+   })
+   rentals = (30 + 4.2 * X["temperature"] - 0.9 * X["humidity"]
+              + 18 * np.sin(X["hour"] / 24 * 2 * np.pi)
+              + rng.normal(0, 12, n))
 
-   fig = target_vs_feature_smooth_grid_interactive(y_true, y_pred)
+   fig = target_vs_feature_smooth_grid_interactive(
+       X, rentals, feature_names=list(X.columns), bins=15, ncols=2,
+       title="Bike-share demand: smoothed target vs each feature",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

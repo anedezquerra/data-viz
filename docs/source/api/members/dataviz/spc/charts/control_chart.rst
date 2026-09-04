@@ -26,10 +26,12 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.charts import control_chart
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Oven temperature (deg C) logged every 15 minutes over one shift
+   temps = rng.normal(180.0, 1.5, size=30)
+   temps[22] = 186.4  # heating element surge
 
-   ax = control_chart(data, title="Filling process")
+   ax = control_chart(temps, title="Oven Temperature Control Chart", ylabel="Temperature (deg C)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

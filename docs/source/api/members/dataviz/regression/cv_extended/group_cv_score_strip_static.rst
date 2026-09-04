@@ -25,13 +25,14 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.regression.cv_extended import group_cv_score_strip_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   plants = ["Plant A", "Plant B", "Plant C", "Plant D", "Plant E"]
+   scores = np.array([0.72, 0.83, 0.68, 0.79, 0.75])
 
-   ax = group_cv_score_strip_static(y_true, y_pred)
+   ax = group_cv_score_strip_static(plants, scores,
+                                    title="OEE Model: Leave-One-Plant-Out R2",
+                                    metric_name="R2", color="#c0392b")
+   ax.set_ylim(0.5, 1.0)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

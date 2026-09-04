@@ -27,13 +27,14 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.multivariate.charts import heatmap
 
    rng = np.random.default_rng(42)
-   df = pd.DataFrame({
-       "Speed": rng.normal(loc=100.0, scale=5.0, size=30),
-       "Pressure": rng.normal(loc=50.0, scale=2.0, size=30),
-       "Yield": rng.normal(loc=90.0, scale=3.0, size=30),
-   })
+   days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+   hours = [f"{h}:00" for h in range(6, 22, 2)]
+   traffic = rng.integers(50, 500, size=(len(days), len(hours))).astype(float)
+   traffic[5:, :3] *= 0.4
+   df = pd.DataFrame(traffic, index=days, columns=hours)
 
-   ax = heatmap(df, title="Process heatmap")
+   ax = heatmap(df, title="Store Foot Traffic by Day and Hour", cmap="YlOrRd")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

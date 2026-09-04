@@ -22,12 +22,19 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.glm import variance_function_plot_static
 
-   mu = np.linspace(0.5, 5.0, 50)
+   rng = np.random.default_rng(42)
+   mu_grid = pd.Series(np.exp(np.linspace(np.log(0.5), np.log(25.0), 30)),
+                       name="mean_defect_count")
 
-   ax = variance_function_plot_static(mu, family="poisson")
+   ax = variance_function_plot_static(mu_grid, family="poisson",
+                                      title="Defect Count Model: Poisson Variance Function",
+                                      color="#8c564b")
+   ax.set_ylabel("V(mu)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

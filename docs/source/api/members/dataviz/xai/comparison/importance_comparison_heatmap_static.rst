@@ -25,16 +25,26 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.comparison import importance_comparison_heatmap_static
 
+   features = [
+       "credit_score", "debt_to_income", "utilization",
+       "annual_income", "loan_amount", "account_age",
+   ]
    importance_matrix = pd.DataFrame(
        {
-           "age": [0.30, 0.22, 0.26],
-           "income": [0.25, 0.31, 0.28],
-           "tenure": [0.10, 0.08, 0.12],
+           "LogisticReg": [0.35, 0.22, 0.15, 0.12, 0.09, 0.07],
+           "RandomForest": [0.28, 0.25, 0.18, 0.11, 0.10, 0.08],
+           "XGBoost": [0.31, 0.21, 0.20, 0.10, 0.12, 0.06],
+           "MLP": [0.26, 0.19, 0.22, 0.14, 0.11, 0.08],
        },
-       index=["logistic", "random_forest", "gradient_boosting"],
+       index=features,
    )
 
-   ax = importance_comparison_heatmap_static(importance_matrix)
+   ax = importance_comparison_heatmap_static(
+       importance_matrix,
+       title="Default-Model Importance Agreement Across Algorithms",
+       cmap="YlGnBu",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

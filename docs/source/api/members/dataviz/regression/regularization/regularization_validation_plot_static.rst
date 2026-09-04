@@ -22,14 +22,26 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.regularization import regularization_validation_plot_static
 
-   alphas = np.logspace(-3, 2, 20)
-   train_scores = 0.95 - 0.02 * np.log10(alphas + 1e-3)
-   test_scores = train_scores - 0.05 - 0.01 * np.abs(np.log10(alphas))
+   rng = np.random.default_rng(42)
+   alphas = pd.Series(np.geomspace(1e-4, 10.0, 16), name="alpha")
+   fold_scores = []
+   for a in alphas:
+       bias = 0.06 * np.log10(a / 1e-4) ** 2
+       variance = 0.10 / (1 + 25 * a)
+       fold_scores.append(0.92 - bias - variance + rng.normal(0, 0.015, 5))
+   test_scores = np.array(fold_scores)
+   train_scores = test_scores + 0.04 + rng.normal(0, 0.005, test_scores.shape)
 
-   ax = regularization_validation_plot_static(alphas, train_scores, test_scores, score_name="R2")
+   ax = regularization_validation_plot_static(
+       alphas, train_scores, test_scores, score_name="R-squared",
+       title="Pricing model: ridge validation curve (5-fold CV)",
+       train_color="#4878d0", test_color="#d62728", theme="minimal",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

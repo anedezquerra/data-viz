@@ -21,13 +21,19 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.datetime import as_datetime_series
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Newsletter signup timestamps exported from a marketing platform
+   rng = np.random.default_rng(42)
+   raw = pd.Timestamp("2026-01-05") + pd.to_timedelta(
+       rng.uniform(0, 90 * 24, size=40), unit="h"
+   )
+   raw_strings = raw.strftime("%Y-%m-%d %H:%M")
 
-   result = as_datetime_series(values)
-   print(result)
+   result = as_datetime_series(raw_strings, name="signup_time")
+   print(result.head())
 
 Output gallery
 --------------

@@ -25,13 +25,21 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.classification.confusion_matrix import confusion_matrix_plot_static
 
-   cm = np.array([[32, 4], [5, 29]])
-   fpr = np.array([0.0, 0.1, 0.3, 1.0])
-   tpr = np.array([0.0, 0.7, 0.9, 1.0])
-   precision = np.array([1.0, 0.86, 0.72])
-   recall = np.array([0.2, 0.7, 1.0])
+   rng = np.random.default_rng(42)
+   n = 160
+   y_prob = np.clip(rng.beta(2, 4, n), 0.01, 0.99)
+   y_true = (rng.uniform(size=n) < y_prob).astype(int)
+   y_pred = (y_prob >= 0.35).astype(int)  # low threshold: fraud recall first
+   cm = np.zeros((2, 2), dtype=int)
+   for t, p in zip(y_true, y_pred):
+       cm[t, p] += 1
 
-   ax = confusion_matrix_plot_static(cm)
+   ax = confusion_matrix_plot_static(
+       cm, labels=["legitimate", "fraud"],
+       title="Fraud detector at 0.35 alert threshold",
+       cmap="Oranges",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

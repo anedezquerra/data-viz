@@ -21,13 +21,28 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.distribution import qq_plot_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Heights measured in a university anthropometry study
+   rng = np.random.default_rng(42)
+   height_cm = pd.Series(
+       np.round(rng.normal(loc=171.0, scale=9.5, size=48), 1),
+       name="height_cm",
+   )
 
-   ax = qq_plot_static(values)
+   ax = qq_plot_static(
+       height_cm,
+       distribution="norm",
+       title="Height Normality QQ Plot",
+       color="steelblue",
+       reference_color="crimson",
+       theme="default",
+   )
+   ax.set_xlabel("Theoretical Normal Quantiles")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

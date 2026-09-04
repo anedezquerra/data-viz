@@ -24,9 +24,11 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.spc.rules import subgroup_matrix
 
-   data = np.arange(1.0, 21.0)
+   rng = np.random.default_rng(42)
+   # Torque readings (N m) from 25 subgroups of 5 fasteners each
+   torque = rng.normal(18.0, 0.6, size=125)
 
-   result = subgroup_matrix(data, subgroup_size=5)
+   result = subgroup_matrix(torque, subgroup_size=5)
    print(result)
 
 Output gallery

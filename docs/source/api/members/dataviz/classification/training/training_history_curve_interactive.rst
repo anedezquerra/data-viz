@@ -21,16 +21,20 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.classification.training import training_history_curve_interactive
 
-   history = {
-       "loss": [0.90, 0.62, 0.45, 0.36, 0.30, 0.27],
-       "val_loss": [0.95, 0.70, 0.55, 0.50, 0.51, 0.53],
-   }
+   # neural churn classifier: 40-epoch log-loss history
+   epochs = np.arange(1, 41)
+   loss = 0.9 * np.exp(-epochs / 9.0) + 0.32
+   val_loss = 0.9 * np.exp(-epochs / 8.0) + 0.36 + np.maximum(epochs - 25, 0) * 0.004
+   history = {"loss": loss.tolist(), "val_loss": val_loss.tolist()}
 
-   fig = training_history_curve_interactive(history)
+   fig = training_history_curve_interactive(history,
+                                            title="Churn MLP: training history")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

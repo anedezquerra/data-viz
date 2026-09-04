@@ -25,12 +25,20 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.regression.effects import interaction_effect_plot_static
 
-   x_grid = np.linspace(0.0, 1.0, 20)
-   curves = [x_grid**2, np.sqrt(x_grid), x_grid]
+   grid = np.linspace(20, 90, 20)
+   curves = np.vstack([
+       100 + 0.5 * grid,
+       100 + 0.9 * grid + 0.01 * grid ** 2,
+       100 + 1.4 * grid + 0.03 * grid ** 2,
+   ])
+   labels = ["low humidity", "medium humidity", "high humidity"]
 
    ax = interaction_effect_plot_static(
-       x_grid, curves, ["low", "mid", "high"], feature_name="x1"
-   )
+       grid, curves, labels,
+       title="Interaction: Temperature x Humidity on Drying Time",
+       feature_name="temperature (C)", cmap="viridis")
+   ax.set_ylabel("Predicted drying time (min)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

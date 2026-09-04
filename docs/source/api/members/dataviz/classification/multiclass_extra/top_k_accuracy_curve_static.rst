@@ -21,18 +21,22 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.multiclass_extra import top_k_accuracy_curve_static
 
    rng = np.random.default_rng(42)
-   logits = rng.normal(size=(200, 4))
-   exp_logits = np.exp(logits - logits.max(axis=1, keepdims=True))
-   y_prob_matrix = exp_logits / exp_logits.sum(axis=1, keepdims=True)
-   y_true = rng.choice(4, size=200)
+   # 6-class product recommender: does the right item appear in the top-K?
+   n = 120
+   n_classes = 6
+   y_true = rng.integers(0, n_classes, n)
+   logits = rng.normal(0, 1, (n, n_classes))
+   logits[np.arange(n), y_true] += 2.2  # model signal on the true class
+   probs = np.exp(logits) / np.exp(logits).sum(axis=1, keepdims=True)
 
-   ax = top_k_accuracy_curve_static(y_true, y_prob_matrix)
+   ax = top_k_accuracy_curve_static(y_true, probs,
+                                    title="Recommender top-K accuracy")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -25,12 +25,16 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.comparison import error_ecdf_overlay_interactive
 
    rng = np.random.default_rng(42)
-   errors_per_model = [
-       np.abs(rng.normal(0.0, 0.5, size=60)),
-       np.abs(rng.normal(0.0, 0.8, size=60)),
-   ]
+   errors = [rng.normal(0, 4, 35),
+             rng.normal(0, 7, 35),
+             rng.normal(2, 10, 35)]
+   labels = ["OLS", "Huber", "Quantile (median)"]
 
-   fig = error_ecdf_overlay_interactive(errors_per_model, ["OLS", "Ridge"])
+   fig = error_ecdf_overlay_interactive(errors, labels,
+                                        title="Delivery-Time Models: |Error| ECDF",
+                                        template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

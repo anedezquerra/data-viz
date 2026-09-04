@@ -21,12 +21,15 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.robust import mad_zscores
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = mad_zscores(values)
+   rng = np.random.default_rng(42)
+   income_k = rng.gamma(shape=2.5, scale=22.0, size=150).round(1)
+   income_k[[12, 77, 130]] = [950.0, 1200.0, 875.0]
+   household_income = pd.Series(income_k, name="household_income_k")
+   result = mad_zscores(household_income)
    print(result)
 
 Output gallery

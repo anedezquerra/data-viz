@@ -21,18 +21,35 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.multiclass import multiclass_pr_curve_static
 
-   curves = {
-       "Class 0": (np.array([0.0, 0.5, 1.0]), np.array([0.9, 0.85, 0.6])),
-       "Class 1": (np.array([0.0, 0.5, 1.0]), np.array([0.8, 0.7, 0.5])),
-       "Class 2": (np.array([0.0, 0.5, 1.0]), np.array([0.7, 0.6, 0.4])),
-   }
+   rng = np.random.default_rng(42)
+   # 3-class support-ticket triage model, one-vs-rest PR per class
+   def ovr_pr(scores, truth):
+       order = np.argsort(-scores)
+       precision, recall, tp, fp = [1.0], [0.0], 0, 0
+       for i in order:
+           if truth[i] == 1:
+               tp += 1
+           else:
+               fp += 1
+           precision.append(tp / max(tp + fp, 1))
+           recall.append(tp / max(truth.sum(), 1))
+       return np.array(recall), np.array(precision)
 
-   ax = multiclass_pr_curve_static(curves)
+   n = 120
+   y = rng.integers(0, 3, n)
+   curves = {}
+   for k, name in enumerate(["Billing", "Technical", "Account"]):
+       truth = (y == k).astype(int)
+       score = np.clip(truth * rng.beta(6, 3, n) + (1 - truth) * rng.beta(3, 6, n), 0, 1)
+       curves[name] = ovr_pr(score, truth)
+
+   ax = multiclass_pr_curve_static(curves,
+                                   title="Ticket triage: one-vs-rest PR")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

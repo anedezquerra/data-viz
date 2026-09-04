@@ -26,14 +26,23 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.univariate.advanced import ridgeline_plot_static
 
+   # Weekly delivery times (days) for three regional warehouses
    rng = np.random.default_rng(42)
-   data = pd.DataFrame({
-       "Line A": rng.normal(loc=10.0, scale=0.4, size=50),
-       "Line B": rng.normal(loc=10.5, scale=0.5, size=50),
-       "Line C": rng.normal(loc=9.8, scale=0.3, size=50),
+   deliveries = pd.DataFrame({
+       "North": rng.normal(loc=3.1, scale=0.8, size=40),
+       "Central": rng.normal(loc=2.6, scale=0.6, size=40),
+       "South": rng.normal(loc=3.8, scale=1.0, size=40),
    })
 
-   ax = ridgeline_plot_static(data, title="Ridgeline plot")
+   ax = ridgeline_plot_static(
+       deliveries,
+       title="Delivery Time by Warehouse",
+       xlabel="Delivery Time (days)",
+       color="teal",
+       theme="minimal",
+   )
+   ax.set_xlabel("Delivery Time (days)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

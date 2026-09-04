@@ -24,13 +24,16 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.regression.var_engineering import target_encoding_curve_interactive
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   zip_means = [385, 402, 291, 450, 318, 512, 366, 277, 429, 341, 470, 305, 398, 260, 445]
+   zip_counts = [210, 95, 640, 38, 480, 22, 150, 720, 61, 390, 45, 540, 120, 810, 88]
+   prior = np.average(zip_means, weights=zip_counts)
 
-   fig = target_encoding_curve_interactive(y_true, y_pred)
+   fig = target_encoding_curve_interactive(
+       zip_means, zip_counts, prior=round(float(prior), 1),
+       title="Home prices by ZIP: target-encoded mean vs sample size (k$)",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -24,13 +24,29 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.xai.shap_extra import shap_interaction_heatmap_interactive
 
-   importances = np.array([0.42, 0.31, 0.18])
-   feature_names = ["age", "income", "tenure"]
-   shap_values = np.array([[0.1, -0.2, 0.3], [0.2, -0.1, 0.1]])
-   feature_values = np.array([0, 1, 2, 3])
-   pd_values = np.array([0.2, 0.25, 0.31, 0.34])
-
-   fig = shap_interaction_heatmap_interactive(shap_values, feature_names)
+   feature_names = [
+       "tenure_months", "monthly_charges", "contract_two_year",
+       "num_support_calls", "avg_session_min", "late_payments",
+       "plan_premium", "age",
+   ]
+   diag = np.array([0.55, 0.40, 0.38, 0.30, 0.16, 0.26, 0.12, 0.09])
+   off = np.array([
+       [0.00, 0.21, 0.12, 0.10, 0.05, 0.06, 0.03, 0.02],
+       [0.21, 0.00, 0.09, 0.08, 0.04, 0.05, 0.04, 0.02],
+       [0.12, 0.09, 0.00, 0.06, 0.03, 0.04, 0.05, 0.01],
+       [0.10, 0.08, 0.06, 0.00, 0.04, 0.07, 0.02, 0.02],
+       [0.05, 0.04, 0.03, 0.04, 0.00, 0.02, 0.02, 0.01],
+       [0.06, 0.05, 0.04, 0.07, 0.02, 0.00, 0.01, 0.01],
+       [0.03, 0.04, 0.05, 0.02, 0.02, 0.01, 0.00, 0.01],
+       [0.02, 0.02, 0.01, 0.02, 0.01, 0.01, 0.01, 0.00],
+   ])
+   interaction_matrix = off + np.diag(diag)
+   fig = shap_interaction_heatmap_interactive(
+       interaction_matrix, feature_names, top_n=8,
+       title="Mean absolute SHAP interactions - churn model",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

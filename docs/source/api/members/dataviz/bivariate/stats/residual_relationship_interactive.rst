@@ -21,13 +21,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.bivariate.stats import residual_relationship_interactive
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
+   rng = np.random.default_rng(42)
+   n = 70
+   experience = pd.Series(rng.uniform(low=0.0, high=20.0, size=n), name="Experience (years)")
+   salary = pd.Series(40.0 + 4.0 * experience + 0.08 * experience**2 + rng.normal(loc=0.0, scale=6.0, size=n), name="Salary (k USD)")
 
-   fig = residual_relationship_interactive(x, y)
+   fig = residual_relationship_interactive(
+       experience,
+       salary,
+       degree=1,
+       title="Linear Fit Residuals: Salary vs Experience",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

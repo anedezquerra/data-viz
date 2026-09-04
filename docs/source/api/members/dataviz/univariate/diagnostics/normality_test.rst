@@ -21,12 +21,18 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.diagnostics import normality_test
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Final exam scores for one section of an introductory course
+   rng = np.random.default_rng(42)
+   scores = pd.Series(
+       np.round(rng.normal(loc=78.0, scale=9.0, size=52), 1),
+       name="exam_score",
+   )
 
-   result = normality_test(values)
+   result = normality_test(scores, method="shapiro", alpha=0.05)
    print(result)
 
 Output gallery

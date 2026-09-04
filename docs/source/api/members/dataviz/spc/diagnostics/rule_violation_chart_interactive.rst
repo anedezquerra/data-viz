@@ -25,10 +25,13 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.diagnostics import rule_violation_chart_interactive
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Batch pH from a fermentation process with a shift after a recipe change
+   ph = rng.normal(7.2, 0.05, size=30)
+   ph[18:] += 0.25  # upward shift after cleaning-cycle change
 
-   fig = rule_violation_chart_interactive(data, title="Process rule signals")
+   fig = rule_violation_chart_interactive(ph, title="Fermentation Batch pH - Rule Violations")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

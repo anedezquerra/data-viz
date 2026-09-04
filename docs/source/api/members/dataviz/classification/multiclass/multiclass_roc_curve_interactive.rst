@@ -21,17 +21,36 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.classification.multiclass import multiclass_roc_curve_interactive
 
-   curves = {
-       "Class 0": (np.array([0.0, 0.1, 0.3, 1.0]), np.array([0.0, 0.8, 0.9, 1.0])),
-       "Class 1": (np.array([0.0, 0.2, 0.4, 1.0]), np.array([0.0, 0.6, 0.8, 1.0])),
-       "Class 2": (np.array([0.0, 0.3, 0.5, 1.0]), np.array([0.0, 0.5, 0.75, 1.0])),
-   }
+   rng = np.random.default_rng(42)
+   # 3-class support-ticket triage model, one-vs-rest ROC per class
+   def ovr_roc(scores, truth):
+       order = np.argsort(-scores)
+       fpr, tpr, tp, fp = [0.0], [0.0], 0, 0
+       for i in order:
+           if truth[i] == 1:
+               tp += 1
+           else:
+               fp += 1
+           tpr.append(tp / max(truth.sum(), 1))
+           fpr.append(fp / max((1 - truth).sum(), 1))
+       return np.array(fpr), np.array(tpr)
 
-   fig = multiclass_roc_curve_interactive(curves)
+   n = 120
+   y = rng.integers(0, 3, n)
+   curves = {}
+   for k, name in enumerate(["Billing", "Technical", "Account"]):
+       truth = (y == k).astype(int)
+       score = np.clip(truth * rng.beta(6, 3, n) + (1 - truth) * rng.beta(3, 6, n), 0, 1)
+       curves[name] = ovr_roc(score, truth)
+
+   fig = multiclass_roc_curve_interactive(curves,
+                                          title="Ticket triage: one-vs-rest ROC")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

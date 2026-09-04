@@ -25,10 +25,20 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.local_explanations import shap_force_plot_static
 
-   shap_instance = np.array([0.25, -0.10, 0.05, -0.02])
-   feature_names = ["age", "income", "tenure", "debt"]
-
-   ax = shap_force_plot_static(shap_instance, feature_names, base_value=0.40)
+   feature_names = [
+       "tenure_months", "monthly_charges", "contract_two_year",
+       "num_support_calls", "avg_session_min", "late_payments",
+       "plan_premium", "age",
+   ]
+   shap_values_instance = np.array(
+       [0.85, 0.42, -0.61, 0.37, 0.12, 0.28, -0.15, -0.06]
+   )
+   ax = shap_force_plot_static(
+       shap_values_instance, feature_names, base_value=-1.10, top_n=8,
+       title="Why customer #417 is predicted to churn (log-odds)",
+   )
+   ax.set_xlabel("Model output (log-odds of churn)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

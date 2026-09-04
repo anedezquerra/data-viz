@@ -21,16 +21,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
-   from dataviz.classification.errors import confidence_by_correctness_histogram_static
+   from dataviz.classification.errors import (
+       confidence_by_correctness_histogram_static,
+   )
 
-   rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   rng = np.random.default_rng(31)
+   n = 150
+   skill = rng.normal(0, 1.4, n)
+   y_prob = 1.0 / (1.0 + np.exp(-skill))
+   y_true = (skill + rng.normal(0, 1.0, n) > 0).astype(int)
 
-   ax = confidence_by_correctness_histogram_static(y_true, y_prob)
+   ax = confidence_by_correctness_histogram_static(
+       y_true, y_prob, threshold=0.5, bins=25,
+       title="Email spam filter: is the model confident when wrong?",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

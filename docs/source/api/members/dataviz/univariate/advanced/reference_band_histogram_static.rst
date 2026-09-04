@@ -21,13 +21,30 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.advanced import reference_band_histogram_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Bottling line fill volumes audited over one production shift
+   rng = np.random.default_rng(42)
+   fill_ml = pd.Series(
+       np.round(rng.normal(loc=500.0, scale=4.5, size=48), 1),
+       name="fill_volume_ml",
+   )
 
-   ax = reference_band_histogram_static(values)
+   ax = reference_band_histogram_static(
+       fill_ml,
+       bins=14,
+       title="Bottle Fill Volume with +/- 1 SD Band",
+       xlabel="Fill Volume (ml)",
+       color="cornflowerblue",
+       band_color="khaki",
+       mean_color="crimson",
+       theme="default",
+   )
+   ax.set_ylabel("Bottles")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

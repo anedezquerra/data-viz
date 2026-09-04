@@ -23,12 +23,16 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
    from dataviz.univariate.inference import BootstrapCI
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = BootstrapCI(statistic="label", estimate=0.5, lower=0.5, upper=0.5, confidence_level=0.5, n_resamples=5)
+   result = BootstrapCI(
+       statistic="mean",
+       estimate=9.84,
+       lower=9.12,
+       upper=10.61,
+       confidence_level=0.95,
+       n_resamples=2000,
+   )
    print(result)
 
 Output gallery

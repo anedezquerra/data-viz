@@ -25,10 +25,13 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.diagnostics import zone_chart_interactive
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Reactor temperature (deg C) sampled hourly with a slow upward drift
+   temps = rng.normal(85.0, 0.8, size=30)
+   temps[22:] += np.linspace(0.0, 1.8, 8)  # fouling heat exchanger
 
-   fig = zone_chart_interactive(data, title="Process zones")
+   fig = zone_chart_interactive(temps, title="Reactor Temperature Zone Chart")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

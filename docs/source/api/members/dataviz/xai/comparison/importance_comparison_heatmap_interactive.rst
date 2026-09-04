@@ -22,18 +22,29 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.xai.comparison import importance_comparison_heatmap_interactive
 
+   features = [
+       "credit_score", "debt_to_income", "utilization",
+       "annual_income", "loan_amount", "account_age",
+   ]
    importance_matrix = pd.DataFrame(
        {
-           "age": [0.30, 0.22, 0.26],
-           "income": [0.25, 0.31, 0.28],
-           "tenure": [0.10, 0.08, 0.12],
+           "LogisticReg": [0.35, 0.22, 0.15, 0.12, 0.09, 0.07],
+           "RandomForest": [0.28, 0.25, 0.18, 0.11, 0.10, 0.08],
+           "XGBoost": [0.31, 0.21, 0.20, 0.10, 0.12, 0.06],
+           "MLP": [0.26, 0.19, 0.22, 0.14, 0.11, 0.08],
        },
-       index=["logistic", "random_forest", "gradient_boosting"],
+       index=features,
    )
 
-   fig = importance_comparison_heatmap_interactive(importance_matrix)
+   fig = importance_comparison_heatmap_interactive(
+       importance_matrix,
+       title="Default-Model Importance Agreement Across Algorithms",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

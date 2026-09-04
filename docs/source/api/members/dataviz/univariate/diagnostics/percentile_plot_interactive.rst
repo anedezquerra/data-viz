@@ -21,12 +21,28 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.diagnostics import percentile_plot_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Response times for an internal API endpoint over one day
+   rng = np.random.default_rng(42)
+   response_ms = pd.Series(
+       np.round(rng.lognormal(mean=4.6, sigma=0.5, size=58), 1),
+       name="response_ms",
+   )
 
-   fig = percentile_plot_interactive(values)
+   fig = percentile_plot_interactive(
+       response_ms,
+       step=10,
+       title="API Response Time Percentile Profile",
+       xlabel="Percentile",
+       ylabel="Response Time (ms)",
+       color="darkmagenta",
+       template="plotly_white",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

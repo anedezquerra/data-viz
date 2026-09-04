@@ -21,13 +21,22 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.categorical import category_counts
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-   categories = pd.Series(["low", "medium", "high", "medium", "low"], name="Priority")
+   # Exit-survey responses for a public library membership program
+   rng = np.random.default_rng(42)
+   ratings = pd.Series(
+       rng.choice(
+           ["Excellent", "Good", "Average", "Poor"],
+           size=180,
+           p=[0.45, 0.32, 0.16, 0.07],
+       ),
+       name="rating",
+   )
 
-   result = category_counts(values)
+   result = category_counts(ratings, normalize=True, top_n=4)
    print(result)
 
 Output gallery

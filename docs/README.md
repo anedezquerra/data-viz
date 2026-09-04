@@ -37,6 +37,12 @@ Curated "Use case" blurbs live in `docs/_use_cases/<pkg>.py` files as
 (`dataviz.<pkg>.<module>.<member>`); pages without an entry omit the section.
 Add an entry there when introducing a new public function or class.
 
+Curated "Complete example" code lives in `docs/_examples/<pkg>.py` files as
+`EXAMPLES` dicts with the same keying. Examples must be self-contained,
+seeded, and end with `plt.show()` / `fig.show()` / `print(result)`. The
+generator automatically places chart legends outside the plot, centered below
+it — do not add legend placement calls in curated examples.
+
 In CI, `.github/workflows/docs.yml` regenerates the pages, verifies that
 every example runs, and commits any drift back to the branch, so new or
 updated integrations automatically ship with runnable examples. Forked pull

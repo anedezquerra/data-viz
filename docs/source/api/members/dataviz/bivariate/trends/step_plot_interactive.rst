@@ -21,13 +21,25 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.bivariate.trends import step_plot_interactive
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
+   quarter = pd.Series(np.arange(1, 13), name="Quarter")
+   price = pd.Series(
+       [9.99, 9.99, 10.49, 10.49, 10.49, 10.99, 10.99, 11.49, 11.49, 11.49, 11.99, 11.99],
+       name="Subscription price (USD)",
+   )
 
-   fig = step_plot_interactive(x, y)
+   fig = step_plot_interactive(
+       quarter,
+       price,
+       shape="hv",
+       title="Subscription Price Changes Over Time",
+       color="darkorange",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

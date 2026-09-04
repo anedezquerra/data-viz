@@ -24,10 +24,35 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.importance_extra import permutation_importance_bar_static
 
-   importances = {"age": 0.045, "income": 0.120, "tenure": 0.012, "debt": 0.067}
-   std = {"age": 0.008, "income": 0.020, "tenure": 0.004, "debt": 0.011}
+   importances = {
+       "credit_score": 0.142,
+       "debt_to_income": 0.098,
+       "utilization": 0.071,
+       "payment_history": 0.055,
+       "annual_income": 0.031,
+       "loan_amount": 0.024,
+       "account_age": 0.012,
+       "inquiries_6m": 0.008,
+   }
+   std = {
+       "credit_score": 0.011,
+       "debt_to_income": 0.009,
+       "utilization": 0.008,
+       "payment_history": 0.007,
+       "annual_income": 0.006,
+       "loan_amount": 0.005,
+       "account_age": 0.004,
+       "inquiries_6m": 0.003,
+   }
 
-   ax = permutation_importance_bar_static(importances, std=std)
+   ax = permutation_importance_bar_static(
+       importances,
+       std=std,
+       top_n=8,
+       title="Permutation Importance (ROC-AUC Drop) - Default Model",
+       color="seagreen",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

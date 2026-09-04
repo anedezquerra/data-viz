@@ -22,13 +22,26 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.multicollinearity import eigenvalue_scree_predictors_interactive
 
    rng = np.random.default_rng(42)
-   x1 = rng.normal(0.0, 1.0, size=60)
-   X = np.column_stack([x1, 0.9 * x1 + rng.normal(0.0, 0.1, size=60), rng.normal(0.0, 1.0, size=60)])
+   n = 40
+   size = rng.normal(2000, 500, n)
+   homes = pd.DataFrame({
+       "sqft": size,
+       "bedrooms": size / 480 + rng.normal(0, 0.4, n),
+       "bathrooms": size / 750 + rng.normal(0, 0.3, n),
+       "garage_cars": np.clip(size / 900 + rng.normal(0, 0.3, n), 0, 4),
+       "lot_sqft": rng.normal(7000, 1800, n),
+   })
 
-   fig = eigenvalue_scree_predictors_interactive(X)
+   fig = eigenvalue_scree_predictors_interactive(
+       homes, title="Home appraisal model: predictor eigenvalue scree",
+       color="#6acc64", template="plotly_white",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

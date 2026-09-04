@@ -26,9 +26,23 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.multivariate.parallel import parallel_coordinates_static
 
-   df = pd.DataFrame({"a": [1, 2, np.nan, 4], "b": [4, 3, 2, 1], "segment": ["A", "A", "B", "B"]})
+   rng = np.random.default_rng(42)
+   n = 60
+   df = pd.DataFrame({
+       "Battery (h)": rng.normal(loc=12.0, scale=2.0, size=n),
+       "Weight (g)": rng.normal(loc=180.0, scale=25.0, size=n),
+       "Screen (in)": rng.normal(loc=6.1, scale=0.4, size=n),
+       "Price (USD)": rng.normal(loc=700.0, scale=150.0, size=n),
+       "Rating": rng.uniform(low=3.0, high=5.0, size=n),
+   })
 
-   ax = parallel_coordinates_static(df)
+   ax = parallel_coordinates_static(
+       df,
+       title="Smartphone Model Comparison",
+       alpha=0.4,
+       linewidth=1.2,
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

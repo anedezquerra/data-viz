@@ -22,14 +22,22 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.domain import demand_forecast_fan_chart_interactive
 
-   rng = np.random.default_rng(42)
-   time = np.arange(24)
-   central = 100 + 2 * time + rng.normal(0.0, 1.0, size=24)
-   quantile_bands = [(central - 5, central + 5), (central - 10, central + 10)]
+   weeks = pd.Series(np.arange(1, 21), name="week_ahead")
+   central = pd.Series(1000 * (1.02 ** weeks), name="central_forecast")
+   spread = 30 * np.sqrt(weeks)
+   bands = [(central - 1.96 * spread, central + 1.96 * spread),
+            (central - 1.28 * spread, central + 1.28 * spread),
+            (central - 0.67 * spread, central + 0.67 * spread)]
 
-   fig = demand_forecast_fan_chart_interactive(time, central, quantile_bands)
+   fig = demand_forecast_fan_chart_interactive(
+       weeks, central, bands,
+       title="Grocery SKU: 20-Week Demand Forecast Fan",
+       color="#c0392b", template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

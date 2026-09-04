@@ -21,13 +21,20 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
+   import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.spc.variable import levey_jennings_chart_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   rng = np.random.default_rng(42)
+   # Daily runs of a glucose control material (mean 5.5, sd 0.12 mmol/L)
+   qc = rng.normal(5.5, 0.12, size=30)
+   qc[21] = 5.98  # reagent lot change pushes one run past 3 sd
 
-   ax = levey_jennings_chart_static(values)
+   ax = levey_jennings_chart_static(
+       qc, mean=5.5, sd=0.12, title="Glucose Control Level 1 - Levey-Jennings"
+   )
+   ax.set_ylabel("Glucose (mmol/L)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

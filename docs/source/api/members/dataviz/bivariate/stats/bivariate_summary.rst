@@ -21,13 +21,16 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.bivariate.stats import bivariate_summary
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
+   rng = np.random.default_rng(42)
+   n = 80
+   study_hours = pd.Series(rng.uniform(low=1.0, high=15.0, size=n), name="Study hours")
+   exam_score = pd.Series(45.0 + 3.5 * study_hours + rng.normal(loc=0.0, scale=6.0, size=n), name="Exam score")
 
-   result = bivariate_summary(x, y)
+   result = bivariate_summary(study_hours, exam_score)
    print(result)
 
 Output gallery

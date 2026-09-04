@@ -26,9 +26,19 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.eda.class_dist import class_distribution_interactive
 
    rng = np.random.default_rng(42)
-   series = pd.Series(rng.choice(["Pass", "Fail", "Rework"], size=60, p=[0.8, 0.1, 0.1]), name="Result")
+   tickets = pd.Series(
+       rng.choice(["Low", "Medium", "High", "Critical"], size=150, p=[0.45, 0.3, 0.18, 0.07]),
+       name="Ticket priority",
+   )
 
-   fig = class_distribution_interactive(series, title="Class distribution")
+   fig = class_distribution_interactive(
+       tickets,
+       title="Support Ticket Priority Balance",
+       color="steelblue",
+       sort=True,
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

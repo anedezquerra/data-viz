@@ -21,13 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.inference import bootstrap_distribution_plot_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   ax = bootstrap_distribution_plot_static(values, seed=42)
+   rng = np.random.default_rng(42)
+   wait_minutes = pd.Series(
+       rng.lognormal(mean=2.2, sigma=0.6, size=180).round(1),
+       name="wait_minutes",
+   )
+   ax = bootstrap_distribution_plot_static(
+       wait_minutes,
+       statistic="mean",
+       n_resamples=1000,
+       seed=7,
+       title="Bootstrap Mean Wait Time (Call Center)",
+       color="steelblue",
+   )
+   ax.set_xlabel("Mean wait time (minutes)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

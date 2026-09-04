@@ -23,10 +23,20 @@ The following example is self-contained and can be copied into a Python session 
 
    from dataviz.xai.local_more import contrastive_explanation_bar_interactive
 
-   pertinent_positives = {"income": 52.0, "tenure": 4.0}
-   pertinent_negatives = {"debt": 8.0, "region_score": 0.3}
-
-   fig = contrastive_explanation_bar_interactive(pertinent_positives, pertinent_negatives)
+   pertinent_positives = {
+       "credit_score": 0.34, "employment_years": 0.21,
+       "annual_income": 0.18, "debt_to_income": 0.12,
+   }
+   pertinent_negatives = {
+       "late_payments": 0.27, "num_open_accounts": 0.15,
+       "loan_amount": 0.09, "debt_to_income": 0.05,
+   }
+   fig = contrastive_explanation_bar_interactive(
+       pertinent_positives, pertinent_negatives,
+       title="Why approved vs what would flip to denial - applicant #771",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -21,15 +21,21 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.classification.threshold import net_benefit_curve_interactive
 
    rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   # medical screening: decision-curve analysis vs treat-all / treat-none
+   n = 150
+   y_true = (rng.random(n) < 0.2).astype(int)
+   y_prob = np.clip(
+       y_true * rng.beta(6, 2.5, n) + (1 - y_true) * rng.beta(2.5, 6, n), 0, 1)
 
-   fig = net_benefit_curve_interactive(y_true, y_prob)
+   fig = net_benefit_curve_interactive(y_true, y_prob,
+                                       title="Screening test: net benefit")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

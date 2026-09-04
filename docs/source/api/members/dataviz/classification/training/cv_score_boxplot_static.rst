@@ -21,18 +21,22 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.training import cv_score_boxplot_static
 
+   rng = np.random.default_rng(42)
+   # 10-fold CV F1 scores for four churn model candidates
    cv_scores = {
-       "Logistic regression": [0.81, 0.83, 0.80, 0.82, 0.84],
-       "Random forest": [0.87, 0.89, 0.88, 0.86, 0.90],
-       "Gradient boosting": [0.85, 0.87, 0.86, 0.88, 0.87],
+       "logreg": rng.normal(0.72, 0.03, 10),
+       "random forest": rng.normal(0.79, 0.025, 10),
+       "gradient boost": rng.normal(0.81, 0.02, 10),
+       "naive bayes": rng.normal(0.66, 0.04, 10),
    }
 
-   ax = cv_score_boxplot_static(cv_scores)
+   ax = cv_score_boxplot_static(cv_scores,
+                                title="Churn models: 10-fold CV F1")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

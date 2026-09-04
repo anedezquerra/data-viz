@@ -21,16 +21,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.gain_lift import cumulative_accuracy_profile_static
 
-   rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   rng = np.random.default_rng(71)
+   n_pos, n_neg = 35, 125
+   y_true = np.concatenate([np.ones(n_pos, int), np.zeros(n_neg, int)])
+   y_prob = np.concatenate([
+       rng.normal(0.68, 0.17, n_pos),
+       rng.normal(0.32, 0.15, n_neg),
+   ]).clip(0.01, 0.99)
 
-   ax = cumulative_accuracy_profile_static(y_true, y_prob)
+   ax = cumulative_accuracy_profile_static(
+       y_true, y_prob,
+       title="Credit default model: CAP curve and accuracy ratio",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

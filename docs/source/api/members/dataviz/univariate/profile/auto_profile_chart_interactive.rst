@@ -26,9 +26,17 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.univariate.profile import auto_profile_chart_interactive
 
    rng = np.random.default_rng(42)
-   value = pd.Series(rng.normal(loc=10.0, scale=0.4, size=30), name="Value")
-
-   fig = auto_profile_chart_interactive(value, title="Automatic profile")
+   customers = pd.DataFrame(
+       {"monthly_spend": rng.gamma(shape=3.0, scale=28.0, size=150).round(2)}
+   )
+   customers.loc[[5, 41, 96], "monthly_spend"] = np.nan
+   fig = auto_profile_chart_interactive(
+       "monthly_spend",
+       data=customers,
+       title="Monthly Spend Profile",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

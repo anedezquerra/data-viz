@@ -25,11 +25,18 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.pdp_extra import centered_ice_plot_static
 
-   rng = np.random.default_rng(33)
-   feature_values = np.linspace(20.0, 80.0, 15)
-   ice_curves = np.log(feature_values)[None, :] * rng.uniform(0.6, 1.4, size=(12, 1))
-
-   ax = centered_ice_plot_static(feature_values, ice_curves, feature_name="income")
+   rng = np.random.default_rng(42)
+   tenure = np.linspace(0, 72, 30)
+   n_instances = 40
+   offsets = rng.normal(0, 0.8, size=(n_instances, 1))
+   curves = 1.6 - 0.035 * tenure + 0.0002 * tenure ** 2
+   ice_curves = curves + offsets + rng.normal(0, 0.03, size=(n_instances, tenure.size))
+   ax = centered_ice_plot_static(
+       tenure, ice_curves, feature_name="tenure_months",
+       title="Centered ICE - heterogeneity in the tenure effect",
+   )
+   ax.axhline(0, color="grey", linewidth=0.6)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

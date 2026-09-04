@@ -22,16 +22,26 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.quantile import quantile_loss_curve_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   quantiles = pd.Series(np.round(np.arange(0.05, 0.96, 0.05), 2), name="tau")
+   residual_sample = rng.normal(0, 2.5, 400)
+   losses = pd.Series(
+       [np.mean(np.maximum(t * residual_sample, (t - 1) * residual_sample))
+        for t in quantiles],
+       name="pinball_loss",
+   )
 
-   ax = quantile_loss_curve_static(y_true, y_pred)
+   ax = quantile_loss_curve_static(
+       quantiles, losses,
+       title="Demand forecasting: pinball loss by quantile level",
+       color="#6a4c93", theme="minimal",
+   )
+   ax.set_xlabel("Quantile level (tau)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

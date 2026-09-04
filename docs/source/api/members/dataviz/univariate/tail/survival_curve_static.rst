@@ -21,13 +21,24 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.tail import survival_curve_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   ax = survival_curve_static(values)
+   rng = np.random.default_rng(42)
+   claim_amounts = pd.Series(
+       (rng.pareto(a=2.5, size=160) * 5000 + 1000).round(0),
+       name="claim_amount",
+   )
+   ax = survival_curve_static(
+       claim_amounts,
+       title="Insurance Claim Survival Curve",
+       color="darkred",
+       theme="minimal",
+   )
+   ax.set_xlabel("Claim amount (USD)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

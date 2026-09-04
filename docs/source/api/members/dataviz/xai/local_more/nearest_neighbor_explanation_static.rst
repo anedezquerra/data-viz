@@ -21,21 +21,36 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.xai.local_more import nearest_neighbor_explanation_static
 
-   query = {"income": 52.0, "debt": 8.0, "tenure": 4.0}
+   rng = np.random.default_rng(42)
+   cols = [
+       "credit_score", "debt_to_income", "loan_amount",
+       "annual_income", "employment_years", "late_payments",
+   ]
+   query = {
+       "credit_score": 612.0, "debt_to_income": 0.41, "loan_amount": 18500.0,
+       "annual_income": 52000.0, "employment_years": 2.0, "late_payments": 2.0,
+   }
    neighbors = pd.DataFrame(
        {
-           "income": [50.0, 55.0, 49.0],
-           "debt": [9.0, 7.5, 10.0],
-           "tenure": [3.5, 4.5, 4.0],
+           "credit_score": 612 + rng.normal(0, 8, size=5),
+           "debt_to_income": 0.41 + rng.normal(0, 0.03, size=5),
+           "loan_amount": 18500 + rng.normal(0, 900, size=5),
+           "annual_income": 52000 + rng.normal(0, 2500, size=5),
+           "employment_years": 2 + rng.normal(0, 0.5, size=5),
+           "late_payments": np.array([2, 1, 2, 3, 2], dtype=float),
        }
    )
-   target = [1, 1, 0]
-
-   ax = nearest_neighbor_explanation_static(query, neighbors, target=target)
+   target = [1, 0, 1, 1, 0]
+   ax = nearest_neighbor_explanation_static(
+       query, neighbors, target=target,
+       title="Denied applicant #2048 vs 5 most similar past decisions",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -21,11 +21,27 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import matplotlib.pyplot as plt
    from dataviz.xai.importance_extra import drop_column_importance_bar_interactive
 
-   deltas = {"age": 0.018, "income": 0.074, "tenure": 0.004, "debt": 0.031}
+   deltas = {
+       "credit_score": 0.118,
+       "debt_to_income": 0.084,
+       "utilization": 0.062,
+       "payment_history": 0.047,
+       "annual_income": 0.019,
+       "loan_amount": 0.011,
+       "account_age": -0.003,
+       "inquiries_6m": -0.006,
+   }
 
-   fig = drop_column_importance_bar_interactive(deltas)
+   fig = drop_column_importance_bar_interactive(
+       deltas,
+       top_n=8,
+       title="Drop-Column Importance (ROC-AUC) - Default Model",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

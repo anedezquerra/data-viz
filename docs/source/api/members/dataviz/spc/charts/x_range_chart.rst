@@ -26,10 +26,14 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.charts import x_range_chart
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Shaft diameters (mm) sampled from a CNC lathe
+   diameters = rng.normal(25.0, 0.08, size=30)
+   diameters[19] = 25.42  # tool wear spike
 
-   ax = x_range_chart(data, subgroup_size=5, title="Filling process variation")
+   ax = x_range_chart(
+       diameters, subgroup_size=5, title="Shaft Diameter X-Range Chart", ylabel="Diameter (mm)"
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

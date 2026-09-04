@@ -21,13 +21,20 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.text import boolean_bar_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-   flags = pd.Series([True, False, True, True, False], name="Passed")
-
-   fig = boolean_bar_interactive(values)
+   rng = np.random.default_rng(42)
+   subscribed = pd.Series(rng.random(120) < 0.42, name="newsletter_subscribed")
+   fig = boolean_bar_interactive(
+       subscribed,
+       title="Newsletter Subscription Status",
+       color="seagreen",
+       height=450,
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

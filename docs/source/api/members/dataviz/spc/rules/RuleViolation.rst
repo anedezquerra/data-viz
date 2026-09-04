@@ -23,10 +23,12 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import numpy as np
    from dataviz.spc.rules import RuleViolation
 
-   result = RuleViolation(index=24, value=11.8, rule="beyond_limits", message="Point outside control limits")
+   # Violation logged when shift 24 exceeded the upper control limit
+   result = RuleViolation(
+       index=24, value=508.7, rule="beyond_limits", message="Point outside control limits"
+   )
    print(result)
 
 Output gallery

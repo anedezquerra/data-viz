@@ -22,16 +22,30 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.xai.importance_extra import feature_importance_boxplot_interactive
 
-   rng = np.random.default_rng(23)
+   rng = np.random.default_rng(42)
+   centers = {
+       "credit_score": 0.142,
+       "debt_to_income": 0.098,
+       "utilization": 0.071,
+       "payment_history": 0.055,
+       "annual_income": 0.031,
+       "loan_amount": 0.024,
+       "account_age": 0.012,
+   }
    per_fold = {
-       "age": rng.normal(0.05, 0.01, 5).tolist(),
-       "income": rng.normal(0.12, 0.02, 5).tolist(),
-       "tenure": rng.normal(0.02, 0.005, 5).tolist(),
+       name: list(rng.normal(c, 0.008, size=12)) for name, c in centers.items()
    }
 
-   fig = feature_importance_boxplot_interactive(per_fold)
+   fig = feature_importance_boxplot_interactive(
+       per_fold,
+       top_n=7,
+       title="Permutation Importance Stability Across 12 Repeats",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

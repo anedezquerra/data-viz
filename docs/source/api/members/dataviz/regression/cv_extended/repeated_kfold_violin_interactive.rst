@@ -25,10 +25,17 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.cv_extended import repeated_kfold_violin_interactive
 
    rng = np.random.default_rng(42)
-   repeats = ["Repeat 1", "Repeat 2", "Repeat 3", "Repeat 4"]
-   scores_per_repeat = [rng.normal(0.8, 0.05, size=5) for _ in range(4)]
+   repeats = ["Repeat 1", "Repeat 2", "Repeat 3"]
+   scores = [rng.normal(0.78, 0.04, 5),
+             rng.normal(0.81, 0.03, 5),
+             rng.normal(0.79, 0.05, 5)]
 
-   fig = repeated_kfold_violin_interactive(repeats, scores_per_repeat, metric_name="R2")
+   fig = repeated_kfold_violin_interactive(
+       repeats, scores,
+       title="Soil Moisture Model: Repeated 5-Fold R2",
+       metric_name="R2", color="#2a7f62", template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

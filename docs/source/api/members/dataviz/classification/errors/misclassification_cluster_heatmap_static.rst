@@ -21,16 +21,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
-   from dataviz.classification.errors import misclassification_cluster_heatmap_static
+   from dataviz.classification.errors import (
+       misclassification_cluster_heatmap_static,
+   )
 
-   rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   rng = np.random.default_rng(41)
+   n = 170
+   y_prob = np.clip(rng.beta(2, 2.5, n), 0.01, 0.99)
+   noise = rng.normal(0, 0.25, n)
+   y_true = (y_prob + noise > 0.55).astype(int)
 
-   ax = misclassification_cluster_heatmap_static(y_true, y_prob)
+   ax = misclassification_cluster_heatmap_static(
+       y_true, y_prob, n_score_bins=8, threshold=0.5,
+       title="Claims triage model: mistake rate by score band",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

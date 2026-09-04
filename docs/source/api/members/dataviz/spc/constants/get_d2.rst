@@ -23,7 +23,9 @@ The following example is self-contained and can be copied into a Python session 
 
    from dataviz.spc.constants import get_d2
 
-   result = get_d2(5)
+   # Estimate sigma from the mean moving range of a filling line
+   mean_moving_range = 0.32
+   result = mean_moving_range / get_d2(2)
    print(result)
 
 Output gallery

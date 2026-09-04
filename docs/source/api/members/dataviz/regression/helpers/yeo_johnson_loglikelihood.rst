@@ -25,16 +25,15 @@ The following example is self-contained and can be copied into a Python session 
    import pandas as pd
    from dataviz.regression.helpers import yeo_johnson_loglikelihood
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   hospital_stay_days = pd.Series(rng.gamma(2.0, 2.5, 40) + 0.5,
+                                  name="length_of_stay_days")
+   lambdas = np.linspace(-2.0, 2.0, 25)
 
-   result = yeo_johnson_loglikelihood(y_true, y_pred)
-   print(result)
+   centered = hospital_stay_days - hospital_stay_days.median()
+   loglik = yeo_johnson_loglikelihood(centered, lambdas)
+   best = lambdas[int(np.argmax(loglik))]
+   print(f"best lambda: {best:.2f}")
 
 Output gallery
 --------------

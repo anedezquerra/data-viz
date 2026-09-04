@@ -21,15 +21,27 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import matplotlib.pyplot as plt
    from dataviz.xai.cohort import importance_by_segment_heatmap_interactive
 
+   features = [
+       "credit_score", "debt_to_income", "utilization",
+       "annual_income", "loan_amount", "account_age",
+   ]
    importances = {
-       "young": {"age": 0.30, "income": 0.12, "tenure": 0.08},
-       "middle": {"age": 0.18, "income": 0.25, "tenure": 0.10},
-       "senior": {"age": 0.10, "income": 0.20, "tenure": 0.22},
+       "Prime (score >= 740)": dict(zip(features, [0.34, 0.18, 0.16, 0.14, 0.10, 0.08])),
+       "Near-prime (660-739)": dict(zip(features, [0.28, 0.24, 0.19, 0.11, 0.11, 0.07])),
+       "Subprime (< 660)": dict(zip(features, [0.19, 0.30, 0.22, 0.09, 0.12, 0.08])),
+       "Thin file": dict(zip(features, [0.12, 0.21, 0.18, 0.20, 0.17, 0.12])),
    }
 
-   fig = importance_by_segment_heatmap_interactive(importances)
+   fig = importance_by_segment_heatmap_interactive(
+       importances,
+       title="Feature Importance by Applicant Segment",
+       height=560,
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

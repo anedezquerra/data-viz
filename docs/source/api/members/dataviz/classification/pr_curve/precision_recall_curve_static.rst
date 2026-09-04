@@ -25,13 +25,26 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.classification.pr_curve import precision_recall_curve_static
 
-   cm = np.array([[32, 4], [5, 29]])
-   fpr = np.array([0.0, 0.1, 0.3, 1.0])
-   tpr = np.array([0.0, 0.7, 0.9, 1.0])
-   precision = np.array([1.0, 0.86, 0.72])
-   recall = np.array([0.2, 0.7, 1.0])
+   rng = np.random.default_rng(42)
+   n = 150
+   # rare-event fraud detector: only 8% of transactions are fraud
+   y_true = (rng.random(n) < 0.08).astype(int)
+   y_prob = np.clip(
+       y_true * rng.beta(6, 2, n) + (1 - y_true) * rng.beta(2, 8, n), 0, 1)
+   order = np.argsort(-y_prob)
+   precision, recall, tp, fp = [1.0], [0.0], 0, 0
+   for i in order:
+       if y_true[i] == 1:
+           tp += 1
+       else:
+           fp += 1
+       precision.append(tp / max(tp + fp, 1))
+       recall.append(tp / max((y_true == 1).sum(), 1))
+   ap = float(np.trapezoid(precision, recall))
 
-   ax = precision_recall_curve_static(precision, recall)
+   ax = precision_recall_curve_static(precision, recall, ap=abs(ap),
+                                      title="Fraud detector precision-recall")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -21,13 +21,15 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import numpy as np
    from dataviz.spc.diagnostics import pareto_chart_interactive
 
-   categories = ["Surface", "Dimension", "Assembly", "Packaging"]
-   counts = [38, 24, 13, 7]
+   # Surface defect tally from a quarter of final visual inspection
+   categories = ["Scratch", "Dent", "Contamination", "Misprint", "Crack", "Discoloration"]
+   counts = [87, 54, 38, 22, 11, 6]
 
-   fig = pareto_chart_interactive(categories, counts, title="Defect priorities")
+   fig = pareto_chart_interactive(categories, counts, title="Q3 Surface Defect Pareto")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

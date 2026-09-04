@@ -25,11 +25,15 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.regression.selection import aic_bic_bar_static
 
-   model_names = ["M1", "M2", "M3"]
-   aic = np.array([120.5, 115.2, 118.7])
-   bic = np.array([125.5, 119.7, 124.7])
+   models = ["Linear", "Quadratic", "Cubic", "Log terms", "Full kitchen-sink"]
+   aic = np.array([412.3, 388.1, 390.6, 381.4, 397.9])
+   bic = aic + np.array([6.2, 6.2, 9.4, 9.4, 15.7])
 
-   ax = aic_bic_bar_static(model_names, aic, bic)
+   ax = aic_bic_bar_static(
+       models, aic, bic,
+       title="Yield-curve regressors: AIC vs BIC per candidate model",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

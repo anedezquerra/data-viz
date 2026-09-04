@@ -22,13 +22,14 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.helpers import conformal_quantile
 
    rng = np.random.default_rng(42)
-   residuals_calibration = rng.normal(0.0, 1.0, size=50)
-
-   result = conformal_quantile(residuals_calibration, alpha=0.1)
-   print(result)
+   calibration_residuals = pd.Series(rng.normal(0.0, 2.5, 30),
+                                     name="calibration_residuals_ppm")
+   q90 = conformal_quantile(calibration_residuals, alpha=0.1)
+   print(f"90% conformal half-width: {q90:.3f} ppm")
 
 Output gallery
 --------------

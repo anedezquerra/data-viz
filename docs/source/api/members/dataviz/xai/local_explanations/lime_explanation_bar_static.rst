@@ -25,13 +25,21 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.xai.local_explanations import lime_explanation_bar_static
 
    contributions = [
-       ("income > 50k", 0.21),
-       ("tenure <= 2", -0.13),
-       ("debt > 10k", -0.08),
-       ("age > 40", 0.05),
+       ("tenure_months <= 6", 0.31),
+       ("num_support_calls > 3", 0.22),
+       ("contract_two_year = 0", 0.18),
+       ("late_payments > 1", 0.09),
+       ("plan_premium = 1", -0.07),
+       ("monthly_charges <= 55", -0.14),
+       ("avg_session_min > 40", -0.21),
+       ("age > 45", -0.06),
    ]
-
-   ax = lime_explanation_bar_static(contributions)
+   ax = lime_explanation_bar_static(
+       contributions,
+       title="LIME explanation - churn prediction for customer #417",
+   )
+   ax.set_xlabel("Weight in local linear surrogate")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

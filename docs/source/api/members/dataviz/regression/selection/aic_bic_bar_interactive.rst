@@ -24,11 +24,16 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.regression.selection import aic_bic_bar_interactive
 
-   model_names = ["M1", "M2", "M3"]
-   aic = np.array([120.5, 115.2, 118.7])
-   bic = np.array([125.5, 119.7, 124.7])
+   models = ["Linear", "Quadratic", "Cubic", "Log terms", "Full kitchen-sink"]
+   aic = np.array([412.3, 388.1, 390.6, 381.4, 397.9])
+   bic = aic + np.array([6.2, 6.2, 9.4, 9.4, 15.7])
 
-   fig = aic_bic_bar_interactive(model_names, aic, bic)
+   fig = aic_bic_bar_interactive(
+       models, aic, bic,
+       title="Yield-curve regressors: AIC vs BIC per candidate model",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

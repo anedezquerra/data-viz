@@ -21,13 +21,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.transforms import transformation_comparison_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   ax = transformation_comparison_static(values)
+   rng = np.random.default_rng(42)
+   reaction_ms = pd.Series(
+       rng.gamma(shape=3.0, scale=90.0, size=150).round(1),
+       name="reaction_ms",
+   )
+   fig = transformation_comparison_static(
+       reaction_ms,
+       bins=20,
+       title="Reaction Time Under Common Transformations",
+       color="mediumpurple",
+   )
+   fig.legend(loc="lower center", bbox_to_anchor=(0.5, -0.05), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

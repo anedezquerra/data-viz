@@ -21,14 +21,11 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import numpy as np
    from dataviz.spc.rules import as_numeric_series
 
-   rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
-
-   result = as_numeric_series(data, name="Fill weight")
+   # Raw fill-weight log entries from a text export (strings and a gap)
+   raw = ["500.2", "499.8", None, "501.1", "500.6", "499.5", "500.9"]
+   result = as_numeric_series(raw, name="Fill Weight")
    print(result)
 
 Output gallery

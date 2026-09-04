@@ -24,9 +24,14 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.spc.attribute import np_chart_interactive
 
-   defects = np.array([3, 5, 4, 6, 2, 7, 4, 5, 3, 6])
+   rng = np.random.default_rng(42)
+   # 28 incoming lots, 200 parts inspected from each lot
+   defects = rng.binomial(200, 0.04, size=28)
+   defects[19] = 19  # lot from a new supplier runs high
 
-   fig = np_chart_interactive(defects, sample_size=100, title="Defectives per lot")
+   fig = np_chart_interactive(defects, sample_size=200, title="Incoming Inspection - Defective Parts per Lot")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

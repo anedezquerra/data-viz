@@ -25,9 +25,15 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.variable import xbar_s_chart_interactive
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.35, size=(20, 5))
+   # Viscosity readings (cP): 22 subgroups of 6 samples per batch
+   viscosity = rng.normal(350.0, 4.0, size=132)
+   viscosity[90:96] += 14.0  # raw-material change in subgroup 15
 
-   fig = xbar_s_chart_interactive(data)
+   fig = xbar_s_chart_interactive(
+       viscosity, subgroup_size=6, title="Batch Viscosity Xbar-S Chart"
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

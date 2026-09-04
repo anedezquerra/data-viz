@@ -25,9 +25,22 @@ The following example is self-contained and can be copied into a Python session 
    import pandas as pd
    from dataviz.eda.distribution import distribution_summary_interactive
 
-   df = pd.DataFrame({"a": [1, 2, np.nan, 4], "b": [4, 3, 2, 1], "segment": ["A", "A", "B", "B"]})
+   rng = np.random.default_rng(42)
+   n = 120
+   df = pd.DataFrame({
+       "Order value (USD)": rng.lognormal(mean=4.0, sigma=0.5, size=n),
+       "Items per order": rng.poisson(lam=3.0, size=n),
+       "Discount (%)": rng.uniform(low=0.0, high=25.0, size=n),
+       "Delivery days": rng.integers(1, 10, size=n).astype(float),
+   })
 
-   fig = distribution_summary_interactive(df)
+   fig = distribution_summary_interactive(
+       df,
+       title="Order Metrics Distribution Summary",
+       bins=25,
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

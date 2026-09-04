@@ -24,12 +24,17 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.regression.bayesian import credible_interval_forest_interactive
 
-   coef_names = ["beta0", "beta1", "beta2"]
-   means = np.array([2.0, -1.0, 0.5])
-   lower = means - 0.4
-   upper = means + 0.4
+   names = ["ad_spend", "price_index", "seasonality", "distribution"]
+   means = np.array([0.42, -1.15, 0.28, 0.66])
+   lower = means - np.array([0.18, 0.30, 0.22, 0.25])
+   upper = means + np.array([0.20, 0.28, 0.24, 0.27])
 
-   fig = credible_interval_forest_interactive(coef_names, means, lower, upper)
+   fig = credible_interval_forest_interactive(
+       names, means, lower, upper,
+       title="Marketing Mix Model: 94% Credible Intervals",
+       color="#2a7f62", template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -26,13 +26,23 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.importance_more import importance_stability_plot_static
 
-   rng = np.random.default_rng(27)
+   rng = np.random.default_rng(42)
+   features = [
+       "credit_score", "debt_to_income", "loan_amount",
+       "employment_years", "annual_income", "num_open_accounts",
+   ]
+   base = np.array([0.42, 0.31, 0.24, 0.18, 0.15, 0.09])
+   folds = np.clip(base + rng.normal(0, 0.03, size=(8, len(features))), 0, None)
    fold_importances = pd.DataFrame(
-       rng.normal([0.05, 0.12, 0.02], [0.01, 0.02, 0.005], size=(6, 3)),
-       columns=["age", "income", "tenure"],
+       folds, columns=features,
+       index=[f"fold_{k}" for k in range(1, 9)],
    )
-
-   ax = importance_stability_plot_static(fold_importances)
+   ax = importance_stability_plot_static(
+       fold_importances, top_n=6,
+       title="Permutation importance stability across 8 CV folds",
+   )
+   ax.set_xlabel("Mean decrease in ROC AUC")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

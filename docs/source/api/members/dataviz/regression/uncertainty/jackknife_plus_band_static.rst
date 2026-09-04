@@ -26,12 +26,17 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.uncertainty import jackknife_plus_band_static
 
    rng = np.random.default_rng(42)
-   y_true = rng.normal(10.0, 2.0, size=60)
-   y_pred = y_true + rng.normal(0.0, 0.5, size=60)
-   lower = y_pred - 1.2
-   upper = y_pred + 1.2
+   n = 30
+   load_mw = 450 + 120 * np.sin(np.linspace(0, 2 * np.pi, n)) + rng.normal(0, 18, n)
+   pred_mw = 450 + 120 * np.sin(np.linspace(0, 2 * np.pi, n))
+   half_width = 25 + 8 * np.abs(np.sin(np.linspace(0, np.pi, n)))
+   lower, upper = pred_mw - half_width, pred_mw + half_width
 
-   ax = jackknife_plus_band_static(y_true, y_pred, lower, upper)
+   ax = jackknife_plus_band_static(
+       load_mw, pred_mw, lower, upper,
+       title="Grid load forecast: jackknife+ 90% predictive band",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

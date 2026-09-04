@@ -21,11 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import matplotlib.pyplot as plt
    from dataviz.xai.fairness_xai import subgroup_shap_divergence_interactive
 
-   divergence = {"age": 0.18, "income": 0.42, "tenure": 0.07, "debt": 0.25}
+   divergence = {
+       "credit_score": 0.42,
+       "debt_to_income": 0.35,
+       "utilization": 0.28,
+       "zip_region": 0.61,
+       "annual_income": 0.19,
+       "account_age": 0.11,
+       "loan_amount": 0.08,
+   }
 
-   fig = subgroup_shap_divergence_interactive(divergence)
+   fig = subgroup_shap_divergence_interactive(
+       divergence,
+       metric="KL",
+       title="SHAP Divergence Between Urban and Rural Subgroups",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -22,15 +22,23 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.residual_extended import residual_qq_interactive
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   wells = pd.Series(np.arange(1, 31), name="well")
+   actual_flow = pd.Series(rng.normal(540, 80, 30).round(1), name="actual_bpd")
+   predicted_flow = pd.Series(
+       actual_flow + rng.normal(0, 35, 30), name="predicted_bpd"
+   )
 
-   fig = residual_qq_interactive(y_true, y_pred)
+   fig = residual_qq_interactive(
+       actual_flow, predicted_flow,
+       title="Oil well flow model: normal Q-Q of residuals",
+       marker_color="#1b9e77", line_color="#d62728", template="plotly_white",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

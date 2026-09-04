@@ -25,12 +25,26 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.concept import saliency_overlay_plot_static
 
-   rng = np.random.default_rng(3)
-   images = [rng.random((12, 12)) for _ in range(3)]
-   saliencies = [rng.random((12, 12)) for _ in range(3)]
-   labels = ["sample A", "sample B", "sample C"]
+   rng = np.random.default_rng(42)
+   size = 32
+   yy, xx = np.mgrid[0:size, 0:size]
+   centers = [(10, 12), (22, 9), (16, 20), (8, 24)]
+   labels = ["Pneumonia", "Normal", "Effusion", "Mass"]
 
-   ax = saliency_overlay_plot_static(images, saliencies, labels=labels)
+   images, saliencies = [], []
+   for cx, cy in centers:
+       blob = np.exp(-((xx - cx) ** 2 + (yy - cy) ** 2) / 30.0)
+       images.append(blob + rng.normal(0, 0.05, size=(size, size)))
+       focus = np.exp(-((xx - cx) ** 2 + (yy - cy) ** 2) / 18.0)
+       saliencies.append(focus + rng.normal(0, 0.03, size=(size, size)))
+
+   ax = saliency_overlay_plot_static(
+       images,
+       saliencies,
+       labels=labels,
+       title="Grad-CAM Overlays - Chest X-Ray Classifier",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

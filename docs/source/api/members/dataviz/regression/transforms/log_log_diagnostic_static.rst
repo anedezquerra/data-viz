@@ -22,19 +22,19 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
-   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.transforms import log_log_diagnostic_static
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   n = 38
+   city_area = rng.uniform(20, 900, n)                    # km^2
+   population = 4200 * city_area ** 0.85 * np.exp(rng.normal(0, 0.18, n))
 
-   ax = log_log_diagnostic_static(x, y)
+   ax = log_log_diagnostic_static(
+       city_area, population,
+       title="Urban scaling study: log-log check of area vs population",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

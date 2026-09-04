@@ -25,10 +25,15 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.spc.attribute import p_chart_static
 
-   defects = np.array([3, 5, 4, 6, 2, 7, 4, 5, 3, 6])
-   sample_sizes = np.array([100, 105, 98, 110, 102, 108, 100, 104, 99, 106])
+   rng = np.random.default_rng(42)
+   # 30 shifts of filling-line inspection with varying sample sizes
+   sample_sizes = rng.integers(180, 260, size=30)
+   defects = rng.binomial(sample_sizes, 0.04)
+   defects[24] = 28  # special cause after a supplier lot change
 
-   ax = p_chart_static(defects, sample_sizes, title="Supplier defect proportion")
+   ax = p_chart_static(defects, sample_sizes, title="Filling Line - Proportion Defective per Shift")
+   ax.set_xlabel("Shift")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

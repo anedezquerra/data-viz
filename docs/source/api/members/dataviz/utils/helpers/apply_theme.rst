@@ -23,6 +23,7 @@ The following example is self-contained and can be copied into a Python session 
    ax.plot([1, 2, 3], [1, 4, 9])
 
    apply_theme(ax, theme="default")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

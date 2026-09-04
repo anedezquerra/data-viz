@@ -22,15 +22,26 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.prediction_extended import prediction_interval_plot_interactive
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   patients = pd.Series(np.arange(1, 31), name="patient")
+   actual_charge = pd.Series(
+       rng.uniform(8, 60, 30).round(1), name="actual_charge_kusd"
+   ).sort_values().reset_index(drop=True)
+   predicted_charge = pd.Series(
+       actual_charge + rng.normal(0, 4.5, 30), name="predicted_charge_kusd"
+   )
 
-   fig = prediction_interval_plot_interactive(y_true, y_pred)
+   fig = prediction_interval_plot_interactive(
+       actual_charge, predicted_charge, confidence=0.90, method="empirical",
+       title="Hospital charge model: 90% prediction intervals",
+       point_color="#2a6f97", band_color="rgba(168,213,229,0.5)",
+       line_color="#d62728", template="plotly_white",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

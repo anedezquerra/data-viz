@@ -22,14 +22,26 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.multicollinearity import condition_index_plot_static
 
    rng = np.random.default_rng(42)
-   x1 = rng.normal(0.0, 1.0, size=60)
-   X = np.column_stack([x1, 0.9 * x1 + rng.normal(0.0, 0.1, size=60), rng.normal(0.0, 1.0, size=60)])
+   n = 36
+   engine_size = rng.normal(2.4, 0.6, n)
+   vehicles = pd.DataFrame({
+       "engine_l": engine_size,
+       "horsepower": 95 * engine_size + rng.normal(0, 12, n),
+       "weight_kg": 620 * engine_size + rng.normal(0, 90, n),
+       "wheelbase_in": rng.normal(104, 6, n),
+   })
 
-   ax = condition_index_plot_static(X)
+   ax = condition_index_plot_static(
+       vehicles, title="Fuel-efficiency model: condition indices",
+       threshold=30.0, color="#ee854a", theme="minimal",
+   )
+   ax.set_ylabel("Condition index")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

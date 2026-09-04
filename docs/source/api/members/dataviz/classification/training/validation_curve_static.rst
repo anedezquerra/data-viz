@@ -21,16 +21,34 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.training import validation_curve_static
 
-   param_values = np.array([0.001, 0.01, 0.1, 1.0, 10.0, 100.0])
-   train_scores = np.array([0.78, 0.82, 0.88, 0.93, 0.97, 0.99])
-   val_scores = np.array([0.77, 0.81, 0.86, 0.87, 0.84, 0.80])
+   rng = np.random.default_rng(42)
+   # random-forest depth sweep with 5-fold CV on a churn dataset
+   depths = np.array([2, 4, 6, 8, 10, 12])
+   train_scores = np.array([
+       [0.71, 0.70, 0.72, 0.71, 0.70],
+       [0.78, 0.77, 0.79, 0.78, 0.77],
+       [0.85, 0.84, 0.86, 0.85, 0.84],
+       [0.91, 0.90, 0.92, 0.91, 0.90],
+       [0.95, 0.94, 0.96, 0.95, 0.94],
+       [0.97, 0.96, 0.98, 0.97, 0.96],
+   ])
+   val_scores = np.array([
+       [0.68, 0.67, 0.69, 0.68, 0.67],
+       [0.74, 0.73, 0.75, 0.74, 0.72],
+       [0.79, 0.78, 0.80, 0.79, 0.77],
+       [0.81, 0.80, 0.82, 0.81, 0.79],
+       [0.80, 0.79, 0.81, 0.80, 0.78],
+       [0.78, 0.77, 0.79, 0.78, 0.76],
+   ])
 
-   ax = validation_curve_static(param_values, train_scores, val_scores, param_name="C")
+   ax = validation_curve_static(depths, train_scores, val_scores,
+                                param_name="max_depth",
+                                title="Churn RF: validation curve")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

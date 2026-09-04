@@ -21,13 +21,17 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.classification.threshold_extra import predictive_value_curve_interactive
 
-   prevalences = np.linspace(0.01, 0.5, 25)
-
-   fig = predictive_value_curve_interactive(0.85, 0.90, prevalences=prevalences)
+   # fixed test characteristics: PPV collapses at low prevalence
+   fig = predictive_value_curve_interactive(
+       sensitivity=0.92, specificity=0.88,
+       prevalences=np.linspace(0.001, 0.5, 150),
+       title="Screening test: PPV / NPV vs prevalence")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

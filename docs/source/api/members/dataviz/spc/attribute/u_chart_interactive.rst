@@ -24,10 +24,15 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.spc.attribute import u_chart_interactive
 
-   defects = np.array([8, 12, 9, 15, 7, 11, 10, 13, 8, 12])
-   units = np.array([40, 50, 45, 55, 42, 48, 50, 52, 44, 49])
+   rng = np.random.default_rng(42)
+   # Defects per fabric roll with varying roll lengths
+   units = rng.integers(8, 16, size=30)
+   defects = rng.poisson(units * 0.4)
+   defects[22] = 18  # loom tension fault on roll 22
 
-   fig = u_chart_interactive(defects, units, title="Defects per inspected unit")
+   fig = u_chart_interactive(defects, units, title="Fabric Rolls - Defects per Unit")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

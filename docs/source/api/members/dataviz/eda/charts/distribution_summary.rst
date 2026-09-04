@@ -23,12 +23,21 @@ The following example is self-contained and can be copied into a Python session 
 
    import numpy as np
    import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.eda.charts import distribution_summary
 
-   df = pd.DataFrame({"a": [1, 2, np.nan, 4], "b": [4, 3, 2, 1], "segment": ["A", "A", "B", "B"]})
+   rng = np.random.default_rng(42)
+   n = 120
+   df = pd.DataFrame({
+       "Order value (USD)": rng.lognormal(mean=4.0, sigma=0.5, size=n),
+       "Items per order": rng.poisson(lam=3.0, size=n),
+       "Discount (%)": rng.uniform(low=0.0, high=25.0, size=n),
+       "Delivery days": rng.integers(1, 10, size=n).astype(float),
+   })
 
-   result = distribution_summary(df)
-   print(result)
+   fig = distribution_summary(df, title="Order Metrics Distribution Summary")
+   fig.legend(loc="lower center", bbox_to_anchor=(0.5, -0.05), ncols=3, frameon=False)
+   plt.show()
 
 Output gallery
 --------------

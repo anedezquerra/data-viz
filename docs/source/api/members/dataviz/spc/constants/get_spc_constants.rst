@@ -21,9 +21,9 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import numpy as np
    from dataviz.spc.constants import get_spc_constants
 
+   # Constants for subgroups of 5 pulled hourly from a packaging line
    result = get_spc_constants(5)
    print(result)
 

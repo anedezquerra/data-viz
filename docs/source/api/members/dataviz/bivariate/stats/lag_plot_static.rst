@@ -21,14 +21,25 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.bivariate.stats import lag_plot_static
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
+   rng = np.random.default_rng(42)
+   n = 100
+   noise = rng.normal(loc=0.0, scale=1.0, size=n)
+   flow = pd.Series(np.zeros(n), name="River flow (m3/s)")
+   for i in range(1, n):
+       flow.iloc[i] = 0.85 * flow.iloc[i - 1] + noise[i]
 
-   ax = lag_plot_static(x, y)
+   ax = lag_plot_static(
+       flow,
+       flow,
+       lag=1,
+       title="River Flow Lag-1 Autocorrelation",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

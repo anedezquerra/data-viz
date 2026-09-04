@@ -21,16 +21,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
-   from dataviz.classification.calibration_extra import calibration_with_confidence_static
+   from dataviz.classification.calibration_extra import (
+       calibration_with_confidence_static,
+   )
 
-   rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   rng = np.random.default_rng(21)
+   n = 140
+   y_prob = np.clip(rng.beta(2, 3, n), 0.01, 0.99)
+   y_true = (rng.uniform(size=n) < y_prob).astype(int)
 
-   ax = calibration_with_confidence_static(y_true, y_prob)
+   ax = calibration_with_confidence_static(
+       y_true, y_prob, n_bins=8, n_bootstrap=200, ci=0.90,
+       title="Loan default model: calibration with 90% bootstrap CI",
+       random_state=42,
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

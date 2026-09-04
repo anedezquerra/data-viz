@@ -21,13 +21,30 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.diagnostics import percentile_plot_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Response times for an internal API endpoint over one day
+   rng = np.random.default_rng(42)
+   response_ms = pd.Series(
+       np.round(rng.lognormal(mean=4.6, sigma=0.5, size=58), 1),
+       name="response_ms",
+   )
 
-   ax = percentile_plot_static(values)
+   ax = percentile_plot_static(
+       response_ms,
+       step=10,
+       title="API Response Time Percentile Profile",
+       xlabel="Percentile",
+       ylabel="Response Time (ms)",
+       color="darkmagenta",
+       marker="s",
+       theme="minimal",
+   )
+   ax.set_ylabel("Response Time (ms)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

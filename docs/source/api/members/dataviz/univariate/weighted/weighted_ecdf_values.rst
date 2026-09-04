@@ -21,13 +21,14 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.weighted import weighted_ecdf_values
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-   weights = pd.Series([1.0, 1.5, 0.8, 1.2, 1.0, 1.1], name="Weight")
-
-   result = weighted_ecdf_values(values, weights)
+   rng = np.random.default_rng(42)
+   nps_score = pd.Series(rng.integers(0, 11, size=250), name="nps_score")
+   sample_weight = pd.Series(rng.uniform(0.5, 2.5, size=250).round(2), name="sample_weight")
+   result = weighted_ecdf_values(nps_score, sample_weight)
    print(result)
 
 Output gallery

@@ -22,16 +22,26 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.coefficients import standardized_coefficient_plot_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   n = 30
+   X = pd.DataFrame({
+       "miles_driven_k": rng.uniform(2, 25, n),
+       "vehicle_age_yr": rng.uniform(0, 15, n),
+       "engine_l": rng.uniform(1.2, 5.0, n),
+   })
+   y = pd.Series(300 + 18 * X["miles_driven_k"] + 45 * X["vehicle_age_yr"]
+                 + 30 * X["engine_l"] + rng.normal(0, 60, n),
+                 name="annual_maintenance_usd")
 
-   ax = standardized_coefficient_plot_static(y_true, y_pred)
+   ax = standardized_coefficient_plot_static(
+       X, y, feature_names=list(X.columns),
+       title="Fleet Maintenance Cost: Standardized Coefficients",
+       positive_color="#2a7f62", negative_color="#c0392b")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

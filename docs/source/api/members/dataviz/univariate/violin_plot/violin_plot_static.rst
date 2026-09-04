@@ -21,13 +21,28 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.violin_plot import violin_plot_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   ax = violin_plot_static(values)
+   rng = np.random.default_rng(42)
+   carriers = rng.choice(["Aeris", "Boreal", "Cirrus"], size=180)
+   offsets = {"Aeris": 4.2, "Boreal": 5.1, "Cirrus": 3.6}
+   delivery = [rng.normal(offsets[c], 0.9) for c in carriers]
+   shipments = pd.DataFrame({"carrier": carriers, "delivery_days": np.round(delivery, 1)})
+   ax = violin_plot_static(
+       shipments,
+       x="carrier",
+       y="delivery_days",
+       title="Delivery Time by Carrier",
+       xlabel="Carrier",
+       ylabel="Delivery time (days)",
+       palette="Set2",
+       inner="quartile",
+       theme="minimal",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

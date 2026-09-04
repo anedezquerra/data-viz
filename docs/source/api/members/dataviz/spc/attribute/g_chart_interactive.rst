@@ -25,9 +25,13 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.attribute import g_chart_interactive
 
    rng = np.random.default_rng(42)
-   counts = rng.geometric(p=0.02, size=30)
+   # Units produced between rare contamination events on a filling line
+   counts = rng.geometric(p=0.03, size=25)
+   counts[15] = 160  # unusually long clean run after filter upgrade
 
-   fig = g_chart_interactive(counts, title="Units between defects")
+   fig = g_chart_interactive(counts, title="Contamination Events - Units Between Occurrences")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -21,14 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.text import top_terms_bar_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-   texts = pd.Series(["fast reliable process", "reliable visual process", "fast chart"], name="Comment")
-
-   ax = top_terms_bar_static(values)
+   rng = np.random.default_rng(42)
+   vocab = ["battery", "screen", "delivery", "quality", "support", "price", "design", "fast"]
+   reviews = pd.Series(
+       [" ".join(rng.choice(vocab, size=rng.integers(3, 9))) for _ in range(60)],
+       name="review",
+   )
+   ax = top_terms_bar_static(
+       reviews,
+       top_n=8,
+       title="Most Common Terms in Product Reviews",
+       color="coral",
+       theme="minimal",
+   )
+   ax.set_xlabel("Occurrences")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

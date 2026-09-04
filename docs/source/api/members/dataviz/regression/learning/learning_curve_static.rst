@@ -22,16 +22,23 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.learning import learning_curve_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   train_sizes = np.array([20, 40, 60, 80, 100, 120, 150, 180])
+   train_scores = pd.Series(0.99 - 0.10 * np.sqrt(train_sizes / 180.0)
+                            + rng.normal(0, 0.005, 8), name="train_r2")
+   val_scores = pd.Series(0.55 + 0.35 * (1.0 - np.exp(-train_sizes / 70.0))
+                          + rng.normal(0, 0.01, 8), name="cv_r2")
 
-   ax = learning_curve_static(train_sizes, train_scores, validation_scores)
+   ax = learning_curve_static(train_sizes, train_scores, val_scores,
+                              title="Concrete Strength Model: Learning Curve",
+                              train_color="#1f77b4", val_color="#d62728",
+                              marker_size=7)
+   ax.set_ylabel("R-squared")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

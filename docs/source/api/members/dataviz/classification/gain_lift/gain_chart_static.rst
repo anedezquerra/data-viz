@@ -21,16 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.gain_lift import gain_chart_static
 
-   rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   rng = np.random.default_rng(67)
+   n_pos, n_neg = 40, 120
+   y_true = np.concatenate([np.ones(n_pos, int), np.zeros(n_neg, int)])
+   y_prob = np.concatenate([
+       rng.normal(0.70, 0.16, n_pos),
+       rng.normal(0.30, 0.15, n_neg),
+   ]).clip(0.01, 0.99)
 
-   ax = gain_chart_static(y_true, y_prob)
+   ax = gain_chart_static(
+       y_true, y_prob,
+       title="Direct-mail campaign: cumulative gains of response model",
+   )
+   ax.annotate("top 20% captures most responders", xy=(0.2, 0.7),
+               xytext=(0.35, 0.45),
+               arrowprops=dict(arrowstyle="->", color="grey"))
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

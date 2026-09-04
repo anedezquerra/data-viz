@@ -21,16 +21,29 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.bivariate.categorical import violin_by_category_static
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-   categories = pd.Series(["low", "medium", "high", "medium", "low"], name="Priority")
+   rng = np.random.default_rng(42)
+   n = 150
+   shift = pd.Series(np.repeat(["Morning", "Afternoon", "Night"], n // 3), name="Shift")
+   cycle_time = pd.Series(
+       np.concatenate([
+           rng.normal(loc=45.0, scale=4.0, size=n // 3),
+           rng.normal(loc=52.0, scale=6.0, size=n // 3),
+           rng.normal(loc=49.0, scale=3.0, size=n // 3),
+       ]),
+       name="Cycle time (s)",
+   )
 
-   ax = violin_by_category_static(categories, values)
+   ax = violin_by_category_static(
+       shift,
+       cycle_time,
+       title="Cycle Time Shape by Shift",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

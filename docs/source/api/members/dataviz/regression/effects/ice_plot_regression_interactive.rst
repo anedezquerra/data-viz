@@ -25,12 +25,16 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.effects import ice_plot_regression_interactive
 
    rng = np.random.default_rng(42)
-   grid = np.linspace(0.0, 1.0, 20)
-   ice_matrix = np.stack(
-       [grid**2 + rng.normal(0.0, 0.05, size=20) for _ in range(10)]
-   )
+   grid = np.linspace(0, 40, 20)
+   ice = np.vstack([50 + 1.8 * grid + rng.normal(0, 8) + 0.02 * grid ** 2
+                    for _ in range(15)])
 
-   fig = ice_plot_regression_interactive(grid, ice_matrix, feature_name="x1")
+   fig = ice_plot_regression_interactive(grid, ice,
+                                         title="ICE: Commute Distance on Rent",
+                                         feature_name="distance to downtown (km)",
+                                         opacity=0.25, template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

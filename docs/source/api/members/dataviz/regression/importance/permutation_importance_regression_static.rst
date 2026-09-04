@@ -22,16 +22,22 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.importance import permutation_importance_regression_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   feature_names = ["dose_mg", "bmi", "age_years", "systolic_bp", "smoker"]
+   perm_mean = pd.Series([0.28, 0.19, 0.12, 0.07, 0.03], index=feature_names,
+                         name="perm_importance_mean")
+   perm_std = pd.Series([0.04, 0.03, 0.03, 0.02, 0.01], index=feature_names,
+                        name="perm_importance_std")
 
-   ax = permutation_importance_regression_static(y_true, y_pred)
+   ax = permutation_importance_regression_static(
+       perm_mean, perm_std, feature_names=feature_names,
+       title="Clinical Outcome Model: Permutation Importance (20 repeats)",
+       color="#2ca02c", error_color="#444444")
+   ax.set_xlabel("Decrease in CV R-squared")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -21,13 +21,20 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
-   import numpy as np
    from dataviz.classification.calibration import brier_score_bar_interactive
 
-   scores = {"Logistic regression": 0.089, "Random forest": 0.076, "Gradient boosting": 0.081}
+   scores = {
+       "Logistic regression": 0.142,
+       "Random forest": 0.118,
+       "Gradient boosting": 0.105,
+       "Naive base rate": 0.210,
+   }
 
-   fig = brier_score_bar_interactive(scores)
+   fig = brier_score_bar_interactive(
+       scores, title="Churn models: Brier score on Q4 holdout",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -22,12 +22,20 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.errors_loss import ranked_error_plot_interactive
 
    rng = np.random.default_rng(42)
-   errors = np.abs(rng.normal(0.0, 0.7, size=60))
+   actual = pd.Series(rng.uniform(200, 900, 28), name="actual_repair_cost")
+   predicted = pd.Series(actual * rng.normal(1.0, 0.12, 28),
+                         name="predicted_repair_cost")
+   errors = actual - predicted
 
-   fig = ranked_error_plot_interactive(errors)
+   fig = ranked_error_plot_interactive(errors,
+                                       title="Repair Cost Model: Ranked Errors",
+                                       color="#c0392b", template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

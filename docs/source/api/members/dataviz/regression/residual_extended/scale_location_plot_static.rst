@@ -22,16 +22,25 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.residual_extended import scale_location_plot_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   orders = pd.Series(np.arange(1, 46), name="order")
+   actual_cost = pd.Series(
+       rng.uniform(20, 400, 45).round(1), name="actual_cost_usd"
+   )
+   hetero_noise = rng.normal(0, 1, 45) * (4 + 0.05 * actual_cost)
+   predicted_cost = pd.Series(actual_cost + hetero_noise, name="predicted_cost_usd")
 
-   ax = scale_location_plot_static(y_true, y_pred)
+   ax = scale_location_plot_static(
+       actual_cost, predicted_cost,
+       title="Shipping cost model: scale-location check",
+       color="#4878d0", trend_color="#d62728", theme="minimal",
+   )
+   ax.set_xlabel("Predicted cost (USD)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

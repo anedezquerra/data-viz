@@ -21,16 +21,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.calibration_extra import score_ecdf_by_class_static
 
-   rng = np.random.default_rng(42)
-   y_score = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_score)
+   rng = np.random.default_rng(13)
+   n_pos, n_neg = 45, 110
+   y_true = np.concatenate([np.ones(n_pos, int), np.zeros(n_neg, int)])
+   y_score = np.concatenate([
+       rng.normal(0.65, 0.15, n_pos),
+       rng.normal(0.30, 0.14, n_neg),
+   ]).clip(0.01, 0.99)
 
-   ax = score_ecdf_by_class_static(y_true, y_score)
+   ax = score_ecdf_by_class_static(
+       y_true, y_score, labels=[0, 1],
+       title="Defect detection: score ECDF for OK vs defective parts",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

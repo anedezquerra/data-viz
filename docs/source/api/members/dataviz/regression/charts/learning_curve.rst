@@ -22,16 +22,18 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.regression.charts import learning_curve
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   train_sizes = np.array([20, 40, 60, 80, 100, 120])
+   train_scores = np.array([0.99, 0.97, 0.96, 0.95, 0.945, 0.94])
+   val_scores = np.array([0.62, 0.71, 0.77, 0.81, 0.83, 0.845])
 
-   result = learning_curve(train_sizes, train_scores, validation_scores)
-   print(result)
+   ax = learning_curve(train_sizes, train_scores, val_scores,
+                       title="Yield Prediction: Learning Curve (R2)")
+   ax.set_ylim(0.5, 1.02)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
+   plt.show()
 
 Output gallery
 --------------

@@ -24,11 +24,18 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.xai.shap_more import shap_monotonicity_plot_interactive
 
-   rng = np.random.default_rng(47)
-   feature_values = np.sort(rng.uniform(20.0, 80.0, 60))
-   shap_values = 0.015 * (feature_values - 50.0) + rng.normal(0.0, 0.02, 60)
-
-   fig = shap_monotonicity_plot_interactive(feature_values, shap_values, feature_name="age")
+   rng = np.random.default_rng(42)
+   credit_score = rng.uniform(300, 850, size=80)
+   shap_values = (
+       -0.004 * (credit_score - 575)
+       + rng.normal(0, 0.08, size=credit_score.size)
+   )
+   fig = shap_monotonicity_plot_interactive(
+       credit_score, shap_values, "credit_score",
+       title="Monotonicity check: higher score always lowers risk",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

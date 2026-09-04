@@ -24,12 +24,20 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.regression.effects import interaction_effect_plot_interactive
 
-   x_grid = np.linspace(0.0, 1.0, 20)
-   curves = [x_grid**2, np.sqrt(x_grid), x_grid]
+   grid = np.linspace(20, 90, 20)
+   curves = np.vstack([
+       100 + 0.5 * grid,
+       100 + 0.9 * grid + 0.01 * grid ** 2,
+       100 + 1.4 * grid + 0.03 * grid ** 2,
+   ])
+   labels = ["low humidity", "medium humidity", "high humidity"]
 
    fig = interaction_effect_plot_interactive(
-       x_grid, curves, ["low", "mid", "high"], feature_name="x1"
-   )
+       grid, curves, labels,
+       title="Interaction: Temperature x Humidity on Drying Time",
+       feature_name="temperature (C)", template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

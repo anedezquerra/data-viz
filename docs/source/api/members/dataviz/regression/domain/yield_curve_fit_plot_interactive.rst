@@ -22,14 +22,22 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.domain import yield_curve_fit_plot_interactive
 
    rng = np.random.default_rng(42)
-   maturities = np.array([0.25, 0.5, 1.0, 2.0, 5.0, 10.0, 30.0])
-   observed_yields = np.array([1.8, 2.0, 2.3, 2.6, 3.0, 3.2, 3.4])
-   fitted_yields = observed_yields + rng.normal(0.0, 0.03, size=7)
+   maturities = pd.Series([0.25, 0.5, 1, 2, 3, 5, 7, 10, 15, 20, 30],
+                          name="maturity_years")
+   observed = pd.Series(4.2 - 1.8 * np.exp(-maturities / 3)
+                        + rng.normal(0, 0.05, maturities.size), name="yield_pct")
+   fitted = pd.Series(4.2 - 1.8 * np.exp(-maturities / 3), name="fitted_pct")
 
-   fig = yield_curve_fit_plot_interactive(maturities, observed_yields, fitted_yields)
+   fig = yield_curve_fit_plot_interactive(maturities, observed, fitted,
+                                          title="Treasury Yield Curve: Nelson-Siegel Fit",
+                                          obs_color="#1f6fb2", fit_color="#c0392b",
+                                          template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

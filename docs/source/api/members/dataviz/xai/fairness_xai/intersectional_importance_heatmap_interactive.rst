@@ -22,18 +22,28 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.xai.fairness_xai import intersectional_importance_heatmap_interactive
 
+   features = [
+       "credit_score", "debt_to_income", "utilization", "annual_income", "loan_amount",
+   ]
    importance_cube = pd.DataFrame(
        {
-           "age": [0.30, 0.24, 0.18, 0.27],
-           "income": [0.22, 0.29, 0.31, 0.25],
-           "tenure": [0.10, 0.08, 0.14, 0.09],
+           "urban|high_income": [0.34, 0.20, 0.16, 0.12, 0.10],
+           "urban|low_income": [0.26, 0.28, 0.21, 0.09, 0.13],
+           "rural|high_income": [0.30, 0.22, 0.15, 0.15, 0.11],
+           "rural|low_income": [0.18, 0.31, 0.24, 0.08, 0.16],
        },
-       index=["young-a", "young-b", "senior-a", "senior-b"],
+       index=features,
    )
 
-   fig = intersectional_importance_heatmap_interactive(importance_cube)
+   fig = intersectional_importance_heatmap_interactive(
+       importance_cube,
+       title="Importance by Intersectional Segment (Region x Income Band)",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

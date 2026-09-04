@@ -25,10 +25,15 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.spc.attribute import u_chart_static
 
-   defects = np.array([8, 12, 9, 15, 7, 11, 10, 13, 8, 12])
-   units = np.array([40, 50, 45, 55, 42, 48, 50, 52, 44, 49])
+   rng = np.random.default_rng(42)
+   # Defects per fabric roll with varying roll lengths
+   units = rng.integers(8, 16, size=30)
+   defects = rng.poisson(units * 0.4)
+   defects[22] = 18  # loom tension fault on roll 22
 
-   ax = u_chart_static(defects, units, title="Defects per inspected unit")
+   ax = u_chart_static(defects, units, title="Fabric Rolls - Defects per Unit")
+   ax.set_xlabel("Roll")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

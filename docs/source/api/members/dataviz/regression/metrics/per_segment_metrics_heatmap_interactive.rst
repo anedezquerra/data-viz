@@ -22,14 +22,23 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.regression.metrics import per_segment_metrics_heatmap_interactive
 
    rng = np.random.default_rng(42)
-   y_true = rng.normal(10.0, 2.0, size=60)
-   y_pred = y_true + rng.normal(0.0, 0.5, size=60)
-   segments = rng.choice(["A", "B", "C"], size=60)
+   n = 24
+   segments = pd.Series(np.repeat(["urban", "suburban", "rural"], 8),
+                        name="store_region")
+   y = pd.Series(100.0 + rng.normal(0.0, 15.0, n), name="monthly_sales_kusd")
+   y_pred = y - rng.normal(0.0, 6.0, n) + np.where(segments == "rural", 8.0, 0.0)
 
-   fig = per_segment_metrics_heatmap_interactive(y_true, y_pred, segments)
+   fig = per_segment_metrics_heatmap_interactive(
+       y, y_pred, segments, metrics=("mae", "rmse", "r2"),
+       title="Retail Sales Model: Metrics by Region",
+       colorscale="Viridis", template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -22,12 +22,21 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.regression.forecast import backtest_error_distribution_interactive
 
    rng = np.random.default_rng(42)
-   errors = rng.normal(0.0, 0.7, size=120)
+   backtest_errors = pd.Series(
+       rng.normal(0.5, 4.0, 400) + rng.choice([0.0, 6.0], size=400, p=[0.9, 0.1]),
+       name="backtest_error_bbl")
 
-   fig = backtest_error_distribution_interactive(errors)
+   fig = backtest_error_distribution_interactive(
+       backtest_errors,
+       title="Oil Production Forecast: Backtest Error Distribution",
+       nbins=40, color="#17becf", template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

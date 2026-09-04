@@ -26,15 +26,18 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.bayesian import posterior_coefficient_density_static
 
    rng = np.random.default_rng(42)
-   samples_per_coef = [
-       rng.normal(2.0, 0.3, size=200),
-       rng.normal(-1.0, 0.3, size=200),
-       rng.normal(0.5, 0.3, size=200),
-   ]
+   samples = [rng.normal(2.1, 0.4, 600),
+              rng.normal(-0.7, 0.25, 600),
+              rng.normal(0.05, 0.5, 600),
+              rng.normal(1.3, 0.3, 600)]
+   names = ["sqft", "bedrooms", "age_years", "dist_transit_km"]
 
    ax = posterior_coefficient_density_static(
-       samples_per_coef, coef_names=["beta0", "beta1", "beta2"]
-   )
+       samples, coef_names=names,
+       title="Hedonic Pricing Model: Posterior Coefficient Densities",
+       cmap="plasma")
+   ax.axvline(0.0, color="#444", linestyle=":", linewidth=1)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

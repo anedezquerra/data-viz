@@ -21,17 +21,24 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
-   import numpy as np
-   from dataviz.classification.model_comparison import metrics_radar_chart_interactive
+   from dataviz.classification.model_comparison import (
+       metrics_radar_chart_interactive,
+   )
 
    metrics = {
-       "Logistic regression": {"accuracy": 0.84, "precision": 0.81, "recall": 0.86, "f1": 0.83},
-       "Random forest": {"accuracy": 0.89, "precision": 0.88, "recall": 0.90, "f1": 0.89},
-       "Gradient boosting": {"accuracy": 0.87, "precision": 0.85, "recall": 0.89, "f1": 0.87},
+       "Logistic regression": {"accuracy": 0.82, "precision": 0.78,
+                               "recall": 0.71, "f1": 0.74, "auc": 0.85},
+       "Random forest": {"accuracy": 0.88, "precision": 0.85,
+                         "recall": 0.80, "f1": 0.82, "auc": 0.91},
+       "Gradient boosting": {"accuracy": 0.89, "precision": 0.87,
+                             "recall": 0.79, "f1": 0.83, "auc": 0.92},
    }
 
-   fig = metrics_radar_chart_interactive(metrics)
+   fig = metrics_radar_chart_interactive(
+       metrics, title="Churn model bake-off: cross-validated metrics",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

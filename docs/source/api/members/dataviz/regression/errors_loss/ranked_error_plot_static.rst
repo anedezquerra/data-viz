@@ -22,13 +22,21 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.errors_loss import ranked_error_plot_static
 
    rng = np.random.default_rng(42)
-   errors = np.abs(rng.normal(0.0, 0.7, size=60))
+   actual = pd.Series(rng.uniform(200, 900, 28), name="actual_repair_cost")
+   predicted = pd.Series(actual * rng.normal(1.0, 0.12, 28),
+                         name="predicted_repair_cost")
+   errors = actual - predicted
 
-   ax = ranked_error_plot_static(errors)
+   ax = ranked_error_plot_static(errors,
+                                 title="Repair Cost Model: Ranked Errors",
+                                 color="#c0392b")
+   ax.set_xlabel("Rank (sorted by error)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

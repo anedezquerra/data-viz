@@ -22,15 +22,21 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.metrics import per_segment_metrics_heatmap_static
 
    rng = np.random.default_rng(42)
-   y_true = rng.normal(10.0, 2.0, size=60)
-   y_pred = y_true + rng.normal(0.0, 0.5, size=60)
-   segments = rng.choice(["A", "B", "C"], size=60)
+   n = 24
+   segments = pd.Series(np.repeat(["urban", "suburban", "rural"], 8),
+                        name="store_region")
+   y = pd.Series(100.0 + rng.normal(0.0, 15.0, n), name="monthly_sales_kusd")
+   y_pred = y - rng.normal(0.0, 6.0, n) + np.where(segments == "rural", 8.0, 0.0)
 
-   ax = per_segment_metrics_heatmap_static(y_true, y_pred, segments)
+   ax = per_segment_metrics_heatmap_static(
+       y, y_pred, segments, metrics=("mae", "rmse", "r2"),
+       title="Retail Sales Model: Metrics by Region", cmap="viridis")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

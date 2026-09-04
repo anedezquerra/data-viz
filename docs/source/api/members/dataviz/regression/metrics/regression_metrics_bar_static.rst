@@ -22,16 +22,32 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.metrics import regression_metrics_bar_static
+   from dataviz.regression.helpers import compute_regression_metrics
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   n = 30
+   sqft = rng.uniform(900.0, 3500.0, n)
+   y = pd.Series(60.0 + 0.16 * sqft + rng.normal(0.0, 12.0, n), name="price_kusd")
+   pred_ols = pd.Series(60.0 + 0.16 * sqft + rng.normal(0.0, 8.0, n),
+                        name="ols_pred")
+   pred_ridge = pd.Series(62.0 + 0.15 * sqft + rng.normal(0.0, 10.0, n),
+                          name="ridge_pred")
+   pred_gbm = pd.Series(61.0 + 0.16 * sqft + rng.normal(0.0, 6.0, n),
+                        name="gbm_pred")
+   model_metrics = {
+       "OLS": compute_regression_metrics(y, pred_ols).as_dict(),
+       "Ridge": compute_regression_metrics(y, pred_ridge).as_dict(),
+       "GBM": compute_regression_metrics(y, pred_gbm).as_dict(),
+   }
 
-   ax = regression_metrics_bar_static(y_true, y_pred)
+   ax = regression_metrics_bar_static(y, pred_gbm,
+                                      metrics=("mae", "rmse", "medae", "r2"),
+                                      title="Housing Price GBM: Test Metrics",
+                                      color="#1f77b4")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

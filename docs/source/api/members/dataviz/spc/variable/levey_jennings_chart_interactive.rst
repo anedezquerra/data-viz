@@ -21,12 +21,19 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
+   import numpy as np
    from dataviz.spc.variable import levey_jennings_chart_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   rng = np.random.default_rng(42)
+   # Daily runs of a glucose control material (mean 5.5, sd 0.12 mmol/L)
+   qc = rng.normal(5.5, 0.12, size=30)
+   qc[21] = 5.98  # reagent lot change pushes one run past 3 sd
 
-   fig = levey_jennings_chart_interactive(values)
+   fig = levey_jennings_chart_interactive(
+       qc, mean=5.5, sd=0.12, title="Glucose Control Level 1 - Levey-Jennings"
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

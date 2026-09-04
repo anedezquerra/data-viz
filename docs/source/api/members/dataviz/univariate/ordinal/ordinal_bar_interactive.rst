@@ -21,13 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.ordinal import ordinal_bar_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-   categories = pd.Series(["low", "medium", "high", "medium", "low"], name="Priority")
-
-   fig = ordinal_bar_interactive(values)
+   rng = np.random.default_rng(42)
+   scale = ["Very dissatisfied", "Dissatisfied", "Neutral", "Satisfied", "Very satisfied"]
+   satisfaction = pd.Series(
+       rng.choice(scale, size=220, p=[0.08, 0.17, 0.20, 0.35, 0.20]),
+       name="satisfaction",
+   )
+   fig = ordinal_bar_interactive(
+       satisfaction,
+       order=scale,
+       normalize=True,
+       title="Post-Purchase Satisfaction Survey (n=220)",
+       color="teal",
+       height=500,
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

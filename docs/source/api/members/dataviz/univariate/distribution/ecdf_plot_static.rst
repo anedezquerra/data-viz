@@ -21,13 +21,28 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.distribution import ecdf_plot_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Rental durations for a bike-share station over one week
+   rng = np.random.default_rng(42)
+   duration_min = pd.Series(
+       np.round(rng.gamma(shape=2.2, scale=9.0, size=38), 1),
+       name="rental_min",
+   )
 
-   ax = ecdf_plot_static(values)
+   ax = ecdf_plot_static(
+       duration_min,
+       title="Bike-Share Rental Duration ECDF",
+       xlabel="Rental Duration (min)",
+       color="darkgreen",
+       linewidth=2.5,
+       theme="minimal",
+   )
+   ax.axhline(0.5, color="gray", linestyle=":", linewidth=1)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

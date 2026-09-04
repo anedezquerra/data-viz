@@ -22,14 +22,23 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.regression.forecast import forecast_vs_actual_interactive
 
    rng = np.random.default_rng(42)
-   time = np.arange(60)
-   y_true = 10 + 0.1 * time + rng.normal(0.0, 1.0, size=60)
-   y_pred = y_true + rng.normal(0.0, 0.5, size=60)
+   weeks = pd.date_range("2025-01-06", periods=24, freq="W-MON")
+   seasonal = 4.0 * np.sin(2 * np.pi * np.arange(24) / 12.0)
+   actual = pd.Series(52.0 + seasonal + rng.normal(0, 1.5, 24), index=weeks,
+                      name="weekly_demand_kwh")
+   forecast = pd.Series(52.0 + seasonal + rng.normal(0, 0.9, 24), index=weeks,
+                        name="arima_forecast")
 
-   fig = forecast_vs_actual_interactive(time, y_true, y_pred)
+   fig = forecast_vs_actual_interactive(weeks, actual, forecast,
+                                        title="Plant Energy Demand: ARIMA Forecast vs Actual",
+                                        template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

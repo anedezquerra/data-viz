@@ -21,12 +21,24 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.treatment import outlier_treatment_comparison_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   fig = outlier_treatment_comparison_interactive(values)
+   rng = np.random.default_rng(42)
+   latency = rng.normal(loc=120.0, scale=15.0, size=180).round(1)
+   latency[[9, 54, 121, 160]] = [520.0, 610.0, 480.0, 700.0]
+   latency_ms = pd.Series(latency, name="latency_ms")
+   fig = outlier_treatment_comparison_interactive(
+       latency_ms,
+       rule="iqr",
+       treatment="cap",
+       title="API Latency Before and After Capping",
+       color="skyblue",
+       height=500,
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -21,20 +21,28 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.xai.importance_more import importance_correlation_heatmap_static
 
-   importances_by_model = pd.DataFrame(
-       {
-           "logistic": [0.30, 0.25, 0.10],
-           "random_forest": [0.22, 0.31, 0.08],
-           "xgboost": [0.26, 0.28, 0.12],
-       },
-       index=["age", "income", "tenure"],
+   rng = np.random.default_rng(42)
+   features = [
+       "credit_score", "debt_to_income", "loan_amount",
+       "employment_years", "annual_income", "num_open_accounts", "age",
+   ]
+   latent = np.array([0.40, 0.30, 0.24, 0.18, 0.15, 0.10, 0.08])
+   models = ["xgboost", "lightgbm", "random_forest", "logistic"]
+   data = {
+       m: np.clip(latent + rng.normal(0, 0.04, size=len(features)), 0, None)
+       for m in models
+   }
+   importances_by_model = pd.DataFrame(data, index=features)
+   ax = importance_correlation_heatmap_static(
+       importances_by_model,
+       title="Do four churn models agree on feature importance?",
    )
-
-   ax = importance_correlation_heatmap_static(importances_by_model)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

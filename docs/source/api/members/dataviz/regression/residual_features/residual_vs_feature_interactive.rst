@@ -22,14 +22,26 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.residual_features import residual_vs_feature_interactive
 
    rng = np.random.default_rng(42)
-   feature = rng.normal(0.0, 1.0, size=60)
-   y_true = 10 + 2 * feature + rng.normal(0.0, 1.0, size=60)
-   y_pred = y_true + rng.normal(0.0, 0.5, size=60)
+   n = 40
+   listings = pd.DataFrame({
+       "sqft": rng.uniform(800, 3600, n),
+   })
+   noise = rng.normal(0, 18, n)
+   price = 60 + 0.22 * listings["sqft"] + 0.00003 * listings["sqft"] ** 2 + noise
+   y_pred = 70 + 0.26 * listings["sqft"]  # linear model misses curvature
 
-   fig = residual_vs_feature_interactive(feature, y_true, y_pred, feature_name="x1")
+   fig = residual_vs_feature_interactive(
+       listings["sqft"], price, y_pred,
+       feature_name="Living area (sqft)",
+       title="Home pricing model: residuals vs living area",
+       trend_color="#e45756",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

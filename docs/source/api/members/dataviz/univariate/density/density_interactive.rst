@@ -21,12 +21,27 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.density import density_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Nightly server room temperatures sampled by an IoT sensor
+   rng = np.random.default_rng(42)
+   temp_c = pd.Series(
+       np.round(rng.normal(loc=21.5, scale=1.2, size=60), 2),
+       name="temperature_c",
+   )
 
-   fig = density_interactive(values)
+   fig = density_interactive(
+       temp_c,
+       title="Server Room Temperature Density",
+       xlabel="Temperature (C)",
+       color="darkred",
+       histnorm="probability density",
+       template="plotly_white",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -22,16 +22,26 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.regression.forecast import forecast_band_plot_interactive
 
    rng = np.random.default_rng(42)
-   time = np.arange(60)
-   y_true = 10 + 0.1 * time + rng.normal(0.0, 1.0, size=60)
-   y_pred = y_true + rng.normal(0.0, 0.5, size=60)
-   lower = y_pred - 1.0
-   upper = y_pred + 1.0
+   days = pd.date_range("2025-03-01", periods=20, freq="D")
+   trend = 120.0 + 0.8 * np.arange(20)
+   central = pd.Series(trend + rng.normal(0, 1.0, 20), index=days,
+                       name="price_forecast")
+   actual = pd.Series(trend + rng.normal(0, 3.0, 20), index=days,
+                      name="spot_price")
+   lower = central - 5.0
+   upper = central + 5.0
 
-   fig = forecast_band_plot_interactive(time, y_true, y_pred, lower, upper)
+   fig = forecast_band_plot_interactive(
+       days, actual, central, lower, upper,
+       title="Wholesale Coffee Price: Forecast with 90% Band",
+       template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

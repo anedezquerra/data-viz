@@ -22,13 +22,18 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.helpers import runs_test_signs
 
    rng = np.random.default_rng(42)
-   residuals = rng.normal(0.0, 1.0, size=50)
+   noise = rng.normal(0.0, 1.0, 30)
+   residuals = pd.Series(
+       np.array([noise[0]] + [0.55 * noise[i - 1] + noise[i] for i in range(1, 30)]),
+       index=pd.date_range("2025-01-01", periods=30, freq="D"),
+       name="streamflow_residuals")
 
-   result = runs_test_signs(residuals)
-   print(result)
+   runs, n_pos, n_neg = runs_test_signs(residuals)
+   print(f"runs={runs}, positive={n_pos}, negative={n_neg}")
 
 Output gallery
 --------------

@@ -22,14 +22,22 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.gof import residual_dependence_test_panel_static
 
    rng = np.random.default_rng(42)
-   X = rng.normal(0.0, 1.0, size=(60, 3))
-   residuals = rng.normal(0.0, 1.0, size=60)
+   n = 36
+   machine_speed = rng.uniform(200.0, 900.0, n)
+   tool_age_hrs = rng.uniform(10.0, 500.0, n)
+   X = pd.DataFrame({"machine_speed_rpm": machine_speed,
+                      "tool_age_hrs": tool_age_hrs})
+   residuals = pd.Series(rng.normal(0.0, 0.5 + 0.002 * machine_speed, n),
+                         name="roughness_residuals_um")
 
-   result = residual_dependence_test_panel_static(X, residuals)
+   fig = residual_dependence_test_panel_static(
+       X, residuals, title="Milling Line: Residual Dependence Test Panel")
+   fig.legend(loc="lower center", bbox_to_anchor=(0.5, -0.05), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

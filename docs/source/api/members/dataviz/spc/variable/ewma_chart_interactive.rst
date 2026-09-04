@@ -25,10 +25,13 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.variable import ewma_chart_interactive
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Film thickness (mm) with a slow drift from die-lip buildup
+   thickness = rng.normal(2.0, 0.02, size=32)
+   thickness[20:] += np.linspace(0.0, 0.06, 12)  # gradual drift
 
-   fig = ewma_chart_interactive(data, lambda_=0.2)
+   fig = ewma_chart_interactive(thickness, lambda_=0.25, title="Film Thickness EWMA Chart")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -24,12 +24,17 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.regression.validation import bias_variance_plot_interactive
 
-   complexity = np.arange(1, 11)
-   bias_squared = 0.5 / complexity
-   variance = 0.002 * complexity**2
-   noise = np.full(10, 0.05)
+   degree = np.arange(1, 11)
+   bias_sq = 14.0 / degree ** 1.6
+   variance = 0.35 * degree ** 1.8
+   noise = np.full_like(degree, 4.0, dtype=float)
 
-   fig = bias_variance_plot_interactive(complexity, bias_squared, variance, noise=noise)
+   fig = bias_variance_plot_interactive(
+       degree, bias_sq, variance, noise=noise,
+       title="Polynomial fit of compressor efficiency: bias-variance trade-off",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -23,12 +23,21 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
    from dataviz.univariate.robust import RobustStats
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = RobustStats(count=5, median=0.5, mad=0.5, scaled_mad=0.5, trimmed_mean=0.5, winsorized_mean=0.5, q1=0.5, q3=0.5, iqr=0.5, lower_fence=0.5, upper_fence=0.5)
+   result = RobustStats(
+       count=150,
+       median=41200.0,
+       mad=9800.0,
+       scaled_mad=14523.6,
+       trimmed_mean=44750.0,
+       winsorized_mean=46310.0,
+       q1=31800.0,
+       q3=58900.0,
+       iqr=27100.0,
+       lower_fence=-8850.0,
+       upper_fence=99550.0,
+   )
    print(result)
 
 Output gallery

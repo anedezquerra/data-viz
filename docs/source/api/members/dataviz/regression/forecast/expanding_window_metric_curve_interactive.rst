@@ -22,15 +22,21 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.regression.forecast import expanding_window_metric_curve_interactive
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   window_sizes = np.arange(30, 211, 20)
+   r2_curve = pd.Series(1.0 - np.exp(-window_sizes / 90.0) + rng.normal(0, 0.01, 10),
+                        index=window_sizes, name="cv_r2")
 
-   fig = expanding_window_metric_curve_interactive(y_true, y_pred)
+   fig = expanding_window_metric_curve_interactive(
+       window_sizes, r2_curve,
+       title="Ticket Volume Model: R2 vs Expanding Training Window",
+       metric_name="CV R-squared", color="#e377c2", template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

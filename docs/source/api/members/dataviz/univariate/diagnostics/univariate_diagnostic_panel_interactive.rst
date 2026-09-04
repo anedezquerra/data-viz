@@ -21,12 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.diagnostics import univariate_diagnostic_panel_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Patient systolic blood pressure readings from a screening clinic
+   rng = np.random.default_rng(42)
+   systolic = pd.Series(
+       np.round(rng.normal(loc=126.0, scale=14.0, size=50), 0),
+       name="systolic_mmhg",
+   )
 
-   fig = univariate_diagnostic_panel_interactive(values)
+   fig = univariate_diagnostic_panel_interactive(
+       systolic,
+       bins=14,
+       title="Systolic Blood Pressure Diagnostics",
+       color="cadetblue",
+       template="plotly_white",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

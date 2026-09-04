@@ -24,11 +24,15 @@ The following example is self-contained and can be copied into a Python session 
    import numpy as np
    from dataviz.xai.uncertainty import epistemic_vs_aleatoric_plot_interactive
 
-   bin_centers = np.linspace(0.1, 0.9, 9)
-   epistemic = np.array([0.08, 0.06, 0.05, 0.04, 0.04, 0.05, 0.05, 0.06, 0.08])
-   aleatoric = np.array([0.03, 0.04, 0.05, 0.07, 0.08, 0.07, 0.05, 0.04, 0.03])
-
-   fig = epistemic_vs_aleatoric_plot_interactive(bin_centers, epistemic, aleatoric)
+   bin_centers = np.linspace(0.0, 1.0, 20)
+   epistemic = 0.05 + 0.12 * (bin_centers - 0.5) ** 2 * 4
+   aleatoric = 0.08 + 0.05 * np.sin(np.pi * bin_centers)
+   fig = epistemic_vs_aleatoric_plot_interactive(
+       bin_centers, epistemic, aleatoric,
+       title="Uncertainty decomposition across predicted-risk deciles",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

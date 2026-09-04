@@ -25,11 +25,17 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.shap_more import shap_monotonicity_plot_static
 
-   rng = np.random.default_rng(47)
-   feature_values = np.sort(rng.uniform(20.0, 80.0, 60))
-   shap_values = 0.015 * (feature_values - 50.0) + rng.normal(0.0, 0.02, 60)
-
-   ax = shap_monotonicity_plot_static(feature_values, shap_values, feature_name="age")
+   rng = np.random.default_rng(42)
+   credit_score = rng.uniform(300, 850, size=80)
+   shap_values = (
+       -0.004 * (credit_score - 575)
+       + rng.normal(0, 0.08, size=credit_score.size)
+   )
+   ax = shap_monotonicity_plot_static(
+       credit_score, shap_values, "credit_score",
+       title="Monotonicity check: higher score always lowers risk",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

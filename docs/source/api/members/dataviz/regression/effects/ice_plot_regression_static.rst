@@ -26,12 +26,16 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.regression.effects import ice_plot_regression_static
 
    rng = np.random.default_rng(42)
-   grid = np.linspace(0.0, 1.0, 20)
-   ice_matrix = np.stack(
-       [grid**2 + rng.normal(0.0, 0.05, size=20) for _ in range(10)]
-   )
+   grid = np.linspace(0, 40, 20)
+   ice = np.vstack([50 + 1.8 * grid + rng.normal(0, 8) + 0.02 * grid ** 2
+                    for _ in range(15)])
 
-   ax = ice_plot_regression_static(grid, ice_matrix, feature_name="x1")
+   ax = ice_plot_regression_static(grid, ice,
+                                   title="ICE: Commute Distance on Rent",
+                                   feature_name="distance to downtown (km)",
+                                   alpha=0.25)
+   ax.set_ylabel("Predicted rent (USD)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

@@ -23,12 +23,17 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
    from dataviz.univariate.fitting import DistributionFit
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = DistributionFit(distribution="label", parameters=0.5, statistic=0.5, p_value=0.5, aic=0.5, bic=0.5)
+   # Fitted summary for claim severities modeled with a lognormal law
+   result = DistributionFit(
+       distribution="lognorm",
+       parameters=(0.42, 2.1, 8.9),
+       statistic=0.061,
+       p_value=0.58,
+       aic=412.3,
+       bic=420.1,
+   )
    print(result)
 
 Output gallery

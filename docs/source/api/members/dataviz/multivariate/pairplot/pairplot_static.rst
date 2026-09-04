@@ -26,9 +26,25 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.multivariate.pairplot import pairplot_static
 
-   df = pd.DataFrame({"a": [1, 2, np.nan, 4], "b": [4, 3, 2, 1], "segment": ["A", "A", "B", "B"]})
+   rng = np.random.default_rng(42)
+   n = 80
+   horsepower = rng.normal(loc=150.0, scale=30.0, size=n)
+   df = pd.DataFrame({
+       "Horsepower": horsepower,
+       "Weight (kg)": 1200.0 + 3.0 * horsepower + rng.normal(loc=0.0, scale=100.0, size=n),
+       "Fuel economy (mpg)": 45.0 - 0.08 * horsepower + rng.normal(loc=0.0, scale=2.0, size=n),
+       "Price (k USD)": 15.0 + 0.12 * horsepower + rng.normal(loc=0.0, scale=3.0, size=n),
+   })
 
-   ax = pairplot_static(df)
+   fig = pairplot_static(
+       df,
+       title="Vehicle Specs Pairplot",
+       diag_kind="hist",
+       plot_kind="scatter",
+       bins=15,
+       alpha=0.6,
+   )
+   fig.legend(loc="lower center", bbox_to_anchor=(0.5, -0.05), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

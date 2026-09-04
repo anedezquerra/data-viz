@@ -22,11 +22,20 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.regression.glm import variance_function_plot_interactive
 
-   mu = np.linspace(0.5, 5.0, 50)
+   rng = np.random.default_rng(42)
+   mu_grid = pd.Series(np.exp(np.linspace(np.log(0.5), np.log(25.0), 30)),
+                       name="mean_defect_count")
 
-   fig = variance_function_plot_interactive(mu, family="poisson")
+   fig = variance_function_plot_interactive(
+       mu_grid, family="poisson",
+       title="Defect Count Model: Poisson Variance Function",
+       template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

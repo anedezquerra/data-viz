@@ -22,20 +22,22 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.classification.report import per_class_metrics_bar_interactive
 
-   cm = np.array([[32, 4], [5, 29]])
-   fpr = np.array([0.0, 0.1, 0.3, 1.0])
-   tpr = np.array([0.0, 0.7, 0.9, 1.0])
-   precision = np.array([1.0, 0.86, 0.72])
-   recall = np.array([0.2, 0.7, 1.0])
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   # 4-class land-cover classifier on satellite tiles
+   n = 160
+   labels = ["forest", "water", "urban", "crops"]
+   y_true = np.array([labels[i] for i in rng.integers(0, 4, n)])
+   err = rng.random(n) < 0.15
+   y_pred = y_true.copy()
+   y_pred[err] = np.array([labels[i] for i in rng.integers(0, 4, err.sum())])
 
-   fig = per_class_metrics_bar_interactive(y_true, y_pred)
+   fig = per_class_metrics_bar_interactive(y_true, y_pred, labels=labels,
+                                           title="Land-cover classifier: precision / recall / F1")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

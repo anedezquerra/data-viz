@@ -25,12 +25,12 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.rules import xbar_r_limits
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.35, size=(20, 5))
+   # Shaft diameters (mm): 25 subgroups of 5 parts from a CNC lathe
+   diameters = rng.normal(25.0, 0.08, size=125)
+   diameters[100:105] += 0.25  # tool wear shift in subgroup 20
 
-   x_limits, r_limits, means, ranges = xbar_r_limits(data)
-   print(x_limits)
-   print(r_limits)
-   print(means.head())
+   result = xbar_r_limits(diameters, subgroup_size=5)
+   print(result)
 
 Output gallery
 --------------

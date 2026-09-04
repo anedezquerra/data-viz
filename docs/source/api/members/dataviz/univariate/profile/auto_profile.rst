@@ -26,9 +26,11 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.univariate.profile import auto_profile
 
    rng = np.random.default_rng(42)
-   value = pd.Series(rng.normal(loc=10.0, scale=0.4, size=30), name="Value")
-
-   result = auto_profile(value)
+   customers = pd.DataFrame(
+       {"monthly_spend": rng.gamma(shape=3.0, scale=28.0, size=150).round(2)}
+   )
+   customers.loc[[5, 41, 96], "monthly_spend"] = np.nan
+   result = auto_profile("monthly_spend", data=customers)
    print(result)
 
 Output gallery

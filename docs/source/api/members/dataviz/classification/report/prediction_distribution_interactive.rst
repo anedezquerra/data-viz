@@ -22,20 +22,24 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.classification.report import prediction_distribution_interactive
 
-   cm = np.array([[32, 4], [5, 29]])
-   fpr = np.array([0.0, 0.1, 0.3, 1.0])
-   tpr = np.array([0.0, 0.7, 0.9, 1.0])
-   precision = np.array([1.0, 0.86, 0.72])
-   recall = np.array([0.2, 0.7, 1.0])
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   # 3-class wine-quality model: where do predictions go per true class?
+   labels = ["low", "medium", "high"]
+   y_true = np.array([labels[i] for i in rng.choice(3, 150, p=[0.3, 0.5, 0.2])])
+   y_pred = y_true.copy()
+   adjacent = rng.random(150) < 0.22  # errors land on neighbouring grades
+   idx = {l: k for k, l in enumerate(labels)}
+   for i in np.where(adjacent)[0]:
+       k = idx[y_pred[i]]
+       y_pred[i] = labels[min(max(k + rng.choice([-1, 1]), 0), 2)]
 
-   fig = prediction_distribution_interactive(y_true, y_pred)
+   fig = prediction_distribution_interactive(y_true, y_pred, labels=labels,
+                                             title="Wine-quality model: predicted share per grade")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

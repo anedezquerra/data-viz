@@ -26,10 +26,19 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.bivariate.categorical import grouped_bar_interactive
 
    rng = np.random.default_rng(42)
-   category = pd.Series(np.repeat(["Line A", "Line B", "Line C"], 10), name="Line")
-   values = pd.Series(rng.normal(loc=10.0, scale=1.0, size=30), name="Output")
+   n = 90
+   region = pd.Series(np.repeat(["North", "South", "East", "West"], n // 4)[:n], name="Region")
+   sales = pd.Series(rng.normal(loc=120.0, scale=25.0, size=n), name="Quarterly sales (k USD)")
 
-   fig = grouped_bar_interactive(category, values, title="Mean output by line")
+   fig = grouped_bar_interactive(
+       region,
+       sales,
+       aggfunc="median",
+       title="Median Quarterly Sales by Region",
+       color="seagreen",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

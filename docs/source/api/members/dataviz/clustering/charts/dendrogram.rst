@@ -22,18 +22,22 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
-   import pandas as pd
+   import matplotlib.pyplot as plt
+   from scipy.cluster.hierarchy import linkage
    from dataviz.clustering.charts import dendrogram
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
-   labels = np.array([0, 0, 1, 1])
-   k_values = np.array([1, 2, 3, 4])
-   inertias = np.array([10.0, 4.2, 2.6, 2.1])
-   linkage_matrix = np.array([[0, 1, 0.3, 2], [2, 3, 0.4, 2], [4, 5, 3.0, 4]])
+   rng = np.random.default_rng(42)
+   data = np.vstack([
+       rng.normal(loc=0.0, scale=0.8, size=(10, 2)),
+       rng.normal(loc=5.0, scale=0.8, size=(10, 2)),
+       rng.normal(loc=[5.0, 0.0], scale=0.8, size=(10, 2)),
+   ])
+   linkage_matrix = linkage(data, method="ward")
+   labels = [f"Sensor {i + 1}" for i in range(len(data))]
 
-   result = dendrogram(linkage_matrix)
-   print(result)
+   ax = dendrogram(linkage_matrix, labels=labels, title="Sensor Network Dendrogram")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
+   plt.show()
 
 Output gallery
 --------------

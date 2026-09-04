@@ -27,9 +27,18 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.eda.class_dist import class_distribution_static
 
    rng = np.random.default_rng(42)
-   series = pd.Series(rng.choice(["Pass", "Fail", "Rework"], size=60, p=[0.8, 0.1, 0.1]), name="Result")
+   tickets = pd.Series(
+       rng.choice(["Low", "Medium", "High", "Critical"], size=150, p=[0.45, 0.3, 0.18, 0.07]),
+       name="Ticket priority",
+   )
 
-   ax = class_distribution_static(series, title="Class distribution")
+   ax = class_distribution_static(
+       tickets,
+       title="Support Ticket Priority Balance",
+       color="steelblue",
+       sort=True,
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

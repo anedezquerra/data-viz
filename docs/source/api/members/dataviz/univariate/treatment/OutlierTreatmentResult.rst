@@ -26,9 +26,16 @@ The following example is self-contained and can be copied into a Python session 
    import pandas as pd
    from dataviz.univariate.treatment import OutlierTreatmentResult
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = OutlierTreatmentResult(original=pd.Series([1.0, 2.0, 3.0], name="Value"), treated=pd.Series([1.0, 2.0, 3.0], name="Value"), mask=pd.Series([1.0, 2.0, 3.0], name="Value"), method="label", rule="label")
+   original = pd.Series([98.0, 105.0, 102.0, 480.0], name="latency_ms")
+   treated = pd.Series([98.0, 105.0, 102.0, 180.0], name="latency_ms")
+   mask = pd.Series([False, False, False, True])
+   result = OutlierTreatmentResult(
+       original=original,
+       treated=treated,
+       mask=mask,
+       method="cap",
+       rule="iqr",
+   )
    print(result)
 
 Output gallery

@@ -22,16 +22,27 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.prediction_extended import pred_vs_actual_hexbin_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   batches = pd.Series(np.arange(1, 121), name="batch")
+   actual_yield = pd.Series(
+       rng.gamma(shape=9.0, scale=4.0, size=120), name="actual_yield_kg"
+   )
+   predicted_yield = pd.Series(
+       0.85 * actual_yield + 5.0 + rng.normal(0, 3.5, 120), name="predicted_yield_kg"
+   )
 
-   ax = pred_vs_actual_hexbin_static(y_true, y_pred)
+   ax = pred_vs_actual_hexbin_static(
+       actual_yield, predicted_yield, gridsize=18,
+       title="Chemical batch yield: predicted vs actual density",
+       cmap="cividis", theme="minimal",
+   )
+   ax.set_xlabel("Actual yield (kg)")
+   ax.set_ylabel("Predicted yield (kg)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

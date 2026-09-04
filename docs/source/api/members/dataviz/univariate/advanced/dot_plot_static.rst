@@ -21,13 +21,33 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.advanced import dot_plot_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Support tickets classified by resolution channel last quarter
+   rng = np.random.default_rng(42)
+   channels = pd.Series(
+       rng.choice(
+           ["Email", "Phone", "Chat", "Self-Service", "Social", "In Person", "Forum"],
+           size=320,
+           p=[0.28, 0.24, 0.20, 0.12, 0.08, 0.05, 0.03],
+       ),
+       name="channel",
+   )
 
-   ax = dot_plot_static(values)
+   ax = dot_plot_static(
+       channels,
+       title="Tickets by Resolution Channel",
+       xlabel="Tickets Resolved",
+       ylabel="Channel",
+       color="seagreen",
+       top_n=6,
+       theme="minimal",
+   )
+   ax.set_xlabel("Tickets Resolved")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

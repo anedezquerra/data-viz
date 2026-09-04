@@ -21,13 +21,29 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.univariate.density import density_static
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Nightly server room temperatures sampled by an IoT sensor
+   rng = np.random.default_rng(42)
+   temp_c = pd.Series(
+       np.round(rng.normal(loc=21.5, scale=1.2, size=60), 2),
+       name="temperature_c",
+   )
 
-   ax = density_static(values)
+   ax = density_static(
+       temp_c,
+       title="Server Room Temperature Density",
+       xlabel="Temperature (C)",
+       color="darkred",
+       linewidth=2.5,
+       fill=True,
+       theme="minimal",
+   )
+   ax.axvline(temp_c.mean(), color="navy", linestyle="--", linewidth=1)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

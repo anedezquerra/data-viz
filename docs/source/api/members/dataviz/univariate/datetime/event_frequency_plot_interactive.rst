@@ -21,14 +21,29 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.datetime import event_frequency_plot_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-   timestamps = pd.to_datetime(["2026-01-01", "2026-01-03", "2026-01-04", "2026-01-10"])
-   categories = pd.Series(["low", "medium", "high", "medium", "low"], name="Priority")
+   # Newsletter signup timestamps exported from a marketing platform
+   rng = np.random.default_rng(42)
+   signups = pd.Series(
+       pd.Timestamp("2026-01-05")
+       + pd.to_timedelta(rng.uniform(0, 90 * 24, size=40), unit="h"),
+       name="signup_time",
+   )
 
-   fig = event_frequency_plot_interactive(values)
+   fig = event_frequency_plot_interactive(
+       signups,
+       freq="W",
+       title="Weekly Newsletter Signups",
+       xlabel="Week",
+       ylabel="Signups",
+       color="darkcyan",
+       template="plotly_white",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -21,17 +21,34 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.xai.local_more import prototype_criticism_grid_interactive
 
+   rng = np.random.default_rng(42)
+   cols = [
+       "tenure_months", "monthly_charges", "num_support_calls",
+       "avg_session_min", "late_payments", "age",
+   ]
    prototypes = pd.DataFrame(
-       {"income": [35.0, 60.0], "debt": [5.0, 12.0], "tenure": [1.0, 6.0]}
+       np.array([
+           [36, 65, 0, 42, 0, 45],
+           [48, 82, 1, 35, 0, 52],
+           [24, 55, 0, 50, 0, 31],
+       ], dtype=float), columns=cols,
    )
    criticisms = pd.DataFrame(
-       {"income": [48.0], "debt": [20.0], "tenure": [2.5]}
+       np.array([
+           [2, 118, 7, 4, 4, 23],
+           [60, 39, 5, 61, 3, 68],
+       ], dtype=float), columns=cols,
    )
-
-   fig = prototype_criticism_grid_interactive(prototypes, criticisms)
+   fig = prototype_criticism_grid_interactive(
+       prototypes, criticisms,
+       title="Typical vs atypical retained customers (MMD critic)",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

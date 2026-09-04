@@ -21,16 +21,17 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import numpy as np
    from dataviz.regression.survival import proportional_hazards_test_plot_interactive
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   covariates = ["age", "bmi", "smoker", "stage", "treatment", "sex"]
+   p_values = [0.62, 0.31, 0.08, 0.012, 0.44, 0.71]
 
-   fig = proportional_hazards_test_plot_interactive(y_true, y_pred)
+   fig = proportional_hazards_test_plot_interactive(
+       covariates, p_values, alpha=0.05,
+       title="Schoenfeld test of the proportional-hazards assumption",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

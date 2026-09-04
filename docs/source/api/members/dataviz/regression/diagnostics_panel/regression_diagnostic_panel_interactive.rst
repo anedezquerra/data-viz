@@ -22,14 +22,27 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.diagnostics_panel import regression_diagnostic_panel_interactive
 
    rng = np.random.default_rng(42)
-   X = rng.normal(0.0, 1.0, size=(60, 3))
-   y_true = rng.normal(10.0, 2.0, size=60)
-   y_pred = y_true + rng.normal(0.0, 0.5, size=60)
+   n = 30
+   X = pd.DataFrame({
+       "temperature_c": rng.uniform(15, 35, n),
+       "rainfall_mm": rng.uniform(200, 1200, n),
+       "fertilizer_kg": rng.uniform(50, 300, n),
+   })
+   y = pd.Series(2.1 * X["temperature_c"] + 0.004 * X["rainfall_mm"]
+                 + 0.015 * X["fertilizer_kg"] + rng.normal(0, 4, n),
+                 name="yield_t_ha")
+   fitted = pd.Series(2.1 * X["temperature_c"] + 0.004 * X["rainfall_mm"]
+                      + 0.015 * X["fertilizer_kg"], name="fitted")
 
-   fig = regression_diagnostic_panel_interactive(X, y_true, y_pred)
+   fig = regression_diagnostic_panel_interactive(
+       X, y, fitted, title="Crop Yield Model: Diagnostic Panel",
+       color="#1f6fb2", line_color="#c0392b", template="plotly_white")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

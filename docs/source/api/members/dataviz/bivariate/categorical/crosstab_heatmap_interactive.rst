@@ -26,10 +26,19 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.bivariate.categorical import crosstab_heatmap_interactive
 
    rng = np.random.default_rng(42)
-   row_category = pd.Series(rng.choice(["Line A", "Line B", "Line C"], size=60), name="Line")
-   column_category = pd.Series(rng.choice(["Pass", "Fail"], size=60), name="Result")
+   n = 200
+   channel = pd.Series(rng.choice(["Email", "Social", "Search", "Referral"], size=n), name="Channel")
+   converted = pd.Series(rng.choice(["Converted", "Bounced"], size=n, p=[0.35, 0.65]), name="Outcome")
 
-   fig = crosstab_heatmap_interactive(row_category, column_category, normalize="index")
+   fig = crosstab_heatmap_interactive(
+       channel,
+       converted,
+       normalize="index",
+       title="Conversion Rate by Channel",
+       colorscale="YlGn",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -22,16 +22,29 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.regression.residual import residual_plot_static
 
-   y_true = np.array([3.0, 2.5, 4.2, 5.0, 4.7])
-   y_pred = np.array([2.8, 2.7, 4.0, 5.1, 4.5])
-   train_sizes = np.array([50, 100, 200])
-   train_scores = np.array([0.82, 0.86, 0.89])
-   validation_scores = np.array([0.76, 0.81, 0.84])
+   rng = np.random.default_rng(42)
+   homes = pd.Series(np.arange(1, 23), name="listing")
+   actual_price = pd.Series(
+       rng.uniform(180, 850, 22).round(0), name="actual_price_kusd"
+   )
+   predicted_price = pd.Series(
+       actual_price + rng.normal(0, 32, 22) + 0.05 * (actual_price - 500),
+       name="predicted_price_kusd",
+   )
 
-   ax = residual_plot_static(y_true, y_pred)
+   ax = residual_plot_static(
+       actual_price, predicted_price,
+       title="Home appraisal model: residual diagnostics",
+       color="#2a6f97", marker_size=70, alpha=0.8,
+       line_color="#d62728", theme="minimal",
+   )
+   ax.set_xlabel("Predicted price (kUSD)")
+   ax.set_ylabel("Residual (kUSD)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

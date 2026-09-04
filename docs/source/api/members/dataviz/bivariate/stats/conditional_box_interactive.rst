@@ -21,13 +21,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.bivariate.stats import conditional_box_interactive
 
-   x = pd.Series([1, 2, 3, 4, 5], name="Input")
-   y = pd.Series([1.2, 1.9, 3.4, 3.7, 5.1], name="Output")
+   rng = np.random.default_rng(42)
+   n = 180
+   temperature = pd.Series(rng.uniform(low=150.0, high=250.0, size=n), name="Oven temperature (C)")
+   hardness = pd.Series(30.0 + 0.25 * temperature + rng.normal(loc=0.0, scale=4.0, size=n), name="Coating hardness")
 
-   fig = conditional_box_interactive(x, y)
+   fig = conditional_box_interactive(
+       temperature,
+       hardness,
+       bins=6,
+       title="Hardness Distribution by Temperature Band",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

@@ -25,10 +25,15 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.x_range import x_range_chart_interactive
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Shaft diameters (mm) sampled from a CNC lathe
+   diameters = rng.normal(25.0, 0.08, size=30)
+   diameters[19] = 25.42  # tool wear spike
 
-   fig = x_range_chart_interactive(data, subgroup_size=5)
+   fig = x_range_chart_interactive(
+       diameters, subgroup_size=5, title="Shaft Diameter X-Range Chart", ylabel="Diameter (mm)"
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

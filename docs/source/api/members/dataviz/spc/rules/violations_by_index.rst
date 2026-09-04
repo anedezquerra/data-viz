@@ -22,14 +22,16 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
-   from dataviz.spc.rules import violations_by_index
-   from dataviz.spc.rules import detect_rule_violations
+   from dataviz.spc.rules import detect_rule_violations, violations_by_index
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Coating thickness (microns) with a spike and a sustained shift
+   thickness = rng.normal(100.0, 1.0, size=32)
+   thickness[22] = 105.1  # spray gun surge beyond limits
+   thickness[26:] += 2.5  # nozzle wear shifts the process mean
 
-   result = violations_by_index(detect_rule_violations(data))
+   violations = detect_rule_violations(thickness)
+   result = violations_by_index(violations)
    print(result)
 
 Output gallery

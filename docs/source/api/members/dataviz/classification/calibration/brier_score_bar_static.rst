@@ -21,14 +21,21 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
-   import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.calibration import brier_score_bar_static
 
-   scores = {"Logistic regression": 0.089, "Random forest": 0.076, "Gradient boosting": 0.081}
+   scores = {
+       "Logistic regression": 0.142,
+       "Random forest": 0.118,
+       "Gradient boosting": 0.105,
+       "Naive base rate": 0.210,
+   }
 
-   ax = brier_score_bar_static(scores)
+   ax = brier_score_bar_static(
+       scores, title="Churn models: Brier score on Q4 holdout",
+   )
+   ax.set_ylim(0, 0.25)
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

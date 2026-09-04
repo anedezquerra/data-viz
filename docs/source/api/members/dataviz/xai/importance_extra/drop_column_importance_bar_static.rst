@@ -24,9 +24,23 @@ The following example is self-contained and can be copied into a Python session 
    import matplotlib.pyplot as plt
    from dataviz.xai.importance_extra import drop_column_importance_bar_static
 
-   deltas = {"age": 0.018, "income": 0.074, "tenure": 0.004, "debt": 0.031}
+   deltas = {
+       "credit_score": 0.118,
+       "debt_to_income": 0.084,
+       "utilization": 0.062,
+       "payment_history": 0.047,
+       "annual_income": 0.019,
+       "loan_amount": 0.011,
+       "account_age": -0.003,
+       "inquiries_6m": -0.006,
+   }
 
-   ax = drop_column_importance_bar_static(deltas)
+   ax = drop_column_importance_bar_static(
+       deltas,
+       top_n=8,
+       title="Drop-Column Importance (ROC-AUC) - Default Model",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

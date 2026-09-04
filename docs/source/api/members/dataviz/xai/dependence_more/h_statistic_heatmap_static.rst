@@ -21,17 +21,29 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
    from dataviz.xai.dependence_more import h_statistic_heatmap_static
 
-   h_matrix = pd.DataFrame(
-       [[1.0, 0.32, 0.05], [0.32, 1.0, 0.11], [0.05, 0.11, 1.0]],
-       index=["age", "income", "tenure"],
-       columns=["age", "income", "tenure"],
-   )
+   features = [
+       "credit_score", "debt_to_income", "utilization", "annual_income", "loan_amount",
+   ]
+   h = np.array([
+       [1.00, 0.34, 0.41, 0.05, 0.08],
+       [0.34, 1.00, 0.52, 0.07, 0.12],
+       [0.41, 0.52, 1.00, 0.04, 0.15],
+       [0.05, 0.07, 0.04, 1.00, 0.22],
+       [0.08, 0.12, 0.15, 0.22, 1.00],
+   ])
+   h_matrix = pd.DataFrame(h, index=features, columns=features)
 
-   ax = h_statistic_heatmap_static(h_matrix)
+   ax = h_statistic_heatmap_static(
+       h_matrix,
+       title="Friedman H-Statistic - Default Model Feature Interactions",
+       cmap="magma",
+   )
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

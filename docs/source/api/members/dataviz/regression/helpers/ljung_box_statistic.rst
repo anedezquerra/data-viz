@@ -22,13 +22,18 @@ The following example is self-contained and can be copied into a Python session 
 .. code-block:: python
 
    import numpy as np
+   import pandas as pd
    from dataviz.regression.helpers import ljung_box_statistic
 
    rng = np.random.default_rng(42)
-   residuals = rng.normal(0.0, 1.0, size=50)
+   noise = rng.normal(0.0, 1.0, 30)
+   residuals = pd.Series(
+       np.array([noise[0]] + [0.55 * noise[i - 1] + noise[i] for i in range(1, 30)]),
+       index=pd.date_range("2025-01-01", periods=30, freq="D"),
+       name="streamflow_residuals")
 
-   result = ljung_box_statistic(residuals, lags=10)
-   print(result)
+   result = ljung_box_statistic(residuals, lags=8)
+   print(f"Q={result[0]:.3f}, p-value={result[1]:.4f}")
 
 Output gallery
 --------------

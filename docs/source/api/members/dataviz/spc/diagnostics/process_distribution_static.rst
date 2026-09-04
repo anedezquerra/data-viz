@@ -26,10 +26,13 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.diagnostics import process_distribution_static
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Fill weights (g) collected during a capability study on line 3
+   weights = rng.normal(500.0, 1.1, size=40)
+   weights[33] = 504.6  # overfill after valve wear
 
-   ax = process_distribution_static(data, bins=12)
+   ax = process_distribution_static(weights, bins=15, title="Line 3 Fill Weight Distribution")
+   ax.set_xlabel("Fill weight (g)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

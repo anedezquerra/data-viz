@@ -23,12 +23,17 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
    from dataviz.univariate.quality import DataQualitySummary
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = DataQualitySummary(count=5, missing=5, missing_rate=0.5, unique=5, duplicate_rate=0.5, zero_rate=0.5, negative_rate=0.5)
+   result = DataQualitySummary(
+       count=140,
+       missing=6,
+       missing_rate=6 / 140,
+       unique=129,
+       duplicate_rate=0.036,
+       zero_rate=0.01,
+       negative_rate=0.02,
+   )
    print(result)
 
 Output gallery

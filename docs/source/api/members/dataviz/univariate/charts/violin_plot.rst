@@ -21,13 +21,26 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
+   import matplotlib.pyplot as plt
    from dataviz.univariate.charts import violin_plot
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
+   # Commute times compared across three office locations
+   rng = np.random.default_rng(42)
+   commutes = pd.DataFrame({
+       "Downtown": rng.gamma(shape=3.0, scale=8.0, size=40),
+       "Suburban": rng.gamma(shape=2.5, scale=5.0, size=40),
+       "Rural": rng.gamma(shape=4.0, scale=10.0, size=40),
+   })
 
-   result = violin_plot(values)
-   print(result)
+   ax = violin_plot(
+       commutes,
+       title="Commute Times by Office Location",
+   )
+   ax.set_ylabel("Commute Time (min)")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
+   plt.show()
 
 Output gallery
 --------------

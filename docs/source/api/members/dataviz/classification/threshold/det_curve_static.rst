@@ -21,16 +21,20 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
    import matplotlib.pyplot as plt
    from dataviz.classification.threshold import det_curve_static
 
    rng = np.random.default_rng(42)
-   y_prob = rng.beta(2.0, 5.0, size=200)
-   y_true = rng.binomial(1, y_prob)
+   # biometric access system: DET curve on a probit scale
+   n = 150
+   y_true = (rng.random(n) < 0.4).astype(int)
+   y_prob = np.clip(
+       y_true * rng.beta(7, 2.5, n) + (1 - y_true) * rng.beta(2.5, 7, n), 0, 1)
 
-   ax = det_curve_static(y_true, y_prob)
+   ax = det_curve_static(y_true, y_prob,
+                         title="Access system: detection-error tradeoff")
+   plt.gca().legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncols=3, frameon=False)
    plt.show()
 
 Output gallery

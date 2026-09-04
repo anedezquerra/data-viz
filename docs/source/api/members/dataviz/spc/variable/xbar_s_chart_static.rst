@@ -26,9 +26,14 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.variable import xbar_s_chart_static
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.35, size=(20, 5))
+   # Viscosity readings (cP): 22 subgroups of 6 samples per batch
+   viscosity = rng.normal(350.0, 4.0, size=132)
+   viscosity[90:96] += 14.0  # raw-material change in subgroup 15
 
-   ax = xbar_s_chart_static(data)
+   ax_xbar, ax_s = xbar_s_chart_static(
+       viscosity, subgroup_size=6, title="Batch Viscosity Xbar-S Chart"
+   )
+   ax_xbar.set_ylabel("Subgroup mean (cP)")
    plt.show()
 
 Output gallery

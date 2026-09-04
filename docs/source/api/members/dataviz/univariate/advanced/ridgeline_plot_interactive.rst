@@ -25,14 +25,22 @@ The following example is self-contained and can be copied into a Python session 
    import pandas as pd
    from dataviz.univariate.advanced import ridgeline_plot_interactive
 
+   # Weekly delivery times (days) for three regional warehouses
    rng = np.random.default_rng(42)
-   data = pd.DataFrame({
-       "Line A": rng.normal(loc=10.0, scale=0.4, size=50),
-       "Line B": rng.normal(loc=10.5, scale=0.5, size=50),
-       "Line C": rng.normal(loc=9.8, scale=0.3, size=50),
+   deliveries = pd.DataFrame({
+       "North": rng.normal(loc=3.1, scale=0.8, size=40),
+       "Central": rng.normal(loc=2.6, scale=0.6, size=40),
+       "South": rng.normal(loc=3.8, scale=1.0, size=40),
    })
 
-   fig = ridgeline_plot_interactive(data, title="Ridgeline plot")
+   fig = ridgeline_plot_interactive(
+       deliveries,
+       title="Delivery Time by Warehouse",
+       xlabel="Delivery Time (days)",
+       template="plotly_white",
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

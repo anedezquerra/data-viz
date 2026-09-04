@@ -23,12 +23,25 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-   import pandas as pd
    from dataviz.univariate.stats import UnivariateStats
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   result = UnivariateStats(count=5, missing=5, mean=0.5, median=0.5, std=0.5, variance=0.5, minimum=0.5, q1=0.5, q3=0.5, maximum=0.5, iqr=0.5, skewness=0.5, kurtosis=0.5, sem=0.5, mad=0.5)
+   result = UnivariateStats(
+       count=200,
+       missing=0,
+       mean=181.2,
+       median=179.5,
+       std=44.8,
+       variance=2007.0,
+       minimum=62.0,
+       q1=149.0,
+       q3=211.0,
+       maximum=312.0,
+       iqr=62.0,
+       skewness=0.21,
+       kurtosis=-0.12,
+       sem=3.17,
+       mad=37.5,
+   )
    print(result)
 
 Output gallery

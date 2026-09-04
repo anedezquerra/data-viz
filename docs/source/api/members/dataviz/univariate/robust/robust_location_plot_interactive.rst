@@ -21,12 +21,22 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
+   import numpy as np
    import pandas as pd
    from dataviz.univariate.robust import robust_location_plot_interactive
 
-   values = pd.Series([12.1, 11.8, 13.0, 12.7, 14.2, 12.4], name="Value")
-
-   fig = robust_location_plot_interactive(values)
+   rng = np.random.default_rng(42)
+   income_k = rng.gamma(shape=2.5, scale=22.0, size=150).round(1)
+   income_k[[12, 77, 130]] = [950.0, 1200.0, 875.0]
+   household_income = pd.Series(income_k, name="household_income_k")
+   fig = robust_location_plot_interactive(
+       household_income,
+       title="Household Income with Robust Location Estimates",
+       color="lightsteelblue",
+       height=500,
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

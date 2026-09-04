@@ -21,13 +21,23 @@ The following example is self-contained and can be copied into a Python session 
 
 .. code-block:: python
 
-
    import numpy as np
+   import matplotlib.pyplot as plt
    from dataviz.classification.multiclass_extra import per_class_auc_bar_interactive
 
-   auc_per_class = {"Class 0": 0.92, "Class 1": 0.85, "Class 2": 0.78}
+   # per-class one-vs-rest AUC from a 5-class document-topic classifier
+   auc_per_class = {
+       "sports": 0.94,
+       "politics": 0.88,
+       "tech": 0.91,
+       "finance": 0.82,
+       "culture": 0.76,
+   }
 
-   fig = per_class_auc_bar_interactive(auc_per_class)
+   fig = per_class_auc_bar_interactive(auc_per_class,
+                                       title="Topic classifier: per-class AUC")
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery

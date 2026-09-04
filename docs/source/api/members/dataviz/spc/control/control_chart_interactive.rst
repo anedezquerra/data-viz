@@ -25,10 +25,18 @@ The following example is self-contained and can be copied into a Python session 
    from dataviz.spc.control import control_chart_interactive
 
    rng = np.random.default_rng(42)
-   data = rng.normal(loc=10.0, scale=0.4, size=30)
-   data[24] = 11.8  # Deliberate special-cause signal
+   # Oven temperature (deg C) logged every 15 minutes over one shift
+   temps = rng.normal(180.0, 1.5, size=30)
+   temps[22] = 186.4  # heating element surge
 
-   fig = control_chart_interactive(data, title="Filling process", ylabel="Fill weight (g)")
+   fig = control_chart_interactive(
+       temps,
+       title="Oven Temperature Control Chart",
+       ylabel="Temperature (deg C)",
+       marker_size=6,
+   )
+   fig.update_traces(showlegend=True, selector=lambda trace: bool(trace.name))
+   fig.update_layout(legend=dict(orientation='h', yanchor='top', y=-0.2, xanchor='center', x=0.5), margin=dict(b=110))
    fig.show()
 
 Output gallery
