@@ -5,7 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    dataviz.bivariate
    dataviz.classification
@@ -22,7 +22,7 @@ Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    dataviz.core
    dataviz.types

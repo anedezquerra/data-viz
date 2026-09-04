@@ -5,7 +5,7 @@ Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    dataviz.bivariate.advanced
    dataviz.bivariate.categorical

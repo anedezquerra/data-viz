@@ -724,7 +724,7 @@ def write_package_page(package_dir: Path) -> None:
         if not children:
             continue
         lines.extend(
-            [f"\n{heading(title, '-')}", "\n.. toctree::\n   :maxdepth: 2\n\n"]
+            [f"\n{heading(title, '-')}", "\n.. toctree::\n   :maxdepth: 1\n\n"]
         )
         lines.extend(f"   {child}\n" for child in children)
     rst_path_for_module(dotted_name).write_text("".join(lines), encoding="utf-8")
