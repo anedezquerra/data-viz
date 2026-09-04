@@ -36,4 +36,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/xai/comparison/rashomon_importance_band_interactive.png" alt="rashomon_importance_band_interactive example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/xai/comparison/rashomon_importance_band_interactive.png" alt="rashomon_importance_band_interactive example output"><figcaption>Example output</figcaption></figure></div>

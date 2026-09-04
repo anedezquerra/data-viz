@@ -31,4 +31,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/classification/threshold_extra/predictive_value_curve_static.png" alt="predictive_value_curve_static example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/classification/threshold_extra/predictive_value_curve_static.png" alt="predictive_value_curve_static example output"><figcaption>Example output</figcaption></figure></div>

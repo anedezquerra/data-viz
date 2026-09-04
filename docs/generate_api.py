@@ -217,7 +217,7 @@ def gallery_for(dotted_module: str, member: Member) -> str:
     image = member_image_path(dotted_module, member)
     if image.exists():
         rst = member_rst_path(dotted_module, member)
-        src = Path(*[".."] * len(rst.relative_to(OUTPUT_ROOT).parts[:-1]))
+        src = Path(*[".."] * len(rst.relative_to(OUTPUT_ROOT).parts))
         src = src / image.relative_to(ROOT / "docs" / "source")
         card = (
             f'<figure class="spc-image-slot spc-image-real">'

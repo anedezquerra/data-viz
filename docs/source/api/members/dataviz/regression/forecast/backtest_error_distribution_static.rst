@@ -31,4 +31,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/regression/forecast/backtest_error_distribution_static.png" alt="backtest_error_distribution_static example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/regression/forecast/backtest_error_distribution_static.png" alt="backtest_error_distribution_static example output"><figcaption>Example output</figcaption></figure></div>

@@ -30,4 +30,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/eda/charts/missing_data_plot.png" alt="missing_data_plot example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/eda/charts/missing_data_plot.png" alt="missing_data_plot example output"><figcaption>Example output</figcaption></figure></div>

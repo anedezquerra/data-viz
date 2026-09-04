@@ -32,4 +32,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/classification/model_comparison/score_distribution_drift_interactive.png" alt="score_distribution_drift_interactive example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/classification/model_comparison/score_distribution_drift_interactive.png" alt="score_distribution_drift_interactive example output"><figcaption>Example output</figcaption></figure></div>

@@ -33,4 +33,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/regression/cv_extended/group_cv_score_strip_interactive.png" alt="group_cv_score_strip_interactive example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/regression/cv_extended/group_cv_score_strip_interactive.png" alt="group_cv_score_strip_interactive example output"><figcaption>Example output</figcaption></figure></div>

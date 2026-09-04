@@ -33,4 +33,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/regression/mixed_effects/group_means_vs_predicted_interactive.png" alt="group_means_vs_predicted_interactive example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/regression/mixed_effects/group_means_vs_predicted_interactive.png" alt="group_means_vs_predicted_interactive example output"><figcaption>Example output</figcaption></figure></div>

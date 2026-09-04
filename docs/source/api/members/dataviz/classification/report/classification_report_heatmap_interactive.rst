@@ -38,4 +38,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/classification/report/classification_report_heatmap_interactive.png" alt="classification_report_heatmap_interactive example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/classification/report/classification_report_heatmap_interactive.png" alt="classification_report_heatmap_interactive example output"><figcaption>Example output</figcaption></figure></div>

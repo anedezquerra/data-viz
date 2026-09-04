@@ -33,4 +33,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/xai/fairness_xai/disparate_impact_by_segment_static.png" alt="disparate_impact_by_segment_static example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/xai/fairness_xai/disparate_impact_by_segment_static.png" alt="disparate_impact_by_segment_static example output"><figcaption>Example output</figcaption></figure></div>

@@ -31,4 +31,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/utils/validation/add_plotly_reference_lines.png" alt="add_plotly_reference_lines example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/utils/validation/add_plotly_reference_lines.png" alt="add_plotly_reference_lines example output"><figcaption>Example output</figcaption></figure></div>

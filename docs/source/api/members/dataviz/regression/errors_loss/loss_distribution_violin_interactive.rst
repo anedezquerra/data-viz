@@ -33,4 +33,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/regression/errors_loss/loss_distribution_violin_interactive.png" alt="loss_distribution_violin_interactive example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/regression/errors_loss/loss_distribution_violin_interactive.png" alt="loss_distribution_violin_interactive example output"><figcaption>Example output</figcaption></figure></div>

@@ -31,4 +31,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/spc/x_range/x_range_chart_interactive.png" alt="x_range_chart_interactive example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/spc/x_range/x_range_chart_interactive.png" alt="x_range_chart_interactive example output"><figcaption>Example output</figcaption></figure></div>

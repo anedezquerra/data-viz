@@ -38,4 +38,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/xai/local_more/nearest_neighbor_explanation_static.png" alt="nearest_neighbor_explanation_static example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/xai/local_more/nearest_neighbor_explanation_static.png" alt="nearest_neighbor_explanation_static example output"><figcaption>Example output</figcaption></figure></div>

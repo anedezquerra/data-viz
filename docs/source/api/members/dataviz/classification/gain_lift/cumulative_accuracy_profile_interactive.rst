@@ -32,4 +32,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/classification/gain_lift/cumulative_accuracy_profile_interactive.png" alt="cumulative_accuracy_profile_interactive example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/classification/gain_lift/cumulative_accuracy_profile_interactive.png" alt="cumulative_accuracy_profile_interactive example output"><figcaption>Example output</figcaption></figure></div>

@@ -37,4 +37,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/regression/var_engineering/feature_target_correlation_bar_static.png" alt="feature_target_correlation_bar_static example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/regression/var_engineering/feature_target_correlation_bar_static.png" alt="feature_target_correlation_bar_static example output"><figcaption>Example output</figcaption></figure></div>

@@ -33,4 +33,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/bivariate/categorical/box_by_category_static.png" alt="box_by_category_static example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/bivariate/categorical/box_by_category_static.png" alt="box_by_category_static example output"><figcaption>Example output</figcaption></figure></div>

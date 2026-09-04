@@ -32,4 +32,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/regression/diagnostics_panel/regression_diagnostic_panel_interactive.png" alt="regression_diagnostic_panel_interactive example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/regression/diagnostics_panel/regression_diagnostic_panel_interactive.png" alt="regression_diagnostic_panel_interactive example output"><figcaption>Example output</figcaption></figure></div>

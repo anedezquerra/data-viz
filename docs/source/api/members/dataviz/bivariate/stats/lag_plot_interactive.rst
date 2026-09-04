@@ -30,4 +30,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/bivariate/stats/lag_plot_interactive.png" alt="lag_plot_interactive example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/bivariate/stats/lag_plot_interactive.png" alt="lag_plot_interactive example output"><figcaption>Example output</figcaption></figure></div>

@@ -32,4 +32,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/regression/multicollinearity/correlation_heatmap_with_clustering_static.png" alt="correlation_heatmap_with_clustering_static example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/regression/multicollinearity/correlation_heatmap_with_clustering_static.png" alt="correlation_heatmap_with_clustering_static example output"><figcaption>Example output</figcaption></figure></div>

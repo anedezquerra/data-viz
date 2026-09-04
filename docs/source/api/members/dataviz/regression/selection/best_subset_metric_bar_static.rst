@@ -34,4 +34,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/regression/selection/best_subset_metric_bar_static.png" alt="best_subset_metric_bar_static example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/regression/selection/best_subset_metric_bar_static.png" alt="best_subset_metric_bar_static example output"><figcaption>Example output</figcaption></figure></div>

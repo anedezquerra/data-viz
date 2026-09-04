@@ -34,4 +34,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/regression/mixed_effects/random_intercept_slope_scatter_static.png" alt="random_intercept_slope_scatter_static example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/regression/mixed_effects/random_intercept_slope_scatter_static.png" alt="random_intercept_slope_scatter_static example output"><figcaption>Example output</figcaption></figure></div>

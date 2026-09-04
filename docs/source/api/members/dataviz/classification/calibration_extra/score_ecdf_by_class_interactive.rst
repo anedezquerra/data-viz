@@ -32,4 +32,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/classification/calibration_extra/score_ecdf_by_class_interactive.png" alt="score_ecdf_by_class_interactive example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/classification/calibration_extra/score_ecdf_by_class_interactive.png" alt="score_ecdf_by_class_interactive example output"><figcaption>Example output</figcaption></figure></div>

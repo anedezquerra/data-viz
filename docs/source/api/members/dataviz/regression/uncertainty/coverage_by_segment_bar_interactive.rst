@@ -33,4 +33,4 @@ Output gallery
 
 .. raw:: html
 
-   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../_static/api/dataviz/regression/uncertainty/coverage_by_segment_bar_interactive.png" alt="coverage_by_segment_bar_interactive example output"><figcaption>Example output</figcaption></figure></div>
+   <div class="spc-image-grid"><figure class="spc-image-slot spc-image-real"><img src="../../../../../_static/api/dataviz/regression/uncertainty/coverage_by_segment_bar_interactive.png" alt="coverage_by_segment_bar_interactive example output"><figcaption>Example output</figcaption></figure></div>
