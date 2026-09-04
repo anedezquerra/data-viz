@@ -64,3 +64,6 @@ Thumbs.db
 
 # Project specific
 *.log
+
+# Generated API example images (rendered in CI)
+docs/source/_static/api/

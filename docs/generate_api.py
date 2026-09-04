@@ -1,4 +1,8 @@
-"""Generate Sphinx API indexes and one page per public function or class."""
+"""Generate Sphinx API indexes and one page per public function or class.
+
+Each member page embeds a self-contained "Complete example". Run
+``python docs/generate_api.py --verify`` to execute them all headlessly.
+"""
 
 from __future__ import annotations
 
@@ -6,6 +10,7 @@ import ast
 import importlib
 import inspect
 import shutil
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -199,8 +204,30 @@ def spc_example(dotted_module: str, member: Member) -> str:
     return "\n".join(lines)
 
 
-def spc_gallery() -> str:
-    """Return four future-image placeholders in a responsive gallery."""
+IMAGE_ROOT = ROOT / "docs" / "source" / "_static" / "api"
+
+
+def member_image_path(dotted_module: str, member: Member) -> Path:
+    """Return the PNG path mirroring the generated member-page layout."""
+    return IMAGE_ROOT / Path(*dotted_module.split(".")) / f"{member.name}.png"
+
+
+def gallery_for(dotted_module: str, member: Member) -> str:
+    """Return the real example image when rendered, else placeholders."""
+    image = member_image_path(dotted_module, member)
+    if image.exists():
+        rst = member_rst_path(dotted_module, member)
+        src = Path(*[".."] * len(rst.relative_to(OUTPUT_ROOT).parts[:-1]))
+        src = src / image.relative_to(ROOT / "docs" / "source")
+        card = (
+            f'<figure class="spc-image-slot spc-image-real">'
+            f'<img src="{src.as_posix()}" alt="{member.name} example output">'
+            f"<figcaption>Example output</figcaption></figure>"
+        )
+        return (
+            "\nOutput gallery\n--------------\n\n.. raw:: html\n\n"
+            f'   <div class="spc-image-grid">{card}</div>\n'
+        )
     cards = "".join(
         f'<figure class="spc-image-slot"><div aria-hidden="true">{index:02d}</div><figcaption>Future example image {index}</figcaption></figure>'
         for index in range(1, 5)
@@ -632,7 +659,7 @@ def write_member_page(dotted_module: str, member: Member) -> str:
         "Complete example\n----------------\n\n"
         "The following example is self-contained and can be copied into a Python session or script.\n\n"
         f".. code-block:: python\n\n{code_block}"
-        f"{spc_gallery()}"
+        f"{gallery_for(dotted_module, member)}"
     )
     path.write_text(content, encoding="utf-8")
     return path.relative_to(OUTPUT_ROOT).with_suffix("").as_posix()
@@ -726,5 +753,61 @@ def generate() -> None:
     )
 
 
-if __name__ == "__main__":
+def verify_examples(only_pkg: str | None = None) -> int:
+    """Execute every generated Complete example; return the failure count."""
+    import traceback
+
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import plotly.graph_objects as go
+
+    go.Figure.show = lambda self, *args, **kwargs: None  # headless
+
+    failures: list[tuple[str, str]] = []
+    total = 0
+    for path in sorted(PACKAGE_ROOT.rglob("*.py")):
+        if path.name == "__init__.py":
+            continue
+        dotted = module_name(path)
+        if only_pkg and not dotted.startswith(f"dataviz.{only_pkg}."):
+            continue
+        for member in public_members(path):
+            total += 1
+            code = example_for(dotted, member)
+            tag = f"{dotted}.{member.name}"
+            try:
+                exec(compile(code, tag, "exec"), {})  # noqa: S102
+            except Exception:
+                failures.append((tag, traceback.format_exc(limit=2)))
+            finally:
+                plt.close("all")
+
+    print(f"executed: {total}, failed: {len(failures)}")
+    for tag, tb in failures:
+        last = tb.strip().splitlines()[-1]
+        print(f"FAIL {tag}: {last}")
+    return len(failures)
+
+
+def main() -> int:
+    """Generate API pages, or execute their Complete examples with --verify."""
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--verify",
+        action="store_true",
+        help="execute every generated Complete example instead of writing pages",
+    )
+    parser.add_argument("--pkg", help="verify only one subpackage, e.g. spc")
+    args = parser.parse_args()
+    if args.verify:
+        return 1 if verify_examples(args.pkg) else 0
     generate()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

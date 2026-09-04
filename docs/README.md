@@ -22,11 +22,34 @@ python -m sphinx -W --keep-going -b linkcheck docs/source docs/build/linkcheck
 ## API regeneration
 
 ```bash
-python docs/generate_api.py
+python docs/generate_api.py            # regenerate the pages
+python docs/generate_api.py --verify   # execute every "Complete example"
 ```
 
 The generator creates navigational package and submodule pages plus one page
-per public function or class under `docs/source/api/members`.
+per public function or class under `docs/source/api/members`. Every member
+page embeds a self-contained "Complete example" that `--verify` executes
+headlessly. `docs/_tools/verify_api_examples.py` is a backward-compatible
+alias for `--verify`.
+
+In CI, `.github/workflows/docs.yml` regenerates the pages, verifies that
+every example runs, and commits any drift back to the branch, so new or
+updated integrations automatically ship with runnable examples. Forked pull
+requests cannot receive commits, so they get a staleness check instead —
+run `python docs/generate_api.py` locally and commit the result.
+
+## API example images
+
+```bash
+python docs/_tools/generate_api_images.py  # render every example figure to PNG
+```
+
+Each member page's "Output gallery" shows the rendered output of its
+"Complete example" when a PNG exists under `docs/source/_static/api/`,
+falling back to placeholders otherwise. Images are generated in CI (before
+page generation) and are not committed; generate them locally before
+`generate_api.py` if you want image-bearing pages in a local build. Plotly
+figures are exported via kaleido, which requires Chrome.
 
 ## GitHub Pages
 
