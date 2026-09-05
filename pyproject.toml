@@ -48,7 +48,7 @@ dependencies = [
     "seaborn>=0.13.2,<1",
     "numpy>=2.0.2,<3",
     "pandas>=2.3.3,<4",
-    "plotly>=5.0,<7",
+    "plotly>=5.0,<8",
     "scipy>=1.13.1,<2",
 ]
 
